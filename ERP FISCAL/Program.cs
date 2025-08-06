@@ -11,6 +11,7 @@ namespace ERP_FISCAL
         /// <summary>
         /// Ponto de entrada principal para o aplicativo.
         /// </summary>
+        /// teste ///
         [STAThread]
         static void Main()
         {
