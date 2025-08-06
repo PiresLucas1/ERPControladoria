@@ -1,0 +1,79 @@
+﻿using System;
+using System.Data.SqlClient;
+
+namespace SeuProjeto
+{
+    public class ConexaoBancoDeDadosDfe
+    {
+        private readonly string connectionString;
+
+        public ConexaoBancoDeDadosDfe()
+        {
+            connectionString = "Server=dbtotvs\\dbtotvs;Database=DFE;Integrated Security=True;";
+        }
+
+        public SqlConnection AbrirConexao()
+        {
+            SqlConnection conexao = new SqlConnection(connectionString);
+
+            try
+            {
+                conexao.Open();
+                Console.WriteLine("Conexão aberta com sucesso!");
+                return conexao;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao abrir a conexão: " + ex.Message);
+                throw;
+            }
+        }
+
+        public void FecharConexao(SqlConnection conexao)
+        {
+            if (conexao != null && conexao.State == System.Data.ConnectionState.Open)
+            {
+                conexao.Close();
+                Console.WriteLine("Conexão fechada.");
+            }
+        }
+    }
+
+    public class ConexaoBancoDeDadosTOTVS
+    {
+        private readonly string connectionString;
+
+        public ConexaoBancoDeDadosTOTVS()
+        {
+            connectionString = "Server=dbtotvs\\dbtotvs;Database=CORPORERM_TESTE;Integrated Security=True;";
+        }
+
+        public SqlConnection AbrirConexao()
+        {
+            SqlConnection conexao = new SqlConnection(connectionString);
+
+            try
+            {
+                conexao.Open();
+                Console.WriteLine("Conexão aberta com sucesso!");
+                return conexao;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao abrir a conexão: " + ex.Message);
+                throw;
+            }
+        }
+
+        public void FecharConexao(SqlConnection conexao)
+        {
+            if (conexao != null && conexao.State == System.Data.ConnectionState.Open)
+            {
+                conexao.Close();
+                Console.WriteLine("Conexão fechada.");
+            }
+        }
+    }
+
+
+}
