@@ -1,4 +1,5 @@
-﻿using SeuProjeto;
+﻿using ERP_FISCAL.controller;
+using SeuProjeto;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,7 @@ namespace ERP_FISCAL
         public ERPFiscal()
         {
             InitializeComponent();
+            this.Resize += new System.EventHandler(this.ResizeForm);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -57,6 +59,13 @@ namespace ERP_FISCAL
             btnExportarTotvs.FlatAppearance.BorderSize = 0;
             btnExportarTotvs.AutoSize = true;
 
+            DtPickerInicio.Enabled = false;
+            DtPickerFim.Enabled = false;
+            txtBoxToFilter.Enabled = false;
+
+            string[] itens = { "Periodo", "Código" };
+            coBoxTipeFilter.Items.AddRange(itens);
+
         }
 
         private async void btnListaNotas_Click(object sender, EventArgs e)
@@ -71,20 +80,22 @@ namespace ERP_FISCAL
                 progressBar1.Style = ProgressBarStyle.Marquee;
                 progressBar1.Visible = true;
 
-                // Executa em outra thread sem travar a UI
-                DataTable notas = await Task.Run(() =>
-                {
-                    Carregar_Colunas util = new Carregar_Colunas();
-                    return util.ObterNotas(dataInicio, dataFim);
-                });
+                //// Executa em outra thread sem travar a UI
+                //DataTable notas = await Task.Run(() =>
+                //{
+                //    Carregar_Colunas util = new Carregar_Colunas();
+                //    return util.ObterNotas(dataInicio, dataFim);
+                //});
 
-               
+                ExportServiceNotes exportServiceNotes = new ExportServiceNotes();                
+                DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim); 
+
 
                 dtImportacao.RowHeadersWidth = 20; 
                 dtImportacao.EnableHeadersVisualStyles = false;
                 dtImportacao.RowHeadersDefaultCellStyle.BackColor = Color.White;
                 dtImportacao.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-
+                dtImportacao.DataSource = notas;
                 dtImportacao.DataSource = notas;
                 dtImportacao.AllowUserToAddRows = false;
                 dtImportacao.ReadOnly = false;
@@ -186,85 +197,87 @@ namespace ERP_FISCAL
 
         private void btnExportarTotvs_Click(object sender, EventArgs e)
         {
-            try
+            DataTable NotesChecks = new DataTable();
+            foreach (DataGridViewColumn col in dtImportacao.Columns)
             {
-                ConexaoBancoDeDadosTOTVS conexaoBanco = new ConexaoBancoDeDadosTOTVS();
+                NotesChecks.Columns.Add(col.Name, col.ValueType ?? typeof(string));
+            }
 
-                using (SqlConnection conexao = conexaoBanco.AbrirConexao())
+            foreach (DataGridViewRow row in dtImportacao.Rows)
+            {
+                if (row.IsNewRow)
+                    continue;
+
+                // Verifica se a linha está marcada
+                bool selecionado = Convert.ToBoolean(row.Cells["Selecionar"].Value);
+                if (!selecionado)
+                    continue;
+
+                DataRow newRow = NotesChecks.NewRow();
+                foreach(DataGridViewColumn col in dtImportacao.Columns)
                 {
-                    foreach (DataGridViewRow row in dtImportacao.Rows)
-                    {
-                        if (row.IsNewRow)
-                            continue;
-
-                        // Verifica se a linha está marcada
-                        bool selecionado = Convert.ToBoolean(row.Cells["Selecionar"].Value);
-                        if (!selecionado)
-                            continue;
-
-                        using (SqlCommand cmd = new SqlCommand("uspImportaNotaServico", conexao))
-                        {
-                            cmd.CommandType = CommandType.StoredProcedure;
-
-                            // Parâmetros de entrada
-                            cmd.Parameters.AddWithValue("@INvchCPFCNPJPrestador", row.Cells["CNPJ Prestador"].Value?.ToString() ?? "");
-                            cmd.Parameters.AddWithValue("@INvchCPFCNPJTomador", row.Cells["CNPJ Tomador"].Value?.ToString() ?? "");
-                            cmd.Parameters.AddWithValue("@INvchNumeroDocumento", row.Cells["Documento"].Value?.ToString() ?? "");
-                            cmd.Parameters.AddWithValue("@INdatDataEmissao", Convert.ToDateTime(row.Cells["Dt.Hora Emissão"].Value));
-                            cmd.Parameters.AddWithValue("@INdatDataLancamento", DateTime.Now);
-                            cmd.Parameters.AddWithValue("@INvchDiscriminacaoServico", row.Cells["Descriminação"].Value?.ToString() ?? "");
-                            cmd.Parameters.AddWithValue("@INvchCodigoVerificacao", row.Cells["Código Verificação"].Value?.ToString() ?? "");
-
-                            cmd.Parameters.AddWithValue("@INnumValorServico", Convert.ToDecimal(row.Cells["Total Serviços"].Value));
-                            cmd.Parameters.AddWithValue("@INnumValorBrutoServico", Convert.ToDecimal(row.Cells["Valor Líquido"].Value));
-                            cmd.Parameters.AddWithValue("@INnumISSBaseCalculo", Convert.ToDecimal(row.Cells["Base Cálculo"].Value));
-                            cmd.Parameters.AddWithValue("@INnumISSValor", Convert.ToDecimal(row.Cells["Valor ISS"].Value));
-                            cmd.Parameters.AddWithValue("@INnumPISValor", Convert.ToDecimal(row.Cells["Valor Pis"].Value));
-                            cmd.Parameters.AddWithValue("@INnumCOFINSValor", Convert.ToDecimal(row.Cells["Valor Cofins"].Value));
-                            cmd.Parameters.AddWithValue("@INnumCSLLValor", Convert.ToDecimal(row.Cells["Valor Csll"].Value));
-                            cmd.Parameters.AddWithValue("@INnumIRRFValor", Convert.ToDecimal(row.Cells["Valor IR"].Value));
-                            cmd.Parameters.AddWithValue("@INnumINSSValor", Convert.ToDecimal(row.Cells["Valor INSS"].Value));
-
-                            cmd.Parameters.AddWithValue("@INvchCodProduto", row.Cells["Cód. Serviço TOTVS"].Value?.ToString() ?? "");
-
-                            cmd.Parameters.AddWithValue("@INvchCFOP", row.Cells["CFOP"].Value?.ToString() ?? "");
-
-                            // Parâmetros de saída
-                            var msgRetorno = new SqlParameter("@OUTvchMsgRetorno", SqlDbType.VarChar, 1000)
-                            {
-                                Direction = ParameterDirection.Output
-                            };
-
-                            var idMov = new SqlParameter("@OUTintIDMOV", SqlDbType.Int)
-                            {
-                                Direction = ParameterDirection.Output
-                            };
-
-                            cmd.Parameters.Add(msgRetorno);
-                            cmd.Parameters.Add(idMov);
-
-                            // Executa a procedure
-                            cmd.ExecuteNonQuery();
-
-                            // Atualiza as colunas de retorno no DataGridView
-                            row.Cells["Retorno"].Value = msgRetorno.Value?.ToString();
-                            row.Cells["IDMov"].Value = idMov.Value?.ToString();
-                        }
-                    }
-
-                    MessageBox.Show("Importação concluída com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    newRow[col.Name] = row.Cells[col.Name].Value ?? DBNull.Value;
                 }
+
+                NotesChecks.Rows.Add(newRow);
+
+                
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro durante a importação: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
+            exportServiceNotes.ExportToTotvs(NotesChecks);
+            
         }
 
         private void dtImportacao_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             // Apenas evita que a exceção estoure para o usuário
             e.Cancel = true;
+        }
+
+        private void ResizeForm(object sender, EventArgs e)
+        {
+            // configurações desejadas
+            int top = 300;
+            int bottomSpacing = 100;
+            int sideMargin = 10; // margem esquerda/direita (ajuste se quiser)
+
+            int widthWindow = this.ClientSize.Width;
+            int heightWindow = this.ClientSize.Height;
+
+           
+            // aplica posição e tamanho
+            dtImportacao.Top = top;
+            dtImportacao.Left = sideMargin;
+            dtImportacao.Width = Math.Max(0, widthWindow - 2 * sideMargin); // garante não ficar negativo
+            dtImportacao.Height = Math.Max(0, heightWindow - top - bottomSpacing); // garante não ficar negativo
+
+            //Console.WriteLine($"largura:{widthWindow} / altura:{heightWindow} -> dt.Width:{dtImportacao.Width} dt.Height:{dtImportacao.Height}");
+            ResizeComponentForm(sender, e);
+        }
+
+        private void ResizeComponentForm(object sender, EventArgs e)
+        {
+
+            int widthWindow = this.ClientSize.Width;
+
+            GBListar.Top = 230;
+            GBListar.Left = widthWindow - 350;
+
+        }
+
+        private void coBoxTipeFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Console.WriteLine(coBoxTipeFilter.SelectedIndex);
+            
+            if(coBoxTipeFilter.SelectedIndex == 0)
+            {
+                DtPickerInicio.Enabled = true;
+                DtPickerFim.Enabled = true;
+            }
+            if(coBoxTipeFilter.SelectedIndex == 1)
+            {
+                txtBoxToFilter.Enabled = true;
+            }
         }
     }
 }

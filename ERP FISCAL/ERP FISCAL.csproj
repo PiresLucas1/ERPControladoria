@@ -48,15 +48,22 @@
   <ItemGroup>
     <Compile Include="Carregar Colunas.cs" />
     <Compile Include="ConexaoBancoDeDados.cs" />
-    <Compile Include="ERPFiscal.cs">
+    <Compile Include="controller\ExportServiceNotes.cs" />
+    <Compile Include="view\ERPFiscal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ERPFiscal.Designer.cs">
+    <Compile Include="view\ERPFiscal.Designer.cs">
       <DependentUpon>ERPFiscal.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ERPFiscal.resx">
+    <Compile Include="view\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="view\ERPFiscal.resx">
       <DependentUpon>ERPFiscal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
