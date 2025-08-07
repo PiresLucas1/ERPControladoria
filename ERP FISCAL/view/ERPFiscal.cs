@@ -76,7 +76,8 @@ namespace ERP_FISCAL
                 DateTime dataInicio = DtPickerInicio.Value.Date;
                 DateTime dataFim = DtPickerFim.Value.Date;
 
-                lblStatus.Text = "Carregando notas...";
+                groupLoading.Visible = true;
+                groupLoading.Text = "Carregando notas...";
                 progressBar1.Style = ProgressBarStyle.Marquee;
                 progressBar1.Visible = true;
 
@@ -139,7 +140,7 @@ namespace ERP_FISCAL
                     colCheck.DefaultValue = false;
                     notas.Columns.Add(colCheck);
                 }
-                lblStatus.Text = $"Notas carregadas: {notas.Rows.Count}";
+                groupLoading.Text = $"Notas carregadas: {notas.Rows.Count}";
 
                 dtImportacao.Columns["Selecionar"].DisplayIndex = 0;
                 dtImportacao.Columns["Selecionar"].HeaderText = "✓";
@@ -148,12 +149,14 @@ namespace ERP_FISCAL
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao carregar notas: " + ex.Message);
-                lblStatus.Text = "Erro ao carregar.";
+                groupLoading.Text = "Erro ao carregar.";
             }
             finally
             {
                 progressBar1.Visible = false;
+                groupLoading.Visible = false;
             }
+
         }
 
         private void btnSelecionarTodos_Click(object sender, EventArgs e)
@@ -178,7 +181,8 @@ namespace ERP_FISCAL
             DtPickerFim.Value = DateTime.Today;
 
             // Limpa status
-            lblStatus.Text = "";
+            groupLoading.Text = "";
+            groupLoading.Text = "";
 
             // Limpa a grid
             dtImportacao.DataSource = null;
@@ -262,6 +266,8 @@ namespace ERP_FISCAL
 
             GBListar.Top = 230;
             GBListar.Left = widthWindow - 350;
+
+            groupLoading.Top = this.ClientSize.Height - 65;
 
         }
 

@@ -43,7 +43,6 @@
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnSelecionarTodas = new System.Windows.Forms.Button();
             this.btnExportarTotvs = new System.Windows.Forms.Button();
-            this.lblStatus = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.gbNotas = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -51,10 +50,12 @@
             this.txtBoxToFilter = new System.Windows.Forms.TextBox();
             this.coBoxTipeFilter = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupLoading = new System.Windows.Forms.GroupBox();
             this.GbDTNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
             this.GBListar.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupLoading.SuspendLayout();
             this.SuspendLayout();
             // 
             // DtPickerInicio
@@ -202,19 +203,9 @@
             this.btnExportarTotvs.UseVisualStyleBackColor = true;
             this.btnExportarTotvs.Click += new System.EventHandler(this.btnExportarTotvs_Click);
             // 
-            // lblStatus
-            // 
-            this.lblStatus.AutoSize = true;
-            this.lblStatus.Location = new System.Drawing.Point(14, 903);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(56, 20);
-            this.lblStatus.TabIndex = 8;
-            this.lblStatus.Text = "Pronto";
-            this.lblStatus.Visible = false;
-            // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 927);
+            this.progressBar1.Location = new System.Drawing.Point(17, 29);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(334, 15);
@@ -283,17 +274,27 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Filtro";
             // 
+            // groupLoading
+            // 
+            this.groupLoading.Controls.Add(this.progressBar1);
+            this.groupLoading.Location = new System.Drawing.Point(7, 882);
+            this.groupLoading.Name = "groupLoading";
+            this.groupLoading.Size = new System.Drawing.Size(375, 61);
+            this.groupLoading.TabIndex = 7;
+            this.groupLoading.TabStop = false;
+            this.groupLoading.Text = "Pronto";
+            this.groupLoading.Visible = false;
+            // 
             // ERPFiscal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1324, 955);
+            this.Controls.Add(this.groupLoading);
             this.Controls.Add(this.btnExportarTotvs);
             this.Controls.Add(this.btnListaNotas);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbNotas);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.GBListar);
             this.Controls.Add(this.dtImportacao);
             this.Controls.Add(this.GbDTNotas);
@@ -310,6 +311,7 @@
             this.GBListar.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupLoading.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -327,7 +329,6 @@
         private System.Windows.Forms.DataGridView dtImportacao;
         private System.Windows.Forms.Button btnListaNotas;
         private System.Windows.Forms.GroupBox GBListar;
-        private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btnSelecionarTodas;
         private System.Windows.Forms.Button btnDesmarcarTodos;
@@ -339,6 +340,7 @@
         private System.Windows.Forms.TextBox txtBoxToFilter;
         private System.Windows.Forms.ComboBox coBoxTipeFilter;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupLoading;
     }
 }
 
