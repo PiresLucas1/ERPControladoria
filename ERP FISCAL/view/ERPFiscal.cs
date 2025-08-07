@@ -273,10 +273,13 @@ namespace ERP_FISCAL
             {
                 DtPickerInicio.Enabled = true;
                 DtPickerFim.Enabled = true;
+                txtBoxToFilter.Enabled = false;
             }
             if(coBoxTipeFilter.SelectedIndex == 1)
             {
                 txtBoxToFilter.Enabled = true;
+                DtPickerInicio.Enabled = false;
+                DtPickerFim.Enabled = false;
             }
         }
     }
