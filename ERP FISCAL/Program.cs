@@ -17,7 +17,7 @@ namespace ERP_FISCAL
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ERPFiscal());
+            Application.Run(new ImportarNota());
         }
     }
 }

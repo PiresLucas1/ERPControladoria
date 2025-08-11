@@ -1,6 +1,6 @@
 ﻿namespace ERP_FISCAL
 {
-    partial class ERPFiscal
+    partial class ImportarNota
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ERPFiscal));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportarNota));
             this.DtPickerInicio = new System.Windows.Forms.DateTimePicker();
             this.lbApresentacao = new System.Windows.Forms.Label();
             this.lbDataInicio = new System.Windows.Forms.Label();
@@ -215,7 +215,7 @@
             // 
             // gbNotas
             // 
-            this.gbNotas.Location = new System.Drawing.Point(756, 40);
+            this.gbNotas.Location = new System.Drawing.Point(615, 28);
             this.gbNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbNotas.Name = "gbNotas";
             this.gbNotas.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -285,7 +285,7 @@
             this.groupLoading.Text = "Pronto";
             this.groupLoading.Visible = false;
             // 
-            // ERPFiscal
+            // ImportarNota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -301,7 +301,7 @@
             this.Controls.Add(this.lbApresentacao);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "ERPFiscal";
+            this.Name = "ImportarNota";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Importação NFS-E";
             this.Load += new System.EventHandler(this.Form1_Load);

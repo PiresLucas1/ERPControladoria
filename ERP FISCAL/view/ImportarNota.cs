@@ -14,9 +14,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ERP_FISCAL
 {
-    public partial class ERPFiscal : Form
+    public partial class ImportarNota : Form
     {
-        public ERPFiscal()
+        public ImportarNota()
         {
             InitializeComponent();
             this.Resize += new System.EventHandler(this.ResizeForm);
@@ -70,93 +70,105 @@ namespace ERP_FISCAL
 
         private async void btnListaNotas_Click(object sender, EventArgs e)
         {
-            try
+            if (coBoxTipeFilter.SelectedIndex == 0) //datepicker
             {
 
-                DateTime dataInicio = DtPickerInicio.Value.Date;
-                DateTime dataFim = DtPickerFim.Value.Date;
-
-                groupLoading.Visible = true;
-                groupLoading.Text = "Carregando notas...";
-                progressBar1.Style = ProgressBarStyle.Marquee;
-                progressBar1.Visible = true;
-
-                //// Executa em outra thread sem travar a UI
-                //DataTable notas = await Task.Run(() =>
-                //{
-                //    Carregar_Colunas util = new Carregar_Colunas();
-                //    return util.ObterNotas(dataInicio, dataFim);
-                //});
-
-                ExportServiceNotes exportServiceNotes = new ExportServiceNotes();                
-                DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim); 
-
-
-                dtImportacao.RowHeadersWidth = 20; 
-                dtImportacao.EnableHeadersVisualStyles = false;
-                dtImportacao.RowHeadersDefaultCellStyle.BackColor = Color.White;
-                dtImportacao.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-                dtImportacao.DataSource = notas;
-                dtImportacao.DataSource = notas;
-                dtImportacao.AllowUserToAddRows = false;
-                dtImportacao.ReadOnly = false;
-
-                if (!dtImportacao.Columns.Contains("CFOP"))
+                try
                 {
-                    int index = dtImportacao.Columns["Cód. Serviço TOTVS"].Index;
 
-                    var cfopColuna = new DataGridViewTextBoxColumn();
-                    cfopColuna.Name = "CFOP";
-                    cfopColuna.HeaderText = "CFOP";
-                    cfopColuna.ReadOnly = false;
-                    cfopColuna.Width = 60;
+                    DateTime dataInicio = DtPickerInicio.Value.Date;
+                    DateTime dataFim = DtPickerFim.Value.Date;
 
-                    dtImportacao.Columns.Insert(index + 1, cfopColuna);
+                    groupLoading.Visible = true;
+                    groupLoading.Text = "Carregando notas...";
+                    progressBar1.Style = ProgressBarStyle.Marquee;
+                    progressBar1.Visible = true;
+
+                    //// Executa em outra thread sem travar a UI
+                    //DataTable notas = await Task.Run(() =>
+                    //{
+                    //    Carregar_Colunas util = new Carregar_Colunas();
+                    //    return util.ObterNotas(dataInicio, dataFim);
+                    //});
+
+                    ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
+                    DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim);
+
+
+                    dtImportacao.RowHeadersWidth = 20;
+                    dtImportacao.EnableHeadersVisualStyles = false;
+                    dtImportacao.RowHeadersDefaultCellStyle.BackColor = Color.White;
+                    dtImportacao.RowHeadersDefaultCellStyle.ForeColor = Color.White;
+                    dtImportacao.DataSource = notas;
+                    dtImportacao.DataSource = notas;
+                    dtImportacao.AllowUserToAddRows = false;
+                    dtImportacao.ReadOnly = false;
+
+                    if (!dtImportacao.Columns.Contains("CFOP"))
+                    {
+                        int index = dtImportacao.Columns["Cód. Serviço TOTVS"].Index;
+
+                        var cfopColuna = new DataGridViewTextBoxColumn();
+                        cfopColuna.Name = "CFOP";
+                        cfopColuna.HeaderText = "CFOP";
+                        cfopColuna.ReadOnly = false;
+                        cfopColuna.Width = 60;
+
+                        dtImportacao.Columns.Insert(index + 1, cfopColuna);
+                    }
+
+                    if (!dtImportacao.Columns.Contains("IDMov"))
+                    {
+                        dtImportacao.Columns.Add("IDMov", "IDMov");
+                        dtImportacao.Columns["IDMov"].ReadOnly = true;
+                    }
+
+                    if (!dtImportacao.Columns.Contains("Retorno"))
+                    {
+                        dtImportacao.Columns.Add("Retorno", "Retorno");
+                        dtImportacao.Columns["Retorno"].ReadOnly = true;
+                    }
+
+                    dtImportacao.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+                    dtImportacao.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+                    dtImportacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                    dtImportacao.ColumnHeadersHeight = 30;
+
+                    dtImportacao.DefaultCellStyle.SelectionBackColor = dtImportacao.DefaultCellStyle.BackColor;
+                    dtImportacao.DefaultCellStyle.SelectionForeColor = dtImportacao.DefaultCellStyle.ForeColor;
+
+                    if (!notas.Columns.Contains("Selecionar"))
+                    {
+                        DataColumn colCheck = new DataColumn("Selecionar", typeof(bool));
+                        colCheck.DefaultValue = false;
+                        notas.Columns.Add(colCheck);
+                    }
+                    groupLoading.Text = $"Notas carregadas: {notas.Rows.Count}";
+
+                    dtImportacao.Columns["Selecionar"].DisplayIndex = 0;
+                    dtImportacao.Columns["Selecionar"].HeaderText = "✓";
+                    dtImportacao.Columns["Selecionar"].Width = 30;
                 }
-
-                if (!dtImportacao.Columns.Contains("IDMov"))
+                catch (Exception ex)
                 {
-                    dtImportacao.Columns.Add("IDMov", "IDMov");
-                    dtImportacao.Columns["IDMov"].ReadOnly = true;
+                    MessageBox.Show("Erro ao carregar notas: " + ex.Message);
+                    groupLoading.Text = "Erro ao carregar.";
                 }
-
-                if (!dtImportacao.Columns.Contains("Retorno"))
+                finally
                 {
-                    dtImportacao.Columns.Add("Retorno", "Retorno");
-                    dtImportacao.Columns["Retorno"].ReadOnly = true;
+                    progressBar1.Visible = false;
+                    groupLoading.Visible = false;
                 }
-
-                dtImportacao.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
-                dtImportacao.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-                dtImportacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-                dtImportacao.ColumnHeadersHeight = 30;
-
-                dtImportacao.DefaultCellStyle.SelectionBackColor = dtImportacao.DefaultCellStyle.BackColor;
-                dtImportacao.DefaultCellStyle.SelectionForeColor = dtImportacao.DefaultCellStyle.ForeColor;
-
-                if (!notas.Columns.Contains("Selecionar"))
-                {
-                    DataColumn colCheck = new DataColumn("Selecionar", typeof(bool));
-                    colCheck.DefaultValue = false;
-                    notas.Columns.Add(colCheck);
-                }
-                groupLoading.Text = $"Notas carregadas: {notas.Rows.Count}";
-
-                dtImportacao.Columns["Selecionar"].DisplayIndex = 0;
-                dtImportacao.Columns["Selecionar"].HeaderText = "✓";
-                dtImportacao.Columns["Selecionar"].Width = 30;
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Erro ao carregar notas: " + ex.Message);
-                groupLoading.Text = "Erro ao carregar.";
-            }
-            finally
-            {
-                progressBar1.Visible = false;
-                groupLoading.Visible = false;
-            }
+                string filterValue;
+                filterValue = coBoxTipeFilter.SelectedItem.ToString();
 
+                //FindUniqueNoteAsync 
+
+
+            }
         }
 
         private void btnSelecionarTodos_Click(object sender, EventArgs e)

@@ -124,7 +124,16 @@ namespace ERP_FISCAL.controller
             }
         }
 
+        public async void FindUniqueNoteAsync(string noteId)
+        {
+            try
+            {
 
+            }catch (Exception ex)
+            {
+
+            }
+        }
 
 
 

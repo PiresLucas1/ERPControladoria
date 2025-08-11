@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace ERP_FISCAL.view
 {
-    public partial class MainForm : Form
+    public partial class Portal : Form
     {
-        public MainForm()
+        public Portal()
         {
             InitializeComponent();
+        }
+
+        private void importarNFSEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImportarNota eRPFiscal = new ImportarNota();
+            eRPFiscal.Show();
+
         }
     }
 }

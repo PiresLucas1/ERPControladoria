@@ -37,5 +37,26 @@ namespace ERP_FISCAL
 
             return tabela;
         }
+
+        public DataTable FindUniqueNote(string noteId)
+        {
+            DataTable table = new DataTable();
+            ConexaoBancoDeDadosDfe connectionDataBase = new ConexaoBancoDeDadosDfe();
+
+            using (SqlConnection conn = connectionDataBase.AbrirConexao())
+            {
+                using (SqlCommand cmd = new SqlCommand("UspQiveConsultaUniqueNFSe", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@INvchNumNota", noteId);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(table);
+                }
+
+                connectionDataBase.FecharConexao(conn);
+            }
+            return table;
+        }
     }
 }
