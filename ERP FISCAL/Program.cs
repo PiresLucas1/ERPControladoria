@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ERP_FISCAL.view;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace ERP_FISCAL
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ImportarNota());
+            Application.Run(new Portal());
         }
     }
 }
