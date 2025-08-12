@@ -124,13 +124,23 @@ namespace ERP_FISCAL.controller
             }
         }
 
-        public async void FindUniqueNoteAsync(string noteId)
+        public async Task<DataTable> FindUniqueNoteAsync(string noteId)
         {
             try
             {
 
-            }catch (Exception ex)
+                DataTable nota = await Task.Run(() =>
+                {
+                    Carregar_Colunas util = new Carregar_Colunas();
+                    return util.FindUniqueNote(noteId);
+                });
+
+                return nota;
+
+            }
+            catch (Exception ex)
             {
+                throw new Exception("Não foi possivel retornar nota");
 
             }
         }
