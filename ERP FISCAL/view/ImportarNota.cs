@@ -66,11 +66,16 @@ namespace ERP_FISCAL
             string[] itens = { "Periodo", "Código" };
             coBoxTipeFilter.Items.AddRange(itens);
 
+            DataGridViewComboBoxColumn coComboBoxColumn = new DataGridViewComboBoxColumn();
+            coComboBoxColumn.HeaderText = "Produtos";
+            coComboBoxColumn.Name = "ColComboBox";
+            dtImportacao.Columns.Add(coComboBoxColumn);
+
         }
 
         private async void btnListaNotas_Click(object sender, EventArgs e)
         {
-            if (coBoxTipeFilter.SelectedIndex == 0) //datepicker
+            if (coBoxTipeFilter.SelectedIndex == 0) // datepicker
             {
 
                 try
@@ -127,8 +132,7 @@ namespace ERP_FISCAL
                     {
                         dtImportacao.Columns.Add("Retorno", "Retorno");
                         dtImportacao.Columns["Retorno"].ReadOnly = true;
-                    }
-
+                    }       
                     dtImportacao.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
                     dtImportacao.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
                     dtImportacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -148,6 +152,7 @@ namespace ERP_FISCAL
                     dtImportacao.Columns["Selecionar"].DisplayIndex = 0;
                     dtImportacao.Columns["Selecionar"].HeaderText = "✓";
                     dtImportacao.Columns["Selecionar"].Width = 30;
+
                 }
                 catch (Exception ex)
                 {
@@ -165,7 +170,11 @@ namespace ERP_FISCAL
                 string filterValue;
                 filterValue = coBoxTipeFilter.SelectedItem.ToString();
 
-                //FindUniqueNoteAsync 
+                ExportServiceNotes service = new ExportServiceNotes();
+
+                DataTable dt;
+                dt = await service.FindUniqueNoteAsync(filterValue);
+
 
 
             }

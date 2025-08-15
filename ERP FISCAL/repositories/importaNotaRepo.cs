@@ -19,20 +19,29 @@ namespace ERP_FISCAL
             DataTable tabela = new DataTable();
             ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
 
-            using (SqlConnection conexao = conexaoBanco.AbrirConexao())
+            try
             {
-                using (SqlCommand cmd = new SqlCommand("UspQiveConsultaNFSe", conexao))
+
+                using (SqlConnection conexao = conexaoBanco.AbrirConexao())
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandTimeout = 1200; /* 20 minutos */
-                    cmd.Parameters.AddWithValue("@INDatDataInicio", dataInicio);
-                    cmd.Parameters.AddWithValue("@INDatDataFim", dataFim);
+                    using (SqlCommand cmd = new SqlCommand("UspQiveConsultaNFSe", conexao))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandTimeout = 1200; /* 20 minutos */
+                        cmd.Parameters.AddWithValue("@INDatDataInicio", dataInicio);
+                        cmd.Parameters.AddWithValue("@INDatDataFim", dataFim);
 
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(tabela);
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        adapter.Fill(tabela);
+                    }
+
+                    conexaoBanco.FecharConexao(conexao);
                 }
+            }
+            catch (Exception)
+            {
 
-                conexaoBanco.FecharConexao(conexao);
+                throw new ArgumentException("ERRO INTERNO: Não foi possível localizar procedure");
             }
 
             return tabela;
@@ -45,7 +54,7 @@ namespace ERP_FISCAL
 
             using (SqlConnection conn = connectionDataBase.AbrirConexao())
             {
-                using (SqlCommand cmd = new SqlCommand("UspQiveConsultaUniqueNFSe", conn))
+                using (SqlCommand cmd = new SqlCommand("consultaumanota", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@INvchNumNota", noteId);

@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Carregar Colunas.cs" />
+    <Compile Include="repositories\importaNotaRepo.cs" />
     <Compile Include="ConexaoBancoDeDados.cs" />
     <Compile Include="controller\ExportServiceNotes.cs" />
     <Compile Include="view\ImportarNota.cs">
