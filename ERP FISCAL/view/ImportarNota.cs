@@ -1,4 +1,5 @@
 ﻿using ERP_FISCAL.controller;
+using ERP_FISCAL.view;
 using SeuProjeto;
 using System;
 using System.Collections.Generic;
@@ -10,16 +11,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+
 
 namespace ERP_FISCAL
 {
     public partial class ImportarNota : Form
     {
+        public string cfopSelecionado;
         public ImportarNota()
         {
             InitializeComponent();
             this.Resize += new System.EventHandler(this.ResizeForm);
+           
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -63,13 +67,10 @@ namespace ERP_FISCAL
             DtPickerFim.Enabled = false;
             txtBoxToFilter.Enabled = false;
 
-            string[] itens = { "Periodo", "Código" };
+            string[] itens = { "Periodo", "Chave de acesso" };
             coBoxTipeFilter.Items.AddRange(itens);
+            //dtImportacao.EditingControlShowing += dtImportacao_EditingControlShowing;
 
-            DataGridViewComboBoxColumn coComboBoxColumn = new DataGridViewComboBoxColumn();
-            coComboBoxColumn.HeaderText = "Produtos";
-            coComboBoxColumn.Name = "ColComboBox";
-            dtImportacao.Columns.Add(coComboBoxColumn);
 
         }
 
@@ -152,6 +153,25 @@ namespace ERP_FISCAL
                     dtImportacao.Columns["Selecionar"].DisplayIndex = 0;
                     dtImportacao.Columns["Selecionar"].HeaderText = "✓";
                     dtImportacao.Columns["Selecionar"].Width = 30;
+                    dtImportacao.Columns["Selecionar"].Width = 30;
+
+
+                    //if (!dtImportacao.Columns.Contains("Situação"))
+                    //{
+                    //    //var col = new DataGridViewComboBoxColumn();
+                    //    //col.Name = "Situação";
+                    //    //col.HeaderText = "Situação";
+                    //    //col.Width = 120;
+                    //    //dtImportacao.Columns.Add(col);
+                    //    var col = new DataGridViewTextBoxColumn();
+                    //    col.Name = "Situação";
+                    //    col.HeaderText = "Situação";
+                    //    col.Width = 120;
+                    //    dtImportacao.Columns.Add(col);
+                                        
+
+                    //}
+
 
                 }
                 catch (Exception ex)
@@ -179,6 +199,7 @@ namespace ERP_FISCAL
 
             }
         }
+
 
         private void btnSelecionarTodos_Click(object sender, EventArgs e)
         {
@@ -296,18 +317,53 @@ namespace ERP_FISCAL
         {
             Console.WriteLine(coBoxTipeFilter.SelectedIndex);
             
-            if(coBoxTipeFilter.SelectedIndex == 0)
+            if(coBoxTipeFilter.SelectedIndex == 0) //filtro intervalo de data
             {
                 DtPickerInicio.Enabled = true;
                 DtPickerFim.Enabled = true;
                 txtBoxToFilter.Enabled = false;
             }
-            if(coBoxTipeFilter.SelectedIndex == 1)
+            if(coBoxTipeFilter.SelectedIndex == 1) //filtro chave de acesso
             {
                 txtBoxToFilter.Enabled = true;
                 DtPickerInicio.Enabled = false;
                 DtPickerFim.Enabled = false;
             }
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verifica se o clique ocorreu em uma célula de conteúdo (não no cabeçalho)
+            if (e.RowIndex >= 0)
+            {
+                // Obtém a coluna clicada
+                DataGridViewColumn column = dtImportacao.Columns[e.ColumnIndex];
+
+                // Verifica se a coluna clicada é a coluna desejada (por exemplo, coluna com índice 0)
+                if (column.Index == dtImportacao.Columns["CFOP"].Index)
+                {
+                    // Aqui você coloca o código que será executado quando a célula da coluna desejada for clicada.
+                    // Por exemplo, acessar o valor da célula:
+                    //object valorCelula = dtImportacao.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+
+                    // Faça algo com o valor da célula
+                    abrirSelecaoCFOP();
+                    
+                }
+            }
+        }
+        public void abrirSelecaoCFOP()
+        {
+            SelecionarCfop novaJanelaSelecionarCFOP =  new SelecionarCfop();
+            novaJanelaSelecionarCFOP.Show();
+        }
+        public void AtualizaValor(string valor)
+        {
+            dtImportacao.Columns.["CFOP"] = valor;
+        }
     }
+
+
+
+
 }

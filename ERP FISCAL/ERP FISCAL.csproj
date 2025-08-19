@@ -61,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\CarregaCFOPController.cs" />
+    <Compile Include="repositories\CarregarCFOPRepositories.cs" />
     <Compile Include="repositories\importaNotaRepo.cs" />
     <Compile Include="ConexaoBancoDeDados.cs" />
     <Compile Include="controller\ExportServiceNotes.cs" />
@@ -78,6 +80,12 @@
     <Compile Include="view\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\SelecionarCfop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SelecionarCfop.Designer.cs">
+      <DependentUpon>SelecionarCfop.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="view\ImportarNota.resx">
       <DependentUpon>ImportarNota.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,6 +101,9 @@
     </Compile>
     <EmbeddedResource Include="view\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SelecionarCfop.resx">
+      <DependentUpon>SelecionarCfop.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
