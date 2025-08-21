@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP FISCAL", "ERP FISCAL\ERP FISCAL.csproj", "{D968ACB0-077F-4494-80EA-8A7EAA76DD37}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP CONTROLADORIA", "ERP FISCAL\ERP CONTROLADORIA.csproj", "{D968ACB0-077F-4494-80EA-8A7EAA76DD37}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
