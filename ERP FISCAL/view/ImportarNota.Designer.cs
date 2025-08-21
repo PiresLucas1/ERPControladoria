@@ -133,7 +133,7 @@
             this.dtImportacao.RowTemplate.Height = 24;
             this.dtImportacao.Size = new System.Drawing.Size(1295, 568);
             this.dtImportacao.TabIndex = 5;
-            this.dtImportacao.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dtImportacao.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtImportacao_CellContentClick);
             // 
             // btnListaNotas
             // 

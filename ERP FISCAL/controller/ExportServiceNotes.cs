@@ -23,6 +23,28 @@ namespace ERP_FISCAL.controller
                 return util.ObterNotas(valueDate1, valueDate2);
             });
 
+            //dtimpo.DataSource = notas;
+
+            //// Cria a coluna de botão "..."
+            //var colBotao = new DataGridViewButtonColumn
+            //{
+            //    Name = "colBuscarServico",
+            //    HeaderText = "",
+            //    Text = "...",
+            //    UseColumnTextForButtonValue = true,
+            //    Width = 32,
+            //    FlatStyle = FlatStyle.Popup
+            //};
+
+            //// Insere a coluna logo após "Cód. Serviço TOTVS"
+            //int i = dataGridView1.Columns["Cód. Serviço TOTVS"].Index;
+            //dataGridView1.Columns.Insert(i + 1, colBotao);
+
+            //// Deixe todo grid só-leitura, exceto CFOP
+            //dataGridView1.ReadOnly = true;
+            //dataGridView1.Columns["CFOP"].ReadOnly = false;
+
+
             return notas;
 
         }

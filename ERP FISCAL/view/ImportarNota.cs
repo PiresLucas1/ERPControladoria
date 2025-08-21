@@ -70,8 +70,6 @@ namespace ERP_FISCAL
             string[] itens = { "Periodo", "Chave de acesso" };
             coBoxTipeFilter.Items.AddRange(itens);
             //dtImportacao.EditingControlShowing += dtImportacao_EditingControlShowing;
-
-
         }
 
         private async void btnListaNotas_Click(object sender, EventArgs e)
@@ -331,36 +329,30 @@ namespace ERP_FISCAL
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dtImportacao_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Verifica se o clique ocorreu em uma célula de conteúdo (não no cabeçalho)
-            if (e.RowIndex >= 0)
+            if (e.RowIndex < 0) return; // ignora header
+
+            var colName = dtImportacao.Columns[e.ColumnIndex].Name;
+
+            if (colName == "CFOP")
             {
-                // Obtém a coluna clicada
-                DataGridViewColumn column = dtImportacao.Columns[e.ColumnIndex];
+                AbrirSelecaoCFOP(e.RowIndex);
+            }
+        }
 
-                // Verifica se a coluna clicada é a coluna desejada (por exemplo, coluna com índice 0)
-                if (column.Index == dtImportacao.Columns["CFOP"].Index)
+       
+        private void AbrirSelecaoCFOP(int rowIndex)
+        {
+            using (var frm = new NaturezaFiscal())
+            {
+                if (frm.ShowDialog(this) == DialogResult.OK && !string.IsNullOrEmpty(frm.CFOPSelecionado))
                 {
-                    // Aqui você coloca o código que será executado quando a célula da coluna desejada for clicada.
-                    // Por exemplo, acessar o valor da célula:
-                    //object valorCelula = dtImportacao.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
-
-                    // Faça algo com o valor da célula
-                    abrirSelecaoCFOP();
-                    
+                    dtImportacao.Rows[rowIndex].Cells["CFOP"].Value = frm.CFOPSelecionado;
                 }
             }
         }
-        public void abrirSelecaoCFOP()
-        {
-            SelecionarCfop novaJanelaSelecionarCFOP =  new SelecionarCfop();
-            novaJanelaSelecionarCFOP.Show();
-        }
-        public void AtualizaValor(string valor)
-        {
-            dtImportacao.Columns.["CFOP"] = valor;
-        }
+
     }
 
 
