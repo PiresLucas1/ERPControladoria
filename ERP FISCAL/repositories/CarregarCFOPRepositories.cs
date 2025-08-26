@@ -30,9 +30,6 @@ namespace ERP_FISCAL.repositories
                         SqlParameter p = new SqlParameter("@INvchIDNatureza", SqlDbType.NVarChar);
                         p.Value = DBNull.Value;
                         cmd.Parameters.Add(p);
-                        //cmd.CommandType = CommandType.Text;
-                        //cmd.CommandText = "SELECT DB_NAME() AS DatabaseName, SUSER_SNAME() AS UserName";
-                        //cmd.ExecuteReader();
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {
                             adapter.Fill(tabela);

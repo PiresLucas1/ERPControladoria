@@ -98,7 +98,7 @@ namespace ERP_FISCAL
                     ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
                     DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim);
 
-
+                    dtImportacao.
                     dtImportacao.RowHeadersWidth = 20;
                     dtImportacao.EnableHeadersVisualStyles = false;
                     dtImportacao.RowHeadersDefaultCellStyle.BackColor = Color.White;
@@ -131,7 +131,15 @@ namespace ERP_FISCAL
                     {
                         dtImportacao.Columns.Add("Retorno", "Retorno");
                         dtImportacao.Columns["Retorno"].ReadOnly = true;
-                    }       
+                    }
+
+                    if (!dtImportacao.Columns.Contains("Cod. Produto"))
+                    {
+                        dtImportacao.Columns.Add("CodProduto", "Cod. Produto");
+                        dtImportacao.Columns["CodProduto"].ReadOnly = false;
+                    }
+
+
                     dtImportacao.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
                     dtImportacao.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
                     dtImportacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
@@ -154,21 +162,6 @@ namespace ERP_FISCAL
                     dtImportacao.Columns["Selecionar"].Width = 30;
 
 
-                    //if (!dtImportacao.Columns.Contains("Situação"))
-                    //{
-                    //    //var col = new DataGridViewComboBoxColumn();
-                    //    //col.Name = "Situação";
-                    //    //col.HeaderText = "Situação";
-                    //    //col.Width = 120;
-                    //    //dtImportacao.Columns.Add(col);
-                    //    var col = new DataGridViewTextBoxColumn();
-                    //    col.Name = "Situação";
-                    //    col.HeaderText = "Situação";
-                    //    col.Width = 120;
-                    //    dtImportacao.Columns.Add(col);
-                                        
-
-                    //}
 
 
                 }
@@ -334,16 +327,18 @@ namespace ERP_FISCAL
             if (e.RowIndex < 0) return; // ignora header
 
             var colName = dtImportacao.Columns[e.ColumnIndex].Name;
+            var codColigada = dtImportacao.Rows[e.RowIndex].Cells["CodColigada"].Value;
 
             if (colName == "CFOP")
             {
-                AbrirSelecaoCFOP(e.RowIndex);
+                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada));
             }
         }
 
-        private void AbrirSelecaoCFOP(int rowIndex)
+        private void AbrirSelecaoCFOP(int rowIndex, int codColigada)
         {
-            using (var frm = new NaturezaFiscal())
+            
+            using (var frm = new NaturezaFiscal(reqCodColigada: codColigada))
             {
                 if (frm.ShowDialog(this) == DialogResult.OK && !string.IsNullOrEmpty(frm.CFOPSelecionado))
                 {

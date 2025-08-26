@@ -12,10 +12,12 @@ namespace ERP_FISCAL.view
         public string CFOPSelecionado { get; private set; }
         public string DescricaoSelecionada { get; private set; }
 
+        public int codColigada { get; set; }
+
         // Dados carregados do controller
         private IAjusteComboBoxUi _cfops;
 
-        public NaturezaFiscal()
+        public NaturezaFiscal(int reqCodColigada)
         {
             InitializeComponent();
 
@@ -25,9 +27,16 @@ namespace ERP_FISCAL.view
             if (txtColigada != null) txtColigada.Visible = false;
             if (txtIdNatureza != null) txtIdNatureza.Visible = false;
             if (txtNatureza != null) txtNatureza.Visible = false;
+            codColigada = reqCodColigada;
+
+
 
             // carrega dados no Load (para poder usar await)
             this.Load += NaturezaFiscal_Load;
+        }
+
+        public NaturezaFiscal()
+        {
         }
 
         private async void NaturezaFiscal_Load(object sender, EventArgs e)
@@ -50,38 +59,29 @@ namespace ERP_FISCAL.view
             {
                 MessageBox.Show("Erro ao carregar coligadas/naturezas: " + ex.Message,"Natureza Fiscal", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            string nomeColigada = carregaNameColigada();
+            comboBoxColigada.SelectedValue = codColigada;
+            comboBoxColigada.Text = nomeColigada;
+            comboBoxColigada.Enabled = false;
+
+            CarregarNaturezasDaColigada();
         }
-
-        // Seleção por ENTER digitando no combo da coligada (opcional)
-        private void comboBoxColigada_KeyDown(object sender, KeyEventArgs e)
+        public string carregaNameColigada()
         {
-            if (e.KeyCode != Keys.Enter) return;
+            var nomeColigada = _cfops.DicionarioColigada.TryGetValue(codColigada.ToString(), out string valorEncontrado);
 
-            var texto = comboBoxColigada.Text == null ? "" : comboBoxColigada.Text.Trim();
-            if (texto.Length == 0 || _cfops == null || _cfops.DicionarioColigada == null) return;
-
-            string nome;
-            if (_cfops.DicionarioColigada.TryGetValue(texto, out nome))
+            if (!nomeColigada)
             {
-                int idx = EncontrarItem(comboBoxColigada, new KeyValuePair<string, string>(texto, nome));
-                if (idx >= 0) comboBoxColigada.SelectedIndex = idx;
+                return "Não foi possivel localizar coligada";
             }
+            string nomeColigadaConcatenado = codColigada.ToString() + " - " + valorEncontrado;
+
+            return nomeColigadaConcatenado;
+
         }
 
-        private void comboBoxColigada_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // cast compatível com C# 7.3
-            object selObj = comboBoxColigada.SelectedItem;
-            if (!(selObj is KeyValuePair<string, string>)) return;
-            var sel = (KeyValuePair<string, string>)selObj;
 
-            if (txtIdColigada != null) { txtIdColigada.Text = sel.Key; txtIdColigada.Visible = true; }
-            if (txtColigada != null) { txtColigada.Text = sel.Value; txtColigada.Visible = true; }
-
-            CarregarNaturezasDaColigada(sel.Key);
-        }
-
-        private void CarregarNaturezasDaColigada(string codColigada)
+        private void CarregarNaturezasDaColigada()
         {
             comboBoxNatureza.Items.Clear();
 
@@ -93,8 +93,8 @@ namespace ERP_FISCAL.view
 
             foreach (DataRow row in _cfops.DatatableNatureza.Rows)
             {
-                var itemKey = Convert.ToString(row["CODCOLIGADA"]);
-                if (!String.Equals(itemKey, codColigada, StringComparison.Ordinal)) continue;
+                var itemKey = Convert.ToInt32(row["CODCOLIGADA"]);
+                if (itemKey != codColigada) continue;
 
                 string key = Convert.ToString(row["IDNATUREZA"]);
                 string desc = Convert.ToString(row["DESCRICAO_NATUREZA"]);

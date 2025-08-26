@@ -200,8 +200,7 @@
             this.comboBoxColigada.Name = "comboBoxColigada";
             this.comboBoxColigada.Size = new System.Drawing.Size(536, 24);
             this.comboBoxColigada.TabIndex = 9;
-            this.comboBoxColigada.SelectedIndexChanged += new System.EventHandler(this.comboBoxColigada_SelectedIndexChanged);
-            this.comboBoxColigada.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboBoxColigada_KeyDown);
+
             // 
             // SelecionarCfop
             // 
