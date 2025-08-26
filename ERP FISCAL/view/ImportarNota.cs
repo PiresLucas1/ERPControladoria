@@ -341,7 +341,6 @@ namespace ERP_FISCAL
             }
         }
 
-       
         private void AbrirSelecaoCFOP(int rowIndex)
         {
             using (var frm = new NaturezaFiscal())

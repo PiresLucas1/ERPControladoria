@@ -54,10 +54,10 @@ namespace ERP_FISCAL
 
             using (SqlConnection conn = connectionDataBase.AbrirConexao())
             {
-                using (SqlCommand cmd = new SqlCommand("consultaumanota", conn))
+                using (SqlCommand cmd = new SqlCommand("uspQiveProcuraNotaIndividual", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@INvchNumNota", noteId);
+                    cmd.Parameters.AddWithValue("@INvchrChaveDeAcesso", noteId);
 
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                     adapter.Fill(table);
