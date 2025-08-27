@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
+using ERP_FISCAL;
 using ERP_FISCAL.controller;
+using ERP_FISCAL.view.interfaces;
+
+
+
 
 namespace ERP_FISCAL.view
 {
@@ -14,23 +19,27 @@ namespace ERP_FISCAL.view
 
         public int codColigada { get; set; }
         public int indexCelula { get; set; }
+        public ImportarNota _formPai {  get; set; }
+        public string numDoc { get; set; }
+        public string codVerificacao { get; set; }
+        public string cnpjPrestador { get; set; }
 
 
         // Dados carregados do controller
         private IAjusteComboBoxUi _cfops;
 
-        public NaturezaFiscal(int reqCodColigada,int reqindexCelula)
+        public NaturezaFiscal(INaturezaFiscalType data)
         {
             InitializeComponent();
 
             // estados iniciais de UI
             comboBoxNatureza.Enabled = false;
-            if (txtIdColigada != null) txtIdColigada.Visible = false;
-            if (txtColigada != null) txtColigada.Visible = false;
-            if (txtIdNatureza != null) txtIdNatureza.Visible = false;
-            if (txtNatureza != null) txtNatureza.Visible = false;
-            codColigada = reqCodColigada;
-            indexCelula = reqindexCelula;
+            codColigada = data.ReqCodColigada;
+            indexCelula = data.ReqIndexCelula;
+            _formPai = data.FormFocus;
+            numDoc = data.NumDoc;
+            codVerificacao = data.CodVerificacao;
+            cnpjPrestador= data.CnpjPrestador;
 
 
 
@@ -38,35 +47,38 @@ namespace ERP_FISCAL.view
             this.Load += NaturezaFiscal_Load;
         }
 
-        public NaturezaFiscal()
-        {
-        }
 
-        private async void NaturezaFiscal_Load(object sender, EventArgs e)
+        public async void CarregaInformacoesNaturezaForms()
         {
             try
             {
                 var carregaComboBoxCfop = new CarregaCFOPController();
                 _cfops = await carregaComboBoxCfop.ListaTodosCFOPController();
 
-                comboBoxColigada.Items.Clear();
-
-                // Popular coligadas (Key = ID, Value = Nome)
-                foreach (var kv in _cfops.DicionarioColigada)
-                    comboBoxColigada.Items.Add(new KeyValuePair<string, string>(kv.Key, kv.Value));
-
-                comboBoxColigada.DisplayMember = "Value";
-                comboBoxColigada.ValueMember = "Key";
+               
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao carregar coligadas/naturezas: " + ex.Message,"Natureza Fiscal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao carregar coligadas/naturezas: " + ex.Message, "Natureza Fiscal", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             string nomeColigada = carregaNameColigada();
             comboBoxColigada.SelectedValue = codColigada;
             comboBoxColigada.Text = nomeColigada;
             comboBoxColigada.Enabled = false;
 
+            textBoxNumDoc.Text = numDoc;
+            textBoxCnpj.Text = cnpjPrestador;
+            textBoxCodVerificacao.Text = codVerificacao;
+
+
+
+
+
+        }
+        private async void NaturezaFiscal_Load(object sender, EventArgs e)
+        {
+
+            CarregaInformacoesNaturezaForms();
             CarregarNaturezasDaColigada();
         }
         public string carregaNameColigada()
@@ -110,18 +122,29 @@ namespace ERP_FISCAL.view
             comboBoxNatureza.ValueMember = "Key";
             comboBoxNatureza.Enabled = comboBoxNatureza.Items.Count > 0;
 
-            if (txtIdNatureza != null) txtIdNatureza.Visible = false;
-            if (txtNatureza != null) txtNatureza.Visible = false;
+
         }
 
         private void comboBoxNatureza_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             object selObj = comboBoxNatureza.SelectedItem;
             if (!(selObj is KeyValuePair<string, string>)) return;
             var sel = (KeyValuePair<string, string>)selObj;
 
-            if (txtIdNatureza != null) { txtIdNatureza.Text = sel.Key; txtIdNatureza.Visible = true; }
-            if (txtNatureza != null) { txtNatureza.Text = sel.Value; txtNatureza.Visible = true; }
+            var dataRowNatureza = _cfops.DatatableNatureza.Select($"IDNATUREZA = '{sel.Key}' AND CODCOLIGADA = {codColigada}" );
+
+
+
+            DataRow rowTeste = dataRowNatureza[0];
+            //Console.WriteLine(rowTeste[3]);
+            //Console.WriteLine(rowTeste[4]);
+            string tipoContabilizacao = rowTeste[3].ToString();
+            string codigoConta = rowTeste[4].ToString();
+
+            textBoxTipoContabilizacao.Text = tipoContabilizacao;
+            textBoxCodigoConta.Text = codigoConta;
+
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -141,10 +164,32 @@ namespace ERP_FISCAL.view
             CFOPSelecionado = sel.Key;    // exemplo: "5102"
             DescricaoSelecionada = sel.Value; // exemplo: "5102 - Venda de produção...
 
-            ImportarNota importaNotas = new ImportarNota();
-            importaNotas.AtualizaCFOP(indexCelula, CFOPSelecionado);
+
+            _formPai.AtualizaCFOP(indexCelula, CFOPSelecionado);
             this.Close();
         }
 
+        private void SelecionarIrProximo_Click(object sender, EventArgs e)
+        {
+            int indexContador = indexCelula;
+            object selObj = comboBoxNatureza.SelectedItem;
+            if (!(selObj is KeyValuePair<string, string>)) return;
+            var sel = (KeyValuePair<string, string>)selObj;
+
+            _formPai.AtualizaCFOP(indexContador, sel.Key);
+
+            indexContador++;
+            DtoFormNotaParaNatureza novosValores = new DtoFormNotaParaNatureza();
+            novosValores = _formPai.PegaInformacaoParaNatureza(indexContador);
+
+            this.codColigada = int.Parse(novosValores.CodColigada);
+            this.numDoc = novosValores.NumDoc;
+            this.cnpjPrestador = novosValores.CnpjPrestador;
+            this.codVerificacao = novosValores.CodVerificacao;
+
+            CarregaInformacoesNaturezaForms();
+
+
+        }
     }
 }

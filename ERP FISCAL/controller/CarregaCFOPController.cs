@@ -51,6 +51,8 @@ namespace ERP_FISCAL.controller
             resultado.DatatableNatureza.Columns.Add("CODCOLIGADA", typeof(int));
             resultado.DatatableNatureza.Columns.Add("IDNATUREZA", typeof(string));
             resultado.DatatableNatureza.Columns.Add("DESCRICAO_NATUREZA", typeof(string));
+            resultado.DatatableNatureza.Columns.Add("TIPO_CONTABILIZAÇÃO", typeof(string));
+            resultado.DatatableNatureza.Columns.Add("CODCONTA", typeof(string)); 
             foreach (DataRow row in dataTable.Rows)
             {
 
@@ -67,12 +69,16 @@ namespace ERP_FISCAL.controller
                 var coligada = row["CODCOLIGADA"];
                 var idNatureza = row["IDNATUREZA"].ToString();
                 var natureza = row["DESCRIÇÃO NATUREZA"].ToString();
+                var tipoContabilizacao = row["TIPO CONTABILIZAÇÃO"].ToString();
+                var codConta = row["CODCONTA"].ToString();
 
                 // cria uma nova linha no DataTable destino
                 DataRow novaLinha = resultado.DatatableNatureza.NewRow();
                 novaLinha["CODCOLIGADA"] = coligada;
                 novaLinha["IDNATUREZA"] = idNatureza;
                 novaLinha["DESCRICAO_NATUREZA"] = natureza;
+                novaLinha["TIPO_CONTABILIZAÇÃO"] = tipoContabilizacao;
+                novaLinha["CODCONTA"] = codConta;
 
                 // adiciona a linha ao DataTable
                 resultado.DatatableNatureza.Rows.Add(novaLinha);

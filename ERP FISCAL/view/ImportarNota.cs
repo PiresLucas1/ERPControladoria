@@ -1,5 +1,6 @@
 ﻿using ERP_FISCAL.controller;
 using ERP_FISCAL.view;
+using ERP_FISCAL.view.interfaces;
 using SeuProjeto;
 using System;
 using System.Collections.Generic;
@@ -69,19 +70,24 @@ namespace ERP_FISCAL
 
             string[] itens = { "Periodo", "Chave de acesso" };
             coBoxTipeFilter.Items.AddRange(itens);
-            //dtImportacao.EditingControlShowing += dtImportacao_EditingControlShowing;
+            coBoxTipeFilter.SelectedIndex = 0;
         }
 
         private async void btnListaNotas_Click(object sender, EventArgs e)
         {
+
+
             if (coBoxTipeFilter.SelectedIndex == 0) // datepicker
             {
+                DateTime dataInicio = DtPickerInicio.Value.Date;
+                DateTime dataFim = DtPickerFim.Value.Date;
 
+                if (dataInicio == null) return;
+                if (dataFim == null) return;
                 try
                 {
 
-                    DateTime dataInicio = DtPickerInicio.Value.Date;
-                    DateTime dataFim = DtPickerFim.Value.Date;
+
 
                     groupLoading.Visible = true;
                     groupLoading.Text = "Carregando notas...";
@@ -177,8 +183,12 @@ namespace ERP_FISCAL
             else
             {
                 string filterValue;
-                filterValue = coBoxTipeFilter.SelectedItem.ToString();
 
+                filterValue = coBoxTipeFilter.SelectedItem.ToString();
+                if (filterValue == null)
+                {
+                    return;
+                }
                 ExportServiceNotes service = new ExportServiceNotes();
 
                 DataTable dt;
@@ -328,32 +338,52 @@ namespace ERP_FISCAL
 
             var colName = dtImportacao.Columns[e.ColumnIndex].Name;
             var codColigada = dtImportacao.Rows[e.RowIndex].Cells["CodColigada"].Value;
+            var cnpjPrestador = dtImportacao.Rows[e.RowIndex].Cells["CNPJ Prestador"].Value;
+            var codVerificacao = dtImportacao.Rows[e.RowIndex].Cells["Código Verificação"].Value;
+            var numDoc = dtImportacao.Rows[e.RowIndex].Cells["Documento"].Value;
 
             if (colName == "CFOP")
             {
-                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada));
+                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString());
             }
         }
 
-        public void AbrirSelecaoCFOP(int rowIndex, int codColigada)
+        public void AbrirSelecaoCFOP(int rowIndex, int codColigada, string cnpjPrestador, string codVerificacao, string numDoc)
         {
-            var frm = new NaturezaFiscal(reqCodColigada: codColigada, reqindexCelula: rowIndex);
+            
+            NaturezaFiscalType notaInstancia = new NaturezaFiscalType
+            {
+                ReqCodColigada = codColigada,
+                ReqIndexCelula = rowIndex,
+                CnpjPrestador = cnpjPrestador,
+                CodVerificacao = codVerificacao,
+                NumDoc = numDoc,
+                FormFocus = this                
+            };
+            var frm = new NaturezaFiscal(notaInstancia);
             frm.Show();
-            //using (var frm = new NaturezaFiscal(reqCodColigada: codColigada))
-            //{
-            //    if (frm.ShowDialog(this) == DialogResult.OK && !string.IsNullOrEmpty(frm.CFOPSelecionado))
-            //    {
-            //        dtImportacao.Rows[rowIndex].Cells["CFOP"].Value = frm.CFOPSelecionado;
-            //        dtImportacao.Rows[rowIndex].Cells["CFOP"].Value = frm.CFOPSelecionado;
-            //    }
-            //}
 
         }
         public void AtualizaCFOP(int index, string CFOPSelecionado)
         {
-
             dtImportacao.Rows[index].Cells["CFOP"].Value = CFOPSelecionado;
            
+        }
+        public DtoFormNotaParaNatureza PegaInformacaoParaNatureza(int index)
+        {
+            var codColigada = dtImportacao.Rows[index].Cells["CodColigada"].Value.ToString();
+            var cnpjPrestador = dtImportacao.Rows[index].Cells["CNPJ Prestador"].Value.ToString();
+            var codVerificacao = dtImportacao.Rows[index].Cells["Código Verificação"].Value.ToString();
+            var numDoc = dtImportacao.Rows[index].Cells["Documento"].Value.ToString();
+
+            var informacaoParaNatureza = new DtoFormNotaParaNatureza
+            {
+                CodColigada = codColigada,
+                CnpjPrestador =cnpjPrestador,
+                CodVerificacao = codVerificacao,
+                NumDoc = numDoc
+            };
+            return informacaoParaNatureza;
         }
 
     }
