@@ -13,11 +13,13 @@ namespace ERP_FISCAL.view
         public string DescricaoSelecionada { get; private set; }
 
         public int codColigada { get; set; }
+        public int indexCelula { get; set; }
+
 
         // Dados carregados do controller
         private IAjusteComboBoxUi _cfops;
 
-        public NaturezaFiscal(int reqCodColigada)
+        public NaturezaFiscal(int reqCodColigada,int reqindexCelula)
         {
             InitializeComponent();
 
@@ -28,6 +30,7 @@ namespace ERP_FISCAL.view
             if (txtIdNatureza != null) txtIdNatureza.Visible = false;
             if (txtNatureza != null) txtNatureza.Visible = false;
             codColigada = reqCodColigada;
+            indexCelula = reqindexCelula;
 
 
 
@@ -136,23 +139,12 @@ namespace ERP_FISCAL.view
             var sel = (KeyValuePair<string, string>)selObj;
 
             CFOPSelecionado = sel.Key;    // exemplo: "5102"
-            DescricaoSelecionada = sel.Value; // exemplo: "5102 - Venda de produção..."
+            DescricaoSelecionada = sel.Value; // exemplo: "5102 - Venda de produção...
 
-            this.DialogResult = DialogResult.OK;
+            ImportarNota importaNotas = new ImportarNota();
+            importaNotas.AtualizaCFOP(indexCelula, CFOPSelecionado);
             this.Close();
         }
 
-        // Helper para localizar item no ComboBox por Key+Value
-        private static int EncontrarItem(ComboBox cb, KeyValuePair<string, string> alvo)
-        {
-            for (int i = 0; i < cb.Items.Count; i++)
-            {
-                object it = cb.Items[i];
-                if (!(it is KeyValuePair<string, string>)) continue;
-                var kv = (KeyValuePair<string, string>)it;
-                if (kv.Key == alvo.Key && kv.Value == alvo.Value) return i;
-            }
-            return -1;
-        }
     }
 }

@@ -98,12 +98,10 @@ namespace ERP_FISCAL
                     ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
                     DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim);
 
-                    dtImportacao.
                     dtImportacao.RowHeadersWidth = 20;
                     dtImportacao.EnableHeadersVisualStyles = false;
                     dtImportacao.RowHeadersDefaultCellStyle.BackColor = Color.White;
                     dtImportacao.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-                    dtImportacao.DataSource = notas;
                     dtImportacao.DataSource = notas;
                     dtImportacao.AllowUserToAddRows = false;
                     dtImportacao.ReadOnly = false;
@@ -223,6 +221,8 @@ namespace ERP_FISCAL
             // Remove a coluna CFOP se existir
             if (dtImportacao.Columns.Contains("CFOP"))
                 dtImportacao.Columns.Remove("CFOP");
+            if (dtImportacao.Columns.Contains("CodProduto"))
+                dtImportacao.Columns.Remove("CodProduto");
 
             // Desmarca todos os checkboxes (se ainda houver dados na grid)
             foreach (DataGridViewRow row in dtImportacao.Rows)
@@ -335,16 +335,25 @@ namespace ERP_FISCAL
             }
         }
 
-        private void AbrirSelecaoCFOP(int rowIndex, int codColigada)
+        public void AbrirSelecaoCFOP(int rowIndex, int codColigada)
         {
-            
-            using (var frm = new NaturezaFiscal(reqCodColigada: codColigada))
-            {
-                if (frm.ShowDialog(this) == DialogResult.OK && !string.IsNullOrEmpty(frm.CFOPSelecionado))
-                {
-                    dtImportacao.Rows[rowIndex].Cells["CFOP"].Value = frm.CFOPSelecionado;
-                }
-            }
+            var frm = new NaturezaFiscal(reqCodColigada: codColigada, reqindexCelula: rowIndex);
+            frm.Show();
+            //using (var frm = new NaturezaFiscal(reqCodColigada: codColigada))
+            //{
+            //    if (frm.ShowDialog(this) == DialogResult.OK && !string.IsNullOrEmpty(frm.CFOPSelecionado))
+            //    {
+            //        dtImportacao.Rows[rowIndex].Cells["CFOP"].Value = frm.CFOPSelecionado;
+            //        dtImportacao.Rows[rowIndex].Cells["CFOP"].Value = frm.CFOPSelecionado;
+            //    }
+            //}
+
+        }
+        public void AtualizaCFOP(int index, string CFOPSelecionado)
+        {
+
+            dtImportacao.Rows[index].Cells["CFOP"].Value = CFOPSelecionado;
+           
         }
 
     }
