@@ -21,10 +21,10 @@ using System.Windows.Forms;
 
 namespace ERP_FISCAL
 {
-    public partial class ImportarNota : Form
+    public partial class ImportarNotaView : Form
     {
         public string cfopSelecionado;
-        public ImportarNota()
+        public ImportarNotaView()
         {
             InitializeComponent();
             this.Resize += new System.EventHandler(this.ResizeForm);
@@ -360,7 +360,7 @@ namespace ERP_FISCAL
                 FormFocus = this,
                 RazaoSocial = razaoSocial
             };
-            var frm = new NaturezaFiscal(notaInstancia);
+            var frm = new NaturezaFiscalView(notaInstancia);
             frm.Show();
 
         }
@@ -397,7 +397,11 @@ namespace ERP_FISCAL
 
         private async void btnInserirEmBloco_Click(object sender, EventArgs e)
         {
-
+            if(dtImportacao == null)
+            {
+                MessageBox.Show("Não há informação na tabela");
+                return;
+            }
             var listaNatureza = await CarregaListaNatureza();
             List<int> linhasParaInserir = new List<int>();
             foreach (DataGridViewRow row in dtImportacao.Rows)
@@ -407,6 +411,11 @@ namespace ERP_FISCAL
                     {
                         linhasParaInserir.Add(row.Index);
                     }                
+            }
+            if(linhasParaInserir.Count < 1)
+            {
+                MessageBox.Show("Nenhuma informação foi selecionada");
+                return;
             }
 
             DialogoInsereInformacao dialogo = new DialogoInsereInformacao();

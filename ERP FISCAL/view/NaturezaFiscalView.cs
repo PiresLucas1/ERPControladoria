@@ -12,14 +12,14 @@ using ERP_FISCAL.view.interfaces;
 
 namespace ERP_FISCAL.view
 {
-    public partial class NaturezaFiscal : Form
+    public partial class NaturezaFiscalView : Form
     {
         public string CFOPSelecionado { get; private set; }
         public string DescricaoSelecionada { get; private set; }
 
         public int codColigada { get; set; }
         public int indexCelula { get; set; }
-        public ImportarNota _formPai {  get; set; }
+        public ImportarNotaView _formPai {  get; set; }
         public string numDoc { get; set; }
         public string codVerificacao { get; set; }
         public string cnpjPrestador { get; set; }
@@ -27,7 +27,7 @@ namespace ERP_FISCAL.view
         public string RazaoSocial { get; set; }
         private IAjusteComboBoxUi _cfops;
 
-        public NaturezaFiscal(INaturezaFiscalType data)
+        public NaturezaFiscalView(INaturezaFiscalType data)
         {
             InitializeComponent();
 

@@ -1,6 +1,6 @@
 ﻿namespace ERP_FISCAL.view
 {
-    partial class NaturezaFiscal
+    partial class NaturezaFiscalView
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxRazaoSocial = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.textBoxCodigoConta = new System.Windows.Forms.TextBox();
             this.textBoxTipoContabilizacao = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -46,8 +48,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxColigada = new System.Windows.Forms.ComboBox();
             this.SelecionarIrProximo = new System.Windows.Forms.Button();
-            this.textBoxRazaoSocial = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,6 +73,23 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informações";
+            // 
+            // textBoxRazaoSocial
+            // 
+            this.textBoxRazaoSocial.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBoxRazaoSocial.Location = new System.Drawing.Point(24, 236);
+            this.textBoxRazaoSocial.Name = "textBoxRazaoSocial";
+            this.textBoxRazaoSocial.Size = new System.Drawing.Size(543, 26);
+            this.textBoxRazaoSocial.TabIndex = 20;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(20, 213);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(103, 20);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Razão Social";
             // 
             // textBoxCodigoConta
             // 
@@ -230,23 +247,6 @@
             this.SelecionarIrProximo.UseVisualStyleBackColor = true;
             this.SelecionarIrProximo.Click += new System.EventHandler(this.SelecionarIrProximo_Click);
             // 
-            // textBoxRazaoSocial
-            // 
-            this.textBoxRazaoSocial.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBoxRazaoSocial.Location = new System.Drawing.Point(24, 236);
-            this.textBoxRazaoSocial.Name = "textBoxRazaoSocial";
-            this.textBoxRazaoSocial.Size = new System.Drawing.Size(543, 26);
-            this.textBoxRazaoSocial.TabIndex = 20;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(20, 213);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(155, 30);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "Razão Social";
-            // 
             // NaturezaFiscal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -263,6 +263,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "NaturezaFiscal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Natureza Fiscal";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

@@ -62,44 +62,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="controller\CarregaCFOPController.cs" />
-    <Compile Include="repositories\CarregarCFOPRepositories.cs" />
-    <Compile Include="repositories\importaNotaRepo.cs" />
+    <Compile Include="Controller\CarregaCFOPController.cs" />
+    <Compile Include="Repositories\cfopRepositories.cs" />
+    <Compile Include="Repositories\notasRepositories.cs" />
     <Compile Include="ConexaoBancoDeDados.cs" />
-    <Compile Include="controller\ExportServiceNotes.cs" />
-    <Compile Include="view\DialogUI\DialogInsereInformacao.cs">
+    <Compile Include="Controller\ExportServiceNotes.cs" />
+    <Compile Include="view\IUDialog\DialogInsereInformacao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\DialogUI\DialogInsereInformacao.Designer.cs">
+    <Compile Include="view\IUDialog\DialogInsereInformacao.Designer.cs">
       <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\DialogUI\interfacesUI\IDialogoInsereInformacao.cs" />
-    <Compile Include="view\ImportarNota.cs">
+    <Compile Include="view\IUDialog\IUInterfaces\IDialogoInsereInformacao.cs" />
+    <Compile Include="view\ImportarNotaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\ImportarNota.Designer.cs">
-      <DependentUpon>ImportarNota.cs</DependentUpon>
+    <Compile Include="view\ImportarNotaView.Designer.cs">
+      <DependentUpon>ImportarNotaView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="view\Controladoria.cs">
+    <Compile Include="view\ControladoriaView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\Controladoria.Designer.cs">
-      <DependentUpon>Controladoria.cs</DependentUpon>
+    <Compile Include="view\ControladoriaView.Designer.cs">
+      <DependentUpon>ControladoriaView.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\interfaces\INaturezaFiscalType.cs" />
-    <Compile Include="view\NaturezaFiscal.cs">
+    <Compile Include="view\Interfaces\INaturezaFiscalType.cs" />
+    <Compile Include="view\NaturezaFiscalView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\NaturezaFiscal.Designer.cs">
-      <DependentUpon>NaturezaFiscal.cs</DependentUpon>
+    <Compile Include="view\NaturezaFiscalView.Designer.cs">
+      <DependentUpon>NaturezaFiscalView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="view\DialogUI\DialogInsereInformacao.resx">
+    <EmbeddedResource Include="view\IUDialog\DialogInsereInformacao.resx">
       <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\ImportarNota.resx">
-      <DependentUpon>ImportarNota.cs</DependentUpon>
+    <EmbeddedResource Include="view\ImportarNotaView.resx">
+      <DependentUpon>ImportarNotaView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -111,11 +111,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="view\Controladoria.resx">
-      <DependentUpon>Controladoria.cs</DependentUpon>
+    <EmbeddedResource Include="view\ControladoriaView.resx">
+      <DependentUpon>ControladoriaView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\NaturezaFiscal.resx">
-      <DependentUpon>NaturezaFiscal.cs</DependentUpon>
+    <EmbeddedResource Include="view\NaturezaFiscalView.resx">
+      <DependentUpon>NaturezaFiscalView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

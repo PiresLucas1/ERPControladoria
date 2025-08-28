@@ -36,7 +36,7 @@
             // 
             // textBoxEntrada
             // 
-            this.textBoxEntrada.Location = new System.Drawing.Point(30, 116);
+            this.textBoxEntrada.Location = new System.Drawing.Point(30, 106);
             this.textBoxEntrada.Name = "textBoxEntrada";
             this.textBoxEntrada.Size = new System.Drawing.Size(351, 26);
             this.textBoxEntrada.TabIndex = 0;
@@ -46,7 +46,7 @@
             this.textTitulo.AutoSize = true;
             this.textTitulo.Location = new System.Drawing.Point(26, 83);
             this.textTitulo.Name = "textTitulo";
-            this.textTitulo.Size = new System.Drawing.Size(119, 30);
+            this.textTitulo.Size = new System.Drawing.Size(79, 20);
             this.textTitulo.TabIndex = 1;
             this.textTitulo.Text = "Selecione";
             // 
@@ -83,6 +83,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DialogInsereInformacao";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DialogInsereInformacao";
             this.ResumeLayout(false);
             this.PerformLayout();

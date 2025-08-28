@@ -19,7 +19,7 @@ namespace ERP_FISCAL.view
 
         private void importarNFSEToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ImportarNota eRPFiscal = new ImportarNota();
+            ImportarNotaView eRPFiscal = new ImportarNotaView();
             eRPFiscal.Show();
 
         }

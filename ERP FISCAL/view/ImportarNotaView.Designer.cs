@@ -1,6 +1,6 @@
 ﻿namespace ERP_FISCAL
 {
-    partial class ImportarNota
+    partial class ImportarNotaView
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportarNota));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportarNotaView));
             this.DtPickerInicio = new System.Windows.Forms.DateTimePicker();
             this.lbApresentacao = new System.Windows.Forms.Label();
             this.lbDataInicio = new System.Windows.Forms.Label();

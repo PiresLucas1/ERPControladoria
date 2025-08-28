@@ -34,7 +34,7 @@ namespace ERP_FISCAL.controller
         public async Task<IAjusteComboBoxUi> ListaTodosCFOPController()
         {
 
-            CarregarCFOPRepositories cfops = new CarregarCFOPRepositories();
+            cfopRepositories cfops = new cfopRepositories();
             DataTable dataTable = await Task.Run(() =>
             {
                 return cfops.CarregarCFOPs();

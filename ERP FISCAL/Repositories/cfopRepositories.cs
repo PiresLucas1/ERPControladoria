@@ -10,7 +10,7 @@ using SeuProjeto;
 
 namespace ERP_FISCAL.repositories
 {
-   internal class CarregarCFOPRepositories
+   internal class cfopRepositories
     {
         public DataTable CarregarCFOPs()
         {
