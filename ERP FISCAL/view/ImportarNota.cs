@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -341,14 +342,15 @@ namespace ERP_FISCAL
             var cnpjPrestador = dtImportacao.Rows[e.RowIndex].Cells["CNPJ Prestador"].Value;
             var codVerificacao = dtImportacao.Rows[e.RowIndex].Cells["Código Verificação"].Value;
             var numDoc = dtImportacao.Rows[e.RowIndex].Cells["Documento"].Value;
+            var razaoSocial = dtImportacao.Rows[e.RowIndex].Cells["Razão Social Prestador"].Value;
 
             if (colName == "CFOP")
             {
-                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString());
+                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString());
             }
         }
 
-        public void AbrirSelecaoCFOP(int rowIndex, int codColigada, string cnpjPrestador, string codVerificacao, string numDoc)
+        public void AbrirSelecaoCFOP(int rowIndex, int codColigada, string cnpjPrestador, string codVerificacao, string numDoc, string razaoSocial)
         {
             
             NaturezaFiscalType notaInstancia = new NaturezaFiscalType
@@ -358,7 +360,8 @@ namespace ERP_FISCAL
                 CnpjPrestador = cnpjPrestador,
                 CodVerificacao = codVerificacao,
                 NumDoc = numDoc,
-                FormFocus = this                
+                FormFocus = this,
+                RazaoSocial = razaoSocial
             };
             var frm = new NaturezaFiscal(notaInstancia);
             frm.Show();
@@ -371,17 +374,26 @@ namespace ERP_FISCAL
         }
         public DtoFormNotaParaNatureza PegaInformacaoParaNatureza(int index)
         {
+
+            if(index > dtImportacao.RowCount - 1)
+            {
+                MessageBox.Show("Não há mais notas para percorrer");
+                return null; 
+            }
             var codColigada = dtImportacao.Rows[index].Cells["CodColigada"].Value.ToString();
             var cnpjPrestador = dtImportacao.Rows[index].Cells["CNPJ Prestador"].Value.ToString();
             var codVerificacao = dtImportacao.Rows[index].Cells["Código Verificação"].Value.ToString();
             var numDoc = dtImportacao.Rows[index].Cells["Documento"].Value.ToString();
-
+            var razaoSocial = dtImportacao.Rows[index].Cells["Razão Social Prestador"].Value.ToString();
+            var quantidade = dtImportacao.RowCount -1;
             var informacaoParaNatureza = new DtoFormNotaParaNatureza
             {
                 CodColigada = codColigada,
                 CnpjPrestador =cnpjPrestador,
                 CodVerificacao = codVerificacao,
-                NumDoc = numDoc
+                NumDoc = numDoc,
+                QuantidadeNotas = quantidade,
+                RazaoSocial = razaoSocial
             };
             return informacaoParaNatureza;
         }

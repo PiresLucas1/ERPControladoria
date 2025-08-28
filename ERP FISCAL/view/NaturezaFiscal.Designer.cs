@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxCodigoConta = new System.Windows.Forms.TextBox();
+            this.textBoxTipoContabilizacao = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.textBoxCnpj = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxCodVerificacao = new System.Windows.Forms.TextBox();
@@ -42,17 +46,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxColigada = new System.Windows.Forms.ComboBox();
             this.SelecionarIrProximo = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBoxTipoContabilizacao = new System.Windows.Forms.TextBox();
-            this.textBoxCodigoConta = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxRazaoSocial = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.textBoxRazaoSocial);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.textBoxCodigoConta);
             this.groupBox1.Controls.Add(this.textBoxTipoContabilizacao);
             this.groupBox1.Controls.Add(this.label7);
@@ -71,6 +73,40 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informações";
+            // 
+            // textBoxCodigoConta
+            // 
+            this.textBoxCodigoConta.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBoxCodigoConta.Location = new System.Drawing.Point(24, 361);
+            this.textBoxCodigoConta.Name = "textBoxCodigoConta";
+            this.textBoxCodigoConta.Size = new System.Drawing.Size(545, 26);
+            this.textBoxCodigoConta.TabIndex = 17;
+            // 
+            // textBoxTipoContabilizacao
+            // 
+            this.textBoxTipoContabilizacao.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBoxTipoContabilizacao.Location = new System.Drawing.Point(24, 305);
+            this.textBoxTipoContabilizacao.Name = "textBoxTipoContabilizacao";
+            this.textBoxTipoContabilizacao.Size = new System.Drawing.Size(545, 26);
+            this.textBoxTipoContabilizacao.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(22, 338);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 20);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Conta";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(22, 282);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(147, 20);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Tipo Contabilização";
             // 
             // textBoxCnpj
             // 
@@ -194,49 +230,22 @@
             this.SelecionarIrProximo.UseVisualStyleBackColor = true;
             this.SelecionarIrProximo.Click += new System.EventHandler(this.SelecionarIrProximo_Click);
             // 
-            // label4
+            // textBoxRazaoSocial
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 270);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(147, 20);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Tipo Contabilização";
+            this.textBoxRazaoSocial.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.textBoxRazaoSocial.Location = new System.Drawing.Point(24, 236);
+            this.textBoxRazaoSocial.Name = "textBoxRazaoSocial";
+            this.textBoxRazaoSocial.Size = new System.Drawing.Size(543, 26);
+            this.textBoxRazaoSocial.TabIndex = 20;
             // 
-            // label7
+            // label9
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(22, 326);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 20);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Conta";
-            // 
-            // textBoxTipoContabilizacao
-            // 
-            this.textBoxTipoContabilizacao.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBoxTipoContabilizacao.Location = new System.Drawing.Point(26, 293);
-            this.textBoxTipoContabilizacao.Name = "textBoxTipoContabilizacao";
-            this.textBoxTipoContabilizacao.Size = new System.Drawing.Size(543, 26);
-            this.textBoxTipoContabilizacao.TabIndex = 16;
-            // 
-            // textBoxCodigoConta
-            // 
-            this.textBoxCodigoConta.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBoxCodigoConta.Location = new System.Drawing.Point(26, 349);
-            this.textBoxCodigoConta.Name = "textBoxCodigoConta";
-            this.textBoxCodigoConta.Size = new System.Drawing.Size(543, 26);
-            this.textBoxCodigoConta.TabIndex = 17;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.ForeColor = System.Drawing.SystemColors.ActiveBorder;
-            this.label8.Location = new System.Drawing.Point(33, 212);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(531, 20);
-            this.label8.TabIndex = 18;
-            this.label8.Text = "__________________________________________________________";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(20, 213);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(155, 30);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Razão Social";
             // 
             // NaturezaFiscal
             // 
@@ -280,6 +289,7 @@
         private System.Windows.Forms.TextBox textBoxTipoContabilizacao;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBoxRazaoSocial;
+        private System.Windows.Forms.Label label9;
     }
 }

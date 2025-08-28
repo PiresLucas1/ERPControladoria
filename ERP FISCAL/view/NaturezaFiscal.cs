@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using ERP_FISCAL;
 using ERP_FISCAL.controller;
@@ -23,6 +24,10 @@ namespace ERP_FISCAL.view
         public string numDoc { get; set; }
         public string codVerificacao { get; set; }
         public string cnpjPrestador { get; set; }
+        public int ContadorGlobal { get; set; }
+        public string RazaoSocial { get; set; }
+
+        
 
 
         // Dados carregados do controller
@@ -40,6 +45,7 @@ namespace ERP_FISCAL.view
             numDoc = data.NumDoc;
             codVerificacao = data.CodVerificacao;
             cnpjPrestador= data.CnpjPrestador;
+            RazaoSocial = data.RazaoSocial;
 
 
 
@@ -48,7 +54,7 @@ namespace ERP_FISCAL.view
         }
 
 
-        public async void CarregaInformacoesNaturezaForms()
+        public async Task CarregaInformacoesNaturezaForms()
         {
             try
             {
@@ -69,16 +75,15 @@ namespace ERP_FISCAL.view
             textBoxNumDoc.Text = numDoc;
             textBoxCnpj.Text = cnpjPrestador;
             textBoxCodVerificacao.Text = codVerificacao;
-
-
-
-
+            textBoxRazaoSocial.Text = RazaoSocial;
 
         }
         private async void NaturezaFiscal_Load(object sender, EventArgs e)
         {
 
-            CarregaInformacoesNaturezaForms();
+           
+
+            await CarregaInformacoesNaturezaForms();
             CarregarNaturezasDaColigada();
         }
         public string carregaNameColigada()
@@ -137,8 +142,6 @@ namespace ERP_FISCAL.view
 
 
             DataRow rowTeste = dataRowNatureza[0];
-            //Console.WriteLine(rowTeste[3]);
-            //Console.WriteLine(rowTeste[4]);
             string tipoContabilizacao = rowTeste[3].ToString();
             string codigoConta = rowTeste[4].ToString();
 
@@ -149,6 +152,8 @@ namespace ERP_FISCAL.view
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+
+            ContadorGlobal = 0;
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
@@ -164,31 +169,51 @@ namespace ERP_FISCAL.view
             CFOPSelecionado = sel.Key;    // exemplo: "5102"
             DescricaoSelecionada = sel.Value; // exemplo: "5102 - Venda de produção...
 
-
+            ContadorGlobal = 0;
             _formPai.AtualizaCFOP(indexCelula, CFOPSelecionado);
             this.Close();
         }
 
-        private void SelecionarIrProximo_Click(object sender, EventArgs e)
+        private async void SelecionarIrProximo_Click(object sender, EventArgs e)
         {
-            int indexContador = indexCelula;
+
+
+            if (comboBoxNatureza.SelectedIndex == -1)
+            {
+                return;
+            }
+            if(ContadorGlobal == 0)
+            {
+               ContadorGlobal = indexCelula;
+            }
+
             object selObj = comboBoxNatureza.SelectedItem;
             if (!(selObj is KeyValuePair<string, string>)) return;
             var sel = (KeyValuePair<string, string>)selObj;
 
-            _formPai.AtualizaCFOP(indexContador, sel.Key);
+            _formPai.AtualizaCFOP(ContadorGlobal, sel.Key);
 
-            indexContador++;
-            DtoFormNotaParaNatureza novosValores = new DtoFormNotaParaNatureza();
-            novosValores = _formPai.PegaInformacaoParaNatureza(indexContador);
 
-            this.codColigada = int.Parse(novosValores.CodColigada);
-            this.numDoc = novosValores.NumDoc;
-            this.cnpjPrestador = novosValores.CnpjPrestador;
-            this.codVerificacao = novosValores.CodVerificacao;
+            DtoFormNotaParaNatureza novosValores = new DtoFormNotaParaNatureza();          
+            ContadorGlobal++;
+            
+            novosValores = _formPai.PegaInformacaoParaNatureza(ContadorGlobal);
 
-            CarregaInformacoesNaturezaForms();
+            if (novosValores != null)
+            {
 
+                this.codColigada = int.Parse(novosValores.CodColigada);
+                this.numDoc = novosValores.NumDoc;
+                this.cnpjPrestador = novosValores.CnpjPrestador;
+                this.codVerificacao = novosValores.CodVerificacao;
+                this.RazaoSocial = novosValores.RazaoSocial;
+
+                await CarregaInformacoesNaturezaForms();
+                CarregarNaturezasDaColigada();
+
+                comboBoxNatureza.SelectedIndex = -1;
+                comboBoxNatureza.Text = string.Empty;
+            }
 
         }
     }

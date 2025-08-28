@@ -15,6 +15,7 @@ namespace ERP_FISCAL.view.interfaces
         string NumDoc { get; set; }
         string CodVerificacao { get; set; }
         string CnpjPrestador { get; set; }
+        string RazaoSocial { get; set; }
 
     }
     public class NaturezaFiscalType : INaturezaFiscalType
@@ -25,18 +26,19 @@ namespace ERP_FISCAL.view.interfaces
         public string CnpjPrestador { get; set; } 
         public string CodVerificacao { get; set; }
         public ImportarNota FormFocus { get; set; }
+        public string RazaoSocial { get; set; }
     }
 
     public interface IDtoFormNotaParaNatureza
     {
-        //codColigada,
-        //        cnpjPrestador,
-        //        codVerificacao,
-        //        numDoc
+
         string CodColigada { get; set; }
         string CnpjPrestador { get; set; }
         string CodVerificacao { get; set; }
         string NumDoc { get; set; }
+        int QuantidadeNotas { get; set; }
+        string RazaoSocial { get; set; }
+
 
     }
 
@@ -46,6 +48,8 @@ namespace ERP_FISCAL.view.interfaces
         public string CnpjPrestador { get; set; }
         public string CodVerificacao { get; set ; }
         public string NumDoc { get; set; }
+        public int QuantidadeNotas { get; set; }
+        public string RazaoSocial { get; set; }
     }
 
 }
