@@ -48,6 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -66,6 +67,13 @@
     <Compile Include="repositories\importaNotaRepo.cs" />
     <Compile Include="ConexaoBancoDeDados.cs" />
     <Compile Include="controller\ExportServiceNotes.cs" />
+    <Compile Include="view\DialogUI\DialogInsereInformacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\DialogUI\DialogInsereInformacao.Designer.cs">
+      <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\DialogUI\interfacesUI\IDialogoInsereInformacao.cs" />
     <Compile Include="view\ImportarNota.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +95,9 @@
     <Compile Include="view\NaturezaFiscal.Designer.cs">
       <DependentUpon>NaturezaFiscal.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="view\DialogUI\DialogInsereInformacao.resx">
+      <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\ImportarNota.resx">
       <DependentUpon>ImportarNota.cs</DependentUpon>
     </EmbeddedResource>

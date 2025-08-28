@@ -14,7 +14,6 @@ namespace ERP_FISCAL.view
 {
     public partial class NaturezaFiscal : Form
     {
-        // Saídas para o form chamador
         public string CFOPSelecionado { get; private set; }
         public string DescricaoSelecionada { get; private set; }
 
@@ -26,11 +25,6 @@ namespace ERP_FISCAL.view
         public string cnpjPrestador { get; set; }
         public int ContadorGlobal { get; set; }
         public string RazaoSocial { get; set; }
-
-        
-
-
-        // Dados carregados do controller
         private IAjusteComboBoxUi _cfops;
 
         public NaturezaFiscal(INaturezaFiscalType data)

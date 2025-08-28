@@ -51,6 +51,7 @@
             this.coBoxTipeFilter = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupLoading = new System.Windows.Forms.GroupBox();
+            this.btnInserirEmBloco = new System.Windows.Forms.Button();
             this.GbDTNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
             this.GBListar.SuspendLayout();
@@ -137,6 +138,7 @@
             // 
             // btnListaNotas
             // 
+            this.btnListaNotas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnListaNotas.Location = new System.Drawing.Point(18, 256);
             this.btnListaNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnListaNotas.Name = "btnListaNotas";
@@ -148,24 +150,25 @@
             // 
             // GBListar
             // 
+            this.GBListar.Controls.Add(this.btnInserirEmBloco);
             this.GBListar.Controls.Add(this.btnDesmarcarTodos);
             this.GBListar.Controls.Add(this.btnLimpar);
             this.GBListar.Controls.Add(this.btnSelecionarTodas);
-            this.GBListar.Location = new System.Drawing.Point(799, 212);
+            this.GBListar.Location = new System.Drawing.Point(856, 129);
             this.GBListar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GBListar.Name = "GBListar";
             this.GBListar.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.GBListar.Size = new System.Drawing.Size(509, 80);
+            this.GBListar.Size = new System.Drawing.Size(452, 163);
             this.GBListar.TabIndex = 7;
             this.GBListar.TabStop = false;
             this.GBListar.Text = "Ações no Data Grid";
             // 
             // btnDesmarcarTodos
             // 
-            this.btnDesmarcarTodos.Location = new System.Drawing.Point(185, 28);
+            this.btnDesmarcarTodos.Location = new System.Drawing.Point(33, 73);
             this.btnDesmarcarTodos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDesmarcarTodos.Name = "btnDesmarcarTodos";
-            this.btnDesmarcarTodos.Size = new System.Drawing.Size(146, 38);
+            this.btnDesmarcarTodos.Size = new System.Drawing.Size(146, 36);
             this.btnDesmarcarTodos.TabIndex = 6;
             this.btnDesmarcarTodos.Text = "Desmarcar todos";
             this.btnDesmarcarTodos.UseVisualStyleBackColor = true;
@@ -173,7 +176,7 @@
             // 
             // btnLimpar
             // 
-            this.btnLimpar.Location = new System.Drawing.Point(337, 30);
+            this.btnLimpar.Location = new System.Drawing.Point(33, 123);
             this.btnLimpar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(146, 32);
@@ -184,10 +187,10 @@
             // 
             // btnSelecionarTodas
             // 
-            this.btnSelecionarTodas.Location = new System.Drawing.Point(32, 27);
+            this.btnSelecionarTodas.Location = new System.Drawing.Point(32, 30);
             this.btnSelecionarTodas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSelecionarTodas.Name = "btnSelecionarTodas";
-            this.btnSelecionarTodas.Size = new System.Drawing.Size(143, 38);
+            this.btnSelecionarTodas.Size = new System.Drawing.Size(147, 35);
             this.btnSelecionarTodas.TabIndex = 6;
             this.btnSelecionarTodas.Text = "Selecionar todos";
             this.btnSelecionarTodas.UseVisualStyleBackColor = true;
@@ -286,6 +289,18 @@
             this.groupLoading.Text = "Pronto";
             this.groupLoading.Visible = false;
             // 
+            // btnInserirEmBloco
+            // 
+            this.btnInserirEmBloco.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInserirEmBloco.Location = new System.Drawing.Point(224, 29);
+            this.btnInserirEmBloco.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnInserirEmBloco.Name = "btnInserirEmBloco";
+            this.btnInserirEmBloco.Size = new System.Drawing.Size(147, 35);
+            this.btnInserirEmBloco.TabIndex = 7;
+            this.btnInserirEmBloco.Text = "Inserir em bloco";
+            this.btnInserirEmBloco.UseVisualStyleBackColor = true;
+            this.btnInserirEmBloco.Click += new System.EventHandler(this.btnInserirEmBloco_Click);
+            // 
             // ImportarNota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -342,6 +357,7 @@
         private System.Windows.Forms.ComboBox coBoxTipeFilter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupLoading;
+        private System.Windows.Forms.Button btnInserirEmBloco;
     }
 }
 

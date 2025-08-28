@@ -261,6 +261,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "NaturezaFiscal";
             this.Text = "Natureza Fiscal";
             this.groupBox1.ResumeLayout(false);

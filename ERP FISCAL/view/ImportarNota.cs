@@ -1,6 +1,9 @@
 ﻿using ERP_FISCAL.controller;
 using ERP_FISCAL.view;
+using ERP_FISCAL.view.DialogUI;
+using ERP_FISCAL.view.DialogUI.interfacesUI;
 using ERP_FISCAL.view.interfaces;
+using Microsoft.VisualBasic;
 using SeuProjeto;
 using System;
 using System.Collections.Generic;
@@ -25,7 +28,7 @@ namespace ERP_FISCAL
         {
             InitializeComponent();
             this.Resize += new System.EventHandler(this.ResizeForm);
-           
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -95,12 +98,6 @@ namespace ERP_FISCAL
                     progressBar1.Style = ProgressBarStyle.Marquee;
                     progressBar1.Visible = true;
 
-                    //// Executa em outra thread sem travar a UI
-                    //DataTable notas = await Task.Run(() =>
-                    //{
-                    //    Carregar_Colunas util = new Carregar_Colunas();
-                    //    return util.ObterNotas(dataInicio, dataFim);
-                    //});
 
                     ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
                     DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim);
@@ -262,18 +259,18 @@ namespace ERP_FISCAL
                     continue;
 
                 DataRow newRow = NotesChecks.NewRow();
-                foreach(DataGridViewColumn col in dtImportacao.Columns)
+                foreach (DataGridViewColumn col in dtImportacao.Columns)
                 {
                     newRow[col.Name] = row.Cells[col.Name].Value ?? DBNull.Value;
                 }
 
                 NotesChecks.Rows.Add(newRow);
 
-                
+
             }
             ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
             exportServiceNotes.ExportToTotvs(NotesChecks);
-            
+
         }
 
         private void dtImportacao_DataError(object sender, DataGridViewDataErrorEventArgs e)
@@ -292,7 +289,7 @@ namespace ERP_FISCAL
             int widthWindow = this.ClientSize.Width;
             int heightWindow = this.ClientSize.Height;
 
-           
+
             // aplica posição e tamanho
             dtImportacao.Top = top;
             dtImportacao.Left = sideMargin;
@@ -318,14 +315,14 @@ namespace ERP_FISCAL
         private void coBoxTipeFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             Console.WriteLine(coBoxTipeFilter.SelectedIndex);
-            
-            if(coBoxTipeFilter.SelectedIndex == 0) //filtro intervalo de data
+
+            if (coBoxTipeFilter.SelectedIndex == 0) //filtro intervalo de data
             {
                 DtPickerInicio.Enabled = true;
                 DtPickerFim.Enabled = true;
                 txtBoxToFilter.Enabled = false;
             }
-            if(coBoxTipeFilter.SelectedIndex == 1) //filtro chave de acesso
+            if (coBoxTipeFilter.SelectedIndex == 1) //filtro chave de acesso
             {
                 txtBoxToFilter.Enabled = true;
                 DtPickerInicio.Enabled = false;
@@ -352,7 +349,7 @@ namespace ERP_FISCAL
 
         public void AbrirSelecaoCFOP(int rowIndex, int codColigada, string cnpjPrestador, string codVerificacao, string numDoc, string razaoSocial)
         {
-            
+
             NaturezaFiscalType notaInstancia = new NaturezaFiscalType
             {
                 ReqCodColigada = codColigada,
@@ -370,26 +367,26 @@ namespace ERP_FISCAL
         public void AtualizaCFOP(int index, string CFOPSelecionado)
         {
             dtImportacao.Rows[index].Cells["CFOP"].Value = CFOPSelecionado;
-           
+
         }
         public DtoFormNotaParaNatureza PegaInformacaoParaNatureza(int index)
         {
 
-            if(index > dtImportacao.RowCount - 1)
+            if (index > dtImportacao.RowCount - 1)
             {
                 MessageBox.Show("Não há mais notas para percorrer");
-                return null; 
+                return null;
             }
             var codColigada = dtImportacao.Rows[index].Cells["CodColigada"].Value.ToString();
             var cnpjPrestador = dtImportacao.Rows[index].Cells["CNPJ Prestador"].Value.ToString();
             var codVerificacao = dtImportacao.Rows[index].Cells["Código Verificação"].Value.ToString();
             var numDoc = dtImportacao.Rows[index].Cells["Documento"].Value.ToString();
             var razaoSocial = dtImportacao.Rows[index].Cells["Razão Social Prestador"].Value.ToString();
-            var quantidade = dtImportacao.RowCount -1;
+            var quantidade = dtImportacao.RowCount - 1;
             var informacaoParaNatureza = new DtoFormNotaParaNatureza
             {
                 CodColigada = codColigada,
-                CnpjPrestador =cnpjPrestador,
+                CnpjPrestador = cnpjPrestador,
                 CodVerificacao = codVerificacao,
                 NumDoc = numDoc,
                 QuantidadeNotas = quantidade,
@@ -398,9 +395,43 @@ namespace ERP_FISCAL
             return informacaoParaNatureza;
         }
 
+        private async void btnInserirEmBloco_Click(object sender, EventArgs e)
+        {
+
+            var listaNatureza = await CarregaListaNatureza();
+            List<int> linhasParaInserir = new List<int>();
+            foreach (DataGridViewRow row in dtImportacao.Rows)
+            {
+                bool selecionado = Convert.ToBoolean(row.Cells["Selecionar"].Value);                
+                    if (selecionado)
+                    {
+                        linhasParaInserir.Add(row.Index);
+                    }                
+            }
+
+            DialogoInsereInformacao dialogo = new DialogoInsereInformacao();
+            dialogo.titulo = "CFOP";
+            dialogo.dataTable = listaNatureza;
+
+            using (var dialog = new DialogInsereInformacao(dialogo))
+             {
+              if (dialog.ShowDialog() == DialogResult.OK)
+               {
+                    foreach(int linha in linhasParaInserir)
+                    {
+                        AtualizaCFOP(linha,dialog.ValorDigitado);
+                    }
+               }
+             }            
+        }
+        public async Task<DataTable> CarregaListaNatureza()
+        {
+            var carregaComboBoxCfop = new CarregaCFOPController();
+            var lista = await carregaComboBoxCfop.ListaTodosCFOPController();
+
+            return lista.DatatableNatureza;
+        }
+
+
     }
-
-
-
-
 }
