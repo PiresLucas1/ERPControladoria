@@ -28,65 +28,113 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.importarNFSEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Portal));
+            this.materialDrawer2 = new MaterialSkin.Controls.MaterialDrawer();
+            this.tabControlHome = new MaterialSkin.Controls.MaterialTabControl();
+            this.tabPageExportTotvs = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.tabControlHome.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // materialDrawer2
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1722, 28);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.materialDrawer2.AutoHide = false;
+            this.materialDrawer2.AutoShow = false;
+            this.materialDrawer2.BackgroundWithAccent = false;
+            this.materialDrawer2.BaseTabControl = null;
+            this.materialDrawer2.Depth = 0;
+            this.materialDrawer2.HighlightWithAccent = true;
+            this.materialDrawer2.IndicatorWidth = 0;
+            this.materialDrawer2.IsOpen = true;
+            this.materialDrawer2.Location = new System.Drawing.Point(0, 32606);
+            this.materialDrawer2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialDrawer2.Name = "materialDrawer2";
+            this.materialDrawer2.ShowIconsWhenHidden = false;
+            this.materialDrawer2.Size = new System.Drawing.Size(71, 46);
+            this.materialDrawer2.TabIndex = 2;
+            this.materialDrawer2.Text = "materialDrawer2";
+            this.materialDrawer2.UseColors = false;
             // 
-            // toolStripMenuItem1
+            // tabControlHome
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importarNFSEToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(155, 24);
-            this.toolStripMenuItem1.Text = "Importação de nota";
+            this.tabControlHome.Controls.Add(this.tabPageExportTotvs);
+            this.tabControlHome.Controls.Add(this.tabPage2);
+            this.tabControlHome.Depth = 0;
+            this.tabControlHome.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlHome.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tabControlHome.ImageList = this.imageList1;
+            this.tabControlHome.Location = new System.Drawing.Point(0, 0);
+            this.tabControlHome.MouseState = MaterialSkin.MouseState.HOVER;
+            this.tabControlHome.Multiline = true;
+            this.tabControlHome.Name = "tabControlHome";
+            this.tabControlHome.SelectedIndex = 0;
+            this.tabControlHome.Size = new System.Drawing.Size(1020, 677);
+            this.tabControlHome.TabIndex = 3;
+            this.tabControlHome.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlHome_Selected);
+            this.tabControlHome.Click += new System.EventHandler(this.tabControlHome_Click);
+            this.tabControlHome.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControlHome_MouseClick);
             // 
-            // importarNFSEToolStripMenuItem
+            // tabPageExportTotvs
             // 
-            this.importarNFSEToolStripMenuItem.Name = "importarNFSEToolStripMenuItem";
-            this.importarNFSEToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
-            this.importarNFSEToolStripMenuItem.Text = "Importar NFS-E";
-            this.importarNFSEToolStripMenuItem.Click += new System.EventHandler(this.importarNFSEToolStripMenuItem_Click);
+            this.tabPageExportTotvs.BackColor = System.Drawing.Color.Transparent;
+            this.tabPageExportTotvs.ImageIndex = 0;
+            this.tabPageExportTotvs.Location = new System.Drawing.Point(4, 29);
+            this.tabPageExportTotvs.Name = "tabPageExportTotvs";
+            this.tabPageExportTotvs.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageExportTotvs.Size = new System.Drawing.Size(1012, 644);
+            this.tabPageExportTotvs.TabIndex = 0;
+            this.tabPageExportTotvs.Text = "Exporta nota para TOTVS";
+            this.tabPageExportTotvs.Click += new System.EventHandler(this.tabPageExportTotvs_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.ImageKey = "settings_32dp_E3E3E3_FILL0_wght200_GRAD0_opsz40.png";
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1012, 644);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "person_play_32dp_E3E3E3_FILL0_wght200_GRAD0_opsz40.png");
+            this.imageList1.Images.SetKeyName(1, "settings_32dp_E3E3E3_FILL0_wght200_GRAD0_opsz40.png");
             // 
             // Portal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::ERP_FISCAL.Properties.Resources.solfarma_removebg_preview;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1722, 360);
-            this.Controls.Add(this.menuStrip1);
-            this.DoubleBuffered = true;
-            this.MainMenuStrip = this.menuStrip1;
+            this.ClientSize = new System.Drawing.Size(1020, 677);
+            this.Controls.Add(this.tabControlHome);
+            this.Controls.Add(this.materialDrawer2);
+            this.DrawerShowIconsWhenHidden = true;
+            this.DrawerTabControl = this.tabControlHome;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Portal";
+            this.Padding = new System.Windows.Forms.Padding(0);
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Controladoria";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Load += new System.EventHandler(this.Portal_Load);
+            this.tabControlHome.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem importarNFSEToolStripMenuItem;
+        private MaterialSkin.Controls.MaterialDrawer materialDrawer2;
+        private MaterialSkin.Controls.MaterialTabControl tabControlHome;
+        private System.Windows.Forms.TabPage tabPageExportTotvs;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }
