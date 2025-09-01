@@ -63,17 +63,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\CarregaCFOPController.cs" />
+    <Compile Include="Controller\ProdutoServicoController.cs" />
     <Compile Include="Repositories\cfopRepositories.cs" />
     <Compile Include="Repositories\notasRepositories.cs" />
     <Compile Include="ConexaoBancoDeDados.cs" />
     <Compile Include="Controller\ExportServiceNotes.cs" />
-    <Compile Include="view\IUDialog\DialogInsereInformacao.cs">
+    <Compile Include="Repositories\ProdutoServicoRepositories.cs" />
+    <Compile Include="view\Interfaces\IProdutoServicoType.cs" />
+    <Compile Include="view\UIComponentes\IUDialog\DialogInsereInformacao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\IUDialog\DialogInsereInformacao.Designer.cs">
+    <Compile Include="view\UIComponentes\IUDialog\DialogInsereInformacao.Designer.cs">
       <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\IUDialog\IUInterfaces\IDialogoInsereInformacao.cs" />
+    <Compile Include="view\UIComponentes\IUDialog\IUInterfaces\IDialogoInsereInformacao.cs" />
     <Compile Include="view\ImportarNotaView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,7 +98,13 @@
     <Compile Include="view\NaturezaFiscalView.Designer.cs">
       <DependentUpon>NaturezaFiscalView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="view\IUDialog\DialogInsereInformacao.resx">
+    <Compile Include="view\UIComponentes\SelecaoCompletaItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\UIComponentes\SelecaoCompletaItem.Designer.cs">
+      <DependentUpon>SelecaoCompletaItem.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="view\UIComponentes\IUDialog\DialogInsereInformacao.resx">
       <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ImportarNotaView.resx">
@@ -116,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\NaturezaFiscalView.resx">
       <DependentUpon>NaturezaFiscalView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UIComponentes\SelecaoCompletaItem.resx">
+      <DependentUpon>SelecaoCompletaItem.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

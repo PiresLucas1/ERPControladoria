@@ -3,6 +3,7 @@ using ERP_FISCAL.view;
 using ERP_FISCAL.view.DialogUI;
 using ERP_FISCAL.view.DialogUI.interfacesUI;
 using ERP_FISCAL.view.interfaces;
+using ERP_FISCAL.view.UIComponentes;
 using Microsoft.VisualBasic;
 using SeuProjeto;
 using System;
@@ -135,11 +136,6 @@ namespace ERP_FISCAL
                         dtImportacao.Columns["Retorno"].ReadOnly = true;
                     }
 
-                    if (!dtImportacao.Columns.Contains("Cod. Produto"))
-                    {
-                        dtImportacao.Columns.Add("CodProduto", "Cod. Produto");
-                        dtImportacao.Columns["CodProduto"].ReadOnly = false;
-                    }
 
 
                     dtImportacao.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
@@ -229,8 +225,6 @@ namespace ERP_FISCAL
             // Remove a coluna CFOP se existir
             if (dtImportacao.Columns.Contains("CFOP"))
                 dtImportacao.Columns.Remove("CFOP");
-            if (dtImportacao.Columns.Contains("CodProduto"))
-                dtImportacao.Columns.Remove("CodProduto");
 
             // Desmarca todos os checkboxes (se ainda houver dados na grid)
             foreach (DataGridViewRow row in dtImportacao.Rows)
@@ -345,6 +339,11 @@ namespace ERP_FISCAL
             {
                 AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString());
             }
+
+            if(colName == "Cód. Serviço TOTVS")
+            {
+                AbrirSelecaoProdutoServico(e.RowIndex);
+            }
         }
 
         public void AbrirSelecaoCFOP(int rowIndex, int codColigada, string cnpjPrestador, string codVerificacao, string numDoc, string razaoSocial)
@@ -363,6 +362,12 @@ namespace ERP_FISCAL
             var frm = new NaturezaFiscalView(notaInstancia);
             frm.Show();
 
+        }
+
+        public void AbrirSelecaoProdutoServico(int rowIndex)
+        {
+            SelecaoCompletaItem selecaoCompleteItem = new SelecaoCompletaItem(rowIndex);
+            selecaoCompleteItem.Show();
         }
         public void AtualizaCFOP(int index, string CFOPSelecionado)
         {
