@@ -27,7 +27,7 @@ namespace ERP_FISCAL
                     using (SqlCommand cmd = new SqlCommand("UspQiveConsultaNFSe", conexao))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandTimeout = 1200; /* 20 minutos */
+                        //cmd.CommandTimeout = 1200; /* 20 minutos */
                         cmd.Parameters.AddWithValue("@INDatDataInicio", dataInicio);
                         cmd.Parameters.AddWithValue("@INDatDataFim", dataFim);
 

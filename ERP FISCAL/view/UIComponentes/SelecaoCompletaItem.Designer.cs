@@ -37,13 +37,15 @@
             this.tbCodNatureza = new System.Windows.Forms.TextBox();
             this.btnSelecionar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cBCodProduto
             // 
             this.cBCodProduto.FormattingEnabled = true;
-            this.cBCodProduto.Location = new System.Drawing.Point(31, 85);
+            this.cBCodProduto.Location = new System.Drawing.Point(31, 114);
             this.cBCodProduto.Name = "cBCodProduto";
             this.cBCodProduto.Size = new System.Drawing.Size(464, 28);
             this.cBCodProduto.TabIndex = 0;
@@ -52,7 +54,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 52);
+            this.label1.Location = new System.Drawing.Point(27, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(225, 20);
             this.label1.TabIndex = 1;
@@ -123,11 +125,30 @@
             this.btnCancelar.Text = "button2";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(27, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(246, 20);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Selecione a descrição do Produto";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(30, 47);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(464, 28);
+            this.comboBox1.TabIndex = 6;
+            // 
             // SelecaoCompletaItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(543, 518);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnSelecionar);
             this.Controls.Add(this.groupBox1);
@@ -154,5 +175,7 @@
         private System.Windows.Forms.TextBox tbCodNatureza;
         private System.Windows.Forms.Button btnSelecionar;
         private System.Windows.Forms.Button btnCancelar;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

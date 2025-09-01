@@ -23,7 +23,7 @@ namespace ERP_FISCAL.view.UIComponentes
             InitializeComponent();
             this.indexRow = indexRow;
             this.Load += SelecaoCompletaItem_Load;
-            ConfigurarAutocompletar();
+           
 
         }
         public async Task CarregaInformacoesProdutoServicoForms()
@@ -45,7 +45,8 @@ namespace ERP_FISCAL.view.UIComponentes
         private async void  SelecaoCompletaItem_Load(object sender, EventArgs e)
         {
             await CarregaInformacoesProdutoServicoForms();
-            CarregaComboBoxProdutoServico();
+            //CarregaComboBoxProdutoServico();
+            ConfigurarAutocompletar();
         }
         public void CarregaComboBoxProdutoServico()
         {
@@ -59,8 +60,6 @@ namespace ERP_FISCAL.view.UIComponentes
 
             foreach (DataRow row in tabelaDados.Rows)
             {
-                //var itemKey = Convert.ToInt32(row["CODIGOPRD"]);
-                //if (itemKey != codColigada) continue;
 
                 string key = Convert.ToString(row["CODIGOPRD"]);
                 string desc = Convert.ToString(row["DESCRICAO"]);
@@ -90,22 +89,23 @@ namespace ERP_FISCAL.view.UIComponentes
         }
         public void ConfigurarAutocompletar()
         {
-            // Crie a coleção de sugestões
-            AutoCompleteStringCollection colecaoSugestoes = new AutoCompleteStringCollection();
             if (tabelaDados == null)
-            {
                 return;
-            }
+
+            cBCodProduto.DropDownStyle = ComboBoxStyle.DropDown;
+            cBCodProduto.AutoCompleteMode = AutoCompleteMode.Suggest;
+            cBCodProduto.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            AutoCompleteStringCollection colecaoSugestoes = new AutoCompleteStringCollection();
+
             foreach (DataRow row in tabelaDados.Rows)
             {
-                colecaoSugestoes.Add(row["IDNATUREZA"].ToString());
+                colecaoSugestoes.Add(row["DESCRICAO"].ToString());
             }
 
-            // Associe a coleção e configure as propriedades do TextBox
-            this.cBCodProduto.AutoCompleteCustomSource = colecaoSugestoes;
-            this.cBCodProduto.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            this.cBCodProduto.AutoCompleteMode = AutoCompleteMode.Suggest;
+            cBCodProduto.AutoCompleteCustomSource = colecaoSugestoes;
         }
+
 
     }
 }
