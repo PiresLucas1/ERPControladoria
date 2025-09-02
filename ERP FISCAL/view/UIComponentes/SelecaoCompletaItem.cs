@@ -10,20 +10,26 @@ using System.Windows.Forms;
 using ERP_FISCAL.controller;
 using ERP_FISCAL.Controller;
 using ERP_FISCAL.view.Interfaces;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ERP_FISCAL.view.UIComponentes
 {
     public partial class SelecaoCompletaItem : Form
     {
         public DataTable tabelaDados;
+        public List<string> listaCodigoProduto;
         public int indexRow;
-        
+        private bool navegandoComSeta = false;
+
+
         public SelecaoCompletaItem(int indexRow)
         {
             InitializeComponent();
             this.indexRow = indexRow;
             this.Load += SelecaoCompletaItem_Load;
-           
+            listaCodigoProduto = new List<string>();
+
+
 
         }
         public async Task CarregaInformacoesProdutoServicoForms()
@@ -45,65 +51,120 @@ namespace ERP_FISCAL.view.UIComponentes
         private async void  SelecaoCompletaItem_Load(object sender, EventArgs e)
         {
             await CarregaInformacoesProdutoServicoForms();
-            //CarregaComboBoxProdutoServico();
-            ConfigurarAutocompletar();
+            CarregaComboBoxCodigoProduto();
         }
-        public void CarregaComboBoxProdutoServico()
-        {
-            cBCodProduto.Items.Clear();
 
-            if (tabelaDados == null || tabelaDados.Rows.Count == 0)
+
+
+
+        public void CarregaComboBoxCodigoProduto()
+        {
+            cbCodigoProduto.DropDownStyle = ComboBoxStyle.DropDown; // permite digitar
+            cbCodigoProduto.AutoCompleteMode = AutoCompleteMode.None; // desliga autocomplete padrão
+
+            foreach (DataRow row in tabelaDados.Rows) {
+
+                string valor = row["CODIGOPRD"].ToString() + " - " + row["DESCRICAO"].ToString();
+                cbCodigoProduto.Items.Add(valor);
+                listaCodigoProduto.Add(valor);
+            }
+            cbCodigoProduto.TextChanged += cbCodigoProduto_TextChanged;
+        }
+
+        private void AjustarDropDown()
+        {
+            int qtdItens = cbCodigoProduto.Items.Count;
+
+            if (qtdItens == 0)
             {
-                cBCodProduto.Enabled = false;
+                cbCodigoProduto.DroppedDown = false;
                 return;
             }
 
-            foreach (DataRow row in tabelaDados.Rows)
+            // Ajusta dinamicamente: máximo 15 itens na lista
+            cbCodigoProduto.MaxDropDownItems = Math.Min(qtdItens, 15);
+        }
+
+        private void cbCodigoProduto_TextChanged(object sender, EventArgs e)
+        {
+            if (navegandoComSeta)
             {
-
-                string key = Convert.ToString(row["CODIGOPRD"]);
-                string desc = Convert.ToString(row["DESCRICAO"]);
-                string value = key + " - " + desc;
-
-                cBCodProduto.Items.Add(new KeyValuePair<string, string>(key, value));
+                string item = cbCodigoProduto.Text;
+                string[] codigoDescricao = item.Split(new string[] { " - " }, StringSplitOptions.None);
+                RecuperaValoresDoItemSelecionada(codigoDescricao[0]);
             }
+            else
+            {
+                string valorDigitado = cbCodigoProduto.Text;
 
-            cBCodProduto.DisplayMember = "Value";
-            cBCodProduto.ValueMember = "Key";
-            cBCodProduto.Enabled = cBCodProduto.Items.Count > 0;
+                var filtrados = string.IsNullOrEmpty(valorDigitado)
+                    ? listaCodigoProduto
+                    : listaCodigoProduto
+                        .Where(x => x.IndexOf(valorDigitado, StringComparison.OrdinalIgnoreCase) >= 0)
+                        .ToList();
+
+                cbCodigoProduto.TextChanged -= cbCodigoProduto_TextChanged;
+
+                cbCodigoProduto.Items.Clear();
+                if (filtrados.Count > 0)
+                {
+                    cbCodigoProduto.Items.AddRange(filtrados.ToArray());
+                    cbCodigoProduto.DroppedDown = true;
+
+                    cbCodigoProduto.Text = valorDigitado;
+                    cbCodigoProduto.SelectionStart = valorDigitado.Length;
+                    cbCodigoProduto.SelectionLength = 0;
+                }
+                else
+                {
+                    cbCodigoProduto.DroppedDown = false;
+                }
+
+                cbCodigoProduto.TextChanged += cbCodigoProduto_TextChanged;
+
+            }
 
         }
 
-        private void cBCodProduto_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            object selObj = cBCodProduto.SelectedItem;
-            if (!(selObj is KeyValuePair<string, string>)) return;
-            var sel = (KeyValuePair<string, string>)selObj;
-
-            var produtoServico = tabelaDados.Select($"CODIGOPRD = '{sel.Key}'");
-
-            DataRow linhaProduto = produtoServico[0];
-            tbCodNatureza.Text = linhaProduto[2].ToString();
-            tbDescricaoNatureza.Text = linhaProduto[3].ToString();
-
-        }
-        public void ConfigurarAutocompletar()
-        {
-            if (tabelaDados == null)
-                return;
-
-            cBCodProduto.DropDownStyle = ComboBoxStyle.DropDown;
-            cBCodProduto.AutoCompleteMode = AutoCompleteMode.Suggest;
-            cBCodProduto.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            AutoCompleteStringCollection colecaoSugestoes = new AutoCompleteStringCollection();
-
-            foreach (DataRow row in tabelaDados.Rows)
+        private void RecuperaValoresDoItemSelecionada(string valor)
+        {           
+            
+            var dataRowCodigoProduto = tabelaDados.Select($"CODIGOPRD = '{valor}'");
+            if(dataRowCodigoProduto != null)
             {
-                colecaoSugestoes.Add(row["DESCRICAO"].ToString());
+
+                if (dataRowCodigoProduto.Length > 0)
+                {
+                    DataRow rowEncontrada = dataRowCodigoProduto[0];
+                    tbCodNatureza.Text = rowEncontrada[2].ToString();
+                    tbDescricaoNatureza.Text = rowEncontrada[3].ToString();
+                }
+            }
+        }
+        private void cbCodigoProduto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (navegandoComSeta) return;
+            if (cbCodigoProduto.SelectedItem != null)
+            {
+                string item = cbCodigoProduto.SelectedItem.ToString();
+                string[] codigoDescricao = item.Split(new string[] { " - " }, StringSplitOptions.None);
+                RecuperaValoresDoItemSelecionada(codigoDescricao[0]);
             }
 
-            cBCodProduto.AutoCompleteCustomSource = colecaoSugestoes;
+            // Reseta a flag após a seleção
+            navegandoComSeta = false;
+        }
+        private void cbCodigoProduto_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Detecta quando o usuário está usando as setas para navegar
+            if (e.KeyCode == Keys.Down || e.KeyCode == Keys.Up)
+            {
+                navegandoComSeta = true;
+            }
+            else
+            {
+                navegandoComSeta = false;
+            }
         }
 
 
