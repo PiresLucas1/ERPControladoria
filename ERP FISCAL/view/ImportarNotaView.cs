@@ -342,7 +342,11 @@ namespace ERP_FISCAL
 
             if(colName == "Cód. Serviço TOTVS")
             {
-                AbrirSelecaoProdutoServico(e.RowIndex);
+                AbrirSelecaoProdutoServico(e.RowIndex, Convert.ToInt32(codColigada));
+            }
+            if(colName == "Retorno")
+            {
+                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString());
             }
         }
 
@@ -364,9 +368,9 @@ namespace ERP_FISCAL
 
         }
 
-        public void AbrirSelecaoProdutoServico(int rowIndex)
+        public void AbrirSelecaoProdutoServico(int rowIndex, int codColigada)
         {
-            SelecaoCompletaItem selecaoCompleteItem = new SelecaoCompletaItem(rowIndex);
+            SelecaoCompletaItem selecaoCompleteItem = new SelecaoCompletaItem(rowIndex, codColigada);
             selecaoCompleteItem.Show();
         }
         public void AtualizaCFOP(int index, string CFOPSelecionado)

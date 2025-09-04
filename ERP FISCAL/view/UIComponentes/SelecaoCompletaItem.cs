@@ -20,14 +20,16 @@ namespace ERP_FISCAL.view.UIComponentes
         public List<string> listaCodigoProduto;
         public int indexRow;
         private bool navegandoComSeta = false;
+        private int coligada;
 
 
-        public SelecaoCompletaItem(int indexRow)
+        public SelecaoCompletaItem(int indexRow, int codColigada)
         {
             InitializeComponent();
             this.indexRow = indexRow;
             this.Load += SelecaoCompletaItem_Load;
             listaCodigoProduto = new List<string>();
+            this.coligada = codColigada;
 
 
 
@@ -37,7 +39,15 @@ namespace ERP_FISCAL.view.UIComponentes
             try
             {
                 var produtoServico = new ProdutoServicoController();
-                tabelaDados = await produtoServico.CarregaProdutoServicoController();
+                DataTable tabela = await produtoServico.CarregaProdutoServicoController();
+                Console.WriteLine(tabela.Columns["CODCOLIGADA"].DataType);
+
+                var tabelaFiltradaPorColigada = tabela.AsEnumerable()
+                    .Where(row => row.Field<short>("CODCOLIGADA") == coligada)
+                    .CopyToDataTable();
+
+                this.tabelaDados = tabelaFiltradaPorColigada;
+
 
 
             }
@@ -115,9 +125,9 @@ namespace ERP_FISCAL.view.UIComponentes
                     cbCodigoProduto.SelectionStart = valorDigitado.Length;
                     cbCodigoProduto.SelectionLength = 0;
                 }
-                else
-                {
-                    cbCodigoProduto.DroppedDown = false;
+                else if (filtrados.Count == 0)
+                {                 
+                    cbCodigoProduto.Items.AddRange(listaCodigoProduto.ToArray());
                 }
 
                 cbCodigoProduto.TextChanged += cbCodigoProduto_TextChanged;
