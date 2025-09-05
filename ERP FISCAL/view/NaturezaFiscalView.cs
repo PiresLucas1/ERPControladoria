@@ -80,9 +80,7 @@ namespace ERP_FISCAL.view
         }
         private async void NaturezaFiscal_Load(object sender, EventArgs e)
         {
-
-           
-
+            
             await CarregaInformacoesNaturezaForms();
             CarregarNaturezasDaColigada();
         }
@@ -207,6 +205,7 @@ namespace ERP_FISCAL.view
                 this.cnpjPrestador = novosValores.CnpjPrestador;
                 this.codVerificacao = novosValores.CodVerificacao;
                 this.RazaoSocial = novosValores.RazaoSocial;
+                this.indexCelula = ContadorGlobal;
 
                 await CarregaInformacoesNaturezaForms();
                 CarregarNaturezasDaColigada();
@@ -220,7 +219,7 @@ namespace ERP_FISCAL.view
 
         private void btnSelecionaProduto_Click(object sender, EventArgs e)
         {
-            ProdutoServico selecaoCompleteItem = new ProdutoServico(indexCelula, codColigada);
+            ProdutoServico selecaoCompleteItem = new ProdutoServico(indexCelula, codColigada, _formPai);
             selecaoCompleteItem.Show();
         }
     }
