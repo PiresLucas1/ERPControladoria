@@ -1,6 +1,6 @@
 ﻿namespace ERP_FISCAL.view.UIComponentes
 {
-    partial class SelecaoCompletaItem
+    partial class ProdutoServico
     {
         /// <summary>
         /// Required designer variable.
@@ -43,9 +43,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 49);
+            this.label1.Location = new System.Drawing.Point(24, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(225, 20);
+            this.label1.Size = new System.Drawing.Size(193, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Selecione o código de Produto";
             // 
@@ -55,9 +55,11 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.tbDescricaoNatureza);
             this.groupBox1.Controls.Add(this.tbCodNatureza);
-            this.groupBox1.Location = new System.Drawing.Point(31, 160);
+            this.groupBox1.Location = new System.Drawing.Point(28, 128);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(464, 255);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Size = new System.Drawing.Size(412, 204);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Informações da Natureza de Rendimento";
@@ -65,51 +67,55 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(30, 139);
+            this.label3.Location = new System.Drawing.Point(27, 111);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 20);
+            this.label3.Size = new System.Drawing.Size(69, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Descrição";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 56);
+            this.label2.Location = new System.Drawing.Point(27, 45);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 20);
+            this.label2.Size = new System.Drawing.Size(51, 16);
             this.label2.TabIndex = 3;
             this.label2.Text = "Código";
             // 
             // tbDescricaoNatureza
             // 
             this.tbDescricaoNatureza.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tbDescricaoNatureza.Location = new System.Drawing.Point(28, 172);
+            this.tbDescricaoNatureza.Location = new System.Drawing.Point(25, 138);
+            this.tbDescricaoNatureza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbDescricaoNatureza.Name = "tbDescricaoNatureza";
-            this.tbDescricaoNatureza.Size = new System.Drawing.Size(374, 26);
+            this.tbDescricaoNatureza.Size = new System.Drawing.Size(333, 22);
             this.tbDescricaoNatureza.TabIndex = 1;
             // 
             // tbCodNatureza
             // 
             this.tbCodNatureza.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.tbCodNatureza.Location = new System.Drawing.Point(34, 89);
+            this.tbCodNatureza.Location = new System.Drawing.Point(30, 71);
+            this.tbCodNatureza.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbCodNatureza.Name = "tbCodNatureza";
-            this.tbCodNatureza.Size = new System.Drawing.Size(368, 26);
+            this.tbCodNatureza.Size = new System.Drawing.Size(328, 22);
             this.tbCodNatureza.TabIndex = 0;
             // 
             // btnSelecionar
             // 
-            this.btnSelecionar.Location = new System.Drawing.Point(377, 452);
+            this.btnSelecionar.Location = new System.Drawing.Point(335, 362);
+            this.btnSelecionar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSelecionar.Name = "btnSelecionar";
-            this.btnSelecionar.Size = new System.Drawing.Size(118, 31);
+            this.btnSelecionar.Size = new System.Drawing.Size(105, 25);
             this.btnSelecionar.TabIndex = 3;
             this.btnSelecionar.Text = "button1";
             this.btnSelecionar.UseVisualStyleBackColor = true;
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(240, 452);
+            this.btnCancelar.Location = new System.Drawing.Point(213, 362);
+            this.btnCancelar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(118, 31);
+            this.btnCancelar.Size = new System.Drawing.Size(105, 25);
             this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "button2";
             this.btnCancelar.UseVisualStyleBackColor = true;
@@ -117,26 +123,29 @@
             // cbCodigoProduto
             // 
             this.cbCodigoProduto.FormattingEnabled = true;
-            this.cbCodigoProduto.Location = new System.Drawing.Point(31, 90);
+            this.cbCodigoProduto.Location = new System.Drawing.Point(28, 72);
+            this.cbCodigoProduto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbCodigoProduto.Name = "cbCodigoProduto";
-            this.cbCodigoProduto.Size = new System.Drawing.Size(464, 28);
+            this.cbCodigoProduto.Size = new System.Drawing.Size(413, 24);
             this.cbCodigoProduto.TabIndex = 6;
             this.cbCodigoProduto.SelectedIndexChanged += new System.EventHandler(this.cbCodigoProduto_SelectedIndexChanged);
             this.cbCodigoProduto.TextChanged += new System.EventHandler(this.cbCodigoProduto_TextChanged);
             this.cbCodigoProduto.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cbCodigoProduto_KeyDown);
             // 
-            // SelecaoCompletaItem
+            // ProdutoServico
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(543, 518);
+            this.ClientSize = new System.Drawing.Size(483, 414);
             this.Controls.Add(this.cbCodigoProduto);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnSelecionar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Name = "SelecaoCompletaItem";
-            this.Text = "SelecaoCompletaItem";
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Name = "ProdutoServico";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Produto ";
             this.Load += new System.EventHandler(this.SelecaoCompletaItem_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

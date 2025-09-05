@@ -14,7 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ERP_FISCAL.view.UIComponentes
 {
-    public partial class SelecaoCompletaItem : Form
+    public partial class ProdutoServico : Form
     {
         public DataTable tabelaDados;
         public List<string> listaCodigoProduto;
@@ -22,7 +22,7 @@ namespace ERP_FISCAL.view.UIComponentes
         private bool navegandoComSeta = false;
 
 
-        public SelecaoCompletaItem(int indexRow)
+        public ProdutoServico(int indexRow)
         {
             InitializeComponent();
             this.indexRow = indexRow;

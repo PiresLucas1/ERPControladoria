@@ -98,11 +98,11 @@
     <Compile Include="view\NaturezaFiscalView.Designer.cs">
       <DependentUpon>NaturezaFiscalView.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\UIComponentes\SelecaoCompletaItem.cs">
+    <Compile Include="view\ProdutoServico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\UIComponentes\SelecaoCompletaItem.Designer.cs">
-      <DependentUpon>SelecaoCompletaItem.cs</DependentUpon>
+    <Compile Include="view\ProdutoServico.Designer.cs">
+      <DependentUpon>ProdutoServico.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="view\UIComponentes\IUDialog\DialogInsereInformacao.resx">
       <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
@@ -126,8 +126,8 @@
     <EmbeddedResource Include="view\NaturezaFiscalView.resx">
       <DependentUpon>NaturezaFiscalView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\UIComponentes\SelecaoCompletaItem.resx">
-      <DependentUpon>SelecaoCompletaItem.cs</DependentUpon>
+    <EmbeddedResource Include="view\ProdutoServico.resx">
+      <DependentUpon>ProdutoServico.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

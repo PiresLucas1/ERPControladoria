@@ -70,7 +70,6 @@ namespace ERP_FISCAL.controller
                             cmd.Parameters.AddWithValue("@INdatDataEmissao", row["Dt.Hora Emissão"] != DBNull.Value
                                 ? Convert.ToDateTime(row["Dt.Hora Emissão"])
                                 : DateTime.MinValue);
-                            cmd.Parameters.AddWithValue("@INdatDataLancamento", DateTime.Now);
                             cmd.Parameters.AddWithValue("@INvchDiscriminacaoServico", row["Descriminação"]?.ToString() ?? "");
                             cmd.Parameters.AddWithValue("@INvchCodigoVerificacao", row["Código Verificação"]?.ToString() ?? "");
 
@@ -104,6 +103,9 @@ namespace ERP_FISCAL.controller
 
                             cmd.Parameters.AddWithValue("@INvchCodProduto", row["Cód. Serviço TOTVS"]?.ToString() ?? "");
                             cmd.Parameters.AddWithValue("@INvchCFOP", row["CFOP"]?.ToString() ?? "");
+                            cmd.Parameters.AddWithValue("@INdatDataLancamento", row["Data Lançamento"] != DBNull.Value
+                                ? Convert.ToDateTime(row["Data Lançamento"])
+                                : DateTime.MinValue);
 
                             // Parâmetros de saída
                             var msgRetorno = new SqlParameter("@OUTvchMsgRetorno", SqlDbType.VarChar, 1000)
@@ -121,9 +123,8 @@ namespace ERP_FISCAL.controller
                             // Executa a procedure
                             await cmd.ExecuteNonQueryAsync();
 
-                            // Se quiser salvar no próprio DataTable, crie colunas antes:
                             row["Retorno"] = msgRetorno.Value?.ToString();
-                            row["IDMov"] = idMov.Value?.ToString();
+                            row["IDMov"] = idMov.Value != DBNull.Value ? (int)idMov.Value : 0;
                         }
                     }
 
