@@ -394,11 +394,6 @@ namespace ERP_FISCAL
             {
                 AbrirSelecaoProdutoServico(e.RowIndex, Convert.ToInt32(codColigada));
             }
-            if(colName == "...")
-            {
-                bool flag = true;
-                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString(), flag);
-            }
         }
 
         public void AbrirSelecaoCFOP(int rowIndex, int codColigada, string cnpjPrestador, string codVerificacao, string numDoc, string razaoSocial, bool flag = false)
@@ -505,7 +500,9 @@ namespace ERP_FISCAL
 
         public void SelecionaValorProduto(string valor, int index)
         {
-            dtImportacao.Rows[index].Cells["Cód. Serviço TOTVS"].Value = valor;
+            var ProdutoFormatado = valor.Split('-');
+            dtImportacao.Rows[index].Cells["Cód. Serviço TOTVS"].Value = ProdutoFormatado[0].Trim();
+            ;
         }
 
         private void dtimportacao_KeyDown(object sender, KeyEventArgs e)
@@ -526,5 +523,23 @@ namespace ERP_FISCAL
             }
         }
 
+
+        private void dtImportacao_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return; // ignora header
+
+            var colName = dtImportacao.Columns[e.ColumnIndex].Name;
+            var codColigada = dtImportacao.Rows[e.RowIndex].Cells["CodColigada"].Value;
+            var cnpjPrestador = dtImportacao.Rows[e.RowIndex].Cells["CNPJ Prestador"].Value;
+            var codVerificacao = dtImportacao.Rows[e.RowIndex].Cells["Código Verificação"].Value;
+            var numDoc = dtImportacao.Rows[e.RowIndex].Cells["Documento"].Value;
+            var razaoSocial = dtImportacao.Rows[e.RowIndex].Cells["Razão Social Prestador"].Value;
+
+            if (colName == "...")
+            {
+                bool flag = true;
+                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString(), flag);
+            }
+        }
     }
 }

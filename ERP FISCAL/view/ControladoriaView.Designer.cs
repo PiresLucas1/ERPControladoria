@@ -42,7 +42,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1722, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(2153, 38);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -51,7 +51,7 @@
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importarNFSEToolStripMenuItem});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(155, 24);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(155, 34);
             this.toolStripMenuItem1.Text = "Importação de nota";
             // 
             // importarNFSEToolStripMenuItem
@@ -65,8 +65,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::ERP_FISCAL.Properties.Resources.solfarma_removebg_preview;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.BackgroundImage = global::ERP_FISCAL.Properties.Resources.SOLFARMA_3D_PNG;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1722, 360);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;

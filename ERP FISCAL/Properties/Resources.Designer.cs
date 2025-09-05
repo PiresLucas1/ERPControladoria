@@ -63,9 +63,9 @@ namespace ERP_FISCAL.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap solfarma_removebg_preview {
+        internal static System.Drawing.Bitmap SOLFARMA_3D_PNG {
             get {
-                object obj = ResourceManager.GetObject("solfarma-removebg-preview", resourceCulture);
+                object obj = ResourceManager.GetObject("SOLFARMA-3D-PNG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
