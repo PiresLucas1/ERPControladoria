@@ -1,4 +1,5 @@
 ﻿using ERP_FISCAL.controller;
+using ERP_FISCAL.Controller;
 using ERP_FISCAL.view;
 using ERP_FISCAL.view.DialogUI;
 using ERP_FISCAL.view.DialogUI.interfacesUI;
@@ -124,18 +125,22 @@ namespace ERP_FISCAL
                         dtImportacao.Columns.Insert(index + 1, cfopColuna);
                     }
 
+
                     if (!dtImportacao.Columns.Contains("Data Lançamento"))
                     {
                         int index = dtImportacao.Columns["CFOP"].Index;
 
-                        var DataLanColuna = new DataGridViewTextBoxColumn();
-                        DataLanColuna.Name = "Data Lançamento";
-                        DataLanColuna.HeaderText = "Data Lançamento";
-                        DataLanColuna.ReadOnly = false;
-                        DataLanColuna.Width = 60;
+                        var colData = new DataGridViewMaskedTextBoxColumn();
+                        colData.Name = "Data Lançamento";
+                        colData.HeaderText = "Data Lançamento";
+                        colData.Mask = "00/00/0000";
+                        colData.Width = 80;
 
-                        dtImportacao.Columns.Insert(index + 1, DataLanColuna);
+                        dtImportacao.Columns.Insert(index + 1, colData);
+
+                        colData.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     }
+
 
                     if (!dtImportacao.Columns.Contains("IDMov"))
                     {
@@ -202,6 +207,13 @@ namespace ERP_FISCAL
                 dt = await service.FindUniqueNoteAsync(filterValue);
 
 
+                foreach (DataGridViewRow row in dtImportacao.Rows)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        cell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    }
+                }
 
             }
         }
@@ -461,6 +473,8 @@ namespace ERP_FISCAL
                }
              }            
         }
+
+
         public async Task<DataTable> CarregaListaNatureza()
         {
             var carregaComboBoxCfop = new CarregaCFOPController();
@@ -473,5 +487,24 @@ namespace ERP_FISCAL
         {
 
         }
+
+        private void dtimportacao_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true; // evita que o Enter faça outra ação padrão
+
+                int col = dtImportacao.CurrentCell.ColumnIndex;
+                int row = dtImportacao.CurrentCell.RowIndex;
+
+                // Vai para a próxima linha (ou coluna, se preferir)
+                if (row < dtImportacao.RowCount - 1)
+                {
+                    dtImportacao.CurrentCell = dtImportacao[col, row + 1];
+                    dtImportacao.BeginEdit(true); // já entra em modo de edição
+                }
+            }
+        }
+
     }
 }

@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\CarregaCFOPController.cs" />
+    <Compile Include="Controller\MascaraDeColuna.cs" />
     <Compile Include="Controller\ProdutoServicoController.cs" />
     <Compile Include="Repositories\cfopRepositories.cs" />
     <Compile Include="Repositories\notasRepositories.cs" />
