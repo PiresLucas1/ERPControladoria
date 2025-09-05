@@ -21,16 +21,17 @@ namespace ERP_FISCAL.view.UIComponentes
         public int indexRow;
         private bool navegandoComSeta = false;
         private int coligada;
+        private ImportarNotaView _formPai;
 
 
-        public ProdutoServico(int indexRow, int codColigada)
+        public ProdutoServico(int indexRow, int codColigada, ImportarNotaView formFocus)
         {
             InitializeComponent();
             this.indexRow = indexRow;
             this.Load += SelecaoCompletaItem_Load;
             listaCodigoProduto = new List<string>();
             this.coligada = codColigada;
-
+            this._formPai = formFocus;
 
 
         }
@@ -111,6 +112,7 @@ namespace ERP_FISCAL.view.UIComponentes
                     ? listaCodigoProduto
                     : listaCodigoProduto
                         .Where(x => x.IndexOf(valorDigitado, StringComparison.OrdinalIgnoreCase) >= 0)
+                        .Distinct()
                         .ToList();
 
                 cbCodigoProduto.TextChanged -= cbCodigoProduto_TextChanged;
@@ -133,6 +135,8 @@ namespace ERP_FISCAL.view.UIComponentes
                 cbCodigoProduto.TextChanged += cbCodigoProduto_TextChanged;
 
             }
+            cbCodigoProduto.SelectionStart = cbCodigoProduto.Text.Length;
+            cbCodigoProduto.SelectionLength = 0;
 
         }
 
@@ -179,7 +183,14 @@ namespace ERP_FISCAL.view.UIComponentes
 
         private void btnSelecionar_Click(object sender, EventArgs e)
         {
+            var produtoSelecionado = cbCodigoProduto.SelectedItem.ToString();
+            _formPai.SelecionaValorProduto(produtoSelecionado, indexRow);
+            this.Close();
+        }
 
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

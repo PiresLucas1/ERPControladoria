@@ -154,7 +154,18 @@ namespace ERP_FISCAL
                         dtImportacao.Columns["Retorno"].ReadOnly = true;
                     }
 
-
+                    if(!dtImportacao.Columns.Contains("..."))
+                    {
+                        int index = dtImportacao.Columns["Data Lançamento"].Index;
+                        var insereInfo = new DataGridViewButtonColumn();
+                        insereInfo.Name = "...";
+                        insereInfo.HeaderText = "...";
+                        insereInfo.Text = "...";
+                        insereInfo.UseColumnTextForButtonValue = true;
+                        insereInfo.ReadOnly = false;
+                        insereInfo.Width = 15;
+                        dtImportacao.Columns.Insert(index +1, insereInfo);
+                    }
 
                     dtImportacao.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
                     dtImportacao.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
@@ -256,6 +267,9 @@ namespace ERP_FISCAL
             if (dtImportacao.Columns.Contains("Data Lançamento"))
                 dtImportacao.Columns.Remove("Data Lançamento");
 
+            if (dtImportacao.Columns.Contains("..."))
+                dtImportacao.Columns.Remove("...");
+
             // Desmarca todos os checkboxes (se ainda houver dados na grid)
             foreach (DataGridViewRow row in dtImportacao.Rows)
             {
@@ -307,20 +321,20 @@ namespace ERP_FISCAL
         {
             // configurações desejadas
             int top = 300;
-            int bottomSpacing = 100;
+            int bottomSpacing = 10;
             int sideMargin = 10; // margem esquerda/direita (ajuste se quiser)
 
             int widthWindow = this.ClientSize.Width;
             int heightWindow = this.ClientSize.Height;
 
 
-            // aplica posição e tamanho
+            // Pega posição do GroupBox de referência
+            int topGb = GBListar.Bottom + 10; 
+
             dtImportacao.Top = top;
             dtImportacao.Left = sideMargin;
-            dtImportacao.Width = Math.Max(0, widthWindow - 2 * sideMargin); // garante não ficar negativo
-            dtImportacao.Height = Math.Max(0, heightWindow - top - bottomSpacing); // garante não ficar negativo
-
-            //Console.WriteLine($"largura:{widthWindow} / altura:{heightWindow} -> dt.Width:{dtImportacao.Width} dt.Height:{dtImportacao.Height}");
+            dtImportacao.Width = Math.Max(0, widthWindow - 2 * sideMargin);
+            dtImportacao.Height = Math.Max(0, heightWindow - top - bottomSpacing);
             ResizeComponentForm(sender, e);
         }
 
@@ -328,8 +342,14 @@ namespace ERP_FISCAL
         {
 
             int widthWindow = this.ClientSize.Width;
+            int heightWindow = this.ClientSize.Height;
+            //Console.WriteLine("largura "+ widthWindow);
+            //Console.WriteLine("Altura " +ClientSize.Height);
+            //Console.WriteLine("Altura " + ((heightWindow * 0.79) - heightWindow)* -1);
+            int posicaoGbLista = (int)(((heightWindow * 0.79) - heightWindow) * -1);
 
-            GBListar.Top = 230;
+            Console.WriteLine(posicaoGbLista + 25);
+            GBListar.Top = posicaoGbLista + 30 ;
             GBListar.Left = widthWindow - 350;
 
             groupLoading.Top = this.ClientSize.Height - 65;
@@ -374,7 +394,7 @@ namespace ERP_FISCAL
             {
                 AbrirSelecaoProdutoServico(e.RowIndex, Convert.ToInt32(codColigada));
             }
-            if(colName == "Retorno")
+            if(colName == "...")
             {
                 bool flag = true;
                 AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString(), flag);
@@ -401,7 +421,7 @@ namespace ERP_FISCAL
 
         public void AbrirSelecaoProdutoServico(int rowIndex, int codColigada)
         {
-            ProdutoServico selecaoCompleteItem = new ProdutoServico(rowIndex, codColigada);
+            ProdutoServico selecaoCompleteItem = new ProdutoServico(rowIndex, codColigada,this);
             selecaoCompleteItem.Show();
         }
         public void AtualizaCFOP(int index, string CFOPSelecionado)
@@ -483,9 +503,9 @@ namespace ERP_FISCAL
             return lista.DatatableNatureza;
         }
 
-        private void dtImportacao_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        public void SelecionaValorProduto(string valor, int index)
         {
-
+            dtImportacao.Rows[index].Cells["Cód. Serviço TOTVS"].Value = valor;
         }
 
         private void dtimportacao_KeyDown(object sender, KeyEventArgs e)
