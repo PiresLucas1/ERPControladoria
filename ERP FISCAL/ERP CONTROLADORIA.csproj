@@ -71,13 +71,19 @@
     <Compile Include="Controller\ExportServiceNotes.cs" />
     <Compile Include="Repositories\ProdutoServicoRepositories.cs" />
     <Compile Include="view\Interfaces\IProdutoServicoType.cs" />
-    <Compile Include="view\UIComponentes\IUDialog\DialogInsereInformacao.cs">
+    <Compile Include="view\UIComponentes\UIConsultaItem\ConsultaItem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\UIComponentes\IUDialog\DialogInsereInformacao.Designer.cs">
+    <Compile Include="view\UIComponentes\UIConsultaItem\ConsultaItem.Designer.cs">
+      <DependentUpon>ConsultaItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\UIComponentes\UIDialog\DialogInsereInformacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\UIComponentes\UIDialog\DialogInsereInformacao.Designer.cs">
       <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\UIComponentes\IUDialog\IUInterfaces\IDialogoInsereInformacao.cs" />
+    <Compile Include="view\UIComponentes\UIDialog\IUInterfaces\IDialogoInsereInformacao.cs" />
     <Compile Include="view\ImportarNotaView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,7 +111,10 @@
     <Compile Include="view\ProdutoServico.Designer.cs">
       <DependentUpon>ProdutoServico.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="view\UIComponentes\IUDialog\DialogInsereInformacao.resx">
+    <EmbeddedResource Include="view\UIComponentes\UIConsultaItem\ConsultaItem.resx">
+      <DependentUpon>ConsultaItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UIComponentes\UIDialog\DialogInsereInformacao.resx">
       <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ImportarNotaView.resx">

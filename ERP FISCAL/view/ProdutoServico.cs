@@ -41,7 +41,7 @@ namespace ERP_FISCAL.view.UIComponentes
             {
                 var produtoServico = new ProdutoServicoController();
                 DataTable tabela = await produtoServico.CarregaProdutoServicoController();
-                Console.WriteLine(tabela.Columns["CODCOLIGADA"].DataType);
+                //Console.WriteLine(tabela.Columns["CODCOLIGADA"].DataType);
 
                 var tabelaFiltradaPorColigada = tabela.AsEnumerable()
                     .Where(row => row.Field<short>("CODCOLIGADA") == coligada)

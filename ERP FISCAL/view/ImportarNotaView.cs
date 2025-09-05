@@ -5,6 +5,7 @@ using ERP_FISCAL.view.DialogUI;
 using ERP_FISCAL.view.DialogUI.interfacesUI;
 using ERP_FISCAL.view.interfaces;
 using ERP_FISCAL.view.UIComponentes;
+using ERP_FISCAL.view.UIComponentes.UIConsultaItem;
 using Microsoft.VisualBasic;
 using SeuProjeto;
 using System;
@@ -387,7 +388,9 @@ namespace ERP_FISCAL
 
             if (colName == "CFOP")
             {
-                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString());
+                //AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString());
+
+                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada));
             }
 
             if(colName == "Cód. Serviço TOTVS")
@@ -395,7 +398,14 @@ namespace ERP_FISCAL
                 AbrirSelecaoProdutoServico(e.RowIndex, Convert.ToInt32(codColigada));
             }
         }
+        public async void AbrirConsultaItem(int row, int codColigada)
+        {
+            CarregaCFOPController cfopController = new CarregaCFOPController();
+            IAjusteComboBoxUi retorno = await cfopController.ListaTodosCFOPController();
 
+            ConsultaItem consultaItem = new ConsultaItem(row, codColigada,retorno.DatatableNatureza);
+            consultaItem.Show();
+        }
         public void AbrirSelecaoCFOP(int rowIndex, int codColigada, string cnpjPrestador, string codVerificacao, string numDoc, string razaoSocial, bool flag = false)
         {
 
