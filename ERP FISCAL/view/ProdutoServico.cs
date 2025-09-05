@@ -23,7 +23,7 @@ namespace ERP_FISCAL.view.UIComponentes
         private int coligada;
 
 
-        public SelecaoCompletaItem(int indexRow, int codColigada)
+        public ProdutoServico(int indexRow, int codColigada)
         {
             InitializeComponent();
             this.indexRow = indexRow;
@@ -177,6 +177,9 @@ namespace ERP_FISCAL.view.UIComponentes
             }
         }
 
+        private void btnSelecionar_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

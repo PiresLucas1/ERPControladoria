@@ -48,6 +48,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxColigada = new System.Windows.Forms.ComboBox();
             this.SelecionarIrProximo = new System.Windows.Forms.Button();
+            this.btnSelecionaProduto = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -247,11 +248,25 @@
             this.SelecionarIrProximo.UseVisualStyleBackColor = true;
             this.SelecionarIrProximo.Click += new System.EventHandler(this.SelecionarIrProximo_Click);
             // 
-            // NaturezaFiscal
+            // btnSelecionaProduto
+            // 
+            this.btnSelecionaProduto.Enabled = false;
+            this.btnSelecionaProduto.Location = new System.Drawing.Point(227, 634);
+            this.btnSelecionaProduto.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSelecionaProduto.Name = "btnSelecionaProduto";
+            this.btnSelecionaProduto.Size = new System.Drawing.Size(129, 40);
+            this.btnSelecionaProduto.TabIndex = 11;
+            this.btnSelecionaProduto.Text = "Selec. Produto";
+            this.btnSelecionaProduto.UseVisualStyleBackColor = true;
+            this.btnSelecionaProduto.Visible = false;
+            this.btnSelecionaProduto.Click += new System.EventHandler(this.btnSelecionaProduto_Click);
+            // 
+            // NaturezaFiscalView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(677, 713);
+            this.Controls.Add(this.btnSelecionaProduto);
             this.Controls.Add(this.SelecionarIrProximo);
             this.Controls.Add(this.comboBoxColigada);
             this.Controls.Add(this.label6);
@@ -262,7 +277,7 @@
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
-            this.Name = "NaturezaFiscal";
+            this.Name = "NaturezaFiscalView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Natureza Fiscal";
             this.groupBox1.ResumeLayout(false);
@@ -293,5 +308,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxRazaoSocial;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnSelecionaProduto;
     }
 }

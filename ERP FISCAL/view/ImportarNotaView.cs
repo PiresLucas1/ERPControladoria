@@ -364,11 +364,12 @@ namespace ERP_FISCAL
             }
             if(colName == "Retorno")
             {
-                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString());
+                bool flag = true;
+                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString(), flag);
             }
         }
 
-        public void AbrirSelecaoCFOP(int rowIndex, int codColigada, string cnpjPrestador, string codVerificacao, string numDoc, string razaoSocial)
+        public void AbrirSelecaoCFOP(int rowIndex, int codColigada, string cnpjPrestador, string codVerificacao, string numDoc, string razaoSocial, bool flag = false)
         {
 
             NaturezaFiscalType notaInstancia = new NaturezaFiscalType
@@ -381,14 +382,14 @@ namespace ERP_FISCAL
                 FormFocus = this,
                 RazaoSocial = razaoSocial
             };
-            var frm = new NaturezaFiscalView(notaInstancia);
+            var frm = new NaturezaFiscalView(notaInstancia, flag);
             frm.Show();
 
         }
 
         public void AbrirSelecaoProdutoServico(int rowIndex, int codColigada)
         {
-            SelecaoCompletaItem selecaoCompleteItem = new SelecaoCompletaItem(rowIndex, codColigada);
+            ProdutoServico selecaoCompleteItem = new ProdutoServico(rowIndex, codColigada);
             selecaoCompleteItem.Show();
         }
         public void AtualizaCFOP(int index, string CFOPSelecionado)

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using ERP_FISCAL;
 using ERP_FISCAL.controller;
 using ERP_FISCAL.view.interfaces;
+using ERP_FISCAL.view.UIComponentes;
 
 
 
@@ -27,7 +28,7 @@ namespace ERP_FISCAL.view
         public string RazaoSocial { get; set; }
         private IAjusteComboBoxUi _cfops;
 
-        public NaturezaFiscalView(INaturezaFiscalType data)
+        public NaturezaFiscalView(INaturezaFiscalType data, bool flag)
         {
             InitializeComponent();
 
@@ -41,6 +42,11 @@ namespace ERP_FISCAL.view
             cnpjPrestador= data.CnpjPrestador;
             RazaoSocial = data.RazaoSocial;
 
+            if(flag == true)
+            {
+                btnSelecionaProduto.Visible = true;
+                btnSelecionaProduto.Enabled = true;
+            }
 
 
             // carrega dados no Load (para poder usar await)
@@ -209,6 +215,13 @@ namespace ERP_FISCAL.view
                 comboBoxNatureza.Text = string.Empty;
             }
 
+        }
+
+
+        private void btnSelecionaProduto_Click(object sender, EventArgs e)
+        {
+            ProdutoServico selecaoCompleteItem = new ProdutoServico(indexCelula, codColigada);
+            selecaoCompleteItem.Show();
         }
     }
 }
