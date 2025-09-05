@@ -124,6 +124,19 @@ namespace ERP_FISCAL
                         dtImportacao.Columns.Insert(index + 1, cfopColuna);
                     }
 
+                    if (!dtImportacao.Columns.Contains("Data Lançamento"))
+                    {
+                        int index = dtImportacao.Columns["CFOP"].Index;
+
+                        var DataLanColuna = new DataGridViewTextBoxColumn();
+                        DataLanColuna.Name = "Data Lançamento";
+                        DataLanColuna.HeaderText = "Data Lançamento";
+                        DataLanColuna.ReadOnly = false;
+                        DataLanColuna.Width = 60;
+
+                        dtImportacao.Columns.Insert(index + 1, DataLanColuna);
+                    }
+
                     if (!dtImportacao.Columns.Contains("IDMov"))
                     {
                         dtImportacao.Columns.Add("IDMov", "IDMov");
@@ -225,6 +238,11 @@ namespace ERP_FISCAL
             // Remove a coluna CFOP se existir
             if (dtImportacao.Columns.Contains("CFOP"))
                 dtImportacao.Columns.Remove("CFOP");
+
+
+            // Remove a coluna CFOP se existir
+            if (dtImportacao.Columns.Contains("Data Lançamento"))
+                dtImportacao.Columns.Remove("Data Lançamento");
 
             // Desmarca todos os checkboxes (se ainda houver dados na grid)
             foreach (DataGridViewRow row in dtImportacao.Rows)
@@ -450,6 +468,9 @@ namespace ERP_FISCAL
             return lista.DatatableNatureza;
         }
 
+        private void dtImportacao_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
 
+        }
     }
 }
