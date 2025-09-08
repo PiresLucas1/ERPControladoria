@@ -6,13 +6,58 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using ERP_FISCAL.controller;
+using ERP_FISCAL.Repositories;
 using SeuProjeto;
 
 namespace ERP_FISCAL.repositories
 {
-   internal class cfopRepositories
+   internal class cfopRepositories : UIRepositories
     {
-        public DataTable CarregarCFOPs()
+        public DataTable EncontrarComOcorrencia(string valor)
+        {
+            DataTable tabela = new DataTable();
+            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
+
+            try
+            {
+
+                using (SqlConnection conn = conexaoBanco.AbrirConexao())
+                {
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaNaturezaFiscal", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        SqlParameter p;
+                        bool valorEmNumero = CarregaCFOPController.VerificaValorParaPesquisa(valor);
+                        if (valorEmNumero)
+                        {
+                          p =  new SqlParameter("@INvchIDNatureza", SqlDbType.NVarChar);
+                        }
+                        else
+                        {
+                            p = new SqlParameter("@INvchDescricaoNatureza", SqlDbType.NVarChar);
+                        }
+                        p.Value = valor;
+                        cmd.Parameters.Add(p);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(tabela);
+                        }
+                    }
+
+                    conexaoBanco.FecharConexao(conn);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
+            }
+
+
+            return tabela;
+        }
+
+        public DataTable EncontrarTodos()
         {
             DataTable tabela = new DataTable();
             ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();

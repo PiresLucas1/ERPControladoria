@@ -163,7 +163,7 @@ namespace ERP_FISCAL.controller
             }
             catch (Exception ex)
             {
-                throw new Exception("Não foi possivel retornar nota");
+                throw new Exception("Não foi possivel retornar nota", ex);
 
             }
         }

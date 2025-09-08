@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using ERP_FISCAL.Controller;
 using ERP_FISCAL.repositories;
 
 namespace ERP_FISCAL.controller
@@ -16,7 +18,7 @@ namespace ERP_FISCAL.controller
         DataTable DatatableNatureza { get; set; }
     }
 
-    public class CarregaCFOPController
+    public class CarregaCFOPController : UIController
     {
 
 
@@ -31,17 +33,17 @@ namespace ERP_FISCAL.controller
                 DatatableNatureza = new DataTable();
             }
         }
-        public async Task<IAjusteComboBoxUi> ListaTodosCFOPController()
+        public async Task<DataTable> CarregaTodos()
         {
 
             cfopRepositories cfops = new cfopRepositories();
             DataTable dataTable = await Task.Run(() =>
             {
-                return cfops.CarregarCFOPs();
+                return cfops.EncontrarTodos();
             });
 
             var resultado = AjusteComboBox(dataTable);
-            return resultado;
+            return resultado.DatatableNatureza ;
         }
 
         public IAjusteComboBoxUi AjusteComboBox(DataTable dataTable)
@@ -88,6 +90,23 @@ namespace ERP_FISCAL.controller
             }
 
             return resultado;
+        }
+
+        public async Task<DataTable> CarregaComOcorrencia(string valor)
+        {
+            cfopRepositories cfops = new cfopRepositories();
+            DataTable dataTable = await Task.Run(() =>
+            {
+                return cfops.EncontrarComOcorrencia(valor);
+            });
+
+            return dataTable;
+        }
+
+        public static bool VerificaValorParaPesquisa(string valor)
+        {
+            Regex regex = new Regex(@"^[0-9\.]+$");
+            return regex.IsMatch(valor);
         }
 
     }

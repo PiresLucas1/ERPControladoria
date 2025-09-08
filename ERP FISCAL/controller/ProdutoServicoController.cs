@@ -8,9 +8,9 @@ using ERP_FISCAL.Repositories;
 
 namespace ERP_FISCAL.Controller
 {
-    internal class ProdutoServicoController
+    internal class ProdutoServicoController: UIController
     {
-        public async Task<DataTable> CarregaProdutoServicoController() {
+        public async Task<DataTable> CarregaTodos() {
 
             ProdutoServicoRepositories produtoServico = new ProdutoServicoRepositories();
             DataTable tabelaDados = new DataTable();
@@ -18,10 +18,24 @@ namespace ERP_FISCAL.Controller
 
             tabelaDados = await Task.Run(() =>
             {
-                return produtoServico.CarregaProdutoServico();
+                return produtoServico.EncontrarTodos();
             });
 
             return tabelaDados;
         }
+        public async Task<DataTable> CarregaComOcorrencia(string valor)
+        {
+            ProdutoServicoRepositories produtoServico = new ProdutoServicoRepositories();
+            DataTable tabelaDados = new DataTable();
+
+
+            tabelaDados = await Task.Run(() =>
+            {
+                return produtoServico.EncontrarComOcorrencia(valor);
+            });
+
+            return tabelaDados;
+        }
+
     }
 }

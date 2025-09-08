@@ -59,7 +59,7 @@ namespace ERP_FISCAL.view
             try
             {
                 var carregaComboBoxCfop = new CarregaCFOPController();
-                _cfops = await carregaComboBoxCfop.ListaTodosCFOPController();
+                _cfops = (IAjusteComboBoxUi)await carregaComboBoxCfop.CarregaTodos();
 
                
             }

@@ -388,47 +388,24 @@ namespace ERP_FISCAL
 
             if (colName == "CFOP")
             {
-                //AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString());
+                CarregaCFOPController cfopController = new CarregaCFOPController();
+                
 
-                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada));
+                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController);
             }
 
             if(colName == "Cód. Serviço TOTVS")
             {
-                AbrirSelecaoProdutoServico(e.RowIndex, Convert.ToInt32(codColigada));
+                ProdutoServicoController produtoServicoController = new ProdutoServicoController();
+                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), produtoServicoController);
             }
         }
-        public async void AbrirConsultaItem(int row, int codColigada)
+        public void AbrirConsultaItem(int row, int codColigada, UIController data)
         {
-            CarregaCFOPController cfopController = new CarregaCFOPController();
-            IAjusteComboBoxUi retorno = await cfopController.ListaTodosCFOPController();
-
-            ConsultaItem consultaItem = new ConsultaItem(row, codColigada,retorno.DatatableNatureza);
+            ConsultaItem consultaItem = new ConsultaItem(row, codColigada, data);
             consultaItem.Show();
         }
-        public void AbrirSelecaoCFOP(int rowIndex, int codColigada, string cnpjPrestador, string codVerificacao, string numDoc, string razaoSocial, bool flag = false)
-        {
 
-            NaturezaFiscalType notaInstancia = new NaturezaFiscalType
-            {
-                ReqCodColigada = codColigada,
-                ReqIndexCelula = rowIndex,
-                CnpjPrestador = cnpjPrestador,
-                CodVerificacao = codVerificacao,
-                NumDoc = numDoc,
-                FormFocus = this,
-                RazaoSocial = razaoSocial
-            };
-            var frm = new NaturezaFiscalView(notaInstancia, flag);
-            frm.Show();
-
-        }
-
-        public void AbrirSelecaoProdutoServico(int rowIndex, int codColigada)
-        {
-            ProdutoServico selecaoCompleteItem = new ProdutoServico(rowIndex, codColigada,this);
-            selecaoCompleteItem.Show();
-        }
         public void AtualizaCFOP(int index, string CFOPSelecionado)
         {
             dtImportacao.Rows[index].Cells["CFOP"].Value = CFOPSelecionado;
@@ -503,9 +480,9 @@ namespace ERP_FISCAL
         public async Task<DataTable> CarregaListaNatureza()
         {
             var carregaComboBoxCfop = new CarregaCFOPController();
-            var lista = await carregaComboBoxCfop.ListaTodosCFOPController();
+            var lista = await carregaComboBoxCfop.CarregaTodos();
 
-            return lista.DatatableNatureza;
+            return lista;
         }
 
         public void SelecionaValorProduto(string valor, int index)
@@ -530,25 +507,6 @@ namespace ERP_FISCAL
                     dtImportacao.CurrentCell = dtImportacao[col, row + 1];
                     dtImportacao.BeginEdit(true); // já entra em modo de edição
                 }
-            }
-        }
-
-
-        private void dtImportacao_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0) return; // ignora header
-
-            var colName = dtImportacao.Columns[e.ColumnIndex].Name;
-            var codColigada = dtImportacao.Rows[e.RowIndex].Cells["CodColigada"].Value;
-            var cnpjPrestador = dtImportacao.Rows[e.RowIndex].Cells["CNPJ Prestador"].Value;
-            var codVerificacao = dtImportacao.Rows[e.RowIndex].Cells["Código Verificação"].Value;
-            var numDoc = dtImportacao.Rows[e.RowIndex].Cells["Documento"].Value;
-            var razaoSocial = dtImportacao.Rows[e.RowIndex].Cells["Razão Social Prestador"].Value;
-
-            if (colName == "...")
-            {
-                bool flag = true;
-                AbrirSelecaoCFOP(e.RowIndex, Convert.ToInt32(codColigada), cnpjPrestador.ToString(), codVerificacao.ToString(), numDoc.ToString(), razaoSocial.ToString(), flag);
             }
         }
     }

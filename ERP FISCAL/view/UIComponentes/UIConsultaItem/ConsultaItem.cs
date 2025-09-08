@@ -8,36 +8,70 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ERP_FISCAL.Controller;
+using ERP_FISCAL.Repositories;
 
 namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
 {
     public partial class ConsultaItem : Form
     {
-        DataTable tabelaDados;
+        UIController controller;
         int row;
         int coligada;
-        public ConsultaItem(int row, int coligada,DataTable tabelaDados)
+        public ConsultaItem(int row, int coligada, UIController controller)
         {
             InitializeComponent();
-            this.tabelaDados = tabelaDados;
+            this.controller = controller;
             this.row = row;
             this.coligada = coligada;
         }
 
-        private void btnPesquisar_Click(object sender, EventArgs e)
+        private async void btnPesquisar_Click(object sender, EventArgs e)
         {
             string valor = inputValor.Text;
-            
-            var tabelaFiltradaPorColigada = tabelaDados.AsEnumerable()
-                .Where(row => row.Field<int>("CODCOLIGADA") == coligada
-                           && row.Field<string>("DESCRICAO_NATUREZA").Contains(valor))
-                .CopyToDataTable();
-            CarregarDataGridView(tabelaFiltradaPorColigada);
+            DataTable tabelaDados;
+            if(valor.Length == 0 )
+            {
+                tabelaDados = await RetornaTodosOsDados();
+            }
+            else
+            {
+                tabelaDados = await RetornaDadosDaOcorrencia(valor);
+
+            }
+            CarregarDataGridView(tabelaDados);
         }
         public void CarregarDataGridView(DataTable table)
         {
-            dataGridView1.DataSource = table;
+            if (table == null)
+            {
+                MessageBox.Show("Não foi possivel localizar");
+                return;
+            }
+            Console.WriteLine(table.Columns["CODCOLIGADA"].DataType);
+            var query = table.AsEnumerable()
+                .Where(row => row.Field<short>("CODCOLIGADA") == coligada);
 
+            if(query.Count() < 1)
+            {
+                MessageBox.Show("Não foi possivel localizar");
+                return;
+            }
+
+            DataTable tabelaFiltrada = query.CopyToDataTable();
+
+            dataGridView1.DataSource = tabelaFiltrada;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+        public async Task<DataTable> RetornaTodosOsDados()
+        {
+            DataTable data =   await controller.CarregaTodos();
+            return data;          
+        }
+        public async Task<DataTable> RetornaDadosDaOcorrencia(string valor)
+        {
+            DataTable data = await controller.CarregaComOcorrencia(valor);
+            return data;
         }
     }
 }

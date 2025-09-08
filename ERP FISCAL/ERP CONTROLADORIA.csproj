@@ -65,7 +65,9 @@
     <Compile Include="Controller\CarregaCFOPController.cs" />
     <Compile Include="Controller\MascaraDeColuna.cs" />
     <Compile Include="Controller\ProdutoServicoController.cs" />
+    <Compile Include="Controller\UIController.cs" />
     <Compile Include="Repositories\cfopRepositories.cs" />
+    <Compile Include="Repositories\UIRepositorio.cs" />
     <Compile Include="Repositories\notasRepositories.cs" />
     <Compile Include="ConexaoBancoDeDados.cs" />
     <Compile Include="Controller\ExportServiceNotes.cs" />
@@ -99,16 +101,16 @@
       <DependentUpon>ControladoriaView.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Interfaces\INaturezaFiscalType.cs" />
-    <Compile Include="view\NaturezaFiscalView.cs">
+    <Compile Include="Deprecated\NaturezaFiscalView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\NaturezaFiscalView.Designer.cs">
+    <Compile Include="Deprecated\NaturezaFiscalView.Designer.cs">
       <DependentUpon>NaturezaFiscalView.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\ProdutoServico.cs">
+    <Compile Include="Deprecated\ProdutoServico.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\ProdutoServico.Designer.cs">
+    <Compile Include="Deprecated\ProdutoServico.Designer.cs">
       <DependentUpon>ProdutoServico.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="view\UIComponentes\UIConsultaItem\ConsultaItem.resx">
@@ -133,10 +135,10 @@
     <EmbeddedResource Include="view\ControladoriaView.resx">
       <DependentUpon>ControladoriaView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\NaturezaFiscalView.resx">
+    <EmbeddedResource Include="Deprecated\NaturezaFiscalView.resx">
       <DependentUpon>NaturezaFiscalView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\ProdutoServico.resx">
+    <EmbeddedResource Include="Deprecated\ProdutoServico.resx">
       <DependentUpon>ProdutoServico.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
