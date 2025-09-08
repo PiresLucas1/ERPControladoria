@@ -37,5 +37,9 @@ namespace ERP_FISCAL.Controller
             return tabelaDados;
         }
 
+        public string CarregaValorUnico(string valor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

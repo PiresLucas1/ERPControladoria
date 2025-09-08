@@ -509,5 +509,36 @@ namespace ERP_FISCAL
                 }
             }
         }
+
+        private void dtImportacao_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (e.Control is TextBox textBox)
+            {
+                // Remove handlers anteriores para não duplicar
+                textBox.KeyDown -= TextBox_KeyDown;
+                textBox.KeyDown += TextBox_KeyDown;
+            }
+        }
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true; // evita pular para a próxima célula automaticamente
+
+                // Aqui você pega a célula atual
+                var dgv = dtImportacao;
+                var cell = dgv.CurrentCell;
+
+                string valorDigitado = (cell.Value ?? "").ToString();
+
+                //MessageBox.Show($"Você digitou: {valorDigitado}");
+
+                //// Exemplo: mover manualmente para próxima linha, mesma coluna
+                //if (cell.RowIndex < dgv.Rows.Count - 1)
+                //{
+                //    dgv.CurrentCell = dgv.Rows[cell.RowIndex + 1, cell.ColumnIndex];
+                //}
+            }
+        }
     }
 }

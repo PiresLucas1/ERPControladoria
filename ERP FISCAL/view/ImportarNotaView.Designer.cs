@@ -62,44 +62,46 @@
             // DtPickerInicio
             // 
             this.DtPickerInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DtPickerInicio.Location = new System.Drawing.Point(11, 59);
+            this.DtPickerInicio.Location = new System.Drawing.Point(12, 74);
+            this.DtPickerInicio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DtPickerInicio.Name = "DtPickerInicio";
-            this.DtPickerInicio.Size = new System.Drawing.Size(145, 22);
+            this.DtPickerInicio.Size = new System.Drawing.Size(163, 26);
             this.DtPickerInicio.TabIndex = 0;
             // 
             // lbApresentacao
             // 
             this.lbApresentacao.AutoSize = true;
-            this.lbApresentacao.Location = new System.Drawing.Point(12, 22);
+            this.lbApresentacao.Location = new System.Drawing.Point(14, 28);
             this.lbApresentacao.Name = "lbApresentacao";
-            this.lbApresentacao.Size = new System.Drawing.Size(200, 16);
+            this.lbApresentacao.Size = new System.Drawing.Size(235, 20);
             this.lbApresentacao.TabIndex = 1;
             this.lbApresentacao.Text = "Selecione o filtro para pesquisar";
             // 
             // lbDataInicio
             // 
             this.lbDataInicio.AutoSize = true;
-            this.lbDataInicio.Location = new System.Drawing.Point(8, 29);
+            this.lbDataInicio.Location = new System.Drawing.Point(9, 36);
             this.lbDataInicio.Name = "lbDataInicio";
-            this.lbDataInicio.Size = new System.Drawing.Size(41, 16);
+            this.lbDataInicio.Size = new System.Drawing.Size(49, 20);
             this.lbDataInicio.TabIndex = 2;
             this.lbDataInicio.Text = "Inicial";
             // 
             // lbDtFim
             // 
             this.lbDtFim.AutoSize = true;
-            this.lbDtFim.Location = new System.Drawing.Point(8, 96);
+            this.lbDtFim.Location = new System.Drawing.Point(9, 120);
             this.lbDtFim.Name = "lbDtFim";
-            this.lbDtFim.Size = new System.Drawing.Size(36, 16);
+            this.lbDtFim.Size = new System.Drawing.Size(43, 20);
             this.lbDtFim.TabIndex = 3;
             this.lbDtFim.Text = "Final";
             // 
             // DtPickerFim
             // 
             this.DtPickerFim.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.DtPickerFim.Location = new System.Drawing.Point(11, 119);
+            this.DtPickerFim.Location = new System.Drawing.Point(12, 149);
+            this.DtPickerFim.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DtPickerFim.Name = "DtPickerFim";
-            this.DtPickerFim.Size = new System.Drawing.Size(145, 22);
+            this.DtPickerFim.Size = new System.Drawing.Size(163, 26);
             this.DtPickerFim.TabIndex = 0;
             // 
             // GbDTNotas
@@ -108,9 +110,11 @@
             this.GbDTNotas.Controls.Add(this.lbDtFim);
             this.GbDTNotas.Controls.Add(this.DtPickerInicio);
             this.GbDTNotas.Controls.Add(this.DtPickerFim);
-            this.GbDTNotas.Location = new System.Drawing.Point(288, 14);
+            this.GbDTNotas.Location = new System.Drawing.Point(324, 18);
+            this.GbDTNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GbDTNotas.Name = "GbDTNotas";
-            this.GbDTNotas.Size = new System.Drawing.Size(168, 158);
+            this.GbDTNotas.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.GbDTNotas.Size = new System.Drawing.Size(189, 198);
             this.GbDTNotas.TabIndex = 4;
             this.GbDTNotas.TabStop = false;
             this.GbDTNotas.Text = "Datas Notas";
@@ -123,20 +127,23 @@
             this.dtImportacao.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dtImportacao.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dtImportacao.ColumnHeadersHeight = 34;
-            this.dtImportacao.Location = new System.Drawing.Point(12, 243);
+            this.dtImportacao.Location = new System.Drawing.Point(14, 304);
+            this.dtImportacao.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtImportacao.Name = "dtImportacao";
             this.dtImportacao.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dtImportacao.RowTemplate.Height = 24;
-            this.dtImportacao.Size = new System.Drawing.Size(1151, 454);
+            this.dtImportacao.Size = new System.Drawing.Size(1295, 568);
             this.dtImportacao.TabIndex = 5;
             this.dtImportacao.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtImportacao_CellContentClick);
+            this.dtImportacao.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dtImportacao_EditingControlShowing);
             // 
             // btnListaNotas
             // 
             this.btnListaNotas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnListaNotas.Location = new System.Drawing.Point(16, 205);
+            this.btnListaNotas.Location = new System.Drawing.Point(18, 256);
+            this.btnListaNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnListaNotas.Name = "btnListaNotas";
-            this.btnListaNotas.Size = new System.Drawing.Size(127, 32);
+            this.btnListaNotas.Size = new System.Drawing.Size(143, 40);
             this.btnListaNotas.TabIndex = 6;
             this.btnListaNotas.Text = "Pesquisar";
             this.btnListaNotas.UseVisualStyleBackColor = true;
@@ -148,9 +155,11 @@
             this.GBListar.Controls.Add(this.btnDesmarcarTodos);
             this.GBListar.Controls.Add(this.btnLimpar);
             this.GBListar.Controls.Add(this.btnSelecionarTodas);
-            this.GBListar.Location = new System.Drawing.Point(761, 103);
+            this.GBListar.Location = new System.Drawing.Point(856, 129);
+            this.GBListar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GBListar.Name = "GBListar";
-            this.GBListar.Size = new System.Drawing.Size(402, 130);
+            this.GBListar.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.GBListar.Size = new System.Drawing.Size(452, 162);
             this.GBListar.TabIndex = 7;
             this.GBListar.TabStop = false;
             this.GBListar.Text = "Ações no Data Grid";
@@ -158,9 +167,10 @@
             // btnInserirEmBloco
             // 
             this.btnInserirEmBloco.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInserirEmBloco.Location = new System.Drawing.Point(199, 23);
+            this.btnInserirEmBloco.Location = new System.Drawing.Point(224, 29);
+            this.btnInserirEmBloco.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnInserirEmBloco.Name = "btnInserirEmBloco";
-            this.btnInserirEmBloco.Size = new System.Drawing.Size(131, 28);
+            this.btnInserirEmBloco.Size = new System.Drawing.Size(147, 35);
             this.btnInserirEmBloco.TabIndex = 7;
             this.btnInserirEmBloco.Text = "Inserir em bloco";
             this.btnInserirEmBloco.UseVisualStyleBackColor = true;
@@ -168,9 +178,10 @@
             // 
             // btnDesmarcarTodos
             // 
-            this.btnDesmarcarTodos.Location = new System.Drawing.Point(29, 58);
+            this.btnDesmarcarTodos.Location = new System.Drawing.Point(33, 72);
+            this.btnDesmarcarTodos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDesmarcarTodos.Name = "btnDesmarcarTodos";
-            this.btnDesmarcarTodos.Size = new System.Drawing.Size(130, 29);
+            this.btnDesmarcarTodos.Size = new System.Drawing.Size(146, 36);
             this.btnDesmarcarTodos.TabIndex = 6;
             this.btnDesmarcarTodos.Text = "Desmarcar todos";
             this.btnDesmarcarTodos.UseVisualStyleBackColor = true;
@@ -178,9 +189,10 @@
             // 
             // btnLimpar
             // 
-            this.btnLimpar.Location = new System.Drawing.Point(29, 98);
+            this.btnLimpar.Location = new System.Drawing.Point(33, 122);
+            this.btnLimpar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLimpar.Name = "btnLimpar";
-            this.btnLimpar.Size = new System.Drawing.Size(130, 26);
+            this.btnLimpar.Size = new System.Drawing.Size(146, 32);
             this.btnLimpar.TabIndex = 6;
             this.btnLimpar.Text = "Limpar";
             this.btnLimpar.UseVisualStyleBackColor = true;
@@ -188,9 +200,10 @@
             // 
             // btnSelecionarTodas
             // 
-            this.btnSelecionarTodas.Location = new System.Drawing.Point(28, 24);
+            this.btnSelecionarTodas.Location = new System.Drawing.Point(32, 30);
+            this.btnSelecionarTodas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSelecionarTodas.Name = "btnSelecionarTodas";
-            this.btnSelecionarTodas.Size = new System.Drawing.Size(131, 28);
+            this.btnSelecionarTodas.Size = new System.Drawing.Size(147, 35);
             this.btnSelecionarTodas.TabIndex = 6;
             this.btnSelecionarTodas.Text = "Selecionar todos";
             this.btnSelecionarTodas.UseVisualStyleBackColor = true;
@@ -198,9 +211,10 @@
             // 
             // btnExportarTotvs
             // 
-            this.btnExportarTotvs.Location = new System.Drawing.Point(288, 178);
+            this.btnExportarTotvs.Location = new System.Drawing.Point(324, 222);
+            this.btnExportarTotvs.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExportarTotvs.Name = "btnExportarTotvs";
-            this.btnExportarTotvs.Size = new System.Drawing.Size(130, 28);
+            this.btnExportarTotvs.Size = new System.Drawing.Size(146, 35);
             this.btnExportarTotvs.TabIndex = 6;
             this.btnExportarTotvs.Text = "Exportar TOTVS";
             this.btnExportarTotvs.UseVisualStyleBackColor = true;
@@ -208,18 +222,21 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(15, 23);
+            this.progressBar1.Location = new System.Drawing.Point(17, 29);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(297, 12);
+            this.progressBar1.Size = new System.Drawing.Size(334, 15);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 9;
             this.progressBar1.Visible = false;
             // 
             // gbNotas
             // 
-            this.gbNotas.Location = new System.Drawing.Point(547, 22);
+            this.gbNotas.Location = new System.Drawing.Point(615, 28);
+            this.gbNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gbNotas.Name = "gbNotas";
-            this.gbNotas.Size = new System.Drawing.Size(251, 48);
+            this.gbNotas.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gbNotas.Size = new System.Drawing.Size(282, 60);
             this.gbNotas.TabIndex = 10;
             this.gbNotas.TabStop = false;
             this.gbNotas.Text = "Notas";
@@ -231,9 +248,11 @@
             this.groupBox1.Controls.Add(this.txtBoxToFilter);
             this.groupBox1.Controls.Add(this.coBoxTipeFilter);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(16, 54);
+            this.groupBox1.Location = new System.Drawing.Point(18, 68);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(189, 138);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(213, 172);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro Prioritário";
@@ -241,47 +260,47 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 78);
+            this.label2.Location = new System.Drawing.Point(17, 98);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 16);
+            this.label2.Size = new System.Drawing.Size(44, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "Filtro";
             // 
             // txtBoxToFilter
             // 
-            this.txtBoxToFilter.Location = new System.Drawing.Point(19, 97);
+            this.txtBoxToFilter.Location = new System.Drawing.Point(21, 121);
             this.txtBoxToFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtBoxToFilter.Name = "txtBoxToFilter";
-            this.txtBoxToFilter.Size = new System.Drawing.Size(152, 22);
+            this.txtBoxToFilter.Size = new System.Drawing.Size(170, 26);
             this.txtBoxToFilter.TabIndex = 4;
             // 
             // coBoxTipeFilter
             // 
             this.coBoxTipeFilter.FormattingEnabled = true;
-            this.coBoxTipeFilter.Location = new System.Drawing.Point(19, 49);
+            this.coBoxTipeFilter.Location = new System.Drawing.Point(21, 61);
             this.coBoxTipeFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.coBoxTipeFilter.Name = "coBoxTipeFilter";
-            this.coBoxTipeFilter.Size = new System.Drawing.Size(152, 24);
+            this.coBoxTipeFilter.Size = new System.Drawing.Size(170, 28);
             this.coBoxTipeFilter.TabIndex = 3;
             this.coBoxTipeFilter.SelectedIndexChanged += new System.EventHandler(this.coBoxTipeFilter_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 30);
+            this.label1.Location = new System.Drawing.Point(17, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 16);
+            this.label1.Size = new System.Drawing.Size(44, 20);
             this.label1.TabIndex = 2;
             this.label1.Text = "Filtro";
             // 
             // groupLoading
             // 
             this.groupLoading.Controls.Add(this.progressBar1);
-            this.groupLoading.Location = new System.Drawing.Point(6, 706);
+            this.groupLoading.Location = new System.Drawing.Point(7, 882);
             this.groupLoading.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupLoading.Name = "groupLoading";
             this.groupLoading.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupLoading.Size = new System.Drawing.Size(333, 49);
+            this.groupLoading.Size = new System.Drawing.Size(375, 61);
             this.groupLoading.TabIndex = 7;
             this.groupLoading.TabStop = false;
             this.groupLoading.Text = "Pronto";
@@ -289,9 +308,9 @@
             // 
             // ImportarNotaView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1177, 764);
+            this.ClientSize = new System.Drawing.Size(1324, 955);
             this.Controls.Add(this.groupLoading);
             this.Controls.Add(this.btnExportarTotvs);
             this.Controls.Add(this.btnListaNotas);
@@ -302,6 +321,7 @@
             this.Controls.Add(this.GbDTNotas);
             this.Controls.Add(this.lbApresentacao);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ImportarNotaView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Importação NFS-E";

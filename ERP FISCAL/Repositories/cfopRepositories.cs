@@ -92,5 +92,15 @@ namespace ERP_FISCAL.repositories
 
             return tabela;
         }
+
+        public string PegaValorPeloCodigo(string valor)
+        {
+            throw new NotImplementedException();
+        }
+
+        DataTable UIRepositories.PegaValorPeloCodigo(string valor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

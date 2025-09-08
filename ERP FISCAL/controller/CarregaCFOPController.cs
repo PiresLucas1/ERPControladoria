@@ -109,5 +109,9 @@ namespace ERP_FISCAL.controller
             return regex.IsMatch(valor);
         }
 
+        public string CarregaValorUnico(string valor)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
