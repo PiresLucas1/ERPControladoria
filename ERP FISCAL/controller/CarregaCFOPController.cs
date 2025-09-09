@@ -109,7 +109,7 @@ namespace ERP_FISCAL.controller
             return regex.IsMatch(valor);
         }
 
-        public string CarregaValorUnico(string valor)
+        public Task<string> PegaValorUnicoPeloCodigo(string valor)
         {
             throw new NotImplementedException();
         }

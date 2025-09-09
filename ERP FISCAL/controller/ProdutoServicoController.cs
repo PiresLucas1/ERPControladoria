@@ -37,9 +37,18 @@ namespace ERP_FISCAL.Controller
             return tabelaDados;
         }
 
-        public string CarregaValorUnico(string valor)
+        public async Task<string> PegaValorUnicoPeloCodigo(string valor)
         {
-            throw new NotImplementedException();
+            ProdutoServicoRepositories produtoServico = new ProdutoServicoRepositories();
+            DataTable tabelaDados = new DataTable();
+
+
+            tabelaDados = await Task.Run(() =>
+            {
+                return produtoServico.PegaValorPeloCodigo(valor);
+            });
+
+            return tabelaDados.Rows[0].ToString();
         }
     }
 }

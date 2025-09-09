@@ -50,7 +50,7 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
             }
             Console.WriteLine(table.Columns["CODCOLIGADA"].DataType);
             var query = table.AsEnumerable()
-                .Where(row => row.Field<short>("CODCOLIGADA") == coligada);
+                .Where(row => row.Field<int>("CODCOLIGADA") == coligada);
 
             if(query.Count() < 1)
             {

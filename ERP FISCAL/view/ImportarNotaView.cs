@@ -19,6 +19,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using TextBox = System.Windows.Forms.TextBox;
 
 
 
@@ -27,6 +29,7 @@ namespace ERP_FISCAL
     public partial class ImportarNotaView : Form
     {
         public string cfopSelecionado;
+        public string valorDeCelula;
         public ImportarNotaView()
         {
             InitializeComponent();
@@ -492,21 +495,13 @@ namespace ERP_FISCAL
             ;
         }
 
-        private void dtimportacao_KeyDown(object sender, KeyEventArgs e)
+        private void TextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                e.Handled = true; // evita que o Enter faça outra ação padrão
+      
+                ConsultaItemNaCelula(sender.ToString());
 
-                int col = dtImportacao.CurrentCell.ColumnIndex;
-                int row = dtImportacao.CurrentCell.RowIndex;
-
-                // Vai para a próxima linha (ou coluna, se preferir)
-                if (row < dtImportacao.RowCount - 1)
-                {
-                    dtImportacao.CurrentCell = dtImportacao[col, row + 1];
-                    dtImportacao.BeginEdit(true); // já entra em modo de edição
-                }
             }
         }
 
@@ -514,31 +509,43 @@ namespace ERP_FISCAL
         {
             if (e.Control is TextBox textBox)
             {
-                // Remove handlers anteriores para não duplicar
+
+                textBox.PreviewKeyDown -= TextBox_PreviewKeyDown;
+                textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
                 textBox.KeyDown -= TextBox_KeyDown;
                 textBox.KeyDown += TextBox_KeyDown;
+
             }
         }
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+
+        private async void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
+
+            var textBox = sender as TextBox;
+            string valorDigitado = textBox?.Text;
             if (e.KeyCode == Keys.Enter)
             {
-                e.SuppressKeyPress = true; // evita pular para a próxima célula automaticamente
+                e.SuppressKeyPress = true; // impede mudar de célula
 
-                // Aqui você pega a célula atual
-                var dgv = dtImportacao;
-                var cell = dgv.CurrentCell;
 
-                string valorDigitado = (cell.Value ?? "").ToString();
+                if (!string.IsNullOrEmpty(valorDigitado))
+                {
+                    ProdutoServicoController produtoController = new ProdutoServicoController();
+                    var retorno = await produtoController.PegaValorUnicoPeloCodigo(valorDigitado);
 
-                //MessageBox.Show($"Você digitou: {valorDigitado}");
+                    Console.WriteLine(retorno);
 
-                //// Exemplo: mover manualmente para próxima linha, mesma coluna
-                //if (cell.RowIndex < dgv.Rows.Count - 1)
-                //{
-                //    dgv.CurrentCell = dgv.Rows[cell.RowIndex + 1, cell.ColumnIndex];
-                //}
+                    // opcional: atualizar a célula atual com o retorno
+                    dtImportacao.CurrentCell.Value = retorno;
+                }
             }
         }
+        public async void ConsultaItemNaCelula(string valor)
+        {          
+            ProdutoServicoController produtoController = new ProdutoServicoController();
+            var retorno = await produtoController.PegaValorUnicoPeloCodigo(valor);
+            Console.WriteLine(retorno);
+        }
+
     }
 }
