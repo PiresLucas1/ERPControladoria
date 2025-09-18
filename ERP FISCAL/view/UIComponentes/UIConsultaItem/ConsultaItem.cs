@@ -50,7 +50,7 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
             }
             Console.WriteLine(table.Columns["CODCOLIGADA"].DataType);
             var query = table.AsEnumerable()
-                .Where(row => row.Field<int>("CODCOLIGADA") == coligada);
+                .Where(row => Convert.ToInt32(row["CODCOLIGADA"]) == coligada);
 
             if(query.Count() < 1)
             {
@@ -72,6 +72,18 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
         {
             DataTable data = await controller.CarregaComOcorrencia(valor);
             return data;
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) 
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];  
+
+                
+                var col1 = row.Cells[0].Value;
+                var col2 = row.Cells["NomeDaColuna"].Value;
+            }
         }
     }
 }
