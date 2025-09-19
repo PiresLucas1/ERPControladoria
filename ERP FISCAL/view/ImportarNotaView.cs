@@ -4,6 +4,7 @@ using ERP_FISCAL.view;
 using ERP_FISCAL.view.DialogUI;
 using ERP_FISCAL.view.DialogUI.interfacesUI;
 using ERP_FISCAL.view.interfaces;
+using ERP_FISCAL.view.SubTipos;
 using ERP_FISCAL.view.UIComponentes;
 using ERP_FISCAL.view.UIComponentes.UIConsultaItem;
 using Microsoft.VisualBasic;
@@ -30,6 +31,7 @@ namespace ERP_FISCAL
     {
         public string cfopSelecionado;
         public string valorDeCelula;
+        public DataRow dataRowSelecionado;
         public ImportarNotaView()
         {
             InitializeComponent();
@@ -120,7 +122,8 @@ namespace ERP_FISCAL
                     {
                         int index = dtImportacao.Columns["Cód. Serviço TOTVS"].Index;
 
-                        var cfopColuna = new DataGridViewTextBoxColumn();
+                        DataGridViewCustomBoxCell cfopColuna = new DataGridViewCustomBoxCell();
+
                         cfopColuna.Name = "CFOP";
                         cfopColuna.HeaderText = "CFOP";
                         cfopColuna.ReadOnly = false;
@@ -394,18 +397,18 @@ namespace ERP_FISCAL
                 CarregaCFOPController cfopController = new CarregaCFOPController();
                 
 
-                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController);
+                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController, "cfop");
             }
 
             if(colName == "Cód. Serviço TOTVS")
             {
                 ProdutoServicoController produtoServicoController = new ProdutoServicoController();
-                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), produtoServicoController);
+                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), produtoServicoController, "cProduto");
             }
         }
-        public void AbrirConsultaItem(int row, int codColigada, UIController data)
+        public void AbrirConsultaItem(int row, int codColigada, UIController data, string name)
         {
-            ConsultaItem consultaItem = new ConsultaItem(row, codColigada, data);
+            ConsultaItem consultaItem = new ConsultaItem(row, codColigada, data, name, this);
             consultaItem.Show();
         }
 
@@ -545,6 +548,27 @@ namespace ERP_FISCAL
             ProdutoServicoController produtoController = new ProdutoServicoController();
             var retorno = await produtoController.PegaValorUnicoPeloCodigo(valor);
             Console.WriteLine(retorno);
+        }
+        public void AlteraValorDataRow(DataRow rowValor, string name, int rowLinha)
+        {
+            dataRowSelecionado = rowValor;
+
+            if(name == "cfop")
+            {
+                //Console.WriteLine(dataRowSelecionado[1]);              
+                InsereValorNoDataGridView(rowLinha, dataRowSelecionado[1].ToString(), "CFOP");
+
+            }
+            if(name == "cProduto")
+            {
+                //Console.WriteLine(dataRowSelecionado[0]);
+                InsereValorNoDataGridView(rowLinha, dataRowSelecionado[0].ToString(), "Cód. Serviço TOTVS");
+
+            }
+        }
+        public void InsereValorNoDataGridView(int row, string valor, string coluna)
+        {
+            dtImportacao.Rows[row].Cells[coluna].Value = valor;
         }
 
     }

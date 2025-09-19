@@ -73,6 +73,7 @@
     <Compile Include="Controller\ExportServiceNotes.cs" />
     <Compile Include="Repositories\ProdutoServicoRepositories.cs" />
     <Compile Include="view\Interfaces\IProdutoServicoType.cs" />
+    <Compile Include="view\SubTipos\DataGridViewCustomBox.cs" />
     <Compile Include="view\UIComponentes\UIConsultaItem\ConsultaItem.cs">
       <SubType>Form</SubType>
     </Compile>

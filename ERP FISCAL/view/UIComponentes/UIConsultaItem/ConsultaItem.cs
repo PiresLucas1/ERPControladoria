@@ -18,12 +18,16 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
         UIController controller;
         int row;
         int coligada;
-        public ConsultaItem(int row, int coligada, UIController controller)
+        DataGridViewRow rowSelecionada = null;
+        ImportarNotaView importarNotaViewForm;
+        public ConsultaItem(int row, int coligada, UIController controller, String Name, ImportarNotaView importarNotaViewForm)
         {
             InitializeComponent();
             this.controller = controller;
             this.row = row;
             this.coligada = coligada;
+            this.Name= Name; ;
+            this.importarNotaViewForm = importarNotaViewForm;
         }
 
         private async void btnPesquisar_Click(object sender, EventArgs e)
@@ -78,11 +82,41 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
         {
             if (e.RowIndex >= 0) 
             {
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];  
+                DataGridViewRow rowDataGridView = dataGridView1.Rows[e.RowIndex];
+                rowSelecionada = rowDataGridView;
 
-                
-                var col1 = row.Cells[0].Value;
-                var col2 = row.Cells["NomeDaColuna"].Value;
+            }
+        }
+
+        private void btnSelecionar_Click(object sender, EventArgs e)
+        {
+            if (rowSelecionada == null)
+                return;
+
+            
+            DataRowView convertRow = rowSelecionada.DataBoundItem as DataRowView;
+
+            DataRow datarow = convertRow.Row;
+            
+            importarNotaViewForm.AlteraValorDataRow(datarow, this.Name, row);
+
+            this.Close();
+
+        }
+
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow rowDataGridView = dataGridView1.Rows[e.RowIndex];
+                rowSelecionada = rowDataGridView;
+
+                DataRowView convertRow = rowSelecionada.DataBoundItem as DataRowView;
+
+                DataRow datarow = convertRow.Row;
+
+                importarNotaViewForm.AlteraValorDataRow(datarow, this.Name, row);
+                this.Close();
             }
         }
     }
