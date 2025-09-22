@@ -506,7 +506,7 @@ namespace ERP_FISCAL
                 textBox.KeyDown += TextBox_KeyDown;
 
                 cellAlteracao = dtImportacao.CurrentCell.RowIndex;
-                colAlteracaocolAlteracao = dtImportacao.CurrentCell.ColumnIndex;
+                colAlteracao = dtImportacao.CurrentCell.ColumnIndex;
             }
         }
 
@@ -536,17 +536,19 @@ namespace ERP_FISCAL
         {
             string nomeColuna = dtImportacao.Columns[colAlteracao].Name;
             DataTable retorno = null;
+            var itemColuna = "";
             if (nomeColuna == "Cód. Serviço TOTVS")
             {
 
                 ProdutoServicoController produtoController = new ProdutoServicoController();
                 retorno = await produtoController.CarregaComOcorrencia(valor);
-                Console.WriteLine(retorno);
+                itemColuna = "CODIGOPRD";
             }
             if(nomeColuna == "CFOP")
             {
                 CarregaCFOPController cFOPController = new CarregaCFOPController();
                 retorno = await cFOPController.CarregaComOcorrencia(valor);
+                itemColuna = "IDNATUREZA";
 
             }
             int linhaAtual = dtImportacao.CurrentCell.RowIndex -1;
@@ -561,10 +563,10 @@ namespace ERP_FISCAL
                 // Comparando se são iguais
                 if (codColigadaRetorno == codColigadaLinha)
                 {                 
-                    string primeiroValorEncontrado = item["CODIGOPRD"].ToString();
+                    string primeiroValorEncontrado = item[itemColuna].ToString();
 
                     // Atualizar célula atual com o valor desejado
-                    dtImportacao.Rows[cellAlteracao].Cells["Cód. Serviço TOTVS"].Value = primeiroValorEncontrado;
+                    dtImportacao.Rows[cellAlteracao].Cells[nomeColuna].Value = primeiroValorEncontrado;
                     break;
                 }
             }
