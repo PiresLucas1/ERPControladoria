@@ -30,20 +30,9 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
             this.importarNotaViewForm = importarNotaViewForm;
         }
 
-        private async void btnPesquisar_Click(object sender, EventArgs e)
+        public async void btnPesquisar_Click(object sender, EventArgs e)
         {
-            string valor = inputValor.Text;
-            DataTable tabelaDados;
-            if(valor.Length == 0 )
-            {
-                tabelaDados = await RetornaTodosOsDados();
-            }
-            else
-            {
-                tabelaDados = await RetornaDadosDaOcorrencia(valor);
-
-            }
-            CarregarDataGridView(tabelaDados);
+            await PesquisaValor();
         }
         public void CarregarDataGridView(DataTable table)
         {
@@ -118,6 +107,36 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
                 importarNotaViewForm.AlteraValorDataRow(datarow, this.Name, row);
                 this.Close();
             }
+        }
+
+        private async void inputValor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (inputValor.Focused)
+            {
+
+                if (e.KeyChar == 13)
+                {
+                    //Executa  a pesquisa
+                    await PesquisaValor();
+                }
+            }
+
+
+        }
+        public async Task PesquisaValor()
+        {
+            string valor = inputValor.Text;
+            DataTable tabelaDados;
+            if (valor.Length == 0)
+            {
+                tabelaDados = await RetornaTodosOsDados();
+            }
+            else
+            {
+                tabelaDados = await RetornaDadosDaOcorrencia(valor);
+
+            }
+            CarregarDataGridView(tabelaDados);
         }
     }
 }

@@ -45,6 +45,7 @@
             this.inputValor.Name = "inputValor";
             this.inputValor.Size = new System.Drawing.Size(1049, 26);
             this.inputValor.TabIndex = 0;
+            this.inputValor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.inputValor_KeyPress);
             // 
             // pesquisar
             // 

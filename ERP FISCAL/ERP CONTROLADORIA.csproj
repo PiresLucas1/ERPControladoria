@@ -114,6 +114,12 @@
     <Compile Include="Deprecated\ProdutoServico.Designer.cs">
       <DependentUpon>ProdutoServico.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.Designer.cs">
+      <DependentUpon>StatusProcess.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="view\UIComponentes\UIConsultaItem\ConsultaItem.resx">
       <DependentUpon>ConsultaItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Deprecated\ProdutoServico.resx">
       <DependentUpon>ProdutoServico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.resx">
+      <DependentUpon>StatusProcess.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

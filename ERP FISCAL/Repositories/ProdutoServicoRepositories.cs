@@ -47,7 +47,7 @@ namespace ERP_FISCAL.Repositories
             ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
             try
             {
-
+                Console.WriteLine(valor.ToString());
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
                     using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaProduto", conn))

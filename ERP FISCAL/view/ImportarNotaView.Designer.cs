@@ -44,19 +44,15 @@
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnSelecionarTodas = new System.Windows.Forms.Button();
             this.btnExportarTotvs = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.gbNotas = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtBoxToFilter = new System.Windows.Forms.TextBox();
             this.coBoxTipeFilter = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupLoading = new System.Windows.Forms.GroupBox();
             this.GbDTNotas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
             this.GBListar.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupLoading.SuspendLayout();
             this.SuspendLayout();
             // 
             // DtPickerInicio
@@ -221,28 +217,6 @@
             this.btnExportarTotvs.UseVisualStyleBackColor = true;
             this.btnExportarTotvs.Click += new System.EventHandler(this.btnExportarTotvs_Click);
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(17, 29);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(334, 15);
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.progressBar1.TabIndex = 9;
-            this.progressBar1.Visible = false;
-            // 
-            // gbNotas
-            // 
-            this.gbNotas.Location = new System.Drawing.Point(615, 28);
-            this.gbNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbNotas.Name = "gbNotas";
-            this.gbNotas.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbNotas.Size = new System.Drawing.Size(282, 60);
-            this.gbNotas.TabIndex = 10;
-            this.gbNotas.TabStop = false;
-            this.gbNotas.Text = "Notas";
-            this.gbNotas.Visible = false;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label2);
@@ -294,29 +268,14 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Filtro";
             // 
-            // groupLoading
-            // 
-            this.groupLoading.Controls.Add(this.progressBar1);
-            this.groupLoading.Location = new System.Drawing.Point(7, 882);
-            this.groupLoading.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupLoading.Name = "groupLoading";
-            this.groupLoading.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupLoading.Size = new System.Drawing.Size(375, 61);
-            this.groupLoading.TabIndex = 7;
-            this.groupLoading.TabStop = false;
-            this.groupLoading.Text = "Pronto";
-            this.groupLoading.Visible = false;
-            // 
             // ImportarNotaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1324, 955);
-            this.Controls.Add(this.groupLoading);
             this.Controls.Add(this.btnExportarTotvs);
             this.Controls.Add(this.btnListaNotas);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.gbNotas);
             this.Controls.Add(this.GBListar);
             this.Controls.Add(this.dtImportacao);
             this.Controls.Add(this.GbDTNotas);
@@ -333,7 +292,6 @@
             this.GBListar.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupLoading.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,18 +309,15 @@
         private System.Windows.Forms.DataGridView dtImportacao;
         private System.Windows.Forms.Button btnListaNotas;
         private System.Windows.Forms.GroupBox GBListar;
-        private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btnSelecionarTodas;
         private System.Windows.Forms.Button btnDesmarcarTodos;
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnExportarTotvs;
-        private System.Windows.Forms.GroupBox gbNotas;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtBoxToFilter;
         private System.Windows.Forms.ComboBox coBoxTipeFilter;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupLoading;
         private System.Windows.Forms.Button btnInserirEmBloco;
     }
 }
