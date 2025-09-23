@@ -128,6 +128,7 @@
             this.Controls.Add(this.pesquisar);
             this.Controls.Add(this.inputValor);
             this.Name = "ConsultaItem";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

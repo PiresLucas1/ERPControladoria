@@ -109,9 +109,14 @@ namespace ERP_FISCAL.controller
             return regex.IsMatch(valor);
         }
 
-        public Task<string> PegaValorUnicoPeloCodigo(string valor)
+        public async Task<DataTable> PegaValorUnicoPeloCodigo(string valor)
         {
-            throw new NotImplementedException();
+            cfopRepositories cfops = new cfopRepositories();
+            DataTable dataTable = await Task.Run(() =>
+            {
+                return cfops.PegaValorPeloCodigo(valor);
+            });
+            return dataTable;
         }
     }
 }

@@ -93,14 +93,39 @@ namespace ERP_FISCAL.repositories
             return tabela;
         }
 
-        public string PegaValorPeloCodigo(string valor)
+        public DataTable PegaValorPeloCodigo(string valor)
         {
-            throw new NotImplementedException();
-        }
+            DataTable tabela = new DataTable();
+            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
 
-        DataTable UIRepositories.PegaValorPeloCodigo(string valor)
-        {
-            throw new NotImplementedException();
+            try
+            {
+
+                using (SqlConnection conn = conexaoBanco.AbrirConexao())
+                {
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspUsuConsultaPeloId", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        SqlParameter p;
+                        bool valorEmNumero = CarregaCFOPController.VerificaValorParaPesquisa(valor);
+                        p = new SqlParameter("@INvchIDNatureza", SqlDbType.NVarChar);
+                        cmd.Parameters.Add(p);
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                        {
+                            adapter.Fill(tabela);
+                        }
+                    }
+
+                    conexaoBanco.FecharConexao(conn);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
+            }
+
+
+            return tabela;
         }
     }
 }

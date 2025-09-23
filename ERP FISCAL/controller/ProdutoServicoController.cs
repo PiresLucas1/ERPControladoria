@@ -37,7 +37,7 @@ namespace ERP_FISCAL.Controller
             return tabelaDados;
         }
 
-        public async Task<string> PegaValorUnicoPeloCodigo(string valor)
+        public async Task<DataTable> PegaValorUnicoPeloCodigo(string valor)
         {
             ProdutoServicoRepositories produtoServico = new ProdutoServicoRepositories();
             DataTable tabelaDados = new DataTable();
@@ -48,7 +48,7 @@ namespace ERP_FISCAL.Controller
                 return produtoServico.PegaValorPeloCodigo(valor);
             });
 
-            return tabelaDados.Rows[0].ToString();
+            return tabelaDados;
         }
     }
 }

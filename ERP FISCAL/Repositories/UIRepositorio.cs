@@ -12,7 +12,7 @@ namespace ERP_FISCAL.Repositories
          DataTable EncontrarTodos();
          DataTable EncontrarComOcorrencia(string valor);
 
-        DataTable PegaValorPeloCodigo(string valor);
+         DataTable PegaValorPeloCodigo(string valor);
 
 
     }

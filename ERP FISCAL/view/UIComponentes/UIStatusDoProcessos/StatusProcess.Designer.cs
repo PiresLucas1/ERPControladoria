@@ -58,7 +58,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(79, 124);
+            this.label1.Location = new System.Drawing.Point(22, 44);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(229, 29);
             this.label1.TabIndex = 0;
@@ -66,7 +66,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(27, 186);
+            this.progressBar1.Location = new System.Drawing.Point(27, 101);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(334, 50);
             this.progressBar1.TabIndex = 1;
@@ -76,12 +76,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(389, 280);
+            this.ClientSize = new System.Drawing.Size(393, 206);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "StatusProcess";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StatusProcess";
             this.ResumeLayout(false);
             this.PerformLayout();

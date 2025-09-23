@@ -12,11 +12,13 @@ using ERP_FISCAL.view.DialogUI.interfacesUI;
 
 namespace ERP_FISCAL.view.DialogUI
 {
-    public partial class DialogInsereInformacao : Form
+    public partial class InsercaoBloco : Form
     {
-        public string ValorDigitado { get; private set; }
+        public string valorProduto  { get; private set; }
+        public string valorData { get; private set; }
+        public string valorCfop { get; private set; }
         public DataTable data { get; set; }
-        public DialogInsereInformacao(IDialogoInsereInformacao dialogo )
+        public InsercaoBloco(IDialogoInsereInformacao dialogo )
         {
 
             InitializeComponent();
@@ -24,10 +26,17 @@ namespace ERP_FISCAL.view.DialogUI
             ConfigurarAutocompletar();
             textTitulo.Text = dialogo.titulo;
 
+            dataLancamentoText.Enabled = false;
+            cProdutoText.Enabled = false;
+            cfopText.Enabled = false;
+
         }
         private void btnOk_Click(object sender, EventArgs e)
         {
-            ValorDigitado = textBoxEntrada.Text;
+            valorProduto = cProdutoText.Text;
+            valorCfop = cfopText.Text;
+            valorData = dataLancamentoText.Text;
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
@@ -52,10 +61,42 @@ namespace ERP_FISCAL.view.DialogUI
             }
 
             // Associe a coleção e configure as propriedades do TextBox
-            this.textBoxEntrada.AutoCompleteCustomSource = colecaoSugestoes;
-            this.textBoxEntrada.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            this.textBoxEntrada.AutoCompleteMode = AutoCompleteMode.Suggest;
+            this.cProdutoText.AutoCompleteCustomSource = colecaoSugestoes;
+            this.cProdutoText.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            this.cProdutoText.AutoCompleteMode = AutoCompleteMode.Suggest;
         }
 
+        private void cProdutoCbox_CheckedChanged(object sender, EventArgs e)
+        {
+            verificaCheckBox();
+
+        }
+
+        private void dataLancamentoCbox_CheckedChanged(object sender, EventArgs e)
+        {
+            verificaCheckBox();
+        }
+
+        private void cfopCbox_CheckedChanged(object sender, EventArgs e)
+        {
+            verificaCheckBox();
+        }
+        public void verificaCheckBox()
+        {
+            if (dataLancamentoCbox.Checked == true)
+                dataLancamentoText.Enabled = true;
+            else
+                dataLancamentoText.Enabled = false;
+
+            if (cProdutoCbox.Checked == true)
+                cProdutoText.Enabled = true;
+            else
+                cProdutoText.Enabled = false;
+
+            if(cfopCbox.Checked == true)
+                cfopText.Enabled = true;
+            else
+                cfopText.Enabled = false;
+        }
     }
 }

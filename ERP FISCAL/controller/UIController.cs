@@ -11,7 +11,7 @@ namespace ERP_FISCAL.Controller
     {
         Task<DataTable> CarregaTodos();
         Task<DataTable> CarregaComOcorrencia(string valor);
-        Task<string> PegaValorUnicoPeloCodigo(string valor);
+        Task<DataTable> PegaValorUnicoPeloCodigo(string valor);
 
     }
 }

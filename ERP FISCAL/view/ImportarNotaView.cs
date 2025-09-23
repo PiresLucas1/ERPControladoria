@@ -118,48 +118,20 @@ namespace ERP_FISCAL
                     ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
                     DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim);
 
+                    splashScreen.SetMessage("Ordenando estrutura...");
+                    DataTable notasFormatada = exportServiceNotes.ReorganizarDataTable(notas);
+
                     dtImportacao.RowHeadersWidth = 20;
                     dtImportacao.EnableHeadersVisualStyles = false;
                     dtImportacao.RowHeadersDefaultCellStyle.BackColor = Color.White;
                     dtImportacao.RowHeadersDefaultCellStyle.ForeColor = Color.White;
-                    dtImportacao.DataSource = notas;
+                    dtImportacao.DataSource = notasFormatada;
                     dtImportacao.AllowUserToAddRows = false;
                     dtImportacao.ReadOnly = false;
                     dtImportacao.AutoGenerateColumns = true;
 
                     splashScreen.SetMessage("Montando grade...");
                     splashScreen.UpdateProgress(70);
-                    if (!dtImportacao.Columns.Contains("CFOP"))
-                    {
-                        int index = dtImportacao.Columns["Cód. Serviço TOTVS"].Index;
-
-                        DataGridViewTextBoxColumn cfopColuna = new DataGridViewTextBoxColumn();
-
-                        cfopColuna.Name = "CFOP";
-                        cfopColuna.HeaderText = "CFOP";
-                        cfopColuna.ReadOnly = false;
-                        cfopColuna.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-                        cfopColuna.Width = 70;
-                        dtImportacao.Columns.Add(cfopColuna);
-
-                    }
-
-
-                    if (!dtImportacao.Columns.Contains("Data Lançamento"))
-                    {
-                        int index = dtImportacao.Columns["CFOP"].Index;
-
-                        var colData = new DataGridViewMaskedTextBoxColumn();
-                        colData.Name = "Data Lançamento";
-                        colData.HeaderText = "Data Lançamento";
-                        colData.Mask = "00/00/0000";
-                        colData.Width = 80;
-
-                        dtImportacao.Columns.Add(colData);
-
-                        colData.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    }
-
 
                     if (!dtImportacao.Columns.Contains("IDMov"))
                     {
@@ -182,11 +154,11 @@ namespace ERP_FISCAL
                     dtImportacao.DefaultCellStyle.SelectionBackColor = dtImportacao.DefaultCellStyle.BackColor;
                     dtImportacao.DefaultCellStyle.SelectionForeColor = dtImportacao.DefaultCellStyle.ForeColor;
 
-                    if (!notas.Columns.Contains("Selecionar"))
+                    if (!notasFormatada.Columns.Contains("Selecionar"))
                     {
                         DataColumn colCheck = new DataColumn("Selecionar", typeof(bool));
                         colCheck.DefaultValue = false;
-                        notas.Columns.Add(colCheck);
+                        notasFormatada.Columns.Add(colCheck);
                     }
 
                     dtImportacao.Columns["Selecionar"].DisplayIndex = 0;
@@ -195,9 +167,13 @@ namespace ERP_FISCAL
                     dtImportacao.Columns["Selecionar"].Width = 30;
 
                     //ajusta colunas
-                    int indexCodProduto = dtImportacao.Columns["Cód. Serviço TOTVS"].Index;
-                    dtImportacao.Columns["CFOP"].DisplayIndex = indexCodProduto++;
-                    dtImportacao.Columns["Retorno"].DisplayIndex = dtImportacao.Columns.Count - 1;
+                    //int indexCodProduto = dtImportacao.Columns["Cód. Serviço TOTVS"].Index;
+                    //dtImportacao.Columns["Desc. Serviço TOTVS"].DisplayIndex = indexCodProduto++;
+                    //Thread.Sleep(1000);
+                    //indexCodProduto = dtImportacao.Columns["Desc. Serviço TOTVS"].Index;
+                    //dtImportacao.Columns["CFOP"].DisplayIndex = indexCodProduto++;
+                    //dtImportacao.Columns["Descrição CFOP"].DisplayIndex = indexCodProduto + 2;
+                    //dtImportacao.Columns["Retorno"].DisplayIndex = dtImportacao.Columns.Count - 1;
 
 
                     splashScreen.SetMessage("Finalizando...");
@@ -398,10 +374,22 @@ namespace ERP_FISCAL
             consultaItem.Show();
         }
 
-        public void AtualizaCFOP(int index, string CFOPSelecionado)
+        public void AtualizaCFOP(int index, string cfopSelecionado)
         {
-            dtImportacao.Rows[index].Cells["CFOP"].Value = CFOPSelecionado;
+            CarregaCFOPController cFOPController = new CarregaCFOPController();
+            ValidaValorDeCelulaCfop(cfopSelecionado, cFOPController, index,"CFOP","CFOP Descrição");
+            
 
+        }
+        public void AtualizaProduto(int index, string cProduto)
+        {
+            ProdutoServicoController produtoServico = new ProdutoServicoController();
+            ValidaValorDeCelulaCProduto(cProduto, produtoServico, index, "Cod. Serviço TOTVS", "Descrição");
+            
+        }
+        public void AtualizaDataLancamento(int index, string dataLancamento)
+        {
+            dtImportacao.Rows[index].Cells["Data Lançamento"].Value = dataLancamento;
         }
         public DtoFormNotaParaNatureza PegaInformacaoParaNatureza(int index)
         {
@@ -453,16 +441,19 @@ namespace ERP_FISCAL
             }
 
             DialogoInsereInformacao dialogo = new DialogoInsereInformacao();
-            dialogo.titulo = "CFOP";
+            dialogo.titulo = "Cód. Serviço Totvs";
             dialogo.dataTable = listaNatureza;
 
-            using (var dialog = new DialogInsereInformacao(dialogo))
+            using (var dialog = new InsercaoBloco(dialogo))
              {
               if (dialog.ShowDialog() == DialogResult.OK)
                {
                     foreach(int linha in linhasParaInserir)
                     {
-                        AtualizaCFOP(linha,dialog.ValorDigitado);
+                        AtualizaCFOP(linha,dialog.valorCfop);
+                        AtualizaProduto(linha,dialog.valorProduto);
+                        AtualizaDataLancamento(linha, dialog.valorData);
+
                     }
                }
              }            
@@ -481,7 +472,7 @@ namespace ERP_FISCAL
         {
             var ProdutoFormatado = valor.Split('-');
             dtImportacao.Rows[index].Cells["Cód. Serviço TOTVS"].Value = ProdutoFormatado[0].Trim();
-            ;
+            
         }
 
         private void TextBox_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -574,23 +565,75 @@ namespace ERP_FISCAL
         public void AlteraValorDataRow(DataRow rowValor, string name, int rowLinha)
         {
             dataRowSelecionado = rowValor;
-
+            
             if(name == "cfop")
             {
-                //Console.WriteLine(dataRowSelecionado[1]);              
-                InsereValorNoDataGridView(rowLinha, dataRowSelecionado[1].ToString(), "CFOP");
+                var valor  = dataRowSelecionado["IDNATUREZA"].ToString().Trim();
+                var valorDescricao = dataRowSelecionado["DESCRICAO_NATUREZA"].ToString().Trim();
+
+                InsereValorNoDataGridView(rowLinha, valor, "CFOP");
+                InsereValorNoDataGridView(rowLinha, valorDescricao, "CFOP Descrição");
+                
 
             }
             if(name == "cProduto")
             {
-                //Console.WriteLine(dataRowSelecionado[0]);
+                var valor = dataRowSelecionado["CODIGOPRD"].ToString().Trim();
+                var valorDescricao = dataRowSelecionado["DESCRICAO"].ToString().Trim();
+
                 InsereValorNoDataGridView(rowLinha, dataRowSelecionado[0].ToString(), "Cód. Serviço TOTVS");
+                InsereValorNoDataGridView(rowLinha, valorDescricao, "Descrição");
 
             }
         }
         public void InsereValorNoDataGridView(int row, string valor, string coluna)
         {
             dtImportacao.Rows[row].Cells[coluna].Value = valor;
+        }
+
+        public async void ValidaValorDeCelulaCfop(string valor, UIController controller, int index,string valorCelula1 ,string valorCelula2)
+        {
+            
+            var retorno = await controller.PegaValorUnicoPeloCodigo(valor);
+            var codColigadaLinha = dtImportacao.Rows[index].Cells["CODCOLIGADA"].Value?.ToString();
+            DataRow valorRow = null;
+
+
+            foreach (DataRow row in retorno.Rows)
+            {
+                var codColigadaRetorno = row["CODCOLIGADA"].ToString();
+
+                if(codColigadaRetorno == codColigadaLinha)
+                {
+                    valorRow = row;
+                }
+
+            }
+            dtImportacao.Rows[index].Cells[valorCelula1].Value = valorRow["IDNATUREZA"].ToString();
+            dtImportacao.Rows[index].Cells[valorCelula2].Value = valorRow["DESCRIÇÃO NATUREZA"].ToString();
+
+        }
+        public async void ValidaValorDeCelulaCProduto(string valor, UIController controller, int index, string valorCelula1, string valorCelula2)
+        {
+
+            var retorno = await controller.PegaValorUnicoPeloCodigo(valor);
+            var codColigadaLinha = dtImportacao.Rows[index].Cells["CODCOLIGADA"].Value?.ToString();
+            DataRow valorRow = null;
+
+
+            foreach (DataRow row in retorno.Rows)
+            {
+                var codColigadaRetorno = row["CODCOLIGADA"].ToString();
+
+                if (codColigadaRetorno == codColigadaLinha)
+                {
+                    valorRow = row;
+                }
+
+            }
+            dtImportacao.Rows[index].Cells[valorCelula1].Value = valorRow["IDNATUREZA"].ToString();
+            dtImportacao.Rows[index].Cells[valorCelula2].Value = valorRow["DESCRIÇÃO NATUREZA"].ToString();
+
         }
 
 

@@ -23,26 +23,6 @@ namespace ERP_FISCAL.controller
                 return util.ObterNotas(valueDate1, valueDate2);
             });
 
-            //dtimpo.DataSource = notas;
-
-            //// Cria a coluna de botão "..."
-            //var colBotao = new DataGridViewButtonColumn
-            //{
-            //    Name = "colBuscarServico",
-            //    HeaderText = "",
-            //    Text = "...",
-            //    UseColumnTextForButtonValue = true,
-            //    Width = 32,
-            //    FlatStyle = FlatStyle.Popup
-            //};
-
-            //// Insere a coluna logo após "Cód. Serviço TOTVS"
-            //int i = dataGridView1.Columns["Cód. Serviço TOTVS"].Index;
-            //dataGridView1.Columns.Insert(i + 1, colBotao);
-
-            //// Deixe todo grid só-leitura, exceto CFOP
-            //dataGridView1.ReadOnly = true;
-            //dataGridView1.Columns["CFOP"].ReadOnly = false;
 
 
             return notas;
@@ -166,6 +146,89 @@ namespace ERP_FISCAL.controller
                 throw new Exception("Não foi possivel retornar nota", ex);
 
             }
+        }
+
+
+        public DataTable ReorganizarDataTable(DataTable original)
+        {
+           // ordem desejada (já inclui as colunas novas)
+           string[] ordemColunas = new string[]{
+            "Documento",
+            "Código Verificação",
+            "Dt.Hora Emissão",
+            "Base Cálculo",
+            "Aliquota",
+            "Valor Líquido",
+            "CNPJ Prestador",
+            "Razão Social Prestador",
+            "UF Prestador",
+            "Total Serviços",
+            "Valor Pis",
+            "Valor Cofins",
+            "Valor IR",
+            "Valor Csll",
+            "Valor INSS",
+            "Valor ISS",
+            "Item Lista Serviço",
+            "Descriminação",
+            "CNPJ Tomador",
+            "Razão Social Tomador",
+            "UF Tomador",
+            "CodColigada",
+            "NomeColigada",
+            "CodFilial",
+            "NomeFilial",
+            "IDContasPagar",
+            "IDMov",
+            "Cód. Serviço TOTVS",
+            // >>> Colunas novas que você quer incluir <<<
+            "Descrição",
+            "CFOP",
+            "CFOP Descrição",
+            "Data Lançamento",
+            // <<< ------------------------------- >>>
+            "Retorno"
+             };
+
+            DataTable novo = new DataTable();
+
+            // cria colunas na ordem certa
+            foreach (string nome in ordemColunas)
+            {
+                if (original.Columns.Contains(nome))
+                {
+                    novo.Columns.Add(nome, original.Columns[nome].DataType);
+                }
+                else
+                {
+                    // adiciona colunas extras como string (ou outro tipo se preferir)
+                    novo.Columns.Add(nome, typeof(string));
+                }
+            }
+
+            // copia linhas
+            foreach (DataRow row in original.Rows)
+            {
+                DataRow novaLinha = novo.NewRow();
+                foreach (string nome in ordemColunas)
+                {
+                    if (original.Columns.Contains(nome))
+                    {
+                        novaLinha[nome] = row[nome];
+                    }
+                    else
+                    {
+                        // aqui você pode calcular/preencher colunas novas
+                        if (nome == "Data Lançamento")
+                            novaLinha[nome] = DateTime.Now.ToShortDateString(); // exemplo
+                        else
+                            novaLinha[nome] = ""; // valor inicial vazio
+                    }
+                }
+                novo.Rows.Add(novaLinha);
+            }
+
+            return novo;
         }
 
 

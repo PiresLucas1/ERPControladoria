@@ -152,11 +152,11 @@
             this.GBListar.Controls.Add(this.btnDesmarcarTodos);
             this.GBListar.Controls.Add(this.btnLimpar);
             this.GBListar.Controls.Add(this.btnSelecionarTodas);
-            this.GBListar.Location = new System.Drawing.Point(856, 129);
+            this.GBListar.Location = new System.Drawing.Point(857, 115);
             this.GBListar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GBListar.Name = "GBListar";
             this.GBListar.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.GBListar.Size = new System.Drawing.Size(452, 162);
+            this.GBListar.Size = new System.Drawing.Size(452, 167);
             this.GBListar.TabIndex = 7;
             this.GBListar.TabStop = false;
             this.GBListar.Text = "Ações no Data Grid";
