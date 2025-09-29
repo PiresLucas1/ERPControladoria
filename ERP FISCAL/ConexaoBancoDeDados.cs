@@ -45,7 +45,7 @@ namespace SeuProjeto
 
         public ConexaoBancoDeDadosTOTVS()
         {
-            connectionString = "Server=dbtotvs\\dbtotvs;Database=CORPORERM_PRODUCAO;Integrated Security=True;";
+            connectionString = "Server=dbtotvs\\dbtotvs;Database=CORPORERM_TESTE;Integrated Security=True;";
         }
 
         public SqlConnection AbrirConexao()

@@ -24,10 +24,10 @@ namespace ERP_FISCAL
 
                 using (SqlConnection conexao = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("UspQiveConsultaNFSe", conexao))
+                    using (SqlCommand cmd = new SqlCommand("dbo.UspQiveConsultaNFSe", conexao))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        //cmd.CommandTimeout = 1200; /* 20 minutos */
+                        cmd.CommandTimeout = 1200; /* 20 minutos */
                         cmd.Parameters.AddWithValue("@INDatDataInicio", dataInicio);
                         cmd.Parameters.AddWithValue("@INDatDataFim", dataFim);
 
@@ -38,10 +38,11 @@ namespace ERP_FISCAL
                     conexaoBanco.FecharConexao(conexao);
                 }
             }
-            catch (Exception)
+            catch (Exception e )
             {
-
-                throw new ArgumentException("ERRO INTERNO: Não foi possível localizar procedure");
+                Console.WriteLine("Ocorreu um erro: " + e.Message);
+                throw new ArgumentException("Falha ao executar a operação", e);
+                
             }
 
             return tabela;

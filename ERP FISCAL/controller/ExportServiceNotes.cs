@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using SeuProjeto;
 using System.Windows.Forms;
 using System.Runtime.InteropServices.ComTypes;
+using ERP_FISCAL.Utils;
 
 namespace ERP_FISCAL.controller
 {
@@ -39,7 +40,7 @@ namespace ERP_FISCAL.controller
                 {
                     foreach (DataRow row in dtToImport.Rows)
                     {
-                        using (SqlCommand cmd = new SqlCommand("uspImportaNotaServico", conexao))
+                        using (SqlCommand cmd = new SqlCommand("dbo.uspImportaNotaServico", conexao))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
 
@@ -54,31 +55,31 @@ namespace ERP_FISCAL.controller
                             cmd.Parameters.AddWithValue("@INvchCodigoVerificacao", row["Código Verificação"]?.ToString() ?? "");
 
                             cmd.Parameters.AddWithValue("@INnumValorServico", row["Total Serviços"] != DBNull.Value
-                                ? Convert.ToDecimal(row["Total Serviços"])
+                                ? DecimalParse.ParseDecimal(row["Total Serviços"])
                                 : 0);
                             cmd.Parameters.AddWithValue("@INnumValorBrutoServico", row["Valor Líquido"] != DBNull.Value
-                                ? Convert.ToDecimal(row["Valor Líquido"])
+                                ? DecimalParse.ParseDecimal(row["Valor Líquido"])
                                 : 0);
                             cmd.Parameters.AddWithValue("@INnumISSBaseCalculo", row["Base Cálculo"] != DBNull.Value
-                                ? Convert.ToDecimal(row["Base Cálculo"])
+                                ? DecimalParse.ParseDecimal(row["Base Cálculo"])
                                 : 0);
                             cmd.Parameters.AddWithValue("@INnumISSValor", row["Valor ISS"] != DBNull.Value
-                                ? Convert.ToDecimal(row["Valor ISS"])
+                                ? DecimalParse.ParseDecimal(row["Valor ISS"])
                                 : 0);
                             cmd.Parameters.AddWithValue("@INnumPISValor", row["Valor Pis"] != DBNull.Value
-                                ? Convert.ToDecimal(row["Valor Pis"])
+                                ? DecimalParse.ParseDecimal(row["Valor Pis"])
                                 : 0);
                             cmd.Parameters.AddWithValue("@INnumCOFINSValor", row["Valor Cofins"] != DBNull.Value
-                                ? Convert.ToDecimal(row["Valor Cofins"])
+                                ? DecimalParse.ParseDecimal(row["Valor Cofins"])
                                 : 0);
                             cmd.Parameters.AddWithValue("@INnumCSLLValor", row["Valor Csll"] != DBNull.Value
-                                ? Convert.ToDecimal(row["Valor Csll"])
+                                ? DecimalParse.ParseDecimal(row["Valor Csll"])
                                 : 0);
                             cmd.Parameters.AddWithValue("@INnumIRRFValor", row["Valor IR"] != DBNull.Value
-                                ? Convert.ToDecimal(row["Valor IR"])
+                                ? DecimalParse.ParseDecimal(row["Valor IR"])
                                 : 0);
                             cmd.Parameters.AddWithValue("@INnumINSSValor", row["Valor INSS"] != DBNull.Value
-                                ? Convert.ToDecimal(row["Valor INSS"])
+                                ? DecimalParse.ParseDecimal(row["Valor INSS"])
                                 : 0);
 
                             cmd.Parameters.AddWithValue("@INvchCodProduto", row["Cód. Serviço TOTVS"]?.ToString() ?? "");
