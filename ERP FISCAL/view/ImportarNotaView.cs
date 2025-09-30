@@ -22,6 +22,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos.StatusProcess;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TextBox = System.Windows.Forms.TextBox;
@@ -547,20 +548,38 @@ namespace ERP_FISCAL
 
             if (retorno == null) return;
 
+            DataTable dataRetorno = retorno.Clone();
+            string primeiroValorEncontrado = "";
+
+
             foreach (DataRow item in retorno.Rows)
             {
                 var codColigadaRetorno = item["CODCOLIGADA"].ToString();
-
                 // Comparando se são iguais
                 if (codColigadaRetorno == codColigadaLinha)
-                {                 
-                    string primeiroValorEncontrado = item[itemColuna].ToString();
-
-                    // Atualizar célula atual com o valor desejado
-                    dtImportacao.Rows[cellAlteracao].Cells[nomeColuna].Value = primeiroValorEncontrado;
-                    break;
+                {
+                    dataRetorno.ImportRow(item);
+                    primeiroValorEncontrado = item[itemColuna].ToString();
                 }
             }
+                if (dataRetorno.Rows.Count > 1) 
+                {
+                    ProdutoServicoController cFOPController = new ProdutoServicoController();
+                    ConsultaItem consultaItem = new ConsultaItem(linhaAtual, Convert.ToInt32(codColigadaLinha), cFOPController, "cProduto", this);
+                    await consultaItem.PesquisaValorPorString(valor);
+                    consultaItem.Show();
+
+                    //AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController, "cfop");
+                    return;
+                }
+                if(dataRetorno.Rows.Count == 1)
+                {
+                    dtImportacao.Rows[cellAlteracao].Cells[nomeColuna].Value = primeiroValorEncontrado;
+                    return;
+
+                }
+              return;
+               
         }
         public void AlteraValorDataRow(DataRow rowValor, string name, int rowLinha)
         {
@@ -569,7 +588,7 @@ namespace ERP_FISCAL
             if(name == "cfop")
             {
                 var valor  = dataRowSelecionado["IDNATUREZA"].ToString().Trim();
-                var valorDescricao = dataRowSelecionado["DESCRICAO_NATUREZA"].ToString().Trim();
+                var valorDescricao = dataRowSelecionado["DESCRIÇÃO NATUREZA"].ToString().Trim();
 
                 InsereValorNoDataGridView(rowLinha, valor, "CFOP");
                 InsereValorNoDataGridView(rowLinha, valorDescricao, "CFOP Descrição");

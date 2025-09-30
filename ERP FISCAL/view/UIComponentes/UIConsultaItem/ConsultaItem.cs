@@ -138,5 +138,19 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
             }
             CarregarDataGridView(tabelaDados);
         }
+        public async Task PesquisaValorPorString(string valor)
+        {           
+            DataTable tabelaDados;
+            if (valor.Length == 0)
+            {
+                tabelaDados = await RetornaTodosOsDados();
+            }
+            else
+            {
+                tabelaDados = await RetornaDadosDaOcorrencia(valor);
+
+            }
+            CarregarDataGridView(tabelaDados);
+        }
     }
 }
