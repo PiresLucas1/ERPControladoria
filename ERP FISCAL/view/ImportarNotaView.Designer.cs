@@ -6,6 +6,7 @@
         /// Variável de designer necessária.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private SeuProjeto.SubTipos.MyDataGridView dtImportacao;
 
         /// <summary>
         /// Limpar os recursos que estão sendo usados.
@@ -36,7 +37,7 @@
             this.DtPickerFim = new System.Windows.Forms.DateTimePicker();
             this.GbDTNotas = new System.Windows.Forms.GroupBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.dtImportacao = new System.Windows.Forms.DataGridView();
+            this.dtImportacao = new SeuProjeto.SubTipos.MyDataGridViewNew();
             this.btnListaNotas = new System.Windows.Forms.Button();
             this.GBListar = new System.Windows.Forms.GroupBox();
             this.btnInserirEmBloco = new System.Windows.Forms.Button();

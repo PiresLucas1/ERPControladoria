@@ -75,6 +75,10 @@
     <Compile Include="Utils\DecimalParse.cs" />
     <Compile Include="view\Interfaces\IProdutoServicoType.cs" />
     <Compile Include="view\SubTipos\DataGridViewCustomBox.cs" />
+    <Compile Include="view\SubTipos\MyDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="view\SubTipos\MyDataGridViewNew.cs" />
     <Compile Include="view\UIComponentes\UIConsultaItem\ConsultaItem.cs">
       <SubType>Form</SubType>
     </Compile>

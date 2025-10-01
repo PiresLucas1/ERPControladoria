@@ -200,9 +200,9 @@
         private System.Windows.Forms.Label textTitulo;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.CheckBox cProdutoCbox;
-        private System.Windows.Forms.CheckBox dataLancamentoCbox;
-        private System.Windows.Forms.CheckBox cfopCbox;
+        public System.Windows.Forms.CheckBox cProdutoCbox;
+        public System.Windows.Forms.CheckBox dataLancamentoCbox;
+        public System.Windows.Forms.CheckBox cfopCbox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox cfopText;
         private System.Windows.Forms.Label label2;

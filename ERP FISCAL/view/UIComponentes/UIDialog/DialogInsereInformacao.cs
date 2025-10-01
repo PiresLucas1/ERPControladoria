@@ -30,6 +30,7 @@ namespace ERP_FISCAL.view.DialogUI
             cProdutoText.Enabled = false;
             cfopText.Enabled = false;
 
+
         }
         private void btnOk_Click(object sender, EventArgs e)
         {

@@ -167,14 +167,6 @@ namespace ERP_FISCAL
                     dtImportacao.Columns["Selecionar"].Width = 30;
                     dtImportacao.Columns["Selecionar"].Width = 30;
 
-                    //ajusta colunas
-                    //int indexCodProduto = dtImportacao.Columns["Cód. Serviço TOTVS"].Index;
-                    //dtImportacao.Columns["Desc. Serviço TOTVS"].DisplayIndex = indexCodProduto++;
-                    //Thread.Sleep(1000);
-                    //indexCodProduto = dtImportacao.Columns["Desc. Serviço TOTVS"].Index;
-                    //dtImportacao.Columns["CFOP"].DisplayIndex = indexCodProduto++;
-                    //dtImportacao.Columns["Descrição CFOP"].DisplayIndex = indexCodProduto + 2;
-                    //dtImportacao.Columns["Retorno"].DisplayIndex = dtImportacao.Columns.Count - 1;
 
 
                     splashScreen.SetMessage("Finalizando...");
@@ -446,18 +438,28 @@ namespace ERP_FISCAL
             dialogo.dataTable = listaNatureza;
 
             using (var dialog = new InsercaoBloco(dialogo))
-             {
-              if (dialog.ShowDialog() == DialogResult.OK)
-               {
-                    foreach(int linha in linhasParaInserir)
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    foreach (int linha in linhasParaInserir)
                     {
-                        AtualizaCFOP(linha,dialog.valorCfop);
-                        AtualizaProduto(linha,dialog.valorProduto);
-                        AtualizaDataLancamento(linha, dialog.valorData);
+                        if (dialog.cfopCbox.Checked)
+                        {
+                            AtualizaCFOP(linha, dialog.valorCfop);
+                        }
 
+                        if (dialog.cProdutoCbox.Checked)
+                        {
+                            AtualizaProduto(linha, dialog.valorProduto);
+                        }
+
+                        if (dialog.dataLancamentoCbox.Checked)
+                        {
+                            AtualizaDataLancamento(linha, dialog.valorData);
+                        }
                     }
-               }
-             }            
+                }
+            }
         }
 
 
@@ -527,20 +529,28 @@ namespace ERP_FISCAL
         public async void ConsultaItemNaCelula(string valor)
         {
             string nomeColuna = dtImportacao.Columns[colAlteracao].Name;
-            DataTable retorno = null;
-            var itemColuna = "";
+            // define variaveis para localizar colunas no datagridview
+            var itemColunaValor = "";
+            var itemColunaDescricao = "";
+
+            DataTable retorno = new DataTable();
+
+            retorno = retorno.DefaultView.ToTable(true);
+
             if (nomeColuna == "Cód. Serviço TOTVS")
             {
 
                 ProdutoServicoController produtoController = new ProdutoServicoController();
                 retorno = await produtoController.CarregaComOcorrencia(valor);
-                itemColuna = "CODIGOPRD";
+                itemColunaValor = "CODIGOPRD";
+                itemColunaDescricao = "DESCRICAO";
             }
             if(nomeColuna == "CFOP")
             {
                 CarregaCFOPController cFOPController = new CarregaCFOPController();
                 retorno = await cFOPController.CarregaComOcorrencia(valor);
-                itemColuna = "IDNATUREZA";
+                itemColunaValor = "IDNATUREZA";
+                itemColunaDescricao = "DESCRIÇÃO NATUREZA";
 
             }
             int linhaAtual = dtImportacao.CurrentCell.RowIndex -1;
@@ -549,7 +559,8 @@ namespace ERP_FISCAL
             if (retorno == null) return;
 
             DataTable dataRetorno = retorno.Clone();
-            string primeiroValorEncontrado = "";
+            string valorEncontrado = "";
+            string valorDescricaoEncontrado = "";
 
 
             foreach (DataRow item in retorno.Rows)
@@ -559,7 +570,8 @@ namespace ERP_FISCAL
                 if (codColigadaRetorno == codColigadaLinha)
                 {
                     dataRetorno.ImportRow(item);
-                    primeiroValorEncontrado = item[itemColuna].ToString();
+                    valorEncontrado = item[itemColunaValor].ToString();
+                    valorDescricaoEncontrado = item[itemColunaDescricao].ToString();
                 }
             }
                 if (dataRetorno.Rows.Count > 1) 
@@ -574,10 +586,19 @@ namespace ERP_FISCAL
                 }
                 if(dataRetorno.Rows.Count == 1)
                 {
-                    dtImportacao.Rows[cellAlteracao].Cells[nomeColuna].Value = primeiroValorEncontrado;
+                    if(nomeColuna == "Cód. Serviço TOTVS")
+                    {
+                        dtImportacao.Rows[cellAlteracao].Cells[nomeColuna].Value = valorEncontrado;
+                        dtImportacao.Rows[cellAlteracao].Cells["Descrição"].Value = valorDescricaoEncontrado;
+                    }
+                    if(nomeColuna == "CFOP")
+                    {
+                        dtImportacao.Rows[cellAlteracao].Cells[nomeColuna].Value = valorEncontrado;
+                        dtImportacao.Rows[cellAlteracao].Cells["CFOP Descrição"].Value = valorDescricaoEncontrado;
+                    }
                     return;
-
                 }
+
               return;
                
         }

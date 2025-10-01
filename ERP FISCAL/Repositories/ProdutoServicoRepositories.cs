@@ -44,6 +44,7 @@ namespace ERP_FISCAL.Repositories
         public DataTable EncontrarComOcorrencia(string valor)
         {
             DataTable tabela = new DataTable();
+            tabela = tabela.DefaultView.ToTable(true);
             ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
             try
             {
@@ -61,19 +62,17 @@ namespace ERP_FISCAL.Repositories
                         cmd.Parameters.Add(p);
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {
-                        int linhas = adapter.Fill(tabela);
+                            int linhas = adapter.Fill(tabela);
 
-                            if(linhas > 0)
-                                adapter.Fill(tabela);
-                            else
+                            if (linhas == 0)
                             {
-
+                                tabela.Clear();
                                 cmd.Parameters.Clear();
-                                cmd.Parameters.Add(new SqlParameter("@INvchDescricaoProduto", SqlDbType.NVarChar) { Value= valor });
-                                adapter.Fill(tabela); 
+                                cmd.Parameters.Add(new SqlParameter("@INvchDescricaoProduto", SqlDbType.NVarChar) { Value = valor });
+                                adapter.Fill(tabela);
                             }
                         }
-                       
+
                     }
 
                     conexaoBanco.FecharConexao(conn);

@@ -27,6 +27,7 @@ namespace ERP_FISCAL.Controller
         {
             ProdutoServicoRepositories produtoServico = new ProdutoServicoRepositories();
             DataTable tabelaDados = new DataTable();
+            tabelaDados = tabelaDados.DefaultView.ToTable(true);
 
 
             tabelaDados = await Task.Run(() =>
