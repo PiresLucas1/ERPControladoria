@@ -100,11 +100,8 @@ namespace ERP_FISCAL.Repositories
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         SqlParameter p = new SqlParameter("@INintIDProduto", SqlDbType.NVarChar);
-                        p.Value = valor;
-                        SqlParameter r  = new SqlParameter("@INbitTipoPesquisa", SqlDbType.NVarChar);
-                        r.Value = 0;
-                        cmd.Parameters.Add(p);
-                        cmd.Parameters.Add(r);
+                        p.Value = valor;                                               
+                        cmd.Parameters.Add(p);                        
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {
                             adapter.Fill(tabela);

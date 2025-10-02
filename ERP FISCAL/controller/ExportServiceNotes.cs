@@ -188,7 +188,11 @@ namespace ERP_FISCAL.controller
             "CFOP Descrição",
             "Data Lançamento",
             // <<< ------------------------------- >>>
-            "Retorno"
+            "Retorno",
+            // Colunas invisiveis para tratativas
+            "ErpSitucaoContasPagar",
+            "IdErpTitulo",
+            "ErpSitucaoTitulo"
              };
 
             DataTable novo = new DataTable();

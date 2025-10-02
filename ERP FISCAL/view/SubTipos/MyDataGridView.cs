@@ -1,5 +1,9 @@
 ﻿using System.Windows.Forms;
 
+
+namespace ERP_CONTROLADORIA.view.SubTipos
+{
+
 public class MyDataGridView : DataGridView
 {
     public MyDataGridView()
@@ -15,4 +19,5 @@ public class MyDataGridView : DataGridView
     {
         base.OnPaint(e);
     }
+}
 }

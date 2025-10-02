@@ -38,6 +38,7 @@ namespace ERP_FISCAL
         public DataRow dataRowSelecionado;
         public int cellAlteracao;
         public int colAlteracao;
+        private DataTable dtOrignal;
         public ImportarNotaView()
         {
             InitializeComponent();
@@ -118,7 +119,7 @@ namespace ERP_FISCAL
 
                     ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
                     DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim);
-
+                    dtOrignal = notas;
                     splashScreen.SetMessage("Ordenando estrutura...");
                     DataTable notasFormatada = exportServiceNotes.ReorganizarDataTable(notas);
 
@@ -167,6 +168,11 @@ namespace ERP_FISCAL
                     dtImportacao.Columns["Selecionar"].Width = 30;
                     dtImportacao.Columns["Selecionar"].Width = 30;
 
+                    //colunas invisiveis 
+                    dtImportacao.Columns["ErpSitucaoContasPagar"].Visible = false;
+                    dtImportacao.Columns["IdErpTitulo"].Visible = false;
+                    dtImportacao.Columns["ErpSitucaoTitulo"].Visible = false;
+
 
 
                     splashScreen.SetMessage("Finalizando...");
@@ -211,6 +217,10 @@ namespace ERP_FISCAL
                     }
                 }
 
+            }
+            if (dtImportacao.RowCount > 0) { 
+                gbFiltros.Enabled = true;
+                rbTodos.Checked = true;
             }
         }
 
@@ -377,7 +387,7 @@ namespace ERP_FISCAL
         public void AtualizaProduto(int index, string cProduto)
         {
             ProdutoServicoController produtoServico = new ProdutoServicoController();
-            ValidaValorDeCelulaCProduto(cProduto, produtoServico, index, "Cod. Serviço TOTVS", "Descrição");
+            ValidaValorDeCelulaCProduto(cProduto, produtoServico, index, "Cód. Serviço TOTVS", "Descrição");
             
         }
         public void AtualizaDataLancamento(int index, string dataLancamento)
@@ -649,6 +659,11 @@ namespace ERP_FISCAL
                 }
 
             }
+            if (valorRow == null)
+            {
+                MessageBox.Show("Valor: " + valor + " Não encontrado para coligada: " + codColigadaLinha);
+                return;
+            }
             dtImportacao.Rows[index].Cells[valorCelula1].Value = valorRow["IDNATUREZA"].ToString();
             dtImportacao.Rows[index].Cells[valorCelula2].Value = valorRow["DESCRIÇÃO NATUREZA"].ToString();
 
@@ -671,11 +686,47 @@ namespace ERP_FISCAL
                 }
 
             }
-            dtImportacao.Rows[index].Cells[valorCelula1].Value = valorRow["IDNATUREZA"].ToString();
-            dtImportacao.Rows[index].Cells[valorCelula2].Value = valorRow["DESCRIÇÃO NATUREZA"].ToString();
+            if(valorRow == null)
+            {
+                MessageBox.Show("Valor: " + valor + " Não encontrado para coligada: " + codColigadaLinha);
+                return;
+            }
+            dtImportacao.Rows[index].Cells[valorCelula1].Value = valorRow["CODIGOPRD"].ToString();
+            dtImportacao.Rows[index].Cells[valorCelula2].Value = valorRow["DESCRICAO"].ToString();
 
         }
 
+        private void rbConstaNoErp_CheckedChanged(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
 
+            
+        }
+
+        private void txtBoxColigada_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Console.WriteLine(txtBoxColigada);
+           if(txtBoxColigada.Text == "")
+            {
+               dtImportacao.DataSource = dtOrignal;
+               return;
+            }
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+
+                string valorColigada = txtBoxColigada.Text;
+                DataTable dtFiltrado = dtOrignal.Clone();          
+
+                foreach (DataRow row in dtOrignal.Rows)
+                {
+                    if (row["CodColigada"].ToString() == valorColigada)
+                    {
+                        dtFiltrado.ImportRow(row);
+                    }
+                }                
+                dtImportacao.DataSource = dtFiltrado;
+                return;
+            }
+        }
     }
 }

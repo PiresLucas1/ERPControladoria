@@ -106,15 +106,16 @@ namespace ERP_FISCAL.repositories
                     using (SqlCommand cmd = new SqlCommand("dbo.uspUsuConsultaPeloId", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        SqlParameter p;
-                        bool valorEmNumero = CarregaCFOPController.VerificaValorParaPesquisa(valor);
+                        SqlParameter p;                        
                         p = new SqlParameter("@INvchIDNatureza", SqlDbType.NVarChar);
+                        p.Value = valor;
                         cmd.Parameters.Add(p);
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {
                             adapter.Fill(tabela);
                         }
                     }
+                    
 
                     conexaoBanco.FecharConexao(conn);
                 }

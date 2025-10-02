@@ -6,7 +6,6 @@
         /// Variável de designer necessária.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-        private SeuProjeto.SubTipos.MyDataGridView dtImportacao;
 
         /// <summary>
         /// Limpar os recursos que estão sendo usados.
@@ -37,10 +36,8 @@
             this.DtPickerFim = new System.Windows.Forms.DateTimePicker();
             this.GbDTNotas = new System.Windows.Forms.GroupBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.dtImportacao = new SeuProjeto.SubTipos.MyDataGridViewNew();
             this.btnListaNotas = new System.Windows.Forms.Button();
             this.GBListar = new System.Windows.Forms.GroupBox();
-            this.btnInserirEmBloco = new System.Windows.Forms.Button();
             this.btnDesmarcarTodos = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnSelecionarTodas = new System.Windows.Forms.Button();
@@ -50,10 +47,18 @@
             this.txtBoxToFilter = new System.Windows.Forms.TextBox();
             this.coBoxTipeFilter = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.gbFiltros = new System.Windows.Forms.GroupBox();
+            this.btnInserirEmBloco = new System.Windows.Forms.Button();
+            this.txtBoxColigada = new System.Windows.Forms.TextBox();
+            this.lbCodColigada = new System.Windows.Forms.Label();
+            this.rbConstaNoErp = new System.Windows.Forms.RadioButton();
+            this.rbTodos = new System.Windows.Forms.RadioButton();
+            this.dtImportacao = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.GbDTNotas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
             this.GBListar.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.gbFiltros.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
             this.SuspendLayout();
             // 
             // DtPickerInicio
@@ -107,7 +112,7 @@
             this.GbDTNotas.Controls.Add(this.lbDtFim);
             this.GbDTNotas.Controls.Add(this.DtPickerInicio);
             this.GbDTNotas.Controls.Add(this.DtPickerFim);
-            this.GbDTNotas.Location = new System.Drawing.Point(324, 18);
+            this.GbDTNotas.Location = new System.Drawing.Point(281, 17);
             this.GbDTNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GbDTNotas.Name = "GbDTNotas";
             this.GbDTNotas.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -115,25 +120,6 @@
             this.GbDTNotas.TabIndex = 4;
             this.GbDTNotas.TabStop = false;
             this.GbDTNotas.Text = "Datas Notas";
-            // 
-            // dtImportacao
-            // 
-            this.dtImportacao.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
-            this.dtImportacao.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
-            this.dtImportacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dtImportacao.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            this.dtImportacao.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dtImportacao.ColumnHeadersHeight = 34;
-            this.dtImportacao.Location = new System.Drawing.Point(14, 304);
-            this.dtImportacao.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.dtImportacao.Name = "dtImportacao";
-            this.dtImportacao.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dtImportacao.RowTemplate.Height = 24;
-            this.dtImportacao.Size = new System.Drawing.Size(1295, 568);
-            this.dtImportacao.TabIndex = 5;
-            this.dtImportacao.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtImportacao_CellContentClick);
-            this.dtImportacao.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dtImportacao_EditingControlShowing);
-            this.dtImportacao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
             // btnListaNotas
             // 
@@ -153,26 +139,14 @@
             this.GBListar.Controls.Add(this.btnDesmarcarTodos);
             this.GBListar.Controls.Add(this.btnLimpar);
             this.GBListar.Controls.Add(this.btnSelecionarTodas);
-            this.GBListar.Location = new System.Drawing.Point(857, 115);
+            this.GBListar.Location = new System.Drawing.Point(1073, 120);
             this.GBListar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.GBListar.Name = "GBListar";
             this.GBListar.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.GBListar.Size = new System.Drawing.Size(452, 167);
+            this.GBListar.Size = new System.Drawing.Size(361, 176);
             this.GBListar.TabIndex = 7;
             this.GBListar.TabStop = false;
             this.GBListar.Text = "Ações no Data Grid";
-            // 
-            // btnInserirEmBloco
-            // 
-            this.btnInserirEmBloco.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInserirEmBloco.Location = new System.Drawing.Point(224, 29);
-            this.btnInserirEmBloco.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnInserirEmBloco.Name = "btnInserirEmBloco";
-            this.btnInserirEmBloco.Size = new System.Drawing.Size(147, 35);
-            this.btnInserirEmBloco.TabIndex = 7;
-            this.btnInserirEmBloco.Text = "Inserir em bloco";
-            this.btnInserirEmBloco.UseVisualStyleBackColor = true;
-            this.btnInserirEmBloco.Click += new System.EventHandler(this.btnInserirEmBloco_Click);
             // 
             // btnDesmarcarTodos
             // 
@@ -209,7 +183,7 @@
             // 
             // btnExportarTotvs
             // 
-            this.btnExportarTotvs.Location = new System.Drawing.Point(324, 222);
+            this.btnExportarTotvs.Location = new System.Drawing.Point(310, 223);
             this.btnExportarTotvs.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExportarTotvs.Name = "btnExportarTotvs";
             this.btnExportarTotvs.Size = new System.Drawing.Size(146, 35);
@@ -269,11 +243,97 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Filtro";
             // 
+            // gbFiltros
+            // 
+            this.gbFiltros.Controls.Add(this.rbTodos);
+            this.gbFiltros.Controls.Add(this.rbConstaNoErp);
+            this.gbFiltros.Controls.Add(this.lbCodColigada);
+            this.gbFiltros.Controls.Add(this.txtBoxColigada);
+            this.gbFiltros.Enabled = false;
+            this.gbFiltros.Location = new System.Drawing.Point(533, 12);
+            this.gbFiltros.Name = "gbFiltros";
+            this.gbFiltros.Size = new System.Drawing.Size(408, 257);
+            this.gbFiltros.TabIndex = 8;
+            this.gbFiltros.TabStop = false;
+            this.gbFiltros.Text = "Filtros";
+            // 
+            // btnInserirEmBloco
+            // 
+            this.btnInserirEmBloco.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInserirEmBloco.Location = new System.Drawing.Point(199, 32);
+            this.btnInserirEmBloco.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnInserirEmBloco.Name = "btnInserirEmBloco";
+            this.btnInserirEmBloco.Size = new System.Drawing.Size(147, 35);
+            this.btnInserirEmBloco.TabIndex = 7;
+            this.btnInserirEmBloco.Text = "Inserir em bloco";
+            this.btnInserirEmBloco.UseVisualStyleBackColor = true;
+            this.btnInserirEmBloco.Click += new System.EventHandler(this.btnInserirEmBloco_Click);
+            // 
+            // txtBoxColigada
+            // 
+            this.txtBoxColigada.Location = new System.Drawing.Point(22, 56);
+            this.txtBoxColigada.Name = "txtBoxColigada";
+            this.txtBoxColigada.Size = new System.Drawing.Size(146, 26);
+            this.txtBoxColigada.TabIndex = 0;
+            this.txtBoxColigada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxColigada_KeyPress);
+            // 
+            // lbCodColigada
+            // 
+            this.lbCodColigada.AutoSize = true;
+            this.lbCodColigada.Location = new System.Drawing.Point(18, 28);
+            this.lbCodColigada.Name = "lbCodColigada";
+            this.lbCodColigada.Size = new System.Drawing.Size(125, 20);
+            this.lbCodColigada.TabIndex = 1;
+            this.lbCodColigada.Text = "Código Coligada";
+            // 
+            // rbConstaNoErp
+            // 
+            this.rbConstaNoErp.AutoSize = true;
+            this.rbConstaNoErp.Location = new System.Drawing.Point(22, 138);
+            this.rbConstaNoErp.Name = "rbConstaNoErp";
+            this.rbConstaNoErp.Size = new System.Drawing.Size(136, 24);
+            this.rbConstaNoErp.TabIndex = 2;
+            this.rbConstaNoErp.TabStop = true;
+            this.rbConstaNoErp.Text = "Existe no ERP";
+            this.rbConstaNoErp.UseVisualStyleBackColor = true;
+            this.rbConstaNoErp.CheckedChanged += new System.EventHandler(this.rbConstaNoErp_CheckedChanged);
+            // 
+            // rbTodos
+            // 
+            this.rbTodos.AutoSize = true;
+            this.rbTodos.Location = new System.Drawing.Point(22, 95);
+            this.rbTodos.Name = "rbTodos";
+            this.rbTodos.Size = new System.Drawing.Size(78, 24);
+            this.rbTodos.TabIndex = 3;
+            this.rbTodos.TabStop = true;
+            this.rbTodos.Text = "Todos";
+            this.rbTodos.UseVisualStyleBackColor = true;
+            // 
+            // dtImportacao
+            // 
+            this.dtImportacao.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
+            this.dtImportacao.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
+            this.dtImportacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dtImportacao.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+            this.dtImportacao.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.dtImportacao.ColumnHeadersHeight = 34;
+            this.dtImportacao.Location = new System.Drawing.Point(14, 304);
+            this.dtImportacao.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtImportacao.Name = "dtImportacao";
+            this.dtImportacao.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dtImportacao.RowTemplate.Height = 24;
+            this.dtImportacao.Size = new System.Drawing.Size(1420, 568);
+            this.dtImportacao.TabIndex = 5;
+            this.dtImportacao.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtImportacao_CellContentClick);
+            this.dtImportacao.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dtImportacao_EditingControlShowing);
+            this.dtImportacao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
+            // 
             // ImportarNotaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1324, 955);
+            this.ClientSize = new System.Drawing.Size(1453, 955);
+            this.Controls.Add(this.gbFiltros);
             this.Controls.Add(this.btnExportarTotvs);
             this.Controls.Add(this.btnListaNotas);
             this.Controls.Add(this.groupBox1);
@@ -289,10 +349,12 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.GbDTNotas.ResumeLayout(false);
             this.GbDTNotas.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).EndInit();
             this.GBListar.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbFiltros.ResumeLayout(false);
+            this.gbFiltros.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,7 +369,8 @@
         private System.Windows.Forms.DateTimePicker DtPickerFim;
         private System.Windows.Forms.GroupBox GbDTNotas;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.DataGridView dtImportacao;
+        //private System.Windows.Forms.DataGridView dtImportacao;
+        private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dtImportacao;        
         private System.Windows.Forms.Button btnListaNotas;
         private System.Windows.Forms.GroupBox GBListar;
         private System.Windows.Forms.Button btnSelecionarTodas;
@@ -320,6 +383,11 @@
         private System.Windows.Forms.ComboBox coBoxTipeFilter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnInserirEmBloco;
+        private System.Windows.Forms.GroupBox gbFiltros;
+        private System.Windows.Forms.Label lbCodColigada;
+        private System.Windows.Forms.TextBox txtBoxColigada;
+        private System.Windows.Forms.RadioButton rbConstaNoErp;
+        private System.Windows.Forms.RadioButton rbTodos;
     }
 }
 
