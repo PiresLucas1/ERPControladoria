@@ -39,7 +39,7 @@ namespace ERP_FISCAL
         public int cellAlteracao;
         public int colAlteracao;
         private DataTable dtOrignal;
-        private string mensagemErro = "";
+        private string mensagemErro;
         public ImportarNotaView()
         {
             InitializeComponent();
@@ -119,10 +119,13 @@ namespace ERP_FISCAL
                     splashScreen.SetMessage("Carregando notas fiscais...");
 
                     ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
+
                     DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim);
                     splashScreen.SetMessage("Ordenando estrutura...");
-                    DataTable notasFormatada = exportServiceNotes.ReorganizarDataTable(notas);
-                    dtOrignal = notasFormatada;
+                    DataTable notasFormatadaParaDataTable = exportServiceNotes.ReorganizarDataTable(notas);
+
+                    DataTable notasFormatada = FiltrarDataTable(notasFormatadaParaDataTable);
+
 
                     dtImportacao.RowHeadersWidth = 20;
                     dtImportacao.EnableHeadersVisualStyles = false;
@@ -219,12 +222,7 @@ namespace ERP_FISCAL
                 }
 
             }
-            if (dtImportacao.RowCount > 0) { 
-                gbFiltros.Enabled = true;
-                rbTodos.Checked = true;
-            }
-            rbConstaNoErp.Checked = false;
-            rbTodos.Checked = true;
+
         }
 
 
@@ -309,27 +307,44 @@ namespace ERP_FISCAL
         /* Ajusta tela conforme altera o tamanho dela */
         private void ResizeForm(object sender, EventArgs e)
         {
-            int top = 300;
             int bottomSpacing = 10;
             int sideMargin = 10;
-            int gbListarHeight = 100; // Altura aproximada do GBListar
+            int buttonHeight = 30;
+            int buttonSpacing = 5;
 
             int widthWindow = this.ClientSize.Width;
             int heightWindow = this.ClientSize.Height;
 
-            // Primeiro posicionar GBListar
-            GBListar.Top = top - gbListarHeight - 10; // 10px de margem
-            GBListar.Left = widthWindow - 350;
+            // GroupBox (fixo no topo)
+            groupBox1.Left = sideMargin;
+            groupBox1.Top = sideMargin;
+            groupBox1.Width = widthWindow - 2 * sideMargin;
 
-            // Depois ajustar DataGrid para começar depois do GBListar
-            int dataGridTop = GBListar.Bottom + 10;
-
-            dtImportacao.Top = dataGridTop;
+            // DataGridView
             dtImportacao.Left = sideMargin;
-            dtImportacao.Width = Math.Max(0, widthWindow - 2 * sideMargin);
-            dtImportacao.Height = Math.Max(0, heightWindow - dataGridTop - bottomSpacing);
+            dtImportacao.Top = groupBox1.Bottom + sideMargin;
+            dtImportacao.Width = widthWindow - 2 * sideMargin;
+            dtImportacao.Height = heightWindow - groupBox1.Height - buttonHeight - 3 * sideMargin;
 
+            // Botões na parte de baixo
+            int btnY = heightWindow - buttonHeight - bottomSpacing;
+
+            btnSelecionarTodas.Top = btnY;
+            btnDesmarcarTodos.Top = btnY;
+            btnInserirEmBloco.Top = btnY;
+            btnLimpar.Top = btnY;
+            btnExportarTotvs.Top = btnY;
+
+            // Posicionamento dos botões em sequência
+            btnSelecionarTodas.Left = sideMargin;
+            btnDesmarcarTodos.Left = btnSelecionarTodas.Right + buttonSpacing;
+            btnInserirEmBloco.Left = btnDesmarcarTodos.Right + buttonSpacing;
+            btnLimpar.Left = btnInserirEmBloco.Right + buttonSpacing;
+
+            // Exportar no canto direito
+            btnExportarTotvs.Left = widthWindow - btnExportarTotvs.Width - sideMargin;
         }
+
 
         private void coBoxTipeFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -473,7 +488,7 @@ namespace ERP_FISCAL
                     }
                 }
             }
-            MessageBox.Show("Existe algumas informações que não existe em determinadas coligadas", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //MessageBox.Show("Existe algumas informações que não existe em determinadas coligadas", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
         }
 
@@ -701,53 +716,6 @@ namespace ERP_FISCAL
 
         }
 
-        private void rbConstaNoErp_CheckedChanged(object sender, EventArgs e)
-        {
-            DataTable dtFiltrado = dtOrignal.Clone();
-
-            foreach (DataRow row in dtOrignal.Rows)
-            {
-                if (row["IDContasPagar"].ToString() != "")
-                {
-                    dtFiltrado.ImportRow(row);
-                }
-                
-            }
-             CarregaDadosDoDataTable(dtFiltrado);
-
-            return;
-        }
-
-        private void txtBoxColigada_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-           if(txtBoxColigada.Text == "")
-            {
-               dtImportacao.DataSource = dtOrignal;
-               return;
-            }
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-
-                string valorColigada = txtBoxColigada.Text;
-                DataTable dtFiltrado = dtOrignal.Clone();
-                DataTable dt = dtImportacao.DataSource as DataTable;
-                foreach (DataRow row in dt.Rows )
-                {
-                    if (row["CodColigada"].ToString() == valorColigada)
-                    {
-                        dtFiltrado.ImportRow(row);
-                    }
-                }
-                CarregaDadosDoDataTable(dtFiltrado);                
-                return;
-            }
-        }
-
-        private void rbTodos_CheckedChanged(object sender, EventArgs e)
-        {
-            CarregaDadosDoDataTable(dtOrignal);
-        }
         public void CarregaDadosDoDataTable(DataTable data)
         {
             dtImportacao.DataSource= data;
@@ -764,6 +732,44 @@ namespace ERP_FISCAL
             dtImportacao.Columns["Selecionar"].Width = 30;
         }
 
+        public DataTable FiltrarDataTable(DataTable data)
+        {
+            DataTable dataRetorno = data.Clone();
 
+            string valorColigada = txtBoxColigada.Text;
+            bool lancadasNoERP = cbLancadasNoERP.Checked;
+
+            foreach (DataRow row in data.Rows)
+            {
+                bool condicao = false;
+
+                if (!string.IsNullOrEmpty(valorColigada) && lancadasNoERP)
+                {
+                    // Coligada informada + somente lançadas no ERP
+                    condicao = (row["CodColigada"].ToString() == valorColigada &&
+                                !string.IsNullOrEmpty(row["IDContasPagar"].ToString()));
+                }
+                else if (string.IsNullOrEmpty(valorColigada) && lancadasNoERP)
+                {
+                    // Sem coligada + somente lançadas no ERP
+                    condicao = !string.IsNullOrEmpty(row["IDContasPagar"].ToString());
+                }
+                else if (!string.IsNullOrEmpty(valorColigada) && !lancadasNoERP)
+                {
+                    // Coligada informada + ignora se está lançado ou não
+                    condicao = (row["CodColigada"].ToString() == valorColigada);
+                }
+                else
+                {
+                    dataRetorno = data;
+                    return dataRetorno;
+                }
+
+                if (condicao)
+                    dataRetorno.ImportRow(row);
+            }
+
+            return dataRetorno;
+        }
     }
 }
