@@ -96,7 +96,8 @@ namespace ERP_FISCAL
         {
             StatusProcess splashScreen = new StatusProcess();
 
-
+            rbConstaNoErp.Checked = false;
+            rbTodos.Checked = true;
 
             if (coBoxTipeFilter.SelectedIndex == 0) // datepicker
             {
@@ -119,9 +120,9 @@ namespace ERP_FISCAL
 
                     ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
                     DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim);
-                    dtOrignal = notas;
                     splashScreen.SetMessage("Ordenando estrutura...");
                     DataTable notasFormatada = exportServiceNotes.ReorganizarDataTable(notas);
+                    dtOrignal = notasFormatada;
 
                     dtImportacao.RowHeadersWidth = 20;
                     dtImportacao.EnableHeadersVisualStyles = false;
@@ -698,14 +699,24 @@ namespace ERP_FISCAL
 
         private void rbConstaNoErp_CheckedChanged(object sender, EventArgs e)
         {
-            DataTable dt = new DataTable();
+            DataTable dtFiltrado = dtOrignal.Clone();
 
-            
+            foreach (DataRow row in dtOrignal.Rows)
+            {
+                if (row["IDContasPagar"].ToString() != "")
+                {
+                    dtFiltrado.ImportRow(row);
+                }
+                
+            }
+             CarregaDadosDoDataTable(dtFiltrado);
+
+            return;
         }
 
         private void txtBoxColigada_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Console.WriteLine(txtBoxColigada);
+            
            if(txtBoxColigada.Text == "")
             {
                dtImportacao.DataSource = dtOrignal;
@@ -715,18 +726,40 @@ namespace ERP_FISCAL
             {
 
                 string valorColigada = txtBoxColigada.Text;
-                DataTable dtFiltrado = dtOrignal.Clone();          
-
-                foreach (DataRow row in dtOrignal.Rows)
+                DataTable dtFiltrado = dtOrignal.Clone();
+                DataTable dt = dtImportacao.DataSource as DataTable;
+                foreach (DataRow row in dt.Rows )
                 {
                     if (row["CodColigada"].ToString() == valorColigada)
                     {
                         dtFiltrado.ImportRow(row);
                     }
-                }                
-                dtImportacao.DataSource = dtFiltrado;
+                }
+                CarregaDadosDoDataTable(dtFiltrado);                
                 return;
             }
         }
+
+        private void rbTodos_CheckedChanged(object sender, EventArgs e)
+        {
+            CarregaDadosDoDataTable(dtOrignal);
+        }
+        public void CarregaDadosDoDataTable(DataTable data)
+        {
+            dtImportacao.DataSource= data;
+            if (!dtOrignal.Columns.Contains("Selecionar"))
+            {
+                DataColumn colCheck = new DataColumn("Selecionar", typeof(bool));
+                colCheck.DefaultValue = false;
+                dtOrignal.Columns.Add(colCheck);
+            }
+
+            dtImportacao.Columns["Selecionar"].DisplayIndex = 0;
+            dtImportacao.Columns["Selecionar"].HeaderText = "✓";
+            dtImportacao.Columns["Selecionar"].Width = 30;
+            dtImportacao.Columns["Selecionar"].Width = 30;
+        }
+
+
     }
 }

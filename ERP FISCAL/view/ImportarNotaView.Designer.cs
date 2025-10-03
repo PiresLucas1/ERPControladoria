@@ -38,6 +38,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.btnListaNotas = new System.Windows.Forms.Button();
             this.GBListar = new System.Windows.Forms.GroupBox();
+            this.btnInserirEmBloco = new System.Windows.Forms.Button();
             this.btnDesmarcarTodos = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnSelecionarTodas = new System.Windows.Forms.Button();
@@ -48,11 +49,10 @@
             this.coBoxTipeFilter = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
-            this.btnInserirEmBloco = new System.Windows.Forms.Button();
-            this.txtBoxColigada = new System.Windows.Forms.TextBox();
-            this.lbCodColigada = new System.Windows.Forms.Label();
-            this.rbConstaNoErp = new System.Windows.Forms.RadioButton();
             this.rbTodos = new System.Windows.Forms.RadioButton();
+            this.rbConstaNoErp = new System.Windows.Forms.RadioButton();
+            this.lbCodColigada = new System.Windows.Forms.Label();
+            this.txtBoxColigada = new System.Windows.Forms.TextBox();
             this.dtImportacao = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.GbDTNotas.SuspendLayout();
             this.GBListar.SuspendLayout();
@@ -147,6 +147,18 @@
             this.GBListar.TabIndex = 7;
             this.GBListar.TabStop = false;
             this.GBListar.Text = "Ações no Data Grid";
+            // 
+            // btnInserirEmBloco
+            // 
+            this.btnInserirEmBloco.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInserirEmBloco.Location = new System.Drawing.Point(199, 32);
+            this.btnInserirEmBloco.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnInserirEmBloco.Name = "btnInserirEmBloco";
+            this.btnInserirEmBloco.Size = new System.Drawing.Size(147, 35);
+            this.btnInserirEmBloco.TabIndex = 7;
+            this.btnInserirEmBloco.Text = "Inserir em bloco";
+            this.btnInserirEmBloco.UseVisualStyleBackColor = true;
+            this.btnInserirEmBloco.Click += new System.EventHandler(this.btnInserirEmBloco_Click);
             // 
             // btnDesmarcarTodos
             // 
@@ -257,34 +269,17 @@
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
             // 
-            // btnInserirEmBloco
+            // rbTodos
             // 
-            this.btnInserirEmBloco.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInserirEmBloco.Location = new System.Drawing.Point(199, 32);
-            this.btnInserirEmBloco.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnInserirEmBloco.Name = "btnInserirEmBloco";
-            this.btnInserirEmBloco.Size = new System.Drawing.Size(147, 35);
-            this.btnInserirEmBloco.TabIndex = 7;
-            this.btnInserirEmBloco.Text = "Inserir em bloco";
-            this.btnInserirEmBloco.UseVisualStyleBackColor = true;
-            this.btnInserirEmBloco.Click += new System.EventHandler(this.btnInserirEmBloco_Click);
-            // 
-            // txtBoxColigada
-            // 
-            this.txtBoxColigada.Location = new System.Drawing.Point(22, 56);
-            this.txtBoxColigada.Name = "txtBoxColigada";
-            this.txtBoxColigada.Size = new System.Drawing.Size(146, 26);
-            this.txtBoxColigada.TabIndex = 0;
-            this.txtBoxColigada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxColigada_KeyPress);
-            // 
-            // lbCodColigada
-            // 
-            this.lbCodColigada.AutoSize = true;
-            this.lbCodColigada.Location = new System.Drawing.Point(18, 28);
-            this.lbCodColigada.Name = "lbCodColigada";
-            this.lbCodColigada.Size = new System.Drawing.Size(125, 20);
-            this.lbCodColigada.TabIndex = 1;
-            this.lbCodColigada.Text = "Código Coligada";
+            this.rbTodos.AutoSize = true;
+            this.rbTodos.Location = new System.Drawing.Point(22, 95);
+            this.rbTodos.Name = "rbTodos";
+            this.rbTodos.Size = new System.Drawing.Size(78, 24);
+            this.rbTodos.TabIndex = 3;
+            this.rbTodos.TabStop = true;
+            this.rbTodos.Text = "Todos";
+            this.rbTodos.UseVisualStyleBackColor = true;
+            this.rbTodos.CheckedChanged += new System.EventHandler(this.rbTodos_CheckedChanged);
             // 
             // rbConstaNoErp
             // 
@@ -298,16 +293,22 @@
             this.rbConstaNoErp.UseVisualStyleBackColor = true;
             this.rbConstaNoErp.CheckedChanged += new System.EventHandler(this.rbConstaNoErp_CheckedChanged);
             // 
-            // rbTodos
+            // lbCodColigada
             // 
-            this.rbTodos.AutoSize = true;
-            this.rbTodos.Location = new System.Drawing.Point(22, 95);
-            this.rbTodos.Name = "rbTodos";
-            this.rbTodos.Size = new System.Drawing.Size(78, 24);
-            this.rbTodos.TabIndex = 3;
-            this.rbTodos.TabStop = true;
-            this.rbTodos.Text = "Todos";
-            this.rbTodos.UseVisualStyleBackColor = true;
+            this.lbCodColigada.AutoSize = true;
+            this.lbCodColigada.Location = new System.Drawing.Point(18, 28);
+            this.lbCodColigada.Name = "lbCodColigada";
+            this.lbCodColigada.Size = new System.Drawing.Size(125, 20);
+            this.lbCodColigada.TabIndex = 1;
+            this.lbCodColigada.Text = "Código Coligada";
+            // 
+            // txtBoxColigada
+            // 
+            this.txtBoxColigada.Location = new System.Drawing.Point(22, 56);
+            this.txtBoxColigada.Name = "txtBoxColigada";
+            this.txtBoxColigada.Size = new System.Drawing.Size(146, 26);
+            this.txtBoxColigada.TabIndex = 0;
+            this.txtBoxColigada.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBoxColigada_KeyPress);
             // 
             // dtImportacao
             // 
