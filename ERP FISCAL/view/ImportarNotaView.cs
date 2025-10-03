@@ -39,6 +39,7 @@ namespace ERP_FISCAL
         public int cellAlteracao;
         public int colAlteracao;
         private DataTable dtOrignal;
+        private string mensagemErro = "";
         public ImportarNotaView()
         {
             InitializeComponent();
@@ -96,8 +97,7 @@ namespace ERP_FISCAL
         {
             StatusProcess splashScreen = new StatusProcess();
 
-            rbConstaNoErp.Checked = false;
-            rbTodos.Checked = true;
+           
 
             if (coBoxTipeFilter.SelectedIndex == 0) // datepicker
             {
@@ -223,6 +223,8 @@ namespace ERP_FISCAL
                 gbFiltros.Enabled = true;
                 rbTodos.Checked = true;
             }
+            rbConstaNoErp.Checked = false;
+            rbTodos.Checked = true;
         }
 
 
@@ -422,7 +424,7 @@ namespace ERP_FISCAL
         }
 
         private async void btnInserirEmBloco_Click(object sender, EventArgs e)
-        {
+        {            
             if(dtImportacao == null)
             {
                 MessageBox.Show("Não há informação na tabela");
@@ -471,6 +473,8 @@ namespace ERP_FISCAL
                     }
                 }
             }
+            MessageBox.Show("Existe algumas informações que não existe em determinadas coligadas", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
         }
 
 
@@ -620,7 +624,7 @@ namespace ERP_FISCAL
             if(name == "cfop")
             {
                 var valor  = dataRowSelecionado["IDNATUREZA"].ToString().Trim();
-                var valorDescricao = dataRowSelecionado["DESCRIÇÃO NATUREZA"].ToString().Trim();
+                var valorDescricao = dataRowSelecionado["DESCRICAO_NATUREZA"].ToString().Trim();
 
                 InsereValorNoDataGridView(rowLinha, valor, "CFOP");
                 InsereValorNoDataGridView(rowLinha, valorDescricao, "CFOP Descrição");
@@ -662,7 +666,7 @@ namespace ERP_FISCAL
             }
             if (valorRow == null)
             {
-                MessageBox.Show("Valor: " + valor + " Não encontrado para coligada: " + codColigadaLinha);
+                mensagemErro += "Valor: " + valor + " Não encontrado para coligada: " + codColigadaLinha;
                 return;
             }
             dtImportacao.Rows[index].Cells[valorCelula1].Value = valorRow["IDNATUREZA"].ToString();
@@ -689,7 +693,7 @@ namespace ERP_FISCAL
             }
             if(valorRow == null)
             {
-                MessageBox.Show("Valor: " + valor + " Não encontrado para coligada: " + codColigadaLinha);
+                mensagemErro += "Valor: " + valor + " Não encontrado para coligada: " + codColigadaLinha;
                 return;
             }
             dtImportacao.Rows[index].Cells[valorCelula1].Value = valorRow["CODIGOPRD"].ToString();
