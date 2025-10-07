@@ -12,7 +12,7 @@ using ERP_FISCAL.repositories;
 namespace ERP_FISCAL.controller
 {
 
-    public interface IAjusteComboBoxUi
+    public interface IDataTableGridCFOPUi
     {
         Dictionary<string, string> DicionarioColigada { get; set; }
         DataTable DatatableNatureza { get; set; }
@@ -22,43 +22,43 @@ namespace ERP_FISCAL.controller
     {
 
 
-        public class AjusteComboBoxUi : IAjusteComboBoxUi
+        public class AjusteDataGridView : IDataTableGridCFOPUi
         {
             public Dictionary<string, string> DicionarioColigada { get; set; }
             public DataTable DatatableNatureza { get; set; }
 
-            public AjusteComboBoxUi()
+            public AjusteDataGridView()
             {
                 DicionarioColigada = new Dictionary<string, string>();
                 DatatableNatureza = new DataTable();
             }
         }
-        public async Task<DataTable> CarregaTodos()
+        public async Task<DataTable> CarregaTodos(int codColigada)
         {
 
             cfopRepositories cfops = new cfopRepositories();
             DataTable dataTable = await Task.Run(() =>
             {
-                return cfops.EncontrarTodos();
+                return cfops.EncontrarTodos(codColigada);
             });
 
-            var resultado = AjusteComboBox(dataTable);
+            var resultado = AjusteDataGrid(dataTable);
             return resultado.DatatableNatureza ;
         }
 
-        public IAjusteComboBoxUi AjusteComboBox(DataTable dataTable)
+        public IDataTableGridCFOPUi AjusteDataGrid(DataTable dataTable)
         {
 
-            var resultado = new AjusteComboBoxUi();
-            resultado.DatatableNatureza.Columns.Add("CODCOLIGADA", typeof(int));
-            resultado.DatatableNatureza.Columns.Add("IDNATUREZA", typeof(string));
-            resultado.DatatableNatureza.Columns.Add("DESCRICAO_NATUREZA", typeof(string));
-            resultado.DatatableNatureza.Columns.Add("TIPO_CONTABILIZAÇÃO", typeof(string));
-            resultado.DatatableNatureza.Columns.Add("CODCONTA", typeof(string)); 
+            var resultado = new AjusteDataGridView();
+            resultado.DatatableNatureza.Columns.Add("COD. COLIGADA", typeof(int));
+            resultado.DatatableNatureza.Columns.Add("COD. NATUREZA", typeof(string));
+            resultado.DatatableNatureza.Columns.Add("DESCRIÇÃO NATUREZA", typeof(string));
+            resultado.DatatableNatureza.Columns.Add("TIPO CONTABILIZAÇÃO", typeof(string));
+            resultado.DatatableNatureza.Columns.Add("COD. CONTA", typeof(string)); 
             foreach (DataRow row in dataTable.Rows)
             {
 
-                var keyColigada = row["CODCOLIGADA"].ToString();
+                var keyColigada = row["COD. COLIGADA"].ToString();
                 var valorColigada = row["NOME COLIGADA"].ToString();
 
                 if (!resultado.DicionarioColigada.ContainsKey(keyColigada))
@@ -68,19 +68,19 @@ namespace ERP_FISCAL.controller
 
                
 
-                var coligada = row["CODCOLIGADA"];
-                var idNatureza = row["IDNATUREZA"].ToString();
+                var coligada = row["COD. COLIGADA"];
+                var idNatureza = row["COD. NATUREZA"].ToString();
                 var natureza = row["DESCRIÇÃO NATUREZA"].ToString();
                 var tipoContabilizacao = row["TIPO CONTABILIZAÇÃO"].ToString();
-                var codConta = row["CODCONTA"].ToString();
+                var codConta = row["COD. CONTA"].ToString();
 
                 // cria uma nova linha no DataTable destino
                 DataRow novaLinha = resultado.DatatableNatureza.NewRow();
-                novaLinha["CODCOLIGADA"] = coligada;
-                novaLinha["IDNATUREZA"] = idNatureza;
-                novaLinha["DESCRICAO_NATUREZA"] = natureza;
-                novaLinha["TIPO_CONTABILIZAÇÃO"] = tipoContabilizacao;
-                novaLinha["CODCONTA"] = codConta;
+                novaLinha["COD. COLIGADA"] = coligada;
+                novaLinha["COD. NATUREZA"] = idNatureza;
+                novaLinha["DESCRIÇÃO NATUREZA"] = natureza;
+                novaLinha["TIPO CONTABILIZAÇÃO"] = tipoContabilizacao;
+                novaLinha["COD. CONTA"] = codConta;
 
                 // adiciona a linha ao DataTable
                 resultado.DatatableNatureza.Rows.Add(novaLinha);
@@ -92,12 +92,12 @@ namespace ERP_FISCAL.controller
             return resultado;
         }
 
-        public async Task<DataTable> CarregaComOcorrencia(string valor)
+        public async Task<DataTable> CarregaComOcorrencia(string valor, int codColigada)
         {
             cfopRepositories cfops = new cfopRepositories();
             DataTable dataTable = await Task.Run(() =>
             {
-                return cfops.EncontrarComOcorrencia(valor);
+                return cfops.EncontrarComOcorrencia(valor, codColigada);
             });
 
             return dataTable;

@@ -68,10 +68,10 @@
             // btnExportarTotvs
             // 
             this.btnExportarTotvs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportarTotvs.Location = new System.Drawing.Point(1288, 961);
+            this.btnExportarTotvs.Location = new System.Drawing.Point(1273, 961);
             this.btnExportarTotvs.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExportarTotvs.Name = "btnExportarTotvs";
-            this.btnExportarTotvs.Size = new System.Drawing.Size(146, 35);
+            this.btnExportarTotvs.Size = new System.Drawing.Size(161, 41);
             this.btnExportarTotvs.TabIndex = 6;
             this.btnExportarTotvs.Text = "Exportar TOTVS";
             this.btnExportarTotvs.UseVisualStyleBackColor = true;
@@ -210,7 +210,7 @@
             this.dtImportacao.Name = "dtImportacao";
             this.dtImportacao.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dtImportacao.RowTemplate.Height = 24;
-            this.dtImportacao.Size = new System.Drawing.Size(1420, 635);
+            this.dtImportacao.Size = new System.Drawing.Size(1420, 697);
             this.dtImportacao.TabIndex = 5;
             this.dtImportacao.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtImportacao_CellContentClick);
             this.dtImportacao.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dtImportacao_EditingControlShowing);
@@ -220,34 +220,35 @@
             // 
             this.btnInserirEmBloco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnInserirEmBloco.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInserirEmBloco.Location = new System.Drawing.Point(188, 982);
+            this.btnInserirEmBloco.Enabled = false;
+            this.btnInserirEmBloco.Location = new System.Drawing.Point(505, 959);
             this.btnInserirEmBloco.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnInserirEmBloco.Name = "btnInserirEmBloco";
-            this.btnInserirEmBloco.Size = new System.Drawing.Size(147, 35);
+            this.btnInserirEmBloco.Size = new System.Drawing.Size(170, 40);
             this.btnInserirEmBloco.TabIndex = 7;
             this.btnInserirEmBloco.Text = "Inserir em bloco";
             this.btnInserirEmBloco.UseVisualStyleBackColor = true;
+            this.btnInserirEmBloco.Visible = false;
             this.btnInserirEmBloco.Click += new System.EventHandler(this.btnInserirEmBloco_Click);
             // 
             // btnDesmarcarTodos
             // 
             this.btnDesmarcarTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDesmarcarTodos.Location = new System.Drawing.Point(18, 938);
+            this.btnDesmarcarTodos.Location = new System.Drawing.Point(18, 961);
             this.btnDesmarcarTodos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDesmarcarTodos.Name = "btnDesmarcarTodos";
-            this.btnDesmarcarTodos.Size = new System.Drawing.Size(146, 36);
+            this.btnDesmarcarTodos.Size = new System.Drawing.Size(153, 41);
             this.btnDesmarcarTodos.TabIndex = 6;
             this.btnDesmarcarTodos.Text = "Desmarcar todos";
-            this.btnDesmarcarTodos.UseVisualStyleBackColor = true;
             this.btnDesmarcarTodos.Click += new System.EventHandler(this.btnDesmarcarTodos_Click);
             // 
             // btnLimpar
             // 
             this.btnLimpar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLimpar.Location = new System.Drawing.Point(189, 942);
+            this.btnLimpar.Location = new System.Drawing.Point(354, 960);
             this.btnLimpar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLimpar.Name = "btnLimpar";
-            this.btnLimpar.Size = new System.Drawing.Size(146, 32);
+            this.btnLimpar.Size = new System.Drawing.Size(126, 41);
             this.btnLimpar.TabIndex = 6;
             this.btnLimpar.Text = "Limpar";
             this.btnLimpar.UseVisualStyleBackColor = true;
@@ -256,10 +257,10 @@
             // btnSelecionarTodas
             // 
             this.btnSelecionarTodas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSelecionarTodas.Location = new System.Drawing.Point(18, 982);
+            this.btnSelecionarTodas.Location = new System.Drawing.Point(177, 961);
             this.btnSelecionarTodas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSelecionarTodas.Name = "btnSelecionarTodas";
-            this.btnSelecionarTodas.Size = new System.Drawing.Size(147, 35);
+            this.btnSelecionarTodas.Size = new System.Drawing.Size(161, 41);
             this.btnSelecionarTodas.TabIndex = 6;
             this.btnSelecionarTodas.Text = "Selecionar todos";
             this.btnSelecionarTodas.UseVisualStyleBackColor = true;

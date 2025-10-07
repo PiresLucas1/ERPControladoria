@@ -106,6 +106,9 @@ namespace ERP_FISCAL
 
                 if (dataInicio == null) return;
                 if (dataFim == null) return;
+                if (txtBoxColigada.Text == "")
+                    txtBoxColigada.Text = "0";
+                
                 try
                 {
                     this.Enabled = false;
@@ -120,11 +123,10 @@ namespace ERP_FISCAL
 
                     ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
 
-                    DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim);
+                    DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim, Convert.ToInt32(txtBoxColigada.Text), cbLancadasNoERP.Checked);
                     splashScreen.SetMessage("Ordenando estrutura...");
-                    DataTable notasFormatadaParaDataTable = exportServiceNotes.ReorganizarDataTable(notas);
+                    DataTable notasFormatada = exportServiceNotes.ReorganizarDataTable(notas);
 
-                    DataTable notasFormatada = FiltrarDataTable(notasFormatadaParaDataTable);
 
 
                     dtImportacao.RowHeadersWidth = 20;
@@ -307,10 +309,11 @@ namespace ERP_FISCAL
         /* Ajusta tela conforme altera o tamanho dela */
         private void ResizeForm(object sender, EventArgs e)
         {
-            int bottomSpacing = 10;
-            int sideMargin = 10;
-            int buttonHeight = 30;
-            int buttonSpacing = 5;
+            int bottomSpacing = 10;   // distância da janela até os botões
+            int sideMargin = 10;      // margem lateral
+            int buttonHeight = 30;    // altura dos botões
+            int buttonSpacing = 5;    // espaçamento entre botões
+            int gridButtonSpacing = 30; // distância entre DataGridView e botões
 
             int widthWindow = this.ClientSize.Width;
             int heightWindow = this.ClientSize.Height;
@@ -319,12 +322,6 @@ namespace ERP_FISCAL
             groupBox1.Left = sideMargin;
             groupBox1.Top = sideMargin;
             groupBox1.Width = widthWindow - 2 * sideMargin;
-
-            // DataGridView
-            dtImportacao.Left = sideMargin;
-            dtImportacao.Top = groupBox1.Bottom + sideMargin;
-            dtImportacao.Width = widthWindow - 2 * sideMargin;
-            dtImportacao.Height = heightWindow - groupBox1.Height - buttonHeight - 3 * sideMargin;
 
             // Botões na parte de baixo
             int btnY = heightWindow - buttonHeight - bottomSpacing;
@@ -343,6 +340,12 @@ namespace ERP_FISCAL
 
             // Exportar no canto direito
             btnExportarTotvs.Left = widthWindow - btnExportarTotvs.Width - sideMargin;
+
+            // DataGridView — mantém 30px entre o grid e os botões
+            dtImportacao.Left = sideMargin;
+            dtImportacao.Top = groupBox1.Bottom + sideMargin;
+            dtImportacao.Width = widthWindow - 2 * sideMargin;
+            dtImportacao.Height = btnSelecionarTodas.Top - dtImportacao.Top - gridButtonSpacing;
         }
 
 
@@ -380,13 +383,13 @@ namespace ERP_FISCAL
                 CarregaCFOPController cfopController = new CarregaCFOPController();
                 
 
-                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController, "cfop");
+                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController, "Consulta CFOP");
             }
 
             if(colName == "Cód. Serviço TOTVS")
             {
                 ProdutoServicoController produtoServicoController = new ProdutoServicoController();
-                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), produtoServicoController, "cProduto");
+                AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), produtoServicoController, "Consulta Produto");
             }
         }
         public void AbrirConsultaItem(int row, int codColigada, UIController data, string name)
@@ -439,23 +442,23 @@ namespace ERP_FISCAL
         }
 
         private async void btnInserirEmBloco_Click(object sender, EventArgs e)
-        {            
-            if(dtImportacao == null)
+        {
+            if (dtImportacao == null)
             {
                 MessageBox.Show("Não há informação na tabela");
                 return;
             }
-            var listaNatureza = await CarregaListaNatureza();
+            var listaNatureza = await CarregaListaNatureza(0);
             List<int> linhasParaInserir = new List<int>();
             foreach (DataGridViewRow row in dtImportacao.Rows)
             {
-                bool selecionado = Convert.ToBoolean(row.Cells["Selecionar"].Value);                
-                    if (selecionado)
-                    {
-                        linhasParaInserir.Add(row.Index);
-                    }                
+                bool selecionado = Convert.ToBoolean(row.Cells["Selecionar"].Value);
+                if (selecionado)
+                {
+                    linhasParaInserir.Add(row.Index);
+                }
             }
-            if(linhasParaInserir.Count < 1)
+            if (linhasParaInserir.Count < 1)
             {
                 MessageBox.Show("Nenhuma informação foi selecionada");
                 return;
@@ -488,15 +491,15 @@ namespace ERP_FISCAL
                     }
                 }
             }
-            //MessageBox.Show("Existe algumas informações que não existe em determinadas coligadas", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Existe algumas informações que não existe em determinadas coligadas", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
         }
 
 
-        public async Task<DataTable> CarregaListaNatureza()
+        public async Task<DataTable> CarregaListaNatureza(int codColigada)
         {
             var carregaComboBoxCfop = new CarregaCFOPController();
-            var lista = await carregaComboBoxCfop.CarregaTodos();
+            var lista = await carregaComboBoxCfop.CarregaTodos(codColigada);
 
             return lista;
         }
@@ -549,14 +552,13 @@ namespace ERP_FISCAL
                     ProdutoServicoController produtoController = new ProdutoServicoController();
                     var retorno = await produtoController.PegaValorUnicoPeloCodigo(valorDigitado);
 
-                    Console.WriteLine(retorno);
                    
                     // opcional: atualizar a célula atual com o retorno
                     dtImportacao.CurrentCell.Value = retorno;
                 }
             }
         }
-        public async void ConsultaItemNaCelula(string valor)
+        public async void ConsultaItemNaCelula(string valor )
         {
             string nomeColuna = dtImportacao.Columns[colAlteracao].Name;
             // define variaveis para localizar colunas no datagridview
@@ -564,6 +566,8 @@ namespace ERP_FISCAL
             var itemColunaDescricao = "";
 
             DataTable retorno = new DataTable();
+            int linhaAtual = dtImportacao.CurrentCell.RowIndex;
+            var codColigadaLinha = dtImportacao.Rows[linhaAtual].Cells["CODCOLIGADA"].Value?.ToString();
 
             retorno = retorno.DefaultView.ToTable(true);
 
@@ -571,50 +575,59 @@ namespace ERP_FISCAL
             {
 
                 ProdutoServicoController produtoController = new ProdutoServicoController();
-                retorno = await produtoController.CarregaComOcorrencia(valor);
+                retorno = await produtoController.CarregaComOcorrencia(valor, Convert.ToInt32(codColigadaLinha));
                 itemColunaValor = "CODIGOPRD";
                 itemColunaDescricao = "DESCRICAO";
             }
             if(nomeColuna == "CFOP")
             {
                 CarregaCFOPController cFOPController = new CarregaCFOPController();
-                retorno = await cFOPController.CarregaComOcorrencia(valor);
-                itemColunaValor = "IDNATUREZA";
+                retorno = await cFOPController.CarregaComOcorrencia(valor, Convert.ToInt32(codColigadaLinha));
+                itemColunaValor = "COD. NATUREZA";
                 itemColunaDescricao = "DESCRIÇÃO NATUREZA";
 
             }
-            int linhaAtual = dtImportacao.CurrentCell.RowIndex -1;
-            var codColigadaLinha = dtImportacao.Rows[linhaAtual].Cells["CODCOLIGADA"].Value?.ToString();
 
             if (retorno == null) return;
 
-            DataTable dataRetorno = retorno.Clone();
+            DataTable dataRetorno = retorno;
             string valorEncontrado = "";
             string valorDescricaoEncontrado = "";
 
 
-            foreach (DataRow item in retorno.Rows)
-            {
-                var codColigadaRetorno = item["CODCOLIGADA"].ToString();
-                // Comparando se são iguais
-                if (codColigadaRetorno == codColigadaLinha)
-                {
-                    dataRetorno.ImportRow(item);
-                    valorEncontrado = item[itemColunaValor].ToString();
-                    valorDescricaoEncontrado = item[itemColunaDescricao].ToString();
-                }
-            }
+           
                 if (dataRetorno.Rows.Count > 1) 
                 {
-                    ProdutoServicoController cFOPController = new ProdutoServicoController();
-                    ConsultaItem consultaItem = new ConsultaItem(linhaAtual, Convert.ToInt32(codColigadaLinha), cFOPController, "cProduto", this);
-                    await consultaItem.PesquisaValorPorString(valor);
-                    consultaItem.Show();
-
-                    //AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController, "cfop");
-                    return;
+                    if(nomeColuna == "CFOP")
+                    {
+                        CarregaCFOPController cFOPController = new CarregaCFOPController();
+                        ConsultaItem consultaItem = new ConsultaItem(linhaAtual, Convert.ToInt32(codColigadaLinha), cFOPController, "Consulta CFOP", this);  
+                        await consultaItem.PesquisaValorPorString(valor);   
+                        //AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController, "cfop");
+                        consultaItem.Show();    
+                        return;
+                    }
+                    if(nomeColuna == "Cód. Serviço TOTVS")
+                    {
+                        ProdutoServicoController cProdutoCotroller = new ProdutoServicoController();
+                        ConsultaItem consultaItem = new ConsultaItem(linhaAtual, Convert.ToInt32(codColigadaLinha), cProdutoCotroller, "Consulta Produto", this);
+                        await consultaItem.PesquisaValorPorString(valor);
+                        //AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController, "cfop");
+                        consultaItem.Show();
+                        return;
+                    }
                 }
-                if(dataRetorno.Rows.Count == 1)
+                if(nomeColuna == "CFOP")
+                {
+                    valorEncontrado = dataRetorno.Rows[0]["COD. NATUREZA"].ToString();
+                    valorDescricaoEncontrado= dataRetorno.Rows[0]["DESCRIÇÃO NATUREZA"].ToString();
+                }
+                if(nomeColuna== "Cód. Serviço TOTVS")
+                {
+                    valorEncontrado = dataRetorno.Rows[0]["CODIGOPRD"].ToString();
+                    valorDescricaoEncontrado = dataRetorno.Rows[0]["DESCRICAO"].ToString();
+                 }
+                if (dataRetorno.Rows.Count == 1)
                 {
                     if(nomeColuna == "Cód. Serviço TOTVS")
                     {
@@ -628,7 +641,10 @@ namespace ERP_FISCAL
                     }
                     return;
                 }
-
+                if(dataRetorno.Rows.Count < 1)
+                {
+                    MessageBox.Show("Não foi possivel localizar");
+                }
               return;
                
         }
@@ -636,17 +652,17 @@ namespace ERP_FISCAL
         {
             dataRowSelecionado = rowValor;
             
-            if(name == "cfop")
+            if(name == "Consulta CFOP")
             {
-                var valor  = dataRowSelecionado["IDNATUREZA"].ToString().Trim();
-                var valorDescricao = dataRowSelecionado["DESCRICAO_NATUREZA"].ToString().Trim();
+                var valor  = dataRowSelecionado["COD. NATUREZA"].ToString().Trim();
+                var valorDescricao = dataRowSelecionado["DESCRIÇÃO NATUREZA"].ToString().Trim();
 
                 InsereValorNoDataGridView(rowLinha, valor, "CFOP");
                 InsereValorNoDataGridView(rowLinha, valorDescricao, "CFOP Descrição");
                 
 
             }
-            if(name == "cProduto")
+            if(name == "Consulta Produto")
             {
                 var valor = dataRowSelecionado["CODIGOPRD"].ToString().Trim();
                 var valorDescricao = dataRowSelecionado["DESCRICAO"].ToString().Trim();
@@ -732,44 +748,5 @@ namespace ERP_FISCAL
             dtImportacao.Columns["Selecionar"].Width = 30;
         }
 
-        public DataTable FiltrarDataTable(DataTable data)
-        {
-            DataTable dataRetorno = data.Clone();
-
-            string valorColigada = txtBoxColigada.Text;
-            bool lancadasNoERP = cbLancadasNoERP.Checked;
-
-            foreach (DataRow row in data.Rows)
-            {
-                bool condicao = false;
-
-                if (!string.IsNullOrEmpty(valorColigada) && lancadasNoERP)
-                {
-                    // Coligada informada + somente lançadas no ERP
-                    condicao = (row["CodColigada"].ToString() == valorColigada &&
-                                !string.IsNullOrEmpty(row["IDContasPagar"].ToString()));
-                }
-                else if (string.IsNullOrEmpty(valorColigada) && lancadasNoERP)
-                {
-                    // Sem coligada + somente lançadas no ERP
-                    condicao = !string.IsNullOrEmpty(row["IDContasPagar"].ToString());
-                }
-                else if (!string.IsNullOrEmpty(valorColigada) && !lancadasNoERP)
-                {
-                    // Coligada informada + ignora se está lançado ou não
-                    condicao = (row["CodColigada"].ToString() == valorColigada);
-                }
-                else
-                {
-                    dataRetorno = data;
-                    return dataRetorno;
-                }
-
-                if (condicao)
-                    dataRetorno.ImportRow(row);
-            }
-
-            return dataRetorno;
-        }
     }
 }

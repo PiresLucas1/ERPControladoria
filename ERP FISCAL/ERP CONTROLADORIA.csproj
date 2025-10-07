@@ -106,18 +106,6 @@
       <DependentUpon>ControladoriaView.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Interfaces\INaturezaFiscalType.cs" />
-    <Compile Include="Deprecated\NaturezaFiscalView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Deprecated\NaturezaFiscalView.Designer.cs">
-      <DependentUpon>NaturezaFiscalView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Deprecated\ProdutoServico.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Deprecated\ProdutoServico.Designer.cs">
-      <DependentUpon>ProdutoServico.cs</DependentUpon>
-    </Compile>
     <Compile Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,12 +133,6 @@
     </Compile>
     <EmbeddedResource Include="view\ControladoriaView.resx">
       <DependentUpon>ControladoriaView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Deprecated\NaturezaFiscalView.resx">
-      <DependentUpon>NaturezaFiscalView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Deprecated\ProdutoServico.resx">
-      <DependentUpon>ProdutoServico.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.resx">
       <DependentUpon>StatusProcess.cs</DependentUpon>

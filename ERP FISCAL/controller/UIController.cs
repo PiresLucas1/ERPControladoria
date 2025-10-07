@@ -9,8 +9,8 @@ namespace ERP_FISCAL.Controller
 {
     public interface UIController
     {
-        Task<DataTable> CarregaTodos();
-        Task<DataTable> CarregaComOcorrencia(string valor);
+        Task<DataTable> CarregaTodos(int codColigada);
+        Task<DataTable> CarregaComOcorrencia(string valor, int codColigada);
         Task<DataTable> PegaValorUnicoPeloCodigo(string valor);
 
     }

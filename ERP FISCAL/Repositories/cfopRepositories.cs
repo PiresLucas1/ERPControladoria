@@ -14,7 +14,7 @@ namespace ERP_FISCAL.repositories
 {
    internal class cfopRepositories : UIRepositories
     {
-        public DataTable EncontrarComOcorrencia(string valor)
+        public DataTable EncontrarComOcorrencia(string valor, int codColigada)
         {
             DataTable tabela = new DataTable();
             ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
@@ -39,6 +39,7 @@ namespace ERP_FISCAL.repositories
                         }
                         p.Value = valor;
                         cmd.Parameters.Add(p);
+                        cmd.Parameters.AddWithValue("@INCodColigada", codColigada);
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {
                             adapter.Fill(tabela);
@@ -57,7 +58,7 @@ namespace ERP_FISCAL.repositories
             return tabela;
         }
 
-        public DataTable EncontrarTodos()
+        public DataTable EncontrarTodos(int codColigada)
         {
             DataTable tabela = new DataTable();
             ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
@@ -71,7 +72,7 @@ namespace ERP_FISCAL.repositories
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 1200;
-
+                        cmd.Parameters.AddWithValue("@INCodColigada", codColigada);
                         SqlParameter p = new SqlParameter("@INvchIDNatureza", SqlDbType.NVarChar);
                         p.Value = DBNull.Value;
                         cmd.Parameters.Add(p);

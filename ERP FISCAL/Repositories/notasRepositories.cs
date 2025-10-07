@@ -14,10 +14,10 @@ namespace ERP_FISCAL
     internal class Carregar_Colunas
     {
 
-        public DataTable ObterNotas(DateTime dataInicio, DateTime dataFim)
+        public DataTable ObterNotas(DateTime dataInicio, DateTime dataFim, int codColigada, int bitExisteErp)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
+            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();            
 
             try
             {
@@ -30,6 +30,9 @@ namespace ERP_FISCAL
                         cmd.CommandTimeout = 1200; /* 20 minutos */
                         cmd.Parameters.AddWithValue("@INDatDataInicio", dataInicio);
                         cmd.Parameters.AddWithValue("@INDatDataFim", dataFim);
+                        cmd.Parameters.AddWithValue("@INCodColigada", codColigada);
+                        cmd.Parameters.AddWithValue("@INTBitConstaNoErp", bitExisteErp);
+
 
                         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
                         adapter.Fill(tabela);

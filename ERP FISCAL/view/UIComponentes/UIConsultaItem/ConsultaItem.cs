@@ -26,8 +26,9 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
             this.controller = controller;
             this.row = row;
             this.coligada = coligada;
-            this.Name= Name; ;
+            this.Name= Name; 
             this.importarNotaViewForm = importarNotaViewForm;
+            this.Text = Name;
         }
 
         public async void btnPesquisar_Click(object sender, EventArgs e)
@@ -40,30 +41,29 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
             {
                 MessageBox.Show("Não foi possivel localizar");
                 return;
-            }
-            Console.WriteLine(table.Columns["CODCOLIGADA"].DataType);
-            var query = table.AsEnumerable()
-                .Where(row => Convert.ToInt32(row["CODCOLIGADA"]) == coligada);
+            }        
+            //var query = table.AsEnumerable()
+            //    .Where(row => Convert.ToInt32(row["COD. COLIGADA"]) == coligada);
 
-            if(query.Count() < 1)
-            {
-                MessageBox.Show("Não foi possivel localizar");
-                return;
-            }
+            //if(query.Count() < 1)
+            //{
+            //    MessageBox.Show("Não foi possivel localizar");
+            //    return;
+            //}
 
-            DataTable tabelaFiltrada = query.CopyToDataTable();
+            //DataTable tabelaFiltrada = query.CopyToDataTable();
 
-            dataGridView1.DataSource = tabelaFiltrada;
+            dataGridView1.DataSource = table;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-        public async Task<DataTable> RetornaTodosOsDados()
+        public async Task<DataTable> RetornaTodosOsDados(int codColigada)
         {
-            DataTable data =   await controller.CarregaTodos();
+            DataTable data =   await controller.CarregaTodos(codColigada);
             return data;          
         }
-        public async Task<DataTable> RetornaDadosDaOcorrencia(string valor)
+        public async Task<DataTable> RetornaDadosDaOcorrencia(string valor, int codColigada)
         {
-            DataTable data = await controller.CarregaComOcorrencia(valor);
+            DataTable data = await controller.CarregaComOcorrencia(valor , codColigada);
             return data;
         }
 
@@ -73,6 +73,13 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
             {
                 DataGridViewRow rowDataGridView = dataGridView1.Rows[e.RowIndex];
                 rowSelecionada = rowDataGridView;
+
+                DataRowView convertRow = rowSelecionada.DataBoundItem as DataRowView;
+
+                DataRow datarow = convertRow.Row;
+
+                importarNotaViewForm.AlteraValorDataRow(datarow, this.Name, row);
+                this.Close();
 
             }
         }
@@ -129,11 +136,11 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
             DataTable tabelaDados;
             if (valor.Length == 0)
             {
-                tabelaDados = await RetornaTodosOsDados();
+                tabelaDados = await RetornaTodosOsDados(coligada);
             }
             else
             {
-                tabelaDados = await RetornaDadosDaOcorrencia(valor);
+                tabelaDados = await RetornaDadosDaOcorrencia(valor,coligada);
 
             }
             CarregarDataGridView(tabelaDados);
@@ -143,11 +150,11 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
             DataTable tabelaDados;
             if (valor.Length == 0)
             {
-                tabelaDados = await RetornaTodosOsDados();
+                tabelaDados = await RetornaTodosOsDados(coligada);
             }
             else
             {
-                tabelaDados = await RetornaDadosDaOcorrencia(valor);
+                tabelaDados = await RetornaDadosDaOcorrencia(valor, coligada);
 
             }
             CarregarDataGridView(tabelaDados);

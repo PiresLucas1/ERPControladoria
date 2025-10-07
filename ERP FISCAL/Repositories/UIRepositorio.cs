@@ -9,8 +9,8 @@ namespace ERP_FISCAL.Repositories
 {
     public interface UIRepositories
     {
-         DataTable EncontrarTodos();
-         DataTable EncontrarComOcorrencia(string valor);
+         DataTable EncontrarTodos(int codColigada);
+         DataTable EncontrarComOcorrencia(string valor, int codColigada);
 
          DataTable PegaValorPeloCodigo(string valor);
 

@@ -11,7 +11,7 @@ namespace ERP_FISCAL.Repositories
 {
     internal class ProdutoServicoRepositories: UIRepositories
     {
-        public DataTable EncontrarTodos()
+        public DataTable EncontrarTodos(int codColigada)
         {
             DataTable tabela = new DataTable();
             ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
@@ -23,6 +23,7 @@ namespace ERP_FISCAL.Repositories
                     using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaProduto", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@INCodColigada", codColigada);
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {
                             adapter.Fill(tabela);
@@ -41,14 +42,14 @@ namespace ERP_FISCAL.Repositories
             return tabela;
 
         }
-        public DataTable EncontrarComOcorrencia(string valor)
+        public DataTable EncontrarComOcorrencia(string valor, int codColigada)
         {
             DataTable tabela = new DataTable();
             tabela = tabela.DefaultView.ToTable(true);
             ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
             try
             {
-                Console.WriteLine(valor.ToString());
+                
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
                     using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaProduto", conn))
@@ -60,6 +61,7 @@ namespace ERP_FISCAL.Repositories
                         p = new SqlParameter("@INintIDProduto", SqlDbType.NVarChar);
                         p.Value = valor;
                         cmd.Parameters.Add(p);
+                        cmd.Parameters.AddWithValue("@INCodColigada", codColigada);
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {
                             int linhas = adapter.Fill(tabela);
@@ -69,6 +71,7 @@ namespace ERP_FISCAL.Repositories
                                 tabela.Clear();
                                 cmd.Parameters.Clear();
                                 cmd.Parameters.Add(new SqlParameter("@INvchDescricaoProduto", SqlDbType.NVarChar) { Value = valor });
+                                cmd.Parameters.AddWithValue("@INCodColigada", codColigada);
                                 adapter.Fill(tabela);
                             }
                         }

@@ -10,7 +10,7 @@ namespace ERP_FISCAL.Controller
 {
     internal class ProdutoServicoController: UIController
     {
-        public async Task<DataTable> CarregaTodos() {
+        public async Task<DataTable> CarregaTodos(int codColigada) {
 
             ProdutoServicoRepositories produtoServico = new ProdutoServicoRepositories();
             DataTable tabelaDados = new DataTable();
@@ -18,12 +18,12 @@ namespace ERP_FISCAL.Controller
 
             tabelaDados = await Task.Run(() =>
             {
-                return produtoServico.EncontrarTodos();
+                return produtoServico.EncontrarTodos(codColigada);
             });
 
             return tabelaDados;
         }
-        public async Task<DataTable> CarregaComOcorrencia(string valor)
+        public async Task<DataTable> CarregaComOcorrencia(string valor, int codColigada)
         {
             ProdutoServicoRepositories produtoServico = new ProdutoServicoRepositories();
             DataTable tabelaDados = new DataTable();
@@ -32,7 +32,7 @@ namespace ERP_FISCAL.Controller
 
             tabelaDados = await Task.Run(() =>
             {
-                return produtoServico.EncontrarComOcorrencia(valor);
+                return produtoServico.EncontrarComOcorrencia(valor, codColigada);
             });
 
             return tabelaDados;

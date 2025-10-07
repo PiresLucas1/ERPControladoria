@@ -16,13 +16,23 @@ namespace ERP_FISCAL.controller
     public class ExportServiceNotes
     {
 
-        public async Task<DataTable> ListServiceNotesAsync(DateTime valueDate1, DateTime valueDate2)
+        public async Task<DataTable> ListServiceNotesAsync(DateTime valueDate1, DateTime valueDate2, int codColigada, bool bitExisteErp)
         {
-            DataTable notas = await Task.Run(() =>
+
+            int existeErp;
+            if (bitExisteErp == false)
             {
-                Carregar_Colunas util = new Carregar_Colunas();
-                return util.ObterNotas(valueDate1, valueDate2);
-            });
+                existeErp = 0;
+            }
+            else
+            {
+                existeErp = 1;
+            }
+                DataTable notas = await Task.Run(() =>
+                {
+                    Carregar_Colunas util = new Carregar_Colunas();
+                    return util.ObterNotas(valueDate1, valueDate2, codColigada, existeErp);
+                });
 
 
 
