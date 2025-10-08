@@ -16,11 +16,11 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
     public partial class ConsultaItem : Form
     {
         UIController controller;
-        int row;
+        DataGridViewRow row;
         int coligada;
         DataGridViewRow rowSelecionada = null;
         ImportarNotaView importarNotaViewForm;
-        public ConsultaItem(int row, int coligada, UIController controller, String Name, ImportarNotaView importarNotaViewForm)
+        public ConsultaItem(DataGridViewRow row, int coligada, UIController controller, String Name, ImportarNotaView importarNotaViewForm)
         {
             InitializeComponent();
             this.controller = controller;

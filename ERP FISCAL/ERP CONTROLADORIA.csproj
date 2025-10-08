@@ -72,6 +72,7 @@
     <Compile Include="ConexaoBancoDeDados.cs" />
     <Compile Include="Controller\ExportServiceNotes.cs" />
     <Compile Include="Repositories\ProdutoServicoRepositories.cs" />
+    <Compile Include="Utils\dateParse.cs" />
     <Compile Include="Utils\DecimalParse.cs" />
     <Compile Include="view\Interfaces\IProdutoServicoType.cs" />
     <Compile Include="view\SubTipos\DataGridViewCustomBox.cs" />
