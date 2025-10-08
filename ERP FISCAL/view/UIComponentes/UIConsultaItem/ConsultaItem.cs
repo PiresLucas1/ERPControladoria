@@ -42,19 +42,10 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
                 MessageBox.Show("Não foi possivel localizar");
                 return;
             }        
-            //var query = table.AsEnumerable()
-            //    .Where(row => Convert.ToInt32(row["COD. COLIGADA"]) == coligada);
-
-            //if(query.Count() < 1)
-            //{
-            //    MessageBox.Show("Não foi possivel localizar");
-            //    return;
-            //}
-
-            //DataTable tabelaFiltrada = query.CopyToDataTable();
 
             dataGridView1.DataSource = table;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            txtBoxCountItems.Text = table.Rows.Count.ToString();
         }
         public async Task<DataTable> RetornaTodosOsDados(int codColigada)
         {

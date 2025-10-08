@@ -35,7 +35,7 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnSelecionar = new System.Windows.Forms.Button();
             this.Registro = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtBoxCountItems = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,26 +100,26 @@
             // Registro
             // 
             this.Registro.AutoSize = true;
-            this.Registro.Location = new System.Drawing.Point(33, 837);
+            this.Registro.Location = new System.Drawing.Point(33, 842);
             this.Registro.Name = "Registro";
             this.Registro.Size = new System.Drawing.Size(73, 20);
             this.Registro.TabIndex = 7;
             this.Registro.Text = "Registro:";
             // 
-            // textBox2
+            // txtBoxCountItems
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.textBox2.Location = new System.Drawing.Point(112, 837);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(170, 26);
-            this.textBox2.TabIndex = 8;
+            this.txtBoxCountItems.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtBoxCountItems.Location = new System.Drawing.Point(112, 837);
+            this.txtBoxCountItems.Name = "txtBoxCountItems";
+            this.txtBoxCountItems.Size = new System.Drawing.Size(170, 26);
+            this.txtBoxCountItems.TabIndex = 8;
             // 
             // ConsultaItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1352, 896);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtBoxCountItems);
             this.Controls.Add(this.Registro);
             this.Controls.Add(this.btnSelecionar);
             this.Controls.Add(this.btnCancelar);
@@ -145,6 +145,6 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnSelecionar;
         private System.Windows.Forms.Label Registro;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtBoxCountItems;
     }
 }
