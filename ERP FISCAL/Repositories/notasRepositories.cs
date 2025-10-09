@@ -44,6 +44,7 @@ namespace ERP_FISCAL
             catch (Exception e )
             {
                 Console.WriteLine("Ocorreu um erro: " + e.Message);
+                MessageBox.Show(e.Message);
                 throw new ArgumentException("Falha ao executar a operação", e);
                 
             }
