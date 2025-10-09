@@ -125,7 +125,7 @@ namespace ERP_FISCAL
                     // Executa a consulta principal
                     splashScreen.SetMessage("Carregando notas fiscais...");
 
-                    ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
+                    NotasController exportServiceNotes = new NotasController();
 
                     DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim, Convert.ToInt32(txtBoxColigada.Text), cbLancadasNoERP.Checked);
                     splashScreen.SetMessage("Ordenando estrutura...");
@@ -159,11 +159,6 @@ namespace ERP_FISCAL
                     }
 
 
-                    //dtImportacao.AllowUserToResizeColumns = true;
-                    //dtImportacao.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-                    ////dtImportacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-                    //dtImportacao.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
-                    //dtImportacao.ColumnHeadersHeight = 30;
                     dtImportacao.AllowUserToResizeColumns = true;
                     dtImportacao.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
                     dtImportacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
@@ -242,7 +237,7 @@ namespace ERP_FISCAL
                 {
                     return;
                 }
-                ExportServiceNotes service = new ExportServiceNotes();
+                NotasController service = new NotasController();
 
                 DataTable dt;
                 dt = await service.FindUniqueNoteAsync(filterValue);
@@ -333,7 +328,7 @@ namespace ERP_FISCAL
 
 
             }
-            ExportServiceNotes exportServiceNotes = new ExportServiceNotes();
+            NotasController exportServiceNotes = new NotasController();
             exportServiceNotes.ExportToTotvs(NotesChecks);
 
         }
@@ -417,7 +412,7 @@ namespace ERP_FISCAL
 
             if (colName == "CFOP")
             {
-                CarregaCFOPController cfopController = new CarregaCFOPController();
+                CfopController cfopController = new CfopController();
 
 
                 AbrirConsultaItem(dtImportacao.Rows[e.RowIndex], Convert.ToInt32(codColigada), cfopController, "Consulta CFOP");
@@ -437,7 +432,7 @@ namespace ERP_FISCAL
 
         public void AtualizaCFOP(int index, string cfopSelecionado)
         {
-            CarregaCFOPController cFOPController = new CarregaCFOPController();
+            CfopController cFOPController = new CfopController();
             ValidaValorDeCelulaCfop(cfopSelecionado, cFOPController, index, "CFOP", "CFOP Descrição");
 
 
@@ -532,7 +527,7 @@ namespace ERP_FISCAL
         }
         public async Task<DataTable> CarregaListaNatureza(int codColigada)
         {
-            var carregaComboBoxCfop = new CarregaCFOPController();
+            var carregaComboBoxCfop = new CfopController();
             var lista = await carregaComboBoxCfop.CarregaTodos(codColigada);
 
             return lista;
@@ -631,7 +626,7 @@ namespace ERP_FISCAL
             }
             if (nomeColuna == "CFOP")
             {
-                CarregaCFOPController cFOPController = new CarregaCFOPController();
+                CfopController cFOPController = new CfopController();
                 retorno = await cFOPController.CarregaComOcorrencia(valor, Convert.ToInt32(codColigadaLinha));
                 itemColunaValor = "COD. NATUREZA";
                 itemColunaDescricao = "DESCRIÇÃO NATUREZA";
@@ -650,7 +645,7 @@ namespace ERP_FISCAL
             {
                 if (nomeColuna == "CFOP")
                 {
-                    CarregaCFOPController cFOPController = new CarregaCFOPController();
+                    CfopController cFOPController = new CfopController();
                     ConsultaItem consultaItem = new ConsultaItem(linhaAtual, Convert.ToInt32(codColigadaLinha), cFOPController, "Consulta CFOP", this);
                     await consultaItem.PesquisaValorPorString(valor);
                     //AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController, "cfop");

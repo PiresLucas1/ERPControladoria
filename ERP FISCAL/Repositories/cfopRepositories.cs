@@ -12,7 +12,7 @@ using SeuProjeto;
 
 namespace ERP_FISCAL.repositories
 {
-   internal class cfopRepositories : UIRepositories
+   internal class CfopRepositories : UIRepositories
     {
         public DataTable EncontrarComOcorrencia(string valor, int codColigada)
         {
@@ -28,7 +28,7 @@ namespace ERP_FISCAL.repositories
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         SqlParameter p;
-                        bool valorEmNumero = CarregaCFOPController.VerificaValorParaPesquisa(valor);
+                        bool valorEmNumero = CfopController.VerificaValorParaPesquisa(valor);
                         if (valorEmNumero)
                         {
                           p =  new SqlParameter("@INvchIDNatureza", SqlDbType.NVarChar);

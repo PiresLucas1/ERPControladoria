@@ -69,15 +69,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\CarregaCFOPController.cs" />
-    <Compile Include="Controller\MascaraDeColuna.cs" />
+    <Compile Include="Controller\CfopController.cs" />
+    <Compile Include="Utils\MascaraDeColuna.cs" />
     <Compile Include="Controller\ProdutoServicoController.cs" />
     <Compile Include="Controller\UIController.cs" />
-    <Compile Include="Repositories\cfopRepositories.cs" />
+    <Compile Include="Repositories\CfopRepositories.cs" />
     <Compile Include="Repositories\UIRepositorio.cs" />
-    <Compile Include="Repositories\notasRepositories.cs" />
+    <Compile Include="Repositories\NotasRepositories.cs" />
     <Compile Include="ConexaoBancoDeDados.cs" />
-    <Compile Include="Controller\ExportServiceNotes.cs" />
+    <Compile Include="Controller\NotasController.cs" />
     <Compile Include="Repositories\ProdutoServicoRepositories.cs" />
     <Compile Include="Utils\dateParse.cs" />
     <Compile Include="Utils\DecimalParse.cs" />

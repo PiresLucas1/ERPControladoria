@@ -18,7 +18,7 @@ namespace ERP_FISCAL.controller
         DataTable DatatableNatureza { get; set; }
     }
 
-    public class CarregaCFOPController : UIController
+    public class CfopController : UIController
     {
 
 
@@ -36,7 +36,7 @@ namespace ERP_FISCAL.controller
         public async Task<DataTable> CarregaTodos(int codColigada)
         {
 
-            cfopRepositories cfops = new cfopRepositories();
+            CfopRepositories cfops = new CfopRepositories();
             DataTable dataTable = await Task.Run(() =>
             {
                 return cfops.EncontrarTodos(codColigada);
@@ -94,7 +94,7 @@ namespace ERP_FISCAL.controller
 
         public async Task<DataTable> CarregaComOcorrencia(string valor, int codColigada)
         {
-            cfopRepositories cfops = new cfopRepositories();
+            CfopRepositories cfops = new CfopRepositories();
             DataTable dataTable = await Task.Run(() =>
             {
                 return cfops.EncontrarComOcorrencia(valor, codColigada);
@@ -111,7 +111,7 @@ namespace ERP_FISCAL.controller
 
         public async Task<DataTable> PegaValorUnicoPeloCodigo(string valor)
         {
-            cfopRepositories cfops = new cfopRepositories();
+            CfopRepositories cfops = new CfopRepositories();
             DataTable dataTable = await Task.Run(() =>
             {
                 return cfops.PegaValorPeloCodigo(valor);

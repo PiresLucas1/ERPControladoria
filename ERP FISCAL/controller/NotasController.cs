@@ -13,7 +13,7 @@ using ERP_FISCAL.Utils;
 
 namespace ERP_FISCAL.controller
 {
-    public class ExportServiceNotes
+    public class NotasController
     {
 
         public async Task<DataTable> ListServiceNotesAsync(DateTime valueDate1, DateTime valueDate2, int codColigada, bool bitExisteErp)
@@ -98,7 +98,7 @@ namespace ERP_FISCAL.controller
                                 ? Convert.ToDateTime(row["Data Lançamento"])
                                 : DateTime.MinValue);
 
-                            // Parâmetros de saída
+                            // Parâmetros de saída  @OUTvchMsgRetorno
                             var msgRetorno = new SqlParameter("@OUTvchMsgRetorno", SqlDbType.VarChar, 1000)
                             {
                                 Direction = ParameterDirection.Output
