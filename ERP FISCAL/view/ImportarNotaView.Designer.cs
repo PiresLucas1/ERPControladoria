@@ -33,6 +33,12 @@
             this.btnListaNotas = new System.Windows.Forms.Button();
             this.btnExportarTotvs = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtCnpjFor = new System.Windows.Forms.TextBox();
+            this.btnFiltrar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtBoxNumDoc = new System.Windows.Forms.TextBox();
             this.cbLancadasNoERP = new System.Windows.Forms.CheckBox();
             this.lbDataInicio = new System.Windows.Forms.Label();
             this.lbDtFim = new System.Windows.Forms.Label();
@@ -44,18 +50,14 @@
             this.lbCodColigada = new System.Windows.Forms.Label();
             this.coBoxTipeFilter = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtImportacao = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.btnInserirEmBloco = new System.Windows.Forms.Button();
             this.btnDesmarcarTodos = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnSelecionarTodas = new System.Windows.Forms.Button();
-            this.txtBoxNumDoc = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnFiltrar = new System.Windows.Forms.Button();
+            this.dtImportacao = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
             this.SuspendLayout();
             // 
             // btnListaNotas
@@ -73,10 +75,10 @@
             // btnExportarTotvs
             // 
             this.btnExportarTotvs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportarTotvs.Location = new System.Drawing.Point(1273, 961);
+            this.btnExportarTotvs.Location = new System.Drawing.Point(1264, 952);
             this.btnExportarTotvs.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExportarTotvs.Name = "btnExportarTotvs";
-            this.btnExportarTotvs.Size = new System.Drawing.Size(161, 41);
+            this.btnExportarTotvs.Size = new System.Drawing.Size(152, 41);
             this.btnExportarTotvs.TabIndex = 6;
             this.btnExportarTotvs.Text = "Exportar TOTVS";
             this.btnExportarTotvs.UseVisualStyleBackColor = true;
@@ -101,10 +103,67 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(1416, 206);
+            this.groupBox1.Size = new System.Drawing.Size(1416, 216);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro Prioritário";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.txtCnpjFor);
+            this.groupBox2.Controls.Add(this.btnFiltrar);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.txtBoxNumDoc);
+            this.groupBox2.Location = new System.Drawing.Point(716, 13);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(302, 196);
+            this.groupBox2.TabIndex = 8;
+            this.groupBox2.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 84);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(135, 20);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "CNPJ Fornecedor";
+            // 
+            // txtCnpjFor
+            // 
+            this.txtCnpjFor.Location = new System.Drawing.Point(17, 107);
+            this.txtCnpjFor.Name = "txtCnpjFor";
+            this.txtCnpjFor.Size = new System.Drawing.Size(234, 26);
+            this.txtCnpjFor.TabIndex = 10;
+            // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnFiltrar.Location = new System.Drawing.Point(171, 155);
+            this.btnFiltrar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(116, 34);
+            this.btnFiltrar.TabIndex = 9;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(152, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Numero Documento";
+            // 
+            // txtBoxNumDoc
+            // 
+            this.txtBoxNumDoc.Location = new System.Drawing.Point(17, 46);
+            this.txtBoxNumDoc.Name = "txtBoxNumDoc";
+            this.txtBoxNumDoc.Size = new System.Drawing.Size(165, 26);
+            this.txtBoxNumDoc.TabIndex = 7;
             // 
             // cbLancadasNoERP
             // 
@@ -204,6 +263,56 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Filtro";
             // 
+            // btnInserirEmBloco
+            // 
+            this.btnInserirEmBloco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnInserirEmBloco.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInserirEmBloco.Enabled = false;
+            this.btnInserirEmBloco.Location = new System.Drawing.Point(758, 1243);
+            this.btnInserirEmBloco.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnInserirEmBloco.Name = "btnInserirEmBloco";
+            this.btnInserirEmBloco.Size = new System.Drawing.Size(170, 40);
+            this.btnInserirEmBloco.TabIndex = 7;
+            this.btnInserirEmBloco.Text = "Inserir em bloco";
+            this.btnInserirEmBloco.UseVisualStyleBackColor = true;
+            this.btnInserirEmBloco.Visible = false;
+            this.btnInserirEmBloco.Click += new System.EventHandler(this.btnInserirEmBloco_Click);
+            // 
+            // btnDesmarcarTodos
+            // 
+            this.btnDesmarcarTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnDesmarcarTodos.Location = new System.Drawing.Point(18, 952);
+            this.btnDesmarcarTodos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDesmarcarTodos.Name = "btnDesmarcarTodos";
+            this.btnDesmarcarTodos.Size = new System.Drawing.Size(153, 41);
+            this.btnDesmarcarTodos.TabIndex = 6;
+            this.btnDesmarcarTodos.Text = "Desmarcar todos";
+            this.btnDesmarcarTodos.Click += new System.EventHandler(this.btnDesmarcarTodos_Click);
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLimpar.Location = new System.Drawing.Point(330, 952);
+            this.btnLimpar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Size = new System.Drawing.Size(126, 41);
+            this.btnLimpar.TabIndex = 6;
+            this.btnLimpar.Text = "Limpar";
+            this.btnLimpar.UseVisualStyleBackColor = true;
+            this.btnLimpar.Click += new System.EventHandler(this.btLimpar_Click);
+            // 
+            // btnSelecionarTodas
+            // 
+            this.btnSelecionarTodas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSelecionarTodas.Location = new System.Drawing.Point(183, 952);
+            this.btnSelecionarTodas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSelecionarTodas.Name = "btnSelecionarTodas";
+            this.btnSelecionarTodas.Size = new System.Drawing.Size(141, 41);
+            this.btnSelecionarTodas.TabIndex = 6;
+            this.btnSelecionarTodas.Text = "Selecionar todos";
+            this.btnSelecionarTodas.UseVisualStyleBackColor = true;
+            this.btnSelecionarTodas.Click += new System.EventHandler(this.btnSelecionarTodos_Click);
+            // 
             // dtImportacao
             // 
             this.dtImportacao.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
@@ -224,100 +333,11 @@
             this.dtImportacao.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dtImportacao_EditingControlShowing);
             this.dtImportacao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
-            // btnInserirEmBloco
-            // 
-            this.btnInserirEmBloco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnInserirEmBloco.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnInserirEmBloco.Enabled = false;
-            this.btnInserirEmBloco.Location = new System.Drawing.Point(505, 959);
-            this.btnInserirEmBloco.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnInserirEmBloco.Name = "btnInserirEmBloco";
-            this.btnInserirEmBloco.Size = new System.Drawing.Size(170, 40);
-            this.btnInserirEmBloco.TabIndex = 7;
-            this.btnInserirEmBloco.Text = "Inserir em bloco";
-            this.btnInserirEmBloco.UseVisualStyleBackColor = true;
-            this.btnInserirEmBloco.Visible = false;
-            this.btnInserirEmBloco.Click += new System.EventHandler(this.btnInserirEmBloco_Click);
-            // 
-            // btnDesmarcarTodos
-            // 
-            this.btnDesmarcarTodos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnDesmarcarTodos.Location = new System.Drawing.Point(18, 961);
-            this.btnDesmarcarTodos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnDesmarcarTodos.Name = "btnDesmarcarTodos";
-            this.btnDesmarcarTodos.Size = new System.Drawing.Size(153, 41);
-            this.btnDesmarcarTodos.TabIndex = 6;
-            this.btnDesmarcarTodos.Text = "Desmarcar todos";
-            this.btnDesmarcarTodos.Click += new System.EventHandler(this.btnDesmarcarTodos_Click);
-            // 
-            // btnLimpar
-            // 
-            this.btnLimpar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLimpar.Location = new System.Drawing.Point(354, 960);
-            this.btnLimpar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnLimpar.Name = "btnLimpar";
-            this.btnLimpar.Size = new System.Drawing.Size(126, 41);
-            this.btnLimpar.TabIndex = 6;
-            this.btnLimpar.Text = "Limpar";
-            this.btnLimpar.UseVisualStyleBackColor = true;
-            this.btnLimpar.Click += new System.EventHandler(this.btLimpar_Click);
-            // 
-            // btnSelecionarTodas
-            // 
-            this.btnSelecionarTodas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSelecionarTodas.Location = new System.Drawing.Point(177, 961);
-            this.btnSelecionarTodas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnSelecionarTodas.Name = "btnSelecionarTodas";
-            this.btnSelecionarTodas.Size = new System.Drawing.Size(161, 41);
-            this.btnSelecionarTodas.TabIndex = 6;
-            this.btnSelecionarTodas.Text = "Selecionar todos";
-            this.btnSelecionarTodas.UseVisualStyleBackColor = true;
-            this.btnSelecionarTodas.Click += new System.EventHandler(this.btnSelecionarTodos_Click);
-            // 
-            // txtBoxNumDoc
-            // 
-            this.txtBoxNumDoc.Location = new System.Drawing.Point(16, 73);
-            this.txtBoxNumDoc.Name = "txtBoxNumDoc";
-            this.txtBoxNumDoc.Size = new System.Drawing.Size(165, 26);
-            this.txtBoxNumDoc.TabIndex = 7;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnFiltrar);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.txtBoxNumDoc);
-            this.groupBox2.Location = new System.Drawing.Point(716, 13);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(323, 180);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 40);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 20);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Numero Documento";
-            // 
-            // btnFiltrar
-            // 
-            this.btnFiltrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnFiltrar.Location = new System.Drawing.Point(173, 126);
-            this.btnFiltrar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(143, 40);
-            this.btnFiltrar.TabIndex = 9;
-            this.btnFiltrar.Text = "Filtrar";
-            this.btnFiltrar.UseVisualStyleBackColor = true;
-            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
-            // 
             // ImportarNotaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1453, 1030);
+            this.ClientSize = new System.Drawing.Size(1450, 1006);
             this.Controls.Add(this.btnDesmarcarTodos);
             this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.btnSelecionarTodas);
@@ -333,9 +353,9 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -366,6 +386,8 @@
         private System.Windows.Forms.Button btnFiltrar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtBoxNumDoc;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtCnpjFor;
     }
 }
 

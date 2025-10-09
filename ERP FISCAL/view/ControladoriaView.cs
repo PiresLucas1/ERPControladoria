@@ -19,6 +19,7 @@ namespace ERP_FISCAL.view
             string dominio = Environment.UserDomainName;
 
             Console.WriteLine(usuario + " " + dominio);
+           
         }
 
         private void importarNFSEToolStripMenuItem_Click(object sender, EventArgs e)

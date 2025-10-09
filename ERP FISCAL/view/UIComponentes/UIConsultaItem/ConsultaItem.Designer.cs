@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConsultaItem));
             this.inputValor = new System.Windows.Forms.TextBox();
             this.pesquisar = new System.Windows.Forms.Label();
             this.btnPesquisar = new System.Windows.Forms.Button();
@@ -127,6 +128,7 @@
             this.Controls.Add(this.btnPesquisar);
             this.Controls.Add(this.pesquisar);
             this.Controls.Add(this.inputValor);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConsultaItem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form1";

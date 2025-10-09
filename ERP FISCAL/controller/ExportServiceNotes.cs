@@ -28,11 +28,11 @@ namespace ERP_FISCAL.controller
             {
                 existeErp = 1;
             }
-                DataTable notas = await Task.Run(() =>
-                {
-                    Carregar_Colunas util = new Carregar_Colunas();
-                    return util.ObterNotas(valueDate1, valueDate2, codColigada, existeErp);
-                });
+            DataTable notas = await Task.Run(() =>
+            {
+                Carregar_Colunas util = new Carregar_Colunas();
+                return util.ObterNotas(valueDate1, valueDate2, codColigada, existeErp);
+            });
 
 
 
@@ -162,48 +162,48 @@ namespace ERP_FISCAL.controller
 
         public DataTable ReorganizarDataTable(DataTable original)
         {
-           // ordem desejada (já inclui as colunas novas)
-           string[] ordemColunas = new string[]{
-            "Documento",
-            "Código Verificação",
-            "Dt.Hora Emissão",
-            "Base Cálculo",
-            "Aliquota",
-            "Valor Líquido",
-            "CNPJ Prestador",
-            "Razão Social Prestador",
-            "UF Prestador",
-            "Total Serviços",
-            "Valor Pis",
-            "Valor Cofins",
-            "Valor IR",
-            "Valor Csll",
-            "Valor INSS",
-            "Valor ISS",
-            "Item Lista Serviço",
-            "Descriminação",
-            "CNPJ Tomador",
-            "Razão Social Tomador",
-            "UF Tomador",
-            "CodColigada",
-            "NomeColigada",
-            "CodFilial",
-            "NomeFilial",
-            "IDContasPagar",
-            "IDMov",
-            "Cód. Serviço TOTVS",
-            // >>> Colunas novas que você quer incluir <<<
-            "Descrição",
-            "CFOP",
-            "CFOP Descrição",
-            "Data Lançamento",
-            // <<< ------------------------------- >>>
-            "Retorno",
-            // Colunas invisiveis para tratativas
-            "ErpSitucaoContasPagar",
-            "IdErpTitulo",
-            "ErpSitucaoTitulo"
-             };
+            // ordem desejada (já inclui as colunas novas)
+            string[] ordemColunas = new string[]{
+        "Documento",
+        "Razão Social Prestador",
+        "CNPJ Prestador",
+        "Código Verificação",
+        "Dt.Hora Emissão",
+        "Base Cálculo",
+        "Aliquota",
+        "Valor Líquido",
+        "UF Prestador",
+        "Total Serviços",
+        "Valor Pis",
+        "Valor Cofins",
+        "Valor IR",
+        "Valor Csll",
+        "Valor INSS",
+        "Valor ISS",
+        "Item Lista Serviço",
+        "Descriminação",
+        "CNPJ Tomador",
+        "Razão Social Tomador",
+        "UF Tomador",
+        "CodColigada",
+        "NomeColigada",
+        "CodFilial",
+        "NomeFilial",
+        "IDContasPagar",
+        "IDMov",
+        "Cód. Serviço TOTVS",
+        // >>> Colunas novas que você quer incluir <<<
+        "Descrição",
+        "CFOP",
+        "CFOP Descrição",
+        "Data Lançamento",
+        // <<< ------------------------------- >>>
+        "Retorno",
+        // Colunas invisíveis para tratativas
+        "ErpSitucaoContasPagar",
+        "IdErpTitulo",
+        "ErpSitucaoTitulo"
+    };
 
             DataTable novo = new DataTable();
 
@@ -211,20 +211,16 @@ namespace ERP_FISCAL.controller
             foreach (string nome in ordemColunas)
             {
                 if (original.Columns.Contains(nome))
-                {
                     novo.Columns.Add(nome, original.Columns[nome].DataType);
-                }
                 else
-                {
-                    // adiciona colunas extras como string (ou outro tipo se preferir)
                     novo.Columns.Add(nome, typeof(string));
-                }
             }
 
             // copia linhas
             foreach (DataRow row in original.Rows)
             {
                 DataRow novaLinha = novo.NewRow();
+
                 foreach (string nome in ordemColunas)
                 {
                     if (original.Columns.Contains(nome))
@@ -235,11 +231,26 @@ namespace ERP_FISCAL.controller
                     {
                         // aqui você pode calcular/preencher colunas novas
                         if (nome == "Data Lançamento")
-                            novaLinha[nome] = DateTime.Now.ToShortDateString(); // exemplo
+                        {
+                            if (original.Columns.Contains("Dt.Hora Emissão") && row["Dt.Hora Emissão"] != DBNull.Value)
+                            {
+                                DateTime dataEmissao;
+                                if (DateTime.TryParse(row["Dt.Hora Emissão"].ToString(), out dataEmissao))
+                                    novaLinha[nome] = dataEmissao.ToShortDateString(); // apenas a data
+                                else
+                                    novaLinha[nome] = DateTime.Now.ToShortDateString(); // fallback
+                            }
+                            else
+                                novaLinha[nome] = "";
+                        }
                         else
-                            novaLinha[nome] = ""; // valor inicial vazio
+                        {
+                            novaLinha[nome] = "";
+                        }
                     }
                 }
+
+                // adiciona a linha apenas uma vez
                 novo.Rows.Add(novaLinha);
             }
 
@@ -247,7 +258,5 @@ namespace ERP_FISCAL.controller
         }
 
 
-
     }
-
 }

@@ -204,7 +204,8 @@ namespace ERP_FISCAL
                     dtImportacao.Columns["Descrição"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                     dtImportacao.Columns["CFOP Descrição"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
 
-                    dtImportacao.Columns[0].Frozen = true;
+                    dtImportacao.Columns["Razão Social Prestador"].Frozen = true;
+
                     // finalização de ajuste ----------------------------------------
 
                     splashScreen.SetMessage("Finalizando...");
@@ -816,7 +817,26 @@ namespace ERP_FISCAL
             {
                 DataTable dataTableOriginal = (DataTable)dtImportacao.DataSource;
                 DataTable dataTableRetorno = dataTableOriginal.Clone();
-                string valorFiltro = txtBoxNumDoc.Text;
+                string valorFiltro = "";
+
+                if (txtCnpjFor.Text != "")
+                {
+
+                    valorFiltro = txtCnpjFor.Text;
+                    foreach (DataRow row in dataTableOriginal.Rows)
+                    {
+                        if (row["CNPJ Prestador"].ToString().Contains(valorFiltro))
+                        {
+                            dataTableRetorno.ImportRow(row);
+                        }
+                    }
+                    dtImportacao.DataSource = dataTableRetorno;
+                    return;
+                }
+
+
+              
+                valorFiltro = txtBoxNumDoc.Text;
                 if (valorFiltro == "")
                 {
                     dtImportacao.DataSource = dtOrignal;
