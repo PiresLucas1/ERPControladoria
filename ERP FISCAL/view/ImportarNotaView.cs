@@ -159,11 +159,17 @@ namespace ERP_FISCAL
                     }
 
 
+                    //dtImportacao.AllowUserToResizeColumns = true;
+                    //dtImportacao.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+                    ////dtImportacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+                    //dtImportacao.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
+                    //dtImportacao.ColumnHeadersHeight = 30;
+                    dtImportacao.AllowUserToResizeColumns = true;
+                    dtImportacao.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                    dtImportacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
                     dtImportacao.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False;
                     dtImportacao.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
-                    dtImportacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-                    dtImportacao.AllowUserToResizeColumns = true;
-                    dtImportacao.ColumnHeadersHeight = 30;
+
 
                     dtImportacao.DefaultCellStyle.SelectionBackColor = dtImportacao.DefaultCellStyle.BackColor;
                     dtImportacao.DefaultCellStyle.SelectionForeColor = dtImportacao.DefaultCellStyle.ForeColor;

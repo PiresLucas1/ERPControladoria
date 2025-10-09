@@ -12,6 +12,8 @@ public class MyDataGridView : DataGridView
         this.DoubleBuffered = true;
         this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         this.UpdateStyles();
+
+        this.AllowUserToResizeColumns = true;
     }
 
     // Impede que o controle se redesenhe em excesso durante o scroll
