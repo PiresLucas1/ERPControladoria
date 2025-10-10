@@ -42,6 +42,8 @@
             // 
             // inputValor
             // 
+            this.inputValor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.inputValor.Location = new System.Drawing.Point(122, 31);
             this.inputValor.Name = "inputValor";
             this.inputValor.Size = new System.Drawing.Size(1049, 26);
@@ -59,6 +61,7 @@
             // 
             // btnPesquisar
             // 
+            this.btnPesquisar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPesquisar.Location = new System.Drawing.Point(1199, 27);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(113, 34);
@@ -69,6 +72,9 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(26, 80);
             this.dataGridView1.Name = "dataGridView1";
@@ -81,6 +87,7 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancelar.Location = new System.Drawing.Point(1039, 823);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(113, 34);
@@ -90,6 +97,7 @@
             // 
             // btnSelecionar
             // 
+            this.btnSelecionar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSelecionar.Location = new System.Drawing.Point(1199, 823);
             this.btnSelecionar.Name = "btnSelecionar";
             this.btnSelecionar.Size = new System.Drawing.Size(113, 34);
@@ -100,6 +108,7 @@
             // 
             // Registro
             // 
+            this.Registro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Registro.AutoSize = true;
             this.Registro.Location = new System.Drawing.Point(33, 842);
             this.Registro.Name = "Registro";
@@ -109,6 +118,7 @@
             // 
             // txtBoxCountItems
             // 
+            this.txtBoxCountItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtBoxCountItems.BackColor = System.Drawing.SystemColors.ControlLight;
             this.txtBoxCountItems.Location = new System.Drawing.Point(112, 837);
             this.txtBoxCountItems.Name = "txtBoxCountItems";

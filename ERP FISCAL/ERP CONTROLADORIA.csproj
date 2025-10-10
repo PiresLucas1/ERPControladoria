@@ -81,6 +81,12 @@
     <Compile Include="Repositories\ProdutoServicoRepositories.cs" />
     <Compile Include="Utils\dateParse.cs" />
     <Compile Include="Utils\DecimalParse.cs" />
+    <Compile Include="view\ExportaDadosBig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ExportaDadosBig.Designer.cs">
+      <DependentUpon>ExportaDadosBig.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\Interfaces\IProdutoServicoType.cs" />
     <Compile Include="view\SubTipos\DataGridViewCustomBox.cs" />
     <Compile Include="view\SubTipos\MyDataGridView.cs">
@@ -120,6 +126,9 @@
     <Compile Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.Designer.cs">
       <DependentUpon>StatusProcess.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="view\ExportaDadosBig.resx">
+      <DependentUpon>ExportaDadosBig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\UIComponentes\UIConsultaItem\ConsultaItem.resx">
       <DependentUpon>ConsultaItem.cs</DependentUpon>
     </EmbeddedResource>

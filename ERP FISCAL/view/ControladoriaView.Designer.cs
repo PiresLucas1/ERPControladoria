@@ -30,8 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Portal));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.importarNFSEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importarNotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importarNotasParaOBigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alterarContaFreteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contabilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,27 +44,51 @@
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1});
+            this.importarNotasToolStripMenuItem,
+            this.contabilToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1937, 33);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // toolStripMenuItem1
+            // importarNotasToolStripMenuItem
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importarNFSEToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(186, 29);
-            this.toolStripMenuItem1.Text = "Importação de nota";
+            this.importarNotasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.importarToolStripMenuItem,
+            this.importarNotasParaOBigToolStripMenuItem});
+            this.importarNotasToolStripMenuItem.Name = "importarNotasToolStripMenuItem";
+            this.importarNotasToolStripMenuItem.Size = new System.Drawing.Size(150, 29);
+            this.importarNotasToolStripMenuItem.Text = "Importar Notas";
             // 
-            // importarNFSEToolStripMenuItem
+            // importarToolStripMenuItem
             // 
-            this.importarNFSEToolStripMenuItem.Name = "importarNFSEToolStripMenuItem";
-            this.importarNFSEToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
-            this.importarNFSEToolStripMenuItem.Text = "Importar NFS-E";
-            this.importarNFSEToolStripMenuItem.Click += new System.EventHandler(this.importarNFSEToolStripMenuItem_Click);
+            this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(322, 34);
+            this.importarToolStripMenuItem.Text = "Importar XML Serviço";
+            this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
+            // 
+            // importarNotasParaOBigToolStripMenuItem
+            // 
+            this.importarNotasParaOBigToolStripMenuItem.Name = "importarNotasParaOBigToolStripMenuItem";
+            this.importarNotasParaOBigToolStripMenuItem.Size = new System.Drawing.Size(322, 34);
+            this.importarNotasParaOBigToolStripMenuItem.Text = "Importar Notas para o Big";
+            this.importarNotasParaOBigToolStripMenuItem.Click += new System.EventHandler(this.importarNotasParaOBigToolStripMenuItem_Click);
+            // 
+            // alterarContaFreteToolStripMenuItem
+            // 
+            this.alterarContaFreteToolStripMenuItem.Name = "alterarContaFreteToolStripMenuItem";
+            this.alterarContaFreteToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.alterarContaFreteToolStripMenuItem.Text = "Alterar conta frete";
+            this.alterarContaFreteToolStripMenuItem.Click += new System.EventHandler(this.alterarContaFreteToolStripMenuItem_Click);
+            // 
+            // contabilToolStripMenuItem
+            // 
+            this.contabilToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alterarContaFreteToolStripMenuItem});
+            this.contabilToolStripMenuItem.Name = "contabilToolStripMenuItem";
+            this.contabilToolStripMenuItem.Size = new System.Drawing.Size(94, 29);
+            this.contabilToolStripMenuItem.Text = "Contabil";
             // 
             // Portal
             // 
@@ -89,7 +116,10 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem importarNFSEToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importarNotasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importarNotasParaOBigToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem contabilToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alterarContaFreteToolStripMenuItem;
     }
 }
