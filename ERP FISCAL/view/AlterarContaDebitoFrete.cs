@@ -1,4 +1,5 @@
 ﻿using ERP_FISCAL.Controller.ContaDebitoFreteController;
+using ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco;
 using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
 using System;
 using System.Collections.Generic;
@@ -134,6 +135,18 @@ namespace ERP_FISCAL.view
             // Opcional: Define cores personalizadas para a linha selecionada
             dtContabilizacaoFrete.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightSteelBlue;
             dtContabilizacaoFrete.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
+        }
+
+        private void btnAlterarEmBloco_Click(object sender, EventArgs e)
+        {
+            DTOAlteraEmBloco dto = new DTOAlteraEmBloco
+            {
+                TextLabel1 = "Conta Débito"
+            };
+
+            // Passa também o DataGridView atual
+            AlteraEmBloco alterarEmBloco = new AlteraEmBloco(dto, dtContabilizacaoFrete);
+            alterarEmBloco.ShowDialog();
         }
     }
 }

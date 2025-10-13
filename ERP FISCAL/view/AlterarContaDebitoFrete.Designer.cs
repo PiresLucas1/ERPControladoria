@@ -38,9 +38,9 @@
             this.dateTimePickerFim = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerInicio = new System.Windows.Forms.DateTimePicker();
             this.gbDeAcoes = new System.Windows.Forms.GroupBox();
-            this.dtContabilizacaoFrete = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
-            this.btnAlterarEmBloco = new System.Windows.Forms.Button();
             this.Alterar = new System.Windows.Forms.Button();
+            this.btnAlterarEmBloco = new System.Windows.Forms.Button();
+            this.dtContabilizacaoFrete = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.gbFiltro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbDeAcoes.SuspendLayout();
@@ -149,6 +149,25 @@
             this.gbDeAcoes.TabIndex = 2;
             this.gbDeAcoes.TabStop = false;
             // 
+            // Alterar
+            // 
+            this.Alterar.Location = new System.Drawing.Point(23, 25);
+            this.Alterar.Name = "Alterar";
+            this.Alterar.Size = new System.Drawing.Size(139, 39);
+            this.Alterar.TabIndex = 8;
+            this.Alterar.Text = "Alterar";
+            this.Alterar.UseVisualStyleBackColor = true;
+            // 
+            // btnAlterarEmBloco
+            // 
+            this.btnAlterarEmBloco.Location = new System.Drawing.Point(185, 25);
+            this.btnAlterarEmBloco.Name = "btnAlterarEmBloco";
+            this.btnAlterarEmBloco.Size = new System.Drawing.Size(139, 39);
+            this.btnAlterarEmBloco.TabIndex = 7;
+            this.btnAlterarEmBloco.Text = "Alterar em Bloco";
+            this.btnAlterarEmBloco.UseVisualStyleBackColor = true;
+            this.btnAlterarEmBloco.Click += new System.EventHandler(this.btnAlterarEmBloco_Click);
+            // 
             // dtContabilizacaoFrete
             // 
             this.dtContabilizacaoFrete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -163,24 +182,6 @@
             this.dtContabilizacaoFrete.TabIndex = 1;
             this.dtContabilizacaoFrete.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtContabilizacaoFrete_CellClick);
             this.dtContabilizacaoFrete.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dtContabilizacaoFrete_RowPrePaint);
-            // 
-            // btnAlterarEmBloco
-            // 
-            this.btnAlterarEmBloco.Location = new System.Drawing.Point(185, 25);
-            this.btnAlterarEmBloco.Name = "btnAlterarEmBloco";
-            this.btnAlterarEmBloco.Size = new System.Drawing.Size(139, 39);
-            this.btnAlterarEmBloco.TabIndex = 7;
-            this.btnAlterarEmBloco.Text = "Alterar em Bloco";
-            this.btnAlterarEmBloco.UseVisualStyleBackColor = true;
-            // 
-            // Alterar
-            // 
-            this.Alterar.Location = new System.Drawing.Point(23, 25);
-            this.Alterar.Name = "Alterar";
-            this.Alterar.Size = new System.Drawing.Size(139, 39);
-            this.Alterar.TabIndex = 8;
-            this.Alterar.Text = "Alterar";
-            this.Alterar.UseVisualStyleBackColor = true;
             // 
             // AlterarContaDebitoFrete
             // 

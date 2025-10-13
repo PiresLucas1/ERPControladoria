@@ -44,8 +44,10 @@ namespace ERP_FISCAL.Controller.ContaDebitoFreteController
             /*colunas extras*/
             "Tipo Frete",
             "CFOP",
-            "Situação"
-            };
+            "Situação",
+            "Conta Débito Atual"
+            //"Conta Débito Correta"
+            }; 
             DataTable novo = new DataTable();
 
             // cria colunas na ordem certa
@@ -114,6 +116,14 @@ namespace ERP_FISCAL.Controller.ContaDebitoFreteController
                             {
                                 novaLinha[nome] = "OK";
                             }
+                        }
+                        else if(nome == "Conta Débito Atual")
+                        {
+                            string codtmv = row["Cod. TMV"]?.ToString() ?? string.Empty;
+                            if (codtmv == "1.2.61")
+                                novaLinha[nome] = "1.1.1.06.000001";
+                            if (codtmv == "1.2.62")
+                                novaLinha[nome] = "3.3.1.07.000028";
                         }
                     }
                 }

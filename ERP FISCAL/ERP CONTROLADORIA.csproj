@@ -13,9 +13,9 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>\\servidor\aplicativos\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
+    <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
@@ -23,9 +23,12 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -53,6 +56,18 @@
   <PropertyGroup />
   <PropertyGroup>
     <StartupObject>ERP_FISCAL.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>41F522CF903E72A002FF72B3C1BFCA57B60CE7D7</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ERP CONTROLADORIA_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -128,6 +143,13 @@
       <DependentUpon>ControladoriaView.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Interfaces\INaturezaFiscalType.cs" />
+    <Compile Include="view\UIComponentes\UIDialog\UIAltetarEmBloco\AlteraEmBloco.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\UIComponentes\UIDialog\UIAltetarEmBloco\AlteraEmBloco.Designer.cs">
+      <DependentUpon>AlteraEmBloco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\UIComponentes\UIDialog\UIAltetarEmBloco\DTOAlteraEmBloco.cs" />
     <Compile Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,9 +184,13 @@
     <EmbeddedResource Include="view\ControladoriaView.resx">
       <DependentUpon>ControladoriaView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\UIComponentes\UIDialog\UIAltetarEmBloco\AlteraEmBloco.resx">
+      <DependentUpon>AlteraEmBloco.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.resx">
       <DependentUpon>StatusProcess.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ERP CONTROLADORIA_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
