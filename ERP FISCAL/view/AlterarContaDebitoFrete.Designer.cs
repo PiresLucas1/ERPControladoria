@@ -28,34 +28,74 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.gbFiltro = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbMostrarTodos = new System.Windows.Forms.Label();
+            this.cbItensParaMostrar = new System.Windows.Forms.ComboBox();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePickerFim = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerInicio = new System.Windows.Forms.DateTimePicker();
-            this.dtContabilizacaoFrete = new System.Windows.Forms.DataGridView();
+            this.gbDeAcoes = new System.Windows.Forms.GroupBox();
+            this.dtContabilizacaoFrete = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.btnAlterarEmBloco = new System.Windows.Forms.Button();
+            this.Alterar = new System.Windows.Forms.Button();
+            this.gbFiltro.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.gbDeAcoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtContabilizacaoFrete)).BeginInit();
             this.SuspendLayout();
             // 
+            // gbFiltro
+            // 
+            this.gbFiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbFiltro.Controls.Add(this.groupBox1);
+            this.gbFiltro.Controls.Add(this.btnPesquisar);
+            this.gbFiltro.Controls.Add(this.label2);
+            this.gbFiltro.Controls.Add(this.label1);
+            this.gbFiltro.Controls.Add(this.dateTimePickerFim);
+            this.gbFiltro.Controls.Add(this.dateTimePickerInicio);
+            this.gbFiltro.Location = new System.Drawing.Point(12, 12);
+            this.gbFiltro.Name = "gbFiltro";
+            this.gbFiltro.Size = new System.Drawing.Size(1352, 257);
+            this.gbFiltro.TabIndex = 0;
+            this.gbFiltro.TabStop = false;
+            this.gbFiltro.Text = "Filtro";
+            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnPesquisar);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.dateTimePickerFim);
-            this.groupBox1.Controls.Add(this.dateTimePickerInicio);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Controls.Add(this.lbMostrarTodos);
+            this.groupBox1.Controls.Add(this.cbItensParaMostrar);
+            this.groupBox1.Location = new System.Drawing.Point(444, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1376, 257);
-            this.groupBox1.TabIndex = 0;
+            this.groupBox1.Size = new System.Drawing.Size(465, 215);
+            this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Identificar na tabela";
+            // 
+            // lbMostrarTodos
+            // 
+            this.lbMostrarTodos.AutoSize = true;
+            this.lbMostrarTodos.Location = new System.Drawing.Point(25, 34);
+            this.lbMostrarTodos.Name = "lbMostrarTodos";
+            this.lbMostrarTodos.Size = new System.Drawing.Size(286, 20);
+            this.lbMostrarTodos.TabIndex = 3;
+            this.lbMostrarTodos.Text = "Somente itens que precisa de correção";
+            // 
+            // cbItensParaMostrar
+            // 
+            this.cbItensParaMostrar.FormattingEnabled = true;
+            this.cbItensParaMostrar.Location = new System.Drawing.Point(29, 70);
+            this.cbItensParaMostrar.Name = "cbItensParaMostrar";
+            this.cbItensParaMostrar.Size = new System.Drawing.Size(188, 28);
+            this.cbItensParaMostrar.TabIndex = 2;
+            this.cbItensParaMostrar.SelectedIndexChanged += new System.EventHandler(this.cbItensParaMostrar_SelectedIndexChanged);
             // 
             // btnPesquisar
             // 
-            this.btnPesquisar.Location = new System.Drawing.Point(269, 197);
+            this.btnPesquisar.Location = new System.Drawing.Point(227, 196);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(139, 39);
             this.btnPesquisar.TabIndex = 4;
@@ -83,6 +123,7 @@
             // 
             // dateTimePickerFim
             // 
+            this.dateTimePickerFim.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePickerFim.Location = new System.Drawing.Point(30, 171);
             this.dateTimePickerFim.Name = "dateTimePickerFim";
             this.dateTimePickerFim.Size = new System.Drawing.Size(132, 26);
@@ -90,32 +131,72 @@
             // 
             // dateTimePickerInicio
             // 
+            this.dateTimePickerInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePickerInicio.Location = new System.Drawing.Point(30, 90);
             this.dateTimePickerInicio.Name = "dateTimePickerInicio";
             this.dateTimePickerInicio.Size = new System.Drawing.Size(132, 26);
             this.dateTimePickerInicio.TabIndex = 0;
             // 
+            // gbDeAcoes
+            // 
+            this.gbDeAcoes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDeAcoes.Controls.Add(this.Alterar);
+            this.gbDeAcoes.Controls.Add(this.btnAlterarEmBloco);
+            this.gbDeAcoes.Location = new System.Drawing.Point(12, 843);
+            this.gbDeAcoes.Name = "gbDeAcoes";
+            this.gbDeAcoes.Size = new System.Drawing.Size(1352, 82);
+            this.gbDeAcoes.TabIndex = 2;
+            this.gbDeAcoes.TabStop = false;
+            // 
             // dtContabilizacaoFrete
             // 
+            this.dtContabilizacaoFrete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dtContabilizacaoFrete.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtContabilizacaoFrete.Location = new System.Drawing.Point(12, 286);
+            this.dtContabilizacaoFrete.Location = new System.Drawing.Point(12, 288);
             this.dtContabilizacaoFrete.Name = "dtContabilizacaoFrete";
             this.dtContabilizacaoFrete.RowHeadersWidth = 62;
             this.dtContabilizacaoFrete.RowTemplate.Height = 28;
-            this.dtContabilizacaoFrete.Size = new System.Drawing.Size(1376, 639);
+            this.dtContabilizacaoFrete.Size = new System.Drawing.Size(1352, 549);
             this.dtContabilizacaoFrete.TabIndex = 1;
+            this.dtContabilizacaoFrete.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtContabilizacaoFrete_CellClick);
+            this.dtContabilizacaoFrete.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dtContabilizacaoFrete_RowPrePaint);
+            // 
+            // btnAlterarEmBloco
+            // 
+            this.btnAlterarEmBloco.Location = new System.Drawing.Point(185, 25);
+            this.btnAlterarEmBloco.Name = "btnAlterarEmBloco";
+            this.btnAlterarEmBloco.Size = new System.Drawing.Size(139, 39);
+            this.btnAlterarEmBloco.TabIndex = 7;
+            this.btnAlterarEmBloco.Text = "Alterar em Bloco";
+            this.btnAlterarEmBloco.UseVisualStyleBackColor = true;
+            // 
+            // Alterar
+            // 
+            this.Alterar.Location = new System.Drawing.Point(23, 25);
+            this.Alterar.Name = "Alterar";
+            this.Alterar.Size = new System.Drawing.Size(139, 39);
+            this.Alterar.TabIndex = 8;
+            this.Alterar.Text = "Alterar";
+            this.Alterar.UseVisualStyleBackColor = true;
             // 
             // AlterarContaDebitoFrete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1400, 963);
+            this.ClientSize = new System.Drawing.Size(1376, 937);
+            this.Controls.Add(this.gbDeAcoes);
             this.Controls.Add(this.dtContabilizacaoFrete);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbFiltro);
             this.Name = "AlterarContaDebitoFrete";
             this.Text = "AlterarContaDebitoFrete";
+            this.gbFiltro.ResumeLayout(false);
+            this.gbFiltro.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.gbDeAcoes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dtContabilizacaoFrete)).EndInit();
             this.ResumeLayout(false);
 
@@ -123,12 +204,18 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbFiltro;
         private System.Windows.Forms.Button btnPesquisar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePickerFim;
         private System.Windows.Forms.DateTimePicker dateTimePickerInicio;
-        private System.Windows.Forms.DataGridView dtContabilizacaoFrete;
+        private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dtContabilizacaoFrete;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lbMostrarTodos;
+        private System.Windows.Forms.ComboBox cbItensParaMostrar;
+        private System.Windows.Forms.GroupBox gbDeAcoes;
+        private System.Windows.Forms.Button btnAlterarEmBloco;
+        private System.Windows.Forms.Button Alterar;
     }
 }

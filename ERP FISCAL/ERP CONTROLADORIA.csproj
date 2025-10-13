@@ -70,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\CfopController.cs" />
+    <Compile Include="Controller\ContaDebitoFreteController\AlteraContaDebitoController.cs" />
+    <Compile Include="Repositories\RepositoriesAlterarContaDebito\AlteraContaDebitoRepositories.cs" />
     <Compile Include="Utils\MascaraDeColuna.cs" />
     <Compile Include="Controller\ProdutoServicoController.cs" />
     <Compile Include="Controller\UIController.cs" />
@@ -81,6 +83,12 @@
     <Compile Include="Repositories\ProdutoServicoRepositories.cs" />
     <Compile Include="Utils\dateParse.cs" />
     <Compile Include="Utils\DecimalParse.cs" />
+    <Compile Include="view\AlterarContaDebitoFrete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\AlterarContaDebitoFrete.Designer.cs">
+      <DependentUpon>AlterarContaDebitoFrete.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\ExportaDadosBig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +134,9 @@
     <Compile Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.Designer.cs">
       <DependentUpon>StatusProcess.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="view\AlterarContaDebitoFrete.resx">
+      <DependentUpon>AlterarContaDebitoFrete.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\ExportaDadosBig.resx">
       <DependentUpon>ExportaDadosBig.cs</DependentUpon>
     </EmbeddedResource>
@@ -185,5 +196,6 @@
   <ItemGroup>
     <Content Include="icone.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

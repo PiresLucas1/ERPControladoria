@@ -163,7 +163,7 @@ namespace ERP_FISCAL.controller
         public DataTable ReorganizarDataTable(DataTable original)
         {
             // ordem desejada (já inclui as colunas novas)
-            string[] ordemColunas = new string[]{
+        string[] ordemColunas = new string[]{
         "Documento",
         "Razão Social Prestador",
         "CNPJ Prestador",

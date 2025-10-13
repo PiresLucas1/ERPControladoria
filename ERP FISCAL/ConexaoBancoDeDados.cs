@@ -73,7 +73,47 @@ namespace SeuProjeto
                 Console.WriteLine("Conexão fechada.");
             }
         }
-    }
 
+    }
+    public class ConexaoBancoDeDadosGestaoProcessos
+    {
+        private readonly string connectionString;
+
+        public ConexaoBancoDeDadosGestaoProcessos()
+        {
+            connectionString = "Server=dbtotvs\\dbtotvs;Database=GestaoProcessos;Integrated Security=True;";
+        }
+        public string GetConexaoString()
+        {
+            return connectionString;
+        }
+
+        public SqlConnection AbrirConexao()
+        {
+            SqlConnection conexao = new SqlConnection(connectionString);
+
+            try
+            {
+                conexao.Open();
+                Console.WriteLine("Conexão aberta com sucesso!");
+                return conexao;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao abrir a conexão: " + ex.Message);
+                throw;
+            }
+        }
+
+        public void FecharConexao(SqlConnection conexao)
+        {
+            if (conexao != null && conexao.State == System.Data.ConnectionState.Open)
+            {
+                conexao.Close();
+                Console.WriteLine("Conexão fechada.");
+            }
+        }
+
+    }
 
 }

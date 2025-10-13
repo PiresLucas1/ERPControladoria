@@ -1,6 +1,10 @@
-﻿using System;
+﻿using ERP_FISCAL.controller;
+using SeuProjeto;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +13,36 @@ namespace ERP_FISCAL.Repositories.RepositoriesAlterarContaDebito
 {
     public class AlteraContaDebitoRepositories
     {
-        public  Task<DataTable> PesquisarNotas(DateTime dataInicio, DateTime dataFim)
+        public async Task<DataTable> PesquisarNotas(DateTime dataInicio, DateTime dataFim)
         {
-            // Implementar a lógica para pesquisar notas no banco de dados
-            // Retornar um DataTable com os resultados
+            DataTable tabela = new DataTable();
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            string stringDeConexao = conexaoBanco.GetConexaoString();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(stringDeConexao)) // <<< apenas cria
+                {
+                    await conn.OpenAsync(); // <<< abre uma vez aqui
+
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspUsuConsultaValidacaoContabilFrete", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@INdatDataInicio", dataInicio);
+                        cmd.Parameters.AddWithValue("@INdatDataFim", dataFim);
+
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            tabela.Load(reader);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
+            }
+
+            return tabela;
         }
     }
-}
+ }
