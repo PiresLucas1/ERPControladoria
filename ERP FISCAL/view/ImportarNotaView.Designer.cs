@@ -33,7 +33,7 @@
             this.btnListaNotas = new System.Windows.Forms.Button();
             this.btnExportarTotvs = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBoxMostraComErro = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtCnpjFor = new System.Windows.Forms.TextBox();
             this.btnFiltrar = new System.Windows.Forms.Button();
@@ -55,14 +55,13 @@
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnSelecionarTodas = new System.Windows.Forms.Button();
             this.dtImportacao = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
-            this.checkBoxMostraComErro = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
             this.SuspendLayout();
             // 
             // btnListaNotas
             // 
+            this.btnListaNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnListaNotas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnListaNotas.Location = new System.Drawing.Point(1255, 153);
             this.btnListaNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -87,16 +86,21 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.groupBox2);
+            this.groupBox1.Controls.Add(this.checkBoxMostraComErro);
             this.groupBox1.Controls.Add(this.cbLancadasNoERP);
             this.groupBox1.Controls.Add(this.lbDataInicio);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.lbDtFim);
             this.groupBox1.Controls.Add(this.DtPickerInicio);
+            this.groupBox1.Controls.Add(this.txtCnpjFor);
             this.groupBox1.Controls.Add(this.DtPickerFim);
+            this.groupBox1.Controls.Add(this.btnFiltrar);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.btnListaNotas);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtBoxToFilter);
             this.groupBox1.Controls.Add(this.txtBoxColigada);
+            this.groupBox1.Controls.Add(this.txtBoxNumDoc);
             this.groupBox1.Controls.Add(this.lbCodColigada);
             this.groupBox1.Controls.Add(this.coBoxTipeFilter);
             this.groupBox1.Controls.Add(this.label1);
@@ -109,24 +113,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro Prioritário";
             // 
-            // groupBox2
+            // checkBoxMostraComErro
             // 
-            this.groupBox2.Controls.Add(this.checkBoxMostraComErro);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.txtCnpjFor);
-            this.groupBox2.Controls.Add(this.btnFiltrar);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.txtBoxNumDoc);
-            this.groupBox2.Location = new System.Drawing.Point(716, 13);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(460, 196);
-            this.groupBox2.TabIndex = 8;
-            this.groupBox2.TabStop = false;
+            this.checkBoxMostraComErro.AutoSize = true;
+            this.checkBoxMostraComErro.Location = new System.Drawing.Point(1007, 53);
+            this.checkBoxMostraComErro.Name = "checkBoxMostraComErro";
+            this.checkBoxMostraComErro.Size = new System.Drawing.Size(155, 24);
+            this.checkBoxMostraComErro.TabIndex = 9;
+            this.checkBoxMostraComErro.Text = "Celulas com Erro";
+            this.checkBoxMostraComErro.UseVisualStyleBackColor = true;
+            this.checkBoxMostraComErro.CheckedChanged += new System.EventHandler(this.checkBoxMostraComErro_CheckedChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(13, 84);
+            this.label4.Location = new System.Drawing.Point(730, 91);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(135, 20);
             this.label4.TabIndex = 11;
@@ -134,7 +135,7 @@
             // 
             // txtCnpjFor
             // 
-            this.txtCnpjFor.Location = new System.Drawing.Point(17, 107);
+            this.txtCnpjFor.Location = new System.Drawing.Point(734, 114);
             this.txtCnpjFor.Name = "txtCnpjFor";
             this.txtCnpjFor.Size = new System.Drawing.Size(234, 26);
             this.txtCnpjFor.TabIndex = 10;
@@ -142,7 +143,7 @@
             // btnFiltrar
             // 
             this.btnFiltrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnFiltrar.Location = new System.Drawing.Point(17, 155);
+            this.btnFiltrar.Location = new System.Drawing.Point(734, 162);
             this.btnFiltrar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(116, 34);
@@ -154,7 +155,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 22);
+            this.label3.Location = new System.Drawing.Point(730, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(152, 20);
             this.label3.TabIndex = 9;
@@ -162,7 +163,7 @@
             // 
             // txtBoxNumDoc
             // 
-            this.txtBoxNumDoc.Location = new System.Drawing.Point(17, 46);
+            this.txtBoxNumDoc.Location = new System.Drawing.Point(734, 53);
             this.txtBoxNumDoc.Name = "txtBoxNumDoc";
             this.txtBoxNumDoc.Size = new System.Drawing.Size(165, 26);
             this.txtBoxNumDoc.TabIndex = 7;
@@ -335,17 +336,6 @@
             this.dtImportacao.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dtImportacao_EditingControlShowing);
             this.dtImportacao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
-            // checkBoxMostraComErro
-            // 
-            this.checkBoxMostraComErro.AutoSize = true;
-            this.checkBoxMostraComErro.Location = new System.Drawing.Point(290, 46);
-            this.checkBoxMostraComErro.Name = "checkBoxMostraComErro";
-            this.checkBoxMostraComErro.Size = new System.Drawing.Size(233, 36);
-            this.checkBoxMostraComErro.TabIndex = 9;
-            this.checkBoxMostraComErro.Text = "Celulas com Erro";
-            this.checkBoxMostraComErro.UseVisualStyleBackColor = true;
-            this.checkBoxMostraComErro.CheckedChanged += new System.EventHandler(this.checkBoxMostraComErro_CheckedChanged);
-            // 
             // ImportarNotaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -366,8 +356,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).EndInit();
             this.ResumeLayout(false);
 
@@ -395,7 +383,6 @@
         private System.Windows.Forms.Button btnDesmarcarTodos;
         private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.Button btnSelecionarTodas;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnFiltrar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtBoxNumDoc;
