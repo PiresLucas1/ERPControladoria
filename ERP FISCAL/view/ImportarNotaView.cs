@@ -300,36 +300,32 @@ namespace ERP_FISCAL
             }
         }
 
-        private void btnExportarTotvs_Click(object sender, EventArgs e)
+        private async void btnExportarTotvs_Click(object sender, EventArgs e)
         {
-            DataTable NotesChecks = new DataTable();
-            foreach (DataGridViewColumn col in dtImportacao.Columns)
-            {
-                NotesChecks.Columns.Add(col.Name, col.ValueType ?? typeof(string));
-            }
+            NotasController exportServiceNotes = new NotasController();
+            var dtOriginal = (DataTable)dtImportacao.DataSource;
+            var linhasSelecionadas = dtOriginal.AsEnumerable()
+                .Where(r => r.Field<bool>("Selecionar"))
+                .ToList();
 
+            await exportServiceNotes.ExportToTotvs(dtOriginal, linhasSelecionadas);
+
+            VerificaLinha();
+        }
+
+        private void VerificaLinha()
+        {
             foreach (DataGridViewRow row in dtImportacao.Rows)
             {
-                if (row.IsNewRow)
-                    continue;
 
-                // Verifica se a linha está marcada
-                bool selecionado = Convert.ToBoolean(row.Cells["Selecionar"].Value);
-                if (!selecionado)
-                    continue;
-
-                DataRow newRow = NotesChecks.NewRow();
-                foreach (DataGridViewColumn col in dtImportacao.Columns)
+                var valorRetorno = row.Cells["Retorno"].Value?.ToString();
+                if (!string.IsNullOrWhiteSpace(valorRetorno))
                 {
-                    newRow[col.Name] = row.Cells[col.Name].Value ?? DBNull.Value;
+                    row.DefaultCellStyle.BackColor = Color.LightSalmon; // Cor da linha
+                    row.DefaultCellStyle.ForeColor = Color.Black;      // Cor do texto
                 }
-
-                NotesChecks.Rows.Add(newRow);
-
-
             }
-            NotasController exportServiceNotes = new NotasController();
-            exportServiceNotes.ExportToTotvs(NotesChecks);
+
 
         }
 
@@ -379,8 +375,6 @@ namespace ERP_FISCAL
             int pesquisarRightMargin = 20; // Margem direita dentro do GroupBox
             btnListaNotas.Left = groupBox1.Width - btnListaNotas.Width - pesquisarRightMargin;
         }
-
-
         private void coBoxTipeFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             Console.WriteLine(coBoxTipeFilter.SelectedIndex);
@@ -780,7 +774,6 @@ namespace ERP_FISCAL
             dtImportacao.Rows[index].Cells[valorCelula2].Value = valorRow["DESCRICAO"].ToString();
 
         }
-
         public void CarregaDadosDoDataTable(DataTable data)
         {
             dtImportacao.DataSource = data;
@@ -796,7 +789,6 @@ namespace ERP_FISCAL
             dtImportacao.Columns["Selecionar"].Width = 30;
             dtImportacao.Columns["Selecionar"].Width = 30;
         }
-
         private void dtImportacao_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return; // Ignora cliques no header
@@ -854,6 +846,28 @@ namespace ERP_FISCAL
                 return;
             }
             MessageBox.Show("Não existe nenhum dado na tabela");
+        }
+        private void FiltraLinhaComErro()
+        {
+            var dt = dtImportacao.DataSource as DataTable;
+            if (dt == null) return;
+
+            if (checkBoxMostraComErro.Checked)
+            {
+                dt.DefaultView.RowFilter = "[Retorno] IS NOT NULL AND [Retorno] <> ''";
+                VerificaLinha();
+            }
+            else
+            {
+                dt.DefaultView.RowFilter = string.Empty; // limpa o filtro
+                VerificaLinha();
+            }
+
+        }
+
+        private void checkBoxMostraComErro_CheckedChanged(object sender, EventArgs e)
+        {
+            FiltraLinhaComErro();
         }
     }
 }

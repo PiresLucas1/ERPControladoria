@@ -148,5 +148,39 @@ namespace ERP_FISCAL.view
             AlteraEmBloco alterarEmBloco = new AlteraEmBloco(dto, dtContabilizacaoFrete);
             alterarEmBloco.ShowDialog();
         }
+        private void SelecionarTodos(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dtContabilizacaoFrete.Rows)
+            {
+                row.Cells["Selecionar"].Value = true;
+            }
+        }
+        private void DesmarcarTodos()
+        {
+            foreach (DataGridViewRow row in dtContabilizacaoFrete.Rows)
+            {
+                row.Cells["Selecionar"].Value = false;
+            }
+        }
+        private void SelecionarCelulasComDivergencia()
+        {
+            foreach (DataGridViewRow row in dtContabilizacaoFrete.Rows)
+            {
+                string situacao = row.Cells["Situação"].Value.ToString();
+
+                if (situacao.Equals("CORRIGIR", StringComparison.OrdinalIgnoreCase))
+                {
+                    row.Cells["Selecionar"].Value = true;
+                }
+            }
+        }
+
+        private void cbSelecionaItensComDivergencia_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbSelecionaItensComDivergencia.Checked)
+                SelecionarCelulasComDivergencia();
+            else
+                DesmarcarTodos();
+        }
     }
 }

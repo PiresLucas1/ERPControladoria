@@ -41,6 +41,7 @@
             this.Alterar = new System.Windows.Forms.Button();
             this.btnAlterarEmBloco = new System.Windows.Forms.Button();
             this.dtContabilizacaoFrete = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.cbSelecionaItensComDivergencia = new System.Windows.Forms.CheckBox();
             this.gbFiltro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbDeAcoes.SuspendLayout();
@@ -66,6 +67,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbSelecionaItensComDivergencia);
             this.groupBox1.Controls.Add(this.lbMostrarTodos);
             this.groupBox1.Controls.Add(this.cbItensParaMostrar);
             this.groupBox1.Location = new System.Drawing.Point(444, 20);
@@ -170,6 +172,8 @@
             // 
             // dtContabilizacaoFrete
             // 
+            this.dtContabilizacaoFrete.AllowUserToAddRows = false;
+            this.dtContabilizacaoFrete.AllowUserToDeleteRows = false;
             this.dtContabilizacaoFrete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -182,6 +186,17 @@
             this.dtContabilizacaoFrete.TabIndex = 1;
             this.dtContabilizacaoFrete.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtContabilizacaoFrete_CellClick);
             this.dtContabilizacaoFrete.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dtContabilizacaoFrete_RowPrePaint);
+            // 
+            // cbSelecionaItensComDivergencia
+            // 
+            this.cbSelecionaItensComDivergencia.AutoSize = true;
+            this.cbSelecionaItensComDivergencia.Location = new System.Drawing.Point(29, 134);
+            this.cbSelecionaItensComDivergencia.Name = "cbSelecionaItensComDivergencia";
+            this.cbSelecionaItensComDivergencia.Size = new System.Drawing.Size(214, 24);
+            this.cbSelecionaItensComDivergencia.TabIndex = 4;
+            this.cbSelecionaItensComDivergencia.Text = "Selecionar itens com erro";
+            this.cbSelecionaItensComDivergencia.UseVisualStyleBackColor = true;
+            this.cbSelecionaItensComDivergencia.CheckedChanged += new System.EventHandler(this.cbSelecionaItensComDivergencia_CheckedChanged);
             // 
             // AlterarContaDebitoFrete
             // 
@@ -218,5 +233,6 @@
         private System.Windows.Forms.GroupBox gbDeAcoes;
         private System.Windows.Forms.Button btnAlterarEmBloco;
         private System.Windows.Forms.Button Alterar;
+        private System.Windows.Forms.CheckBox cbSelecionaItensComDivergencia;
     }
 }

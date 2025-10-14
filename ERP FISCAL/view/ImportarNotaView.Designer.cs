@@ -55,6 +55,7 @@
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnSelecionarTodas = new System.Windows.Forms.Button();
             this.dtImportacao = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.checkBoxMostraComErro = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
@@ -110,6 +111,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.checkBoxMostraComErro);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.txtCnpjFor);
             this.groupBox2.Controls.Add(this.btnFiltrar);
@@ -117,7 +119,7 @@
             this.groupBox2.Controls.Add(this.txtBoxNumDoc);
             this.groupBox2.Location = new System.Drawing.Point(716, 13);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(302, 196);
+            this.groupBox2.Size = new System.Drawing.Size(460, 196);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             // 
@@ -140,7 +142,7 @@
             // btnFiltrar
             // 
             this.btnFiltrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnFiltrar.Location = new System.Drawing.Point(171, 155);
+            this.btnFiltrar.Location = new System.Drawing.Point(17, 155);
             this.btnFiltrar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnFiltrar.Name = "btnFiltrar";
             this.btnFiltrar.Size = new System.Drawing.Size(116, 34);
@@ -333,6 +335,17 @@
             this.dtImportacao.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dtImportacao_EditingControlShowing);
             this.dtImportacao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
+            // checkBoxMostraComErro
+            // 
+            this.checkBoxMostraComErro.AutoSize = true;
+            this.checkBoxMostraComErro.Location = new System.Drawing.Point(290, 46);
+            this.checkBoxMostraComErro.Name = "checkBoxMostraComErro";
+            this.checkBoxMostraComErro.Size = new System.Drawing.Size(233, 36);
+            this.checkBoxMostraComErro.TabIndex = 9;
+            this.checkBoxMostraComErro.Text = "Celulas com Erro";
+            this.checkBoxMostraComErro.UseVisualStyleBackColor = true;
+            this.checkBoxMostraComErro.CheckedChanged += new System.EventHandler(this.checkBoxMostraComErro_CheckedChanged);
+            // 
             // ImportarNotaView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -388,6 +401,7 @@
         private System.Windows.Forms.TextBox txtBoxNumDoc;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtCnpjFor;
+        private System.Windows.Forms.CheckBox checkBoxMostraComErro;
     }
 }
 
