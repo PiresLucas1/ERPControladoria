@@ -40,8 +40,10 @@
             this.gbDeAcoes = new System.Windows.Forms.GroupBox();
             this.Alterar = new System.Windows.Forms.Button();
             this.btnAlterarEmBloco = new System.Windows.Forms.Button();
-            this.dtContabilizacaoFrete = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.cbSelecionaItensComDivergencia = new System.Windows.Forms.CheckBox();
+            this.dtContabilizacaoFrete = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.cbTipoMovimento = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.gbFiltro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbDeAcoes.SuspendLayout();
@@ -60,19 +62,21 @@
             this.gbFiltro.Controls.Add(this.dateTimePickerInicio);
             this.gbFiltro.Location = new System.Drawing.Point(12, 12);
             this.gbFiltro.Name = "gbFiltro";
-            this.gbFiltro.Size = new System.Drawing.Size(1352, 257);
+            this.gbFiltro.Size = new System.Drawing.Size(1358, 270);
             this.gbFiltro.TabIndex = 0;
             this.gbFiltro.TabStop = false;
             this.gbFiltro.Text = "Filtro";
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.cbTipoMovimento);
             this.groupBox1.Controls.Add(this.cbSelecionaItensComDivergencia);
             this.groupBox1.Controls.Add(this.lbMostrarTodos);
             this.groupBox1.Controls.Add(this.cbItensParaMostrar);
             this.groupBox1.Location = new System.Drawing.Point(444, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(465, 215);
+            this.groupBox1.Size = new System.Drawing.Size(465, 244);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Identificar na tabela";
@@ -145,9 +149,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDeAcoes.Controls.Add(this.Alterar);
             this.gbDeAcoes.Controls.Add(this.btnAlterarEmBloco);
-            this.gbDeAcoes.Location = new System.Drawing.Point(12, 843);
+            this.gbDeAcoes.Location = new System.Drawing.Point(12, 909);
             this.gbDeAcoes.Name = "gbDeAcoes";
-            this.gbDeAcoes.Size = new System.Drawing.Size(1352, 82);
+            this.gbDeAcoes.Size = new System.Drawing.Size(1358, 82);
             this.gbDeAcoes.TabIndex = 2;
             this.gbDeAcoes.TabStop = false;
             // 
@@ -170,6 +174,17 @@
             this.btnAlterarEmBloco.UseVisualStyleBackColor = true;
             this.btnAlterarEmBloco.Click += new System.EventHandler(this.btnAlterarEmBloco_Click);
             // 
+            // cbSelecionaItensComDivergencia
+            // 
+            this.cbSelecionaItensComDivergencia.AutoSize = true;
+            this.cbSelecionaItensComDivergencia.Location = new System.Drawing.Point(29, 191);
+            this.cbSelecionaItensComDivergencia.Name = "cbSelecionaItensComDivergencia";
+            this.cbSelecionaItensComDivergencia.Size = new System.Drawing.Size(214, 24);
+            this.cbSelecionaItensComDivergencia.TabIndex = 4;
+            this.cbSelecionaItensComDivergencia.Text = "Selecionar itens com erro";
+            this.cbSelecionaItensComDivergencia.UseVisualStyleBackColor = true;
+            this.cbSelecionaItensComDivergencia.CheckedChanged += new System.EventHandler(this.cbSelecionaItensComDivergencia_CheckedChanged);
+            // 
             // dtContabilizacaoFrete
             // 
             this.dtContabilizacaoFrete.AllowUserToAddRows = false;
@@ -178,31 +193,38 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtContabilizacaoFrete.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtContabilizacaoFrete.Location = new System.Drawing.Point(12, 288);
+            this.dtContabilizacaoFrete.Location = new System.Drawing.Point(12, 293);
             this.dtContabilizacaoFrete.Name = "dtContabilizacaoFrete";
             this.dtContabilizacaoFrete.RowHeadersWidth = 62;
             this.dtContabilizacaoFrete.RowTemplate.Height = 28;
-            this.dtContabilizacaoFrete.Size = new System.Drawing.Size(1352, 549);
+            this.dtContabilizacaoFrete.Size = new System.Drawing.Size(1358, 615);
             this.dtContabilizacaoFrete.TabIndex = 1;
             this.dtContabilizacaoFrete.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtContabilizacaoFrete_CellClick);
             this.dtContabilizacaoFrete.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dtContabilizacaoFrete_RowPrePaint);
             // 
-            // cbSelecionaItensComDivergencia
+            // cbTipoMovimento
             // 
-            this.cbSelecionaItensComDivergencia.AutoSize = true;
-            this.cbSelecionaItensComDivergencia.Location = new System.Drawing.Point(29, 134);
-            this.cbSelecionaItensComDivergencia.Name = "cbSelecionaItensComDivergencia";
-            this.cbSelecionaItensComDivergencia.Size = new System.Drawing.Size(214, 24);
-            this.cbSelecionaItensComDivergencia.TabIndex = 4;
-            this.cbSelecionaItensComDivergencia.Text = "Selecionar itens com erro";
-            this.cbSelecionaItensComDivergencia.UseVisualStyleBackColor = true;
-            this.cbSelecionaItensComDivergencia.CheckedChanged += new System.EventHandler(this.cbSelecionaItensComDivergencia_CheckedChanged);
+            this.cbTipoMovimento.FormattingEnabled = true;
+            this.cbTipoMovimento.Location = new System.Drawing.Point(29, 149);
+            this.cbTipoMovimento.Name = "cbTipoMovimento";
+            this.cbTipoMovimento.Size = new System.Drawing.Size(188, 28);
+            this.cbTipoMovimento.TabIndex = 5;
+            this.cbTipoMovimento.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 116);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(306, 30);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Escolher tipo de movimento";
             // 
             // AlterarContaDebitoFrete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1376, 937);
+            this.ClientSize = new System.Drawing.Size(1382, 1003);
             this.Controls.Add(this.gbDeAcoes);
             this.Controls.Add(this.dtContabilizacaoFrete);
             this.Controls.Add(this.gbFiltro);
@@ -234,5 +256,7 @@
         private System.Windows.Forms.Button btnAlterarEmBloco;
         private System.Windows.Forms.Button Alterar;
         private System.Windows.Forms.CheckBox cbSelecionaItensComDivergencia;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cbTipoMovimento;
     }
 }

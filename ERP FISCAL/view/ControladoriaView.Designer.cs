@@ -33,8 +33,8 @@
             this.importarNotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarNotasParaOBigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alterarContaFreteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contabilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alterarContaFreteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,13 +75,6 @@
             this.importarNotasParaOBigToolStripMenuItem.Text = "Importar Notas para o Big";
             this.importarNotasParaOBigToolStripMenuItem.Click += new System.EventHandler(this.importarNotasParaOBigToolStripMenuItem_Click);
             // 
-            // alterarContaFreteToolStripMenuItem
-            // 
-            this.alterarContaFreteToolStripMenuItem.Name = "alterarContaFreteToolStripMenuItem";
-            this.alterarContaFreteToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.alterarContaFreteToolStripMenuItem.Text = "Alterar conta frete";
-            this.alterarContaFreteToolStripMenuItem.Click += new System.EventHandler(this.alterarContaFreteToolStripMenuItem_Click);
-            // 
             // contabilToolStripMenuItem
             // 
             this.contabilToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -89,6 +82,14 @@
             this.contabilToolStripMenuItem.Name = "contabilToolStripMenuItem";
             this.contabilToolStripMenuItem.Size = new System.Drawing.Size(94, 29);
             this.contabilToolStripMenuItem.Text = "Contabil";
+            this.contabilToolStripMenuItem.Visible = false;
+            // 
+            // alterarContaFreteToolStripMenuItem
+            // 
+            this.alterarContaFreteToolStripMenuItem.Name = "alterarContaFreteToolStripMenuItem";
+            this.alterarContaFreteToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.alterarContaFreteToolStripMenuItem.Text = "Alterar conta frete";
+            this.alterarContaFreteToolStripMenuItem.Click += new System.EventHandler(this.alterarContaFreteToolStripMenuItem_Click);
             // 
             // Portal
             // 

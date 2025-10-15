@@ -21,7 +21,6 @@ namespace ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco
             _dataGrid = tabela;
 
             label1.Text = data.TextLabel1;
-            label1.AutoSize = false;
         }
 
         private void btnConfirmar_Click(object sender, EventArgs e)

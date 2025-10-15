@@ -40,7 +40,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 66);
+            this.label1.Location = new System.Drawing.Point(48, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 20);
             this.label1.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // textBoxValorNovo
             // 
-            this.textBoxValorNovo.Location = new System.Drawing.Point(27, 123);
+            this.textBoxValorNovo.Location = new System.Drawing.Point(52, 125);
             this.textBoxValorNovo.Name = "textBoxValorNovo";
             this.textBoxValorNovo.Size = new System.Drawing.Size(367, 26);
             this.textBoxValorNovo.TabIndex = 2;
@@ -87,7 +87,7 @@
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(30, 226);
+            this.label3.Location = new System.Drawing.Point(55, 229);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(364, 63);
             this.label3.TabIndex = 6;

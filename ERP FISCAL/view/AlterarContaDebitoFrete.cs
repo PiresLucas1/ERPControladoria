@@ -20,6 +20,11 @@ namespace ERP_FISCAL.view
             InitializeComponent();
             cbItensParaMostrar.Items.Add("Todos");
             cbItensParaMostrar.Items.Add("Apenas com divergência");
+
+            cbTipoMovimento.Items.Add("1.2.61");
+            cbTipoMovimento.Items.Add("1.2.62");
+            cbTipoMovimento.Items.Add("Todos");
+
         }
 
         private async void btnPesquisar_Click(object sender, EventArgs e)
@@ -141,7 +146,7 @@ namespace ERP_FISCAL.view
         {
             DTOAlteraEmBloco dto = new DTOAlteraEmBloco
             {
-                TextLabel1 = "Conta Débito"
+                TextLabel1 = "Conta Débito "
             };
 
             // Passa também o DataGridView atual
@@ -181,6 +186,22 @@ namespace ERP_FISCAL.view
                 SelecionarCelulasComDivergencia();
             else
                 DesmarcarTodos();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbTipoMovimento.SelectedItem.ToString() == "1.2.61")
+            {
+                (dtContabilizacaoFrete.DataSource as DataTable).DefaultView.RowFilter = "[Cod. TMV] = '1.2.61'";
+            }
+            else if(cbTipoMovimento.SelectedItem.ToString() == "1.2.61")
+            {
+                (dtContabilizacaoFrete.DataSource as DataTable).DefaultView.RowFilter = "[Cod. TMV] = '1.2.62'";
+            }
+            else
+            {
+                (dtContabilizacaoFrete.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+            }
         }
     }
 }
