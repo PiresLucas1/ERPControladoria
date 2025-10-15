@@ -36,20 +36,45 @@ namespace ERP_FISCAL.view
 
         private void importarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ImportarNotaView eRPFiscal = new ImportarNotaView();
-            eRPFiscal.Show();
+
+            if (!FormAberto(typeof(ImportarNotaView)))
+            {
+               ImportarNotaView eRPFiscal = new ImportarNotaView();
+                eRPFiscal.Show();
+
+            }
         }
 
         private void importarNotasParaOBigToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ExportaDadosBig exportaDadosBig = new ExportaDadosBig();
-            exportaDadosBig.Show();
+            if(!FormAberto(typeof(ExportaDadosBig)))
+            {
+                ExportaDadosBig exportaDadosBig = new ExportaDadosBig();
+                exportaDadosBig.Show();
+            }
+
         }
 
         private void alterarContaFreteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AlterarContaDebitoFrete alterarContaDebitoFrete = new AlterarContaDebitoFrete();
-            alterarContaDebitoFrete.Show();
+            if(!FormAberto(typeof (AlterarContaDebitoFrete)))
+            {
+                AlterarContaDebitoFrete alterarContaDebitoFrete = new AlterarContaDebitoFrete();
+                alterarContaDebitoFrete.Show();
+            }
+            
+        }
+        private bool FormAberto(Type tipoForm)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.GetType() == tipoForm)
+                {
+                    form.Focus(); // traz o form existente para frente
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

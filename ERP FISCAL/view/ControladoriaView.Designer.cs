@@ -79,6 +79,7 @@
             // 
             this.contabilToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alterarContaFreteToolStripMenuItem});
+            this.contabilToolStripMenuItem.Enabled = false;
             this.contabilToolStripMenuItem.Name = "contabilToolStripMenuItem";
             this.contabilToolStripMenuItem.Size = new System.Drawing.Size(94, 29);
             this.contabilToolStripMenuItem.Text = "Contabil";
