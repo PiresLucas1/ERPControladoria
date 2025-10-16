@@ -61,6 +61,16 @@ namespace ERP_FISCAL.Properties {
         }
         
         /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ChatGPT_Image_16_10_2025__11_06_03 {
+            get {
+                object obj = ResourceManager.GetObject("ChatGPT Image 16_10_2025, 11_06_03", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Icon semelhante a (Ícone).
         /// </summary>
         internal static System.Drawing.Icon icone {
@@ -83,9 +93,39 @@ namespace ERP_FISCAL.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Novo_solfarma {
+            get {
+                object obj = ResourceManager.GetObject("Novo solfarma", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SOLFARMA_3D_PNG {
             get {
                 object obj = ResourceManager.GetObject("SOLFARMA-3D-PNG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Solfarma_Controladoria {
+            get {
+                object obj = ResourceManager.GetObject("Solfarma Controladoria", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Solfarma_Controladoria_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("Solfarma_Controladoria-removebg-preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

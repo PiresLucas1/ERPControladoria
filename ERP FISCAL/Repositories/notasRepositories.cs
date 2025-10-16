@@ -24,7 +24,7 @@ namespace ERP_FISCAL
 
                 using (SqlConnection conexao = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.UspQiveConsultaNFSeAlternativa", conexao))
+                    using (SqlCommand cmd = new SqlCommand("dbo.UspQiveConsultaNFSe", conexao))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 1200; /* 20 minutos */

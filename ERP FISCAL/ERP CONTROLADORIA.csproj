@@ -89,6 +89,8 @@
   <ItemGroup>
     <Compile Include="Controller\CfopController.cs" />
     <Compile Include="Controller\ContaDebitoFreteController\AlteraContaDebitoController.cs" />
+    <Compile Include="Controller\ExportaDadosBigController\ExportaDadosBigController.cs" />
+    <Compile Include="Repositories\ExportaDadosBigRepositories\ExportaDadosBigRepositories.cs" />
     <Compile Include="Repositories\RepositoriesAlterarContaDebito\AlteraContaDebitoRepositories.cs" />
     <Compile Include="Utils\MascaraDeColuna.cs" />
     <Compile Include="Controller\ProdutoServicoController.cs" />
@@ -224,6 +226,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icone.ico" />
+    <None Include="Resources\Novo solfarma.png" />
+    <None Include="Resources\ChatGPT Image 16_10_2025, 11_06_03.png" />
+    <None Include="Resources\Solfarma_Controladoria-removebg-preview.png" />
+    <None Include="Resources\Solfarma Controladoria.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -40,7 +40,7 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.Transparent;
+            this.menuStrip1.BackColor = System.Drawing.Color.DarkOrange;
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -88,7 +88,7 @@
             // alterarContaFreteToolStripMenuItem
             // 
             this.alterarContaFreteToolStripMenuItem.Name = "alterarContaFreteToolStripMenuItem";
-            this.alterarContaFreteToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.alterarContaFreteToolStripMenuItem.Size = new System.Drawing.Size(256, 34);
             this.alterarContaFreteToolStripMenuItem.Text = "Alterar conta frete";
             this.alterarContaFreteToolStripMenuItem.Click += new System.EventHandler(this.alterarContaFreteToolStripMenuItem_Click);
             // 
@@ -96,6 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.BackgroundImage = global::ERP_FISCAL.Properties.Resources.SOLFARMA_3D_PNG;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1937, 882);
