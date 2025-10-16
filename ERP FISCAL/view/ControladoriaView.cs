@@ -18,8 +18,13 @@ namespace ERP_FISCAL.view
             string usuario = Environment.UserName;
             string dominio = Environment.UserDomainName;
 
-            Console.WriteLine(usuario + " " + dominio);
-           
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            System.Reflection.AssemblyName assemblyName = assembly.GetName();
+            Version version = assemblyName.Version;
+
+            txtVersao.Text = "Versão: " + version.Major + "." + version.Minor + "." + version.Build;
+            //Console.WriteLine(usuario + " " + dominio);
+
         }
 
         private void importarNFSEToolStripMenuItem_Click(object sender, EventArgs e)
@@ -75,6 +80,28 @@ namespace ERP_FISCAL.view
                 }
             }
             return false;
+        }
+
+        private void alterarCorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Cria o seletor de cores
+            using (ColorDialog colorDialog = new ColorDialog())
+            {
+                // Cor inicial (opcional)
+                colorDialog.Color = this.BackColor;
+
+                // Exibe o seletor
+                if (colorDialog.ShowDialog() == DialogResult.OK)
+                {
+
+                    // Se quiser pegar o valor RGB:
+                    Color corSelecionada = colorDialog.Color;
+                    
+                    menuBarBottom.BackColor = corSelecionada;
+                    menuBarTop.BackColor = corSelecionada;
+                    txtVersao.BackColor = corSelecionada;
+                }
+            }
         }
     }
 }

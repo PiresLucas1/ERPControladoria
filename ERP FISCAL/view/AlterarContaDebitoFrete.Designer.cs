@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlterarContaDebitoFrete));
             this.gbFiltro = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbTipoMovimento = new System.Windows.Forms.ComboBox();
+            this.cbSelecionaItensComDivergencia = new System.Windows.Forms.CheckBox();
             this.lbMostrarTodos = new System.Windows.Forms.Label();
             this.cbItensParaMostrar = new System.Windows.Forms.ComboBox();
             this.btnPesquisar = new System.Windows.Forms.Button();
@@ -40,10 +44,7 @@
             this.gbDeAcoes = new System.Windows.Forms.GroupBox();
             this.Alterar = new System.Windows.Forms.Button();
             this.btnAlterarEmBloco = new System.Windows.Forms.Button();
-            this.cbSelecionaItensComDivergencia = new System.Windows.Forms.CheckBox();
             this.dtContabilizacaoFrete = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
-            this.cbTipoMovimento = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.gbFiltro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbDeAcoes.SuspendLayout();
@@ -80,6 +81,35 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Identificar na tabela";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 116);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(204, 20);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Escolher tipo de movimento";
+            // 
+            // cbTipoMovimento
+            // 
+            this.cbTipoMovimento.FormattingEnabled = true;
+            this.cbTipoMovimento.Location = new System.Drawing.Point(29, 149);
+            this.cbTipoMovimento.Name = "cbTipoMovimento";
+            this.cbTipoMovimento.Size = new System.Drawing.Size(188, 28);
+            this.cbTipoMovimento.TabIndex = 5;
+            this.cbTipoMovimento.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // cbSelecionaItensComDivergencia
+            // 
+            this.cbSelecionaItensComDivergencia.AutoSize = true;
+            this.cbSelecionaItensComDivergencia.Location = new System.Drawing.Point(29, 191);
+            this.cbSelecionaItensComDivergencia.Name = "cbSelecionaItensComDivergencia";
+            this.cbSelecionaItensComDivergencia.Size = new System.Drawing.Size(214, 24);
+            this.cbSelecionaItensComDivergencia.TabIndex = 4;
+            this.cbSelecionaItensComDivergencia.Text = "Selecionar itens com erro";
+            this.cbSelecionaItensComDivergencia.UseVisualStyleBackColor = true;
+            this.cbSelecionaItensComDivergencia.CheckedChanged += new System.EventHandler(this.cbSelecionaItensComDivergencia_CheckedChanged);
             // 
             // lbMostrarTodos
             // 
@@ -174,17 +204,6 @@
             this.btnAlterarEmBloco.UseVisualStyleBackColor = true;
             this.btnAlterarEmBloco.Click += new System.EventHandler(this.btnAlterarEmBloco_Click);
             // 
-            // cbSelecionaItensComDivergencia
-            // 
-            this.cbSelecionaItensComDivergencia.AutoSize = true;
-            this.cbSelecionaItensComDivergencia.Location = new System.Drawing.Point(29, 191);
-            this.cbSelecionaItensComDivergencia.Name = "cbSelecionaItensComDivergencia";
-            this.cbSelecionaItensComDivergencia.Size = new System.Drawing.Size(214, 24);
-            this.cbSelecionaItensComDivergencia.TabIndex = 4;
-            this.cbSelecionaItensComDivergencia.Text = "Selecionar itens com erro";
-            this.cbSelecionaItensComDivergencia.UseVisualStyleBackColor = true;
-            this.cbSelecionaItensComDivergencia.CheckedChanged += new System.EventHandler(this.cbSelecionaItensComDivergencia_CheckedChanged);
-            // 
             // dtContabilizacaoFrete
             // 
             this.dtContabilizacaoFrete.AllowUserToAddRows = false;
@@ -202,24 +221,6 @@
             this.dtContabilizacaoFrete.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtContabilizacaoFrete_CellClick);
             this.dtContabilizacaoFrete.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.dtContabilizacaoFrete_RowPrePaint);
             // 
-            // cbTipoMovimento
-            // 
-            this.cbTipoMovimento.FormattingEnabled = true;
-            this.cbTipoMovimento.Location = new System.Drawing.Point(29, 149);
-            this.cbTipoMovimento.Name = "cbTipoMovimento";
-            this.cbTipoMovimento.Size = new System.Drawing.Size(188, 28);
-            this.cbTipoMovimento.TabIndex = 5;
-            this.cbTipoMovimento.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 116);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(306, 30);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Escolher tipo de movimento";
-            // 
             // AlterarContaDebitoFrete
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -228,6 +229,7 @@
             this.Controls.Add(this.gbDeAcoes);
             this.Controls.Add(this.dtContabilizacaoFrete);
             this.Controls.Add(this.gbFiltro);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AlterarContaDebitoFrete";
             this.Text = "AlterarContaDebitoFrete";
             this.gbFiltro.ResumeLayout(false);

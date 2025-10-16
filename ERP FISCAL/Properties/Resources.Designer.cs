@@ -73,30 +73,10 @@ namespace ERP_FISCAL.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Icon semelhante a (Ícone).
         /// </summary>
-        internal static System.Drawing.Icon icone {
+        internal static System.Drawing.Icon icon_new {
             get {
-                object obj = ResourceManager.GetObject("icone", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_new", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Byte[].
-        /// </summary>
-        internal static byte[] iconeB {
-            get {
-                object obj = ResourceManager.GetObject("iconeB", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Novo_solfarma {
-            get {
-                object obj = ResourceManager.GetObject("Novo solfarma", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

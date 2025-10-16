@@ -41,10 +41,9 @@
             this.txtFilial = new System.Windows.Forms.TextBox();
             this.dtNotasImportadas = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btn = new System.Windows.Forms.Button();
+            this.chkNaoConferida = new System.Windows.Forms.CheckBox();
+            this.chkSubstituir = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtNotasImportadas)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -166,44 +165,13 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.btn);
-            this.groupBox2.Controls.Add(this.checkBox3);
-            this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.checkBox1);
+            this.groupBox2.Controls.Add(this.chkNaoConferida);
+            this.groupBox2.Controls.Add(this.chkSubstituir);
             this.groupBox2.Location = new System.Drawing.Point(12, 819);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1200, 91);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(163, 25);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(179, 24);
-            this.checkBox3.TabIndex = 17;
-            this.checkBox3.Text = "Cód Tipo Movimento";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(18, 55);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(134, 24);
-            this.checkBox2.TabIndex = 16;
-            this.checkBox2.Text = "Não conferida";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(18, 23);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(102, 24);
-            this.checkBox1.TabIndex = 15;
-            this.checkBox1.Text = "Substituir";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // btn
             // 
@@ -214,6 +182,26 @@
             this.btn.Text = "Importar para Totvs";
             this.btn.UseVisualStyleBackColor = true;
             this.btn.Click += new System.EventHandler(this.btn_Click);
+            // 
+            // chkNaoConferida
+            // 
+            this.chkNaoConferida.AutoSize = true;
+            this.chkNaoConferida.Location = new System.Drawing.Point(18, 55);
+            this.chkNaoConferida.Name = "chkNaoConferida";
+            this.chkNaoConferida.Size = new System.Drawing.Size(134, 24);
+            this.chkNaoConferida.TabIndex = 16;
+            this.chkNaoConferida.Text = "Não conferida";
+            this.chkNaoConferida.UseVisualStyleBackColor = true;
+            // 
+            // chkSubstituir
+            // 
+            this.chkSubstituir.AutoSize = true;
+            this.chkSubstituir.Location = new System.Drawing.Point(18, 23);
+            this.chkSubstituir.Name = "chkSubstituir";
+            this.chkSubstituir.Size = new System.Drawing.Size(102, 24);
+            this.chkSubstituir.TabIndex = 15;
+            this.chkSubstituir.Text = "Substituir";
+            this.chkSubstituir.UseVisualStyleBackColor = true;
             // 
             // ExportaDadosBig
             // 
@@ -249,9 +237,8 @@
         private System.Windows.Forms.ComboBox cbConferida;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnPesquisar;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox chkNaoConferida;
+        private System.Windows.Forms.CheckBox chkSubstituir;
         private System.Windows.Forms.Button btn;
     }
 }

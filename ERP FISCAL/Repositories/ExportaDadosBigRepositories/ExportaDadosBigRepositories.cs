@@ -56,6 +56,48 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
 
             return tabela;
         }
+
+        public async Task<string> ImportaNotaBigParaTotvs(string notas, DateTime dataInicio, DateTime dataFim, int substituir, int conferida, int filial)
+        {
+            ConexaoBancoDeDadosBigCentral conexaoBanco = new ConexaoBancoDeDadosBigCentral();
+            DataTable tabelaRetorno = new DataTable();
+            try
+            {
+
+                using (SqlConnection conn = conexaoBanco.AbrirConexao())
+                {
+                    using (SqlCommand cmd = new SqlCommand("dbo.upsIntegracaoTotvsExportaNotaFiscalSat", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        SqlParameter p;
+                        cmd.Parameters.AddWithValue("@INdatDataInicio", dataInicio);
+                        cmd.Parameters.AddWithValue("@INdatDataFim", dataFim);                    
+                        cmd.Parameters.AddWithValue("@INintFilial", filial);                        
+                        cmd.Parameters.AddWithValue("@INbitSubstituir", substituir);
+                        cmd.Parameters.AddWithValue("@INbitNaoConferida", conferida);
+                        cmd.Parameters.AddWithValue("@INvchNumeroDocumentos", notas);
+
+                        var msgRetorno = new SqlParameter("@OUTvchMsgRetorno", SqlDbType.VarChar, 1000)
+                        {
+                            Direction = ParameterDirection.Output
+                        };
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            tabelaRetorno.Load(reader);
+                        }
+
+
+                    }
+                    string retorno = tabelaRetorno.Rows[0].ToString();
+                    conexaoBanco.FecharConexao(conn);
+                    return "Importação concluída com sucesso.";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
+            }
+        }
     }
     
 }

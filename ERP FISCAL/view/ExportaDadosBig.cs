@@ -64,7 +64,7 @@ namespace ERP_FISCAL.view
             dtNotasImportadas.Columns["Selecionar"].Width = 30;
         }
 
-        private void btn_Click(object sender, EventArgs e)
+        private async void btn_Click(object sender, EventArgs e)
         {
             //NotasController exportServiceNotes = new NotasController();
             var dtOriginal = (DataTable)dtNotasImportadas.DataSource;
@@ -72,7 +72,16 @@ namespace ERP_FISCAL.view
                 .Where(r => r.Field<bool>("Selecionar"))
                 .ToList();
 
-            Console.WriteLine(linhasSelecionadas);
+            string[] valorNumeroNota = linhasSelecionadas.Select(r => r.ItemArray[5].ToString() ?? string.Empty).ToArray();
+            DateTime dataInicio = dtPickerInicio.Value;
+            DateTime dataFim =  dtPickerFinal.Value;
+            int filial = Convert.ToInt32(txtFilial.Text);
+            int substituir = chkSubstituir.Checked ? 1 : 0;
+            int conferida = chkNaoConferida.Checked ? 1 : 0;
+
+            ExportaDadosBigController exportaDadosBigController = new ExportaDadosBigController();
+            string retorno = await exportaDadosBigController.ImportaNotaBigParaTotvs(valorNumeroNota, dataInicio, dataFim, substituir, conferida, filial);
+            
 
         }
     }

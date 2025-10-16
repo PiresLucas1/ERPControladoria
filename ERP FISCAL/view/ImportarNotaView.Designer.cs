@@ -34,19 +34,19 @@
             this.btnExportarTotvs = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.checkBoxMostraComErro = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtCnpjFor = new System.Windows.Forms.TextBox();
-            this.btnFiltrar = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtBoxNumDoc = new System.Windows.Forms.TextBox();
             this.cbLancadasNoERP = new System.Windows.Forms.CheckBox();
             this.lbDataInicio = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.lbDtFim = new System.Windows.Forms.Label();
             this.DtPickerInicio = new System.Windows.Forms.DateTimePicker();
+            this.txtCnpjFor = new System.Windows.Forms.TextBox();
             this.DtPickerFim = new System.Windows.Forms.DateTimePicker();
+            this.btnFiltrar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.txtBoxToFilter = new System.Windows.Forms.TextBox();
             this.txtBoxColigada = new System.Windows.Forms.TextBox();
+            this.txtBoxNumDoc = new System.Windows.Forms.TextBox();
             this.lbCodColigada = new System.Windows.Forms.Label();
             this.coBoxTipeFilter = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -126,50 +126,6 @@
             this.checkBoxMostraComErro.UseVisualStyleBackColor = true;
             this.checkBoxMostraComErro.CheckedChanged += new System.EventHandler(this.checkBoxMostraComErro_CheckedChanged);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(730, 91);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(135, 20);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "CNPJ Fornecedor";
-            // 
-            // txtCnpjFor
-            // 
-            this.txtCnpjFor.Location = new System.Drawing.Point(734, 114);
-            this.txtCnpjFor.Name = "txtCnpjFor";
-            this.txtCnpjFor.Size = new System.Drawing.Size(234, 26);
-            this.txtCnpjFor.TabIndex = 10;
-            // 
-            // btnFiltrar
-            // 
-            this.btnFiltrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnFiltrar.Location = new System.Drawing.Point(734, 162);
-            this.btnFiltrar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(116, 34);
-            this.btnFiltrar.TabIndex = 9;
-            this.btnFiltrar.Text = "Filtrar";
-            this.btnFiltrar.UseVisualStyleBackColor = true;
-            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(730, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 20);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Numero Documento";
-            // 
-            // txtBoxNumDoc
-            // 
-            this.txtBoxNumDoc.Location = new System.Drawing.Point(734, 53);
-            this.txtBoxNumDoc.Name = "txtBoxNumDoc";
-            this.txtBoxNumDoc.Size = new System.Drawing.Size(165, 26);
-            this.txtBoxNumDoc.TabIndex = 7;
-            // 
             // cbLancadasNoERP
             // 
             this.cbLancadasNoERP.AutoSize = true;
@@ -189,6 +145,15 @@
             this.lbDataInicio.TabIndex = 2;
             this.lbDataInicio.Text = "Inicial";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(730, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(135, 20);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "CNPJ Fornecedor";
+            // 
             // lbDtFim
             // 
             this.lbDtFim.AutoSize = true;
@@ -207,6 +172,13 @@
             this.DtPickerInicio.Size = new System.Drawing.Size(163, 26);
             this.DtPickerInicio.TabIndex = 0;
             // 
+            // txtCnpjFor
+            // 
+            this.txtCnpjFor.Location = new System.Drawing.Point(734, 114);
+            this.txtCnpjFor.Name = "txtCnpjFor";
+            this.txtCnpjFor.Size = new System.Drawing.Size(234, 26);
+            this.txtCnpjFor.TabIndex = 10;
+            // 
             // DtPickerFim
             // 
             this.DtPickerFim.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -216,6 +188,18 @@
             this.DtPickerFim.Size = new System.Drawing.Size(163, 26);
             this.DtPickerFim.TabIndex = 0;
             // 
+            // btnFiltrar
+            // 
+            this.btnFiltrar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnFiltrar.Location = new System.Drawing.Point(734, 162);
+            this.btnFiltrar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnFiltrar.Name = "btnFiltrar";
+            this.btnFiltrar.Size = new System.Drawing.Size(116, 34);
+            this.btnFiltrar.TabIndex = 9;
+            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.UseVisualStyleBackColor = true;
+            this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -224,6 +208,15 @@
             this.label2.Size = new System.Drawing.Size(44, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "Filtro";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(730, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(152, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Numero Documento";
             // 
             // txtBoxToFilter
             // 
@@ -239,6 +232,13 @@
             this.txtBoxColigada.Name = "txtBoxColigada";
             this.txtBoxColigada.Size = new System.Drawing.Size(146, 26);
             this.txtBoxColigada.TabIndex = 0;
+            // 
+            // txtBoxNumDoc
+            // 
+            this.txtBoxNumDoc.Location = new System.Drawing.Point(734, 53);
+            this.txtBoxNumDoc.Name = "txtBoxNumDoc";
+            this.txtBoxNumDoc.Size = new System.Drawing.Size(165, 26);
+            this.txtBoxNumDoc.TabIndex = 7;
             // 
             // lbCodColigada
             // 
