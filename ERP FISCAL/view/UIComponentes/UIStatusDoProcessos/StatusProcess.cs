@@ -19,7 +19,7 @@ namespace ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos
             del = this.UpdateProgressInternal;
 
             // Configurações de UX
-            this.StartPosition = FormStartPosition.CenterParent;
+            this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.ControlBox = false;
         }

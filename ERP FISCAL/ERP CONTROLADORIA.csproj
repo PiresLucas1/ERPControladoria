@@ -7,7 +7,7 @@
     <ProjectGuid>{D968ACB0-077F-4494-80EA-8A7EAA76DD37}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ERP_FISCAL</RootNamespace>
-    <AssemblyName>ERP FISCAL</AssemblyName>
+    <AssemblyName>Solfarma GP</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -16,17 +16,19 @@
     <PublishUrl>\\192.168.30.56\gs300gp\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
+    <UpdateUrl>\\192.168.30.56\gs300gp\</UpdateUrl>
+    <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -87,7 +89,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\CfopController.cs" />
+    <Compile Include="Controller\AlteraTipoMovimentoController\AlterarTipoMovimento.cs" />
+    <Compile Include="Controller\ImportarNotasController\CfopController.cs" />
     <Compile Include="Controller\ContaDebitoFreteController\AlteraContaDebitoController.cs" />
     <Compile Include="Controller\ExportaDadosBigController\ExportaDadosBigController.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -95,17 +98,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\AlteraTipoMovimentoRepositories\AlteraTipoMovimentoRepositories.cs" />
     <Compile Include="Repositories\ExportaDadosBigRepositories\ExportaDadosBigRepositories.cs" />
     <Compile Include="Repositories\RepositoriesAlterarContaDebito\AlteraContaDebitoRepositories.cs" />
     <Compile Include="Utils\MascaraDeColuna.cs" />
-    <Compile Include="Controller\ProdutoServicoController.cs" />
-    <Compile Include="Controller\UIController.cs" />
-    <Compile Include="Repositories\CfopRepositories.cs" />
-    <Compile Include="Repositories\UIRepositorio.cs" />
-    <Compile Include="Repositories\NotasRepositories.cs" />
+    <Compile Include="Controller\ImportarNotasController\ProdutoServicoController.cs" />
+    <Compile Include="Controller\ImportarNotasController\UIController.cs" />
+    <Compile Include="Repositories\ImportarNotasRepositories\CfopRepositories.cs" />
+    <Compile Include="Repositories\ImportarNotasRepositories\UIRepositorio.cs" />
+    <Compile Include="Repositories\ImportarNotasRepositories\NotasRepositories.cs" />
     <Compile Include="ConexaoBancoDeDados.cs" />
-    <Compile Include="Controller\NotasController.cs" />
-    <Compile Include="Repositories\ProdutoServicoRepositories.cs" />
+    <Compile Include="Controller\ImportarNotasController\NotasController.cs" />
+    <Compile Include="Repositories\ImportarNotasRepositories\ProdutoServicoRepositories.cs" />
     <Compile Include="Utils\dateParse.cs" />
     <Compile Include="Utils\DecimalParse.cs" />
     <Compile Include="view\AlterarContaDebitoFrete.cs">
@@ -113,6 +117,12 @@
     </Compile>
     <Compile Include="view\AlterarContaDebitoFrete.Designer.cs">
       <DependentUpon>AlterarContaDebitoFrete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\AlteraTipoMovimento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\AlteraTipoMovimento.Designer.cs">
+      <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
     </Compile>
     <Compile Include="view\ExportaDadosBig.cs">
       <SubType>Form</SubType>
@@ -168,6 +178,9 @@
     </Compile>
     <EmbeddedResource Include="view\AlterarContaDebitoFrete.resx">
       <DependentUpon>AlterarContaDebitoFrete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\AlteraTipoMovimento.resx">
+      <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ExportaDadosBig.resx">
       <DependentUpon>ExportaDadosBig.cs</DependentUpon>

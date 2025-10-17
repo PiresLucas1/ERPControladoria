@@ -17,14 +17,14 @@ namespace ERP_FISCAL.repositories
         public DataTable EncontrarComOcorrencia(string valor, int codColigada)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
 
             try
             {
 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaNaturezaFiscal", conn))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultaNaturezaFiscal", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         SqlParameter p;
@@ -61,14 +61,14 @@ namespace ERP_FISCAL.repositories
         public DataTable EncontrarTodos(int codColigada)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
 
             try
             {
 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaNaturezaFiscal", conn))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultaNaturezaFiscal", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 1200;
@@ -97,14 +97,14 @@ namespace ERP_FISCAL.repositories
         public DataTable PegaValorPeloCodigo(string valor)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
 
             try
             {
 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspUsuConsultaPeloId", conn))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultaNaturezaFiscal", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         SqlParameter p;                        

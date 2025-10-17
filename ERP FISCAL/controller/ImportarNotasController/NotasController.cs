@@ -43,6 +43,7 @@ namespace ERP_FISCAL.controller
         public async Task ExportToTotvsOLD(DataTable dtToImport)
         {
             List<string> mensagemRetorno = new List<string>();
+            var msgRetornoString = "";
             try
             {
                 var conexaoBanco = new ConexaoBancoDeDadosTOTVS();
@@ -117,12 +118,12 @@ namespace ERP_FISCAL.controller
 
                             //row["Retorno"] = msgRetorno.Value?.ToString();
                             //row["IDMov"] = idMov.Value != DBNull.Value ? (int)idMov.Value : 0;
-                            msgRetorno.Value?.ToString();
+                            msgRetornoString = msgRetorno.Value?.ToString();
                         }
                     }
 
                     MessageBox.Show(
-                        "Importação concluída com sucesso!",
+                        "Importação concluída com sucesso! " + msgRetornoString,
                         "Sucesso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information

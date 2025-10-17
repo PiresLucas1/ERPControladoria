@@ -14,13 +14,13 @@ namespace ERP_FISCAL.Repositories
         public DataTable EncontrarTodos(int codColigada)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
             try
             {
 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaProduto", conn))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspCadConsultaProduto", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@INCodColigada", codColigada);
@@ -46,13 +46,13 @@ namespace ERP_FISCAL.Repositories
         {
             DataTable tabela = new DataTable();
             tabela = tabela.DefaultView.ToTable(true);
-            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
             try
             {
                 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaProduto", conn))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspCadConsultaProduto", conn))
                     {
                         
                         
@@ -99,7 +99,7 @@ namespace ERP_FISCAL.Repositories
 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaProdutoPeloIDOuDescricao", conn))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspCadConsultaProdutoIDDescricao", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         SqlParameter p = new SqlParameter("@INintIDProduto", SqlDbType.NVarChar);
@@ -131,7 +131,7 @@ namespace ERP_FISCAL.Repositories
 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaProdutoPeloIDOuDescricao", conn))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspCadConsultaProdutoIDDescricao", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         SqlParameter p;

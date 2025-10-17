@@ -40,7 +40,6 @@ namespace ERP_FISCAL
         public DataGridViewRow cellAlteracao;
         public int colAlteracao;
         private DataTable dtOrignal;
-        private string mensagemErro;
         public ImportarNotaView()
         {
             InitializeComponent();
@@ -89,7 +88,7 @@ namespace ERP_FISCAL
             DtPickerFim.Enabled = false;
             txtBoxToFilter.Enabled = false;
 
-            string[] itens = { "Periodo", "Chave de acesso" };
+            string[] itens = { "Periodo" };
             coBoxTipeFilter.Items.AddRange(itens);
             coBoxTipeFilter.SelectedIndex = 0;
         }
@@ -740,7 +739,6 @@ namespace ERP_FISCAL
             }
             if (valorRow == null)
             {
-                mensagemErro += "Valor: " + valor + " Não encontrado para coligada: " + codColigadaLinha;
                 return;
             }
             dtImportacao.Rows[index].Cells[valorCelula1].Value = valorRow["IDNATUREZA"].ToString();
@@ -767,7 +765,7 @@ namespace ERP_FISCAL
             }
             if (valorRow == null)
             {
-                mensagemErro += "Valor: " + valor + " Não encontrado para coligada: " + codColigadaLinha;
+                //mensagemErro += "Valor: " + valor + " Não encontrado para coligada: " + codColigadaLinha;
                 return;
             }
             dtImportacao.Rows[index].Cells[valorCelula1].Value = valorRow["CODIGOPRD"].ToString();

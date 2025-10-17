@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,11 +19,20 @@ namespace ERP_FISCAL.view
             string usuario = Environment.UserName;
             string dominio = Environment.UserDomainName;
 
-            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            System.Reflection.AssemblyName assemblyName = assembly.GetName();
-            Version version = assemblyName.Version;
+            // 🔹 Carrega a cor salva
+            string corSalva = Properties.Settings.Default.CorCabecalho;
+            if (!string.IsNullOrEmpty(corSalva))
+            {
+                Color cor = ColorTranslator.FromHtml(corSalva);
+                menuBarBottom.BackColor = cor;
+                menuBarTop.BackColor = cor;
+                txtVersao.BackColor = cor;
+            }
 
-            txtVersao.Text = "Versão: " + version.Major + "." + version.Minor + "." + version.Build;
+            var versionInfo = FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            txtVersao.Text = "Versão: " + versionInfo.FileVersion;
+
+            
             //Console.WriteLine(usuario + " " + dominio);
 
         }
@@ -100,7 +110,22 @@ namespace ERP_FISCAL.view
                     menuBarBottom.BackColor = corSelecionada;
                     menuBarTop.BackColor = corSelecionada;
                     txtVersao.BackColor = corSelecionada;
+
+                    // 🔹 Salva no Settings (convertendo para HTML: #RRGGBB)
+                    Properties.Settings.Default.CorCabecalho = ColorTranslator.ToHtml(corSelecionada);
+                    Properties.Settings.Default.Save();
+
+
                 }
+            }
+        }
+
+        private void alteraTipoMovimentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(AlterarContaDebitoFrete)))
+            {
+                AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
+                alteraTipoMovimento.Show();
             }
         }
     }
