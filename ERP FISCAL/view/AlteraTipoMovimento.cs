@@ -57,8 +57,7 @@ namespace ERP_FISCAL.view
             }
 
             foreach (DataRow row in data.Rows)
-            {
-                // Checa se já existe uma linha com mesma coligada e codigo
+            {              
                 bool exists = dataTableComModificacoes.AsEnumerable().Any(r =>
                     object.Equals(r["CODCOLIGADA"], row["CODCOLIGADA"]) &&
                     object.Equals(r["IDMOV"], row["IDMOV"])
@@ -83,6 +82,7 @@ namespace ERP_FISCAL.view
         {
 
             var dtOriginal = (DataTable)dtAlteracoes.DataSource;
+
             var linhasSelecionadas = dtOriginal.AsEnumerable()
                 .Where(r => r.Field<bool>("Selecionar"))
                 .ToList();
@@ -110,24 +110,47 @@ namespace ERP_FISCAL.view
             MessageBox.Show(resultado);
             if (resultado != null && resultado.Trim().Equals("Tipo de Movimento alterado com sucesso!", StringComparison.OrdinalIgnoreCase))
             {
-                bool jaExiste = dataTableComModificacoes.AsEnumerable().Any(r =>
-                    Convert.ToInt32(r.Field<short>("CODCOLIGADA")) == Convert.ToInt32(coligada) &&
-                     r.Field<int>("IDMOV") == Convert.ToInt32(idmov) 
-                 );
+                // atualiza valor diretamente no datagrid, sem precisar consultar no banco novamente
+                primeiraLinha["CODTMV"] = tbCodTmv.Text;
+                dtAlteracoes.Refresh();
 
-                if (!jaExiste)
+
+                foreach (DataGridViewRow row in dtAlteracoes.Rows)
                 {
-                    // Adiciona uma nova linha copiando os valores desejados
-                    DataRow novaLinha = dataTableComModificacoes.NewRow();
-                    novaLinha["CODTMV"] = tbCodTmv.Text;
+                    var rowColigada = row.Cells["CODCOLIGADA"].Value?.ToString();
+                    var rowIdMov = row.Cells["IDMOV"].Value?.ToString();
 
-                    
-
-                    dataTableComModificacoes.Rows.Add(novaLinha);
-                    CarregaDataTable(dataTableComModificacoes);
+                    if (rowColigada == coligada.ToString() && rowIdMov == idmov.ToString())
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LightGreen;
+                        break;
+                    }
                 }
+
             }
-            
+            else
+            {
+                // remove do data grid que é exibido
+                dtOriginal.Rows.Remove(primeiraLinha);
+                dtAlteracoes.Refresh();
+                // reomve do datatable da classe
+                if (dataTableComModificacoes != null && dataTableComModificacoes.Rows.Count > 0)
+                {
+                    var linhasParaRemover = dataTableComModificacoes.AsEnumerable()
+                        .Where(r =>
+                            r["CODCOLIGADA"].ToString() == coligada.ToString() &&
+                            r["IDMOV"].ToString() == idmov.ToString())
+                        .ToList();
+
+                    foreach (var linha in linhasParaRemover)
+                    {
+                        dataTableComModificacoes.Rows.Remove(linha);
+                    }
+                }
+                dataTableComModificacoes.AcceptChanges();
+
+            }
+
             return;
 
 
@@ -148,5 +171,23 @@ namespace ERP_FISCAL.view
             dtAlteracoes.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightSteelBlue;
             dtAlteracoes.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
         }
+
+        private void dtAlteracoes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Garante que o clique foi na coluna "Selecionar"
+            if (e.RowIndex >= 0 && dtAlteracoes.Columns[e.ColumnIndex].Name == "Selecionar")
+            {
+                // Desmarca todas as outras linhas
+                foreach (DataGridViewRow row in dtAlteracoes.Rows)
+                {
+                    if (row.Index != e.RowIndex)
+                        row.Cells["Selecionar"].Value = false;
+                }
+
+                // Atualiza o grid
+                dtAlteracoes.EndEdit();
+            }
+        }
+
     }
 }

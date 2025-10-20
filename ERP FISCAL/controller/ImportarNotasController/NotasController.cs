@@ -122,18 +122,31 @@ namespace ERP_FISCAL.controller
                         }
                     }
 
-                    MessageBox.Show(
-                        "Importação concluída com sucesso! " + msgRetornoString,
+                    if (msgRetornoString != null && msgRetornoString.Trim().Equals("Importação concluída com sucesso!", StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show(
+                        msgRetornoString,
                         "Sucesso",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information
-                    );
+                         );
+                    }
+                    else {                         
+                        MessageBox.Show(
+                        "Erro durante a importação: " + msgRetornoString,
+                        "Erro",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                         );
+                    }
+
+                   
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Erro durante a importação: " + ex.Message,
+                    "Erro interno durante a importação: " + ex.Message,
                     "Erro",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error

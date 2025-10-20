@@ -33,7 +33,10 @@
             this.dtPickerFinal = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbFiltro = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.txtNumeroNota = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btnPesquisar = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.cbConferida = new System.Windows.Forms.ComboBox();
@@ -44,9 +47,12 @@
             this.btn = new System.Windows.Forms.Button();
             this.chkNaoConferida = new System.Windows.Forms.CheckBox();
             this.chkSubstituir = new System.Windows.Forms.CheckBox();
-            this.groupBox1.SuspendLayout();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.gbFiltro.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtNotasImportadas)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dtPickerInicio
@@ -83,28 +89,57 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "Data Fim";
             // 
-            // groupBox1
+            // gbFiltro
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.gbFiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.btnPesquisar);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.cbConferida);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtFilial);
-            this.groupBox1.Controls.Add(this.dtPickerInicio);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.dtPickerFinal);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1200, 226);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Parâmetros";
+            this.gbFiltro.Controls.Add(this.groupBox1);
+            this.gbFiltro.Controls.Add(this.btnPesquisar);
+            this.gbFiltro.Controls.Add(this.label7);
+            this.gbFiltro.Controls.Add(this.cbConferida);
+            this.gbFiltro.Controls.Add(this.label3);
+            this.gbFiltro.Controls.Add(this.txtFilial);
+            this.gbFiltro.Controls.Add(this.dtPickerInicio);
+            this.gbFiltro.Controls.Add(this.label2);
+            this.gbFiltro.Controls.Add(this.label1);
+            this.gbFiltro.Controls.Add(this.dtPickerFinal);
+            this.gbFiltro.Location = new System.Drawing.Point(12, 12);
+            this.gbFiltro.Name = "gbFiltro";
+            this.gbFiltro.Size = new System.Drawing.Size(1200, 226);
+            this.gbFiltro.TabIndex = 4;
+            this.gbFiltro.TabStop = false;
+            this.gbFiltro.Text = "Parâmetros";
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(98, 127);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(112, 33);
+            this.button1.TabIndex = 19;
+            this.button1.Text = "Filtrar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // txtNumeroNota
+            // 
+            this.txtNumeroNota.Location = new System.Drawing.Point(10, 69);
+            this.txtNumeroNota.Name = "txtNumeroNota";
+            this.txtNumeroNota.Size = new System.Drawing.Size(200, 26);
+            this.txtNumeroNota.TabIndex = 17;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 35);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(63, 20);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "N° Nota";
             // 
             // btnPesquisar
             // 
+            this.btnPesquisar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPesquisar.Location = new System.Drawing.Point(1017, 179);
             this.btnPesquisar.Name = "btnPesquisar";
             this.btnPesquisar.Size = new System.Drawing.Size(141, 38);
@@ -159,11 +194,13 @@
             this.dtNotasImportadas.RowTemplate.Height = 28;
             this.dtNotasImportadas.Size = new System.Drawing.Size(1200, 569);
             this.dtNotasImportadas.TabIndex = 5;
+            this.dtNotasImportadas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtNotasImportadas_CellClick);
             // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.btn);
             this.groupBox2.Controls.Add(this.chkNaoConferida);
             this.groupBox2.Controls.Add(this.chkSubstituir);
@@ -175,6 +212,7 @@
             // 
             // btn
             // 
+            this.btn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn.Location = new System.Drawing.Point(982, 34);
             this.btn.Name = "btn";
             this.btn.Size = new System.Drawing.Size(176, 38);
@@ -203,6 +241,29 @@
             this.chkSubstituir.Text = "Substituir";
             this.chkSubstituir.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.txtNumeroNota);
+            this.groupBox1.Location = new System.Drawing.Point(522, 23);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(233, 188);
+            this.groupBox1.TabIndex = 20;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Filtro";
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.Location = new System.Drawing.Point(195, 41);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(139, 38);
+            this.button2.TabIndex = 18;
+            this.button2.Text = "Selecionar tudo";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // ExportaDadosBig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -210,15 +271,17 @@
             this.ClientSize = new System.Drawing.Size(1233, 919);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.dtNotasImportadas);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbFiltro);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExportaDadosBig";
             this.Text = "Exporta Dados Big";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbFiltro.ResumeLayout(false);
+            this.gbFiltro.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtNotasImportadas)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -229,7 +292,7 @@
         private System.Windows.Forms.DateTimePicker dtPickerFinal;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbFiltro;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtFilial;
         private System.Windows.Forms.DataGridView dtNotasImportadas;
@@ -240,5 +303,10 @@
         private System.Windows.Forms.CheckBox chkNaoConferida;
         private System.Windows.Forms.CheckBox chkSubstituir;
         private System.Windows.Forms.Button btn;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txtNumeroNota;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button2;
     }
 }

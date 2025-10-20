@@ -303,6 +303,11 @@ namespace ERP_FISCAL
         {
             NotasController exportServiceNotes = new NotasController();
             var dtOriginal = (DataTable)dtImportacao.DataSource;
+            if(dtOriginal == null)
+            {
+                MessageBox.Show("Não há dados para exportar");
+                return;
+            }
             var linhasSelecionadas = dtOriginal.AsEnumerable()
                 .Where(r => r.Field<bool>("Selecionar"))
                 .ToList();

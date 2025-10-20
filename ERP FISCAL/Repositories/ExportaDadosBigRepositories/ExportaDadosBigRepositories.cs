@@ -61,6 +61,7 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
         {
             ConexaoBancoDeDadosBigCentral conexaoBanco = new ConexaoBancoDeDadosBigCentral();
             DataTable tabelaRetorno = new DataTable();
+            string retornoMensagem = "";
             try
             {
 
@@ -81,16 +82,17 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
                         {
                             Direction = ParameterDirection.Output
                         };
+                        cmd.Parameters.Add(msgRetorno);
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             tabelaRetorno.Load(reader);
                         }
 
-
+                        retornoMensagem = msgRetorno.Value?.ToString();
                     }
                     string retorno = tabelaRetorno.Rows[0].ToString();
                     conexaoBanco.FecharConexao(conn);
-                    return "Importação concluída com sucesso.";
+                    return retornoMensagem;
                 }
             }
             catch (Exception ex)

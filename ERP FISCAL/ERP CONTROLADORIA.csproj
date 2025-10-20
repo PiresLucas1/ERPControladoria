@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>24</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -112,10 +112,10 @@
     <Compile Include="Repositories\ImportarNotasRepositories\ProdutoServicoRepositories.cs" />
     <Compile Include="Utils\dateParse.cs" />
     <Compile Include="Utils\DecimalParse.cs" />
-    <Compile Include="view\AlterarContaDebitoFrete.cs">
+    <Compile Include="view\OldIView\AlterarContaDebitoFrete.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\AlterarContaDebitoFrete.Designer.cs">
+    <Compile Include="view\OldIView\AlterarContaDebitoFrete.Designer.cs">
       <DependentUpon>AlterarContaDebitoFrete.cs</DependentUpon>
     </Compile>
     <Compile Include="view\AlteraTipoMovimento.cs">
@@ -176,7 +176,7 @@
     <Compile Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.Designer.cs">
       <DependentUpon>StatusProcess.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="view\AlterarContaDebitoFrete.resx">
+    <EmbeddedResource Include="view\OldIView\AlterarContaDebitoFrete.resx">
       <DependentUpon>AlterarContaDebitoFrete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\AlteraTipoMovimento.resx">

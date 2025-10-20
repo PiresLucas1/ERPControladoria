@@ -33,6 +33,8 @@
             this.importarNotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarNotasParaOBigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alteraçõesFiscaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alteraTipoMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contabilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alterarContaFreteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarBottom = new System.Windows.Forms.MenuStrip();
@@ -41,8 +43,6 @@
             this.alterarCorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.alteraçõesFiscaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alteraTipoMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarTop.SuspendLayout();
             this.menuBarBottom.SuspendLayout();
             this.SuspendLayout();
@@ -74,16 +74,31 @@
             // importarToolStripMenuItem
             // 
             this.importarToolStripMenuItem.Name = "importarToolStripMenuItem";
-            this.importarToolStripMenuItem.Size = new System.Drawing.Size(322, 34);
+            this.importarToolStripMenuItem.Size = new System.Drawing.Size(289, 34);
             this.importarToolStripMenuItem.Text = "Importar XML Serviço";
             this.importarToolStripMenuItem.Click += new System.EventHandler(this.importarToolStripMenuItem_Click);
             // 
             // importarNotasParaOBigToolStripMenuItem
             // 
             this.importarNotasParaOBigToolStripMenuItem.Name = "importarNotasParaOBigToolStripMenuItem";
-            this.importarNotasParaOBigToolStripMenuItem.Size = new System.Drawing.Size(322, 34);
-            this.importarNotasParaOBigToolStripMenuItem.Text = "Importar Notas para o Big";
+            this.importarNotasParaOBigToolStripMenuItem.Size = new System.Drawing.Size(289, 34);
+            this.importarNotasParaOBigToolStripMenuItem.Text = "Exportar Notas do Big";
             this.importarNotasParaOBigToolStripMenuItem.Click += new System.EventHandler(this.importarNotasParaOBigToolStripMenuItem_Click);
+            // 
+            // alteraçõesFiscaisToolStripMenuItem
+            // 
+            this.alteraçõesFiscaisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alteraTipoMovimentoToolStripMenuItem});
+            this.alteraçõesFiscaisToolStripMenuItem.Name = "alteraçõesFiscaisToolStripMenuItem";
+            this.alteraçõesFiscaisToolStripMenuItem.Size = new System.Drawing.Size(162, 29);
+            this.alteraçõesFiscaisToolStripMenuItem.Text = "Alterações fiscais";
+            // 
+            // alteraTipoMovimentoToolStripMenuItem
+            // 
+            this.alteraTipoMovimentoToolStripMenuItem.Name = "alteraTipoMovimentoToolStripMenuItem";
+            this.alteraTipoMovimentoToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
+            this.alteraTipoMovimentoToolStripMenuItem.Text = "Altera tipo movimento";
+            this.alteraTipoMovimentoToolStripMenuItem.Click += new System.EventHandler(this.alteraTipoMovimentoToolStripMenuItem_Click);
             // 
             // contabilToolStripMenuItem
             // 
@@ -98,7 +113,7 @@
             // alterarContaFreteToolStripMenuItem
             // 
             this.alterarContaFreteToolStripMenuItem.Name = "alterarContaFreteToolStripMenuItem";
-            this.alterarContaFreteToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.alterarContaFreteToolStripMenuItem.Size = new System.Drawing.Size(256, 34);
             this.alterarContaFreteToolStripMenuItem.Text = "Alterar conta frete";
             this.alterarContaFreteToolStripMenuItem.Click += new System.EventHandler(this.alterarContaFreteToolStripMenuItem_Click);
             // 
@@ -154,21 +169,6 @@
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(256, 34);
             this.toolStripMenuItem5.Text = "Alterar conta frete";
-            // 
-            // alteraçõesFiscaisToolStripMenuItem
-            // 
-            this.alteraçõesFiscaisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alteraTipoMovimentoToolStripMenuItem});
-            this.alteraçõesFiscaisToolStripMenuItem.Name = "alteraçõesFiscaisToolStripMenuItem";
-            this.alteraçõesFiscaisToolStripMenuItem.Size = new System.Drawing.Size(162, 29);
-            this.alteraçõesFiscaisToolStripMenuItem.Text = "Alterações fiscais";
-            // 
-            // alteraTipoMovimentoToolStripMenuItem
-            // 
-            this.alteraTipoMovimentoToolStripMenuItem.Name = "alteraTipoMovimentoToolStripMenuItem";
-            this.alteraTipoMovimentoToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
-            this.alteraTipoMovimentoToolStripMenuItem.Text = "Altera tipo movimento";
-            this.alteraTipoMovimentoToolStripMenuItem.Click += new System.EventHandler(this.alteraTipoMovimentoToolStripMenuItem_Click);
             // 
             // Portal
             // 

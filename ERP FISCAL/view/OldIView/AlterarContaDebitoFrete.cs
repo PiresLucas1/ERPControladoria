@@ -25,6 +25,7 @@ namespace ERP_FISCAL.view
             cbTipoMovimento.Items.Add("1.2.62");
             cbTipoMovimento.Items.Add("Todos");
 
+           
         }
 
         private async void btnPesquisar_Click(object sender, EventArgs e)

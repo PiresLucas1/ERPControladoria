@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,10 +30,10 @@ namespace ERP_FISCAL.view
                 txtVersao.BackColor = cor;
             }
 
-            var versionInfo = FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
-            txtVersao.Text = "Versão: " + versionInfo.FileVersion;
+            Version versaoAssembly = Assembly.GetExecutingAssembly().GetName().Version;
+            txtVersao.Text = $"Versão: {versaoAssembly}";
 
-            
+
             //Console.WriteLine(usuario + " " + dominio);
 
         }

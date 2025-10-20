@@ -122,6 +122,8 @@
             // 
             // dtAlteracoes
             // 
+            this.dtAlteracoes.AllowUserToAddRows = false;
+            this.dtAlteracoes.AllowUserToDeleteRows = false;
             this.dtAlteracoes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -133,6 +135,7 @@
             this.dtAlteracoes.Size = new System.Drawing.Size(1103, 486);
             this.dtAlteracoes.TabIndex = 1;
             this.dtAlteracoes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtAlteracoes_CellClick);
+            this.dtAlteracoes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtAlteracoes_CellContentClick);
             // 
             // btnAlterar
             // 
