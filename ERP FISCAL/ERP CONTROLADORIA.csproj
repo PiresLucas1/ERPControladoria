@@ -112,6 +112,7 @@
     <Compile Include="Repositories\ImportarNotasRepositories\ProdutoServicoRepositories.cs" />
     <Compile Include="Utils\dateParse.cs" />
     <Compile Include="Utils\DecimalParse.cs" />
+    <Compile Include="Utils\ValidaNaturezaFilial.cs" />
     <Compile Include="view\OldIView\AlterarContaDebitoFrete.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,5 +1,6 @@
 ﻿using ERP_FISCAL.controller;
 using ERP_FISCAL.Controller;
+using ERP_FISCAL.Utils;
 using ERP_FISCAL.view;
 using ERP_FISCAL.view.DialogUI;
 using ERP_FISCAL.view.DialogUI.interfacesUI;
@@ -23,10 +24,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static ERP_FISCAL.Utils.DateParse;
 using static ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos.StatusProcess;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TextBox = System.Windows.Forms.TextBox;
-using static ERP_FISCAL.Utils.DateParse;
 
 
 
@@ -669,6 +670,7 @@ namespace ERP_FISCAL
 
             if (nomeColuna == "CFOP")
             {
+
                 valorEncontrado = dataRetorno.Rows[0]["COD. NATUREZA"].ToString();
                 valorDescricaoEncontrado = dataRetorno.Rows[0]["DESCRIÇÃO NATUREZA"].ToString();
             }
@@ -686,6 +688,19 @@ namespace ERP_FISCAL
                 }
                 if (nomeColuna == "CFOP")
                 {
+                    string ufPrestador = dtImportacao.Rows[cellAlteracao.Index].Cells["UF Prestador"].Value.ToString();
+                    string ufTomador = dtImportacao.Rows[cellAlteracao.Index].Cells["UF Tomador"].Value.ToString();
+                    string filial = dtImportacao.Rows[cellAlteracao.Index].Cells["CodFilial"].Value.ToString();
+                    ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial();
+
+                    bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valorEncontrado, Convert.ToInt32(filial), ufTomador, ufPrestador);
+
+                    if (!validacao)
+                    {
+                        dtImportacao.Rows[cellAlteracao.Index].Cells[nomeColuna].Value = "";
+                        return;
+                    }
+                    //validaNatureza.ValidaCodigoNaturezaFilial()
                     dtImportacao.Rows[cellAlteracao.Index].Cells[nomeColuna].Value = valorEncontrado;
                     dtImportacao.Rows[cellAlteracao.Index].Cells["CFOP Descrição"].Value = valorDescricaoEncontrado;
                 }
@@ -703,6 +718,19 @@ namespace ERP_FISCAL
             {
                 var valor = dataRowSelecionado["COD. NATUREZA"].ToString().Trim();
                 var valorDescricao = dataRowSelecionado["DESCRIÇÃO NATUREZA"].ToString().Trim();
+
+                string ufPrestador = dtImportacao.Rows[rowLinha.Index].Cells["UF Prestador"].Value.ToString();
+                string ufTomador = dtImportacao.Rows[rowLinha.Index].Cells["UF Tomador"].Value.ToString();
+                string filial = dtImportacao.Rows[rowLinha.Index].Cells["CodFilial"].Value.ToString();
+
+                ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial();
+
+                bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valor, Convert.ToInt32(filial), ufTomador, ufPrestador);
+
+                if (!validacao)
+                {
+                    return;
+                }
 
                 InsereValorNoDataGridView(rowLinha.Index, valor, "CFOP");
                 InsereValorNoDataGridView(rowLinha.Index, valorDescricao, "CFOP Descrição");
@@ -871,6 +899,34 @@ namespace ERP_FISCAL
         private void checkBoxMostraComErro_CheckedChanged(object sender, EventArgs e)
         {
             FiltraLinhaComErro();
+        }
+
+        private void btnAutoPreencherCfop_Click(object sender, EventArgs e)
+        {
+            foreach(DataGridViewRow linha in dtImportacao.Rows)
+            {
+                string filial = linha.Cells["CodFilial"].Value.ToString();
+
+                string ufTomador = linha.Cells["UF Tomador"].Value.ToString();
+                string ufPrestador = linha.Cells["UF Prestador"].Value.ToString();
+
+
+
+                if (Convert.ToInt32(filial) != 1)
+                {
+                  
+                  if (ufPrestador == ufTomador) 
+                  {
+                      linha.Cells["CFOP"].Value = "1.933.008";
+                      linha.Cells["CFOP Descrição"].Value = "AQUISIÇÃO DE SERVIÇOS - FILIAL";
+                  }
+                  else
+                  {
+                      linha.Cells["CFOP"].Value = "2.933.006";
+                      linha.Cells["CFOP Descrição"].Value = "";
+                  }
+                }
+            }
         }
     }
 }

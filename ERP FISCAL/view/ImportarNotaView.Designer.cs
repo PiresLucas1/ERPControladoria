@@ -54,9 +54,12 @@
             this.btnDesmarcarTodos = new System.Windows.Forms.Button();
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnSelecionarTodas = new System.Windows.Forms.Button();
+            this.btnAutoPreencherCfop = new System.Windows.Forms.Button();
             this.dtImportacao = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnListaNotas
@@ -88,6 +91,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.checkBoxMostraComErro);
             this.groupBox1.Controls.Add(this.cbLancadasNoERP);
             this.groupBox1.Controls.Add(this.lbDataInicio);
@@ -118,7 +122,7 @@
             // checkBoxMostraComErro
             // 
             this.checkBoxMostraComErro.AutoSize = true;
-            this.checkBoxMostraComErro.Location = new System.Drawing.Point(1007, 53);
+            this.checkBoxMostraComErro.Location = new System.Drawing.Point(997, 34);
             this.checkBoxMostraComErro.Name = "checkBoxMostraComErro";
             this.checkBoxMostraComErro.Size = new System.Drawing.Size(155, 24);
             this.checkBoxMostraComErro.TabIndex = 9;
@@ -318,6 +322,18 @@
             this.btnSelecionarTodas.UseVisualStyleBackColor = true;
             this.btnSelecionarTodas.Click += new System.EventHandler(this.btnSelecionarTodos_Click);
             // 
+            // btnAutoPreencherCfop
+            // 
+            this.btnAutoPreencherCfop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnAutoPreencherCfop.Location = new System.Drawing.Point(12, 34);
+            this.btnAutoPreencherCfop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAutoPreencherCfop.Name = "btnAutoPreencherCfop";
+            this.btnAutoPreencherCfop.Size = new System.Drawing.Size(143, 40);
+            this.btnAutoPreencherCfop.TabIndex = 12;
+            this.btnAutoPreencherCfop.Text = "Preencher CFOP";
+            this.btnAutoPreencherCfop.UseVisualStyleBackColor = true;
+            this.btnAutoPreencherCfop.Click += new System.EventHandler(this.btnAutoPreencherCfop_Click);
+            // 
             // dtImportacao
             // 
             this.dtImportacao.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
@@ -337,6 +353,16 @@
             this.dtImportacao.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtImportacao_CellContentClick);
             this.dtImportacao.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dtImportacao_EditingControlShowing);
             this.dtImportacao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnAutoPreencherCfop);
+            this.groupBox2.Location = new System.Drawing.Point(997, 76);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(219, 133);
+            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Auto preenchimento";
             // 
             // ImportarNotaView
             // 
@@ -359,6 +385,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -391,6 +418,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtCnpjFor;
         private System.Windows.Forms.CheckBox checkBoxMostraComErro;
+        private System.Windows.Forms.Button btnAutoPreencherCfop;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
 
