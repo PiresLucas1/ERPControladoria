@@ -691,14 +691,22 @@ namespace ERP_FISCAL
                     string ufPrestador = dtImportacao.Rows[cellAlteracao.Index].Cells["UF Prestador"].Value.ToString();
                     string ufTomador = dtImportacao.Rows[cellAlteracao.Index].Cells["UF Tomador"].Value.ToString();
                     string filial = dtImportacao.Rows[cellAlteracao.Index].Cells["CodFilial"].Value.ToString();
-                    ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial();
 
-                    bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valorEncontrado, Convert.ToInt32(filial), ufTomador, ufPrestador);
+                    string codColigada = dtImportacao.Rows[cellAlteracao.Index].Cells["CodColigada"].Value.ToString();
 
-                    if (!validacao)
+                    if(ufTomador != "")
                     {
-                        dtImportacao.Rows[cellAlteracao.Index].Cells[nomeColuna].Value = "";
-                        return;
+                        if (Convert.ToInt32(codColigada) == 2)
+                        {
+                            ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial();
+                            bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valorEncontrado, Convert.ToInt32(filial), ufTomador, ufPrestador);
+
+                            if (!validacao)
+                            {
+                                dtImportacao.Rows[cellAlteracao.Index].Cells[nomeColuna].Value = "";
+                                return;
+                            }
+                        }
                     }
                     //validaNatureza.ValidaCodigoNaturezaFilial()
                     dtImportacao.Rows[cellAlteracao.Index].Cells[nomeColuna].Value = valorEncontrado;
@@ -722,14 +730,21 @@ namespace ERP_FISCAL
                 string ufPrestador = dtImportacao.Rows[rowLinha.Index].Cells["UF Prestador"].Value.ToString();
                 string ufTomador = dtImportacao.Rows[rowLinha.Index].Cells["UF Tomador"].Value.ToString();
                 string filial = dtImportacao.Rows[rowLinha.Index].Cells["CodFilial"].Value.ToString();
+                if(ufTomador != "")
+                {                
+                    ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial();
 
-                ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial();
+                    string codColigada = dtImportacao.Rows[cellAlteracao.Index].Cells["CodColigada"].Value.ToString();
+                    if (Convert.ToInt32(codColigada) == 2)
+                    {
 
-                bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valor, Convert.ToInt32(filial), ufTomador, ufPrestador);
+                        bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valor, Convert.ToInt32(filial), ufTomador, ufPrestador);
 
-                if (!validacao)
-                {
-                    return;
+                        if (!validacao)
+                        {
+                            return;
+                        }
+                    }
                 }
 
                 InsereValorNoDataGridView(rowLinha.Index, valor, "CFOP");
@@ -905,14 +920,14 @@ namespace ERP_FISCAL
         {
             foreach(DataGridViewRow linha in dtImportacao.Rows)
             {
-                string filial = linha.Cells["CodFilial"].Value.ToString();
-
+                string filial = linha.Cells["CodFilial"].Value.ToString(); 
+                string codColigada = linha.Cells["CodColigada"].Value.ToString(); 
                 string ufTomador = linha.Cells["UF Tomador"].Value.ToString();
                 string ufPrestador = linha.Cells["UF Prestador"].Value.ToString();
 
 
 
-                if (Convert.ToInt32(filial) != 1)
+                if (Convert.ToInt32(filial) != 1 && Convert.ToInt32(codColigada) == 2)
                 {
                   
                   if (ufPrestador == ufTomador) 
@@ -923,10 +938,12 @@ namespace ERP_FISCAL
                   else
                   {
                       linha.Cells["CFOP"].Value = "2.933.006";
-                      linha.Cells["CFOP Descrição"].Value = "";
+                      linha.Cells["CFOP Descrição"].Value = "AQUISIÇÃO DE SERVIÇOS - FILIAL";
                   }
                 }
+
             }
+            MessageBox.Show("CFOPs preenchidos automaticamente conforme regras definidas.");
         }
     }
 }

@@ -17,14 +17,14 @@ namespace ERP_FISCAL
         public DataTable ObterNotas(DateTime dataInicio, DateTime dataFim, int codColigada, int bitExisteErp)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();            
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();            
 
             try
             {
 
                 using (SqlConnection conexao = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.UspQiveConsultaNFSe", conexao))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultarNfeServico", conexao))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 1200; /* 20 minutos */
