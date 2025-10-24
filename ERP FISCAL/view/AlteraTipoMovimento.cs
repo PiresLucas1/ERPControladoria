@@ -1,4 +1,5 @@
 ﻿using ERP_FISCAL.Controller.AlteraTipoMovimentoController;
+using ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco;
 using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
 using System;
 using System.Collections.Generic;
@@ -29,12 +30,28 @@ namespace ERP_FISCAL.view
                 MessageBox.Show("Você precisa inserir o número do movimento e a coligada");
                 return;
             }
-            int codMovimento = Convert.ToInt32(tbCodMovimento.Text);
+           
             int coligada = tbColigada.Text == "" ? 0 : Convert.ToInt32(tbColigada.Text);
-            AlterarTipoMovimentoController alterarTipoMovimento = new AlterarTipoMovimentoController();
-            DataTable dataRetorno = await alterarTipoMovimento.ConsultaMovimentoTotvs(codMovimento, coligada);
+            DataTable dataRetorno;
+            //if (!chkAlteraEmBloco.Checked)
+            //{
+            //    if (tbCodMovimento.Text.Contains(";"))
+            //    {
+                    
+            //        return;
+            //    }
+            //    int codMovimento = Convert.ToInt32(tbCodMovimento.Text);
 
-            StatusProcess splashScreen = new StatusProcess();
+            //    AlterarTipoMovimentoController alterarTipoMovimento = new AlterarTipoMovimentoController();
+            //    dataRetorno = await alterarTipoMovimento.ConsultaMovimentoTotvs(codMovimento, coligada);
+            //}
+            //else
+            //{
+            AlterarTipoMovimentoController alterarTipoMovimento = new AlterarTipoMovimentoController();
+            dataRetorno = await alterarTipoMovimento.ConsultaMultiplosMovimentoTotvs(tbCodMovimento.Text, coligada);
+            //}
+
+                StatusProcess splashScreen = new StatusProcess();
             splashScreen.Show(this); // 'this' como owner para ficar modal
             splashScreen.SetMessage("Carregando...");
             splashScreen.UpdateProgress(70);
@@ -93,14 +110,21 @@ namespace ERP_FISCAL.view
                 return;
             }
 
-            var primeiraLinha = linhasSelecionadas[0];
-            var coligada = primeiraLinha["CODCOLIGADA"];
-            var idmov = primeiraLinha["IDMOV"];
 
             StatusProcess splashScreen = new StatusProcess();
 
             splashScreen.Show(this); // 'this' como owner para ficar modal
             splashScreen.SetMessage("Alterando Tipo de Movimento...");
+
+            if (chkAlteraEmBloco.Checked)
+            {
+                MessageBox.Show("O check de alteração em bloco esta marcado, para alterar o movimento unico é necessário desmarcar");
+                return;
+            }            
+
+            var primeiraLinha = linhasSelecionadas[0];
+            var coligada = primeiraLinha["CODCOLIGADA"];
+            var idmov = primeiraLinha["IDMOV"];
 
             AlterarTipoMovimentoController alteraTipoMovimento = new AlterarTipoMovimentoController();
             var resultado = await alteraTipoMovimento.AlterarTipoMovimento(Convert.ToInt32(idmov), Convert.ToInt32(coligada), tbCodTmv.Text);
@@ -174,6 +198,10 @@ namespace ERP_FISCAL.view
 
         private void dtAlteracoes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (chkAlteraEmBloco.Checked)
+            {
+                return;
+            }
             // Garante que o clique foi na coluna "Selecionar"
             if (e.RowIndex >= 0 && dtAlteracoes.Columns[e.ColumnIndex].Name == "Selecionar")
             {
@@ -189,5 +217,64 @@ namespace ERP_FISCAL.view
             }
         }
 
+
+        private void btnAlterarEmBloco_Click(object sender, EventArgs e)
+        {
+            if (!chkAlteraEmBloco.Checked)
+            {
+                MessageBox.Show("Para alterar em bloco, marque o checkbox 'Alterar em Bloco'");
+                return;
+            }
+            var dtOriginal = (DataTable)dtAlteracoes.DataSource;
+
+            var linhasSelecionadas = dtOriginal.AsEnumerable()
+                .Where(r => r.Field<bool>("Selecionar"))
+                .ToList();
+
+            if (linhasSelecionadas.Count <= 0)
+            {
+                MessageBox.Show("Nenhum movimento selecionado para alteração.");
+                return;
+            }
+            //var coligada = primeiraLinha["CODCOLIGADA"];
+            var primeiraLinha = linhasSelecionadas[0];
+            var coligadaPraConfirmar = primeiraLinha["CODCOLIGADA"];
+            var idMovPraConfirmar = primeiraLinha["IDMOV"];
+
+            var coligada = primeiraLinha["CODCOLIGADA"];
+            List<string> idMovs = new List<string>();
+            foreach (DataRow linha in linhasSelecionadas)
+            {
+                var coligadaLinha = linha["CODCOLIGADA"];
+                
+                if(coligadaLinha.ToString() != coligadaPraConfirmar.ToString())
+                {
+                    MessageBox.Show("Para alterar em bloco, todos os movimentos selecionados devem pertencer à mesma coligada.");
+
+                    var dgvRow = dtAlteracoes.Rows
+                                .Cast<DataGridViewRow>()
+                                .FirstOrDefault(r => ((DataRowView)r.DataBoundItem).Row == linha);
+
+                        dtAlteracoes.ClearSelection();
+                        dgvRow.Selected = true;
+                        dtAlteracoes.FirstDisplayedScrollingRowIndex = dgvRow.Index;
+                        dgvRow.DefaultCellStyle.BackColor = Color.LightSalmon;
+                    return;
+                }
+                idMovs.Add(linha["IDMOV"].ToString());
+            }
+
+            // string idsParaAlterar = string.Join(",", idMovs);
+
+            AlteraEmBloco alteraEmBloco = new AlteraEmBloco
+                ( 3,
+                new string[] { "Coligada: " + coligada.ToString(),"Código do Tipo de Movimento:", "Inserir novo código:" },
+                new string[] {coligada.ToString(), idMovPraConfirmar.ToString(), "" }
+                );
+            
+            DialogResult resultado = alteraEmBloco.ShowDialog();
+
+
+        }
     }
 }

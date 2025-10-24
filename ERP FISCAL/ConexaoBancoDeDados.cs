@@ -78,10 +78,12 @@ namespace SeuProjeto
     public class ConexaoBancoDeDadosGestaoProcessos
     {
         private readonly string connectionString;
+        private readonly string connectionStringRm;
 
         public ConexaoBancoDeDadosGestaoProcessos()
         {
             connectionString = "Server=dbtotvs\\dbtotvs;Database=GestaoProcessos;Integrated Security=True;";
+            connectionStringRm = "Server=DBSOL\\DBSOL;Database=GestaoProcessos;User Id=rm;Password=rm;Encrypt=True;TrustServerCertificate=True;Connection Timeout=0;";
         }
         public string GetConexaoString()
         {
@@ -91,6 +93,22 @@ namespace SeuProjeto
         public SqlConnection AbrirConexao()
         {
             SqlConnection conexao = new SqlConnection(connectionString);
+
+            try
+            {
+                conexao.Open();
+                Console.WriteLine("Conexão aberta com sucesso!");
+                return conexao;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao abrir a conexão: " + ex.Message);
+                throw;
+            }
+        }
+        public SqlConnection AbrirConexaoRm()
+        {
+            SqlConnection conexao = new SqlConnection(connectionStringRm);
 
             try
             {

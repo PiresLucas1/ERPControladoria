@@ -17,10 +17,28 @@ namespace ERP_FISCAL.Controller.AlteraTipoMovimentoController
 
             return dataRetorno;
         }
+        public async Task<DataTable> ConsultaMultiplosMovimentoTotvs(string codMovimento, int coligada)
+        {
+            AlteraTipoMovimentoRepositories alteraTipoMovimentoRepositories = new AlteraTipoMovimentoRepositories();
+            DataTable dataRetorno = await alteraTipoMovimentoRepositories.ConsultaMultiplosMovimentoTotvs(codMovimento, coligada);
+
+            return dataRetorno;
+        }
         public async Task<string> AlterarTipoMovimento(int codMovimento, int coligada, string codTmovimento)
         {
             AlteraTipoMovimentoRepositories alteraTipoMovimentoRepositories = new AlteraTipoMovimentoRepositories();
             DataTable retorno = await alteraTipoMovimentoRepositories.AlteraTipoMovimento(codMovimento, coligada, codTmovimento);
+
+            string mensagem = retorno.Rows.Count > 0
+                ? retorno.Rows[0]["Resultado"].ToString()
+                : "Sem resultado";
+            return mensagem;
+
+        }
+        public async Task<string> AlterarTipoMovimentoEmBloco(int codMovimento, int coligada, string codTmovimento)
+        {
+            AlteraTipoMovimentoRepositories alteraTipoMovimentoRepositories = new AlteraTipoMovimentoRepositories();
+            DataTable retorno = await alteraTipoMovimentoRepositories.AlteraTipoMovimentoEmBloco(codMovimento, coligada, codTmovimento);
 
             string mensagem = retorno.Rows.Count > 0
                 ? retorno.Rows[0]["Resultado"].ToString()

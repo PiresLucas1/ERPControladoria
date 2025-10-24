@@ -13,34 +13,36 @@ namespace ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco
     public partial class AlteraEmBloco : Form
     {
         private readonly DTOAlteraEmBloco _data;
-        private readonly DataGridView _dataGrid;
-        public AlteraEmBloco(DTOAlteraEmBloco data, DataGridView tabela)
+        private readonly DataTable _dataGrid;
+        private readonly int _codLayout;
+        private readonly string[] _valorLabel;
+        private readonly string[] _valorTextBox;
+        public AlteraEmBloco( int codLayout, string[] valoresLabel, string[] valorTextBox, DataTable tabela = null)
         {
             InitializeComponent();
-            _data = data;
+            //_data = data;
             _dataGrid = tabela;
+            _codLayout = codLayout;
+            _valorLabel = valoresLabel;
+            _valorTextBox = valorTextBox;
 
-            label1.Text = data.TextLabel1;
+            //lb1.Text = data.TextLabel1;
+            CarregaTerceiroLayout();
         }
 
-        private void btnConfirmar_Click(object sender, EventArgs e)
+
+        public void CarregaTerceiroLayout()
         {
-            if (_dataGrid == null || _dataGrid.SelectedRows.Count == 0)
+            if(_codLayout == 3)
             {
-                MessageBox.Show("Nenhuma linha selecionada!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                lb1.Text = _valorLabel[0];
+                lb2.Text = _valorLabel[1];
+                lb3.Text = _valorLabel[2];
 
-            foreach (DataGridViewRow row in _dataGrid.SelectedRows)
-            {
-                if (_dataGrid.Columns.Contains("Conta Débito")) // verifica se existe essa coluna
-                {
-                    row.Cells["Conta Débito"].Value = textBoxValorNovo.Text; // aplica o novo valor
-                }
+                txtValorNovo.Text = _valorTextBox[0] != "" ? _valorTextBox[0] : "";
+                txtValorNovo2.Text = _valorTextBox[1] != "" ? _valorTextBox[1] : "";
+                txtValorNovo3.Text = _valorTextBox[2] != "" ? _valorTextBox[2] : "";
             }
-
-            MessageBox.Show("Linhas alteradas com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
         }
     }
 }

@@ -30,6 +30,8 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlteraTipoMovimento));
             this.gbHeader = new System.Windows.Forms.GroupBox();
+            this.btnAlterarEmBloco = new System.Windows.Forms.Button();
+            this.chkAlteraEmBloco = new System.Windows.Forms.CheckBox();
             this.btnConsulta = new System.Windows.Forms.Button();
             this.lbConsultaMovimento = new System.Windows.Forms.Label();
             this.tbCodMovimento = new System.Windows.Forms.TextBox();
@@ -40,6 +42,7 @@
             this.dtAlteracoes = new System.Windows.Forms.DataGridView();
             this.btnAlterar = new System.Windows.Forms.Button();
             this.gbBottom = new System.Windows.Forms.GroupBox();
+            this.txtCount = new System.Windows.Forms.TextBox();
             this.gbHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtAlteracoes)).BeginInit();
             this.gbBottom.SuspendLayout();
@@ -49,6 +52,8 @@
             // 
             this.gbHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbHeader.Controls.Add(this.btnAlterarEmBloco);
+            this.gbHeader.Controls.Add(this.chkAlteraEmBloco);
             this.gbHeader.Controls.Add(this.btnConsulta);
             this.gbHeader.Controls.Add(this.lbConsultaMovimento);
             this.gbHeader.Controls.Add(this.tbCodMovimento);
@@ -61,6 +66,27 @@
             this.gbHeader.Size = new System.Drawing.Size(1103, 219);
             this.gbHeader.TabIndex = 0;
             this.gbHeader.TabStop = false;
+            // 
+            // btnAlterarEmBloco
+            // 
+            this.btnAlterarEmBloco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAlterarEmBloco.Location = new System.Drawing.Point(949, 161);
+            this.btnAlterarEmBloco.Name = "btnAlterarEmBloco";
+            this.btnAlterarEmBloco.Size = new System.Drawing.Size(136, 43);
+            this.btnAlterarEmBloco.TabIndex = 10;
+            this.btnAlterarEmBloco.Text = "Alterar em bloco";
+            this.btnAlterarEmBloco.UseVisualStyleBackColor = true;
+            this.btnAlterarEmBloco.Click += new System.EventHandler(this.btnAlterarEmBloco_Click);
+            // 
+            // chkAlteraEmBloco
+            // 
+            this.chkAlteraEmBloco.AutoSize = true;
+            this.chkAlteraEmBloco.Location = new System.Drawing.Point(261, 55);
+            this.chkAlteraEmBloco.Name = "chkAlteraEmBloco";
+            this.chkAlteraEmBloco.Size = new System.Drawing.Size(152, 24);
+            this.chkAlteraEmBloco.TabIndex = 9;
+            this.chkAlteraEmBloco.Text = "Alterar em Bloco";
+            this.chkAlteraEmBloco.UseVisualStyleBackColor = true;
             // 
             // btnConsulta
             // 
@@ -152,12 +178,22 @@
             // 
             this.gbBottom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbBottom.Controls.Add(this.txtCount);
             this.gbBottom.Controls.Add(this.btnAlterar);
             this.gbBottom.Location = new System.Drawing.Point(12, 739);
             this.gbBottom.Name = "gbBottom";
             this.gbBottom.Size = new System.Drawing.Size(1103, 79);
             this.gbBottom.TabIndex = 10;
             this.gbBottom.TabStop = false;
+            // 
+            // txtCount
+            // 
+            this.txtCount.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtCount.Enabled = false;
+            this.txtCount.Location = new System.Drawing.Point(9, 33);
+            this.txtCount.Name = "txtCount";
+            this.txtCount.Size = new System.Drawing.Size(90, 26);
+            this.txtCount.TabIndex = 10;
             // 
             // AlteraTipoMovimento
             // 
@@ -174,6 +210,7 @@
             this.gbHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtAlteracoes)).EndInit();
             this.gbBottom.ResumeLayout(false);
+            this.gbBottom.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -191,5 +228,8 @@
         private System.Windows.Forms.Button btnConsulta;
         private System.Windows.Forms.Button btnAlterar;
         private System.Windows.Forms.GroupBox gbBottom;
+        private System.Windows.Forms.CheckBox chkAlteraEmBloco;
+        private System.Windows.Forms.Button btnAlterarEmBloco;
+        private System.Windows.Forms.TextBox txtCount;
     }
 }

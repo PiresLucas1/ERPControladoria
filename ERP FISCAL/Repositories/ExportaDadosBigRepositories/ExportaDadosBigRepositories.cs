@@ -27,7 +27,7 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
                     using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaNotasBigNaoEncontradasTotvs", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        SqlParameter p;
+                        //SqlParameter p;
                         cmd.Parameters.AddWithValue("@INdatDataInicio", dataInicio);
                         cmd.Parameters.AddWithValue("@INdatDataFim", dataFim);
                         if(filial == 0)
@@ -57,20 +57,22 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
             return tabela;
         }
 
-        public async Task<string> ImportaNotaBigParaTotvs(string notas, DateTime dataInicio, DateTime dataFim, int substituir, int conferida, int filial)
+        public async Task<RetornoExportaBigRepository> ImportaNotaBigParaTotvs(string notas, DateTime dataInicio, DateTime dataFim, int substituir, int conferida, int filial)
         {
-            ConexaoBancoDeDadosBigCentral conexaoBanco = new ConexaoBancoDeDadosBigCentral();
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
             DataTable tabelaRetorno = new DataTable();
+            RetornoExportaBigRepository retornoExportaBigRepository = new RetornoExportaBigRepository();
             string retornoMensagem = "";
             try
             {
 
-                using (SqlConnection conn = conexaoBanco.AbrirConexao())
+                using (SqlConnection conn = conexaoBanco.AbrirConexaoRm())
                 {
                     using (SqlCommand cmd = new SqlCommand("dbo.upsIntegracaoTotvsExportaNotaFiscalSat", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        SqlParameter p;
+                        cmd.CommandTimeout = 900;
+                        //SqlParameter p;
                         cmd.Parameters.AddWithValue("@INdatDataInicio", dataInicio);
                         cmd.Parameters.AddWithValue("@INdatDataFim", dataFim);                    
                         cmd.Parameters.AddWithValue("@INintFilial", filial);                        
@@ -92,7 +94,9 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
                     }
                     string retorno = tabelaRetorno.Rows[0].ToString();
                     conexaoBanco.FecharConexao(conn);
-                    return retornoMensagem;
+                    retornoExportaBigRepository.MensagemRetorno = retornoMensagem;
+                    retornoExportaBigRepository.DtRetorno = tabelaRetorno;
+                    return retornoExportaBigRepository;
                 }
             }
             catch (Exception ex)

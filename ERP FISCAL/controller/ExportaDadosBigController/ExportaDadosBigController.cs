@@ -18,12 +18,13 @@ namespace ERP_FISCAL.Controller.ExportaDadosBigController
             return dataRetorno;
 
         }
-        public async Task<string> ImportaNotaBigParaTotvs(string[] notas, DateTime dataInicio, DateTime dataFim, int substituir, int conferida, int filial)
+        public async Task<RetornoExportaBigRepository> ImportaNotaBigParaTotvs(string[] notas, DateTime dataInicio, DateTime dataFim, int substituir, int conferida, int filial)
         {
             string stringNotas = string.Join(",", notas);
             ExportaDadosBigRepositories exportaDadosBigRepositories = new ExportaDadosBigRepositories();
-            string retorno = await exportaDadosBigRepositories.ImportaNotaBigParaTotvs(stringNotas,dataInicio, dataFim, substituir, conferida,filial);
-            return retorno;
+            RetornoExportaBigRepository retornoExportaBigRepository = new RetornoExportaBigRepository();
+            retornoExportaBigRepository = await exportaDadosBigRepositories.ImportaNotaBigParaTotvs(stringNotas,dataInicio, dataFim, substituir, conferida,filial);
+            return retornoExportaBigRepository;
         }
     }
 }

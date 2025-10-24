@@ -73,11 +73,11 @@ namespace ERP_FISCAL.view
 
         private void alterarContaFreteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(!FormAberto(typeof (AlterarContaDebitoFrete)))
-            {
-                AlterarContaDebitoFrete alterarContaDebitoFrete = new AlterarContaDebitoFrete();
-                alterarContaDebitoFrete.Show();
-            }
+            //if(!FormAberto(typeof (AlterarContaDebitoFrete)))
+            //{
+            //    AlterarContaDebitoFrete alterarContaDebitoFrete = new AlterarContaDebitoFrete();
+            //    alterarContaDebitoFrete.Show();
+            //}
             
         }
         private bool FormAberto(Type tipoForm)
@@ -121,13 +121,22 @@ namespace ERP_FISCAL.view
             }
         }
 
-        private void alteraTipoMovimentoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void alterarTipoDeMovimentoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FormAberto(typeof(AlterarContaDebitoFrete)))
+            if (!FormAberto(typeof(AlteraTipoMovimento)))
             {
                 AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
                 alteraTipoMovimento.Show();
             }
         }
+
+        //private void alteraTipoMovimentoToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (!FormAberto(typeof(AlterarContaDebitoFrete)))
+        //    {
+        //        AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
+        //        alteraTipoMovimento.Show();
+        //    }
+        //}
     }
 }

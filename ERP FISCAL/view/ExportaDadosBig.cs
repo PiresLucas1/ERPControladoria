@@ -1,5 +1,7 @@
 ﻿using ERP_FISCAL.controller;
 using ERP_FISCAL.Controller.ExportaDadosBigController;
+using ERP_FISCAL.Repositories.ExportaDadosBigRepositories;
+using ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela;
 using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
 using System;
 using System.Collections.Generic;
@@ -58,6 +60,8 @@ namespace ERP_FISCAL.view
             CarregaDataTable(dataRetorno);
             splashScreen.Close();
 
+            txtCount.Text = dtNotasImportadas.Rows.Count.ToString();
+
 
         }
         public void CarregaDataTable(DataTable data)
@@ -101,16 +105,24 @@ namespace ERP_FISCAL.view
             int substituir = chkSubstituir.Checked ? 1 : 0;
             int conferida = chkNaoConferida.Checked ? 1 : 0;
 
+            StatusProcess splashScreen = new StatusProcess();
+            splashScreen.Show(this);
+            splashScreen.SetMessage("Importando notas...");
+            splashScreen.UpdateProgress(70);
             ExportaDadosBigController exportaDadosBigController = new ExportaDadosBigController();
-            string retorno = await exportaDadosBigController.ImportaNotaBigParaTotvs(valorNumeroNota, dataInicio, dataFim, substituir, conferida, filial);
+            RetornoExportaBigRepository retornoExportaBigRepository = new RetornoExportaBigRepository();
+            retornoExportaBigRepository = await exportaDadosBigController.ImportaNotaBigParaTotvs(valorNumeroNota, dataInicio, dataFim, substituir, conferida, filial);
 
-            MessageBox.Show(retorno, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
+            MessageBox.Show(retornoExportaBigRepository.MensagemRetorno, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            splashScreen.Close();
             foreach (DataGridViewRow row in dtNotasImportadas.SelectedRows)
             {
                 row.DefaultCellStyle.BackColor = Color.LightYellow;
 
             }
+            RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retornoExportaBigRepository.DtRetorno);
+            retornoEmTabela.ShowDialog();
+
             dtNotasImportadas.Refresh();
 
 

@@ -33,8 +33,6 @@
             this.importarNotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarNotasParaOBigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alteraçõesFiscaisToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alteraTipoMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contabilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alterarContaFreteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarBottom = new System.Windows.Forms.MenuStrip();
@@ -43,6 +41,8 @@
             this.alterarCorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.alteraçõesFiscaisToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.alterarTipoDeMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarTop.SuspendLayout();
             this.menuBarBottom.SuspendLayout();
             this.SuspendLayout();
@@ -54,11 +54,10 @@
             this.menuBarTop.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuBarTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importarNotasToolStripMenuItem,
-            this.alteraçõesFiscaisToolStripMenuItem,
             this.contabilToolStripMenuItem});
             this.menuBarTop.Location = new System.Drawing.Point(0, 0);
             this.menuBarTop.Name = "menuBarTop";
-            this.menuBarTop.Size = new System.Drawing.Size(1937, 33);
+            this.menuBarTop.Size = new System.Drawing.Size(1809, 33);
             this.menuBarTop.TabIndex = 0;
             this.menuBarTop.Text = "menuStrip1";
             // 
@@ -66,10 +65,11 @@
             // 
             this.importarNotasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importarToolStripMenuItem,
-            this.importarNotasParaOBigToolStripMenuItem});
+            this.importarNotasParaOBigToolStripMenuItem,
+            this.alteraçõesFiscaisToolStripMenuItem1});
             this.importarNotasToolStripMenuItem.Name = "importarNotasToolStripMenuItem";
-            this.importarNotasToolStripMenuItem.Size = new System.Drawing.Size(150, 29);
-            this.importarNotasToolStripMenuItem.Text = "Importar Notas";
+            this.importarNotasToolStripMenuItem.Size = new System.Drawing.Size(70, 29);
+            this.importarNotasToolStripMenuItem.Text = "Fiscal";
             // 
             // importarToolStripMenuItem
             // 
@@ -85,30 +85,13 @@
             this.importarNotasParaOBigToolStripMenuItem.Text = "Exportar Notas do Big";
             this.importarNotasParaOBigToolStripMenuItem.Click += new System.EventHandler(this.importarNotasParaOBigToolStripMenuItem_Click);
             // 
-            // alteraçõesFiscaisToolStripMenuItem
-            // 
-            this.alteraçõesFiscaisToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alteraTipoMovimentoToolStripMenuItem});
-            this.alteraçõesFiscaisToolStripMenuItem.Name = "alteraçõesFiscaisToolStripMenuItem";
-            this.alteraçõesFiscaisToolStripMenuItem.Size = new System.Drawing.Size(162, 29);
-            this.alteraçõesFiscaisToolStripMenuItem.Text = "Alterações fiscais";
-            // 
-            // alteraTipoMovimentoToolStripMenuItem
-            // 
-            this.alteraTipoMovimentoToolStripMenuItem.Name = "alteraTipoMovimentoToolStripMenuItem";
-            this.alteraTipoMovimentoToolStripMenuItem.Size = new System.Drawing.Size(294, 34);
-            this.alteraTipoMovimentoToolStripMenuItem.Text = "Altera tipo movimento";
-            this.alteraTipoMovimentoToolStripMenuItem.Click += new System.EventHandler(this.alteraTipoMovimentoToolStripMenuItem_Click);
-            // 
             // contabilToolStripMenuItem
             // 
             this.contabilToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alterarContaFreteToolStripMenuItem});
-            this.contabilToolStripMenuItem.Enabled = false;
             this.contabilToolStripMenuItem.Name = "contabilToolStripMenuItem";
             this.contabilToolStripMenuItem.Size = new System.Drawing.Size(94, 29);
             this.contabilToolStripMenuItem.Text = "Contabil";
-            this.contabilToolStripMenuItem.Visible = false;
             // 
             // alterarContaFreteToolStripMenuItem
             // 
@@ -127,9 +110,9 @@
             this.txtVersao,
             this.Opções,
             this.toolStripMenuItem4});
-            this.menuBarBottom.Location = new System.Drawing.Point(0, 849);
+            this.menuBarBottom.Location = new System.Drawing.Point(0, 822);
             this.menuBarBottom.Name = "menuBarBottom";
-            this.menuBarBottom.Size = new System.Drawing.Size(1937, 33);
+            this.menuBarBottom.Size = new System.Drawing.Size(1809, 33);
             this.menuBarBottom.TabIndex = 1;
             this.menuBarBottom.Text = "menuStrip2";
             // 
@@ -170,6 +153,21 @@
             this.toolStripMenuItem5.Size = new System.Drawing.Size(256, 34);
             this.toolStripMenuItem5.Text = "Alterar conta frete";
             // 
+            // alteraçõesFiscaisToolStripMenuItem1
+            // 
+            this.alteraçõesFiscaisToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alterarTipoDeMovimentoToolStripMenuItem});
+            this.alteraçõesFiscaisToolStripMenuItem1.Name = "alteraçõesFiscaisToolStripMenuItem1";
+            this.alteraçõesFiscaisToolStripMenuItem1.Size = new System.Drawing.Size(289, 34);
+            this.alteraçõesFiscaisToolStripMenuItem1.Text = "Alterações Fiscais";
+            // 
+            // alterarTipoDeMovimentoToolStripMenuItem
+            // 
+            this.alterarTipoDeMovimentoToolStripMenuItem.Name = "alterarTipoDeMovimentoToolStripMenuItem";
+            this.alterarTipoDeMovimentoToolStripMenuItem.Size = new System.Drawing.Size(325, 34);
+            this.alterarTipoDeMovimentoToolStripMenuItem.Text = "Alterar tipo de movimento";
+            this.alterarTipoDeMovimentoToolStripMenuItem.Click += new System.EventHandler(this.alterarTipoDeMovimentoToolStripMenuItem_Click);
+            // 
             // Portal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -177,7 +175,7 @@
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1937, 882);
+            this.ClientSize = new System.Drawing.Size(1809, 855);
             this.Controls.Add(this.menuBarBottom);
             this.Controls.Add(this.menuBarTop);
             this.DoubleBuffered = true;
@@ -211,7 +209,7 @@
         private System.Windows.Forms.ToolStripMenuItem Opções;
         private System.Windows.Forms.ToolStripMenuItem alterarCorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem txtVersao;
-        private System.Windows.Forms.ToolStripMenuItem alteraçõesFiscaisToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem alteraTipoMovimentoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alteraçõesFiscaisToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem alterarTipoDeMovimentoToolStripMenuItem;
     }
 }
