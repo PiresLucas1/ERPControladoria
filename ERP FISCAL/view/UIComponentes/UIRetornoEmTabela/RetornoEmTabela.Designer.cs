@@ -37,7 +37,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(924, 626);
+            this.button1.Location = new System.Drawing.Point(975, 626);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(105, 44);
             this.button1.TabIndex = 1;
@@ -61,7 +61,7 @@
             this.dataGridRetorno.Name = "dataGridRetorno";
             this.dataGridRetorno.RowHeadersWidth = 62;
             this.dataGridRetorno.RowTemplate.Height = 28;
-            this.dataGridRetorno.Size = new System.Drawing.Size(1023, 567);
+            this.dataGridRetorno.Size = new System.Drawing.Size(1068, 567);
             this.dataGridRetorno.TabIndex = 3;
             // 
             // RetornoEmTabela
@@ -69,11 +69,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(1041, 692);
+            this.ClientSize = new System.Drawing.Size(1092, 692);
             this.Controls.Add(this.dataGridRetorno);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
+            this.MaximizeBox = false;
             this.Name = "RetornoEmTabela";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RetornoEmTabela";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRetorno)).EndInit();
             this.ResumeLayout(false);
