@@ -28,6 +28,7 @@ namespace ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela
         {
             CarregaDataGrid();
         }
+        }
         public void CarregaDataGrid()
         {
             foreach (DataColumn column in _data.Columns)
@@ -45,9 +46,9 @@ namespace ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela
             dataTable = _data;
             dataGridRetorno.DataSource = dataTable;
             // Ajuste visual 
-            dataGridRetorno.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridRetorno.AllowUserToAddRows = false;
-            dataGridRetorno.ReadOnly = true;
+            //dataGridRetorno.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            //dataGridRetorno.AllowUserToAddRows = false;
+            //dataGridRetorno.ReadOnly = true;
 
         }
 
