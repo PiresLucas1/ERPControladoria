@@ -28,9 +28,12 @@ namespace ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela
         {
             CarregaDataGrid();
         }
-        
+
         public void CarregaDataGrid()
         {
+            dataGridRetorno.AutoGenerateColumns = false;
+            dataGridRetorno.Columns.Clear();
+
             foreach (DataColumn column in _data.Columns)
             {
                 var coluna = new DataGridViewAutoFilterTextBoxColumn
@@ -39,18 +42,20 @@ namespace ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela
                     DataPropertyName = column.ColumnName,
                     Name = column.ColumnName
                 };
-                dataGridRetorno.Columns.Add(coluna);
-                
-            }
-            DataTable dataTable = new DataTable();
-            dataTable = _data;
-            dataGridRetorno.DataSource = dataTable;
-            // Ajuste visual 
-            //dataGridRetorno.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            //dataGridRetorno.AllowUserToAddRows = false;
-            //dataGridRetorno.ReadOnly = true;
 
+                dataGridRetorno.Columns.Add(coluna);
+            }
+
+            BindingSource bs = new BindingSource();
+            bs.DataSource = _data;
+            dataGridRetorno.DataSource = bs;
+
+            // Ajuste visual
+            dataGridRetorno.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridRetorno.AllowUserToAddRows = false;
+            dataGridRetorno.ReadOnly = true;
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
