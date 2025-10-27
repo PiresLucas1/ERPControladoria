@@ -83,7 +83,7 @@ namespace SeuProjeto
         public ConexaoBancoDeDadosGestaoProcessos()
         {
             connectionString = "Server=dbtotvs\\dbtotvs;Database=GestaoProcessos;Integrated Security=True;";
-            connectionStringRm = "Server=DBSOL\\DBSOL;Database=GestaoProcessos;User Id=rm;Password=rm;Encrypt=True;TrustServerCertificate=True;Connection Timeout=0;";
+            connectionStringRm = "Server=dbtotvs\\dbtotvs;Database=GestaoProcessos;User Id=rm;Password=rm;Encrypt=True;TrustServerCertificate=True;Connection Timeout=0;";
         }
         public string GetConexaoString()
         {

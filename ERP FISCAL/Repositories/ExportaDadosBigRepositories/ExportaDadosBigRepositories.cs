@@ -59,7 +59,7 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
 
         public async Task<RetornoExportaBigRepository> ImportaNotaBigParaTotvs(string notas, DateTime dataInicio, DateTime dataFim, int substituir, int conferida, int filial)
         {
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            ConexaoBancoDeDadosGestaoProcessos  conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
             DataTable tabelaRetorno = new DataTable();
             RetornoExportaBigRepository retornoExportaBigRepository = new RetornoExportaBigRepository();
             string retornoMensagem = "";
@@ -71,7 +71,7 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
                     using (SqlCommand cmd = new SqlCommand("dbo.upsIntegracaoTotvsExportaNotaFiscalSat", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandTimeout = 900;
+                        cmd.CommandTimeout = 1600;
                         //SqlParameter p;
                         cmd.Parameters.AddWithValue("@INdatDataInicio", dataInicio);
                         cmd.Parameters.AddWithValue("@INdatDataFim", dataFim);                    
@@ -92,7 +92,7 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
 
                         retornoMensagem = msgRetorno.Value?.ToString();
                     }
-                    string retorno = tabelaRetorno.Rows[0].ToString();
+                    string retorno = tabelaRetorno.Rows[0].ToString() ?? "Nada Encontrado";
                     conexaoBanco.FecharConexao(conn);
                     retornoExportaBigRepository.MensagemRetorno = retornoMensagem;
                     retornoExportaBigRepository.DtRetorno = tabelaRetorno;

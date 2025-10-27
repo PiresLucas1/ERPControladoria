@@ -45,11 +45,12 @@
             this.txtFilial = new System.Windows.Forms.TextBox();
             this.dtNotasImportadas = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtCount = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.btn = new System.Windows.Forms.Button();
             this.chkNaoConferida = new System.Windows.Forms.CheckBox();
             this.chkSubstituir = new System.Windows.Forms.CheckBox();
-            this.txtCount = new System.Windows.Forms.TextBox();
+            this.chkSelecionado = new System.Windows.Forms.CheckBox();
             this.gbFiltro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtNotasImportadas)).BeginInit();
@@ -113,12 +114,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkSelecionado);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.txtNumeroNota);
             this.groupBox1.Location = new System.Drawing.Point(522, 23);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(233, 188);
+            this.groupBox1.Size = new System.Drawing.Size(290, 188);
             this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro";
@@ -135,7 +137,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(98, 127);
+            this.button1.Location = new System.Drawing.Point(172, 149);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(112, 33);
             this.button1.TabIndex = 19;
@@ -224,6 +226,14 @@
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             // 
+            // txtCount
+            // 
+            this.txtCount.Enabled = false;
+            this.txtCount.Location = new System.Drawing.Point(6, 48);
+            this.txtCount.Name = "txtCount";
+            this.txtCount.Size = new System.Drawing.Size(102, 26);
+            this.txtCount.TabIndex = 19;
+            // 
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -266,13 +276,16 @@
             this.chkSubstituir.Text = "Substituir";
             this.chkSubstituir.UseVisualStyleBackColor = true;
             // 
-            // txtCount
+            // chkSelecionado
             // 
-            this.txtCount.Enabled = false;
-            this.txtCount.Location = new System.Drawing.Point(6, 48);
-            this.txtCount.Name = "txtCount";
-            this.txtCount.Size = new System.Drawing.Size(102, 26);
-            this.txtCount.TabIndex = 19;
+            this.chkSelecionado.AutoSize = true;
+            this.chkSelecionado.Location = new System.Drawing.Point(10, 119);
+            this.chkSelecionado.Name = "chkSelecionado";
+            this.chkSelecionado.Size = new System.Drawing.Size(165, 24);
+            this.chkSelecionado.TabIndex = 20;
+            this.chkSelecionado.Text = "Exibir Selecionado";
+            this.chkSelecionado.UseVisualStyleBackColor = true;
+            this.chkSelecionado.CheckedChanged += new System.EventHandler(this.chkSelecionado_CheckedChanged);
             // 
             // ExportaDadosBig
             // 
@@ -320,5 +333,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox txtCount;
+        private System.Windows.Forms.CheckBox chkSelecionado;
     }
 }

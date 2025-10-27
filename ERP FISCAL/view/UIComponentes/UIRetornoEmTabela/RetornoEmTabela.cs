@@ -14,47 +14,46 @@ namespace ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela
 {
     public partial class RetornoEmTabela : Form
     {
+        public DataTable _data = new DataTable();
         public RetornoEmTabela(DataTable dt)
         {
             InitializeComponent();
+            _data = dt;
+            this.Load += RetornoEmTabela_Load;
 
+        }
+
+
+        private void RetornoEmTabela_Load(object sender, EventArgs e)
+        {
             CarregaDataGrid();
-            
         }
         public void CarregaDataGrid()
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Nome");
-            dt.Columns.Add("Cidade");
-            dt.Rows.Add("Rudinei", "Caxias");
-            dt.Rows.Add("Ana", "Porto Alegre");
-            dt.Rows.Add("Carlos", "Caxias");
-
-            // Limpa colunas existentes
-            dataGridRetorno.Columns.Clear();
-
-            // Adiciona colunas com autofiltro
-            var colNome = new DataGridViewAutoFilterTextBoxColumn
+            foreach (DataColumn column in _data.Columns)
             {
-                HeaderText = "Nome",
-                DataPropertyName = "Nome"
-            };
-
-            var colCidade = new DataGridViewAutoFilterTextBoxColumn
-            {
-                HeaderText = "Cidade",
-                DataPropertyName = "Cidade"
-            };
-
-            dataGridRetorno.Columns.Add(colNome);
-            dataGridRetorno.Columns.Add(colCidade);
-            // Define a origem de dados
-            dataGridRetorno.DataSource = dt;
+                var coluna = new DataGridViewAutoFilterTextBoxColumn
+                {
+                    HeaderText = column.ColumnName,
+                    DataPropertyName = column.ColumnName,
+                    Name = column.ColumnName
+                };
+                dataGridRetorno.Columns.Add(coluna);
+                
+            }
+            DataTable dataTable = new DataTable();
+            dataTable = _data;
+            dataGridRetorno.DataSource = dataTable;
+            // Ajuste visual 
+            dataGridRetorno.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridRetorno.AllowUserToAddRows = false;
+            dataGridRetorno.ReadOnly = true;
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.OK;
             this.Close();
         }
     }

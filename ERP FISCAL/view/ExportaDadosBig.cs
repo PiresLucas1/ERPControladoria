@@ -115,20 +115,29 @@ namespace ERP_FISCAL.view
 
             MessageBox.Show(retornoExportaBigRepository.MensagemRetorno, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             splashScreen.Close();
+
             foreach (DataGridViewRow row in dtNotasImportadas.SelectedRows)
             {
                 row.DefaultCellStyle.BackColor = Color.LightYellow;
 
             }
-            RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retornoExportaBigRepository.DtRetorno);
-            retornoEmTabela.ShowDialog();
 
-            dtNotasImportadas.Refresh();
+            using (RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retornoExportaBigRepository.DtRetorno))
+            {
+                var resultado = retornoEmTabela.ShowDialog();
 
+                if (resultado == DialogResult.OK)
+                {
+                    // O usuário clicou no botão "OK" (ou equivalente)
+                    dtNotasImportadas.Refresh();
+                }
+                else
+                {
+                    dtNotasImportadas.Refresh();
+                }
 
-
-
-        } 
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -163,6 +172,18 @@ namespace ERP_FISCAL.view
             foreach (DataGridViewRow row in dtNotasImportadas.Rows)
             {
                 row.Cells["Selecionar"].Value = true;
+            }
+        }
+
+        private void chkSelecionado_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chkSelecionado.Checked)
+            {
+                (dtNotasImportadas.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+            }
+            else
+            {
+                (dtNotasImportadas.DataSource as DataTable).DefaultView.RowFilter = "[Selecionar] =" + true;
             }
         }
     }
