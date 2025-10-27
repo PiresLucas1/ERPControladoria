@@ -29,21 +29,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridRetorno = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.dataGridRetorno = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRetorno)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridRetorno
-            // 
-            this.dataGridRetorno.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridRetorno.Location = new System.Drawing.Point(12, 34);
-            this.dataGridRetorno.Name = "dataGridRetorno";
-            this.dataGridRetorno.RowHeadersWidth = 62;
-            this.dataGridRetorno.RowTemplate.Height = 28;
-            this.dataGridRetorno.Size = new System.Drawing.Size(1014, 575);
-            this.dataGridRetorno.TabIndex = 0;
             // 
             // button1
             // 
@@ -64,15 +54,25 @@
             this.textBox1.Size = new System.Drawing.Size(94, 26);
             this.textBox1.TabIndex = 2;
             // 
+            // dataGridRetorno
+            // 
+            this.dataGridRetorno.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridRetorno.Location = new System.Drawing.Point(12, 33);
+            this.dataGridRetorno.Name = "dataGridRetorno";
+            this.dataGridRetorno.RowHeadersWidth = 62;
+            this.dataGridRetorno.RowTemplate.Height = 28;
+            this.dataGridRetorno.Size = new System.Drawing.Size(1023, 567);
+            this.dataGridRetorno.TabIndex = 3;
+            // 
             // RetornoEmTabela
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(1041, 692);
+            this.Controls.Add(this.dataGridRetorno);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridRetorno);
             this.Name = "RetornoEmTabela";
             this.Text = "RetornoEmTabela";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRetorno)).EndInit();
@@ -83,8 +83,9 @@
 
         #endregion
 
-        private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dataGridRetorno;
+        //private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dataGridRetorno;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox1;
+        private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dataGridRetorno;
     }
 }

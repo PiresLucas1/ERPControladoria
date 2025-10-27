@@ -122,8 +122,8 @@ namespace ERP_FISCAL.view
 
             }
 
-            using (RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retornoExportaBigRepository.DtRetorno))
-            {
+
+            RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retornoExportaBigRepository.DtRetorno);
                 var resultado = retornoEmTabela.ShowDialog();
 
                 if (resultado == DialogResult.OK)
@@ -136,7 +136,7 @@ namespace ERP_FISCAL.view
                     dtNotasImportadas.Refresh();
                 }
 
-            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)

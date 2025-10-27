@@ -28,7 +28,7 @@ namespace ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela
         {
             CarregaDataGrid();
         }
-        }
+        
         public void CarregaDataGrid()
         {
             foreach (DataColumn column in _data.Columns)
