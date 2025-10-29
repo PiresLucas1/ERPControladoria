@@ -113,6 +113,7 @@
     <Compile Include="Service\BlingService.ts\BlingService.cs" />
     <Compile Include="Service\BlingService.ts\DtoBlingNotaFiscal.cs" />
     <Compile Include="Utils\DataRowToObject.cs" />
+    <Compile Include="Utils\GetToken.cs" />
     <Compile Include="Utils\MascaraDeColuna.cs" />
     <Compile Include="Controller\ImportarNotasController\ProdutoServicoController.cs" />
     <Compile Include="Controller\ImportarNotasController\UIController.cs" />

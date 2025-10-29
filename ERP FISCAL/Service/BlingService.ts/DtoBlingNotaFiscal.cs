@@ -56,7 +56,7 @@ namespace ERP_FISCAL.Service.BlingService.ts
         string Descricao { get; set; }
         string Unidade { get; set; }
         int Quantidade { get; set; }
-        double Valor { get; set; }
+        string Valor { get; set; }
     }
 
     public class Itens : IItens
@@ -74,6 +74,6 @@ namespace ERP_FISCAL.Service.BlingService.ts
         public int Quantidade { get; set; }
 
         [JsonProperty("valor")]
-        public double Valor { get; set; }
+        public string Valor { get; set; }
     }
 }
