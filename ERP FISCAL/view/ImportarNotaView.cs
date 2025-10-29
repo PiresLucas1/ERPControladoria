@@ -171,11 +171,12 @@ namespace ERP_FISCAL
 
                     if (!notasFormatada.Columns.Contains("Selecionar"))
                     {
-                        DataColumn colCheck = new DataColumn("Selecionar", typeof(bool));
-                        colCheck.DefaultValue = false;
+                        var colCheck = new DataColumn("Selecionar", typeof(bool))
+                        {
+                            DefaultValue = false
+                        };
                         notasFormatada.Columns.Add(colCheck);
                     }
-
 
                     dtImportacao.Columns["Selecionar"].DisplayIndex = 0;
                     dtImportacao.Columns["Selecionar"].HeaderText = "✓";
@@ -494,10 +495,12 @@ namespace ERP_FISCAL
                 return;
             }
 
-            DialogoInsereInformacao dialogo = new DialogoInsereInformacao();
-            dialogo.titulo = "Cód. Serviço Totvs";
-            dialogo.dataTable = listaNatureza;
-
+            var dialogo = new DialogoInsereInformacao
+            {
+                titulo = "Cód. Serviço Totvs",
+                dataTable = listaNatureza
+            };
+            
             using (var dialog = new InsercaoBloco(dialogo))
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
@@ -825,8 +828,11 @@ namespace ERP_FISCAL
             dtImportacao.DataSource = data;
             if (!dtOrignal.Columns.Contains("Selecionar"))
             {
-                DataColumn colCheck = new DataColumn("Selecionar", typeof(bool));
-                colCheck.DefaultValue = false;
+                var colCheck = new DataColumn("Selecionar", typeof(bool))
+                {
+                    DefaultValue = false
+                };
+
                 dtOrignal.Columns.Add(colCheck);
             }
 
@@ -945,5 +951,6 @@ namespace ERP_FISCAL
             }
             MessageBox.Show("CFOPs preenchidos automaticamente conforme regras definidas.");
         }
+
     }
 }

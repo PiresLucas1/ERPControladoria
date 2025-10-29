@@ -1,0 +1,50 @@
+﻿using SeuProjeto;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
+{
+    public class ConsultaSaldoNotasZanupRepositories
+    {
+
+        public async Task<DataTable> ConsultaSaldoNotas(int IdProduto)
+        {
+            DataTable tabela = new DataTable();
+            ConexaoBancoDeDadosGestaoProcessosSol conexaoBanco = new ConexaoBancoDeDadosGestaoProcessosSol();
+
+            try
+            {
+
+                using (SqlConnection conn = conexaoBanco.AbrirConexao())
+                {
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaSaldoNotasZanup", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        // SqlParameter p;
+                        cmd.Parameters.AddWithValue("@INintIDProduto", IdProduto);
+                     
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            tabela.Load(reader);
+                        }
+                    }
+
+                    conexaoBanco.FecharConexao(conn);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
+            }
+
+
+            return tabela;
+        }
+
+    }
+}
