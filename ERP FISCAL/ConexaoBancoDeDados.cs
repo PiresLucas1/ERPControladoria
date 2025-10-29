@@ -232,4 +232,62 @@ namespace SeuProjeto
 
     }
 
+    public class ConexaoBancoDeDadosZanup
+    {
+        private readonly string connectionString;
+        private readonly string connectionStringRm;
+
+        public ConexaoBancoDeDadosZanup()
+        {
+            connectionString = "Server=dbtotvs\\dbtotvs;Database=Zanup;Integrated Security=True;";
+        }
+        public string GetConexaoString()
+        {
+            return connectionString;
+        }
+
+        public SqlConnection AbrirConexao()
+        {
+            SqlConnection conexao = new SqlConnection(connectionString);
+
+            try
+            {
+                conexao.Open();
+                Console.WriteLine("Conexão aberta com sucesso!");
+                return conexao;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao abrir a conexão: " + ex.Message);
+                throw;
+            }
+        }
+        public SqlConnection AbrirConexaoRm()
+        {
+            SqlConnection conexao = new SqlConnection(connectionStringRm);
+
+            try
+            {
+                conexao.Open();
+                Console.WriteLine("Conexão aberta com sucesso!");
+                return conexao;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao abrir a conexão: " + ex.Message);
+                throw;
+            }
+        }
+
+        public void FecharConexao(SqlConnection conexao)
+        {
+            if (conexao != null && conexao.State == System.Data.ConnectionState.Open)
+            {
+                conexao.Close();
+                Console.WriteLine("Conexão fechada.");
+            }
+        }
+
+    }
+
 }
