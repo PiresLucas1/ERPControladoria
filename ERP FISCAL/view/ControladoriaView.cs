@@ -130,6 +130,17 @@ namespace ERP_FISCAL.view
             }
         }
 
+        private void devoluçaoDeNotasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ConsultaSaldoNotasFiscais)))
+            {
+                ConsultaSaldoNotasFiscais alteraTipoMovimento = new ConsultaSaldoNotasFiscais();
+                alteraTipoMovimento.Show();
+            }
+        }
+
+
+
         //private void alteraTipoMovimentoToolStripMenuItem_Click(object sender, EventArgs e)
         //{
         //    if (!FormAberto(typeof(AlterarContaDebitoFrete)))
