@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories
 {
-    internal class AlteraTipoMovimentoRepositories
+    public class AlteraTipoMovimentoRepositories
     {
         public async Task<DataTable> ConsultaMovimentoTotvs(int codMovimento, int coligada)
         {

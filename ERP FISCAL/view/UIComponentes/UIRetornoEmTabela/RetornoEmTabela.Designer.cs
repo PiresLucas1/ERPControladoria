@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtBoxCount = new System.Windows.Forms.TextBox();
             this.dataGridRetorno = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRetorno)).BeginInit();
             this.SuspendLayout();
@@ -45,14 +45,14 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox1
+            // txtBoxCount
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(12, 644);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(94, 26);
-            this.textBox1.TabIndex = 2;
+            this.txtBoxCount.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtBoxCount.Enabled = false;
+            this.txtBoxCount.Location = new System.Drawing.Point(12, 644);
+            this.txtBoxCount.Name = "txtBoxCount";
+            this.txtBoxCount.Size = new System.Drawing.Size(205, 26);
+            this.txtBoxCount.TabIndex = 2;
             // 
             // dataGridRetorno
             // 
@@ -71,7 +71,7 @@
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(1092, 692);
             this.Controls.Add(this.dataGridRetorno);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtBoxCount);
             this.Controls.Add(this.button1);
             this.MaximizeBox = false;
             this.Name = "RetornoEmTabela";
@@ -87,7 +87,7 @@
 
         //private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dataGridRetorno;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtBoxCount;
         private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dataGridRetorno;
     }
 }

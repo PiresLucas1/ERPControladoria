@@ -33,11 +33,11 @@
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtValorNovo2 = new System.Windows.Forms.TextBox();
-            this.lb2 = new System.Windows.Forms.Label();
             this.txtValorNovo3 = new System.Windows.Forms.TextBox();
             this.lb3 = new System.Windows.Forms.Label();
+            this.txtValorNovo2 = new System.Windows.Forms.TextBox();
+            this.lb2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,7 +74,7 @@
             this.btnConfirmar.TabIndex = 5;
             this.btnConfirmar.Text = "Confirmar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
-            
+            this.btnConfirmar.Click += new System.EventHandler(this.btnConfirmar_Click);
             // 
             // groupBox1
             // 
@@ -93,14 +93,21 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             // 
-            // label3
+            // txtValorNovo3
             // 
-            this.label3.Location = new System.Drawing.Point(55, 269);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(364, 63);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Serão alterados os itens  selecionados no tabela para informação inserida no camp" +
-    "o acima";
+            this.txtValorNovo3.Location = new System.Drawing.Point(52, 206);
+            this.txtValorNovo3.Name = "txtValorNovo3";
+            this.txtValorNovo3.Size = new System.Drawing.Size(367, 26);
+            this.txtValorNovo3.TabIndex = 10;
+            // 
+            // lb3
+            // 
+            this.lb3.AutoSize = true;
+            this.lb3.Location = new System.Drawing.Point(48, 174);
+            this.lb3.Name = "lb3";
+            this.lb3.Size = new System.Drawing.Size(51, 20);
+            this.lb3.TabIndex = 9;
+            this.lb3.Text = "label4";
             // 
             // txtValorNovo2
             // 
@@ -118,21 +125,14 @@
             this.lb2.TabIndex = 7;
             this.lb2.Text = "label2";
             // 
-            // txtValorNovo3
+            // label3
             // 
-            this.txtValorNovo3.Location = new System.Drawing.Point(52, 206);
-            this.txtValorNovo3.Name = "txtValorNovo3";
-            this.txtValorNovo3.Size = new System.Drawing.Size(367, 26);
-            this.txtValorNovo3.TabIndex = 10;
-            // 
-            // lb3
-            // 
-            this.lb3.AutoSize = true;
-            this.lb3.Location = new System.Drawing.Point(48, 174);
-            this.lb3.Name = "lb3";
-            this.lb3.Size = new System.Drawing.Size(51, 20);
-            this.lb3.TabIndex = 9;
-            this.lb3.Text = "label4";
+            this.label3.Location = new System.Drawing.Point(55, 269);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(364, 63);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Serão alterados os itens  selecionados no tabela para informação inserida no camp" +
+    "o acima";
             // 
             // AlteraEmBloco
             // 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +18,8 @@ namespace ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco
         private readonly int _codLayout;
         private readonly string[] _valorLabel;
         private readonly string[] _valorTextBox;
-        public AlteraEmBloco( int codLayout, string[] valoresLabel, string[] valorTextBox, DataTable tabela = null)
+        private readonly AlteraTipoMovimentoRepositories _repo;
+        public AlteraEmBloco( int codLayout, string[] valoresLabel, string[] valorTextBox, AlteraTipoMovimentoRepositories repo, DataTable tabela = null)
         {
             InitializeComponent();
             //_data = data;
@@ -25,6 +27,7 @@ namespace ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco
             _codLayout = codLayout;
             _valorLabel = valoresLabel;
             _valorTextBox = valorTextBox;
+            _repo = repo;
 
             //lb1.Text = data.TextLabel1;
             CarregaTerceiroLayout();
@@ -43,6 +46,11 @@ namespace ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco
                 txtValorNovo2.Text = _valorTextBox[1] != "" ? _valorTextBox[1] : "";
                 txtValorNovo3.Text = _valorTextBox[2] != "" ? _valorTextBox[2] : "";
             }
+        }
+
+        private void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
