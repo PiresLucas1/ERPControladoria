@@ -239,7 +239,7 @@ namespace ERP_FISCAL.view
             //var coligada = primeiraLinha["CODCOLIGADA"];
             var primeiraLinha = linhasSelecionadas[0];
             var coligadaPraConfirmar = primeiraLinha["CODCOLIGADA"];
-            var idMovPraConfirmar = primeiraLinha["IDMOV"];
+            var idMovPraConfirmar = primeiraLinha["CODTMV"];
 
             var coligada = primeiraLinha["CODCOLIGADA"];
             List<string> idMovs = new List<string>();
@@ -269,7 +269,7 @@ namespace ERP_FISCAL.view
             AlteraEmBloco alteraEmBloco = new AlteraEmBloco
                 ( 3,
                 new string[] { "Coligada: " + coligada.ToString(),"Código do Tipo de Movimento:", "Inserir novo código:" },
-                new string[] {coligada.ToString(), idMovPraConfirmar.ToString(), "" }
+                new string[] {coligada.ToString(), idMovPraConfirmar.ToString(), "" }, null
                 );
             
             DialogResult resultado = alteraEmBloco.ShowDialog();

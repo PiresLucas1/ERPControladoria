@@ -54,6 +54,8 @@ namespace ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela
             dataGridRetorno.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridRetorno.AllowUserToAddRows = false;
             dataGridRetorno.ReadOnly = true;
+
+            txtBoxCount.Text= $"Registros: {_data.Rows.Count}";
         }
 
 
