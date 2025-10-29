@@ -9,42 +9,44 @@ using System.Threading.Tasks;
 
 namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
 {
-    public class ConsultaSaldoNotasZanupRepositories
+    namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
     {
-
-        public async Task<DataTable> ConsultaSaldoNotas(int IdProduto)
+        public class ConsultaSaldoNotasZanupRepositories
         {
-            DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessosSol conexaoBanco = new ConexaoBancoDeDadosGestaoProcessosSol();
-
-            try
+            public async Task<string> ObterTokenAsync()
             {
+                string token = null;
+                var conexaoBanco = new ConexaoBancoDeDadosZanup();
 
-                using (SqlConnection conn = conexaoBanco.AbrirConexao())
+                try
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaSaldoNotasZanup", conn))
+                    using (SqlConnection conn = conexaoBanco.AbrirConexao()) /* TOKEN EXPIRA DE 5 EM 5 HORAS, ENTÃO PEGAMOS ATUAL SEMPRE */
+                    using (SqlCommand cmd = new SqlCommand(@"
+                                                            SELECT 
+                                                                TOP 1 
+                                                                tblAutBling.Token
+                                                            FROM 
+                                                                Zanup.dbo.tblAutenticacaoBling tblAutBling (NOLOCK)
+                                                            WHERE 
+                                                                tblAutBling.Ativo = 1", conn
+                                                           ))
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        // SqlParameter p;
-                        cmd.Parameters.AddWithValue("@INintIDProduto", IdProduto);
-                     
-                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
-                        {
-                            tabela.Load(reader);
-                        }
+                        cmd.CommandType = CommandType.Text;
+
+                        var result = await cmd.ExecuteScalarAsync();
+
+                        if (result != null && result != DBNull.Value)
+                            token = result.ToString();
                     }
-
-                    conexaoBanco.FecharConexao(conn);
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
-            }
+                catch (Exception ex)
+                {
+                    throw new Exception("Erro ao consultar token: " + ex.Message, ex);
+                }
 
-
-            return tabela;
+                return token;
+            }
         }
-
     }
+
 }
