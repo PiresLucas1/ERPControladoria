@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ERP_FISCAL.view.ContabilView;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -137,6 +138,16 @@ namespace ERP_FISCAL.view
                 ConsultaSaldoNotasFiscais alteraTipoMovimento = new ConsultaSaldoNotasFiscais();
                 alteraTipoMovimento.Show();
             }
+        }
+
+        private void importarRecebimentoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ImportacaoRecebimento)))
+            {
+                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
+                importacaoRecebimento.Show();
+            }
+            
         }
 
 
