@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ERP_FISCAL.Utils
 {
@@ -15,10 +16,14 @@ namespace ERP_FISCAL.Utils
         {
             Console.WriteLine(row);
 
+            BlingService blingService = new BlingService();
+            DtoBlingNotaFiscal notaFiscal = await blingService.ConsultarNotaAsync();
+
+
             DtoBlingNotaFiscal novaNotaFiscal = new DtoBlingNotaFiscal
             {
                 Tipo = 2,
-                Numero = row["NumDocumento"].ToString(),
+                Numero = notaFiscal.Numero + 1,
                 DataOperacao = Convert.ToDateTime(row["DataDocumento"].ToString()),
                 Contato = new Contato
                 {
@@ -39,9 +44,13 @@ namespace ERP_FISCAL.Utils
                 }
             };
             //Console.WriteLine(novaNotaFiscal);
+  //          string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
 
-            BlingService blingService = new BlingService();
+          
             await blingService.CriarNotaAsync(novaNotaFiscal);
+
+            //MessageBox.Show(json, "Dados enviados para criação da nota", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return;
 
 
 
