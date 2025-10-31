@@ -1,4 +1,5 @@
-﻿using ERP_FISCAL.Service.BlingService.ts;
+﻿using ERP_FISCAL.Models;
+
 using ERP_FISCAL.Utils;
 using Newtonsoft.Json;
 using System;
@@ -15,7 +16,7 @@ namespace ERP_FISCAL.service
 {
     public class BlingService
     {
-        public async Task<string> CriarNotaAsync(IDtoBlingNotaFiscal data)
+        public async Task<string> CriarNotaAsync(NotaFiscal data)
         {
             GetToken obterTokenAsync = new GetToken();
             string token = await obterTokenAsync.ObterTokenAsync();
@@ -37,7 +38,7 @@ namespace ERP_FISCAL.service
             return $"Status: {(int)response.StatusCode} - {response.StatusCode}\r\n{retorno}";
         }
 
-        public async Task<DtoBlingNotaFiscal> ConsultarNotaAsync()
+        public async Task<NotaFiscal> ConsultarNotaAsync()
         {
             GetToken obterTokenAsync = new GetToken();
 
@@ -51,10 +52,20 @@ namespace ERP_FISCAL.service
 
             var response = await httpClient.GetAsync($"https://api.bling.com.br/Api/v3/nfe?pagina=1&limite=1&tipo=1");
 
-            response.EnsureSuccessStatusCode();
+            while((int)response.StatusCode == 429)
+            {
+              await Task.Delay(7000);
+                response = await httpClient.GetAsync($"https://api.bling.com.br/Api/v3/nfe?pagina=1&limite=1&tipo=1");
+            }        
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"Erro: {(int)response.StatusCode} - {response.ReasonPhrase}");
+                return null;
+            }
 
             var json = await response.Content.ReadAsStringAsync();
-            var notaFiscal = JsonConvert.DeserializeObject<DtoBlingNotaFiscal>(json);
+            var notaFiscal = JsonConvert.DeserializeObject<NotaFiscal>(json);
+            await Task.Delay(7000);
 
             return notaFiscal;
         }

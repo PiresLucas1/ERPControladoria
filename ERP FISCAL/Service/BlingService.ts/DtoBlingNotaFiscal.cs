@@ -1,47 +1,73 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
-namespace ERP_FISCAL.Service.BlingService.ts
+namespace ERP_FISCAL.Models
 {
-    public interface IDtoBlingNotaFiscal
-    {
-        int Tipo { get; set; }
-        string Numero { get; set; }
-        DateTime DataOperacao { get; set; }
-        IContato Contato { get; set; }
-        List<IItens> Itens { get; set; }
-        string NaturezaOperacao { get; set; }
-    }
-
-    public class DtoBlingNotaFiscal : IDtoBlingNotaFiscal
+    public class NotaFiscal
     {
         [JsonProperty("tipo")]
         public int Tipo { get; set; }
 
+        [JsonProperty("serie")]
+        public int Serie { get; set; }
+
         [JsonProperty("numero")]
         public string Numero { get; set; }
+
+        [JsonProperty("naturezaOperacao")]
+        public NaturezaOperacao NaturezaOperacao { get; set; }
 
         [JsonProperty("dataOperacao")]
         public DateTime DataOperacao { get; set; }
 
-        [JsonProperty("naturezaOperacao")]
-        public string NaturezaOperacao { get; set; }
+        [JsonProperty("finalidade")]
+        public int Finalidade { get; set; }
+
+        [JsonProperty("observacoes")]
+        public string Observacoes { get; set; }
+
+        [JsonProperty("modelo")]
+        public int Modelo { get; set; }
+
+        [JsonProperty("documentoReferenciado")]
+        public List<DocumentoReferenciado> DocumentoReferenciado { get; set; }
 
         [JsonProperty("contato")]
-        public IContato Contato { get; set; }
+        public Contato Contato { get; set; }
 
         [JsonProperty("itens")]
-        public List<IItens> Itens { get; set; }
+        public List<Item> Itens { get; set; }
+
+        [JsonProperty("transporte")]
+        public Transporte Transporte { get; set; }
+
+        [JsonProperty("condicaoPagamento")]
+        public string CondicaoPagamento { get; set; }
+
+        [JsonProperty("parcelas")]
+        public List<Parcela> Parcelas { get; set; }
     }
 
-    public interface IContato
+    public class NaturezaOperacao
     {
-        string NumeroDocumento { get; set; }
-        string Nome { get; set; }
+        [JsonProperty("id")]
+        public long Id { get; set; }
     }
 
-    public class Contato : IContato
+    public class DocumentoReferenciado
+    {
+        [JsonProperty("modelo")]
+        public int Modelo { get; set; }
+
+        [JsonProperty("numero")]
+        public int Numero { get; set; }
+
+        [JsonProperty("chaveAcesso")]
+        public string ChaveAcesso { get; set; }
+    }
+
+    public class Contato
     {
         [JsonProperty("numeroDocumento")]
         public string NumeroDocumento { get; set; }
@@ -50,30 +76,117 @@ namespace ERP_FISCAL.Service.BlingService.ts
         public string Nome { get; set; }
     }
 
-    public interface IItens
-    {
-        string Codigo { get; set; }
-        string Descricao { get; set; }
-        string Unidade { get; set; }
-        int Quantidade { get; set; }
-        string Valor { get; set; }
-    }
-
-    public class Itens : IItens
+    public class Item
     {
         [JsonProperty("codigo")]
         public string Codigo { get; set; }
-
-        [JsonProperty("descricao")]
-        public string Descricao { get; set; }
 
         [JsonProperty("unidade")]
         public string Unidade { get; set; }
 
         [JsonProperty("quantidade")]
-        public int Quantidade { get; set; }
+        public decimal Quantidade { get; set; }
 
         [JsonProperty("valor")]
-        public string Valor { get; set; }
+        public decimal Valor { get; set; }
+    }
+
+    public class Transporte
+    {
+        [JsonProperty("fretePorConta")]
+        public int FretePorConta { get; set; }
+
+        [JsonProperty("frete")]
+        public string Frete { get; set; }
+
+        [JsonProperty("veiculo")]
+        public Veiculo Veiculo { get; set; }
+
+        [JsonProperty("transportador")]
+        public Transportador Transportador { get; set; }
+
+        [JsonProperty("volume")]
+        public Volume Volume { get; set; }
+    }
+
+    public class Veiculo
+    {
+        [JsonProperty("placa")]
+        public string Placa { get; set; }
+
+        [JsonProperty("uf")]
+        public string Uf { get; set; }
+
+        [JsonProperty("marca")]
+        public string Marca { get; set; }
+    }
+
+    public class Transportador
+    {
+        [JsonProperty("nome")]
+        public string Nome { get; set; }
+
+        [JsonProperty("numeroDocumento")]
+        public string NumeroDocumento { get; set; }
+
+        [JsonProperty("ie")]
+        public string Ie { get; set; }
+
+        [JsonProperty("endereco")]
+        public Endereco Endereco { get; set; }
+    }
+
+    public class Endereco
+    {
+        [JsonProperty("endereco")]
+        public string EnderecoStr { get; set; }
+
+        [JsonProperty("municipio")]
+        public string Municipio { get; set; }
+
+        [JsonProperty("uf")]
+        public string Uf { get; set; }
+    }
+
+    public class Volume
+    {
+        [JsonProperty("quantidade")]
+        public int Quantidade { get; set; }
+
+        [JsonProperty("especie")]
+        public int Especie { get; set; }
+
+        [JsonProperty("numero")]
+        public string Numero { get; set; }
+
+        [JsonProperty("pesoBruto")]
+        public decimal PesoBruto { get; set; }
+
+        [JsonProperty("pesoLiquido")]
+        public decimal PesoLiquido { get; set; }
+    }
+
+    public class Parcela
+    {
+        [JsonProperty("data")]
+        public DateTime Data { get; set; }
+
+        [JsonProperty("valor")]
+        public decimal Valor { get; set; }
+
+        [JsonProperty("observacoes")]
+        public string Observacoes { get; set; }
+
+        [JsonProperty("caut")]
+        public string Caut { get; set; }
+
+        [JsonProperty("formaPagamento")]
+        public FormaPagamento FormaPagamento { get; set; }
+    }
+
+    public class FormaPagamento
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
     }
 }

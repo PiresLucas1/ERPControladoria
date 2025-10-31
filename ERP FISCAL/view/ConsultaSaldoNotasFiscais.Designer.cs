@@ -36,14 +36,14 @@
             this.btGerarNotaFiscal = new System.Windows.Forms.Button();
             this.tabNavegacaoAba = new System.Windows.Forms.TabControl();
             this.tabConsultaItens = new System.Windows.Forms.TabPage();
-            this.dvgConsultaNotas = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.tabItensSelecionado = new System.Windows.Forms.TabPage();
+            this.dvgConsultaNotas = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.dvgItensSelecionados = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.gbFiltro.SuspendLayout();
             this.tabNavegacaoAba.SuspendLayout();
             this.tabConsultaItens.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).BeginInit();
             this.tabItensSelecionado.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dvgItensSelecionados)).BeginInit();
             this.SuspendLayout();
             // 
@@ -139,6 +139,17 @@
             this.tabConsultaItens.Text = "Consulta Itens";
             this.tabConsultaItens.UseVisualStyleBackColor = true;
             // 
+            // tabItensSelecionado
+            // 
+            this.tabItensSelecionado.Controls.Add(this.dvgItensSelecionados);
+            this.tabItensSelecionado.Location = new System.Drawing.Point(4, 29);
+            this.tabItensSelecionado.Name = "tabItensSelecionado";
+            this.tabItensSelecionado.Padding = new System.Windows.Forms.Padding(3);
+            this.tabItensSelecionado.Size = new System.Drawing.Size(1149, 551);
+            this.tabItensSelecionado.TabIndex = 1;
+            this.tabItensSelecionado.Text = "Itens Selecionados";
+            this.tabItensSelecionado.UseVisualStyleBackColor = true;
+            // 
             // dvgConsultaNotas
             // 
             this.dvgConsultaNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -152,17 +163,7 @@
             this.dvgConsultaNotas.Size = new System.Drawing.Size(1137, 539);
             this.dvgConsultaNotas.TabIndex = 0;
             this.dvgConsultaNotas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgConsultaNotas_CellClick);
-            // 
-            // tabItensSelecionado
-            // 
-            this.tabItensSelecionado.Controls.Add(this.dvgItensSelecionados);
-            this.tabItensSelecionado.Location = new System.Drawing.Point(4, 29);
-            this.tabItensSelecionado.Name = "tabItensSelecionado";
-            this.tabItensSelecionado.Padding = new System.Windows.Forms.Padding(3);
-            this.tabItensSelecionado.Size = new System.Drawing.Size(1149, 551);
-            this.tabItensSelecionado.TabIndex = 1;
-            this.tabItensSelecionado.Text = "Itens Selecionados";
-            this.tabItensSelecionado.UseVisualStyleBackColor = true;
+            this.dvgConsultaNotas.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dvgConsultaNotas_EditingControlShowing);
             // 
             // dvgItensSelecionados
             // 
@@ -195,8 +196,8 @@
             this.gbFiltro.PerformLayout();
             this.tabNavegacaoAba.ResumeLayout(false);
             this.tabConsultaItens.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).EndInit();
             this.tabItensSelecionado.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dvgItensSelecionados)).EndInit();
             this.ResumeLayout(false);
 

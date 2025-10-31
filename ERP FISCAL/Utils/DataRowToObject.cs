@@ -1,5 +1,6 @@
-﻿using ERP_FISCAL.service;
-using ERP_FISCAL.Service.BlingService.ts;
+﻿using ERP_FISCAL.Models;
+using ERP_FISCAL.service;
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,42 +13,120 @@ namespace ERP_FISCAL.Utils
 {
     public class DataRowToObject
     {
-        public async void TranformaDataRowToObject(DataRow row)
+        public async Task TranformaDataRowToObject(List<DataRow> ListRow)
         {
-            Console.WriteLine(row);
+            Console.WriteLine(ListRow);
 
             BlingService blingService = new BlingService();
-            DtoBlingNotaFiscal notaFiscal = await blingService.ConsultarNotaAsync();
+            NotaFiscal notaFiscal = await blingService.ConsultarNotaAsync();
 
+            //DateTime dataConvertida = DateTime.ParseExact(row["DataDocumento"].ToString(), "dd/MM/YYYY", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime dataAtual = DateTime.Now;
+            DateTime dataFutura = dataAtual.AddDays(32);
 
-            DtoBlingNotaFiscal novaNotaFiscal = new DtoBlingNotaFiscal
+            foreach (DataRow row in ListRow)
             {
-                Tipo = 2,
-                Numero = notaFiscal.Numero + 1,
-                DataOperacao = Convert.ToDateTime(row["DataDocumento"].ToString()),
-                Contato = new Contato
+
+                NotaFiscal novaNotaFiscal = new NotaFiscal
                 {
-                    Nome = "cliente 9999",
-                    NumeroDocumento = "teste"
+                    Tipo = 1,
+                    Serie = 5,
+                    Numero = notaFiscal.Numero + 1,
+                    NaturezaOperacao = new NaturezaOperacao
+                    {
+                        Id = 15101770690
+                    },
+                    DataOperacao = dataAtual,
+                    Finalidade = 4,
+                    Observacoes = $"Dev. ref. a NF {row["NumDocumento"].ToString()} em {row["DataDocumento"].ToString()}, compra de mercadoria sob a chave de acesso: {row["ChaveAcesso"].ToString()}",
+                    Modelo = 55,
+                    DocumentoReferenciado = new List<DocumentoReferenciado>
+                {
+                    new DocumentoReferenciado
+                    {
+                        Modelo = 55,
+                        Numero = (int)row["NumDocumento"],
+                        ChaveAcesso = row["ChaveAcesso"].ToString()
+                    },
                 },
-                NaturezaOperacao = "99999",
-                Itens = new List<IItens>
+                    Contato = new Contato
+                    {
+                        NumeroDocumento = "46.054.219/0001-74",
+                        Nome = "SOLFARMA COMERCIO DE PRODUTOS FARMACEUTICOS S.A."
+                    },
+                    Itens = new List<Item>
                 {
-                    new Itens
+                    new Item
                     {
                         Codigo = row["IDProduto"].ToString(),
-                        Descricao = row["DescProduto"].ToString(),
-                        Quantidade = Convert.ToInt32(row["Quantidade Venda"].ToString()),
-                        Unidade = row["Devolução"].ToString(),
-                        Valor = row["ValorUnitario"].ToString()
+                        Unidade = "UN",
+                        Quantidade = (int)row["Qtd para Devolver"],
+                        Valor =  (decimal)row["ValorUnitario"],
+                    }
+                },
+                    Transporte = new Transporte
+                    {
+                        FretePorConta = 0,
+                        Frete = "0",
+                        Veiculo = new Veiculo
+                        {
+                            Placa = "",
+                            Uf = "",
+                            Marca = ""
+                        },
+                        Transportador = new Transportador
+                        {
+                            Nome = "SOLFARMA COMERCIO DE PRODUTOS FARMACEUTICOS S.A.",
+                            NumeroDocumento = "",
+                            Ie = "",
+                            Endereco = new Endereco
+                            {
+                                Uf = "",
+                                EnderecoStr = "",
+                                Municipio = ""
+                            }
+                        },
+                        Volume = new Volume
+                        {
+                            Quantidade = 0,
+                            Especie = 2,
+                            Numero = "",
+                            PesoBruto = 0,
+                            PesoLiquido = 0
+                        }
+                    },
+                    CondicaoPagamento = "32",
+                    Parcelas = new List<Parcela>
+                {
+                    new Parcela
+                    {
+                        Data= dataFutura,
+                        Valor =0,
+                        Observacoes="",
+                        Caut="",
+                        FormaPagamento= new FormaPagamento
+                        {
+                            Id = 6574120
+                        }
+
                     }
                 }
-            };
-            //Console.WriteLine(novaNotaFiscal);
-  //          string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
 
-          
-            await blingService.CriarNotaAsync(novaNotaFiscal);
+
+                };
+
+
+             string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
+              Console.WriteLine(novaNotaFiscal);
+              Console.WriteLine(json);
+                
+
+
+            }
+
+
+
+            //await blingService.CriarNotaAsync(novaNotaFiscal);
 
             //MessageBox.Show(json, "Dados enviados para criação da nota", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
