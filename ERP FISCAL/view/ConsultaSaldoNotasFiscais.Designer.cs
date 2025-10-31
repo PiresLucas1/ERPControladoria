@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gbFiltro = new System.Windows.Forms.GroupBox();
+            this.btnRelacionaItens = new System.Windows.Forms.Button();
             this.btnListaNotas = new System.Windows.Forms.Button();
             this.txtBoxIDProduto = new System.Windows.Forms.TextBox();
             this.lbIDProduto = new System.Windows.Forms.Label();
@@ -50,6 +51,7 @@
             // 
             this.gbFiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbFiltro.Controls.Add(this.btnRelacionaItens);
             this.gbFiltro.Controls.Add(this.btnListaNotas);
             this.gbFiltro.Controls.Add(this.txtBoxIDProduto);
             this.gbFiltro.Controls.Add(this.lbIDProduto);
@@ -61,9 +63,20 @@
             this.gbFiltro.TabIndex = 0;
             this.gbFiltro.TabStop = false;
             // 
+            // btnRelacionaItens
+            // 
+            this.btnRelacionaItens.Location = new System.Drawing.Point(22, 120);
+            this.btnRelacionaItens.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnRelacionaItens.Name = "btnRelacionaItens";
+            this.btnRelacionaItens.Size = new System.Drawing.Size(156, 36);
+            this.btnRelacionaItens.TabIndex = 3;
+            this.btnRelacionaItens.Text = "Relacionar itens";
+            this.btnRelacionaItens.UseVisualStyleBackColor = true;
+            this.btnRelacionaItens.Click += new System.EventHandler(this.btnRelacionaItens_Click);
+            // 
             // btnListaNotas
             // 
-            this.btnListaNotas.Location = new System.Drawing.Point(10, 120);
+            this.btnListaNotas.Location = new System.Drawing.Point(203, 39);
             this.btnListaNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnListaNotas.Name = "btnListaNotas";
             this.btnListaNotas.Size = new System.Drawing.Size(114, 36);
@@ -74,7 +87,7 @@
             // 
             // txtBoxIDProduto
             // 
-            this.txtBoxIDProduto.Location = new System.Drawing.Point(6, 47);
+            this.txtBoxIDProduto.Location = new System.Drawing.Point(22, 49);
             this.txtBoxIDProduto.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtBoxIDProduto.Name = "txtBoxIDProduto";
             this.txtBoxIDProduto.Size = new System.Drawing.Size(112, 26);
@@ -83,7 +96,7 @@
             // lbIDProduto
             // 
             this.lbIDProduto.AutoSize = true;
-            this.lbIDProduto.Location = new System.Drawing.Point(6, 23);
+            this.lbIDProduto.Location = new System.Drawing.Point(22, 25);
             this.lbIDProduto.Name = "lbIDProduto";
             this.lbIDProduto.Size = new System.Drawing.Size(86, 20);
             this.lbIDProduto.TabIndex = 0;
@@ -128,6 +141,9 @@
             // 
             // dvgConsultaNotas
             // 
+            this.dvgConsultaNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dvgConsultaNotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dvgConsultaNotas.Location = new System.Drawing.Point(6, 6);
             this.dvgConsultaNotas.Name = "dvgConsultaNotas";
@@ -136,7 +152,6 @@
             this.dvgConsultaNotas.Size = new System.Drawing.Size(1137, 539);
             this.dvgConsultaNotas.TabIndex = 0;
             this.dvgConsultaNotas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgConsultaNotas_CellClick);
-            this.dvgConsultaNotas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgConsultaNotas_CellContentClick);
             // 
             // tabItensSelecionado
             // 
@@ -151,6 +166,9 @@
             // 
             // dvgItensSelecionados
             // 
+            this.dvgItensSelecionados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dvgItensSelecionados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dvgItensSelecionados.Location = new System.Drawing.Point(6, 6);
             this.dvgItensSelecionados.Name = "dvgItensSelecionados";
@@ -159,6 +177,7 @@
             this.dvgItensSelecionados.Size = new System.Drawing.Size(1136, 539);
             this.dvgItensSelecionados.TabIndex = 0;
             this.dvgItensSelecionados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellClick);
+            this.dvgItensSelecionados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellDoubleClick);
             // 
             // ConsultaSaldoNotasFiscais
             // 
@@ -195,5 +214,6 @@
         private System.Windows.Forms.TabPage tabItensSelecionado;
         private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dvgConsultaNotas;
         private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dvgItensSelecionados;
+        private System.Windows.Forms.Button btnRelacionaItens;
     }
 }

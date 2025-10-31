@@ -10,6 +10,7 @@ using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace ERP_FISCAL.view
@@ -44,15 +45,18 @@ namespace ERP_FISCAL.view
                 return;
             }
 
-            if (dvgConsultaNotas.RowCount > 0)
-                ImportaItemParaDvgItensSelecionado();
+
+            StatusProcess splashScreen = new StatusProcess();
+            splashScreen.Show(this); // 'this' como owner para ficar modal
+            splashScreen.SetMessage("Carregando...");
+            splashScreen.UpdateProgress(70);
 
             try
             {
                 ConsultaSaldoNotasZanupController consultaSaldoNotasZanup = new ConsultaSaldoNotasZanupController();
                 DataTable retorno = await consultaSaldoNotasZanup.ConsultaSaldoNotas(idProduto);
-                
-                if(dataItensSelecionados.Columns.Count <= 0)
+
+                if (dataItensSelecionados.Columns.Count <= 0)
                     dataItensSelecionados = retorno.Clone();
 
 
@@ -62,7 +66,7 @@ namespace ERP_FISCAL.view
                 }
                 dataItensPesquisado = retorno;
                 CarregaDataTable(retorno);
-                
+
             }
             catch (Exception ex)
             {
@@ -71,6 +75,8 @@ namespace ERP_FISCAL.view
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
             }
+
+            splashScreen.Close();
 
         }
         public void CarregaDataTable(DataTable data)
@@ -81,7 +87,13 @@ namespace ERP_FISCAL.view
                 colCheck.DefaultValue = false;
                 data.Columns.Add(colCheck);
             }
-
+            if (!data.Columns.Contains("Qtd para Devolver"))
+            {
+                DataColumn colQuantidade = new DataColumn("Qtd para Devolver", typeof(string));
+                colQuantidade.DefaultValue = "";
+                data.Columns.Add(colQuantidade);
+                
+            }
 
             dvgConsultaNotas.DataSource = data;
             dvgConsultaNotas.Columns["Selecionar"].DisplayIndex = 0;
@@ -89,40 +101,31 @@ namespace ERP_FISCAL.view
             dvgConsultaNotas.Columns["Selecionar"].Width = 30;
             dvgConsultaNotas.Columns["Selecionar"].Width = 30;
 
+            dvgConsultaNotas.Columns["Qtd para Devolver"].DisplayIndex = 1;
+            dvgConsultaNotas.Columns["Selecionar"].Width = 30;
+            dvgConsultaNotas.Columns["Selecionar"].Width = 30;
+
+            dvgConsultaNotas.RowHeadersVisible = false;
+
 
         }
 
         private void dvgConsultaNotas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+ 
             if (e.RowIndex < 0) return; // Ignora cliques no header
-
             // Remove a seleção de todas as linhas
             dvgConsultaNotas.ClearSelection();
-
             // Destaca a linha clicada
             dvgConsultaNotas.Rows[e.RowIndex].Selected = true;
 
+
             // Opcional: Define cores personalizadas para a linha selecionada
-            dvgConsultaNotas.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightSteelBlue;
+            dvgConsultaNotas.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightSeaGreen;
             dvgConsultaNotas.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
 
+           
 
-        }
-
-        private void dvgConsultaNotas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && dvgConsultaNotas.Columns[e.ColumnIndex].Name == "Selecionar")
-            {
-                // Desmarca todas as outras linhas
-                foreach (DataGridViewRow row in dvgConsultaNotas.Rows)
-                {
-                    if (row.Index != e.RowIndex)
-                        row.Cells["Selecionar"].Value = false;
-                }
-
-                // Atualiza o grid
-                dvgConsultaNotas.EndEdit();
-            }
         }
 
         public void CriarNotaFiscal()
@@ -157,22 +160,13 @@ namespace ERP_FISCAL.view
             CriarNotaFiscal();
         }
 
-        public void ImportaItemParaDvgItensSelecionado()
+        public void ImportaItemParaDvgItensSelecionado(List<DataRow> linhasSelecionadas)
         {
-            if (dvgConsultaNotas.RowCount > 0)
-            {
-                var dtOriginal = (DataTable)dvgConsultaNotas.DataSource;
-
-                var linhasSelecionadas = dtOriginal.AsEnumerable()
-                    .Where(r => r.Field<bool>("Selecionar"))
-                    .ToList();
-
                 foreach (var linha in linhasSelecionadas)
                 {
                     dataItensSelecionados.ImportRow(linha);
                 }
-                //dvgItensSelecionados.DataSource = dataItensSelecionados;
-            }
+            MessageBox.Show("Itens importados com sucesso!");
         }
 
         private void tabNavegacaoAba_Selected(object sender, TabControlEventArgs e)
@@ -181,23 +175,53 @@ namespace ERP_FISCAL.view
             {
                 dvgItensSelecionados.DataSource = dataItensSelecionados;
 
-                if (!dvgItensSelecionados.Columns.Contains("DeleteIcone"))
-                {
-                    DataGridViewImageColumn imageColumn = new DataGridViewImageColumn();
-                    imageColumn.Name = "DeleteIcone";
-                    imageColumn.HeaderText = "Ícone";
-                    dvgItensSelecionados.Columns.Add(imageColumn);
-                    //Image icon = Properties.Resources.trash2;
-
-                }
-
-                
             }
         }
 
+
+
+        /* EVENTO DA TABELA DE SELECIONADOS */
+        private void dvgItensSelecionados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (tabNavegacaoAba.SelectedTab == tabItensSelecionado)
+            {
+
+                DialogResult retorno = MessageBox.Show("Deseja excluir este item da relação", "Aviso",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+                if (retorno == DialogResult.OK)
+                {
+                    dataItensSelecionados.Rows.RemoveAt(e.RowIndex);
+                    dvgItensSelecionados.DataSource = dataItensSelecionados;
+                }
+
+            }
+        }
         private void dvgItensSelecionados_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            dvgItensSelecionados.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightSalmon;
+            dvgItensSelecionados.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
 
+        }
+
+        private void btnRelacionaItens_Click(object sender, EventArgs e)
+        {
+            if (dvgConsultaNotas.RowCount > 0)
+            {
+
+                var dtOriginal = (DataTable)dvgConsultaNotas.DataSource;
+
+                var linhasSelecionadas = dtOriginal.AsEnumerable()
+                    .Where(r => r.Field<bool>("Selecionar"))
+                    .ToList();
+                if (linhasSelecionadas.Count > 0)
+                    ImportaItemParaDvgItensSelecionado(linhasSelecionadas);
+                else
+                    MessageBox.Show("Nenhum item selecionado");
+
+            }
+            else
+                MessageBox.Show("Nenhum item para importar!");
         }
     }
 }

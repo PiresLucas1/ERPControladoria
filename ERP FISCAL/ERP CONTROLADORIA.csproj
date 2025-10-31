@@ -321,6 +321,8 @@
   <ItemGroup>
     <Content Include="icon-new.ico" />
     <Content Include="links.txt" />
+    <Content Include="Resources\trash2.png" />
+    <Content Include="Resources\trash.bmp" />
     <None Include="Resources\icon-new.ico" />
   </ItemGroup>
   <ItemGroup />
