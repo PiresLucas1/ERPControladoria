@@ -4,6 +4,11 @@ using Newtonsoft.Json;
 
 namespace ERP_FISCAL.Models
 {
+    public class Root
+    {
+        [JsonProperty("data")]
+        public List<NotaFiscal> Data { get; set; }
+    }
     public class NotaFiscal
     {
         [JsonProperty("tipo")]
@@ -19,7 +24,7 @@ namespace ERP_FISCAL.Models
         public NaturezaOperacao NaturezaOperacao { get; set; }
 
         [JsonProperty("dataOperacao")]
-        public DateTime DataOperacao { get; set; }
+        public string DataOperacao { get; set; }
 
         [JsonProperty("finalidade")]
         public int Finalidade { get; set; }
@@ -169,7 +174,7 @@ namespace ERP_FISCAL.Models
     public class Parcela
     {
         [JsonProperty("data")]
-        public DateTime Data { get; set; }
+        public string Data { get; set; }
 
         [JsonProperty("valor")]
         public decimal Valor { get; set; }

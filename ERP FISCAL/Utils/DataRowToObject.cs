@@ -23,6 +23,8 @@ namespace ERP_FISCAL.Utils
             //DateTime dataConvertida = DateTime.ParseExact(row["DataDocumento"].ToString(), "dd/MM/YYYY", System.Globalization.CultureInfo.InvariantCulture);
             DateTime dataAtual = DateTime.Now;
             DateTime dataFutura = dataAtual.AddDays(32);
+            string dataAtualFormatada = dataAtual.ToString("yyyy-MM-dd");
+            string dataFuturaFormatada = dataFutura.ToString("yyyy-MM-dd");
 
             foreach (DataRow row in ListRow)
             {
@@ -31,12 +33,12 @@ namespace ERP_FISCAL.Utils
                 {
                     Tipo = 1,
                     Serie = 5,
-                    Numero = notaFiscal.Numero + 1,
+                    Numero = (Convert.ToInt32(notaFiscal.Numero) + 1).ToString(),
                     NaturezaOperacao = new NaturezaOperacao
                     {
                         Id = 15101770690
                     },
-                    DataOperacao = dataAtual,
+                    DataOperacao = dataAtualFormatada,
                     Finalidade = 4,
                     Observacoes = $"Dev. ref. a NF {row["NumDocumento"].ToString()} em {row["DataDocumento"].ToString()}, compra de mercadoria sob a chave de acesso: {row["ChaveAcesso"].ToString()}",
                     Modelo = 55,
@@ -100,7 +102,7 @@ namespace ERP_FISCAL.Utils
                 {
                     new Parcela
                     {
-                        Data= dataFutura,
+                        Data= dataFuturaFormatada,
                         Valor =0,
                         Observacoes="",
                         Caut="",
@@ -116,19 +118,20 @@ namespace ERP_FISCAL.Utils
                 };
 
 
-             string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
-              Console.WriteLine(novaNotaFiscal);
-              Console.WriteLine(json);
-                
+              string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
+              var response = await blingService.CriarNotaAsync(novaNotaFiscal);
+
+                if (response == 0)
+                {
+
+                    break;
+                }
 
 
             }
+            MessageBox.Show("Notas Criadas", "Dados enviados para criação da nota", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-
-            //await blingService.CriarNotaAsync(novaNotaFiscal);
-
-            //MessageBox.Show(json, "Dados enviados para criação da nota", MessageBoxButtons.OK, MessageBoxIcon.Information);
             return;
 
 

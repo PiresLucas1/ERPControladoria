@@ -1,4 +1,5 @@
-﻿using DocumentFormat.OpenXml.Spreadsheet;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Spreadsheet;
 using ERP_FISCAL.Controller;
 using ERP_FISCAL.Controller.ConsultaSaldoNotasZanup;
 using ERP_FISCAL.Utils;
@@ -24,8 +25,8 @@ namespace ERP_FISCAL.view
     {
         public DataGridViewRow cellAlteracao;
         public int colAlteracao;
-        public DataTable dataItensSelecionados = new DataTable();
-        public DataTable dataItensPesquisado = new DataTable();
+        public System.Data.DataTable dataItensSelecionados = new System.Data.DataTable();
+        public System.Data.DataTable dataItensPesquisado = new System.Data.DataTable();
         public ConsultaSaldoNotasFiscais()
         {
             InitializeComponent();
@@ -57,11 +58,12 @@ namespace ERP_FISCAL.view
             splashScreen.Show(this); // 'this' como owner para ficar modal
             splashScreen.SetMessage("Carregando...");
             splashScreen.UpdateProgress(70);
-
+            btnListaNotas.Enabled = false;
+            btnListaNotas.Enabled = false;
             try
             {
                 ConsultaSaldoNotasZanupController consultaSaldoNotasZanup = new ConsultaSaldoNotasZanupController();
-                DataTable retorno = await consultaSaldoNotasZanup.ConsultaSaldoNotas(idProduto);
+                System.Data.DataTable retorno = await consultaSaldoNotasZanup.ConsultaSaldoNotas(idProduto);
 
                 if (dataItensSelecionados.Columns.Count <= 0)
                    
@@ -84,16 +86,11 @@ namespace ERP_FISCAL.view
             }
 
             splashScreen.Close();
+            btnListaNotas.Enabled = true;
 
         }
-        public void CarregaDataTable(DataTable data)
+        public void CarregaDataTable(System.Data.DataTable data)
         {
-            if (!data.Columns.Contains("Selecionar"))
-            {
-                DataColumn colCheck = new DataColumn("Selecionar", typeof(bool));
-                colCheck.DefaultValue = false;
-                data.Columns.Add(colCheck);
-            }
             if (!data.Columns.Contains("Qtd para Devolver"))
             {
                 DataColumn colQuantidade = new DataColumn("Qtd para Devolver", typeof(int));
@@ -103,12 +100,8 @@ namespace ERP_FISCAL.view
             }
             dvgConsultaNotas.DataSource = data;
 
-            dvgConsultaNotas.Columns["Selecionar"].DisplayIndex = 0;
-            dvgConsultaNotas.Columns["Selecionar"].HeaderText = "✓";
-            dvgConsultaNotas.Columns["Selecionar"].Width = 30;
-            dvgConsultaNotas.Columns["Selecionar"].Width = 30;
 
-            dvgConsultaNotas.Columns["Qtd para Devolver"].DisplayIndex = 1;
+            dvgConsultaNotas.Columns["Qtd para Devolver"].DisplayIndex = 0;
             dvgConsultaNotas.Columns["Qtd para Devolver"].Width = 30;
             dvgConsultaNotas.Columns["Qtd para Devolver"].Width = 30;
             dvgConsultaNotas.Columns["Qtd para Devolver"].DefaultCellStyle.ForeColor = Color.Red;
@@ -138,7 +131,7 @@ namespace ERP_FISCAL.view
 
         public async Task CriarNotaFiscal()
         {
-            var dtOriginal = (DataTable)dvgItensSelecionados.DataSource;
+            var dtOriginal = (System.Data.DataTable)dvgItensSelecionados.DataSource;
 
             var linhasSelecionadas = dtOriginal.AsEnumerable()
                 .ToList();
@@ -148,22 +141,28 @@ namespace ERP_FISCAL.view
             StatusProcess splashScreen = new StatusProcess();
 
             splashScreen.Show(this); // 'this' como owner para ficar modal
-            splashScreen.SetMessage("Alterando Tipo de Movimento...");
+            splashScreen.SetMessage("Gerando nota fical no bling...");
 
             DataRowToObject dataRowToObject = new DataRowToObject();
             await dataRowToObject.TranformaDataRowToObject(linhasSelecionadas);
+            btGerarNotaFiscal.Enabled = false;
 
             splashScreen.Close();
+            btGerarNotaFiscal.Enabled = true;
         }
 
-        private void btGerarNotaFiscal_Click(object sender, EventArgs e)
+        private async void btGerarNotaFiscal_Click(object sender, EventArgs e)
         {
-            CriarNotaFiscal();
+            if (dataItensSelecionados.Rows.Count <= 0)
+            {
+                return;
+            }
+            await CriarNotaFiscal();
         }
 
         public void ImportaItemParaDvgItensSelecionado(List<DataRow> linhasSelecionadas)
         {
-            var dtOriginal = (DataTable)dvgConsultaNotas.DataSource;
+            var dtOriginal = (System.Data.DataTable)dvgConsultaNotas.DataSource;
             dataItensSelecionados = dtOriginal.Clone();
             foreach (var linha in linhasSelecionadas)
             {
@@ -180,10 +179,15 @@ namespace ERP_FISCAL.view
         {
             if (tabNavegacaoAba.SelectedTab == tabItensSelecionado)
             {
-                dvgItensSelecionados.DataSource = dataItensSelecionados;
-                dvgItensSelecionados.Columns.Remove("Selecionar");
-                dvgItensSelecionados.Columns["Qtd para Devolver"].DisplayIndex = 0;
-                dvgItensSelecionados.Columns["Qtd para Devolver"].DefaultCellStyle.ForeColor = Color.Red;
+                if(dataItensSelecionados.Rows.Count > 0)
+                {
+
+                    dvgItensSelecionados.DataSource = dataItensSelecionados;
+                    dvgItensSelecionados.Columns["Qtd para Devolver"].DisplayIndex = 0;
+                    dvgItensSelecionados.Columns["Qtd para Devolver"].DefaultCellStyle.ForeColor = Color.Red;
+                }
+
+                return;
 
 
             }
@@ -194,20 +198,21 @@ namespace ERP_FISCAL.view
             if (dvgConsultaNotas.RowCount > 0)
             {
 
-                var dtOriginal = (DataTable)dvgConsultaNotas.DataSource;
+                var dtOriginal = (System.Data.DataTable)dvgConsultaNotas.DataSource;
                 if(!dtOriginal.Columns.Contains("Qtd para Devolver"))
                 {
-                    DataColumn colQuantidade = new DataColumn("Qtd para Devolver", typeof(string));
-                    colQuantidade.DefaultValue = "";
+                    DataColumn colQuantidade = new DataColumn("Qtd para Devolver", typeof(int));
+                    colQuantidade.DefaultValue = 0;
                     dtOriginal.Columns.Add(colQuantidade);
 
                 }
 
                 var linhasSelecionadas = dtOriginal.AsEnumerable()
-                    .Where(r => r.Field<bool>("Selecionar"))
+                    .Where(r => r.Field<int>("Qtd para Devolver") != 0)
                     .ToList();
 
                 bool existeCelulaVaiza = false;
+                bool existeValorIncorreto = false;
                 foreach (DataRow row in linhasSelecionadas)
                 {
                     string qtd = row["Qtd para Devolver"]?.ToString();
@@ -217,6 +222,17 @@ namespace ERP_FISCAL.view
                         dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = System.Drawing.Color.LightSalmon;
                         existeCelulaVaiza = true;
                     }
+                    if(Convert.ToUInt32(qtd) > Convert.ToInt32(row["Saldo Restante"].ToString()))
+                    {
+                        int index = dtOriginal.Rows.IndexOf(row);
+                        dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = System.Drawing.Color.LightSalmon;
+                        existeValorIncorreto = true;
+                    }
+                }
+                if (existeValorIncorreto)
+                {
+                    MessageBox.Show("Existe algumas linhas que o valor de devolução esta incorreto");
+                    return;
                 }
                 if (existeCelulaVaiza)
                 {
@@ -273,7 +289,10 @@ namespace ERP_FISCAL.view
         {
             if (tabNavegacaoAba.SelectedTab == tabItensSelecionado)
             {
-
+                if(dataItensSelecionados.Rows.Count <= 0)
+                {
+                    return;
+                }
                 DialogResult retorno = MessageBox.Show("Deseja excluir este item da relação", "Aviso",
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 

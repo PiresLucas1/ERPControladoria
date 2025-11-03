@@ -16,7 +16,7 @@ namespace ERP_FISCAL.service
 {
     public class BlingService
     {
-        public async Task<string> CriarNotaAsync(NotaFiscal data)
+        public async Task<int> CriarNotaAsync(NotaFiscal data)
         {
             GetToken obterTokenAsync = new GetToken();
             string token = await obterTokenAsync.ObterTokenAsync();
@@ -35,7 +35,13 @@ namespace ERP_FISCAL.service
             var response = await httpClient.PostAsync("https://api.bling.com.br/Api/v3/nfe", content);
             var retorno = await response.Content.ReadAsStringAsync();
 
-            return $"Status: {(int)response.StatusCode} - {response.StatusCode}\r\n{retorno}";
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine($"Erro: {(int)response.StatusCode} - {response.ReasonPhrase}");
+                return 0;
+            }
+
+            return 1;
         }
 
         public async Task<NotaFiscal> ConsultarNotaAsync()
@@ -50,12 +56,12 @@ namespace ERP_FISCAL.service
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", token);
 
-            var response = await httpClient.GetAsync($"https://api.bling.com.br/Api/v3/nfe?pagina=1&limite=1&tipo=1");
+            var response = await httpClient.GetAsync($"https://api.bling.com.br/Api/v3/nfe?pagina=1&limite=1&tipo=1&serie=5");
 
             while((int)response.StatusCode == 429)
             {
               await Task.Delay(7000);
-                response = await httpClient.GetAsync($"https://api.bling.com.br/Api/v3/nfe?pagina=1&limite=1&tipo=1");
+                response = await httpClient.GetAsync($"https://api.bling.com.br/Api/v3/nfe?pagina=1&limite=1&tipo=1&serie=5");
             }        
             if (!response.IsSuccessStatusCode)
             {
@@ -64,7 +70,8 @@ namespace ERP_FISCAL.service
             }
 
             var json = await response.Content.ReadAsStringAsync();
-            var notaFiscal = JsonConvert.DeserializeObject<NotaFiscal>(json);
+            var data = JsonConvert.DeserializeObject<Root>(json);
+            var notaFiscal = data.Data.FirstOrDefault();
             await Task.Delay(7000);
 
             return notaFiscal;
