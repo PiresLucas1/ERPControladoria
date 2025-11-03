@@ -10,10 +10,10 @@ namespace ERP_FISCAL.Controller.ConsultaSaldoNotasZanup
 {
     public class ConsultaSaldoNotasZanupController
     {
-        public async Task <DataTable> ConsultaSaldoNotas(int IDProduto) 
+        public async Task <DataTable> ConsultaSaldoNotas(int IDProduto = 0,int NumDoc = 0) 
         {
             ConsultaSaldoNotasZanupRepositories consultaSaldoNotas = new ConsultaSaldoNotasZanupRepositories();
-            DataTable retorno = await consultaSaldoNotas.ConsultaSaldoNotas(IDProduto);
+            DataTable retorno = await consultaSaldoNotas.ConsultaSaldoNotas(IDProduto, NumDoc);
             return retorno;
         }
     }

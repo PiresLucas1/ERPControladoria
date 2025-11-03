@@ -30,29 +30,30 @@ namespace ERP_FISCAL.view
         public ConsultaSaldoNotasFiscais()
         {
             InitializeComponent();
+            cbFiltroSaldo.Items.Add("IDProduto");
+            cbFiltroSaldo.Items.Add("Num.doc");
         }
         private async void Button1_Click(object sender, EventArgs e)
         {
-            int idProduto;
+            int ValorFiltro;
 
-            if (string.IsNullOrWhiteSpace(txtBoxIDProduto.Text))
+            if (string.IsNullOrWhiteSpace(txtFiltro.Text))
             {
-                MessageBox.Show("Preencha o campo ID Produto por favor!",
+                MessageBox.Show("Preencha o campo!",
                                 "Campo obrigatório",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
                 return;
             }
 
-            if (!int.TryParse(txtBoxIDProduto.Text, out idProduto))
+            if ((!int.TryParse(txtFiltro.Text, out ValorFiltro)))
             {
-                MessageBox.Show("Digite apenas números no campo ID Produto!",
+                MessageBox.Show("Digite apenas números!",
                                 "Entrada inválida",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
                 return;
             }
-
 
             StatusProcess splashScreen = new StatusProcess();
             splashScreen.Show(this); // 'this' como owner para ficar modal
@@ -63,12 +64,22 @@ namespace ERP_FISCAL.view
             try
             {
                 ConsultaSaldoNotasZanupController consultaSaldoNotasZanup = new ConsultaSaldoNotasZanupController();
-                System.Data.DataTable retorno = await consultaSaldoNotasZanup.ConsultaSaldoNotas(idProduto);
+
+                System.Data.DataTable retorno = new System.Data.DataTable();
+
+                if (cbFiltroSaldo.SelectedIndex == 0)
+                {
+                    retorno = await consultaSaldoNotasZanup.ConsultaSaldoNotas(ValorFiltro, 0);
+
+                }
+                else
+                {
+                    retorno = await consultaSaldoNotasZanup.ConsultaSaldoNotas(0,ValorFiltro);
+                }
+
 
                 if (dataItensSelecionados.Columns.Count <= 0)
                    
-
-
                 if (retorno.Rows.Count == 0)
                 {
                     MessageBox.Show("Nenhum produto encontrado!");
@@ -311,5 +322,12 @@ namespace ERP_FISCAL.view
 
         }
 
+        private void cbFiltroSaldo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cbFiltroSaldo.SelectedIndex == 0)
+            {
+
+            }
+        }
     }
 }

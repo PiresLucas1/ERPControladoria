@@ -12,7 +12,7 @@ namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
     public class ConsultaSaldoNotasZanupRepositories
     {
 
-        public async Task<DataTable> ConsultaSaldoNotas(int IdProduto)
+        public async Task<DataTable> ConsultaSaldoNotas(int IdProduto,int NumDoc)
         {
             DataTable tabela = new DataTable();
             ConexaoBancoDeDadosGestaoProcessosSol conexaoBanco = new ConexaoBancoDeDadosGestaoProcessosSol();
@@ -26,7 +26,14 @@ namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         // SqlParameter p;
-                        cmd.Parameters.AddWithValue("@INintIDProduto", IdProduto);
+                        if (IdProduto == 0)
+                        {
+                            cmd.Parameters.AddWithValue("@INintNumNota", NumDoc);
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@INintIDProduto", IdProduto);
+                        }                         
                      
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
