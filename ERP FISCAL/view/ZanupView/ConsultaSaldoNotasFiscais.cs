@@ -175,6 +175,9 @@ namespace ERP_FISCAL.view
         {
             var dtOriginal = (System.Data.DataTable)dvgConsultaNotas.DataSource;
             dataItensSelecionados = dtOriginal.Clone();
+
+
+         
             foreach (var linha in linhasSelecionadas)
             {
                 dataItensSelecionados.ImportRow(linha);
@@ -196,6 +199,10 @@ namespace ERP_FISCAL.view
                     dvgItensSelecionados.DataSource = dataItensSelecionados;
                     dvgItensSelecionados.Columns["Qtd para Devolver"].DisplayIndex = 0;
                     dvgItensSelecionados.Columns["Qtd para Devolver"].DefaultCellStyle.ForeColor = Color.Red;
+
+                    AdicionaColunaEstoqueOrigem();
+
+                    dvgItensSelecionados.Columns["Estoque origem"].DisplayIndex = dvgItensSelecionados.Columns["Qtd para Devolver"].Index + 1;
                 }
 
                 return;
@@ -203,6 +210,45 @@ namespace ERP_FISCAL.view
 
             }
         }
+
+        public void AdicionaColunaEstoqueOrigem()
+        {
+            // Evita adicionar a coluna mais de uma vez
+            if (!dvgItensSelecionados.Columns.Contains("EstoqueOrigem"))
+            {
+                DataGridViewComboBoxColumn colCombo = new DataGridViewComboBoxColumn
+                {
+                    HeaderText = "Estoque origem",
+                    Name = "Estoque Origem",
+                    DataPropertyName = "Estoque Origem", // Nome da coluna no DataTable (deve existir se for binding)
+                    DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton,
+                    FlatStyle = FlatStyle.Flat,
+                    Width = 200
+                };
+
+                // Adiciona as opções do combo
+                colCombo.Items.AddRange(
+                    "Amazon - FBA Onsite (Full)",
+                    "Geral",
+                    "Mercado Livre - FULL",
+                    "Mercado Livre - Local",
+                    "Raia Drogasil",
+                    "Shopee",
+                    "Shopee 205632595 (Fulfillment)",
+                    "Shopee 205655037 (Fulfillment)",
+                    "Shopee 205655101 (Fulfillment)",
+                    "Shopee Garnier (Fulfillment)",
+                    "Shopee L'Oréal (Fulfillment)",
+                    "Shopee Maybelline (Fulfillment)",
+                    "Shopee Zanup (Fulfillm)",
+                    "Solfarma",
+                    "TikTok Shop"
+                );
+
+                dvgItensSelecionados.Columns.Add(colCombo);
+            }
+        }
+
 
         private void btnRelacionaItens_Click(object sender, EventArgs e)
         {
@@ -217,6 +263,7 @@ namespace ERP_FISCAL.view
                     dtOriginal.Columns.Add(colQuantidade);
 
                 }
+               
 
                 var linhasSelecionadas = dtOriginal.AsEnumerable()
                     .Where(r => r.Field<int>("Qtd para Devolver") != 0)
