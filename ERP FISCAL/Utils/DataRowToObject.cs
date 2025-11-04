@@ -41,7 +41,7 @@ namespace ERP_FISCAL.Utils
                     DataOperacao = dataAtualFormatada,
                     Finalidade = 4,
                     //inserir no campo observação o estoque de referencia
-                    Observacoes = $"Dev. ref. a NF {row["NumDocumento"].ToString()} em {row["DataDocumento"].ToString()}, compra de mercadoria sob a chave de acesso: {row["ChaveAcesso"].ToString()}",
+                    Observacoes = $"Dev. ref. a NF {row["NumDocumento"].ToString()} em {row["DataDocumento"].ToString()}, compra de mercadoria sob a chave de acesso: {row["ChaveAcesso"].ToString()}, Estoque origem: {row["Estoque Origem"]}",
                     Modelo = 55,
                     DocumentoReferenciado = new List<DocumentoReferenciado>
                 {

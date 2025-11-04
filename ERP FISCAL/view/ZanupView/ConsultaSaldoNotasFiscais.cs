@@ -176,8 +176,11 @@ namespace ERP_FISCAL.view
             var dtOriginal = (System.Data.DataTable)dvgConsultaNotas.DataSource;
             dataItensSelecionados = dtOriginal.Clone();
 
+            if (!dataItensSelecionados.Columns.Contains("Estoque origem"))
+            {
+                dataItensSelecionados.Columns.Add("Estoque origem", typeof(string));
+            }
 
-         
             foreach (var linha in linhasSelecionadas)
             {
                 dataItensSelecionados.ImportRow(linha);
@@ -185,6 +188,10 @@ namespace ERP_FISCAL.view
 
                 dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = Color.LightGreen;
             }
+
+            AdicionaColunaEstoqueOrigem();
+            dvgItensSelecionados.DataSource = dataItensSelecionados;
+
             MessageBox.Show("Itens importados com sucesso!");
 
         }
@@ -214,7 +221,7 @@ namespace ERP_FISCAL.view
         public void AdicionaColunaEstoqueOrigem()
         {
             // Evita adicionar a coluna mais de uma vez
-            if (!dvgItensSelecionados.Columns.Contains("EstoqueOrigem"))
+            if (!dvgItensSelecionados.Columns.Contains("Estoque Origem"))
             {
                 DataGridViewComboBoxColumn colCombo = new DataGridViewComboBoxColumn
                 {
@@ -302,6 +309,8 @@ namespace ERP_FISCAL.view
                     ImportaItemParaDvgItensSelecionado(linhasSelecionadas);
                 else
                     MessageBox.Show("Nenhum item selecionado");
+
+
 
             }
             else

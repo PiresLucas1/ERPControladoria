@@ -138,6 +138,7 @@
     <Compile Include="Controller\ImportarNotasController\CfopController.cs" />
     <Compile Include="Controller\ContaDebitoFreteController\AlteraContaDebitoController.cs" />
     <Compile Include="Controller\ExportaDadosBigController\ExportaDadosBigController.cs" />
+    <Compile Include="Enum\EstoqueEnum.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
