@@ -341,6 +341,7 @@
             // 
             // dtImportacao
             // 
+            this.dtImportacao.AllowUserToAddRows = false;
             this.dtImportacao.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.ColumnHeader;
             this.dtImportacao.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
             this.dtImportacao.BorderStyle = System.Windows.Forms.BorderStyle.None;

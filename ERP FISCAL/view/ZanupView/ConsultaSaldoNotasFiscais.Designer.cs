@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.gbFiltro = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtFiltro = new System.Windows.Forms.TextBox();
+            this.lbFiltroSaldo = new System.Windows.Forms.Label();
+            this.cbFiltroSaldo = new System.Windows.Forms.ComboBox();
             this.btnRelacionaItens = new System.Windows.Forms.Button();
             this.btnListaNotas = new System.Windows.Forms.Button();
             this.btGerarNotaFiscal = new System.Windows.Forms.Button();
@@ -37,17 +41,13 @@
             this.dvgConsultaNotas = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.tabItensSelecionado = new System.Windows.Forms.TabPage();
             this.dvgItensSelecionados = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
-            this.cbFiltroSaldo = new System.Windows.Forms.ComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lbFiltroSaldo = new System.Windows.Forms.Label();
-            this.txtFiltro = new System.Windows.Forms.TextBox();
             this.gbFiltro.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabNavegacaoAba.SuspendLayout();
             this.tabConsultaItens.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).BeginInit();
             this.tabItensSelecionado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvgItensSelecionados)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbFiltro
@@ -62,6 +62,43 @@
             this.gbFiltro.Size = new System.Drawing.Size(1025, 131);
             this.gbFiltro.TabIndex = 0;
             this.gbFiltro.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtFiltro);
+            this.groupBox1.Controls.Add(this.lbFiltroSaldo);
+            this.groupBox1.Controls.Add(this.cbFiltroSaldo);
+            this.groupBox1.Location = new System.Drawing.Point(9, 11);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(209, 114);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Filtro Prioritário";
+            // 
+            // txtFiltro
+            // 
+            this.txtFiltro.Location = new System.Drawing.Point(9, 86);
+            this.txtFiltro.Name = "txtFiltro";
+            this.txtFiltro.Size = new System.Drawing.Size(102, 22);
+            this.txtFiltro.TabIndex = 6;
+            // 
+            // lbFiltroSaldo
+            // 
+            this.lbFiltroSaldo.AutoSize = true;
+            this.lbFiltroSaldo.Location = new System.Drawing.Point(6, 18);
+            this.lbFiltroSaldo.Name = "lbFiltroSaldo";
+            this.lbFiltroSaldo.Size = new System.Drawing.Size(36, 16);
+            this.lbFiltroSaldo.TabIndex = 5;
+            this.lbFiltroSaldo.Text = "Filtro";
+            // 
+            // cbFiltroSaldo
+            // 
+            this.cbFiltroSaldo.FormattingEnabled = true;
+            this.cbFiltroSaldo.Location = new System.Drawing.Point(9, 37);
+            this.cbFiltroSaldo.Name = "cbFiltroSaldo";
+            this.cbFiltroSaldo.Size = new System.Drawing.Size(102, 24);
+            this.cbFiltroSaldo.TabIndex = 4;
+            this.cbFiltroSaldo.SelectedIndexChanged += new System.EventHandler(this.cbFiltroSaldo_SelectedIndexChanged);
             // 
             // btnRelacionaItens
             // 
@@ -123,6 +160,7 @@
             // 
             // dvgConsultaNotas
             // 
+            this.dvgConsultaNotas.AllowUserToAddRows = false;
             this.dvgConsultaNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -151,6 +189,7 @@
             // 
             // dvgItensSelecionados
             // 
+            this.dvgItensSelecionados.AllowUserToAddRows = false;
             this.dvgItensSelecionados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -165,43 +204,6 @@
             this.dvgItensSelecionados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellClick);
             this.dvgItensSelecionados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellDoubleClick);
             // 
-            // cbFiltroSaldo
-            // 
-            this.cbFiltroSaldo.FormattingEnabled = true;
-            this.cbFiltroSaldo.Location = new System.Drawing.Point(9, 37);
-            this.cbFiltroSaldo.Name = "cbFiltroSaldo";
-            this.cbFiltroSaldo.Size = new System.Drawing.Size(102, 24);
-            this.cbFiltroSaldo.TabIndex = 4;
-            this.cbFiltroSaldo.SelectedIndexChanged += new System.EventHandler(this.cbFiltroSaldo_SelectedIndexChanged);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.txtFiltro);
-            this.groupBox1.Controls.Add(this.lbFiltroSaldo);
-            this.groupBox1.Controls.Add(this.cbFiltroSaldo);
-            this.groupBox1.Location = new System.Drawing.Point(9, 11);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(209, 114);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filtro Prioritário";
-            // 
-            // lbFiltroSaldo
-            // 
-            this.lbFiltroSaldo.AutoSize = true;
-            this.lbFiltroSaldo.Location = new System.Drawing.Point(6, 18);
-            this.lbFiltroSaldo.Name = "lbFiltroSaldo";
-            this.lbFiltroSaldo.Size = new System.Drawing.Size(36, 16);
-            this.lbFiltroSaldo.TabIndex = 5;
-            this.lbFiltroSaldo.Text = "Filtro";
-            // 
-            // txtFiltro
-            // 
-            this.txtFiltro.Location = new System.Drawing.Point(9, 86);
-            this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(102, 22);
-            this.txtFiltro.TabIndex = 6;
-            // 
             // ConsultaSaldoNotasFiscais
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -214,13 +216,13 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta Saldo Notas Fiscais";
             this.gbFiltro.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabNavegacaoAba.ResumeLayout(false);
             this.tabConsultaItens.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).EndInit();
             this.tabItensSelecionado.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dvgItensSelecionados)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
