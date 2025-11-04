@@ -226,7 +226,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtNotasImportadas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtNotasImportadas.Location = new System.Drawing.Point(11, 195);
+            this.dtNotasImportadas.Location = new System.Drawing.Point(1, 195);
             this.dtNotasImportadas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtNotasImportadas.Name = "dtNotasImportadas";
             this.dtNotasImportadas.RowHeadersWidth = 62;
