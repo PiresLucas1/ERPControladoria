@@ -1,19 +1,16 @@
-﻿using DocumentFormat.OpenXml.Drawing.Charts;
-using DocumentFormat.OpenXml.Spreadsheet;
-using ERP_FISCAL.Controller;
+﻿
 using ERP_FISCAL.Controller.ConsultaSaldoNotasZanup;
 using ERP_FISCAL.Utils;
 using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+
 using System.Data;
-using System.Drawing;
-using System.Drawing.Printing;
+
 using System.Linq;
-using System.Text;
+
 using System.Threading.Tasks;
-using System.Windows;
+
 using System.Windows.Forms;
 using Color = System.Drawing.Color;
 
@@ -74,16 +71,16 @@ namespace ERP_FISCAL.view
                 }
                 else
                 {
-                    retorno = await consultaSaldoNotasZanup.ConsultaSaldoNotas(0,ValorFiltro);
+                    retorno = await consultaSaldoNotasZanup.ConsultaSaldoNotas(0, ValorFiltro);
                 }
 
 
                 if (dataItensSelecionados.Columns.Count <= 0)
-                   
-                if (retorno.Rows.Count == 0)
-                {
-                    MessageBox.Show("Nenhum produto encontrado!");
-                }
+
+                    if (retorno.Rows.Count == 0)
+                    {
+                        MessageBox.Show("Nenhum produto encontrado!");
+                    }
                 dataItensPesquisado = retorno;
                 CarregaDataTable(retorno);
 
@@ -111,6 +108,7 @@ namespace ERP_FISCAL.view
             }
             dvgConsultaNotas.DataSource = data;
 
+            VerificaSeExisteItemNoDatatableDeItensSelecionado(data);
 
             dvgConsultaNotas.Columns["Qtd para Devolver"].DisplayIndex = 0;
             dvgConsultaNotas.Columns["Qtd para Devolver"].Width = 30;
@@ -121,6 +119,40 @@ namespace ERP_FISCAL.view
 
 
         }
+
+        public void VerificaSeExisteItemNoDatatableDeItensSelecionado(DataTable data)
+        {
+            ResetarCoresGridConsultaNotas();
+            List<string> chaveDeAcessoSelecionadas = new List<string>();
+            if (dataItensSelecionados.Rows.Count <= 0)
+                return;
+            foreach (DataRow row in dataItensSelecionados.Rows)
+            {
+                var chaveAcesso = row["ChaveAcesso"].ToString();
+                chaveDeAcessoSelecionadas.Add(chaveAcesso);
+
+            }
+            foreach (DataRow row in data.Rows)
+            {
+                var chaveAcesso = row["ChaveAcesso"].ToString();
+                if (chaveDeAcessoSelecionadas.Contains(chaveAcesso))
+                {
+                    int index = data.Rows.IndexOf(row);
+                    dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = Color.LightSalmon;
+                }
+            }
+       
+
+        }
+        public void ResetarCoresGridConsultaNotas()
+        {
+            foreach (DataGridViewRow row in dvgConsultaNotas.Rows)
+            {
+                row.DefaultCellStyle.BackColor = Color.White; 
+                row.DefaultCellStyle.ForeColor = Color.Black;
+            }
+        }
+
 
         private void dvgConsultaNotas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -200,7 +232,7 @@ namespace ERP_FISCAL.view
         {
             if (tabNavegacaoAba.SelectedTab == tabItensSelecionado)
             {
-                if(dataItensSelecionados.Rows.Count > 0)
+                if (dataItensSelecionados.Rows.Count > 0)
                 {
 
                     dvgItensSelecionados.DataSource = dataItensSelecionados;
@@ -263,14 +295,14 @@ namespace ERP_FISCAL.view
             {
 
                 var dtOriginal = (System.Data.DataTable)dvgConsultaNotas.DataSource;
-                if(!dtOriginal.Columns.Contains("Qtd para Devolver"))
+                if (!dtOriginal.Columns.Contains("Qtd para Devolver"))
                 {
                     DataColumn colQuantidade = new DataColumn("Qtd para Devolver", typeof(int));
                     colQuantidade.DefaultValue = 0;
                     dtOriginal.Columns.Add(colQuantidade);
 
                 }
-               
+
 
                 var linhasSelecionadas = dtOriginal.AsEnumerable()
                     .Where(r => r.Field<int>("Qtd para Devolver") != 0)
@@ -281,13 +313,13 @@ namespace ERP_FISCAL.view
                 foreach (DataRow row in linhasSelecionadas)
                 {
                     string qtd = row["Qtd para Devolver"]?.ToString();
-                    if (string.IsNullOrWhiteSpace(qtd) || Convert.ToInt32(qtd) == 0 )
+                    if (string.IsNullOrWhiteSpace(qtd) || Convert.ToInt32(qtd) == 0)
                     {
                         int index = dtOriginal.Rows.IndexOf(row);
                         dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = System.Drawing.Color.LightSalmon;
                         existeCelulaVaiza = true;
                     }
-                    if(Convert.ToUInt32(qtd) > Convert.ToInt32(row["Saldo Restante"].ToString()))
+                    if (Convert.ToUInt32(qtd) > Convert.ToInt32(row["Saldo Restante"].ToString()))
                     {
                         int index = dtOriginal.Rows.IndexOf(row);
                         dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = System.Drawing.Color.LightSalmon;
@@ -339,7 +371,7 @@ namespace ERP_FISCAL.view
                 var valorSaldoRestante = cellAlteracao.Cells["Saldo Restante"].Value.ToString();
                 int saldoRestante = Convert.ToInt32(valorSaldoRestante);
                 int valorDevolvido = Convert.ToInt32(cellParaTextBox.Text);
-                if (valorDevolvido >saldoRestante )
+                if (valorDevolvido > saldoRestante)
                 {
                     MessageBox.Show("Valor de Devolução não pode ser maior que o valor de Saldo Restante");
                     cellAlteracao.Cells["Qtd para Devolver"].Value = "";
@@ -356,7 +388,7 @@ namespace ERP_FISCAL.view
         {
             if (tabNavegacaoAba.SelectedTab == tabItensSelecionado)
             {
-                if(dataItensSelecionados.Rows.Count <= 0)
+                if (dataItensSelecionados.Rows.Count <= 0)
                 {
                     return;
                 }
@@ -380,11 +412,41 @@ namespace ERP_FISCAL.view
 
         private void cbFiltroSaldo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cbFiltroSaldo.SelectedIndex == 0)
+            if (cbFiltroSaldo.SelectedIndex == 0)
             {
 
             }
         }
 
+
+        private void chkExibirRelacionados_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (dvgConsultaNotas.DataSource == null)
+                return;
+
+            DataTable dt = (dvgConsultaNotas.DataSource as DataTable);
+
+            if (chkExibirRelacionados.Checked)
+            {
+                // Clona a estrutura
+                DataTable dtFiltrado = dt.Clone();
+
+                // Copia apenas as linhas pintadas
+                foreach (DataGridViewRow row in dvgConsultaNotas.Rows)
+                {
+                    if (row.DefaultCellStyle.BackColor == Color.LightSalmon)
+                    {
+                        dtFiltrado.ImportRow(((DataRowView)row.DataBoundItem).Row);
+                    }
+                }
+
+                dvgConsultaNotas.DataSource = dtFiltrado;
+            }
+            else
+            {
+                // Restaura o DataTable original
+                dvgConsultaNotas.DataSource = dt;
+            }
+        }
     }
 }
