@@ -22,8 +22,9 @@ namespace ERP_FISCAL.view
     {
         public DataGridViewRow cellAlteracao;
         public int colAlteracao;
-        public System.Data.DataTable dataItensSelecionados = new System.Data.DataTable();
-        public System.Data.DataTable dataItensPesquisado = new System.Data.DataTable();
+        public DataTable dataItensSelecionados = new DataTable();
+        public DataTable dataItensPesquisado = new DataTable();
+        public DataTable dataOrigem = new DataTable();
         public ConsultaSaldoNotasFiscais()
         {
             InitializeComponent();
@@ -62,7 +63,7 @@ namespace ERP_FISCAL.view
             {
                 ConsultaSaldoNotasZanupController consultaSaldoNotasZanup = new ConsultaSaldoNotasZanupController();
 
-                System.Data.DataTable retorno = new System.Data.DataTable();
+                DataTable retorno = new DataTable();
 
                 if (cbFiltroSaldo.SelectedIndex == 0)
                 {
@@ -83,7 +84,7 @@ namespace ERP_FISCAL.view
                     }
                 dataItensPesquisado = retorno;
                 CarregaDataTable(retorno);
-
+                
             }
             catch (Exception ex)
             {
@@ -97,7 +98,7 @@ namespace ERP_FISCAL.view
             btnListaNotas.Enabled = true;
 
         }
-        public void CarregaDataTable(System.Data.DataTable data)
+        public void CarregaDataTable(DataTable data)
         {
             if (!data.Columns.Contains("Qtd para Devolver"))
             {
@@ -105,6 +106,12 @@ namespace ERP_FISCAL.view
                 colQuantidade.DefaultValue = 0;
                 data.Columns.Add(colQuantidade);
 
+            }
+            if (!data.Columns.Contains("colSelecionado"))
+            {
+                DataColumn colSelecionado = new DataColumn("colSelecionado", typeof(bool));
+                colSelecionado.DefaultValue = 0;
+                data.Columns.Add(colSelecionado);
             }
             dvgConsultaNotas.DataSource = data;
 
@@ -114,9 +121,14 @@ namespace ERP_FISCAL.view
             dvgConsultaNotas.Columns["Qtd para Devolver"].Width = 30;
             dvgConsultaNotas.Columns["Qtd para Devolver"].Width = 30;
             dvgConsultaNotas.Columns["Qtd para Devolver"].DefaultCellStyle.ForeColor = Color.Red;
+            
+            dvgConsultaNotas.Columns["colSelecionado"].Visible = false;
+
 
             dvgConsultaNotas.RowHeadersVisible = false;
+            dataOrigem = dvgConsultaNotas.DataSource as DataTable;
 
+            OrdenarPorSelecionado(dvgConsultaNotas);
 
         }
 
@@ -137,19 +149,41 @@ namespace ERP_FISCAL.view
                 var chaveAcesso = row["ChaveAcesso"].ToString();
                 if (chaveDeAcessoSelecionadas.Contains(chaveAcesso))
                 {
-                    int index = data.Rows.IndexOf(row);
-                    dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = Color.LightSalmon;
+
+                    PintarLinhaPorDataRow(dvgConsultaNotas, row, Color.LightSalmon);
+                    row["colSelecionado"] = true;
                 }
             }
-       
+            dvgConsultaNotas.Refresh();
 
         }
         public void ResetarCoresGridConsultaNotas()
         {
             foreach (DataGridViewRow row in dvgConsultaNotas.Rows)
             {
-                row.DefaultCellStyle.BackColor = Color.White; 
+                // reset visual
+                row.DefaultCellStyle.BackColor = Color.White;
                 row.DefaultCellStyle.ForeColor = Color.Black;
+
+                // reset lógico (no DataTable)
+                if (row.DataBoundItem is DataRowView drv
+                    && drv.Row.Table.Columns.Contains("colSelecionado"))
+                {
+                    drv.Row["colSelecionado"] = false;
+                }
+            }
+
+            dvgConsultaNotas.Refresh();
+        }
+
+        public void OrdenarPorSelecionado(DataGridView dvg)
+        {
+            if (dvg.DataSource is DataTable dt)
+            {
+                if (!dt.Columns.Contains("colSelecionado"))
+                    return; // nada para ordenar
+
+                dt.DefaultView.Sort = "colSelecionado DESC";
             }
         }
 
@@ -203,9 +237,24 @@ namespace ERP_FISCAL.view
             await CriarNotaFiscal();
         }
 
+        public void PintarLinhaPorDataRow(DataGridView dvg, DataRow rowParaPintar, Color cor)
+        {
+            foreach (DataGridViewRow gridRow in dvg.Rows)
+            {
+                if (gridRow.DataBoundItem is DataRowView drv &&
+                    drv.Row == rowParaPintar)
+                {
+                    gridRow.DefaultCellStyle.BackColor = cor;
+                    break;
+                }
+            }
+        }
+
+
+
         public void ImportaItemParaDvgItensSelecionado(List<DataRow> linhasSelecionadas)
         {
-            var dtOriginal = (System.Data.DataTable)dvgConsultaNotas.DataSource;
+            var dtOriginal = (DataTable)dvgConsultaNotas.DataSource;
             
             if(dataItensSelecionados.Rows.Count <= 0)
                 dataItensSelecionados = dtOriginal.Clone();
@@ -219,9 +268,8 @@ namespace ERP_FISCAL.view
             foreach (var linha in linhasSelecionadas)
             {
                 dataItensSelecionados.ImportRow(linha);
-                int index = dtOriginal.Rows.IndexOf(linha);
 
-                dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = Color.LightGreen;
+                PintarLinhaPorDataRow(dvgConsultaNotas, linha, Color.LightSalmon);
             }
 
             AdicionaColunaEstoqueOrigem();
@@ -253,6 +301,7 @@ namespace ERP_FISCAL.view
             }
         }
 
+        /*Adiciona coluna estoque de origem na tabela que alimenta o dvg de itens selecionados*/
         public void AdicionaColunaEstoqueOrigem()
         {
             // Evita adicionar a coluna mais de uma vez
@@ -290,7 +339,6 @@ namespace ERP_FISCAL.view
                 dvgItensSelecionados.Columns.Add(colCombo);
             }
         }
-
 
         private void btnRelacionaItens_Click(object sender, EventArgs e)
         {
@@ -386,7 +434,6 @@ namespace ERP_FISCAL.view
             }
         }
 
-        /* EVENTO DA TABELA DE SELECIONADOS */
         private void dvgItensSelecionados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (tabNavegacaoAba.SelectedTab == tabItensSelecionado)
@@ -444,11 +491,24 @@ namespace ERP_FISCAL.view
                 }
 
                 dvgConsultaNotas.DataSource = dtFiltrado;
+                
             }
             else
             {
                 // Restaura o DataTable original
-                dvgConsultaNotas.DataSource = dt;
+                dvgConsultaNotas.DataSource = dataOrigem;
+            }
+        }
+
+        private void dvgConsultaNotas_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            var row = dvgConsultaNotas.Rows[e.RowIndex];
+            var drv = row.DataBoundItem as DataRowView;
+
+            if (drv != null && drv.DataView.Table.Columns.Contains("colSelecionado"))
+            {
+                bool selecionado = Convert.ToBoolean(drv.Row["colSelecionado"]);
+                row.DefaultCellStyle.BackColor = selecionado ? Color.LightSalmon : Color.White;
             }
         }
     }
