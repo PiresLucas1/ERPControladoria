@@ -186,7 +186,7 @@ namespace ERP_FISCAL.view
             splashScreen.Show(this); // 'this' como owner para ficar modal
             splashScreen.SetMessage("Gerando nota fical no bling...");
 
-            DataRowToObject dataRowToObject = new DataRowToObject();
+            CriaNotaBlingService dataRowToObject = new CriaNotaBlingService();
             await dataRowToObject.TranformaDataRowToObject(linhasSelecionadas);
             btGerarNotaFiscal.Enabled = false;
 
@@ -206,7 +206,10 @@ namespace ERP_FISCAL.view
         public void ImportaItemParaDvgItensSelecionado(List<DataRow> linhasSelecionadas)
         {
             var dtOriginal = (System.Data.DataTable)dvgConsultaNotas.DataSource;
-            dataItensSelecionados = dtOriginal.Clone();
+            
+            if(dataItensSelecionados.Rows.Count <= 0)
+                dataItensSelecionados = dtOriginal.Clone();
+            
 
             if (!dataItensSelecionados.Columns.Contains("Estoque origem"))
             {

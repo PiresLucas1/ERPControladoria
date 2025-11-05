@@ -8,26 +8,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ERP_FISCAL.Service.BlingService.ts.DtoDataRowToDocumentoNota;
 
 namespace ERP_FISCAL.Utils
 {
-    public class DataRowToObject
+    public class CriaNotaBlingService
     {
-        public async Task TranformaDataRowToObject(List<DataRow> ListRow)
+        public async Task TranformaDataRowToObject(List<DataRow> listRow)
         {
-            Console.WriteLine(ListRow);
+            Console.WriteLine(listRow);
 
             BlingService blingService = new BlingService();
             NotaFiscal notaFiscal = await blingService.ConsultarNotaAsync();
 
-            //DateTime dataConvertida = DateTime.ParseExact(row["DataDocumento"].ToString(), "dd/MM/YYYY", System.Globalization.CultureInfo.InvariantCulture);
             DateTime dataAtual = DateTime.Now;
             DateTime dataFutura = dataAtual.AddDays(32);
             string dataAtualFormatada = dataAtual.ToString("yyyy-MM-dd");
             string dataFuturaFormatada = dataFutura.ToString("yyyy-MM-dd");
 
-            foreach (DataRow row in ListRow)
+
+            AgrupaProdutosDaMesmaNota agrupaProdutosDaMesmaNota = new AgrupaProdutosDaMesmaNota();
+            var grupoDeDocumento = agrupaProdutosDaMesmaNota.AgrupaProdutosDaMesmaChave(listRow);
+            Console.WriteLine(grupoDeDocumento);
+
+            foreach (var itemGrupo in grupoDeDocumento)
             {
+                var primeiraLinha = itemGrupo.First();
+
+
 
                 NotaFiscal novaNotaFiscal = new NotaFiscal
                 {
@@ -41,15 +49,15 @@ namespace ERP_FISCAL.Utils
                     DataOperacao = dataAtualFormatada,
                     Finalidade = 4,
                     //inserir no campo observação o estoque de referencia
-                    Observacoes = $"Dev. ref. a NF {row["NumDocumento"].ToString()} em {row["DataDocumento"].ToString()}, compra de mercadoria sob a chave de acesso: {row["ChaveAcesso"].ToString()}, Estoque origem: {row["Estoque Origem"]}",
+                    Observacoes = $"Dev. ref. a NF {primeiraLinha.NumDocumento} em {primeiraLinha.DataDocumento}, compra de mercadoria sob a chave de acesso: {primeiraLinha.ChaveAcesso}, Estoque origem: {primeiraLinha.EstoqueOrigem}",
                     Modelo = 55,
                     DocumentoReferenciado = new List<DocumentoReferenciado>
                 {
                     new DocumentoReferenciado
                     {
                         Modelo = 55,
-                        Numero = (int)row["NumDocumento"],
-                        ChaveAcesso = row["ChaveAcesso"].ToString()
+                        Numero = primeiraLinha.NumDocumento,
+                        ChaveAcesso = primeiraLinha.ChaveAcesso
                     },
                 },
                     Contato = new Contato
@@ -57,16 +65,6 @@ namespace ERP_FISCAL.Utils
                         NumeroDocumento = "46.054.219/0001-74",
                         Nome = "SOLFARMA COMERCIO DE PRODUTOS FARMACEUTICOS S.A."
                     },
-                    Itens = new List<Item>
-                {
-                    new Item
-                    {
-                        Codigo = row["IDProduto"].ToString(),
-                        Unidade = "UN",
-                        Quantidade = (int)row["Qtd para Devolver"],
-                        Valor =  (decimal)row["ValorUnitario"],
-                    }
-                },
                     Transporte = new Transporte
                     {
                         FretePorConta = 0,
@@ -113,18 +111,28 @@ namespace ERP_FISCAL.Utils
                         }
 
                     }
+                },
+                    Itens = new List<Item>()
+                };
+                // fim da criação do objeto
+
+                // adiciona os itens no objeto
+                foreach (var item in itemGrupo)
+                {
+                    novaNotaFiscal.Itens.Add(new Item
+                    {
+                        Codigo = item.IDProduto.ToString(),
+                        Unidade = "UN",
+                        Quantidade = item.QtdParaDevolver,
+                        Valor = item.ValorUnitario
+                    });
                 }
 
-
-                };
-
-
-              string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
-              var response = await blingService.CriarNotaAsync(novaNotaFiscal);
+                string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
+                var response = await blingService.CriarNotaAsync(novaNotaFiscal);
 
                 if (response == 0)
                 {
-
                     break;
                 }
 
