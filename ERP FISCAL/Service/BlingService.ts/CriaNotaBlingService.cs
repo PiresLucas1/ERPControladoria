@@ -1,6 +1,6 @@
 ﻿using ERP_FISCAL.Models;
 using ERP_FISCAL.service;
-
+using ERP_FISCAL.view;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,9 +14,10 @@ namespace ERP_FISCAL.Utils
 {
     public class CriaNotaBlingService
     {
-        public async Task TranformaDataRowToObject(List<DataRow> listRow)
+        public string varreduraDeCriacao { get; set; }
+        public async Task TranformaDataRowToObject(List<DataRow> listRow, ConsultaSaldoNotasFiscais form)
         {
-            Console.WriteLine(listRow);
+            
 
             BlingService blingService = new BlingService();
             NotaFiscal notaFiscal = await blingService.ConsultarNotaAsync();
@@ -29,7 +30,11 @@ namespace ERP_FISCAL.Utils
 
             AgrupaProdutosDaMesmaNota agrupaProdutosDaMesmaNota = new AgrupaProdutosDaMesmaNota();
             var grupoDeDocumento = agrupaProdutosDaMesmaNota.AgrupaProdutosDaMesmaChave(listRow);
-            Console.WriteLine(grupoDeDocumento);
+
+            await Task.Delay(2000);
+
+            int contadorDeNotasCriadas = 0;
+            int contadorIdNotasCriadas = 1;
 
             foreach (var itemGrupo in grupoDeDocumento)
             {
@@ -41,7 +46,7 @@ namespace ERP_FISCAL.Utils
                 {
                     Tipo = 1,
                     Serie = 5,
-                    Numero = (Convert.ToInt32(notaFiscal.Numero) + 1).ToString(),
+                    Numero = (Convert.ToInt32(notaFiscal.Numero) + contadorIdNotasCriadas).ToString(),
                     NaturezaOperacao = new NaturezaOperacao
                     {
                         Id = 15101770690
@@ -63,7 +68,9 @@ namespace ERP_FISCAL.Utils
                     Contato = new Contato
                     {
                         NumeroDocumento = "46.054.219/0001-74",
-                        Nome = "SOLFARMA COMERCIO DE PRODUTOS FARMACEUTICOS S.A."
+                        Nome = "SOLFARMA COMERCIO DE PRODUTOS FARMACEUTICOS S.A.",
+                        tipoPessoa = "J",
+                        contribuinte = 1
                     },
                     Transporte = new Transporte
                     {
@@ -129,12 +136,15 @@ namespace ERP_FISCAL.Utils
                 }
 
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
-                var response = await blingService.CriarNotaAsync(novaNotaFiscal);
+                Console.WriteLine(json);
+                await blingService.CriarNotaAsync(novaNotaFiscal);
+                contadorDeNotasCriadas++;
+                contadorIdNotasCriadas++;
+                varreduraDeCriacao = $" {contadorDeNotasCriadas} criadas de {grupoDeDocumento.Count}";
+                form.GeraTextoDeCriacaoDeNotas(varreduraDeCriacao);
 
-                if (response == 0)
-                {
-                    break;
-                }
+                await Task.Delay(7000); // Atraso de 2 segundos entre as requisições  216321
+
 
 
             }

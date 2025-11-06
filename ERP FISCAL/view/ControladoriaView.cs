@@ -150,6 +150,15 @@ namespace ERP_FISCAL.view
             
         }
 
+        private void atualizarGestãoPatrimonialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ImportacaoRecebimento)))
+            {
+                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
+                importacaoRecebimento.Show();
+            }
+        }
+
 
 
         //private void alteraTipoMovimentoToolStripMenuItem_Click(object sender, EventArgs e)

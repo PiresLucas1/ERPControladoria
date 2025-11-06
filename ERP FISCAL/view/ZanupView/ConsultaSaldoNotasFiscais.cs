@@ -1,4 +1,5 @@
 ﻿
+using DocumentFormat.OpenXml.InkML;
 using ERP_FISCAL.Controller.ConsultaSaldoNotasZanup;
 using ERP_FISCAL.Utils;
 using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
@@ -221,7 +222,7 @@ namespace ERP_FISCAL.view
             splashScreen.SetMessage("Gerando nota fical no bling...");
 
             CriaNotaBlingService dataRowToObject = new CriaNotaBlingService();
-            await dataRowToObject.TranformaDataRowToObject(linhasSelecionadas);
+            await dataRowToObject.TranformaDataRowToObject(linhasSelecionadas, this);
             btGerarNotaFiscal.Enabled = false;
 
             splashScreen.Close();
@@ -235,6 +236,11 @@ namespace ERP_FISCAL.view
                 return;
             }
             await CriarNotaFiscal();
+        }
+        
+        public void GeraTextoDeCriacaoDeNotas(string valor)
+        {
+            txtCountNotas.Text = valor;
         }
 
         public void PintarLinhaPorDataRow(DataGridView dvg, DataRow rowParaPintar, Color cor)

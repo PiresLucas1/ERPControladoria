@@ -42,6 +42,7 @@
             this.dvgConsultaNotas = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.tabItensSelecionado = new System.Windows.Forms.TabPage();
             this.dvgItensSelecionados = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.txtCountNotas = new System.Windows.Forms.TextBox();
             this.gbFiltro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabNavegacaoAba.SuspendLayout();
@@ -228,11 +229,21 @@
             this.dvgItensSelecionados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellClick);
             this.dvgItensSelecionados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellDoubleClick);
             // 
+            // txtCountNotas
+            // 
+            this.txtCountNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtCountNotas.Location = new System.Drawing.Point(23, 827);
+            this.txtCountNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtCountNotas.Name = "txtCountNotas";
+            this.txtCountNotas.Size = new System.Drawing.Size(252, 26);
+            this.txtCountNotas.TabIndex = 7;
+            // 
             // ConsultaSaldoNotasFiscais
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1192, 866);
+            this.Controls.Add(this.txtCountNotas);
             this.Controls.Add(this.tabNavegacaoAba);
             this.Controls.Add(this.btGerarNotaFiscal);
             this.Controls.Add(this.gbFiltro);
@@ -249,6 +260,7 @@
             this.tabItensSelecionado.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dvgItensSelecionados)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -268,5 +280,6 @@
         private System.Windows.Forms.Label lbFiltroSaldo;
         private System.Windows.Forms.TextBox txtFiltro;
         private System.Windows.Forms.CheckBox chkExibirRelacionados;
+        private System.Windows.Forms.TextBox txtCountNotas;
     }
 }

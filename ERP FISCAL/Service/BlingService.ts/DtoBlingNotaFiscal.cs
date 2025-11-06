@@ -79,6 +79,12 @@ namespace ERP_FISCAL.Models
 
         [JsonProperty("nome")]
         public string Nome { get; set; }
+
+        [JsonProperty("tipoPessoa")]
+        public string tipoPessoa { get; set; }
+
+        [JsonProperty("contribuinte")]
+        public int contribuinte { get; set; }
     }
 
     public class Item
