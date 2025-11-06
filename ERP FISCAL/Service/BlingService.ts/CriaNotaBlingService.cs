@@ -70,7 +70,18 @@ namespace ERP_FISCAL.Utils
                         NumeroDocumento = "46.054.219/0001-74",
                         Nome = "SOLFARMA COMERCIO DE PRODUTOS FARMACEUTICOS S.A.",
                         tipoPessoa = "J",
-                        contribuinte = 1
+                        contribuinte = 1,
+                        ie= 210030251111,
+                        endereco = new EnderecoCliente
+                        {
+                           endereco = "Avenida João Ferreira Penna",
+                           numero = 147,
+                           bairro = "DISTRITO INDUSTRIAL III",
+                           cep = "14707-002",
+                           municipio = "Bebedouro",
+                           uf = "SP"
+
+                        }
                     },
                     Transporte = new Transporte
                     {

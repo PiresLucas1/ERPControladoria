@@ -232,7 +232,9 @@
             // txtCountNotas
             // 
             this.txtCountNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtCountNotas.Location = new System.Drawing.Point(23, 827);
+            this.txtCountNotas.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.txtCountNotas.Enabled = false;
+            this.txtCountNotas.Location = new System.Drawing.Point(29, 810);
             this.txtCountNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCountNotas.Name = "txtCountNotas";
             this.txtCountNotas.Size = new System.Drawing.Size(252, 26);

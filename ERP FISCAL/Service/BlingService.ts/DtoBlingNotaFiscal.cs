@@ -85,6 +85,13 @@ namespace ERP_FISCAL.Models
 
         [JsonProperty("contribuinte")]
         public int contribuinte { get; set; }
+        [JsonProperty("ie")]
+        public long ie { get; set; }
+
+        [JsonProperty("endereco")]
+        public EnderecoCliente endereco { get; set; }
+
+
     }
 
     public class Item
@@ -199,5 +206,26 @@ namespace ERP_FISCAL.Models
     {
         [JsonProperty("id")]
         public int Id { get; set; }
+    }
+    public class  EnderecoCliente 
+    {
+        [JsonProperty("endereco")]
+        public string endereco { get; set; }
+
+        [JsonProperty("numero")]
+        public int numero { get; set; }
+
+        [JsonProperty("bairro")]
+        public string bairro { get; set; }
+
+        [JsonProperty("cep")]
+        public string cep { get; set; }
+
+        [JsonProperty("municipio")]
+        public string municipio { get; set; }
+
+        [JsonProperty("uf")]
+        public string uf { get; set; }
+
     }
 }
