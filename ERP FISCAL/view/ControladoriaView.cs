@@ -1,10 +1,12 @@
-﻿using ERP_FISCAL.view.ContabilView;
+﻿using DocumentFormat.OpenXml.Office.PowerPoint.Y2021.M06.Main;
+using ERP_FISCAL.view.ContabilView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -15,11 +17,13 @@ namespace ERP_FISCAL.view
 {
     public partial class Portal : Form
     {
+        public int contadorTheme = 0;
         public Portal()
         {
             InitializeComponent();
             string usuario = Environment.UserName;
             string dominio = Environment.UserDomainName;
+            
 
             // 🔹 Carrega a cor salva
             string corSalva = Properties.Settings.Default.CorCabecalho;
@@ -157,6 +161,26 @@ namespace ERP_FISCAL.view
                 ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
                 importacaoRecebimento.Show();
             }
+        }
+
+        private void txtVersao_Click(object sender, EventArgs e)
+        {
+            contadorTheme++;
+
+            if (contadorTheme == 5)
+            {
+                MessageBox.Show("Tema Secreto habilitado");
+                
+
+            }
+        }
+
+        public void HabilitaThema()
+        {
+            string caminho = Path.Combine(Application.StartupPath, "theme", "themeDracula.json");
+            
+            //this.BackColor 
+
         }
 
 

@@ -37,6 +37,7 @@
             this.alterarTipoDeMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contabilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarRecebimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.atualizarGestãoPatrimonialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zanupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.devoluçaoDeNotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarBottom = new System.Windows.Forms.MenuStrip();
@@ -45,7 +46,6 @@
             this.alterarCorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.atualizarGestãoPatrimonialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarTop.SuspendLayout();
             this.menuBarBottom.SuspendLayout();
             this.SuspendLayout();
@@ -61,8 +61,7 @@
             this.zanupToolStripMenuItem});
             this.menuBarTop.Location = new System.Drawing.Point(0, 0);
             this.menuBarTop.Name = "menuBarTop";
-            this.menuBarTop.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
-            this.menuBarTop.Size = new System.Drawing.Size(2714, 54);
+            this.menuBarTop.Size = new System.Drawing.Size(1809, 33);
             this.menuBarTop.TabIndex = 0;
             this.menuBarTop.Text = "menuStrip1";
             // 
@@ -73,7 +72,7 @@
             this.importarNotasParaOBigToolStripMenuItem,
             this.alteraçõesFiscaisToolStripMenuItem1});
             this.importarNotasToolStripMenuItem.Name = "importarNotasToolStripMenuItem";
-            this.importarNotasToolStripMenuItem.Size = new System.Drawing.Size(70, 50);
+            this.importarNotasToolStripMenuItem.Size = new System.Drawing.Size(70, 29);
             this.importarNotasToolStripMenuItem.Text = "Fiscal";
             // 
             // importarToolStripMenuItem
@@ -111,7 +110,7 @@
             this.importarRecebimentoToolStripMenuItem,
             this.atualizarGestãoPatrimonialToolStripMenuItem});
             this.contabilToolStripMenuItem.Name = "contabilToolStripMenuItem";
-            this.contabilToolStripMenuItem.Size = new System.Drawing.Size(94, 50);
+            this.contabilToolStripMenuItem.Size = new System.Drawing.Size(94, 29);
             this.contabilToolStripMenuItem.Text = "Contabil";
             // 
             // importarRecebimentoToolStripMenuItem
@@ -121,12 +120,19 @@
             this.importarRecebimentoToolStripMenuItem.Text = "Importar Recebimento";
             this.importarRecebimentoToolStripMenuItem.Click += new System.EventHandler(this.importarRecebimentoToolStripMenuItem_Click);
             // 
+            // atualizarGestãoPatrimonialToolStripMenuItem
+            // 
+            this.atualizarGestãoPatrimonialToolStripMenuItem.Name = "atualizarGestãoPatrimonialToolStripMenuItem";
+            this.atualizarGestãoPatrimonialToolStripMenuItem.Size = new System.Drawing.Size(335, 34);
+            this.atualizarGestãoPatrimonialToolStripMenuItem.Text = "Atualizar Gestão Patrimonial";
+            this.atualizarGestãoPatrimonialToolStripMenuItem.Click += new System.EventHandler(this.atualizarGestãoPatrimonialToolStripMenuItem_Click);
+            // 
             // zanupToolStripMenuItem
             // 
             this.zanupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.devoluçaoDeNotasToolStripMenuItem});
             this.zanupToolStripMenuItem.Name = "zanupToolStripMenuItem";
-            this.zanupToolStripMenuItem.Size = new System.Drawing.Size(78, 50);
+            this.zanupToolStripMenuItem.Size = new System.Drawing.Size(78, 29);
             this.zanupToolStripMenuItem.Text = "Zanup";
             // 
             // devoluçaoDeNotasToolStripMenuItem
@@ -146,25 +152,25 @@
             this.txtVersao,
             this.Opções,
             this.toolStripMenuItem4});
-            this.menuBarBottom.Location = new System.Drawing.Point(0, 1229);
+            this.menuBarBottom.Location = new System.Drawing.Point(0, 822);
             this.menuBarBottom.Name = "menuBarBottom";
-            this.menuBarBottom.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
-            this.menuBarBottom.Size = new System.Drawing.Size(2714, 54);
+            this.menuBarBottom.Size = new System.Drawing.Size(1809, 33);
             this.menuBarBottom.TabIndex = 1;
             this.menuBarBottom.Text = "menuStrip2";
             // 
             // txtVersao
             // 
             this.txtVersao.Name = "txtVersao";
-            this.txtVersao.Size = new System.Drawing.Size(81, 50);
+            this.txtVersao.Size = new System.Drawing.Size(81, 29);
             this.txtVersao.Text = "Versão";
+            this.txtVersao.Click += new System.EventHandler(this.txtVersao_Click);
             // 
             // Opções
             // 
             this.Opções.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alterarCorToolStripMenuItem});
             this.Opções.Name = "Opções";
-            this.Opções.Size = new System.Drawing.Size(89, 50);
+            this.Opções.Size = new System.Drawing.Size(89, 29);
             this.Opções.Text = "Opções";
             // 
             // alterarCorToolStripMenuItem
@@ -189,13 +195,6 @@
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(256, 34);
             this.toolStripMenuItem5.Text = "Alterar conta frete";
-            // 
-            // atualizarGestãoPatrimonialToolStripMenuItem
-            // 
-            this.atualizarGestãoPatrimonialToolStripMenuItem.Name = "atualizarGestãoPatrimonialToolStripMenuItem";
-            this.atualizarGestãoPatrimonialToolStripMenuItem.Size = new System.Drawing.Size(335, 34);
-            this.atualizarGestãoPatrimonialToolStripMenuItem.Text = "Atualizar Gestão Patrimonial";
-            this.atualizarGestãoPatrimonialToolStripMenuItem.Click += new System.EventHandler(this.atualizarGestãoPatrimonialToolStripMenuItem_Click);
             // 
             // Portal
             // 
