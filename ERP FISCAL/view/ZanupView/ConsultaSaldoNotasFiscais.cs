@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 
 using System.Data;
-
+using System.IO;
 using System.Linq;
 
 using System.Threading.Tasks;
@@ -237,7 +237,12 @@ namespace ERP_FISCAL.view
             }
             await CriarNotaFiscal();
         }
-        
+        public void LimpaDataGridViewItensSelecionados()
+        {
+            dataItensSelecionados.Clear();
+            dvgItensSelecionados.DataSource = dataItensSelecionados;
+        }
+
         public void GeraTextoDeCriacaoDeNotas(string valor)
         {
             txtCountNotas.Text = valor;
@@ -281,9 +286,12 @@ namespace ERP_FISCAL.view
             AdicionaColunaEstoqueOrigem();
             dvgItensSelecionados.DataSource = dataItensSelecionados;
 
+
             MessageBox.Show("Itens importados com sucesso!");
 
+            
         }
+
 
         private void tabNavegacaoAba_Selected(object sender, TabControlEventArgs e)
         {
@@ -301,9 +309,14 @@ namespace ERP_FISCAL.view
                     dvgItensSelecionados.Columns["Estoque origem"].DisplayIndex = dvgItensSelecionados.Columns["Qtd para Devolver"].Index + 1;
                 }
 
+                txtCountNotas.Text = "";
                 return;
 
 
+            }
+            else
+            {
+                txtCountNotas.Text =  dvgConsultaNotas.RowCount.ToString();
             }
         }
 
@@ -515,6 +528,16 @@ namespace ERP_FISCAL.view
             {
                 bool selecionado = Convert.ToBoolean(drv.Row["colSelecionado"]);
                 row.DefaultCellStyle.BackColor = selecionado ? Color.LightSalmon : Color.White;
+            }
+        }
+
+
+        private void txtFiltro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                Button1_Click(null, null);
+                e.Handled = true;
             }
         }
     }

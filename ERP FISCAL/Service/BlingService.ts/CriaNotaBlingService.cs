@@ -5,10 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ERP_FISCAL.Service.BlingService.ts.DtoDataRowToDocumentoNota;
+
 
 namespace ERP_FISCAL.Utils
 {
@@ -20,7 +19,7 @@ namespace ERP_FISCAL.Utils
             
 
             BlingService blingService = new BlingService();
-            NotaFiscal notaFiscal = await blingService.ConsultarNotaAsync();
+            
 
             DateTime dataAtual = DateTime.Now;
             DateTime dataFutura = dataAtual.AddDays(32);
@@ -31,10 +30,9 @@ namespace ERP_FISCAL.Utils
             AgrupaProdutosDaMesmaNota agrupaProdutosDaMesmaNota = new AgrupaProdutosDaMesmaNota();
             var grupoDeDocumento = agrupaProdutosDaMesmaNota.AgrupaProdutosDaMesmaChave(listRow);
 
-            await Task.Delay(2000);
+            await Task.Delay(3000);
 
-            int contadorDeNotasCriadas = 0;
-            int contadorIdNotasCriadas = 1;
+            int contadorDeNotasCriadas = 0;            
 
             foreach (var itemGrupo in grupoDeDocumento)
             {
@@ -45,8 +43,7 @@ namespace ERP_FISCAL.Utils
                 NotaFiscal novaNotaFiscal = new NotaFiscal
                 {
                     Tipo = 1,
-                    Serie = 5,
-                    Numero = (Convert.ToInt32(notaFiscal.Numero) + contadorIdNotasCriadas).ToString(),
+                    Serie = 5,                    
                     NaturezaOperacao = new NaturezaOperacao
                     {
                         Id = 15101770690
@@ -147,18 +144,23 @@ namespace ERP_FISCAL.Utils
                 }
 
                 string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
-                Console.WriteLine(json);
+                
+
                 await blingService.CriarNotaAsync(novaNotaFiscal);
-                contadorDeNotasCriadas++;
-                contadorIdNotasCriadas++;
+                contadorDeNotasCriadas++;                
+
                 varreduraDeCriacao = $" {contadorDeNotasCriadas} criadas de {grupoDeDocumento.Count}";
+
+                //informa no form o progresso da criação das notas
                 form.GeraTextoDeCriacaoDeNotas(varreduraDeCriacao);
 
-                await Task.Delay(7000); // Atraso de 2 segundos entre as requisições  216321
+                await Task.Delay(7000); 
 
 
 
             }
+            // limpa tabela de itens selecionados
+            form.LimpaDataGridViewItensSelecionados();
             MessageBox.Show("Notas Criadas", "Dados enviados para criação da nota", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 

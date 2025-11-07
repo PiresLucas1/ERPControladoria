@@ -31,11 +31,13 @@
             this.lbDataInicio = new System.Windows.Forms.Label();
             this.lbDataFim = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cbColigada = new System.Windows.Forms.ComboBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.btnAtualizar = new System.Windows.Forms.Button();
+            this.btnFechar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,7 +62,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.cbColigada);
             this.groupBox1.Controls.Add(this.lbDataFim);
             this.groupBox1.Controls.Add(this.dateTimePicker2);
             this.groupBox1.Controls.Add(this.dateTimePicker1);
@@ -72,13 +74,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Período para  Ataualização";
             // 
-            // dateTimePicker1
+            // label1
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(20, 136);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(208, 26);
-            this.dateTimePicker1.TabIndex = 3;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(71, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Coligada";
+            // 
+            // cbColigada
+            // 
+            this.cbColigada.FormattingEnabled = true;
+            this.cbColigada.Location = new System.Drawing.Point(20, 61);
+            this.cbColigada.Name = "cbColigada";
+            this.cbColigada.Size = new System.Drawing.Size(121, 28);
+            this.cbColigada.TabIndex = 5;
             // 
             // dateTimePicker2
             // 
@@ -88,45 +99,59 @@
             this.dateTimePicker2.Size = new System.Drawing.Size(203, 26);
             this.dateTimePicker2.TabIndex = 4;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(20, 136);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(208, 26);
+            this.dateTimePicker1.TabIndex = 3;
+            // 
             // richTextBox1
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.Moccasin;
             this.richTextBox1.ForeColor = System.Drawing.Color.Black;
-            this.richTextBox1.Location = new System.Drawing.Point(12, 194);
+            this.richTextBox1.Location = new System.Drawing.Point(14, 194);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(5);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedHorizontal;
             this.richTextBox1.ShowSelectionMargin = true;
-            this.richTextBox1.Size = new System.Drawing.Size(606, 133);
+            this.richTextBox1.Size = new System.Drawing.Size(638, 113);
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = "Ao clicar no botão \"Atualizar\", o sistema executa o processo de atualização do va" +
     "lor de bem e o  valor de depreciação dos IDs Mov que foram inseridos no periodo " +
     "filtrado e coligada";
             // 
-            // comboBox1
+            // btnAtualizar
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(20, 61);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 28);
-            this.comboBox1.TabIndex = 5;
+            this.btnAtualizar.Location = new System.Drawing.Point(400, 315);
+            this.btnAtualizar.Name = "btnAtualizar";
+            this.btnAtualizar.Size = new System.Drawing.Size(113, 30);
+            this.btnAtualizar.TabIndex = 11;
+            this.btnAtualizar.Text = "Atualizar";
+            this.btnAtualizar.UseVisualStyleBackColor = true;
+            this.btnAtualizar.Click += new System.EventHandler(this.btnAtualizar_Click);
             // 
-            // label1
+            // btnFechar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 30);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Coligada";
+            this.btnFechar.Location = new System.Drawing.Point(539, 315);
+            this.btnFechar.Name = "btnFechar";
+            this.btnFechar.Size = new System.Drawing.Size(113, 30);
+            this.btnFechar.TabIndex = 12;
+            this.btnFechar.Text = "Fechar";
+            this.btnFechar.UseVisualStyleBackColor = true;
             // 
             // GestaoPatrimonio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(666, 352);
+            this.ClientSize = new System.Drawing.Size(666, 357);
+            this.Controls.Add(this.btnFechar);
+            this.Controls.Add(this.btnAtualizar);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Name = "GestaoPatrimonio";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GestaoPatrimonio";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -142,6 +167,8 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbColigada;
+        private System.Windows.Forms.Button btnAtualizar;
+        private System.Windows.Forms.Button btnFechar;
     }
 }

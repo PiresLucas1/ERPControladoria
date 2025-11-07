@@ -15,6 +15,15 @@ namespace ERP_FISCAL.view.ContabilView
         public GestaoPatrimonio()
         {
             InitializeComponent();
+            cbColigada.Items.Add(2);
+        }
+
+        private void btnAtualizar_Click(object sender, EventArgs e)
+        {
+            //pega informações do datapicker
+            //valida informação
+            //abre o controller
+            //caso de certo retornar OK, caso contrário mensagem de erro
         }
     }
 }

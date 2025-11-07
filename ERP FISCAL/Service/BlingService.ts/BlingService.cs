@@ -33,6 +33,13 @@ namespace ERP_FISCAL.service
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await httpClient.PostAsync("https://api.bling.com.br/Api/v3/nfe", content);
+
+            while ((int)response.StatusCode == 429)
+            {
+                await Task.Delay(7000);
+                  response = await httpClient.PostAsync("https://api.bling.com.br/Api/v3/nfe", content);
+            }
+
             var retorno = await response.Content.ReadAsStringAsync();
 
             if (!response.IsSuccessStatusCode)
@@ -72,6 +79,7 @@ namespace ERP_FISCAL.service
             }
 
             var json = await response.Content.ReadAsStringAsync();
+            Console.Write("twste");
             var data = JsonConvert.DeserializeObject<Root>(json);
             var notaFiscal = data.Data.FirstOrDefault();
             await Task.Delay(7000);

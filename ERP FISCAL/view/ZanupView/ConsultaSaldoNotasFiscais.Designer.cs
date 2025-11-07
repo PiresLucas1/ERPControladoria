@@ -100,6 +100,7 @@
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(114, 26);
             this.txtFiltro.TabIndex = 6;
+            this.txtFiltro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFiltro_KeyPress);
             // 
             // lbFiltroSaldo
             // 
@@ -133,6 +134,7 @@
             // 
             // btnRelacionaItens
             // 
+            this.btnRelacionaItens.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRelacionaItens.Location = new System.Drawing.Point(977, 120);
             this.btnRelacionaItens.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRelacionaItens.Name = "btnRelacionaItens";
@@ -234,10 +236,10 @@
             this.txtCountNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtCountNotas.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.txtCountNotas.Enabled = false;
-            this.txtCountNotas.Location = new System.Drawing.Point(29, 810);
+            this.txtCountNotas.Location = new System.Drawing.Point(29, 802);
             this.txtCountNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCountNotas.Name = "txtCountNotas";
-            this.txtCountNotas.Size = new System.Drawing.Size(252, 26);
+            this.txtCountNotas.Size = new System.Drawing.Size(186, 26);
             this.txtCountNotas.TabIndex = 7;
             // 
             // ConsultaSaldoNotasFiscais
