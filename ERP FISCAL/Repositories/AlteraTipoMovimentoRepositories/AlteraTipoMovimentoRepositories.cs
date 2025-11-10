@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories
 {
@@ -165,6 +166,71 @@ namespace ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories
 
             return tabela;
         }
+
+        public async Task<DataTable> ConsultaListaIDMovimentosTotvs(string codMovimento)
+        {
+            DataTable tabela = new DataTable();
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+
+            try
+            {
+
+                using (SqlConnection conn = conexaoBanco.AbrirConexao())
+                {
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultaListaIDMov", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        // SqlParameter p;   
+                        cmd.Parameters.AddWithValue("@vchIDMov", codMovimento);                        
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            tabela.Load(reader);
+                        }
+                    }
+
+                    conexaoBanco.FecharConexao(conn);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
+            }
+
+
+            return tabela;
+        }
+        public async Task<DataTable> AlteraListaMovimento(DataTable data)
+        {
+            DataTable tabela = new DataTable();
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+
+            try
+            {
+
+                using (SqlConnection conn = conexaoBanco.AbrirConexao())
+                {
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisAlteraTipoMovimento", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;                        
+                        cmd.Parameters.AddWithValue("@TMP", data);
+                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
+                        {
+                            tabela.Load(reader);
+                        }
+                    }
+
+                    conexaoBanco.FecharConexao(conn);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
+            }
+
+            MessageBox.Show("Alterações realizadas com sucesso!", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            return tabela;
+        }
+    
     }
 }
 

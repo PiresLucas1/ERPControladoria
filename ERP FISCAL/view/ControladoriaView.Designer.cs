@@ -35,6 +35,8 @@
             this.importarNotasParaOBigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alteraçõesFiscaisToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.alterarTipoDeMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alteraçãoUnicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alteraçãoEmListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contabilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarRecebimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.atualizarGestãoPatrimonialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,10 +101,26 @@
             // 
             // alterarTipoDeMovimentoToolStripMenuItem
             // 
+            this.alterarTipoDeMovimentoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alteraçãoUnicaToolStripMenuItem,
+            this.alteraçãoEmListaToolStripMenuItem});
             this.alterarTipoDeMovimentoToolStripMenuItem.Name = "alterarTipoDeMovimentoToolStripMenuItem";
             this.alterarTipoDeMovimentoToolStripMenuItem.Size = new System.Drawing.Size(325, 34);
             this.alterarTipoDeMovimentoToolStripMenuItem.Text = "Alterar tipo de movimento";
-            this.alterarTipoDeMovimentoToolStripMenuItem.Click += new System.EventHandler(this.alterarTipoDeMovimentoToolStripMenuItem_Click);
+            // 
+            // alteraçãoUnicaToolStripMenuItem
+            // 
+            this.alteraçãoUnicaToolStripMenuItem.Name = "alteraçãoUnicaToolStripMenuItem";
+            this.alteraçãoUnicaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.alteraçãoUnicaToolStripMenuItem.Text = "Alteração unica";
+            this.alteraçãoUnicaToolStripMenuItem.Click += new System.EventHandler(this.alteraçãoUnicaToolStripMenuItem_Click);
+            // 
+            // alteraçãoEmListaToolStripMenuItem
+            // 
+            this.alteraçãoEmListaToolStripMenuItem.Name = "alteraçãoEmListaToolStripMenuItem";
+            this.alteraçãoEmListaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.alteraçãoEmListaToolStripMenuItem.Text = "Alteração em lista";
+            this.alteraçãoEmListaToolStripMenuItem.Click += new System.EventHandler(this.alteraçãoEmListaToolStripMenuItem_Click);
             // 
             // contabilToolStripMenuItem
             // 
@@ -242,5 +260,7 @@
         private System.Windows.Forms.ToolStripMenuItem devoluçaoDeNotasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importarRecebimentoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem atualizarGestãoPatrimonialToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alteraçãoUnicaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alteraçãoEmListaToolStripMenuItem;
     }
 }

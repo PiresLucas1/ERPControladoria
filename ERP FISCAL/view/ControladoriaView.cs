@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Office.PowerPoint.Y2021.M06.Main;
 using ERP_FISCAL.view.ContabilView;
+using ERP_FISCAL.view.FiscalView;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -126,14 +127,7 @@ namespace ERP_FISCAL.view
             }
         }
 
-        private void alterarTipoDeMovimentoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!FormAberto(typeof(AlteraTipoMovimento)))
-            {
-                AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
-                alteraTipoMovimento.Show();
-            }
-        }
+
 
         private void devoluçaoDeNotasToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -181,6 +175,24 @@ namespace ERP_FISCAL.view
             
             //this.BackColor 
 
+        }
+
+        private void alteraçãoUnicaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(AlteraTipoMovimento)))
+            {
+                AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
+                alteraTipoMovimento.Show();
+            }
+        }
+
+        private void alteraçãoEmListaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(AlterarTipoMovimentoLista)))
+            {
+                AlterarTipoMovimentoLista alteraTipoMovimentoLista = new AlterarTipoMovimentoLista();
+                alteraTipoMovimentoLista.Show();
+            }
         }
 
 

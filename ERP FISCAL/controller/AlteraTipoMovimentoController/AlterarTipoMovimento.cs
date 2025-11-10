@@ -46,5 +46,19 @@ namespace ERP_FISCAL.Controller.AlteraTipoMovimentoController
             return mensagem;
 
         }
+        public async Task<DataTable> ConsultaListaMovimento(string codMovimento)
+        {
+            AlteraTipoMovimentoRepositories alteraTipoMovimento = new AlteraTipoMovimentoRepositories();
+            DataTable retorno = await alteraTipoMovimento.ConsultaListaIDMovimentosTotvs(codMovimento);
+
+            return retorno;
+        }
+        public async Task<DataTable> AlteraListaMovimento(DataTable data)
+        {
+            AlteraTipoMovimentoRepositories alteraTipoMovimento = new AlteraTipoMovimentoRepositories();
+            DataTable retorno = await alteraTipoMovimento.AlteraListaMovimento(data);
+
+            return retorno;
+        }
     }
 }

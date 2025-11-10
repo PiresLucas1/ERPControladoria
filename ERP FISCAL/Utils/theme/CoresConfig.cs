@@ -7,7 +7,7 @@ namespace ERP_FISCAL.Utils.theme
 
     public static class CoresConfig
     {
-        public static CoresConfig Cores { get; private set; }
+        //public static CoresConfig Cores { get; private set; }
 
         public static void CarregarCores(string caminhoArquivo)
         {
@@ -15,7 +15,7 @@ namespace ERP_FISCAL.Utils.theme
                 throw new FileNotFoundException($"Arquivo de configuração não encontrado: {caminhoArquivo}");
 
             string json = File.ReadAllText(caminhoArquivo);
-            Cores = JsonConvert.DeserializeObject<CoresConfig>(json);
+            //Cores = JsonConvert.DeserializeObject<T>(json);
         }
 
         public static Color HexToColor(string hex)

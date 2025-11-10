@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>39</ApplicationRevision>
+    <ApplicationRevision>40</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -167,6 +167,7 @@
     <Compile Include="Repositories\ImportarNotasRepositories\ProdutoServicoRepositories.cs" />
     <Compile Include="Utils\dateParse.cs" />
     <Compile Include="Utils\DecimalParse.cs" />
+    <Compile Include="Utils\theme\CoresConfig.cs" />
     <Compile Include="Utils\ValidaNaturezaFilial.cs" />
     <Compile Include="view\ContabilView\GestaoPatrimonio.cs">
       <SubType>Form</SubType>
@@ -174,11 +175,23 @@
     <Compile Include="view\ContabilView\GestaoPatrimonio.Designer.cs">
       <DependentUpon>GestaoPatrimonio.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\FiscalView\AlterarTipoMovimentoLista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\FiscalView\AlterarTipoMovimentoLista.Designer.cs">
+      <DependentUpon>AlterarTipoMovimentoLista.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\FiscalView\AlteraTipoMovimento.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="view\FiscalView\AlteraTipoMovimento.Designer.cs">
       <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\UIComponentes\UIDialog\AlteraUnicoItemEmBloco\AlteraUnicoValorEmBloco.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\UIComponentes\UIDialog\AlteraUnicoItemEmBloco\AlteraUnicoValorEmBloco.Designer.cs">
+      <DependentUpon>AlteraUnicoValorEmBloco.cs</DependentUpon>
     </Compile>
     <Compile Include="view\ZanupView\ConsultaSaldoNotasFiscais.cs">
       <SubType>Form</SubType>
@@ -253,9 +266,15 @@
     <EmbeddedResource Include="view\ContabilView\GestaoPatrimonio.resx">
       <DependentUpon>GestaoPatrimonio.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="view\FiscalView\AlterarTipoMovimentoLista.resx">
+      <DependentUpon>AlterarTipoMovimentoLista.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\FiscalView\AlteraTipoMovimento.resx">
       <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UIComponentes\UIDialog\AlteraUnicoItemEmBloco\AlteraUnicoValorEmBloco.resx">
+      <DependentUpon>AlteraUnicoValorEmBloco.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ZanupView\ConsultaSaldoNotasFiscais.resx">
       <DependentUpon>ConsultaSaldoNotasFiscais.cs</DependentUpon>
@@ -305,6 +324,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Utils\theme\themeDracula.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
