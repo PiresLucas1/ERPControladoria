@@ -1,6 +1,7 @@
 ﻿using ERP_FISCAL.Controller.AlteraTipoMovimentoController;
 using ERP_FISCAL.view.UIComponentes.UIDialog.AlteraUnicoItemEmBloco;
 using ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco;
+using ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela;
 using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
 using System;
 using System.Collections.Generic;
@@ -134,8 +135,12 @@ namespace ERP_FISCAL.view.FiscalView
                 }
             }
             AlterarTipoMovimentoController alterarTipoMovimento = new AlterarTipoMovimentoController();
-            await alterarTipoMovimento.AlteraListaMovimento(dt);
-            
+            DataTable retorno = await alterarTipoMovimento.AlteraListaMovimento(dt);
+
+            RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retorno);
+            retornoEmTabela.ShowDialog();
+
+
         }
     }
 }

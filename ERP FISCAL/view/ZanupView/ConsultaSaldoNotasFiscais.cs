@@ -225,7 +225,7 @@ namespace ERP_FISCAL.view
             await dataRowToObject.TranformaDataRowToObject(linhasSelecionadas, this);
             btGerarNotaFiscal.Enabled = false;
 
-            splashScreen.Close();
+            splashScreen.CloseComponent();
             btGerarNotaFiscal.Enabled = true;
         }
 

@@ -62,7 +62,7 @@ namespace ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories
             try
             {
 
-                using (SqlConnection conn = conexaoBanco.AbrirConexao())
+                using (SqlConnection conn = conexaoBanco.AbrirConexaoRm())
                 {
                     using (SqlCommand cmd = new SqlCommand("dbo.uspCadAlteraCodMovimentoTotvs", conn))
                     {
@@ -207,7 +207,7 @@ namespace ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories
             try
             {
 
-                using (SqlConnection conn = conexaoBanco.AbrirConexao())
+                using (SqlConnection conn = conexaoBanco.AbrirConexaoRm())
                 {
                     using (SqlCommand cmd = new SqlCommand("dbo.uspFisAlteraTipoMovimento", conn))
                     {

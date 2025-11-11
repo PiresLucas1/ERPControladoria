@@ -76,6 +76,7 @@
             this.btnAlterarEmBloco.TabIndex = 10;
             this.btnAlterarEmBloco.Text = "Alterar em bloco";
             this.btnAlterarEmBloco.UseVisualStyleBackColor = true;
+            this.btnAlterarEmBloco.Visible = false;
             this.btnAlterarEmBloco.Click += new System.EventHandler(this.btnAlterarEmBloco_Click);
             // 
             // chkAlteraEmBloco
