@@ -45,7 +45,7 @@ namespace ERP_FISCAL.view
             StatusProcess splashScreen = new StatusProcess();
             splashScreen.Show(this); // 'this' como owner para ficar modal
             splashScreen.SetMessage("Carregando...");
-            splashScreen.UpdateProgress(70);
+            
             if (dtPickerInicio.Value > dtPickerFinal.Value)
             {
                 MessageBox.Show("A data inicial não pode ser maior que a data final.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -108,7 +108,7 @@ namespace ERP_FISCAL.view
             StatusProcess splashScreen = new StatusProcess();
             splashScreen.Show(this);
             splashScreen.SetMessage("Importando notas...");
-            splashScreen.UpdateProgress(70);
+            
             ExportaDadosBigController exportaDadosBigController = new ExportaDadosBigController();
             RetornoExportaBigRepository retornoExportaBigRepository = new RetornoExportaBigRepository();
             retornoExportaBigRepository = await exportaDadosBigController.ImportaNotaBigParaTotvs(valorNumeroNota, dataInicio, dataFim, substituir, conferida, filial);

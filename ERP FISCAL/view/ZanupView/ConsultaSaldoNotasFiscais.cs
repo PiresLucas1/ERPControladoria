@@ -57,7 +57,7 @@ namespace ERP_FISCAL.view
             StatusProcess splashScreen = new StatusProcess();
             splashScreen.Show(this); // 'this' como owner para ficar modal
             splashScreen.SetMessage("Carregando...");
-            splashScreen.UpdateProgress(70);
+            
             btnListaNotas.Enabled = false;
             btnListaNotas.Enabled = false;
             try

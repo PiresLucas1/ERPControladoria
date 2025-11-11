@@ -120,7 +120,7 @@ namespace ERP_FISCAL
                     // Mostra a tela de carregamento
                     splashScreen.Show(this); // 'this' como owner para ficar modal
                     splashScreen.SetMessage("Carregando notas...");
-                    splashScreen.UpdateProgress(30);
+                    
 
                     // Executa a consulta principal
                     splashScreen.SetMessage("Carregando notas fiscais...");
@@ -144,7 +144,7 @@ namespace ERP_FISCAL
                     dtImportacao.AutoGenerateColumns = true;
 
                     splashScreen.SetMessage("Montando grade...");
-                    splashScreen.UpdateProgress(70);
+                    
 
                     if (!dtImportacao.Columns.Contains("IDMov"))
                     {
@@ -211,19 +211,19 @@ namespace ERP_FISCAL
                     // finalização de ajuste ----------------------------------------
 
                     splashScreen.SetMessage("Finalizando...");
-                    splashScreen.UpdateProgress(100);
+                  
 
                 }
                 catch (Exception ex)
                 {
-                    splashScreen.Close();
+                    splashScreen.CloseComponent();
                     this.Enabled = true;
                     MessageBox.Show("Erro ao carregar notas: " + ex.Message);
 
                 }
                 finally
                 {
-                    splashScreen.Close();
+                    splashScreen.CloseComponent();
                     this.Enabled = true;
                     this.BringToFront();
                     this.Activate();

@@ -85,6 +85,8 @@
             this.Text = "StatusProcess";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.Shown += StatusProcess_Shown;
+            this.FormClosing += StatusProcess_FormClosing;
 
         }
 
@@ -94,5 +96,6 @@
         private System.Diagnostics.Process process2;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label1;
+
     }
 }
