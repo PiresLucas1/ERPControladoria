@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>42</ApplicationRevision>
+    <ApplicationRevision>43</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -138,6 +138,7 @@
     <Compile Include="Controller\ImportarNotasController\CfopController.cs" />
     <Compile Include="Controller\ContaDebitoFreteController\AlteraContaDebitoController.cs" />
     <Compile Include="Controller\ExportaDadosBigController\ExportaDadosBigController.cs" />
+    <Compile Include="Controller\SegCadastroController\SegCadastroController.cs" />
     <Compile Include="Enum\EstoqueEnum.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -149,6 +150,7 @@
     <Compile Include="Repositories\ExportaDadosBigRepositories\ExportaDadosBigRepositories.cs" />
     <Compile Include="Repositories\ExportaDadosBigRepositories\RetornoExportaBig.cs" />
     <Compile Include="Repositories\RepositoriesAlterarContaDebito\AlteraContaDebitoRepositories.cs" />
+    <Compile Include="Repositories\SegCadastroRepositories\SegCadastroRepositories.cs" />
     <Compile Include="Service\BlingService.ts\BlingService.cs" />
     <Compile Include="Service\BlingService.ts\DtoBlingNotaFiscal.cs" />
     <Compile Include="Service\BlingService.ts\DtoDataRowToDocumentoNota.cs" />
@@ -169,6 +171,12 @@
     <Compile Include="Utils\DecimalParse.cs" />
     <Compile Include="Utils\theme\CoresConfig.cs" />
     <Compile Include="Utils\ValidaNaturezaFilial.cs" />
+    <Compile Include="view\CadUsu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\CadUsu.Designer.cs">
+      <DependentUpon>CadUsu.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\ContabilView\GestaoPatrimonio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +194,18 @@
     </Compile>
     <Compile Include="view\FiscalView\AlteraTipoMovimento.Designer.cs">
       <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\PrimeiroLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\PrimeiroLogin.Designer.cs">
+      <DependentUpon>PrimeiroLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\SegAdicionarDado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\SegAdicionarDado.Designer.cs">
+      <DependentUpon>SegAdicionarDado.cs</DependentUpon>
     </Compile>
     <Compile Include="view\UIComponentes\UIDialog\AlteraUnicoItemEmBloco\AlteraUnicoValorEmBloco.cs">
       <SubType>Form</SubType>
@@ -263,6 +283,9 @@
     <Compile Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.Designer.cs">
       <DependentUpon>StatusProcess.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="view\CadUsu.resx">
+      <DependentUpon>CadUsu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="view\ContabilView\GestaoPatrimonio.resx">
       <DependentUpon>GestaoPatrimonio.cs</DependentUpon>
     </EmbeddedResource>
@@ -272,6 +295,12 @@
     <EmbeddedResource Include="view\FiscalView\AlteraTipoMovimento.resx">
       <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\PrimeiroLogin.resx">
+      <DependentUpon>PrimeiroLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\SegAdicionarDado.resx">
+      <DependentUpon>SegAdicionarDado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\UIComponentes\UIDialog\AlteraUnicoItemEmBloco\AlteraUnicoValorEmBloco.resx">
       <DependentUpon>AlteraUnicoValorEmBloco.cs</DependentUpon>

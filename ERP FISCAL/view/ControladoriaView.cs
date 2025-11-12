@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Office.PowerPoint.Y2021.M06.Main;
+using ERP_FISCAL.Controller.SegCadastroController;
 using ERP_FISCAL.view.ContabilView;
 using ERP_FISCAL.view.FiscalView;
 using System;
@@ -16,10 +17,17 @@ using System.Windows.Forms;
 
 namespace ERP_FISCAL.view
 {
+
     public partial class Portal : Form
     {
+        public class UserInfo
+        {
+            public static string UsuarioAtual { get; set; }
+            public static string IDMeny { get; set; }
+        }
+
         public int contadorTheme = 0;
-        public Portal()
+        public Portal(UserInfo user = null)
         {
             InitializeComponent();
             string usuario = Environment.UserName;
@@ -192,6 +200,17 @@ namespace ERP_FISCAL.view
             {
                 AlterarTipoMovimentoLista alteraTipoMovimentoLista = new AlterarTipoMovimentoLista();
                 alteraTipoMovimentoLista.Show();
+            }
+        }
+
+        private async void cadastrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(!FormAberto(typeof(CadUsu)))
+            {
+                SegCadastroController segCadastroController = new SegCadastroController();
+                DataTable dt = await segCadastroController.ListaDados("%", 1);
+                CadUsu cadastroUsuario = new CadUsu(dt);
+                cadastroUsuario.Show();
             }
         }
 

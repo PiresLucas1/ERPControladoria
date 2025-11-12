@@ -18,7 +18,7 @@ namespace ERP_FISCAL
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Portal());
+            Application.Run(new PrimeiroLogin());
             
 
         }

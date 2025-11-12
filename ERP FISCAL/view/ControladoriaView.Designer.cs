@@ -48,6 +48,7 @@
             this.alterarCorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastrarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarTop.SuspendLayout();
             this.menuBarBottom.SuspendLayout();
             this.SuspendLayout();
@@ -111,14 +112,14 @@
             // alteraçãoUnicaToolStripMenuItem
             // 
             this.alteraçãoUnicaToolStripMenuItem.Name = "alteraçãoUnicaToolStripMenuItem";
-            this.alteraçãoUnicaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.alteraçãoUnicaToolStripMenuItem.Size = new System.Drawing.Size(254, 34);
             this.alteraçãoUnicaToolStripMenuItem.Text = "Alteração unica";
             this.alteraçãoUnicaToolStripMenuItem.Click += new System.EventHandler(this.alteraçãoUnicaToolStripMenuItem_Click);
             // 
             // alteraçãoEmListaToolStripMenuItem
             // 
             this.alteraçãoEmListaToolStripMenuItem.Name = "alteraçãoEmListaToolStripMenuItem";
-            this.alteraçãoEmListaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.alteraçãoEmListaToolStripMenuItem.Size = new System.Drawing.Size(254, 34);
             this.alteraçãoEmListaToolStripMenuItem.Text = "Alteração em lista";
             this.alteraçãoEmListaToolStripMenuItem.Click += new System.EventHandler(this.alteraçãoEmListaToolStripMenuItem_Click);
             // 
@@ -186,7 +187,8 @@
             // Opções
             // 
             this.Opções.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alterarCorToolStripMenuItem});
+            this.alterarCorToolStripMenuItem,
+            this.cadastrarUsuarioToolStripMenuItem});
             this.Opções.Name = "Opções";
             this.Opções.Size = new System.Drawing.Size(89, 29);
             this.Opções.Text = "Opções";
@@ -194,7 +196,7 @@
             // alterarCorToolStripMenuItem
             // 
             this.alterarCorToolStripMenuItem.Name = "alterarCorToolStripMenuItem";
-            this.alterarCorToolStripMenuItem.Size = new System.Drawing.Size(199, 34);
+            this.alterarCorToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.alterarCorToolStripMenuItem.Text = "Alterar Cor";
             this.alterarCorToolStripMenuItem.Click += new System.EventHandler(this.alterarCorToolStripMenuItem_Click);
             // 
@@ -213,6 +215,13 @@
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(256, 34);
             this.toolStripMenuItem5.Text = "Alterar conta frete";
+            // 
+            // cadastrarUsuarioToolStripMenuItem
+            // 
+            this.cadastrarUsuarioToolStripMenuItem.Name = "cadastrarUsuarioToolStripMenuItem";
+            this.cadastrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.cadastrarUsuarioToolStripMenuItem.Text = "Cadastrar usuario";
+            this.cadastrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.cadastrarUsuarioToolStripMenuItem_Click);
             // 
             // Portal
             // 
@@ -262,5 +271,6 @@
         private System.Windows.Forms.ToolStripMenuItem atualizarGestãoPatrimonialToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alteraçãoUnicaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alteraçãoEmListaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cadastrarUsuarioToolStripMenuItem;
     }
 }
