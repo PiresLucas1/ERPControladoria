@@ -45,5 +45,19 @@ namespace ERP_FISCAL.Controller.SegCadastroController
             }
             return retorno;
         } 
+        public async Task<DataTable> ConsultaUnicoUsuario(string nomeUsuario)
+        {
+            SegCadastroRepositories segCadastroRepositories = new SegCadastroRepositories();
+            DataTable retorno = new DataTable();
+            retorno = await segCadastroRepositories.ConsultaUnicoUsuario(nomeUsuario);
+            return retorno;
+        }
+        public async Task<DataTable> InseriUsuario(string nomeUsuario, int perfilUsuario)
+        {
+            SegCadastroRepositories segCadastroRepositories = new SegCadastroRepositories();
+            DataTable retorno = new DataTable();
+            retorno = await segCadastroRepositories.InserirUsuario(nomeUsuario, perfilUsuario);
+            return retorno;
+        }
     }
 }

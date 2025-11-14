@@ -207,6 +207,12 @@
     <Compile Include="view\SegAdicionarDado.Designer.cs">
       <DependentUpon>SegAdicionarDado.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\UIComponentes\AdicionaUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\UIComponentes\AdicionaUsuario.Designer.cs">
+      <DependentUpon>AdicionaUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\UIComponentes\UIDialog\AlteraUnicoItemEmBloco\AlteraUnicoValorEmBloco.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -301,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\SegAdicionarDado.resx">
       <DependentUpon>SegAdicionarDado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\UIComponentes\AdicionaUsuario.resx">
+      <DependentUpon>AdicionaUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\UIComponentes\UIDialog\AlteraUnicoItemEmBloco\AlteraUnicoValorEmBloco.resx">
       <DependentUpon>AlteraUnicoValorEmBloco.cs</DependentUpon>

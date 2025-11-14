@@ -23,7 +23,7 @@ namespace ERP_FISCAL.view
         public class UserInfo
         {
             public static string UsuarioAtual { get; set; }
-            public static string IDMeny { get; set; }
+            public static string[] IDMenu { get; set; }
         }
 
         public int contadorTheme = 0;
@@ -214,15 +214,5 @@ namespace ERP_FISCAL.view
             }
         }
 
-
-
-        //private void alteraTipoMovimentoToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    if (!FormAberto(typeof(AlterarContaDebitoFrete)))
-        //    {
-        //        AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
-        //        alteraTipoMovimento.Show();
-        //    }
-        //}
     }
 }

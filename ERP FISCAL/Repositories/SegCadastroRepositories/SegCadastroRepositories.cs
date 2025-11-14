@@ -160,6 +160,61 @@ namespace ERP_FISCAL.Repositories.SegCadastroRepositories
             }            
             return tabela;
         }
+        public async Task<DataTable> ConsultaUnicoUsuario(string nomeUsuario)
+        {
+            DataTable tabela = new DataTable();
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            string stringDeConexao = conexaoBanco.GetConexaoString();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(stringDeConexao)) // <<< apenas cria
+                {
+                    await conn.OpenAsync(); // <<< abre uma vez aqui
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspSegConsultarUnicoUsuario", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@INvchUsuario", nomeUsuario);
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            tabela.Load(reader);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
+            }
+            return tabela;
+        }
+        public async Task<DataTable> InserirUsuario(string nomeUsuario, int perfilUsuario)
+        {
+            DataTable tabela = new DataTable();
+            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            string stringDeConexao = conexaoBanco.GetConexaoString();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(stringDeConexao)) // <<< apenas cria
+                {
+                    await conn.OpenAsync(); // <<< abre uma vez aqui
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspSegInserirUsuario", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@INvchNomeUsuario", nomeUsuario);                        
+                        cmd.Parameters.AddWithValue("@INintIDUsuarioPerfil", perfilUsuario);
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            tabela.Load(reader);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
+            }
+            return tabela;
+        }
     }
 
 

@@ -1,4 +1,5 @@
 ﻿using ERP_FISCAL.Controller.SegCadastroController;
+using ERP_FISCAL.view.UIComponentes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -46,7 +47,7 @@ namespace ERP_FISCAL.view
         }
         private void ativaFiltro()
         {
-            foreach(Control obj in groupBox1.Controls)
+            foreach(Control obj in gpFiltro.Controls)
             {
                 if(obj is TextBox)
                 {
@@ -96,6 +97,12 @@ namespace ERP_FISCAL.view
         private void CarregaDataGrid(DataTable dt)
         {
             dvgUsuarios.DataSource = dt;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AdicionaUsuario adicionaUsuario = new AdicionaUsuario();
+            adicionaUsuario.ShowDialog();
         }
     }
 }

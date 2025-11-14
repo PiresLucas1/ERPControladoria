@@ -36,12 +36,12 @@ namespace ERP_FISCAL.view
             string DescrNome = txtNome.Text;
             if (lblNomeAplicacao.Text != "Nome Perfil")
             {
+                await segCadastroController.InseriInformacao(DescrNome);
+
+            }else
                 DescrNome = txtNome.Text;
                 string DescrApp = txtDescApp.Text;
                 await segCadastroController.InseriInformacao(DescrNome, DescrApp);
-
-            }else
-                await segCadastroController.InseriInformacao(DescrNome);
 
             MessageBox.Show("Item adicionado com sucesso!");
         }

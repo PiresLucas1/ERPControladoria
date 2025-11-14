@@ -29,7 +29,9 @@
         private void InitializeComponent()
         {
             this.txtNomeUsu = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gpFiltro = new System.Windows.Forms.GroupBox();
+            this.gpAdicao = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.btnAdicionarPerfil = new System.Windows.Forms.Button();
             this.btnAdicionarMenu = new System.Windows.Forms.Button();
             this.cbFiltros = new System.Windows.Forms.ComboBox();
@@ -42,9 +44,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAlterar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.dvgUsuarios = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
-            this.groupBox1.SuspendLayout();
+            this.gpFiltro.SuspendLayout();
+            this.gpAdicao.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvgUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,43 +57,64 @@
             this.txtNomeUsu.Size = new System.Drawing.Size(146, 26);
             this.txtNomeUsu.TabIndex = 1;
             // 
-            // groupBox1
+            // gpFiltro
             // 
-            this.groupBox1.Controls.Add(this.btnAdicionarPerfil);
-            this.groupBox1.Controls.Add(this.btnAdicionarMenu);
-            this.groupBox1.Controls.Add(this.cbFiltros);
-            this.groupBox1.Controls.Add(this.btnFiltrar);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.txtMenu);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtPerfil);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtNomeUsu);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1142, 183);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filtro";
+            this.gpFiltro.Controls.Add(this.gpAdicao);
+            this.gpFiltro.Controls.Add(this.cbFiltros);
+            this.gpFiltro.Controls.Add(this.btnFiltrar);
+            this.gpFiltro.Controls.Add(this.label4);
+            this.gpFiltro.Controls.Add(this.txtMenu);
+            this.gpFiltro.Controls.Add(this.label3);
+            this.gpFiltro.Controls.Add(this.txtPerfil);
+            this.gpFiltro.Controls.Add(this.label2);
+            this.gpFiltro.Controls.Add(this.label1);
+            this.gpFiltro.Controls.Add(this.txtNomeUsu);
+            this.gpFiltro.Location = new System.Drawing.Point(12, 12);
+            this.gpFiltro.Name = "gpFiltro";
+            this.gpFiltro.Size = new System.Drawing.Size(1142, 183);
+            this.gpFiltro.TabIndex = 2;
+            this.gpFiltro.TabStop = false;
+            this.gpFiltro.Text = "Filtro";
+            // 
+            // gpAdicao
+            // 
+            this.gpAdicao.Controls.Add(this.button2);
+            this.gpAdicao.Controls.Add(this.btnAdicionarPerfil);
+            this.gpAdicao.Controls.Add(this.btnAdicionarMenu);
+            this.gpAdicao.Location = new System.Drawing.Point(788, 25);
+            this.gpAdicao.Name = "gpAdicao";
+            this.gpAdicao.Size = new System.Drawing.Size(344, 148);
+            this.gpAdicao.TabIndex = 12;
+            this.gpAdicao.TabStop = false;
+            this.gpAdicao.Text = "Adicionar Itens";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(24, 35);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(142, 35);
+            this.button2.TabIndex = 14;
+            this.button2.Text = " Usuario";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnAdicionarPerfil
             // 
-            this.btnAdicionarPerfil.Location = new System.Drawing.Point(970, 135);
+            this.btnAdicionarPerfil.Location = new System.Drawing.Point(24, 81);
             this.btnAdicionarPerfil.Name = "btnAdicionarPerfil";
             this.btnAdicionarPerfil.Size = new System.Drawing.Size(142, 35);
             this.btnAdicionarPerfil.TabIndex = 13;
-            this.btnAdicionarPerfil.Text = "Adcionar Menu";
+            this.btnAdicionarPerfil.Text = "Menu";
             this.btnAdicionarPerfil.UseVisualStyleBackColor = true;
             this.btnAdicionarPerfil.Click += new System.EventHandler(this.btnAdicionarMenu_Click);
             // 
             // btnAdicionarMenu
             // 
-            this.btnAdicionarMenu.Location = new System.Drawing.Point(791, 135);
+            this.btnAdicionarMenu.Location = new System.Drawing.Point(172, 35);
             this.btnAdicionarMenu.Name = "btnAdicionarMenu";
             this.btnAdicionarMenu.Size = new System.Drawing.Size(142, 35);
             this.btnAdicionarMenu.TabIndex = 12;
-            this.btnAdicionarMenu.Text = "Adicionar Perfil";
+            this.btnAdicionarMenu.Text = "Perfil";
             this.btnAdicionarMenu.UseVisualStyleBackColor = true;
             this.btnAdicionarMenu.Click += new System.EventHandler(this.btnAdicionarPerfil_Click);
             // 
@@ -182,15 +205,6 @@
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(827, 724);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(193, 35);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Adicionar Selecionado";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // dvgUsuarios
             // 
             this.dvgUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -208,14 +222,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1167, 780);
             this.Controls.Add(this.dvgUsuarios);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAlterar);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gpFiltro);
             this.Name = "CadUsu";
             this.Text = "CadUsu";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gpFiltro.ResumeLayout(false);
+            this.gpFiltro.PerformLayout();
+            this.gpAdicao.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dvgUsuarios)).EndInit();
             this.ResumeLayout(false);
 
@@ -223,7 +237,7 @@
 
         #endregion
         private System.Windows.Forms.TextBox txtNomeUsu;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gpFiltro;
         private System.Windows.Forms.TextBox txtPerfil;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -232,11 +246,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAlterar;
         private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cbFiltros;
         private System.Windows.Forms.Label label4;
         private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dvgUsuarios;
         private System.Windows.Forms.Button btnAdicionarPerfil;
         private System.Windows.Forms.Button btnAdicionarMenu;
+        private System.Windows.Forms.GroupBox gpAdicao;
+        private System.Windows.Forms.Button button2;
     }
 }
