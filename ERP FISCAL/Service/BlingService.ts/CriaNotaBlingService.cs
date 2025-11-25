@@ -143,7 +143,7 @@ namespace ERP_FISCAL.Utils
                     });
                 }
 
-                string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
+               string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
                 
 
                 await blingService.CriarNotaAsync(novaNotaFiscal);

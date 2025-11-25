@@ -218,15 +218,33 @@ namespace ERP_FISCAL.view
 
             StatusProcess splashScreen = new StatusProcess();
 
-            splashScreen.Show(this); // 'this' como owner para ficar modal
             splashScreen.SetMessage("Gerando nota fical no bling...");
+            splashScreen.Show(this); // 'this' como owner para ficar modal
 
-            CriaNotaBlingService dataRowToObject = new CriaNotaBlingService();
-            await dataRowToObject.TranformaDataRowToObject(linhasSelecionadas, this);
-            btGerarNotaFiscal.Enabled = false;
+            try
+            {
+                btGerarNotaFiscal.Enabled = false;
 
-            splashScreen.CloseComponent();
-            btGerarNotaFiscal.Enabled = true;
+                CriaNotaBlingService dataRowToObject = new CriaNotaBlingService();
+
+                await dataRowToObject.TranformaDataRowToObject(linhasSelecionadas, this);
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(
+                   $"Erro ao gerar nota fiscal:\n{ex.Message}",
+                   "Erro",
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // SEMPRE executa, com erro ou sem erro
+                splashScreen.CloseComponent();
+                btGerarNotaFiscal.Enabled = true;
+            }
+                                 
         }
 
         private async void btGerarNotaFiscal_Click(object sender, EventArgs e)

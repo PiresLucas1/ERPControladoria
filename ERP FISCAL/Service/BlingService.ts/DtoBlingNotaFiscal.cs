@@ -17,8 +17,8 @@ namespace ERP_FISCAL.Models
         [JsonProperty("serie")]
         public int Serie { get; set; }
 
-        [JsonProperty("numero")]
-        public string Numero { get; set; }
+        //[JsonProperty("numero")]
+        //public string Numero { get; set; }
 
         [JsonProperty("naturezaOperacao")]
         public NaturezaOperacao NaturezaOperacao { get; set; }

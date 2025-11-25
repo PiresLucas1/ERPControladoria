@@ -1,4 +1,5 @@
-﻿using ERP_FISCAL.Models;
+﻿using DocumentFormat.OpenXml.Office2016.Excel;
+using ERP_FISCAL.Models;
 
 using ERP_FISCAL.Utils;
 using Newtonsoft.Json;
@@ -33,12 +34,19 @@ namespace ERP_FISCAL.service
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var response = await httpClient.PostAsync("https://api.bling.com.br/Api/v3/nfe", content);
-
-            while ((int)response.StatusCode == 429)
+            int contadorDeTentativasDeConexao = 0;
+            if((int)response.StatusCode == 429)
             {
-                await Task.Delay(7000);
-                  response = await httpClient.PostAsync("https://api.bling.com.br/Api/v3/nfe", content);
+                while (contadorDeTentativasDeConexao < 5)
+                {                                        
+                 await Task.Delay(7000);
+                 response = await httpClient.PostAsync("https://api.bling.com.br/Api/v3/nfe", content);                   
+                }
             }
+        
+            var body = await response.Content.ReadAsStringAsync();
+
+            Console.WriteLine(body);
 
             var retorno = await response.Content.ReadAsStringAsync();
 
@@ -47,6 +55,7 @@ namespace ERP_FISCAL.service
                 string errorBody = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"Erro: {(int)response.StatusCode} - {response.ReasonPhrase}");
                 throw new Exception($"Erro na requisição: {(int)response.StatusCode} - {errorBody}");
+                
                 
             }
 
