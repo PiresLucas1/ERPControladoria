@@ -1,4 +1,5 @@
-﻿using ERP_FISCAL.view;
+﻿using dotenv.net;
+using ERP_FISCAL.view;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,9 @@ namespace ERP_FISCAL
         [STAThread]
         static void Main()
         {
+            DotEnv.Load();
+            Console.WriteLine(Environment.GetEnvironmentVariable("CONEXAO_BANCO_DFE"));
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Portal());

@@ -95,7 +95,7 @@ namespace ERP_FISCAL
         }
         private async void btnListaNotas_Click(object sender, EventArgs e)
         {
-            StatusProcess splashScreen = new StatusProcess();
+            
             if (dtImportacao.Rows.Count > 0 &&  dtImportacao.Columns[0].Frozen == true){
                 dtImportacao.Columns[0].Frozen = false;
 
@@ -118,17 +118,15 @@ namespace ERP_FISCAL
                     this.Enabled = false;
 
                     // Mostra a tela de carregamento
-                    splashScreen.Show(this); // 'this' como owner para ficar modal
-                    splashScreen.SetMessage("Carregando notas...");
-                    
-
-                    // Executa a consulta principal
-                    splashScreen.SetMessage("Carregando notas fiscais...");
+                    ProcessStatusManager.Start("Carregando dados...");
+                    ProcessStatusManager.Update("Processando...");
+                                        
 
                     NotasController exportServiceNotes = new NotasController();
 
                     DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim, Convert.ToInt32(txtBoxColigada.Text), cbLancadasNoERP.Checked);
-                    splashScreen.SetMessage("Ordenando estrutura...");
+                    
+
                     DataTable notasFormatada = exportServiceNotes.ReorganizarDataTable(notas);
                     dtOrignal = notasFormatada;
 
@@ -142,8 +140,7 @@ namespace ERP_FISCAL
                     dtImportacao.AllowUserToAddRows = false;
                     dtImportacao.ReadOnly = false;
                     dtImportacao.AutoGenerateColumns = true;
-
-                    splashScreen.SetMessage("Montando grade...");
+                    
                     
 
                     if (!dtImportacao.Columns.Contains("IDMov"))
@@ -210,20 +207,19 @@ namespace ERP_FISCAL
 
                     // finalização de ajuste ----------------------------------------
 
-                    splashScreen.SetMessage("Finalizando...");
+                    
                   
 
                 }
                 catch (Exception ex)
                 {
-                    splashScreen.CloseComponent();
-                    this.Enabled = true;
-                    MessageBox.Show("Erro ao carregar notas: " + ex.Message);
+                    ProcessStatusManager.Error(ex); // Fecha e mostra o erro
+                    this.Enabled = true;                    
 
                 }
                 finally
                 {
-                    splashScreen.CloseComponent();
+                    ProcessStatusManager.Stop(); // Garante o fechamento
                     this.Enabled = true;
                     this.BringToFront();
                     this.Activate();

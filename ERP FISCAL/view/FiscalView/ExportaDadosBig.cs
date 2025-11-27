@@ -42,10 +42,7 @@ namespace ERP_FISCAL.view
                 MessageBox.Show("O campo filial é obrigatório.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            StatusProcess splashScreen = new StatusProcess();
-            splashScreen.Show(this); // 'this' como owner para ficar modal
-            splashScreen.SetMessage("Carregando...");
-            
+         
             if (dtPickerInicio.Value > dtPickerFinal.Value)
             {
                 MessageBox.Show("A data inicial não pode ser maior que a data final.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -56,9 +53,25 @@ namespace ERP_FISCAL.view
                 cbConferida.SelectedItem.ToString() == "Não" ? "N" :
                 cbConferida.SelectedItem.ToString() == "Todos" ? "T" : "T";
             string filial = txtFilial.Text == "" ? null : txtFilial.Text;
-            DataTable dataRetorno = await BuscaDataTable(dtPickerInicio.Value, dtPickerFinal.Value, Convert.ToInt32(filial), Convert.ToChar(verifacaConferida));
+            DataTable dataRetorno = new DataTable(); 
+            try
+            {
+                ProcessStatusManager.Start("Carregando dados...");
+                ProcessStatusManager.Update("Processando...");
+                dataRetorno = await BuscaDataTable(dtPickerInicio.Value, dtPickerFinal.Value, Convert.ToInt32(filial), Convert.ToChar(verifacaConferida));
+
+            }
+            catch (Exception ex)
+            {
+                ProcessStatusManager.Error(ex); // Fecha e mostra o erro
+            }
+            finally
+            {
+                ProcessStatusManager.Stop(); // Garante o fechamento
+            }
+
             CarregaDataTable(dataRetorno);
-            splashScreen.Close();
+            
 
             txtCount.Text = dtNotasImportadas.Rows.Count.ToString();
 
@@ -105,16 +118,31 @@ namespace ERP_FISCAL.view
             int substituir = chkSubstituir.Checked ? 1 : 0;
             int conferida = chkNaoConferida.Checked ? 1 : 0;
 
-            StatusProcess splashScreen = new StatusProcess();
-            splashScreen.Show(this);
-            splashScreen.SetMessage("Importando notas...");
-            
-            ExportaDadosBigController exportaDadosBigController = new ExportaDadosBigController();
+
+
             RetornoExportaBigRepository retornoExportaBigRepository = new RetornoExportaBigRepository();
-            retornoExportaBigRepository = await exportaDadosBigController.ImportaNotaBigParaTotvs(valorNumeroNota, dataInicio, dataFim, substituir, conferida, filial);
+
+            try
+            {
+                ProcessStatusManager.Start("Carregando dados...");
+                ProcessStatusManager.Update("Processando...");
+
+                ExportaDadosBigController exportaDadosBigController = new ExportaDadosBigController();
+                
+                retornoExportaBigRepository = await exportaDadosBigController.ImportaNotaBigParaTotvs(valorNumeroNota, dataInicio, dataFim, substituir, conferida, filial);
+
+            }
+            catch (Exception ex)
+            {
+                ProcessStatusManager.Error(ex); // Fecha e mostra o erro
+            }
+            finally
+            {
+                ProcessStatusManager.Stop(); // Garante o fechamento
+            }
 
             MessageBox.Show(retornoExportaBigRepository.MensagemRetorno, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            splashScreen.Close();
+            
 
             foreach (DataGridViewRow row in dtNotasImportadas.SelectedRows)
             {

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using dotenv.net;
+using dotenv.net.Utilities;
+using System;
 using System.Data.SqlClient;
+
 
 namespace SeuProjeto
 {
@@ -10,6 +13,7 @@ namespace SeuProjeto
         public ConexaoBancoDeDadosDfe()
         {
             connectionString = "Server=dbtotvs\\dbtotvs;Database=DFE;Integrated Security=True;";
+            //connectionString = Environment.GetEnvironmentVariable("CONEXAO_BANCO_DFE");
         }
 
         public SqlConnection AbrirConexao()
@@ -46,6 +50,7 @@ namespace SeuProjeto
         public ConexaoBancoDeDadosTOTVS()
         {
             connectionString = "Server=dbtotvs\\dbtotvs;Database=CORPORERM_PRODUCAO;Integrated Security=True;";
+            //connectionString = Environment.GetEnvironmentVariable("CONEXAO_BANCO_TOTVS");
         }
 
         public SqlConnection AbrirConexao()
@@ -84,6 +89,8 @@ namespace SeuProjeto
         {
             connectionString = "Server=dbtotvs\\dbtotvs;Database=GestaoProcessos;Integrated Security=True;";
             connectionStringRm = "Server=dbtotvs\\dbtotvs;Database=GestaoProcessos;User Id=rm;Password=rm;Encrypt=True;TrustServerCertificate=True;Connection Timeout=0;";
+            //connectionString = Environment.GetEnvironmentVariable("CONEXAO_BANCO_GESTAOPROCESSOS");
+            //connectionStringRm = Environment.GetEnvironmentVariable("CONEXAO_BANCO_GESTAOPROCESSOS_RM");
         }
         public string GetConexaoString()
         {
@@ -140,6 +147,7 @@ namespace SeuProjeto
         public ConexaoBancoDeDadosBigCentral()
         {
             connectionString = "Server=dbtotvs\\dbtotvs;Database=BigCentral;Integrated Security=True;";
+            //connectionString = Environment.GetEnvironmentVariable("CONEXAO_BANCO_BIGCENTRAL");
         }
         public string GetConexaoString()
         {
@@ -182,6 +190,7 @@ namespace SeuProjeto
         public ConexaoBancoDeDadosGestaoProcessosSol()
         {
             connectionString = "Server=dbsol\\dbsol;Database=GS300GP;Integrated Security=True;";
+            //connectionString = Environment.GetEnvironmentVariable("CONEXAO_BANCO_GESTAOPROCESSOS_SOL");
         }
         public string GetConexaoString()
         {
@@ -240,6 +249,7 @@ namespace SeuProjeto
         public ConexaoBancoDeDadosZanup()
         {
             connectionString = "Server=dbtotvs\\dbtotvs;Database=Zanup;Integrated Security=True;";
+            //connectionString = Environment.GetEnvironmentVariable("CONEXAO_BANCO_ZANUP");
         }
         public string GetConexaoString()
         {

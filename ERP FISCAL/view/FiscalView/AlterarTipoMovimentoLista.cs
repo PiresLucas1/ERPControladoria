@@ -29,11 +29,25 @@ namespace ERP_FISCAL.view.FiscalView
                 MessageBox.Show("Por favor, insira um valor para consulta.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            StatusProcess splashScreen = new StatusProcess();
-            splashScreen.SetMessage("Consultando movimento...");
-            splashScreen.Show();
-            DataTable retorno = await BuscaMovimentos();
-            splashScreen.Close();
+
+            DataTable retorno = new DataTable();
+            try
+            {
+            ProcessStatusManager.Start("Carregando dados...");
+            ProcessStatusManager.Update("Processando...");
+            retorno = await BuscaMovimentos();
+
+            }
+            catch (Exception ex)
+            {
+                ProcessStatusManager.Error(ex); // Fecha e mostra o erro
+            }
+            finally
+            {
+                ProcessStatusManager.Stop(); // Garante o fechamento
+            }
+
+            
             CarregaDataGridView(retorno);
             txtCountRows.Text = retorno.Rows.Count.ToString();
         }

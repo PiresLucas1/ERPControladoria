@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace ERP_FISCAL.view
@@ -32,32 +33,24 @@ namespace ERP_FISCAL.view
             }
            
             int coligada = tbColigada.Text == "" ? 0 : Convert.ToInt32(tbColigada.Text);
-            DataTable dataRetorno;
-            //if (!chkAlteraEmBloco.Checked)
-            //{
-            //    if (tbCodMovimento.Text.Contains(";"))
-            //    {
-                    
-            //        return;
-            //    }
-            //    int codMovimento = Convert.ToInt32(tbCodMovimento.Text);
-
-            //    AlterarTipoMovimentoController alterarTipoMovimento = new AlterarTipoMovimentoController();
-            //    dataRetorno = await alterarTipoMovimento.ConsultaMovimentoTotvs(codMovimento, coligada);
-            //}
-            //else
-            //{
-            AlterarTipoMovimentoController alterarTipoMovimento = new AlterarTipoMovimentoController();
-            dataRetorno = await alterarTipoMovimento.ConsultaMultiplosMovimentoTotvs(tbCodMovimento.Text, coligada);
-            //}
-
-                StatusProcess splashScreen = new StatusProcess();
-            splashScreen.Show(this); // 'this' como owner para ficar modal
-            splashScreen.SetMessage("Carregando...");
-            
-
+            DataTable dataRetorno = new DataTable();
+            try
+            {
+                ProcessStatusManager.Start("Carregando dados...");
+                ProcessStatusManager.Update("Processando...");                
+                AlterarTipoMovimentoController alterarTipoMovimento = new AlterarTipoMovimentoController();
+                dataRetorno = await alterarTipoMovimento.ConsultaMultiplosMovimentoTotvs(tbCodMovimento.Text, coligada);    
+            }
+            catch (Exception ex)
+            {
+                ProcessStatusManager.Error(ex); // Fecha e mostra o erro
+            }
+            finally
+            {
+                ProcessStatusManager.Stop(); // Garante o fechamento
+            }
             CarregaDataTable(dataRetorno);
-            splashScreen.Close();
+            
         }
         public void CarregaDataTable(DataTable data)
         {
@@ -110,26 +103,32 @@ namespace ERP_FISCAL.view
                 return;
             }
 
+            var primeiraLinha = linhasSelecionadas[0];
+            var coligada = primeiraLinha["CODCOLIGADA"];
+            var idmov = primeiraLinha["IDMOV"];
 
-            StatusProcess splashScreen = new StatusProcess();
-
-            splashScreen.Show(this); // 'this' como owner para ficar modal
-            splashScreen.SetMessage("Alterando Tipo de Movimento...");
+            var resultado = "";
 
             if (chkAlteraEmBloco.Checked)
             {
                 MessageBox.Show("O check de alteração em bloco esta marcado, para alterar o movimento unico é necessário desmarcar");
                 return;
-            }            
+            }
 
-            var primeiraLinha = linhasSelecionadas[0];
-            var coligada = primeiraLinha["CODCOLIGADA"];
-            var idmov = primeiraLinha["IDMOV"];
+            try
+            {
+                AlterarTipoMovimentoController alteraTipoMovimento = new AlterarTipoMovimentoController();
+                resultado = await alteraTipoMovimento.AlterarTipoMovimento(Convert.ToInt32(idmov), Convert.ToInt32(coligada), tbCodTmv.Text);
 
-            AlterarTipoMovimentoController alteraTipoMovimento = new AlterarTipoMovimentoController();
-            var resultado = await alteraTipoMovimento.AlterarTipoMovimento(Convert.ToInt32(idmov), Convert.ToInt32(coligada), tbCodTmv.Text);
-            splashScreen.Close();
-
+            }
+            catch (Exception ex)
+            {
+                ProcessStatusManager.Error(ex); // Fecha e mostra o erro
+            }
+            finally
+            {
+                ProcessStatusManager.Stop(); // Garante o fechamento
+            }             
 
             MessageBox.Show(resultado);
             if (resultado != null && resultado.Trim().Equals("Tipo de Movimento alterado com sucesso!", StringComparison.OrdinalIgnoreCase))

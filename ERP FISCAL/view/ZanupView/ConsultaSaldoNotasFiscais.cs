@@ -53,15 +53,16 @@ namespace ERP_FISCAL.view
                                 MessageBoxIcon.Warning);
                 return;
             }
+           
+           
+          
 
-            StatusProcess splashScreen = new StatusProcess();
-            splashScreen.Show(this); // 'this' como owner para ficar modal
-            splashScreen.SetMessage("Carregando...");
-            
             btnListaNotas.Enabled = false;
             btnListaNotas.Enabled = false;
             try
             {
+                ProcessStatusManager.Start("Carregando dados...");
+                ProcessStatusManager.Update("Processando...");
                 ConsultaSaldoNotasZanupController consultaSaldoNotasZanup = new ConsultaSaldoNotasZanupController();
 
                 DataTable retorno = new DataTable();
@@ -89,13 +90,13 @@ namespace ERP_FISCAL.view
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro inesperado ao consultar notas: " + ex.Message,
-                                "Erro no sistema",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
+                ProcessStatusManager.Error(ex); // Fecha e mostra o erro
             }
-
-            splashScreen.Close();
+            finally
+            {
+                ProcessStatusManager.Stop(); // Garante o fechamento
+            }
+            
             btnListaNotas.Enabled = true;
 
         }
@@ -212,17 +213,12 @@ namespace ERP_FISCAL.view
             var dtOriginal = (System.Data.DataTable)dvgItensSelecionados.DataSource;
 
             var linhasSelecionadas = dtOriginal.AsEnumerable()
-                .ToList();
-
-
-
-            StatusProcess splashScreen = new StatusProcess();
-
-            splashScreen.SetMessage("Gerando nota fical no bling...");
-            splashScreen.Show(this); // 'this' como owner para ficar modal
+                .ToList();           
 
             try
             {
+                ProcessStatusManager.Start("Carregando dados...");
+                ProcessStatusManager.Update("Processando...");
                 btGerarNotaFiscal.Enabled = false;
 
                 CriaNotaBlingService dataRowToObject = new CriaNotaBlingService();
@@ -232,17 +228,11 @@ namespace ERP_FISCAL.view
             }
             catch(Exception ex)
             {
-                MessageBox.Show(
-                   $"Erro ao gerar nota fiscal:\n{ex.Message}",
-                   "Erro",
-                   MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
+                ProcessStatusManager.Error(ex);
             }
             finally
             {
-                // SEMPRE executa, com erro ou sem erro
-                splashScreen.CloseComponent();
-                btGerarNotaFiscal.Enabled = true;
+                ProcessStatusManager.Stop();
             }
                                  
         }
