@@ -17,7 +17,7 @@ namespace ERP_FISCAL.service
 {
     public class BlingService
     {
-        public async Task CriarNotaAsync(NotaFiscal data)
+        public async Task<HttpResponseMessage> CriarNotaAsync(NotaFiscal data)
         {
             GetToken obterTokenAsync = new GetToken();
             string token = await obterTokenAsync.ObterTokenAsync();
@@ -54,11 +54,9 @@ namespace ERP_FISCAL.service
             {
                 string errorBody = await response.Content.ReadAsStringAsync();
                 Console.WriteLine($"Erro: {(int)response.StatusCode} - {response.ReasonPhrase}");
-                throw new Exception($"Erro na requisição: {(int)response.StatusCode} - {errorBody}");
-                
-                
+                throw new Exception($"Erro na requisição: {(int)response.StatusCode} - {errorBody}");                                
             }
-
+            return response;
             
         }
 

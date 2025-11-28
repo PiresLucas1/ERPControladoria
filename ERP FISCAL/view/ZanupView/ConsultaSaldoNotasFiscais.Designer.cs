@@ -43,6 +43,8 @@
             this.tabItensSelecionado = new System.Windows.Forms.TabPage();
             this.dvgItensSelecionados = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.txtCountNotas = new System.Windows.Forms.TextBox();
+            this.btnLimparTela = new System.Windows.Forms.Button();
+            this.btnSelecionarTudo = new System.Windows.Forms.Button();
             this.gbFiltro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabNavegacaoAba.SuspendLayout();
@@ -224,6 +226,7 @@
             this.dvgItensSelecionados.Location = new System.Drawing.Point(6, 6);
             this.dvgItensSelecionados.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dvgItensSelecionados.Name = "dvgItensSelecionados";
+            this.dvgItensSelecionados.RowHeadersVisible = false;
             this.dvgItensSelecionados.RowHeadersWidth = 62;
             this.dvgItensSelecionados.RowTemplate.Height = 28;
             this.dvgItensSelecionados.Size = new System.Drawing.Size(1136, 539);
@@ -242,11 +245,39 @@
             this.txtCountNotas.Size = new System.Drawing.Size(186, 26);
             this.txtCountNotas.TabIndex = 7;
             // 
+            // btnLimparTela
+            // 
+            this.btnLimparTela.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLimparTela.Enabled = false;
+            this.btnLimparTela.Location = new System.Drawing.Point(794, 795);
+            this.btnLimparTela.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnLimparTela.Name = "btnLimparTela";
+            this.btnLimparTela.Size = new System.Drawing.Size(170, 41);
+            this.btnLimparTela.TabIndex = 8;
+            this.btnLimparTela.Text = "Limpar Tela";
+            this.btnLimparTela.UseVisualStyleBackColor = true;
+            this.btnLimparTela.Click += new System.EventHandler(this.btnLimparTela_Click);
+            // 
+            // btnSelecionarTudo
+            // 
+            this.btnSelecionarTudo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelecionarTudo.Enabled = false;
+            this.btnSelecionarTudo.Location = new System.Drawing.Point(312, 795);
+            this.btnSelecionarTudo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSelecionarTudo.Name = "btnSelecionarTudo";
+            this.btnSelecionarTudo.Size = new System.Drawing.Size(170, 41);
+            this.btnSelecionarTudo.TabIndex = 9;
+            this.btnSelecionarTudo.Text = "Selecionar tudo";
+            this.btnSelecionarTudo.UseVisualStyleBackColor = true;
+            this.btnSelecionarTudo.Click += new System.EventHandler(this.btnSelecionarTudo_Click);
+            // 
             // ConsultaSaldoNotasFiscais
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1192, 866);
+            this.Controls.Add(this.btnSelecionarTudo);
+            this.Controls.Add(this.btnLimparTela);
             this.Controls.Add(this.txtCountNotas);
             this.Controls.Add(this.tabNavegacaoAba);
             this.Controls.Add(this.btGerarNotaFiscal);
@@ -285,5 +316,7 @@
         private System.Windows.Forms.TextBox txtFiltro;
         private System.Windows.Forms.CheckBox chkExibirRelacionados;
         private System.Windows.Forms.TextBox txtCountNotas;
+        private System.Windows.Forms.Button btnLimparTela;
+        private System.Windows.Forms.Button btnSelecionarTudo;
     }
 }

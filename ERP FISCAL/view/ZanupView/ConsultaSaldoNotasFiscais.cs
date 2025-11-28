@@ -212,11 +212,11 @@ namespace ERP_FISCAL.view
 
         public async Task CriarNotaFiscal()
         {
-            var dtOriginal = (System.Data.DataTable)dvgItensSelecionados.DataSource;
-
-            var linhasSelecionadas = dtOriginal.AsEnumerable()
-                .ToList();           
-
+            var linhasSelecionadas = dvgItensSelecionados.Rows
+                .Cast<DataGridViewRow>()
+                .Where(r => Convert.ToBoolean(r.Cells["Selecionar"].Value) == true)
+                .Select(r => ((DataRowView)r.DataBoundItem).Row)
+                .ToList();            
             try
             {
                 ProcessStatusManager.Start("Carregando dados...");
@@ -235,6 +235,7 @@ namespace ERP_FISCAL.view
             finally
             {
                 ProcessStatusManager.Stop();
+                btGerarNotaFiscal.Enabled = !btGerarNotaFiscal.Enabled;
             }
                                  
         }
@@ -268,6 +269,26 @@ namespace ERP_FISCAL.view
         public void GeraTextoDeCriacaoDeNotas(string valor)
         {
             txtCountNotas.Text = valor;
+        }
+        public void MarcaLinhaImportadaParaOBling(int valorDocumento, int IdProduto, decimal quantidadeParaDevolver)
+        {
+            foreach(DataGridViewRow row in dvgItensSelecionados.Rows)
+            {
+                if (row.IsNewRow)
+                {
+                    continue;
+                }
+                int doc = Convert.ToInt32(row.Cells["NumDocumento"].Value);
+                int prod = Convert.ToInt32(row.Cells["IDProduto"].Value);
+                decimal qtd = Convert.ToDecimal(row.Cells["Qtd para Devolver"].Value);
+
+                if (doc == valorDocumento && prod == IdProduto && qtd == quantidadeParaDevolver)
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightGreen;   // fundo
+                    row.DefaultCellStyle.ForeColor = Color.Black;        // texto (opcional)
+                    break; // Se quiser marcar só o primeiro que encontrar
+                }
+            }
         }
 
         public void PintarLinhaPorDataRow(DataGridView dvg, DataRow rowParaPintar, Color cor)
@@ -306,6 +327,7 @@ namespace ERP_FISCAL.view
             }
 
             AdicionaColunaEstoqueOrigem();
+            AdicionarColunaSelecionar();
             dvgItensSelecionados.DataSource = dataItensSelecionados;
 
 
@@ -317,6 +339,11 @@ namespace ERP_FISCAL.view
 
         private void tabNavegacaoAba_Selected(object sender, TabControlEventArgs e)
         {
+            if(dvgItensSelecionados.Rows.Count <= 0)
+            {
+                txtCountNotas.Text = "0";
+                return;
+            }
             if (tabNavegacaoAba.SelectedTab == tabItensSelecionado)
             {
                 if (dataItensSelecionados.Rows.Count > 0)
@@ -327,19 +354,24 @@ namespace ERP_FISCAL.view
                     dvgItensSelecionados.Columns["Qtd para Devolver"].DefaultCellStyle.ForeColor = Color.Red;
 
                     AdicionaColunaEstoqueOrigem();
+                    AdicionarColunaSelecionar();
 
                     dvgItensSelecionados.Columns["Estoque origem"].DisplayIndex = dvgItensSelecionados.Columns["Qtd para Devolver"].Index + 1;
                 }
 
-                dvgItensSelecionados.Columns["colSelecionado"].Visible = false;
-                txtCountNotas.Text = "";
+                dvgItensSelecionados.Columns["colSelecionado"].Visible= false;
+                txtCountNotas.Text = dvgItensSelecionados.Rows.Count.ToString();
+
+                btnSelecionarTudo.Enabled = true;
+                btnLimparTela.Enabled = true;
                 return;
-
-
+                
             }
             else
             {
                 txtCountNotas.Text =  dvgConsultaNotas.RowCount.ToString();
+                btnSelecionarTudo.Enabled = false;
+                btnLimparTela.Enabled = false;
             }
         }
 
@@ -382,65 +414,135 @@ namespace ERP_FISCAL.view
             }
         }
 
-        private void btnRelacionaItens_Click(object sender, EventArgs e)
+        private void AdicionarColunaSelecionar()
         {
-            if (dvgConsultaNotas.RowCount > 0)
+            if (!dvgItensSelecionados.Columns.Contains("Selecionar"))
             {
 
-                var dtOriginal = (System.Data.DataTable)dvgConsultaNotas.DataSource;
-                if (!dtOriginal.Columns.Contains("Qtd para Devolver"))
-                {
-                    DataColumn colQuantidade = new DataColumn("Qtd para Devolver", typeof(int));
-                    colQuantidade.DefaultValue = 0;
-                    dtOriginal.Columns.Add(colQuantidade);
+                DataGridViewCheckBoxColumn coluna = new DataGridViewCheckBoxColumn();
+                coluna.Name = "Selecionar";
+                coluna.HeaderText = "✓";
+                coluna.DataPropertyName = "Selecionar"; 
+                coluna.Width = 80;
+                coluna.ReadOnly = false; 
 
-                }
-
-
-                var linhasSelecionadas = dtOriginal.AsEnumerable()
-                    .Where(r => r.Field<int>("Qtd para Devolver") != 0)
-                    .ToList();
-
-                bool existeCelulaVaiza = false;
-                bool existeValorIncorreto = false;
-                foreach (DataRow row in linhasSelecionadas)
-                {
-                    string qtd = row["Qtd para Devolver"]?.ToString();
-                    if (string.IsNullOrWhiteSpace(qtd) || Convert.ToInt32(qtd) == 0)
-                    {
-                        int index = dtOriginal.Rows.IndexOf(row);
-                        dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = System.Drawing.Color.LightSalmon;
-                        existeCelulaVaiza = true;
-                    }
-                    if (Convert.ToUInt32(qtd) > Convert.ToInt32(row["Saldo Restante"].ToString()))
-                    {
-                        int index = dtOriginal.Rows.IndexOf(row);
-                        dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = System.Drawing.Color.LightSalmon;
-                        existeValorIncorreto = true;
-                    }
-                }
-                if (existeValorIncorreto)
-                {
-                    MessageBox.Show("Existe algumas linhas que o valor de devolução esta incorreto");
-                    return;
-                }
-                if (existeCelulaVaiza)
-                {
-                    MessageBox.Show("Existe algumas linhas que o valor de devolução não foi informado");
-                    return;
-                }
-
-                if (linhasSelecionadas.Count > 0)
-                    ImportaItemParaDvgItensSelecionado(linhasSelecionadas);
-                else
-                    MessageBox.Show("Nenhum item selecionado");
-
-
+                dvgItensSelecionados.Columns.Insert(0, coluna);
 
             }
-            else
-                MessageBox.Show("Nenhum item para importar!");
         }
+
+        private void btnRelacionaItens_Click(object sender, EventArgs e)
+        {
+            if (dvgConsultaNotas.RowCount <= 0)
+            {
+                MessageBox.Show("Nenhum item para importar!");
+                return;
+            }
+
+            var dtOriginal = (DataTable)dvgConsultaNotas.DataSource;
+
+            // adiciona a coluna Qtd para Devolver se não existir
+            if (!dtOriginal.Columns.Contains("Qtd para Devolver"))
+            {
+                DataColumn colQuantidade = new DataColumn("Qtd para Devolver", typeof(int));
+                colQuantidade.DefaultValue = 0;
+                dtOriginal.Columns.Add(colQuantidade);
+            }
+
+            // linhas com quantidade preenchida
+            var linhasSelecionadas = dtOriginal.AsEnumerable()
+                .Where(r => r.Field<int>("Qtd para Devolver") != 0)
+                .ToList();
+
+            bool existeCelulaVazia = false;
+            bool existeValorIncorreto = false;
+
+            // validações
+            foreach (DataRow row in linhasSelecionadas)
+            {
+                string qtd = row["Qtd para Devolver"]?.ToString();
+                int index = dtOriginal.Rows.IndexOf(row);
+
+                if (string.IsNullOrWhiteSpace(qtd) || Convert.ToInt32(qtd) == 0)
+                {
+                    dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = Color.LightSalmon;
+                    existeCelulaVazia = true;
+                }
+
+                if (Convert.ToInt32(qtd) > Convert.ToInt32(row["Saldo Restante"]))
+                {
+                    dvgConsultaNotas.Rows[index].DefaultCellStyle.BackColor = Color.LightSalmon;
+                    existeValorIncorreto = true;
+                }
+            }
+
+            if (existeValorIncorreto)
+            {
+                MessageBox.Show("Existe algumas linhas que o valor de devolução está incorreto");
+                return;
+            }
+
+            if (existeCelulaVazia)
+            {
+                MessageBox.Show("Existe algumas linhas que o valor de devolução não foi informado");
+                return;
+            }
+
+            if (linhasSelecionadas.Count == 0)
+            {
+                MessageBox.Show("Nenhum item selecionado");
+                return;
+            }
+
+            // -----------------------------------------
+            // 🔥 FILTRAR REPETIDOS ANTES DE IMPORTAR
+            // -----------------------------------------
+
+            var linhasSemDuplicados = new List<DataRow>();
+
+            foreach (DataRow row in linhasSelecionadas)
+            {
+                string documento = row["NumDocumento"].ToString();
+                string idProduto = row["IDProduto"].ToString();
+                int quantidade = Convert.ToInt32(row["Quantidade Venda"]);
+
+                // só adiciona se NÃO existir no grid destino
+                if (!ItemJaExisteNoDestino(documento, idProduto, quantidade))
+                {
+                    linhasSemDuplicados.Add(row);
+                }
+            }
+
+            if (linhasSemDuplicados.Count == 0)
+            {
+                MessageBox.Show("Todos os itens já foram relacionados anteriormente.");
+                return;
+            }
+
+            // importa somente itens não duplicados
+            ImportaItemParaDvgItensSelecionado(linhasSemDuplicados);
+        }
+
+
+        private bool ItemJaExisteNoDestino(string documento, string idProduto, int quantidade)
+        {
+            foreach (DataGridViewRow row in dvgItensSelecionados.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                string doc = row.Cells["NumDocumento"].Value?.ToString();
+                string prod = row.Cells["IDProduto"].Value?.ToString();
+                int qtd = Convert.ToInt32(row.Cells["Quantidade Venda"].Value);
+
+                if (doc == documento && prod == idProduto && qtd == quantidade)
+                {
+                    return true; // encontrou duplicata
+                }
+            }
+
+            return false;
+        }
+
 
         private void dvgConsultaNotas_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
@@ -562,6 +664,19 @@ namespace ERP_FISCAL.view
                 Button1_Click(null, null);
                 e.Handled = true;
             }
+        }
+
+        private void btnSelecionarTudo_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dvgItensSelecionados.Rows)
+            {
+                row.Cells["Selecionar"].Value = true;
+            }            
+        }
+
+        private void btnLimparTela_Click(object sender, EventArgs e)
+        {
+            dvgItensSelecionados.DataSource = null;
         }
     }
 }

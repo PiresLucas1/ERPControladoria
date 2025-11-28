@@ -146,7 +146,14 @@ namespace ERP_FISCAL.Utils
                string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
                 
 
-                await blingService.CriarNotaAsync(novaNotaFiscal);
+                var response = await blingService.CriarNotaAsync(novaNotaFiscal);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    form.MarcaLinhaImportadaParaOBling(primeiraLinha.NumDocumento, primeiraLinha.IDProduto, primeiraLinha.QtdParaDevolver);
+
+                }
+
                 contadorDeNotasCriadas++;                
 
                 varreduraDeCriacao = $" {contadorDeNotasCriadas} criadas de {grupoDeDocumento.Count}";
