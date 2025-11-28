@@ -86,7 +86,9 @@ namespace ERP_FISCAL.view
                     }
                 dataItensPesquisado = retorno;
                 CarregaDataTable(retorno);
-                
+                txtCountNotas.Text = retorno.Rows.Count.ToString();
+
+
             }
             catch (Exception ex)
             {
@@ -243,7 +245,19 @@ namespace ERP_FISCAL.view
             {
                 return;
             }
-            await CriarNotaFiscal();
+            var result = MessageBox.Show(
+                "Deseja realmente continuar?",
+                "Confirmação",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.Yes)
+            {
+                                
+                await CriarNotaFiscal();
+            }
+
         }
         public void LimpaDataGridViewItensSelecionados()
         {
@@ -317,6 +331,7 @@ namespace ERP_FISCAL.view
                     dvgItensSelecionados.Columns["Estoque origem"].DisplayIndex = dvgItensSelecionados.Columns["Qtd para Devolver"].Index + 1;
                 }
 
+                dvgItensSelecionados.Columns["colSelecionado"].Visible = false;
                 txtCountNotas.Text = "";
                 return;
 

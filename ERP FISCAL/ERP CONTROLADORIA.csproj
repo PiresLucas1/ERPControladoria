@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>44</ApplicationRevision>
+    <ApplicationRevision>45</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -222,6 +222,7 @@
     <Compile Include="view\UIComponentes\UIDialog\AlteraUnicoItemEmBloco\AlteraUnicoValorEmBloco.Designer.cs">
       <DependentUpon>AlteraUnicoValorEmBloco.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\UIComponentes\UIStatusDoProcessos\ProcessStatusManeger.cs" />
     <Compile Include="view\ZanupView\ConsultaSaldoNotasFiscais.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -88,7 +88,7 @@
             this.chkExibirRelacionados.Location = new System.Drawing.Point(144, 110);
             this.chkExibirRelacionados.Name = "chkExibirRelacionados";
             this.chkExibirRelacionados.Size = new System.Drawing.Size(206, 24);
-            this.chkExibirRelacionados.TabIndex = 7;
+            this.chkExibirRelacionados.TabIndex = 3;
             this.chkExibirRelacionados.Text = "Exibir da NF relacionada";
             this.chkExibirRelacionados.UseVisualStyleBackColor = true;
             this.chkExibirRelacionados.CheckedChanged += new System.EventHandler(this.chkExibirRelacionados_CheckedChanged_1);
@@ -99,7 +99,7 @@
             this.txtFiltro.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(114, 26);
-            this.txtFiltro.TabIndex = 6;
+            this.txtFiltro.TabIndex = 2;
             this.txtFiltro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFiltro_KeyPress);
             // 
             // lbFiltroSaldo
@@ -117,7 +117,7 @@
             this.btnListaNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnListaNotas.Name = "btnListaNotas";
             this.btnListaNotas.Size = new System.Drawing.Size(114, 36);
-            this.btnListaNotas.TabIndex = 2;
+            this.btnListaNotas.TabIndex = 4;
             this.btnListaNotas.Text = "Listar notas";
             this.btnListaNotas.UseVisualStyleBackColor = true;
             this.btnListaNotas.Click += new System.EventHandler(this.Button1_Click);
@@ -129,7 +129,7 @@
             this.cbFiltroSaldo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbFiltroSaldo.Name = "cbFiltroSaldo";
             this.cbFiltroSaldo.Size = new System.Drawing.Size(114, 28);
-            this.cbFiltroSaldo.TabIndex = 4;
+            this.cbFiltroSaldo.TabIndex = 1;
             this.cbFiltroSaldo.SelectedIndexChanged += new System.EventHandler(this.cbFiltroSaldo_SelectedIndexChanged);
             // 
             // btnRelacionaItens
@@ -139,7 +139,7 @@
             this.btnRelacionaItens.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnRelacionaItens.Name = "btnRelacionaItens";
             this.btnRelacionaItens.Size = new System.Drawing.Size(156, 36);
-            this.btnRelacionaItens.TabIndex = 3;
+            this.btnRelacionaItens.TabIndex = 5;
             this.btnRelacionaItens.Text = "Relacionar itens";
             this.btnRelacionaItens.UseVisualStyleBackColor = true;
             this.btnRelacionaItens.Click += new System.EventHandler(this.btnRelacionaItens_Click);
@@ -151,7 +151,7 @@
             this.btGerarNotaFiscal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btGerarNotaFiscal.Name = "btGerarNotaFiscal";
             this.btGerarNotaFiscal.Size = new System.Drawing.Size(170, 41);
-            this.btGerarNotaFiscal.TabIndex = 3;
+            this.btGerarNotaFiscal.TabIndex = 6;
             this.btGerarNotaFiscal.Text = "Gerar nota fiscal";
             this.btGerarNotaFiscal.UseVisualStyleBackColor = true;
             this.btGerarNotaFiscal.Click += new System.EventHandler(this.btGerarNotaFiscal_Click);
