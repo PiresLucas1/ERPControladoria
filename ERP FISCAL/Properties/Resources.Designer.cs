@@ -83,6 +83,16 @@ namespace ERP_FISCAL.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap sol_background2 {
+            get {
+                object obj = ResourceManager.GetObject("sol_background2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SOLFARMA_3D_PNG {
             get {
                 object obj = ResourceManager.GetObject("SOLFARMA-3D-PNG", resourceCulture);
@@ -106,6 +116,16 @@ namespace ERP_FISCAL.Properties {
         internal static System.Drawing.Bitmap Solfarma_Controladoria_removebg_preview {
             get {
                 object obj = ResourceManager.GetObject("Solfarma_Controladoria-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Solfarma_Controladoria1 {
+            get {
+                object obj = ResourceManager.GetObject("Solfarma Controladoria1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

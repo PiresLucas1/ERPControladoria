@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Http;
+using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -32,8 +34,8 @@ namespace ERP_FISCAL.Utils
 
             await Task.Delay(3000);
 
-            int contadorDeNotasCriadas = 0;            
-
+            int contadorDeNotasCriadas = 0;
+            var response = new HttpResponseMessage();
             foreach (var itemGrupo in grupoDeDocumento)
             {
                 var primeiraLinha = itemGrupo.First();
@@ -146,7 +148,7 @@ namespace ERP_FISCAL.Utils
                string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
                 
 
-                var response = await blingService.CriarNotaAsync(novaNotaFiscal);
+                response = await blingService.CriarNotaAsync(novaNotaFiscal);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -166,9 +168,17 @@ namespace ERP_FISCAL.Utils
 
 
             }
+            if (response.IsSuccessStatusCode)
+            {
             // limpa tabela de itens selecionados
-            form.LimpaDataGridViewItensSelecionados();
-            MessageBox.Show("Notas Criadas", "Dados enviados para criação da nota", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DialogResult resultado = MessageBox.Show("Deseja limpar a relação na tabela", "Limpar tabela", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                
+                if(resultado == DialogResult.Yes)
+                    form.LimpaDataGridViewItensSelecionados();
+               
+             MessageBox.Show("Notas Criadas", "Dados enviados para criação da nota", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
 
 
             return;

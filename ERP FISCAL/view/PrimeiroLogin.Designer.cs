@@ -35,26 +35,36 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackgroundImage = global::ERP_FISCAL.Properties.Resources.sol_background2;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1220, 215);
+            this.pictureBox1.Size = new System.Drawing.Size(755, 255);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // pBarCarregaPerfil
             // 
-            this.pBarCarregaPerfil.Location = new System.Drawing.Point(12, 244);
+            this.pBarCarregaPerfil.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pBarCarregaPerfil.Location = new System.Drawing.Point(12, 296);
             this.pBarCarregaPerfil.Name = "pBarCarregaPerfil";
-            this.pBarCarregaPerfil.Size = new System.Drawing.Size(1220, 115);
+            this.pBarCarregaPerfil.Size = new System.Drawing.Size(755, 115);
             this.pBarCarregaPerfil.TabIndex = 1;
             // 
             // PrimeiroLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1244, 383);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(795, 466);
+            this.ControlBox = false;
             this.Controls.Add(this.pBarCarregaPerfil);
             this.Controls.Add(this.pictureBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
             this.Name = "PrimeiroLogin";
             this.Text = "PrimeiroLogin";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

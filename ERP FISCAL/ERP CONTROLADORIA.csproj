@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>45</ApplicationRevision>
+    <ApplicationRevision>49</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -398,6 +398,8 @@
   <ItemGroup>
     <Content Include="icon-new.ico" />
     <Content Include="links.txt" />
+    <Content Include="Resources\sol_background.jpeg" />
+    <Content Include="Resources\sol_background2.jpeg" />
     <Content Include="Resources\trash2.png" />
     <Content Include="Resources\trash.bmp" />
     <None Include="Resources\icon-new.ico" />

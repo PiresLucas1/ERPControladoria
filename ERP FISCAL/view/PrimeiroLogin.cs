@@ -13,24 +13,8 @@ namespace ERP_FISCAL.view
         public string[] usuariosComPermissoesTotais = { "rudinei.cferreira", "lucas.pires", "aamaiello" };
         public PrimeiroLogin()
         {
-            InitializeComponent();
-            CarregarPerfil();
+            InitializeComponent();            
             pBarCarregaPerfil.Style = ProgressBarStyle.Marquee;
         }        
-        public async void CarregarPerfil()
-        {
-            string usuario = Environment.UserName;
-            await Task.Delay(800);
-
-            if (usuariosComPermissoesTotais.Contains(usuario))
-            {
-
-                Portal portal = new Portal();
-                portal.Show();
-            }
-            this.Hide();
-        }
-
-
     }
 }

@@ -45,9 +45,11 @@
             this.btnAlterar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.dvgUsuarios = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.gbFooter = new System.Windows.Forms.GroupBox();
             this.gpFiltro.SuspendLayout();
             this.gpAdicao.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvgUsuarios)).BeginInit();
+            this.gbFooter.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtNomeUsu
@@ -59,6 +61,8 @@
             // 
             // gpFiltro
             // 
+            this.gpFiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gpFiltro.Controls.Add(this.gpAdicao);
             this.gpFiltro.Controls.Add(this.cbFiltros);
             this.gpFiltro.Controls.Add(this.btnFiltrar);
@@ -78,6 +82,7 @@
             // 
             // gpAdicao
             // 
+            this.gpAdicao.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gpAdicao.Controls.Add(this.button2);
             this.gpAdicao.Controls.Add(this.btnAdicionarPerfil);
             this.gpAdicao.Controls.Add(this.btnAdicionarMenu);
@@ -189,7 +194,8 @@
             // 
             // btnAlterar
             // 
-            this.btnAlterar.Location = new System.Drawing.Point(1026, 724);
+            this.btnAlterar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAlterar.Location = new System.Drawing.Point(1029, 39);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(118, 35);
             this.btnAlterar.TabIndex = 8;
@@ -198,7 +204,8 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(12, 724);
+            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnCancelar.Location = new System.Drawing.Point(887, 39);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(118, 35);
             this.btnCancelar.TabIndex = 9;
@@ -207,30 +214,45 @@
             // 
             // dvgUsuarios
             // 
+            this.dvgUsuarios.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dvgUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dvgUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dvgUsuarios.Location = new System.Drawing.Point(12, 211);
             this.dvgUsuarios.Name = "dvgUsuarios";
             this.dvgUsuarios.RowHeadersWidth = 62;
             this.dvgUsuarios.RowTemplate.Height = 28;
-            this.dvgUsuarios.Size = new System.Drawing.Size(1143, 475);
+            this.dvgUsuarios.Size = new System.Drawing.Size(1153, 464);
             this.dvgUsuarios.TabIndex = 11;
+            // 
+            // gbFooter
+            // 
+            this.gbFooter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbFooter.Controls.Add(this.btnCancelar);
+            this.gbFooter.Controls.Add(this.btnAlterar);
+            this.gbFooter.Location = new System.Drawing.Point(12, 685);
+            this.gbFooter.Name = "gbFooter";
+            this.gbFooter.Size = new System.Drawing.Size(1153, 83);
+            this.gbFooter.TabIndex = 12;
+            this.gbFooter.TabStop = false;
             // 
             // CadUsu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1167, 780);
+            this.ClientSize = new System.Drawing.Size(1177, 780);
             this.Controls.Add(this.dvgUsuarios);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnAlterar);
             this.Controls.Add(this.gpFiltro);
+            this.Controls.Add(this.gbFooter);
             this.Name = "CadUsu";
             this.Text = "CadUsu";
             this.gpFiltro.ResumeLayout(false);
             this.gpFiltro.PerformLayout();
             this.gpAdicao.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dvgUsuarios)).EndInit();
+            this.gbFooter.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -253,5 +275,6 @@
         private System.Windows.Forms.Button btnAdicionarMenu;
         private System.Windows.Forms.GroupBox gpAdicao;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.GroupBox gbFooter;
     }
 }

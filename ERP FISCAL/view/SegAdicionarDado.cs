@@ -13,37 +13,61 @@ namespace ERP_FISCAL.view
 {
     public partial class SegAdicionarDado : Form
     {
-        
-        public SegAdicionarDado(DataTable dt, string nomeCampo= "Nome Menu")
+        public int tipoForm;
+        public DataTable data = new DataTable();
+        public SegAdicionarDado(DataTable dt, int tipoForm, string nomeCampo= "Nome Menu")
         {
+            /*
+             * tipo form 
+             * 1 = Menu = 3
+             * 2 = Perfil = 2
+             */
             InitializeComponent();
             CarregaDados(dt);
             lblNome.Text = nomeCampo;
+            this.tipoForm = tipoForm;
+            this.data = dt;
 
-            if(nomeCampo == "Nome Perfil")
+            if (nomeCampo == "Nome Perfil")
             {
                 txtDescApp.Enabled = false;
             }
         }
         public void CarregaDados(DataTable dt)
         {
-            dvgItens.DataSource = dt;
+            data = dt;
+            dvgItens.DataSource = data;
         }
 
         private async void btnAddItem_Click(object sender, EventArgs e)
         {
             SegCadastroController segCadastroController = new SegCadastroController();
+            int apoioTipoPesquisa = 0;            
             string DescrNome = txtNome.Text;
-            if (lblNomeAplicacao.Text != "Nome Perfil")
+            if (tipoForm != 1)
             {
                 await segCadastroController.InseriInformacao(DescrNome);
-
-            }else
+                apoioTipoPesquisa = 2;
+            }
+            else
+            {
                 DescrNome = txtNome.Text;
                 string DescrApp = txtDescApp.Text;
                 await segCadastroController.InseriInformacao(DescrNome, DescrApp);
+                apoioTipoPesquisa = 3;
+
+            }
 
             MessageBox.Show("Item adicionado com sucesso!");
+            DataTable retorno = await CadUsu.ListaInformacao("%", apoioTipoPesquisa);
+            AtualizaInformacao(retorno);
+        }
+        private void AtualizaInformacao(DataTable newData)
+        {
+            data = newData;
+            dvgItens.DataSource = data;
+
+
         }
     }
 }

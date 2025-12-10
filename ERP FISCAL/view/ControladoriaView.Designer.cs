@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Portal));
             this.menuBarTop = new System.Windows.Forms.MenuStrip();
-            this.importarNotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.FiscalMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.importarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarNotasParaOBigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alteraçõesFiscaisToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,15 +40,15 @@
             this.contabilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarRecebimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.atualizarGestãoPatrimonialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zanupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ZanupMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.devoluçaoDeNotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarBottom = new System.Windows.Forms.MenuStrip();
             this.txtVersao = new System.Windows.Forms.ToolStripMenuItem();
             this.Opções = new System.Windows.Forms.ToolStripMenuItem();
             this.alterarCorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastrarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastrarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarTop.SuspendLayout();
             this.menuBarBottom.SuspendLayout();
             this.SuspendLayout();
@@ -59,24 +59,24 @@
             this.menuBarTop.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuBarTop.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuBarTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importarNotasToolStripMenuItem,
+            this.FiscalMenu,
             this.contabilToolStripMenuItem,
-            this.zanupToolStripMenuItem});
+            this.ZanupMenu});
             this.menuBarTop.Location = new System.Drawing.Point(0, 0);
             this.menuBarTop.Name = "menuBarTop";
-            this.menuBarTop.Size = new System.Drawing.Size(1809, 33);
+            this.menuBarTop.Size = new System.Drawing.Size(1809, 36);
             this.menuBarTop.TabIndex = 0;
             this.menuBarTop.Text = "menuStrip1";
             // 
-            // importarNotasToolStripMenuItem
+            // FiscalMenu
             // 
-            this.importarNotasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FiscalMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importarToolStripMenuItem,
             this.importarNotasParaOBigToolStripMenuItem,
             this.alteraçõesFiscaisToolStripMenuItem1});
-            this.importarNotasToolStripMenuItem.Name = "importarNotasToolStripMenuItem";
-            this.importarNotasToolStripMenuItem.Size = new System.Drawing.Size(70, 29);
-            this.importarNotasToolStripMenuItem.Text = "Fiscal";
+            this.FiscalMenu.Name = "FiscalMenu";
+            this.FiscalMenu.Size = new System.Drawing.Size(70, 30);
+            this.FiscalMenu.Text = "Fiscal";
             // 
             // importarToolStripMenuItem
             // 
@@ -129,7 +129,7 @@
             this.importarRecebimentoToolStripMenuItem,
             this.atualizarGestãoPatrimonialToolStripMenuItem});
             this.contabilToolStripMenuItem.Name = "contabilToolStripMenuItem";
-            this.contabilToolStripMenuItem.Size = new System.Drawing.Size(94, 29);
+            this.contabilToolStripMenuItem.Size = new System.Drawing.Size(94, 30);
             this.contabilToolStripMenuItem.Text = "Contabil";
             // 
             // importarRecebimentoToolStripMenuItem
@@ -146,13 +146,13 @@
             this.atualizarGestãoPatrimonialToolStripMenuItem.Text = "Atualizar Gestão Patrimonial";
             this.atualizarGestãoPatrimonialToolStripMenuItem.Click += new System.EventHandler(this.atualizarGestãoPatrimonialToolStripMenuItem_Click);
             // 
-            // zanupToolStripMenuItem
+            // ZanupMenu
             // 
-            this.zanupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ZanupMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.devoluçaoDeNotasToolStripMenuItem});
-            this.zanupToolStripMenuItem.Name = "zanupToolStripMenuItem";
-            this.zanupToolStripMenuItem.Size = new System.Drawing.Size(78, 29);
-            this.zanupToolStripMenuItem.Text = "Zanup";
+            this.ZanupMenu.Name = "ZanupMenu";
+            this.ZanupMenu.Size = new System.Drawing.Size(78, 30);
+            this.ZanupMenu.Text = "Zanup";
             // 
             // devoluçaoDeNotasToolStripMenuItem
             // 
@@ -171,16 +171,16 @@
             this.txtVersao,
             this.Opções,
             this.toolStripMenuItem4});
-            this.menuBarBottom.Location = new System.Drawing.Point(0, 822);
+            this.menuBarBottom.Location = new System.Drawing.Point(0, 819);
             this.menuBarBottom.Name = "menuBarBottom";
-            this.menuBarBottom.Size = new System.Drawing.Size(1809, 33);
+            this.menuBarBottom.Size = new System.Drawing.Size(1809, 36);
             this.menuBarBottom.TabIndex = 1;
             this.menuBarBottom.Text = "menuStrip2";
             // 
             // txtVersao
             // 
             this.txtVersao.Name = "txtVersao";
-            this.txtVersao.Size = new System.Drawing.Size(81, 29);
+            this.txtVersao.Size = new System.Drawing.Size(81, 30);
             this.txtVersao.Text = "Versão";
             this.txtVersao.Click += new System.EventHandler(this.txtVersao_Click);
             // 
@@ -190,15 +190,22 @@
             this.alterarCorToolStripMenuItem,
             this.cadastrarUsuarioToolStripMenuItem});
             this.Opções.Name = "Opções";
-            this.Opções.Size = new System.Drawing.Size(89, 29);
+            this.Opções.Size = new System.Drawing.Size(89, 30);
             this.Opções.Text = "Opções";
             // 
             // alterarCorToolStripMenuItem
             // 
             this.alterarCorToolStripMenuItem.Name = "alterarCorToolStripMenuItem";
-            this.alterarCorToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.alterarCorToolStripMenuItem.Size = new System.Drawing.Size(252, 34);
             this.alterarCorToolStripMenuItem.Text = "Alterar Cor";
             this.alterarCorToolStripMenuItem.Click += new System.EventHandler(this.alterarCorToolStripMenuItem_Click);
+            // 
+            // cadastrarUsuarioToolStripMenuItem
+            // 
+            this.cadastrarUsuarioToolStripMenuItem.Name = "cadastrarUsuarioToolStripMenuItem";
+            this.cadastrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(252, 34);
+            this.cadastrarUsuarioToolStripMenuItem.Text = "Cadastrar usuario";
+            this.cadastrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.cadastrarUsuarioToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
@@ -215,13 +222,6 @@
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(256, 34);
             this.toolStripMenuItem5.Text = "Alterar conta frete";
-            // 
-            // cadastrarUsuarioToolStripMenuItem
-            // 
-            this.cadastrarUsuarioToolStripMenuItem.Name = "cadastrarUsuarioToolStripMenuItem";
-            this.cadastrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.cadastrarUsuarioToolStripMenuItem.Text = "Cadastrar usuario";
-            this.cadastrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.cadastrarUsuarioToolStripMenuItem_Click);
             // 
             // Portal
             // 
@@ -241,6 +241,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Controladoria";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Shown += new System.EventHandler(this.Portal_Shown);
             this.menuBarTop.ResumeLayout(false);
             this.menuBarTop.PerformLayout();
             this.menuBarBottom.ResumeLayout(false);
@@ -253,7 +254,7 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuBarTop;
-        private System.Windows.Forms.ToolStripMenuItem importarNotasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem FiscalMenu;
         private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importarNotasParaOBigToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contabilToolStripMenuItem;
@@ -265,7 +266,7 @@
         private System.Windows.Forms.ToolStripMenuItem txtVersao;
         private System.Windows.Forms.ToolStripMenuItem alteraçõesFiscaisToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem alterarTipoDeMovimentoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem zanupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ZanupMenu;
         private System.Windows.Forms.ToolStripMenuItem devoluçaoDeNotasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importarRecebimentoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem atualizarGestãoPatrimonialToolStripMenuItem;

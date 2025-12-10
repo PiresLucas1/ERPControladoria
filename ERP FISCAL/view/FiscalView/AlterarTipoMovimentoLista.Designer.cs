@@ -36,9 +36,9 @@
             this.btnConsultar = new System.Windows.Forms.Button();
             this.btnAlteraCodMovimento = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnSelecionarTudo = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnAlterarSelecionados = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnSelecionarTudo = new System.Windows.Forms.Button();
             this.txtCountRows = new System.Windows.Forms.TextBox();
             this.dvgIDMovs = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.gpFiltro.SuspendLayout();
@@ -106,7 +106,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.btnAlterarSelecionados);
             this.groupBox1.Controls.Add(this.button1);
@@ -119,16 +120,16 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
-            // btnSelecionarTudo
+            // btnAlterarSelecionados
             // 
-            this.btnSelecionarTudo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSelecionarTudo.Location = new System.Drawing.Point(23, 25);
-            this.btnSelecionarTudo.Name = "btnSelecionarTudo";
-            this.btnSelecionarTudo.Size = new System.Drawing.Size(151, 34);
-            this.btnSelecionarTudo.TabIndex = 9;
-            this.btnSelecionarTudo.Text = "Selecionar  tudo";
-            this.btnSelecionarTudo.UseVisualStyleBackColor = true;
-            this.btnSelecionarTudo.Click += new System.EventHandler(this.btnSelecionarTudo_Click);
+            this.btnAlterarSelecionados.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAlterarSelecionados.Location = new System.Drawing.Point(205, 68);
+            this.btnAlterarSelecionados.Name = "btnAlterarSelecionados";
+            this.btnAlterarSelecionados.Size = new System.Drawing.Size(151, 34);
+            this.btnAlterarSelecionados.TabIndex = 8;
+            this.btnAlterarSelecionados.Text = "Alt. Selecionados";
+            this.btnAlterarSelecionados.UseVisualStyleBackColor = true;
+            this.btnAlterarSelecionados.Click += new System.EventHandler(this.btnAlterarSelecionados_Click);
             // 
             // button1
             // 
@@ -141,16 +142,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btnAlterarSelecionados
+            // btnSelecionarTudo
             // 
-            this.btnAlterarSelecionados.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAlterarSelecionados.Location = new System.Drawing.Point(205, 68);
-            this.btnAlterarSelecionados.Name = "btnAlterarSelecionados";
-            this.btnAlterarSelecionados.Size = new System.Drawing.Size(151, 34);
-            this.btnAlterarSelecionados.TabIndex = 8;
-            this.btnAlterarSelecionados.Text = "Alt. Selecionados";
-            this.btnAlterarSelecionados.UseVisualStyleBackColor = true;
-            this.btnAlterarSelecionados.Click += new System.EventHandler(this.btnAlterarSelecionados_Click);
+            this.btnSelecionarTudo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSelecionarTudo.Location = new System.Drawing.Point(23, 25);
+            this.btnSelecionarTudo.Name = "btnSelecionarTudo";
+            this.btnSelecionarTudo.Size = new System.Drawing.Size(151, 34);
+            this.btnSelecionarTudo.TabIndex = 9;
+            this.btnSelecionarTudo.Text = "Selecionar  tudo";
+            this.btnSelecionarTudo.UseVisualStyleBackColor = true;
+            this.btnSelecionarTudo.Click += new System.EventHandler(this.btnSelecionarTudo_Click);
             // 
             // txtCountRows
             // 

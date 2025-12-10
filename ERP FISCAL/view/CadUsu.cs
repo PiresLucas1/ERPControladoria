@@ -1,15 +1,12 @@
-﻿using ERP_FISCAL.Controller.SegCadastroController;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using ERP_FISCAL.Controller.SegCadastroController;
 using ERP_FISCAL.view.UIComponentes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization.Configuration;
+using DataTable = System.Data.DataTable;
+
 
 namespace ERP_FISCAL.view
 {
@@ -78,10 +75,26 @@ namespace ERP_FISCAL.view
             SegCadastroController segCadastroController = new SegCadastroController();
             DataTable retorno =  await segCadastroController.ListaDados("%",2);
     
-            SegAdicionarDado seg = new SegAdicionarDado(retorno, "Nome Perfil");
+            SegAdicionarDado seg = new SegAdicionarDado(retorno, 2,"Nome Perfil");
 
             seg.ShowDialog();
 
+        }
+
+        public static async Task<DataTable> ListaInformacao(string parametro, int tipoPesquisa)
+        {
+            SegCadastroController segCadastroController = new SegCadastroController();
+            if (tipoPesquisa == 2)
+            {
+                DataTable retorno = await segCadastroController.ListaDados("%", 2);
+                return retorno;
+            }
+            if(tipoPesquisa == 3)
+            {
+                DataTable retorno = await segCadastroController.ListaDados("%", 3);
+                return retorno;
+            }
+            return null;
         }
 
         private async void btnAdicionarMenu_Click(object sender, EventArgs e)
@@ -89,7 +102,7 @@ namespace ERP_FISCAL.view
             SegCadastroController segCadastroController = new SegCadastroController();
             DataTable retorno = await segCadastroController.ListaDados("%", 3);
 
-            SegAdicionarDado seg = new SegAdicionarDado(retorno);
+            SegAdicionarDado seg = new SegAdicionarDado(retorno, 1);
 
             seg.ShowDialog();
         }
