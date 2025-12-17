@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>49</ApplicationRevision>
+    <ApplicationRevision>50</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -95,6 +95,9 @@
     </Reference>
     <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
@@ -197,6 +200,12 @@
     </Compile>
     <Compile Include="view\FiscalView\AlteraTipoMovimento.Designer.cs">
       <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\FiscalView\ExportaXml.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\FiscalView\ExportaXml.Designer.cs">
+      <DependentUpon>ExportaXml.cs</DependentUpon>
     </Compile>
     <Compile Include="view\PrimeiroLogin.cs">
       <SubType>Form</SubType>
@@ -305,6 +314,9 @@
     <EmbeddedResource Include="view\FiscalView\AlteraTipoMovimento.resx">
       <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\FiscalView\ExportaXml.resx">
+      <DependentUpon>ExportaXml.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PrimeiroLogin.resx">
       <DependentUpon>PrimeiroLogin.cs</DependentUpon>

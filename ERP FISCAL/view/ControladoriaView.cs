@@ -333,7 +333,10 @@ namespace ERP_FISCAL.view
             }
         }
 
+        private void xMLPostoDoLagoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }
 
