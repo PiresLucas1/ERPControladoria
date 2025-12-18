@@ -17,7 +17,7 @@ namespace ERP_FISCAL
         public DataTable ObterNotas(DateTime dataInicio, DateTime dataFim, int codColigada, int bitExisteErp)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();            
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);            
 
             try
             {
@@ -55,7 +55,7 @@ namespace ERP_FISCAL
         public DataTable FindUniqueNote(string noteId)
         {
             DataTable table = new DataTable();
-            ConexaoBancoDeDadosDfe connectionDataBase = new ConexaoBancoDeDadosDfe();
+            DbConexaoConfig connectionDataBase = new DbConexaoConfig(DbName.DfeTotvs);  
 
             using (SqlConnection conn = connectionDataBase.AbrirConexao())
             {

@@ -16,11 +16,10 @@ namespace ERP_FISCAL.Repositories.RepositoriesAlterarContaDebito
         public async Task<DataTable> PesquisarNotas(DateTime dataInicio, DateTime dataFim)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
-            string stringDeConexao = conexaoBanco.GetConexaoString();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);            
             try
             {
-                using (SqlConnection conn = new SqlConnection(stringDeConexao)) // <<< apenas cria
+                using (SqlConnection conn = conexaoBanco.AbrirConexao()) // <<< apenas cria
                 {
                     await conn.OpenAsync(); // <<< abre uma vez aqui
 

@@ -1,10 +1,6 @@
-﻿using SeuProjeto;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ERP_FISCAL.Repositories.SegCadastroRepositories
@@ -14,13 +10,11 @@ namespace ERP_FISCAL.Repositories.SegCadastroRepositories
         public async Task<DataTable> ListaDadosPorNome(string nomeUsuario)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
-            string stringDeConexao = conexaoBanco.GetConexaoString();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);            
             try
             {
-                using (SqlConnection conn = new SqlConnection(stringDeConexao)) // <<< apenas cria
-                {
-                    await conn.OpenAsync(); // <<< abre uma vez aqui
+                using (SqlConnection conn = conexaoBanco.AbrirConexao()) 
+                {                    
 
                     using (SqlCommand cmd = new SqlCommand("dbo.uspSegConsultarUsuario", conn))
                     {
@@ -44,13 +38,11 @@ namespace ERP_FISCAL.Repositories.SegCadastroRepositories
         public async Task<DataTable> ListaDadosPorPerfil(string nomeUsuario)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
-            string stringDeConexao = conexaoBanco.GetConexaoString();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);            
             try
             {
-                using (SqlConnection conn = new SqlConnection(stringDeConexao)) // <<< apenas cria
-                {
-                    await conn.OpenAsync(); // <<< abre uma vez aqui
+                using (SqlConnection conn = conexaoBanco.AbrirConexao()) 
+                {                    
 
                     using (SqlCommand cmd = new SqlCommand("dbo.uspSegConsultarUsuarioPerfil", conn))
                     {
@@ -74,13 +66,11 @@ namespace ERP_FISCAL.Repositories.SegCadastroRepositories
         public async Task<DataTable> ListaDadosPorMenu(string nomeUsuario)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
-            string stringDeConexao = conexaoBanco.GetConexaoString();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);            
             try
             {
-                using (SqlConnection conn = new SqlConnection(stringDeConexao)) // <<< apenas cria
-                {
-                    await conn.OpenAsync(); // <<< abre uma vez aqui
+                using (SqlConnection conn = conexaoBanco.AbrirConexao()) 
+                {                    
 
                     using (SqlCommand cmd = new SqlCommand("dbo.uspSegConsultarMenu", conn))
                     {
@@ -103,13 +93,11 @@ namespace ERP_FISCAL.Repositories.SegCadastroRepositories
         public async Task<DataTable> InserirPerfil(string nomePerfil)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
-            string stringDeConexao = conexaoBanco.GetConexaoString();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);            
             try
             {
-                using (SqlConnection conn = new SqlConnection(stringDeConexao)) // <<< apenas cria
-                {
-                    await conn.OpenAsync(); // <<< abre uma vez aqui
+                using (SqlConnection conn = conexaoBanco.AbrirConexao()) 
+                {                    
 
                     using (SqlCommand cmd = new SqlCommand("dbo.uspSegInserirUsuarioPerfil", conn))
                     {
@@ -132,13 +120,11 @@ namespace ERP_FISCAL.Repositories.SegCadastroRepositories
         public async Task<DataTable> InserirMenu(string nomeMenu, string nomeAplicacao)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
-            string stringDeConexao = conexaoBanco.GetConexaoString();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);            
             try
             {
-                using (SqlConnection conn = new SqlConnection(stringDeConexao)) // <<< apenas cria
-                {
-                    await conn.OpenAsync(); // <<< abre uma vez aqui
+                using (SqlConnection conn = conexaoBanco.AbrirConexao()) 
+                {                    
 
                     using (SqlCommand cmd = new SqlCommand("dbo.uspSegInserirMenu", conn))
                     {
@@ -163,13 +149,11 @@ namespace ERP_FISCAL.Repositories.SegCadastroRepositories
         public async Task<DataTable> ConsultaUnicoUsuario(string nomeUsuario)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
-            string stringDeConexao = conexaoBanco.GetConexaoString();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);            
             try
             {
-                using (SqlConnection conn = new SqlConnection(stringDeConexao)) // <<< apenas cria
-                {
-                    await conn.OpenAsync(); // <<< abre uma vez aqui
+                using (SqlConnection conn = conexaoBanco.AbrirConexao()) 
+                {                    
                     using (SqlCommand cmd = new SqlCommand("dbo.uspSegConsultarUnicoUsuario", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -190,11 +174,11 @@ namespace ERP_FISCAL.Repositories.SegCadastroRepositories
         public async Task<DataTable> InserirUsuario(string nomeUsuario, int perfilUsuario)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
-            string stringDeConexao = conexaoBanco.GetConexaoString();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
+            
             try
             {
-                using (SqlConnection conn = new SqlConnection(stringDeConexao)) // <<< apenas cria
+                using (SqlConnection conn = conexaoBanco.AbrirConexao()) // <<< apenas cria
                 {
                     await conn.OpenAsync(); // <<< abre uma vez aqui
                     using (SqlCommand cmd = new SqlCommand("dbo.uspSegInserirUsuario", conn))

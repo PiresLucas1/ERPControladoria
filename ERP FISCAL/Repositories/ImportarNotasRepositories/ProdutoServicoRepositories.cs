@@ -14,7 +14,7 @@ namespace ERP_FISCAL.Repositories
         public DataTable EncontrarTodos(int codColigada)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
             try
             {
 

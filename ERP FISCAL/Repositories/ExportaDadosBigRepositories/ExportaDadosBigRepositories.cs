@@ -17,7 +17,7 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
         public async Task<DataTable> BuscaNotasDoBigNaoEncontradoNaTotvs(DateTime dataInicio, DateTime dataFim, int filial, char conferida)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.DfeTotvs);
 
             try
             {

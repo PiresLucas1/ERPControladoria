@@ -14,7 +14,7 @@ namespace ERP_FISCAL.Repositories.ExportarXmlRepositories
         public async Task<DataTable> ExportaXmlPostoLago(DateTime dataInicio, DateTime dataFim, string localExportacao, string modeloDocumento, int exportarTudo)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosWebPosto conexaoBanco = new ConexaoBancoDeDadosWebPosto();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.WebPosto);
 
             try
             {

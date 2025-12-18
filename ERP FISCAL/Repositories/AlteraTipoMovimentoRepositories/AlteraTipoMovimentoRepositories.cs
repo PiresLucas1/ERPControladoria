@@ -16,7 +16,7 @@ namespace ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories
         public async Task<DataTable> ConsultaMovimentoTotvs(int codMovimento, int coligada)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
 
             try
             {

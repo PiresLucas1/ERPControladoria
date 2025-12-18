@@ -1,6 +1,4 @@
-﻿using dotenv.net;
-using dotenv.net.Utilities;
-using System;
+﻿using System;
 using System.Data.SqlClient;
 
 

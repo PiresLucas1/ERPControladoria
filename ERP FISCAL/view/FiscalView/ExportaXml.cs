@@ -16,7 +16,7 @@ namespace ERP_FISCAL.view.FiscalView
             string placeholderText = "Ex: \\\\192.168.30.48\\xml\\2025 - 11 - 21_a_26\\";
             tbLocalExport.Text = placeholderText;
             tbLocalExport.ForeColor = SystemColors.GrayText;
-            AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
+            //AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
         }
         public void carregaComboBox()
         {

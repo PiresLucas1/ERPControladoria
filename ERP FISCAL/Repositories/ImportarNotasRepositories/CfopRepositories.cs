@@ -17,7 +17,7 @@ namespace ERP_FISCAL.repositories
         public DataTable EncontrarComOcorrencia(string valor, int codColigada)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
 
             try
             {
@@ -61,7 +61,7 @@ namespace ERP_FISCAL.repositories
         public DataTable EncontrarTodos(int codColigada)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
 
             try
             {
@@ -97,7 +97,7 @@ namespace ERP_FISCAL.repositories
         public DataTable PegaValorPeloCodigo(string valor)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
 
             try
             {
