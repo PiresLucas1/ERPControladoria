@@ -31,6 +31,10 @@ namespace ERP_FISCAL.view
             InitializeComponent();
             cbFiltroSaldo.Items.Add("IDProduto");
             cbFiltroSaldo.Items.Add("Num.doc");
+            AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
+            cbFilial.Items.Add("Todas");
+            cbFilial.Items.Add("1 - Farma");
+            cbFilial.Items.Add("9 - Alimentar");
         }
         private async void Button1_Click(object sender, EventArgs e)
         {
@@ -127,6 +131,7 @@ namespace ERP_FISCAL.view
             dvgConsultaNotas.Columns["Qtd para Devolver"].DefaultCellStyle.ForeColor = Color.Red;
             
             dvgConsultaNotas.Columns["colSelecionado"].Visible = false;
+            dvgConsultaNotas.Columns["IDPessoaEmitente"].Visible = false;
 
 
             dvgConsultaNotas.RowHeadersVisible = false;
@@ -678,5 +683,32 @@ namespace ERP_FISCAL.view
         {
             dvgItensSelecionados.DataSource = null;
         }
+
+        private void cbFilial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataTable dt = (DataTable)dvgConsultaNotas.DataSource;
+            switch (cbFilial.SelectedIndex)
+            {
+
+                case 0:                    
+                    dt.DefaultView.RowFilter = "";
+                    break;
+
+                case 1:
+                    dt.DefaultView.RowFilter = "IDPessoaEmitente = 1";
+                    break;
+
+                case 2:
+                    dt.DefaultView.RowFilter = "IDPessoaEmitente = 9";
+                    break;
+            }
+           
+        }
     }
 }
+
+
+//if (tabela.Columns.Contains("NomeDaColuna"))
+//{
+//    tabela.Columns.Remove("NomeDaColuna");
+//}

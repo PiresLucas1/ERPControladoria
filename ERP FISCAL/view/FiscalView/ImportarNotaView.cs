@@ -45,6 +45,7 @@ namespace ERP_FISCAL
         {
             InitializeComponent();
             this.Resize += new System.EventHandler(this.ResizeForm);
+            AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
 
         }
 

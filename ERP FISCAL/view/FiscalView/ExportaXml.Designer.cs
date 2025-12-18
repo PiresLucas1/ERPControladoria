@@ -48,6 +48,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BackColor = System.Drawing.SystemColors.Menu;
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.richTextBox1.Enabled = false;
             this.richTextBox1.Font = new System.Drawing.Font("Sans Serif Collection", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.ForeColor = System.Drawing.SystemColors.InfoText;
             this.richTextBox1.Location = new System.Drawing.Point(208, 37);
@@ -110,7 +112,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(43, 170);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 38);
+            this.label1.Size = new System.Drawing.Size(109, 25);
             this.label1.TabIndex = 8;
             this.label1.Text = "Data Início:";
             // 
@@ -130,7 +132,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(43, 298);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(294, 38);
+            this.label3.Size = new System.Drawing.Size(196, 25);
             this.label3.TabIndex = 10;
             this.label3.Text = "Local de Exportação:";
             // 

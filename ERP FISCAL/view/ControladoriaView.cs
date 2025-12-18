@@ -1,5 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Spreadsheet;
 using ERP_FISCAL.Controller.SegCadastroController;
+using ERP_FISCAL.Utils;
 using ERP_FISCAL.view.ContabilView;
 using ERP_FISCAL.view.FiscalView;
 using System;
@@ -47,6 +48,10 @@ namespace ERP_FISCAL.view
 
             Version versaoAssembly = Assembly.GetExecutingAssembly().GetName().Version;
             txtVersao.Text = $"Versão: {versaoAssembly}";
+
+            
+            AplicarFonte.AplicarFonteForm(this,new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
+
 
         }
         private async void Portal_Shown(object sender, EventArgs e)
@@ -130,8 +135,7 @@ namespace ERP_FISCAL.view
 
             if (!FormAberto(typeof(ImportarNotaView)))
             {
-                ImportarNotaView eRPFiscal = new ImportarNotaView();
-                eRPFiscal.MdiParent = this;
+                ImportarNotaView eRPFiscal = new ImportarNotaView();                
                 eRPFiscal.Show();
 
             }
@@ -141,8 +145,7 @@ namespace ERP_FISCAL.view
         {
             if(!FormAberto(typeof(ExportaDadosBig)))
             {
-                ExportaDadosBig exportaDadosBig = new ExportaDadosBig();
-                exportaDadosBig.MdiParent = this;
+                ExportaDadosBig exportaDadosBig = new ExportaDadosBig();                
                 exportaDadosBig.Show();
             }
 
@@ -202,8 +205,7 @@ namespace ERP_FISCAL.view
         {
             if (!FormAberto(typeof(ConsultaSaldoNotasFiscais)))
             {
-                ConsultaSaldoNotasFiscais alteraTipoMovimento = new ConsultaSaldoNotasFiscais();
-                alteraTipoMovimento.MdiParent = this;
+                ConsultaSaldoNotasFiscais alteraTipoMovimento = new ConsultaSaldoNotasFiscais();                
                 alteraTipoMovimento.Show();
             }
         }
@@ -212,8 +214,7 @@ namespace ERP_FISCAL.view
         {
             if (!FormAberto(typeof(ImportacaoRecebimento)))
             {
-                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
-                importacaoRecebimento.MdiParent = this;
+                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();                
                 importacaoRecebimento.Show();
             }
             
@@ -223,8 +224,7 @@ namespace ERP_FISCAL.view
         {
             if (!FormAberto(typeof(ImportacaoRecebimento)))
             {
-                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
-                importacaoRecebimento.MdiParent = this;
+                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();                
                 importacaoRecebimento.Show();
             }
         }
@@ -253,8 +253,7 @@ namespace ERP_FISCAL.view
         {
             if (!FormAberto(typeof(AlteraTipoMovimento)))
             {
-                AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
-                alteraTipoMovimento.MdiParent = this;
+                AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();                
                 alteraTipoMovimento.Show();
             }
         }
@@ -263,8 +262,7 @@ namespace ERP_FISCAL.view
         {
             if (!FormAberto(typeof(AlterarTipoMovimentoLista)))
             {
-                AlterarTipoMovimentoLista alteraTipoMovimentoLista = new AlterarTipoMovimentoLista();
-                alteraTipoMovimentoLista.MdiParent = this;
+                AlterarTipoMovimentoLista alteraTipoMovimentoLista = new AlterarTipoMovimentoLista();                
                 alteraTipoMovimentoLista.Show();
             }
         }
@@ -274,11 +272,8 @@ namespace ERP_FISCAL.view
             if(!FormAberto(typeof(CadUsu)))
             {
                 SegCadastroController segCadastroController = new SegCadastroController();
-
                 DataTable dt = await segCadastroController.ListaDados("%", 1);
-
-                CadUsu cadastroUsuario = new CadUsu(dt);
-                cadastroUsuario.MdiParent = this;
+                CadUsu cadastroUsuario = new CadUsu(dt);                
                 cadastroUsuario.Show();
             }
         }
@@ -347,11 +342,31 @@ namespace ERP_FISCAL.view
         {
             if (!FormAberto(typeof(ExportaXml)))
             {
-                ExportaXml exportaXml = new ExportaXml();
-                exportaXml.MdiParent= this;
+                ExportaXml exportaXml = new ExportaXml();                
                 exportaXml.Show();
             }
             
+        }
+
+        private void grandeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alteraTamanhoFonte(12);
+        }
+
+        private void médioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alteraTamanhoFonte(10);
+        }
+
+        private void pequenoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alteraTamanhoFonte(8);
+        }
+
+        public void alteraTamanhoFonte(int valor)
+        {
+            Properties.Settings.Default.FonteTamanho = valor;
+            Properties.Settings.Default.Save();
         }
     }
 }

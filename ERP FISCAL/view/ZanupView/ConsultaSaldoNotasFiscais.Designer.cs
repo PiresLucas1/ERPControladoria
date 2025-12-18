@@ -39,18 +39,19 @@
             this.btGerarNotaFiscal = new System.Windows.Forms.Button();
             this.tabNavegacaoAba = new System.Windows.Forms.TabControl();
             this.tabConsultaItens = new System.Windows.Forms.TabPage();
-            this.dvgConsultaNotas = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.tabItensSelecionado = new System.Windows.Forms.TabPage();
-            this.dvgItensSelecionados = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
             this.txtCountNotas = new System.Windows.Forms.TextBox();
             this.btnLimparTela = new System.Windows.Forms.Button();
             this.btnSelecionarTudo = new System.Windows.Forms.Button();
+            this.dvgConsultaNotas = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.dvgItensSelecionados = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.cbFilial = new System.Windows.Forms.ComboBox();
             this.gbFiltro.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabNavegacaoAba.SuspendLayout();
             this.tabConsultaItens.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).BeginInit();
             this.tabItensSelecionado.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dvgItensSelecionados)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,6 +71,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbFilial);
             this.groupBox1.Controls.Add(this.chkExibirRelacionados);
             this.groupBox1.Controls.Add(this.txtFiltro);
             this.groupBox1.Controls.Add(this.lbFiltroSaldo);
@@ -79,7 +81,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(523, 142);
+            this.groupBox1.Size = new System.Drawing.Size(637, 142);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro Prioritário";
@@ -87,7 +89,7 @@
             // chkExibirRelacionados
             // 
             this.chkExibirRelacionados.AutoSize = true;
-            this.chkExibirRelacionados.Location = new System.Drawing.Point(144, 110);
+            this.chkExibirRelacionados.Location = new System.Drawing.Point(218, 108);
             this.chkExibirRelacionados.Name = "chkExibirRelacionados";
             this.chkExibirRelacionados.Size = new System.Drawing.Size(206, 24);
             this.chkExibirRelacionados.TabIndex = 3;
@@ -100,7 +102,7 @@
             this.txtFiltro.Location = new System.Drawing.Point(10, 108);
             this.txtFiltro.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(114, 26);
+            this.txtFiltro.Size = new System.Drawing.Size(156, 26);
             this.txtFiltro.TabIndex = 2;
             this.txtFiltro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFiltro_KeyPress);
             // 
@@ -115,7 +117,7 @@
             // 
             // btnListaNotas
             // 
-            this.btnListaNotas.Location = new System.Drawing.Point(403, 98);
+            this.btnListaNotas.Location = new System.Drawing.Point(504, 98);
             this.btnListaNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnListaNotas.Name = "btnListaNotas";
             this.btnListaNotas.Size = new System.Drawing.Size(114, 36);
@@ -130,7 +132,7 @@
             this.cbFiltroSaldo.Location = new System.Drawing.Point(10, 46);
             this.cbFiltroSaldo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbFiltroSaldo.Name = "cbFiltroSaldo";
-            this.cbFiltroSaldo.Size = new System.Drawing.Size(114, 28);
+            this.cbFiltroSaldo.Size = new System.Drawing.Size(156, 28);
             this.cbFiltroSaldo.TabIndex = 1;
             this.cbFiltroSaldo.SelectedIndexChanged += new System.EventHandler(this.cbFiltroSaldo_SelectedIndexChanged);
             // 
@@ -185,24 +187,6 @@
             this.tabConsultaItens.Text = "Consulta Itens";
             this.tabConsultaItens.UseVisualStyleBackColor = true;
             // 
-            // dvgConsultaNotas
-            // 
-            this.dvgConsultaNotas.AllowUserToAddRows = false;
-            this.dvgConsultaNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dvgConsultaNotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgConsultaNotas.Location = new System.Drawing.Point(6, 6);
-            this.dvgConsultaNotas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dvgConsultaNotas.Name = "dvgConsultaNotas";
-            this.dvgConsultaNotas.RowHeadersWidth = 62;
-            this.dvgConsultaNotas.RowTemplate.Height = 28;
-            this.dvgConsultaNotas.Size = new System.Drawing.Size(1137, 539);
-            this.dvgConsultaNotas.TabIndex = 0;
-            this.dvgConsultaNotas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgConsultaNotas_CellClick);
-            this.dvgConsultaNotas.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dvgConsultaNotas_CellFormatting);
-            this.dvgConsultaNotas.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dvgConsultaNotas_EditingControlShowing);
-            // 
             // tabItensSelecionado
             // 
             this.tabItensSelecionado.Controls.Add(this.dvgItensSelecionados);
@@ -214,25 +198,6 @@
             this.tabItensSelecionado.TabIndex = 1;
             this.tabItensSelecionado.Text = "Itens Selecionados";
             this.tabItensSelecionado.UseVisualStyleBackColor = true;
-            // 
-            // dvgItensSelecionados
-            // 
-            this.dvgItensSelecionados.AllowUserToAddRows = false;
-            this.dvgItensSelecionados.AllowUserToResizeRows = false;
-            this.dvgItensSelecionados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dvgItensSelecionados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgItensSelecionados.Location = new System.Drawing.Point(6, 6);
-            this.dvgItensSelecionados.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dvgItensSelecionados.Name = "dvgItensSelecionados";
-            this.dvgItensSelecionados.RowHeadersVisible = false;
-            this.dvgItensSelecionados.RowHeadersWidth = 62;
-            this.dvgItensSelecionados.RowTemplate.Height = 28;
-            this.dvgItensSelecionados.Size = new System.Drawing.Size(1136, 539);
-            this.dvgItensSelecionados.TabIndex = 0;
-            this.dvgItensSelecionados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellClick);
-            this.dvgItensSelecionados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellDoubleClick);
             // 
             // txtCountNotas
             // 
@@ -271,6 +236,52 @@
             this.btnSelecionarTudo.UseVisualStyleBackColor = true;
             this.btnSelecionarTudo.Click += new System.EventHandler(this.btnSelecionarTudo_Click);
             // 
+            // dvgConsultaNotas
+            // 
+            this.dvgConsultaNotas.AllowUserToAddRows = false;
+            this.dvgConsultaNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dvgConsultaNotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvgConsultaNotas.Location = new System.Drawing.Point(6, 6);
+            this.dvgConsultaNotas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dvgConsultaNotas.Name = "dvgConsultaNotas";
+            this.dvgConsultaNotas.RowHeadersWidth = 62;
+            this.dvgConsultaNotas.RowTemplate.Height = 28;
+            this.dvgConsultaNotas.Size = new System.Drawing.Size(1137, 539);
+            this.dvgConsultaNotas.TabIndex = 0;
+            this.dvgConsultaNotas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgConsultaNotas_CellClick);
+            this.dvgConsultaNotas.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dvgConsultaNotas_CellFormatting);
+            this.dvgConsultaNotas.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dvgConsultaNotas_EditingControlShowing);
+            // 
+            // dvgItensSelecionados
+            // 
+            this.dvgItensSelecionados.AllowUserToAddRows = false;
+            this.dvgItensSelecionados.AllowUserToResizeRows = false;
+            this.dvgItensSelecionados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dvgItensSelecionados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dvgItensSelecionados.Location = new System.Drawing.Point(6, 6);
+            this.dvgItensSelecionados.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dvgItensSelecionados.Name = "dvgItensSelecionados";
+            this.dvgItensSelecionados.RowHeadersVisible = false;
+            this.dvgItensSelecionados.RowHeadersWidth = 62;
+            this.dvgItensSelecionados.RowTemplate.Height = 28;
+            this.dvgItensSelecionados.Size = new System.Drawing.Size(1136, 539);
+            this.dvgItensSelecionados.TabIndex = 0;
+            this.dvgItensSelecionados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellClick);
+            this.dvgItensSelecionados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellDoubleClick);
+            // 
+            // cbFilial
+            // 
+            this.cbFilial.FormattingEnabled = true;
+            this.cbFilial.Location = new System.Drawing.Point(218, 46);
+            this.cbFilial.Name = "cbFilial";
+            this.cbFilial.Size = new System.Drawing.Size(197, 28);
+            this.cbFilial.TabIndex = 6;
+            this.cbFilial.SelectedIndexChanged += new System.EventHandler(this.cbFilial_SelectedIndexChanged);
+            // 
             // ConsultaSaldoNotasFiscais
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -291,8 +302,8 @@
             this.groupBox1.PerformLayout();
             this.tabNavegacaoAba.ResumeLayout(false);
             this.tabConsultaItens.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).EndInit();
             this.tabItensSelecionado.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dvgItensSelecionados)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -318,5 +329,6 @@
         private System.Windows.Forms.TextBox txtCountNotas;
         private System.Windows.Forms.Button btnLimparTela;
         private System.Windows.Forms.Button btnSelecionarTudo;
+        private System.Windows.Forms.ComboBox cbFilial;
     }
 }

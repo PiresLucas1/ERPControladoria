@@ -49,6 +49,10 @@
             this.Opções = new System.Windows.Forms.ToolStripMenuItem();
             this.alterarCorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastrarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alterarTamanhoDaFonteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pequenoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.médioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.grandeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarTop.SuspendLayout();
@@ -66,7 +70,7 @@
             this.ZanupMenu});
             this.menuBarTop.Location = new System.Drawing.Point(0, 0);
             this.menuBarTop.Name = "menuBarTop";
-            this.menuBarTop.Size = new System.Drawing.Size(1830, 33);
+            this.menuBarTop.Size = new System.Drawing.Size(1840, 33);
             this.menuBarTop.TabIndex = 0;
             this.menuBarTop.Text = "menuStrip1";
             // 
@@ -190,9 +194,9 @@
             this.txtVersao,
             this.Opções,
             this.toolStripMenuItem4});
-            this.menuBarBottom.Location = new System.Drawing.Point(0, 822);
+            this.menuBarBottom.Location = new System.Drawing.Point(0, 842);
             this.menuBarBottom.Name = "menuBarBottom";
-            this.menuBarBottom.Size = new System.Drawing.Size(1830, 33);
+            this.menuBarBottom.Size = new System.Drawing.Size(1840, 33);
             this.menuBarBottom.TabIndex = 1;
             this.menuBarBottom.Text = "menuStrip2";
             // 
@@ -207,7 +211,8 @@
             // 
             this.Opções.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alterarCorToolStripMenuItem,
-            this.cadastrarUsuarioToolStripMenuItem});
+            this.cadastrarUsuarioToolStripMenuItem,
+            this.alterarTamanhoDaFonteToolStripMenuItem});
             this.Opções.Name = "Opções";
             this.Opções.Size = new System.Drawing.Size(89, 29);
             this.Opções.Text = "Opções";
@@ -215,16 +220,47 @@
             // alterarCorToolStripMenuItem
             // 
             this.alterarCorToolStripMenuItem.Name = "alterarCorToolStripMenuItem";
-            this.alterarCorToolStripMenuItem.Size = new System.Drawing.Size(252, 34);
+            this.alterarCorToolStripMenuItem.Size = new System.Drawing.Size(318, 34);
             this.alterarCorToolStripMenuItem.Text = "Alterar Cor";
             this.alterarCorToolStripMenuItem.Click += new System.EventHandler(this.alterarCorToolStripMenuItem_Click);
             // 
             // cadastrarUsuarioToolStripMenuItem
             // 
             this.cadastrarUsuarioToolStripMenuItem.Name = "cadastrarUsuarioToolStripMenuItem";
-            this.cadastrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(252, 34);
+            this.cadastrarUsuarioToolStripMenuItem.Size = new System.Drawing.Size(318, 34);
             this.cadastrarUsuarioToolStripMenuItem.Text = "Cadastrar usuario";
             this.cadastrarUsuarioToolStripMenuItem.Click += new System.EventHandler(this.cadastrarUsuarioToolStripMenuItem_Click);
+            // 
+            // alterarTamanhoDaFonteToolStripMenuItem
+            // 
+            this.alterarTamanhoDaFonteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pequenoToolStripMenuItem,
+            this.médioToolStripMenuItem,
+            this.grandeToolStripMenuItem});
+            this.alterarTamanhoDaFonteToolStripMenuItem.Name = "alterarTamanhoDaFonteToolStripMenuItem";
+            this.alterarTamanhoDaFonteToolStripMenuItem.Size = new System.Drawing.Size(318, 34);
+            this.alterarTamanhoDaFonteToolStripMenuItem.Text = "Alterar Tamanho da Fonte";
+            // 
+            // pequenoToolStripMenuItem
+            // 
+            this.pequenoToolStripMenuItem.Name = "pequenoToolStripMenuItem";
+            this.pequenoToolStripMenuItem.Size = new System.Drawing.Size(183, 34);
+            this.pequenoToolStripMenuItem.Text = "Pequeno";
+            this.pequenoToolStripMenuItem.Click += new System.EventHandler(this.pequenoToolStripMenuItem_Click);
+            // 
+            // médioToolStripMenuItem
+            // 
+            this.médioToolStripMenuItem.Name = "médioToolStripMenuItem";
+            this.médioToolStripMenuItem.Size = new System.Drawing.Size(183, 34);
+            this.médioToolStripMenuItem.Text = "Médio";
+            this.médioToolStripMenuItem.Click += new System.EventHandler(this.médioToolStripMenuItem_Click);
+            // 
+            // grandeToolStripMenuItem
+            // 
+            this.grandeToolStripMenuItem.Name = "grandeToolStripMenuItem";
+            this.grandeToolStripMenuItem.Size = new System.Drawing.Size(183, 34);
+            this.grandeToolStripMenuItem.Text = "Grande";
+            this.grandeToolStripMenuItem.Click += new System.EventHandler(this.grandeToolStripMenuItem_Click);
             // 
             // toolStripMenuItem4
             // 
@@ -248,13 +284,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1830, 855);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ClientSize = new System.Drawing.Size(1840, 875);
             this.Controls.Add(this.menuBarBottom);
             this.Controls.Add(this.menuBarTop);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuBarTop;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Portal";
@@ -295,5 +330,9 @@
         private System.Windows.Forms.ToolStripMenuItem cadastrarUsuarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportarXMLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xMLPostoDoLagoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alterarTamanhoDaFonteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pequenoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem médioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem grandeToolStripMenuItem;
     }
 }

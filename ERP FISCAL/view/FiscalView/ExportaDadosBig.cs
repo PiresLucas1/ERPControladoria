@@ -1,6 +1,7 @@
 ﻿using ERP_FISCAL.controller;
 using ERP_FISCAL.Controller.ExportaDadosBigController;
 using ERP_FISCAL.Repositories.ExportaDadosBigRepositories;
+using ERP_FISCAL.Utils;
 using ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela;
 using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
 using System;
@@ -25,6 +26,7 @@ namespace ERP_FISCAL.view
             cbConferida.Items.Add("Todos");
             cbConferida.SelectedIndex = 2;
             txtNumeroNota.Enabled = false;
+            AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
         }
 
         public async Task<DataTable> BuscaDataTable(DateTime dataInicio, DateTime dataFim, int filial, char verificaConferida)

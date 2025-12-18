@@ -34,5 +34,17 @@ namespace ERP_FISCAL.Properties {
                 this["CorCabecalho"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("8")]
+        public int FonteTamanho {
+            get {
+                return ((int)(this["FonteTamanho"]));
+            }
+            set {
+                this["FonteTamanho"] = value;
+            }
+        }
     }
 }

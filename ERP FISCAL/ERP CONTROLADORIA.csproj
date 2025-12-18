@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>50</ApplicationRevision>
+    <ApplicationRevision>52</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -165,6 +165,7 @@
     <Compile Include="Service\UploadFile\UploadFileService.cs" />
     <Compile Include="Service\BlingService.ts\CriaNotaBlingService.cs" />
     <Compile Include="Utils\AgrupaProdutosDaMesmaNota.cs" />
+    <Compile Include="Utils\AplicarFonte.cs" />
     <Compile Include="Utils\GetToken.cs" />
     <Compile Include="Utils\MascaraDeColuna.cs" />
     <Compile Include="Controller\ImportarNotasController\ProdutoServicoController.cs" />

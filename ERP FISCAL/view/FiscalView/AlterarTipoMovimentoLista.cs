@@ -1,4 +1,5 @@
 ﻿using ERP_FISCAL.Controller.AlteraTipoMovimentoController;
+using ERP_FISCAL.Utils;
 using ERP_FISCAL.view.UIComponentes.UIDialog.AlteraUnicoItemEmBloco;
 using ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco;
 using ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela;
@@ -20,6 +21,7 @@ namespace ERP_FISCAL.view.FiscalView
         public AlterarTipoMovimentoLista()
         {
             InitializeComponent();
+            AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
         }
 
         private async void btnConsultar_Click(object sender, EventArgs e)
