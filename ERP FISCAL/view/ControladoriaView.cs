@@ -130,7 +130,8 @@ namespace ERP_FISCAL.view
 
             if (!FormAberto(typeof(ImportarNotaView)))
             {
-               ImportarNotaView eRPFiscal = new ImportarNotaView();
+                ImportarNotaView eRPFiscal = new ImportarNotaView();
+                eRPFiscal.MdiParent = this;
                 eRPFiscal.Show();
 
             }
@@ -141,6 +142,7 @@ namespace ERP_FISCAL.view
             if(!FormAberto(typeof(ExportaDadosBig)))
             {
                 ExportaDadosBig exportaDadosBig = new ExportaDadosBig();
+                exportaDadosBig.MdiParent = this;
                 exportaDadosBig.Show();
             }
 
@@ -201,6 +203,7 @@ namespace ERP_FISCAL.view
             if (!FormAberto(typeof(ConsultaSaldoNotasFiscais)))
             {
                 ConsultaSaldoNotasFiscais alteraTipoMovimento = new ConsultaSaldoNotasFiscais();
+                alteraTipoMovimento.MdiParent = this;
                 alteraTipoMovimento.Show();
             }
         }
@@ -210,6 +213,7 @@ namespace ERP_FISCAL.view
             if (!FormAberto(typeof(ImportacaoRecebimento)))
             {
                 ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
+                importacaoRecebimento.MdiParent = this;
                 importacaoRecebimento.Show();
             }
             
@@ -220,6 +224,7 @@ namespace ERP_FISCAL.view
             if (!FormAberto(typeof(ImportacaoRecebimento)))
             {
                 ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
+                importacaoRecebimento.MdiParent = this;
                 importacaoRecebimento.Show();
             }
         }
@@ -249,6 +254,7 @@ namespace ERP_FISCAL.view
             if (!FormAberto(typeof(AlteraTipoMovimento)))
             {
                 AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
+                alteraTipoMovimento.MdiParent = this;
                 alteraTipoMovimento.Show();
             }
         }
@@ -258,6 +264,7 @@ namespace ERP_FISCAL.view
             if (!FormAberto(typeof(AlterarTipoMovimentoLista)))
             {
                 AlterarTipoMovimentoLista alteraTipoMovimentoLista = new AlterarTipoMovimentoLista();
+                alteraTipoMovimentoLista.MdiParent = this;
                 alteraTipoMovimentoLista.Show();
             }
         }
@@ -267,8 +274,11 @@ namespace ERP_FISCAL.view
             if(!FormAberto(typeof(CadUsu)))
             {
                 SegCadastroController segCadastroController = new SegCadastroController();
+
                 DataTable dt = await segCadastroController.ListaDados("%", 1);
+
                 CadUsu cadastroUsuario = new CadUsu(dt);
+                cadastroUsuario.MdiParent = this;
                 cadastroUsuario.Show();
             }
         }
@@ -335,7 +345,13 @@ namespace ERP_FISCAL.view
 
         private void xMLPostoDoLagoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (!FormAberto(typeof(ExportaXml)))
+            {
+                ExportaXml exportaXml = new ExportaXml();
+                exportaXml.MdiParent= this;
+                exportaXml.Show();
+            }
+            
         }
     }
 }

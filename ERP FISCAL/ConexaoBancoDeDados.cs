@@ -300,4 +300,45 @@ namespace SeuProjeto
 
     }
 
-}
+    public class ConexaoBancoDeDadosWebPosto
+    {
+        private readonly string connectionString;        
+
+        public ConexaoBancoDeDadosWebPosto()
+        {
+            connectionString = "Server=dbtotvs\\dbtotvs;Database=PostoLago_WebPosto;Integrated Security=True;";
+            //connectionString = Environment.GetEnvironmentVariable("CONEXAO_BANCO_GESTAOPROCESSOS_SOL");
+        }
+        public string GetConexaoString()
+        {
+            return connectionString;
+        }
+
+        public SqlConnection AbrirConexao()
+        {
+            SqlConnection conexao = new SqlConnection(connectionString);
+
+            try
+            {
+                conexao.Open();
+                Console.WriteLine("Conexão aberta com sucesso!");
+                return conexao;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro ao abrir a conexão: " + ex.Message);
+                throw;
+            }
+        }
+        public void FecharConexao(SqlConnection conexao)
+        {
+            if (conexao != null && conexao.State == System.Data.ConnectionState.Open)
+            {
+                conexao.Close();
+                Console.WriteLine("Conexão fechada.");
+            }
+        }
+
+    }
+
+    }

@@ -141,6 +141,7 @@
   <ItemGroup>
     <Compile Include="Controller\AlteraTipoMovimentoController\AlterarTipoMovimento.cs" />
     <Compile Include="Controller\ConsultaSaldoNotasZanup\ConsultaSaldoNotasZanupController.cs" />
+    <Compile Include="Controller\ExportaXmlController\ExportaXmlController.cs" />
     <Compile Include="Controller\ImportarNotasController\CfopController.cs" />
     <Compile Include="Controller\ContaDebitoFreteController\AlteraContaDebitoController.cs" />
     <Compile Include="Controller\ExportaDadosBigController\ExportaDadosBigController.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="Repositories\ConsultaSaldoNotasZanup\ConsultaSaldoNotasZanupRepositories.cs" />
     <Compile Include="Repositories\ExportaDadosBigRepositories\ExportaDadosBigRepositories.cs" />
     <Compile Include="Repositories\ExportaDadosBigRepositories\RetornoExportaBig.cs" />
+    <Compile Include="Repositories\ExportarXmlRepositories\ExportarXmlRepositorio.cs" />
     <Compile Include="Repositories\RepositoriesAlterarContaDebito\AlteraContaDebitoRepositories.cs" />
     <Compile Include="Repositories\SegCadastroRepositories\SegCadastroRepositories.cs" />
     <Compile Include="Service\BlingService.ts\BlingService.cs" />

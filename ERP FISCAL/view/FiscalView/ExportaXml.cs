@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using ERP_FISCAL.Controller.ExportaXmlController;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ERP_FISCAL.view.FiscalView
@@ -15,6 +11,31 @@ namespace ERP_FISCAL.view.FiscalView
         public ExportaXml()
         {
             InitializeComponent();
+            carregaComboBox();
+            string placeholderText = "Ex: \\\\192.168.30.48\\xml\\2025 - 11 - 21_a_26\\";
+            tbLocalExport.Text = placeholderText;
+            tbLocalExport.ForeColor = SystemColors.GrayText;
+        }
+        public void carregaComboBox()
+        {
+            cbTipoExportacao.Items.Clear();
+            cbTipoExportacao.Items.Add("Sim");
+            cbTipoExportacao.Items.Add("Não");
+
+            cbModeloDocumento.Items.Clear();
+            cbModeloDocumento.Items.Add("55 - NF-e");
+            cbModeloDocumento.Items.Add("55 - NFCe");
+            cbModeloDocumento.Items.Add("69 - Sat");
+
+
+
+        }
+
+        private async void btnExecute_Click(object sender, EventArgs e)
+        {
+            ExportaXmlController exportaXmlController = new ExportaXmlController();
+            DataTable retorno =  await exportaXmlController.ExportaXmlPostoLago(dtInicio.Value, dtFim.Value, tbLocalExport.Text, cbModeloDocumento.Text, cbTipoExportacao.Text == "Sim" ? 1 : 0);
+            MessageBox.Show("Exportação concluída. Registros exportados: " + retorno.Rows.Count.ToString());
         }
     }
 }

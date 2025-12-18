@@ -37,6 +37,8 @@
             this.alterarTipoDeMovimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alteraçãoUnicaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alteraçãoEmListaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xMLPostoDoLagoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contabilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importarRecebimentoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.atualizarGestãoPatrimonialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,8 +51,6 @@
             this.cadastrarUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportarXMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xMLPostoDoLagoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarTop.SuspendLayout();
             this.menuBarBottom.SuspendLayout();
             this.SuspendLayout();
@@ -66,7 +66,7 @@
             this.ZanupMenu});
             this.menuBarTop.Location = new System.Drawing.Point(0, 0);
             this.menuBarTop.Name = "menuBarTop";
-            this.menuBarTop.Size = new System.Drawing.Size(1809, 33);
+            this.menuBarTop.Size = new System.Drawing.Size(1830, 33);
             this.menuBarTop.TabIndex = 0;
             this.menuBarTop.Text = "menuStrip1";
             // 
@@ -127,6 +127,21 @@
             this.alteraçãoEmListaToolStripMenuItem.Text = "Alteração em lista";
             this.alteraçãoEmListaToolStripMenuItem.Click += new System.EventHandler(this.alteraçãoEmListaToolStripMenuItem_Click);
             // 
+            // exportarXMLToolStripMenuItem
+            // 
+            this.exportarXMLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xMLPostoDoLagoToolStripMenuItem});
+            this.exportarXMLToolStripMenuItem.Name = "exportarXMLToolStripMenuItem";
+            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(289, 34);
+            this.exportarXMLToolStripMenuItem.Text = "Exportar XML ";
+            // 
+            // xMLPostoDoLagoToolStripMenuItem
+            // 
+            this.xMLPostoDoLagoToolStripMenuItem.Name = "xMLPostoDoLagoToolStripMenuItem";
+            this.xMLPostoDoLagoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.xMLPostoDoLagoToolStripMenuItem.Text = "XML Posto do Lago";
+            this.xMLPostoDoLagoToolStripMenuItem.Click += new System.EventHandler(this.xMLPostoDoLagoToolStripMenuItem_Click);
+            // 
             // contabilToolStripMenuItem
             // 
             this.contabilToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -177,7 +192,7 @@
             this.toolStripMenuItem4});
             this.menuBarBottom.Location = new System.Drawing.Point(0, 822);
             this.menuBarBottom.Name = "menuBarBottom";
-            this.menuBarBottom.Size = new System.Drawing.Size(1809, 33);
+            this.menuBarBottom.Size = new System.Drawing.Size(1830, 33);
             this.menuBarBottom.TabIndex = 1;
             this.menuBarBottom.Text = "menuStrip2";
             // 
@@ -227,33 +242,19 @@
             this.toolStripMenuItem5.Size = new System.Drawing.Size(256, 34);
             this.toolStripMenuItem5.Text = "Alterar conta frete";
             // 
-            // exportarXMLToolStripMenuItem
-            // 
-            this.exportarXMLToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xMLPostoDoLagoToolStripMenuItem});
-            this.exportarXMLToolStripMenuItem.Name = "exportarXMLToolStripMenuItem";
-            this.exportarXMLToolStripMenuItem.Size = new System.Drawing.Size(289, 34);
-            this.exportarXMLToolStripMenuItem.Text = "Exportar XML ";
-            // 
-            // xMLPostoDoLagoToolStripMenuItem
-            // 
-            this.xMLPostoDoLagoToolStripMenuItem.Name = "xMLPostoDoLagoToolStripMenuItem";
-            this.xMLPostoDoLagoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.xMLPostoDoLagoToolStripMenuItem.Text = "XML Posto do Lago";
-            this.xMLPostoDoLagoToolStripMenuItem.Click += new System.EventHandler(this.xMLPostoDoLagoToolStripMenuItem_Click);
-            // 
             // Portal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1809, 855);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1830, 855);
             this.Controls.Add(this.menuBarBottom);
             this.Controls.Add(this.menuBarTop);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuBarTop;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Portal";
