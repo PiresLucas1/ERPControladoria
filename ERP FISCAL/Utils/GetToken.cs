@@ -1,10 +1,6 @@
-﻿using SeuProjeto;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ERP_FISCAL.Utils
@@ -14,7 +10,7 @@ namespace ERP_FISCAL.Utils
             public async Task<string> ObterTokenAsync()
             {
                 string token = null;
-                var conexaoBanco = new ConexaoBancoDeDadosZanup();
+                var conexaoBanco = new DbConexaoConfig(DbName.ZanupTotvs);
 
                 try
                 {

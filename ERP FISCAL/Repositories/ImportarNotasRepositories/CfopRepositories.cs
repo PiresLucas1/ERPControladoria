@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ERP_FISCAL.controller;
+using ERP_FISCAL.Repositories;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
-using System.Threading.Tasks;
-using ERP_FISCAL.controller;
-using ERP_FISCAL.Repositories;
-using SeuProjeto;
 
 namespace ERP_FISCAL.repositories
 {

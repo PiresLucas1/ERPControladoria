@@ -35,7 +35,8 @@ namespace ERP_FISCAL.view
 
             this.Shown += Portal_Shown;           
             DesabilitaItemMenu(menuBarTop,"", false);
-            this.nomeUsuario = Environment.UserName;            
+            this.nomeUsuario = Environment.UserName;
+
             // 🔹 Carrega a cor salva
             string corSalva = Properties.Settings.Default.CorCabecalho;
             if (!string.IsNullOrEmpty(corSalva))
@@ -45,9 +46,10 @@ namespace ERP_FISCAL.view
                 menuBarTop.BackColor = cor;
                 txtVersao.BackColor = cor;
             }
-
             Version versaoAssembly = Assembly.GetExecutingAssembly().GetName().Version;
+            //preenche footer com informações do sistema e usuário
             txtVersao.Text = $"Versão: {versaoAssembly}";
+            txtNomeUsuario.Text = $"Usuário: {nomeUsuario}";
 
             
             AplicarFonte.AplicarFonteForm(this,new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));

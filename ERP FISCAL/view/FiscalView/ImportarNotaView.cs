@@ -1,32 +1,19 @@
 ﻿using ERP_FISCAL.controller;
 using ERP_FISCAL.Controller;
 using ERP_FISCAL.Utils;
-using ERP_FISCAL.view;
 using ERP_FISCAL.view.DialogUI;
 using ERP_FISCAL.view.DialogUI.interfacesUI;
 using ERP_FISCAL.view.interfaces;
-using ERP_FISCAL.view.SubTipos;
-using ERP_FISCAL.view.UIComponentes;
 using ERP_FISCAL.view.UIComponentes.UIConsultaItem;
 using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
-using Microsoft.VisualBasic;
-using SeuProjeto;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using static ERP_FISCAL.Utils.DateParse;
-using static ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos.StatusProcess;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TextBox = System.Windows.Forms.TextBox;
 
 

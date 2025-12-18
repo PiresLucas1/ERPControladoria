@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SeuProjeto;
 
 namespace ERP_FISCAL.Repositories
 {
@@ -46,7 +41,7 @@ namespace ERP_FISCAL.Repositories
         {
             DataTable tabela = new DataTable();
             tabela = tabela.DefaultView.ToTable(true);
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
             try
             {
                 
@@ -93,7 +88,7 @@ namespace ERP_FISCAL.Repositories
         public DataTable PegaValorPeloCodigo(string valor)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.DfeTotvs);
             try
             {
 
@@ -125,7 +120,7 @@ namespace ERP_FISCAL.Repositories
         public DataTable PegaValorPelaDescricao(string valor)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosDfe conexaoBanco = new ConexaoBancoDeDadosDfe();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
             try
             {
 

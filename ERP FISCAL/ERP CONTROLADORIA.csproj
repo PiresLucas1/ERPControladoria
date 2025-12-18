@@ -146,6 +146,7 @@
     <Compile Include="Controller\ContaDebitoFreteController\AlteraContaDebitoController.cs" />
     <Compile Include="Controller\ExportaDadosBigController\ExportaDadosBigController.cs" />
     <Compile Include="Controller\SegCadastroController\SegCadastroController.cs" />
+    <Compile Include="DbConexaoConfig.cs" />
     <Compile Include="Enum\EstoqueEnum.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -173,7 +174,6 @@
     <Compile Include="Repositories\ImportarNotasRepositories\CfopRepositories.cs" />
     <Compile Include="Repositories\ImportarNotasRepositories\UIRepositorio.cs" />
     <Compile Include="Repositories\ImportarNotasRepositories\NotasRepositories.cs" />
-    <Compile Include="ConexaoBancoDeDados.cs" />
     <Compile Include="Controller\ImportarNotasController\NotasController.cs" />
     <Compile Include="Repositories\ImportarNotasRepositories\ProdutoServicoRepositories.cs" />
     <Compile Include="Utils\dateParse.cs" />

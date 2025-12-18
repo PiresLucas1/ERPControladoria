@@ -1,15 +1,10 @@
-﻿using System;
+﻿using ERP_FISCAL.Utils;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
-using SeuProjeto;
 using System.Windows.Forms;
-using System.Runtime.InteropServices.ComTypes;
-using ERP_FISCAL.Utils;
 
 namespace ERP_FISCAL.controller
 {
@@ -46,7 +41,7 @@ namespace ERP_FISCAL.controller
             var msgRetornoString = "";
             try
             {
-                var conexaoBanco = new ConexaoBancoDeDadosTOTVS();
+                var conexaoBanco = new DbConexaoConfig(DbName.Totvs);
 
                 using (SqlConnection conexao = conexaoBanco.AbrirConexao())
                 {
@@ -156,7 +151,7 @@ namespace ERP_FISCAL.controller
 
         public async Task ExportToTotvs(DataTable dtOriginal, List<DataRow> linhasSelecionadas)
         {
-            var conexaoBanco = new ConexaoBancoDeDadosTOTVS();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.Totvs);
 
             try
             {

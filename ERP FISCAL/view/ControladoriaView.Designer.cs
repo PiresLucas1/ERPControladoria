@@ -55,6 +55,7 @@
             this.grandeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtNomeUsuario = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarTop.SuspendLayout();
             this.menuBarBottom.SuspendLayout();
             this.SuspendLayout();
@@ -193,7 +194,8 @@
             this.menuBarBottom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.txtVersao,
             this.Opções,
-            this.toolStripMenuItem4});
+            this.toolStripMenuItem4,
+            this.txtNomeUsuario});
             this.menuBarBottom.Location = new System.Drawing.Point(0, 842);
             this.menuBarBottom.Name = "menuBarBottom";
             this.menuBarBottom.Size = new System.Drawing.Size(1840, 33);
@@ -278,6 +280,12 @@
             this.toolStripMenuItem5.Size = new System.Drawing.Size(256, 34);
             this.toolStripMenuItem5.Text = "Alterar conta frete";
             // 
+            // txtNomeUsuario
+            // 
+            this.txtNomeUsuario.Name = "txtNomeUsuario";
+            this.txtNomeUsuario.Size = new System.Drawing.Size(140, 29);
+            this.txtNomeUsuario.Text = "Nome usuario";
+            // 
             // Portal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -334,5 +342,6 @@
         private System.Windows.Forms.ToolStripMenuItem pequenoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem médioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem grandeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem txtNomeUsuario;
     }
 }

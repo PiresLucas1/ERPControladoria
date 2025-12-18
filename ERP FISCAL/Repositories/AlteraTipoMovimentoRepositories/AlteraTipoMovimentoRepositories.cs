@@ -1,11 +1,6 @@
-﻿using SeuProjeto;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -57,12 +52,12 @@ namespace ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories
         public async Task<DataTable> AlteraTipoMovimento(int codMovimento, int coligada, string codTmovimento)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
 
             try
             {
 
-                using (SqlConnection conn = conexaoBanco.AbrirConexaoRm())
+                using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
                     using (SqlCommand cmd = new SqlCommand("dbo.uspCadAlteraCodMovimentoTotvs", conn))
                     {
@@ -93,7 +88,7 @@ namespace ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories
         public async Task<DataTable> AlteraTipoMovimentoEmBloco(int codMovimento, int coligada, string codTmovimento)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
 
             try
             {
@@ -129,7 +124,7 @@ namespace ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories
         public async Task<DataTable> ConsultaMultiplosMovimentoTotvs(string codMovimento, int coligada)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
 
             try
             {
@@ -170,7 +165,7 @@ namespace ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories
         public async Task<DataTable> ConsultaListaIDMovimentosTotvs(string codMovimento)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
 
             try
             {
@@ -202,12 +197,12 @@ namespace ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories
         public async Task<DataTable> AlteraListaMovimento(DataTable data)
         {
             DataTable tabela = new DataTable();
-            ConexaoBancoDeDadosGestaoProcessos conexaoBanco = new ConexaoBancoDeDadosGestaoProcessos();
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
 
             try
             {
 
-                using (SqlConnection conn = conexaoBanco.AbrirConexaoRm())
+                using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
                     using (SqlCommand cmd = new SqlCommand("dbo.uspFisAlteraTipoMovimento", conn))
                     {
