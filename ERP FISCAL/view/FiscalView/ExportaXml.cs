@@ -35,8 +35,9 @@ namespace ERP_FISCAL.view.FiscalView
 
         private async void btnExecute_Click(object sender, EventArgs e)
         {
-            ExportaXmlController exportaXmlController = new ExportaXmlController();
-            DataTable retorno =  await exportaXmlController.ExportaXmlPostoLago(dtInicio.Value, dtFim.Value, tbLocalExport.Text, cbModeloDocumento.Text, cbTipoExportacao.Text == "Sim" ? 1 : 0);
+            ExportaXmlController exportaXmlController = new ExportaXmlController();            
+            var modeloDocumento = cbModeloDocumento.Text.Substring(0, 2);
+            DataTable retorno =  await exportaXmlController.ExportaXmlPostoLago(dtInicio.Value, dtFim.Value, tbLocalExport.Text, modeloDocumento, cbTipoExportacao.Text == "Sim" ? 1 : 0);
             MessageBox.Show("Exportação concluída. Registros exportados: " + retorno.Rows.Count.ToString());
         }
     }
