@@ -5,50 +5,41 @@ using System.Threading.Tasks;
 
 namespace ERP_FISCAL.Utils
 {
-    public class GetToken
-    {
-        public async Task<string> ObterTokenAsync()
+        public class GetToken
         {
-            string token = null;
-            var conexaoBanco = new DbConexaoConfig(DbName.ZanupTotvs);
-
-            try
+            public async Task<string> ObterTokenAsync()
             {
-                using (SqlConnection conn = conexaoBanco.AbrirConexao())
-                using (SqlCommand cmd = new SqlCommand("DBO.uspConsultaAutenticaBearerTokenBling", conn))
+                string token = null;
+                var conexaoBanco = new DbConexaoConfig(DbName.ZanupTotvs);
+
+                try
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-
-                    // Parâmetro de entrada
-                    cmd.Parameters.Add(new SqlParameter("@INvchURL", SqlDbType.VarChar, 100)
+                    using (SqlConnection conn = conexaoBanco.AbrirConexao())
+                    using (SqlCommand cmd = new SqlCommand(@"
+                                                            SELECT 
+                                                                TOP 1 tblAutBling.Token
+                                                            FROM   
+                                                                Zanup.dbo.tblAutenticacaoBling tblAutBling (NOLOCK)
+                                                            WHERE 
+                                                                tblAutBling.Ativo = 1
+                                                             ", conn
+                                                            ))
                     {
-                        Value = "Aplicação GP - POST DEV https://api.bling.com.br/Api/v3/nfe" /* POPULA TABELA DE LOGS TBLLOGREQUESICAOAPIBLING */
-                    });
+                        cmd.CommandType = CommandType.Text;
 
-                    // Parâmetro de saída
-                    SqlParameter paramToken = new SqlParameter("@OUTvchBearerToken", SqlDbType.VarChar, 100)
-                    {
-                        Direction = ParameterDirection.Output
-                    };
-                    cmd.Parameters.Add(paramToken);
+                        var result = await cmd.ExecuteScalarAsync();
 
-                    await cmd.ExecuteNonQueryAsync();
-
-                    if (paramToken.Value != DBNull.Value)
-                    {
-                        token = paramToken.Value.ToString();
-
-                        if (token.StartsWith("Bearer ", StringComparison.OrdinalIgnoreCase))
-                            token = token.Substring(7);
+                        if (result != null && result != DBNull.Value)
+                            token = result.ToString();
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao consultar token via procedure: " + ex.Message, ex);
-            }
+                catch (Exception ex)
+                {
+                    throw new Exception("Erro ao consultar token: " + ex.Message, ex);
+                }
 
-            return token;
+                return token;
+            }
         }
-    }
+
 }

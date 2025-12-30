@@ -11,7 +11,7 @@ namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
         public async Task<DataTable> ConsultaSaldoNotas(int IdProduto,int NumDoc)
         {
             DataTable tabela = new DataTable();
-            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpDbsol);
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.ZanupTotvs);
 
             try
             {
