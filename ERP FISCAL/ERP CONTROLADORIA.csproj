@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>52</ApplicationRevision>
+    <ApplicationRevision>57</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -210,6 +210,12 @@
     <Compile Include="view\FiscalView\ExportaXml.Designer.cs">
       <DependentUpon>ExportaXml.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\MetasComissaoFarma\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\MetasComissaoFarma\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\PrimeiroLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -320,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\FiscalView\ExportaXml.resx">
       <DependentUpon>ExportaXml.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\MetasComissaoFarma\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PrimeiroLogin.resx">
       <DependentUpon>PrimeiroLogin.cs</DependentUpon>
