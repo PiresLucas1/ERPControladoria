@@ -13,7 +13,8 @@ namespace ERP_FISCAL
         BigCentral,
         GpDbsol,
         ZanupTotvs,
-        WebPosto
+        WebPosto,
+        GpDbsolWithLogin
     }
 
     public class DbConexaoConfig
@@ -54,6 +55,10 @@ namespace ERP_FISCAL
 
                 case DbName.WebPosto:
                     connectionString = "Server=dbtotvs\\dbtotvs;Database=CORPORERM_PRODUCAO;User Id=rm;Password=rm;Encrypt=True;TrustServerCertificate=True;Connection Timeout=0;";
+                    break;
+
+                case DbName.GpDbsolWithLogin:
+                    connectionString = "Server=dbsol\\dbsol;Database=GS300GP;User Id=rm;Password=rm;Integrated Security=True;";
                     break;
 
                 default:

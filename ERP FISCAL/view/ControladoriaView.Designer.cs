@@ -56,6 +56,9 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.txtNomeUsuario = new System.Windows.Forms.ToolStripMenuItem();
+            this.gerencialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.metaComissãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.farmaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarTop.SuspendLayout();
             this.menuBarBottom.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +71,8 @@
             this.menuBarTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FiscalMenu,
             this.contabilToolStripMenuItem,
-            this.ZanupMenu});
+            this.ZanupMenu,
+            this.gerencialToolStripMenuItem});
             this.menuBarTop.Location = new System.Drawing.Point(0, 0);
             this.menuBarTop.Name = "menuBarTop";
             this.menuBarTop.Size = new System.Drawing.Size(1840, 33);
@@ -286,6 +290,29 @@
             this.txtNomeUsuario.Size = new System.Drawing.Size(140, 29);
             this.txtNomeUsuario.Text = "Nome usuario";
             // 
+            // gerencialToolStripMenuItem
+            // 
+            this.gerencialToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.metaComissãoToolStripMenuItem});
+            this.gerencialToolStripMenuItem.Name = "gerencialToolStripMenuItem";
+            this.gerencialToolStripMenuItem.Size = new System.Drawing.Size(99, 29);
+            this.gerencialToolStripMenuItem.Text = "Gerencial";
+            // 
+            // metaComissãoToolStripMenuItem
+            // 
+            this.metaComissãoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.farmaToolStripMenuItem});
+            this.metaComissãoToolStripMenuItem.Name = "metaComissãoToolStripMenuItem";
+            this.metaComissãoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.metaComissãoToolStripMenuItem.Text = "Meta Comissão";
+            // 
+            // farmaToolStripMenuItem
+            // 
+            this.farmaToolStripMenuItem.Name = "farmaToolStripMenuItem";
+            this.farmaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.farmaToolStripMenuItem.Text = "Farma";
+            this.farmaToolStripMenuItem.Click += new System.EventHandler(this.farmaToolStripMenuItem_Click);
+            // 
             // Portal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -343,5 +370,8 @@
         private System.Windows.Forms.ToolStripMenuItem médioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem grandeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem txtNomeUsuario;
+        private System.Windows.Forms.ToolStripMenuItem gerencialToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem metaComissãoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem farmaToolStripMenuItem;
     }
 }
