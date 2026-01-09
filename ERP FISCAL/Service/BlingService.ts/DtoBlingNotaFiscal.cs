@@ -35,8 +35,11 @@ namespace ERP_FISCAL.Models
         [JsonProperty("modelo")]
         public int Modelo { get; set; }
 
+        [JsonProperty("documentoReferenciados")]
+        public List<DocumentoReferenciado> DocumentoReferenciados { get; set; }
+
         [JsonProperty("documentoReferenciado")]
-        public List<DocumentoReferenciado> DocumentoReferenciado { get; set; }
+        public DocumentoReferenciado DocumentoReferenciado { get; set; }
 
         [JsonProperty("contato")]
         public Contato Contato { get; set; }
@@ -70,6 +73,12 @@ namespace ERP_FISCAL.Models
 
         [JsonProperty("chaveAcesso")]
         public string ChaveAcesso { get; set; }
+
+        [JsonProperty("serie")]
+        public int Serie { get; set; }
+
+        [JsonProperty("contadorOrdemOperacao")]
+        public int ContadorOrdemOperacao { get; set; }
     }
 
     public class Contato

@@ -310,8 +310,7 @@
             // 
             this.farmaToolStripMenuItem.Name = "farmaToolStripMenuItem";
             this.farmaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.farmaToolStripMenuItem.Text = "Farma";
-            this.farmaToolStripMenuItem.Click += new System.EventHandler(this.farmaToolStripMenuItem_Click);
+            this.farmaToolStripMenuItem.Text = "Farma";            
             // 
             // Portal
             // 

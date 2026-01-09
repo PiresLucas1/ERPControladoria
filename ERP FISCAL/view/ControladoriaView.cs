@@ -3,7 +3,6 @@ using ERP_FISCAL.Controller.SegCadastroController;
 using ERP_FISCAL.Utils;
 using ERP_FISCAL.view.ContabilView;
 using ERP_FISCAL.view.FiscalView;
-using ERP_FISCAL.view.MetasComissaoFarma;
 using System;
 using System.Data;
 using System.Drawing;
@@ -372,11 +371,7 @@ namespace ERP_FISCAL.view
             Properties.Settings.Default.Save();
         }
 
-        private void farmaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MetaComissao metaComissao = new MetaComissao();
-            metaComissao.Show();
-        }
+
     }
 }
 

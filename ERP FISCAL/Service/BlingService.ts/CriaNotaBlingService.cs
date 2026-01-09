@@ -55,15 +55,25 @@ namespace ERP_FISCAL.Utils
                     //inserir no campo observação o estoque de referencia
                     Observacoes = $"Dev. ref. a NF {primeiraLinha.NumDocumento} em {primeiraLinha.DataDocumento}, compra de mercadoria sob a chave de acesso: {primeiraLinha.ChaveAcesso}, Estoque origem: {primeiraLinha.EstoqueOrigem}",
                     Modelo = 55,
-                    DocumentoReferenciado = new List<DocumentoReferenciado>
-                {
-                    new DocumentoReferenciado
+                    DocumentoReferenciados = new List<DocumentoReferenciado>
+                    {
+                        new DocumentoReferenciado
+                        {
+                            Modelo = 55,
+                            Numero = primeiraLinha.NumDocumento,
+                            ChaveAcesso = primeiraLinha.ChaveAcesso,
+                            Serie = 1,
+                            ContadorOrdemOperacao= 1
+                        },
+                    },
+                    DocumentoReferenciado = new DocumentoReferenciado
                     {
                         Modelo = 55,
                         Numero = primeiraLinha.NumDocumento,
-                        ChaveAcesso = primeiraLinha.ChaveAcesso
+                        ChaveAcesso = primeiraLinha.ChaveAcesso,
+                        Serie = 1,
+                        ContadorOrdemOperacao=1
                     },
-                },
                     Contato = new Contato
                     {
                         NumeroDocumento = "46.054.219/0001-74",

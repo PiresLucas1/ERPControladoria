@@ -18,6 +18,7 @@ namespace ERP_FISCAL.Utils
                 using (SqlCommand cmd = new SqlCommand("DBO.uspConsultaAutenticaBearerTokenBling", conn))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.CommandTimeout = 0;
 
                     // Parâmetro de entrada
                     cmd.Parameters.Add(new SqlParameter("@INvchURL", SqlDbType.VarChar, 100)

@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>57</ApplicationRevision>
+    <ApplicationRevision>59</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -247,6 +247,12 @@
       <DependentUpon>AlteraUnicoValorEmBloco.cs</DependentUpon>
     </Compile>
     <Compile Include="view\UIComponentes\UIStatusDoProcessos\ProcessStatusManeger.cs" />
+    <Compile Include="view\ZanupView\ConsultaNotaItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ZanupView\ConsultaNotaItem.Designer.cs">
+      <DependentUpon>ConsultaNotaItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\ZanupView\ConsultaSaldoNotasFiscais.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -347,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\UIComponentes\UIDialog\AlteraUnicoItemEmBloco\AlteraUnicoValorEmBloco.resx">
       <DependentUpon>AlteraUnicoValorEmBloco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ZanupView\ConsultaNotaItem.resx">
+      <DependentUpon>ConsultaNotaItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ZanupView\ConsultaSaldoNotasFiscais.resx">
       <DependentUpon>ConsultaSaldoNotasFiscais.cs</DependentUpon>

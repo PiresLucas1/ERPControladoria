@@ -50,7 +50,7 @@ namespace ERP_FISCAL
                     break;
 
                 case DbName.ZanupTotvs:
-                    connectionString = "Server=dbtotvs\\dbtotvs;Database=Zanup;Integrated Security=True;";
+                    connectionString = "Server=dbtotvs\\dbtotvs;Database=Zanup;User Id=rm;Password=rm;Encrypt=True;TrustServerCertificate=True;Connection Timeout=0;";
                     break;
 
                 case DbName.WebPosto:
