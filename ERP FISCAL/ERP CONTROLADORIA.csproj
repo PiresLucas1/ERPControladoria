@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>59</ApplicationRevision>
+    <ApplicationRevision>62</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -159,6 +159,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Repositories\AlteraTipoMovimentoRepositories\AlteraTipoMovimentoRepositories.cs" />
+    <Compile Include="Repositories\ConsultaSaldoNotasZanup\ConsultaNotaItensZanupRepositories.cs" />
     <Compile Include="Repositories\ConsultaSaldoNotasZanup\ConsultaSaldoNotasZanupRepositories.cs" />
     <Compile Include="Repositories\ExportaDadosBigRepositories\ExportaDadosBigRepositories.cs" />
     <Compile Include="Repositories\ExportaDadosBigRepositories\RetornoExportaBig.cs" />
@@ -191,6 +192,12 @@
     </Compile>
     <Compile Include="view\CadUsu.Designer.cs">
       <DependentUpon>CadUsu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\CampanhasGestaoProcessos\InserirCampanhaTelevendas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\CampanhasGestaoProcessos\InserirCampanhaTelevendas.Designer.cs">
+      <DependentUpon>InserirCampanhaTelevendas.cs</DependentUpon>
     </Compile>
     <Compile Include="view\ContabilView\GestaoPatrimonio.cs">
       <SubType>Form</SubType>
@@ -325,6 +332,9 @@
     </Compile>
     <EmbeddedResource Include="view\CadUsu.resx">
       <DependentUpon>CadUsu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\CampanhasGestaoProcessos\InserirCampanhaTelevendas.resx">
+      <DependentUpon>InserirCampanhaTelevendas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\ContabilView\GestaoPatrimonio.resx">
       <DependentUpon>GestaoPatrimonio.cs</DependentUpon>

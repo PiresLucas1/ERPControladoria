@@ -63,7 +63,8 @@ namespace ERP_FISCAL.Utils
                             Numero = primeiraLinha.NumDocumento,
                             ChaveAcesso = primeiraLinha.ChaveAcesso,
                             Serie = 1,
-                            ContadorOrdemOperacao= 1
+                            ContadorOrdemOperacao= 1,
+                            Data = primeiraLinha.DataDocumento.ToShortDateString()
                         },
                     },
                     DocumentoReferenciado = new DocumentoReferenciado
@@ -72,7 +73,8 @@ namespace ERP_FISCAL.Utils
                         Numero = primeiraLinha.NumDocumento,
                         ChaveAcesso = primeiraLinha.ChaveAcesso,
                         Serie = 1,
-                        ContadorOrdemOperacao=1
+                        ContadorOrdemOperacao = 1,
+                        Data = primeiraLinha.DataDocumento.ToShortDateString()
                     },
                     Contato = new Contato
                     {

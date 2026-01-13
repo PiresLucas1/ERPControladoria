@@ -79,6 +79,10 @@ namespace ERP_FISCAL.Models
 
         [JsonProperty("contadorOrdemOperacao")]
         public int ContadorOrdemOperacao { get; set; }
+
+        [JsonProperty("data")]
+        public string Data { get; set; }
+
     }
 
     public class Contato
