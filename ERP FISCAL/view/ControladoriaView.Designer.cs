@@ -44,6 +44,9 @@
             this.atualizarGestãoPatrimonialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ZanupMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.devoluçaoDeNotasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gerencialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.metaComissãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.farmaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarBottom = new System.Windows.Forms.MenuStrip();
             this.txtVersao = new System.Windows.Forms.ToolStripMenuItem();
             this.Opções = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,9 +59,7 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.txtNomeUsuario = new System.Windows.Forms.ToolStripMenuItem();
-            this.gerencialToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.metaComissãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.farmaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.criarNotaZanupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarTop.SuspendLayout();
             this.menuBarBottom.SuspendLayout();
             this.SuspendLayout();
@@ -177,7 +178,9 @@
             // ZanupMenu
             // 
             this.ZanupMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.devoluçaoDeNotasToolStripMenuItem});
+            this.devoluçaoDeNotasToolStripMenuItem,
+            this.criarNotaZanupToolStripMenuItem});
+            this.ZanupMenu.Enabled = false;
             this.ZanupMenu.Name = "ZanupMenu";
             this.ZanupMenu.Size = new System.Drawing.Size(78, 29);
             this.ZanupMenu.Text = "Zanup";
@@ -188,6 +191,28 @@
             this.devoluçaoDeNotasToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
             this.devoluçaoDeNotasToolStripMenuItem.Text = "Devoluçao de notas";
             this.devoluçaoDeNotasToolStripMenuItem.Click += new System.EventHandler(this.devoluçaoDeNotasToolStripMenuItem_Click);
+            // 
+            // gerencialToolStripMenuItem
+            // 
+            this.gerencialToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.metaComissãoToolStripMenuItem});
+            this.gerencialToolStripMenuItem.Name = "gerencialToolStripMenuItem";
+            this.gerencialToolStripMenuItem.Size = new System.Drawing.Size(99, 29);
+            this.gerencialToolStripMenuItem.Text = "Gerencial";
+            // 
+            // metaComissãoToolStripMenuItem
+            // 
+            this.metaComissãoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.farmaToolStripMenuItem});
+            this.metaComissãoToolStripMenuItem.Name = "metaComissãoToolStripMenuItem";
+            this.metaComissãoToolStripMenuItem.Size = new System.Drawing.Size(237, 34);
+            this.metaComissãoToolStripMenuItem.Text = "Meta Comissão";
+            // 
+            // farmaToolStripMenuItem
+            // 
+            this.farmaToolStripMenuItem.Name = "farmaToolStripMenuItem";
+            this.farmaToolStripMenuItem.Size = new System.Drawing.Size(162, 34);
+            this.farmaToolStripMenuItem.Text = "Farma";
             // 
             // menuBarBottom
             // 
@@ -290,27 +315,12 @@
             this.txtNomeUsuario.Size = new System.Drawing.Size(140, 29);
             this.txtNomeUsuario.Text = "Nome usuario";
             // 
-            // gerencialToolStripMenuItem
+            // criarNotaZanupToolStripMenuItem
             // 
-            this.gerencialToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.metaComissãoToolStripMenuItem});
-            this.gerencialToolStripMenuItem.Name = "gerencialToolStripMenuItem";
-            this.gerencialToolStripMenuItem.Size = new System.Drawing.Size(99, 29);
-            this.gerencialToolStripMenuItem.Text = "Gerencial";
-            // 
-            // metaComissãoToolStripMenuItem
-            // 
-            this.metaComissãoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.farmaToolStripMenuItem});
-            this.metaComissãoToolStripMenuItem.Name = "metaComissãoToolStripMenuItem";
-            this.metaComissãoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.metaComissãoToolStripMenuItem.Text = "Meta Comissão";
-            // 
-            // farmaToolStripMenuItem
-            // 
-            this.farmaToolStripMenuItem.Name = "farmaToolStripMenuItem";
-            this.farmaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
-            this.farmaToolStripMenuItem.Text = "Farma";            
+            this.criarNotaZanupToolStripMenuItem.Name = "criarNotaZanupToolStripMenuItem";
+            this.criarNotaZanupToolStripMenuItem.Size = new System.Drawing.Size(272, 34);
+            this.criarNotaZanupToolStripMenuItem.Text = "Criar Nota Zanup";
+            this.criarNotaZanupToolStripMenuItem.Click += new System.EventHandler(this.criarNotaZanupToolStripMenuItem_Click);
             // 
             // Portal
             // 
@@ -372,5 +382,6 @@
         private System.Windows.Forms.ToolStripMenuItem gerencialToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem metaComissãoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem farmaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem criarNotaZanupToolStripMenuItem;
     }
 }

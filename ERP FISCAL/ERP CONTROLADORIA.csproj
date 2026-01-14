@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\AlteraTipoMovimentoController\AlterarTipoMovimento.cs" />
+    <Compile Include="Controller\ConsultaSaldoNotasFiscais\ConsultaSaldoNotasController.cs" />
     <Compile Include="Controller\ConsultaSaldoNotasZanup\ConsultaSaldoNotasZanupController.cs" />
     <Compile Include="Controller\ExportaXmlController\ExportaXmlController.cs" />
     <Compile Include="Controller\ImportarNotasController\CfopController.cs" />
@@ -330,6 +331,12 @@
     <Compile Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.Designer.cs">
       <DependentUpon>StatusProcess.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\ZanupView\PreVisualizacaoNota.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\ZanupView\PreVisualizacaoNota.Designer.cs">
+      <DependentUpon>PreVisualizacaoNota.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="view\CadUsu.resx">
       <DependentUpon>CadUsu.cs</DependentUpon>
     </EmbeddedResource>
@@ -403,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\UIComponentes\UIStatusDoProcessos\StatusProcess.resx">
       <DependentUpon>StatusProcess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\ZanupView\PreVisualizacaoNota.resx">
+      <DependentUpon>PreVisualizacaoNota.cs</DependentUpon>
     </EmbeddedResource>
     <None Include=".env">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

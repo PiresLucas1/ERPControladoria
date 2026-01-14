@@ -10,7 +10,7 @@ namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
 {
     public class ConsultaNotaItensZanupRepositories
     {
-        public async Task<DataTable> ConsultaNotaItens(DateTime dataInicio, DateTime dataFim, string cnpjCpf)
+        public async Task<DataTable> ConsultaNotaItens(DateTime dataInicio, DateTime dataFim,string cnpjCpf ,string idProduto = null)
         {
             //uspZanConsultaNotaItens
             DataTable dataTable = new DataTable();
@@ -24,9 +24,13 @@ namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.AddWithValue("", dataInicio);
-                        cmd.Parameters.AddWithValue("", dataFim);
-                        cmd.Parameters.AddWithValue("", cnpjCpf);
+                        cmd.Parameters.AddWithValue("@INdatDataEmissaoInicio", dataInicio);
+                        cmd.Parameters.AddWithValue("@INdatDataEmissaoFim", dataFim);
+                        cmd.Parameters.AddWithValue("@INvchCnpjCpf", cnpjCpf);
+                        if(idProduto != null)
+                        {
+                            cmd.Parameters.AddWithValue("@INintIdProduto", idProduto);
+                        }
                         
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {

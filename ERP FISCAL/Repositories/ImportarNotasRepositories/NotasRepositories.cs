@@ -18,7 +18,7 @@ namespace ERP_FISCAL
 
                 using (SqlConnection conexao = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultarNfeServico", conexao))
+                    using (SqlCommand cmd = new SqlCommand("dbo.(\r\n    @INintTipoReembolso IN (1,2)\r\n    AND tblConVen.DataFaturamento \r\n        BETWEEN @INintDataFaturamentoInicio AND @INintDataFaturamentoFim\r\n)\r\nOR\r\n(\r\n    @INintTipoReembolso NOT IN (1,2)\r\n    AND tblConVen.Data \r\n        BETWEEN @INintDataFaturamentoInicio AND @INintDataFaturamentoFim\r\n)", conexao))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 1200; /* 20 minutos */
