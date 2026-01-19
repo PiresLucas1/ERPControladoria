@@ -32,6 +32,8 @@ namespace ERP_FISCAL.Utils
             AgrupaProdutosDaMesmaNota agrupaProdutosDaMesmaNota = new AgrupaProdutosDaMesmaNota();
             var grupoDeDocumento = agrupaProdutosDaMesmaNota.AgrupaProdutosDaMesmaChave(listRow);
 
+            
+
             await Task.Delay(3000);
 
             int contadorDeNotasCriadas = 0;

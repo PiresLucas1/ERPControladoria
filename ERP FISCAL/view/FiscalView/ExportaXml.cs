@@ -1,4 +1,5 @@
 ﻿using ERP_FISCAL.Controller.ExportaXmlController;
+using ERP_FISCAL.Repositories.ExportarXmlRepositories;
 using ERP_FISCAL.Utils;
 using System;
 using System.Data;
@@ -35,10 +36,25 @@ namespace ERP_FISCAL.view.FiscalView
 
         private async void btnExecute_Click(object sender, EventArgs e)
         {
-            ExportaXmlController exportaXmlController = new ExportaXmlController();            
-            var modeloDocumento = cbModeloDocumento.Text.Substring(0, 2);
-            DataTable retorno =  await exportaXmlController.ExportaXmlPostoLago(dtInicio.Value, dtFim.Value, tbLocalExport.Text, modeloDocumento, cbTipoExportacao.Text == "Sim" ? 1 : 0);
-            MessageBox.Show("Exportação concluída. Registros exportados: " + retorno.Rows.Count.ToString());
+            ExportaXmlController exportaXmlController = new ExportaXmlController();
+            var modeloDocumento = "";
+            if (cbModeloDocumento.SelectedItem != null)
+            {
+                modeloDocumento = cbModeloDocumento.Text.Substring(0, 2);
+
+            }
+            string cabecalhoDePesquisa = tbLocalExport.Text + dtInicio.Value.ToString() + dtFim.Text.ToString();
+            VisuExportacaoXml view = new VisuExportacaoXml(cabecalhoDePesquisa);
+            view.Visible = true;
+
+            var progress = new Progress<string>(mensagem =>
+            {
+                view.AlteraValorTexto(mensagem);
+            });
+
+            DataTable retorno =  await exportaXmlController.ExportaXmlPostoLago(dtInicio.Value, dtFim.Value, tbLocalExport.Text, modeloDocumento ?? "", cbTipoExportacao.Text == "Sim" ? 1 : 0, progress);
+                                
         }
+
     }
 }

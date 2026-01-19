@@ -143,13 +143,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\AlteraTipoMovimentoController\AlterarTipoMovimento.cs" />
-    <Compile Include="Controller\ConsultaSaldoNotasFiscais\ConsultaSaldoNotasController.cs" />
-    <Compile Include="Controller\ConsultaSaldoNotasZanup\ConsultaSaldoNotasZanupController.cs" />
-    <Compile Include="Controller\ExportaXmlController\ExportaXmlController.cs" />
-    <Compile Include="Controller\ImportarNotasController\CfopController.cs" />
+    <Compile Include="Controller\Fiscal\AlteraTipoMovimentoController\AlterarTipoMovimento.cs" />
+    <Compile Include="Controller\Zanup\ConsultaNotasItensController.cs" />
+    <Compile Include="Controller\Zanup\ConsultaSaldoNotasZanupController.cs" />
+    <Compile Include="Controller\Fiscal\ExportaXmlController\ExportaXmlController.cs" />
+    <Compile Include="Controller\Fiscal\ImportarNotasController\CfopController.cs" />
     <Compile Include="Controller\ContaDebitoFreteController\AlteraContaDebitoController.cs" />
-    <Compile Include="Controller\ExportaDadosBigController\ExportaDadosBigController.cs" />
+    <Compile Include="Controller\Fiscal\ExportaDadosBigController\ExportaDadosBigController.cs" />
     <Compile Include="Controller\MetaComissaoFarmaController\MetaComissaoFarmaController.cs" />
     <Compile Include="Controller\SegCadastroController\SegCadastroController.cs" />
     <Compile Include="DbConexaoConfig.cs" />
@@ -159,12 +159,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\AlteraTipoMovimentoRepositories\AlteraTipoMovimentoRepositories.cs" />
-    <Compile Include="Repositories\ConsultaSaldoNotasZanup\ConsultaNotaItensZanupRepositories.cs" />
-    <Compile Include="Repositories\ConsultaSaldoNotasZanup\ConsultaSaldoNotasZanupRepositories.cs" />
-    <Compile Include="Repositories\ExportaDadosBigRepositories\ExportaDadosBigRepositories.cs" />
-    <Compile Include="Repositories\ExportaDadosBigRepositories\RetornoExportaBig.cs" />
-    <Compile Include="Repositories\ExportarXmlRepositories\ExportarXmlRepositorio.cs" />
+    <Compile Include="Repositories\Fiscal\AlteraTipoMovimentoRepositories\AlteraTipoMovimentoRepositories.cs" />
+    <Compile Include="Repositories\Zanup\ConsultaNotaItensZanupRepositories.cs" />
+    <Compile Include="Repositories\Zanup\ConsultaSaldoNotasZanupRepositories.cs" />
+    <Compile Include="Repositories\Fiscal\ExportaDadosBigRepositories\ExportaDadosBigRepositories.cs" />
+    <Compile Include="Repositories\Fiscal\ExportaDadosBigRepositories\RetornoExportaBig.cs" />
+    <Compile Include="Repositories\Fiscal\ExportarXmlRepositories\ExportarXmlRepositorio.cs" />
     <Compile Include="Repositories\MetaComissaoFarmaRepositories\MetaComissaoFarmaRepositories.cs" />
     <Compile Include="Repositories\RepositoriesAlterarContaDebito\AlteraContaDebitoRepositories.cs" />
     <Compile Include="Repositories\SegCadastroRepositories\SegCadastroRepositories.cs" />
@@ -175,15 +175,16 @@
     <Compile Include="Service\BlingService.ts\CriaNotaBlingService.cs" />
     <Compile Include="Utils\AgrupaProdutosDaMesmaNota.cs" />
     <Compile Include="Utils\AplicarFonte.cs" />
+    <Compile Include="Utils\NotaProdutoDTO.cs" />
     <Compile Include="Utils\GetToken.cs" />
     <Compile Include="Utils\MascaraDeColuna.cs" />
-    <Compile Include="Controller\ImportarNotasController\ProdutoServicoController.cs" />
-    <Compile Include="Controller\ImportarNotasController\UIController.cs" />
-    <Compile Include="Repositories\ImportarNotasRepositories\CfopRepositories.cs" />
-    <Compile Include="Repositories\ImportarNotasRepositories\UIRepositorio.cs" />
-    <Compile Include="Repositories\ImportarNotasRepositories\NotasRepositories.cs" />
-    <Compile Include="Controller\ImportarNotasController\NotasController.cs" />
-    <Compile Include="Repositories\ImportarNotasRepositories\ProdutoServicoRepositories.cs" />
+    <Compile Include="Controller\Fiscal\ImportarNotasController\ProdutoServicoController.cs" />
+    <Compile Include="Controller\Fiscal\ImportarNotasController\UIController.cs" />
+    <Compile Include="Repositories\Fiscal\ImportarNotasRepositories\CfopRepositories.cs" />
+    <Compile Include="Repositories\Fiscal\ImportarNotasRepositories\UIRepositorio.cs" />
+    <Compile Include="Repositories\Fiscal\ImportarNotasRepositories\NotasRepositories.cs" />
+    <Compile Include="Controller\Fiscal\ImportarNotasController\NotasController.cs" />
+    <Compile Include="Repositories\Fiscal\ImportarNotasRepositories\ProdutoServicoRepositories.cs" />
     <Compile Include="Utils\dateParse.cs" />
     <Compile Include="Utils\DecimalParse.cs" />
     <Compile Include="Utils\theme\CoresConfig.cs" />
@@ -223,6 +224,12 @@
     </Compile>
     <Compile Include="view\FiscalView\ExportaXml.Designer.cs">
       <DependentUpon>ExportaXml.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\FiscalView\VisuExportacaoXml.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\FiscalView\VisuExportacaoXml.Designer.cs">
+      <DependentUpon>VisuExportacaoXml.cs</DependentUpon>
     </Compile>
     <Compile Include="view\PrimeiroLogin.cs">
       <SubType>Form</SubType>
@@ -355,6 +362,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\FiscalView\ExportaXml.resx">
       <DependentUpon>ExportaXml.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\FiscalView\VisuExportacaoXml.resx">
+      <DependentUpon>VisuExportacaoXml.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PrimeiroLogin.resx">
       <DependentUpon>PrimeiroLogin.cs</DependentUpon>

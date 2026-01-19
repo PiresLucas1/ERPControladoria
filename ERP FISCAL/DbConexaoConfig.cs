@@ -54,7 +54,7 @@ namespace ERP_FISCAL
                     break;
 
                 case DbName.WebPosto:
-                    connectionString = "Server=dbtotvs\\dbtotvs;Database=CORPORERM_PRODUCAO;User Id=rm;Password=rm;Encrypt=True;TrustServerCertificate=True;Connection Timeout=0;";
+                    connectionString = "Server=dbtotvs\\dbtotvs;Database=PostoLago_WebPosto;User Id=rm;Password=rm;Encrypt=True;TrustServerCertificate=True;Connection Timeout=0;";
                     break;
 
                 case DbName.GpDbsolWithLogin:
