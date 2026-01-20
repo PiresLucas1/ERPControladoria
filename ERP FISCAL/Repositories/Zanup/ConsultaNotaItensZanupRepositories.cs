@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ERP_FISCAL.Utils;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -26,11 +27,14 @@ namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
 
                         cmd.Parameters.AddWithValue("@INdatDataEmissaoInicio", dataInicio);
                         cmd.Parameters.AddWithValue("@INdatDataEmissaoFim", dataFim);
-                        cmd.Parameters.AddWithValue("@INvchCnpjCpf", cnpjCpf);
-                        if(idProduto != null)
-                        {
+                        if(cnpjCpf != null)
+                            cmd.Parameters.AddWithValue("@INvchCnpjCpf", cnpjCpf);
+                        else                       
+                            cmd.Parameters.AddWithValue("@INvchCnpjCpf", DBNull.Value);
+                        
+                        if (idProduto != null)                        
                             cmd.Parameters.AddWithValue("@INintIdProduto", idProduto);
-                        }
+                        
                         
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
@@ -50,7 +54,7 @@ namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
 
         }
 
-        public void CriaNotasItensZanup()
+        public async Task CriaNotasItensZanup(NotaProdutoDTO valor)
         {
 
         }

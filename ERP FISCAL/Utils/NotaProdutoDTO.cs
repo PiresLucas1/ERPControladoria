@@ -20,6 +20,16 @@ namespace ERP_FISCAL.Utils
         public decimal IcmsAliquota { get; set; }
         public decimal IcmsValor { get; set; }
         public string ChaveAcesso { get; set; }
+
+        //opcionais
+        public string? CpfCnpj { get; set; }
+        public string? Destinatario { get; set; }
+        public string? InscricaoEstadualDestinatario { get; set; }
+        public string? NumeroEnderecoDestinatario { get; set; }
+        public string? BairroEnderecoDestinatario { get; set; }
+        public string? CepEnderecoDestinatario { get; set; }
+        public string? NomeMunicipioEnderecoDestinatario { get; set; }
+        public string? UfEnderecoDestinatario { get; set; }
     }
 
 }

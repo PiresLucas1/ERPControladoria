@@ -30,6 +30,7 @@
         {
             this.tbCnpjCpf = new System.Windows.Forms.TextBox();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
+            this.cbLinhasSelecionadas = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tbIdProduto = new System.Windows.Forms.TextBox();
             this.dtFim = new System.Windows.Forms.DateTimePicker();
@@ -46,7 +47,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.gbActionsBottom = new System.Windows.Forms.GroupBox();
             this.dvgRetorno = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
-            this.cbLinhasSelecionadas = new System.Windows.Forms.CheckBox();
             this.gbFiltros.SuspendLayout();
             this.gbActionsBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dvgRetorno)).BeginInit();
@@ -77,6 +77,17 @@
             this.gbFiltros.TabIndex = 3;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
+            // 
+            // cbLinhasSelecionadas
+            // 
+            this.cbLinhasSelecionadas.AutoSize = true;
+            this.cbLinhasSelecionadas.Location = new System.Drawing.Point(747, 64);
+            this.cbLinhasSelecionadas.Name = "cbLinhasSelecionadas";
+            this.cbLinhasSelecionadas.Size = new System.Drawing.Size(224, 24);
+            this.cbLinhasSelecionadas.TabIndex = 11;
+            this.cbLinhasSelecionadas.Text = "Exibir Linhas Selecionadas";
+            this.cbLinhasSelecionadas.UseVisualStyleBackColor = true;
+            this.cbLinhasSelecionadas.CheckedChanged += new System.EventHandler(this.cbLinhasSelecionadas_CheckedChanged);
             // 
             // label4
             // 
@@ -155,6 +166,7 @@
             this.btnCriarNota.TabIndex = 7;
             this.btnCriarNota.Text = "Criar nota";
             this.btnCriarNota.UseVisualStyleBackColor = true;
+            this.btnCriarNota.Click += new System.EventHandler(this.btnCriarNota_Click_1);
             // 
             // btnMarcarTodos
             // 
@@ -228,16 +240,6 @@
             this.dvgRetorno.RowTemplate.Height = 28;
             this.dvgRetorno.Size = new System.Drawing.Size(1489, 575);
             this.dvgRetorno.TabIndex = 4;
-            // 
-            // cbLinhasSelecionadas
-            // 
-            this.cbLinhasSelecionadas.AutoSize = true;
-            this.cbLinhasSelecionadas.Location = new System.Drawing.Point(747, 64);
-            this.cbLinhasSelecionadas.Name = "cbLinhasSelecionadas";
-            this.cbLinhasSelecionadas.Size = new System.Drawing.Size(336, 36);
-            this.cbLinhasSelecionadas.TabIndex = 11;
-            this.cbLinhasSelecionadas.Text = "Exibir Linhas Selecionadas";
-            this.cbLinhasSelecionadas.UseVisualStyleBackColor = true;
             // 
             // ConsultaNotaItem
             // 

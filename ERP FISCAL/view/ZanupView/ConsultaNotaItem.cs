@@ -30,7 +30,7 @@ namespace ERP_FISCAL.view.ZanupView
             }
            DateTime dataInicio = dtInicio.Value;
            DateTime dataFim = dtFim.Value;
-           string cnpjCpf = tbCnpjCpf.Text;
+           string cnpjCpf = tbCnpjCpf.Text == "" ? null : tbCnpjCpf.Text;
            int idProduto = tbIdProduto.Text != "" ? int.Parse(tbIdProduto.Text) : 0;
            await CarregaGrid(dataInicio, dataFim, cnpjCpf, idProduto);
 
@@ -39,6 +39,8 @@ namespace ERP_FISCAL.view.ZanupView
         {            
             try
             {
+                BindingSource bsRetorno = new BindingSource();
+
                 ProcessStatusManager.Start("Carregando dados...");
                 ProcessStatusManager.Update("Processando...");
                 btnPesquisa.Enabled = false;
@@ -46,8 +48,11 @@ namespace ERP_FISCAL.view.ZanupView
                 ConsultaNotasZanupItemController consultaSaldoNotasController = new ConsultaNotasZanupItemController();
                 DataTable retorno = await consultaSaldoNotasController.ConsultaNotasZanupItem(dataInicio, dataFim, cnpjCpf, idProduto);
 
-                AdicionaColunaCheckBox();
-                dvgRetorno.DataSource = retorno;
+                DataTable dtFormatada = AdicionaColunaCheckBox(retorno);
+                bsRetorno.DataSource = dtFormatada;
+
+                dvgRetorno.DataSource = bsRetorno;
+                dvgRetorno.Columns["Selecionar"].DisplayIndex = 0;
             }
             catch (Exception ex)
             {
@@ -60,23 +65,29 @@ namespace ERP_FISCAL.view.ZanupView
             }
                                    
         }
-        public void AdicionaColunaCheckBox()
+        public DataTable AdicionaColunaCheckBox(DataTable retorno)
         {
-            if (!dvgRetorno.Columns.Contains("Selecionar"))
-            {                                
-                dvgRetorno.Columns.Clear();
-                DataGridViewCheckBoxColumn colSelecionar = new DataGridViewCheckBoxColumn
-                {
-                    Name = "Selecionar",
-                    HeaderText = "",
-                    Width = 30,
-                    ReadOnly = false,
-                    FalseValue = false,
-                    TrueValue = true
-                };
-                dvgRetorno.Columns.Insert(0, colSelecionar);
+            if (!retorno.Columns.Contains("Selecionar"))
+            {
+                DataColumn col = new DataColumn("Selecionar", typeof(bool));
+                col.DefaultValue = false;
+                retorno.Columns.Add(col);
             }
-
+            return retorno;
+            //if (!dvgRetorno.Columns.Contains("Selecionar"))
+            //{                                
+            //    dvgRetorno.Columns.Clear();
+            //    DataGridViewCheckBoxColumn colSelecionar = new DataGridViewCheckBoxColumn
+            //    {
+            //        Name = "Selecionar",
+            //        HeaderText = "Selecionar",
+            //        Width = 30,
+            //        ReadOnly = false,
+            //        FalseValue = false,
+            //        TrueValue = true
+            //    };
+            //    dvgRetorno.Columns.Insert(0, colSelecionar);
+            //}
         }
 
         private void btnMarcarTodos_Click(object sender, EventArgs e)
@@ -95,39 +106,57 @@ namespace ERP_FISCAL.view.ZanupView
             }
         }
 
-        //private void btnCriarNota_Click(object sender, EventArgs e)
-        //{
-        //    List<NotaProdutoDTO> linhasSelecionadas = dvgRetorno.Rows
-        //        .Cast<DataGridViewRow>()
-        //        .Where(r => !r.IsNewRow &&
-        //                     r.Cells["Selecionar"].Value !=null && (bool)r.Cells["Selecionar"].Value)
-        //        .Select(r => new NotaProdutoDTO
-        //        {
-        //            CnpjCpf = r.Cells["CnpjCpf"].Value?.ToString(),
-        //            Nome = r.Cells["NomeCliente"].Value?.ToString(),
-        //            NumeroNota = Convert.ToInt32(r.Cells["NumeroNota"].Value),
-        //            Serie = r.Cells["Serie"].Value?.ToString(),
-        //            DataEmissao = Convert.ToDateTime(r.Cells["DataEmissao"].Value),
-        //            CodigoProduto = Convert.ToInt32(r.Cells["CodigoProduto"].Value),
-        //            Produto = r.Cells["DescricaoProduto"].Value?.ToString(),
-        //            ValorTotalProduto = Convert.ToDecimal(r.Cells["ValorTotalProduto"].Value),
-        //            IcmsBase = Convert.ToDecimal(r.Cells["IcmsBase"].Value),
-        //            IcmsAliquota = Convert.ToDecimal(r.Cells["IcmsAliquota"].Value),
-        //            IcmsValor = Convert.ToDecimal(r.Cells["IcmsValor"].Value),
-        //            ChaveAcesso = r.Cells["ChaveAcesso"].Value?.ToString()
-        //        })
-        //        .ToList();
+        private void cbLinhasSelecionadas_CheckedChanged(object sender, EventArgs e)
+        {
+            BindingSource bs = dvgRetorno.DataSource as BindingSource;            
+            if (cbLinhasSelecionadas.Checked)
+            {
+                bs.Filter = "Selecionar = true";
+                
+            }
+            else
+            {
+                bs.RemoveFilter();
+                
+            }
+        }
 
-        //    if (!linhasSelecionadas.Any())
-        //    {
-        //        MessageBox.Show("Nenhuma nota Selecionada.");
-        //        return;
-        //    }
-        //    ConsultaNotasZanupItemController consultaNotasZanupItemController = new ConsultaNotasZanupItemController();
-        //    consultaNotasZanupItemController.CriaNotaZanup(linhasSelecionadas);
-             
+        private async Task CriarNotaBling(List<NotaProdutoDTO> linhasSelecionadas)
+        {          
+            ConsultaNotasZanupItemController consultaNotasZanupItemController = new ConsultaNotasZanupItemController();
+            await consultaNotasZanupItemController.CriaNotaZanup(linhasSelecionadas);
+        }
 
+        private async void btnCriarNota_Click_1(object sender, EventArgs e)
+        {
+            List<NotaProdutoDTO> linhasSelecionadas = dvgRetorno.Rows
+               .Cast<DataGridViewRow>()
+               .Where(r => !r.IsNewRow &&
+                            r.Cells["Selecionar"].Value != null && (bool)r.Cells["Selecionar"].Value)
+               .Select(r => new NotaProdutoDTO
+               {
+                   CnpjCpf = r.Cells["CnpjCpf"].Value?.ToString(),
+                   Nome = r.Cells["NomeCliente"].Value?.ToString(),
+                   NumeroNota = Convert.ToInt32(r.Cells["NumeroNota"].Value),
+                   Serie = r.Cells["Serie"].Value?.ToString(),
+                   DataEmissao = Convert.ToDateTime(r.Cells["DataEmissao"].Value),
+                   CodigoProduto = Convert.ToInt32(r.Cells["CodigoProduto"].Value),
+                   Produto = r.Cells["DescricaoProduto"].Value?.ToString(),
+                   ValorTotalProduto = Convert.ToDecimal(r.Cells["ValorTotalProduto"].Value),
+                   IcmsBase = Convert.ToDecimal(r.Cells["IcmsBase"].Value),
+                   IcmsAliquota = Convert.ToDecimal(r.Cells["IcmsAliquota"].Value),
+                   IcmsValor = Convert.ToDecimal(r.Cells["IcmsValor"].Value),
+                   ChaveAcesso = r.Cells["ChaveAcesso"].Value?.ToString()
+               })
+               .ToList();
 
-        //}
+            if (!linhasSelecionadas.Any())
+            {
+                MessageBox.Show("Nenhuma nota Selecionada.");
+                return;
+            }
+           await CriarNotaBling(linhasSelecionadas);
+            
+        }
     }
 }
