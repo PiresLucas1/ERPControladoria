@@ -169,6 +169,7 @@
     <Compile Include="Repositories\RepositoriesAlterarContaDebito\AlteraContaDebitoRepositories.cs" />
     <Compile Include="Repositories\SegCadastroRepositories\SegCadastroRepositories.cs" />
     <Compile Include="Service\BlingService.ts\BlingService.cs" />
+    <Compile Include="Service\BlingService.ts\CriarNotaBlingDinamica.cs" />
     <Compile Include="Service\BlingService.ts\DtoBlingNotaFiscal.cs" />
     <Compile Include="Service\BlingService.ts\DtoDataRowToDocumentoNota.cs" />
     <Compile Include="Service\UploadFile\UploadFileService.cs" />

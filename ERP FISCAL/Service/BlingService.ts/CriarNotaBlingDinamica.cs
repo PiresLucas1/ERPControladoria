@@ -4,22 +4,23 @@ using ERP_FISCAL.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ERP_FISCAL.NotaDinamicaBling
 {
     public class CriarNotaBlingDinamica
     {
-        public async Task ExecutarCriacaoNota(NotaProdutoDTO nota)
+        public async Task<HttpResponseMessage> ExecutarCriacaoNota(NotaProdutoDTO nota)
         {
             BlingService blingService = new BlingService();
             DateTime dataAtual = DateTime.Now;            
             string dataAtualFormatada = dataAtual.ToString("yyyy-MM-dd");
 
-
+            var response = new HttpResponseMessage();
             NotaFiscal notaFiscal = new NotaFiscal();
-
             NotaFiscal novaNotaFiscal = new NotaFiscal
             {
                 Tipo = 1,
@@ -56,19 +57,19 @@ namespace ERP_FISCAL.NotaDinamicaBling
                 //},
                 Contato = new Contato
                 {
-                    NumeroDocumento = "46.054.219/0001-74",
-                    Nome = "SOLFARMA COMERCIO DE PRODUTOS FARMACEUTICOS S.A.",
-                    tipoPessoa = "J",
+                    NumeroDocumento = nota.CnpjCpf,
+                    Nome = nota.Nome,
+                    tipoPessoa = nota.CpfCnpj.Length > 11 ? "F" : "J" ,
                     contribuinte = 1,
-                    ie = 210030251111,
+                    ie = long.Parse(nota.InscricaoEstadualDestinatario),
                     endereco = new EnderecoCliente
                     {
-                        endereco = "Avenida João Ferreira Penna",
-                        numero = 147,
-                        bairro = "DISTRITO INDUSTRIAL III",
-                        cep = "14707-002",
-                        municipio = "Bebedouro",
-                        uf = "SP"
+                        endereco = nota.NumeroEnderecoDestinatario,
+                        numero = 0,
+                        bairro = nota.BairroEnderecoDestinatario,
+                        cep = nota.CepEnderecoDestinatario,
+                        municipio = nota.NomeMunicipioEnderecoDestinatario,
+                        uf = nota.UfEnderecoDestinatario
 
                     }
                 },
@@ -84,9 +85,9 @@ namespace ERP_FISCAL.NotaDinamicaBling
                     },
                     Transportador = new Transportador
                     {
-                        Nome = "SOLFARMA COMERCIO DE PRODUTOS FARMACEUTICOS S.A.",
+                        Nome = nota.CnpjCpf,
                         NumeroDocumento = "",
-                        Ie = "",
+                        Ie = nota.InscricaoEstadualDestinatario,
                         Endereco = new Endereco
                         {
                             Uf = "",
@@ -108,7 +109,7 @@ namespace ERP_FISCAL.NotaDinamicaBling
                 {
                     new Parcela
                     {
-                        Data= dataAtual,
+                        Data= dataAtual.ToShortDateString(),
                         Valor =0,
                         Observacoes="",
                         Caut="",
@@ -119,9 +120,24 @@ namespace ERP_FISCAL.NotaDinamicaBling
 
                     }
                 },
-                Itens = new List<Item>()
+                Itens = new List<Item>
+                {
+                    new Item
+                    {                        
+                        Codigo = nota.CodigoProduto.ToString(),
+                        Unidade = "UN",
+                        Quantidade = nota.QtdParaDevolver,
+                        Valor = nota.ValorTotalProduto
+                    }
+                }
             };
-            //await blingService.CriarNotaFiscalDinamica(nota);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(novaNotaFiscal, Newtonsoft.Json.Formatting.Indented);
+            
+            response = await blingService.CriarNotaAsync(novaNotaFiscal);
+            await Task.Delay(7000);
+            
+            return response;
+            
         }
     }
 }

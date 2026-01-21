@@ -230,6 +230,8 @@
             // 
             // dvgRetorno
             // 
+            this.dvgRetorno.AllowUserToAddRows = false;
+            this.dvgRetorno.AllowUserToDeleteRows = false;
             this.dvgRetorno.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));

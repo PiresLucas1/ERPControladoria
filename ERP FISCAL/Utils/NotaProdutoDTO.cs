@@ -21,6 +21,8 @@ namespace ERP_FISCAL.Utils
         public decimal IcmsValor { get; set; }
         public string ChaveAcesso { get; set; }
 
+        public int QtdParaDevolver { get; set; }
+
         //opcionais
         public string? CpfCnpj { get; set; }
         public string? Destinatario { get; set; }

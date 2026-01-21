@@ -73,6 +73,12 @@ namespace ERP_FISCAL.view.ZanupView
                 col.DefaultValue = false;
                 retorno.Columns.Add(col);
             }
+            if(!retorno.Columns.Contains("QtdParaDevolver"))
+            {
+                DataColumn colQtdParaDevolver = new DataColumn("QtdParaDevolver", typeof(int));
+                colQtdParaDevolver.DefaultValue = 0;
+                retorno.Columns.Add(colQtdParaDevolver);
+            }
             return retorno;
             //if (!dvgRetorno.Columns.Contains("Selecionar"))
             //{                                
@@ -89,6 +95,7 @@ namespace ERP_FISCAL.view.ZanupView
             //    dvgRetorno.Columns.Insert(0, colSelecionar);
             //}
         }
+        
 
         private void btnMarcarTodos_Click(object sender, EventArgs e)
         {
@@ -135,18 +142,20 @@ namespace ERP_FISCAL.view.ZanupView
                             r.Cells["Selecionar"].Value != null && (bool)r.Cells["Selecionar"].Value)
                .Select(r => new NotaProdutoDTO
                {
-                   CnpjCpf = r.Cells["CnpjCpf"].Value?.ToString(),
-                   Nome = r.Cells["NomeCliente"].Value?.ToString(),
-                   NumeroNota = Convert.ToInt32(r.Cells["NumeroNota"].Value),
+                   CnpjCpf = r.Cells["CPF/CNPJ"].Value?.ToString(),
+                   Nome = r.Cells["Nome Destinatario"].Value?.ToString(),
+                   NumeroNota = Convert.ToInt32(r.Cells["Num. Nota"].Value),
                    Serie = r.Cells["Serie"].Value?.ToString(),
-                   DataEmissao = Convert.ToDateTime(r.Cells["DataEmissao"].Value),
-                   CodigoProduto = Convert.ToInt32(r.Cells["CodigoProduto"].Value),
-                   Produto = r.Cells["DescricaoProduto"].Value?.ToString(),
+                   DataEmissao = Convert.ToDateTime(r.Cells["Data Emissão"].Value),
+                   CodigoProduto = Convert.ToInt32(r.Cells["Cod. Produto"].Value),
+                   Produto = r.Cells["Produto"].Value?.ToString(),
                    ValorTotalProduto = Convert.ToDecimal(r.Cells["ValorTotalProduto"].Value),
-                   IcmsBase = Convert.ToDecimal(r.Cells["IcmsBase"].Value),
-                   IcmsAliquota = Convert.ToDecimal(r.Cells["IcmsAliquota"].Value),
-                   IcmsValor = Convert.ToDecimal(r.Cells["IcmsValor"].Value),
-                   ChaveAcesso = r.Cells["ChaveAcesso"].Value?.ToString()
+                   IcmsBase = Convert.ToDecimal(r.Cells["ICMSBase"].Value),
+                   IcmsAliquota = Convert.ToDecimal(r.Cells["ICMSAliquota"].Value),
+                   IcmsValor = Convert.ToDecimal(r.Cells["ICMSValor"].Value),
+                   ChaveAcesso = r.Cells["ChaveAcesso"].Value?.ToString(),
+                   QtdParaDevolver = r.Cells["QtdParaDevolver"].Value != null ? Convert.ToInt32(r.Cells["QtdParaDevolver"].Value) : 0,
+
                })
                .ToList();
 
