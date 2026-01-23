@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>62</ApplicationRevision>
+    <ApplicationRevision>63</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -220,14 +220,14 @@
     <Compile Include="view\FiscalView\AlteraTipoMovimento.Designer.cs">
       <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\FiscalView\ExportaXml.cs">
+    <Compile Include="view\FiscalView\ExportaXmlPasta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\FiscalView\ExportaXml.Designer.cs">
-      <DependentUpon>ExportaXml.cs</DependentUpon>
+    <Compile Include="view\FiscalView\ExportaXmlPasta.Designer.cs">
+      <DependentUpon>ExportaXmlPasta.cs</DependentUpon>
     </Compile>
     <Compile Include="view\FiscalView\VisuExportacaoXml.cs">
-      <SubType>Form</SubType>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="view\FiscalView\VisuExportacaoXml.Designer.cs">
       <DependentUpon>VisuExportacaoXml.cs</DependentUpon>
@@ -281,11 +281,11 @@
     <Compile Include="view\ContabilView\ImportacaoRecebimento.Designer.cs">
       <DependentUpon>ImportacaoRecebimento.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\FiscalView\ExportaDadosBig.cs">
+    <Compile Include="view\FiscalView\ImportaDadosBigTotvs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\FiscalView\ExportaDadosBig.Designer.cs">
-      <DependentUpon>ExportaDadosBig.cs</DependentUpon>
+    <Compile Include="view\FiscalView\ImportaDadosBigTotvs.Designer.cs">
+      <DependentUpon>ImportaDadosBigTotvs.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Interfaces\IProdutoServicoType.cs" />
     <Compile Include="view\SubTipos\DataGridViewCustomBox.cs" />
@@ -305,11 +305,11 @@
       <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
     </Compile>
     <Compile Include="view\UIComponentes\UIDialog\IUInterfaces\IDialogoInsereInformacao.cs" />
-    <Compile Include="view\FiscalView\ImportarNotaView.cs">
+    <Compile Include="view\FiscalView\ExportarNotasTotvs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\FiscalView\ImportarNotaView.Designer.cs">
-      <DependentUpon>ImportarNotaView.cs</DependentUpon>
+    <Compile Include="view\FiscalView\ExportarNotasTotvs.Designer.cs">
+      <DependentUpon>ExportarNotasTotvs.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -361,8 +361,8 @@
       <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\FiscalView\ExportaXml.resx">
-      <DependentUpon>ExportaXml.cs</DependentUpon>
+    <EmbeddedResource Include="view\FiscalView\ExportaXmlPasta.resx">
+      <DependentUpon>ExportaXmlPasta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\FiscalView\VisuExportacaoXml.resx">
       <DependentUpon>VisuExportacaoXml.cs</DependentUpon>
@@ -391,8 +391,8 @@
     <EmbeddedResource Include="view\ContabilView\ImportacaoRecebimento.resx">
       <DependentUpon>ImportacaoRecebimento.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\FiscalView\ExportaDadosBig.resx">
-      <DependentUpon>ExportaDadosBig.cs</DependentUpon>
+    <EmbeddedResource Include="view\FiscalView\ImportaDadosBigTotvs.resx">
+      <DependentUpon>ImportaDadosBigTotvs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\UIComponentes\UIConsultaItem\ConsultaItem.resx">
       <DependentUpon>ConsultaItem.cs</DependentUpon>
@@ -401,8 +401,8 @@
     <EmbeddedResource Include="view\UIComponentes\UIDialog\DialogInsereInformacao.resx">
       <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\FiscalView\ImportarNotaView.resx">
-      <DependentUpon>ImportarNotaView.cs</DependentUpon>
+    <EmbeddedResource Include="view\FiscalView\ExportarNotasTotvs.resx">
+      <DependentUpon>ExportarNotasTotvs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

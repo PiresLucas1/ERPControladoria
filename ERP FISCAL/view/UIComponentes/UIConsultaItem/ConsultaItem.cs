@@ -19,8 +19,8 @@ namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
         DataGridViewRow row;
         int coligada;
         DataGridViewRow rowSelecionada = null;
-        ImportarNotaView importarNotaViewForm;
-        public ConsultaItem(DataGridViewRow row, int coligada, UIController controller, String Name, ImportarNotaView importarNotaViewForm)
+        ExportarNotasTotvs importarNotaViewForm;
+        public ConsultaItem(DataGridViewRow row, int coligada, UIController controller, String Name, ExportarNotasTotvs importarNotaViewForm)
         {
             InitializeComponent();
             this.controller = controller;

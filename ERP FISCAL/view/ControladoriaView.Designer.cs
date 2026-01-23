@@ -59,7 +59,7 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.txtNomeUsuario = new System.Windows.Forms.ToolStripMenuItem();
-            this.criarNotaZanupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.criarNotaZanupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem(); 
             this.menuBarTop.SuspendLayout();
             this.menuBarBottom.SuspendLayout();
             this.SuspendLayout();
@@ -329,7 +329,7 @@
             this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1840, 875);
+            this.ClientSize = new System.Drawing.Size(1840, 875);            
             this.Controls.Add(this.menuBarBottom);
             this.Controls.Add(this.menuBarTop);
             this.DoubleBuffered = true;
@@ -382,6 +382,6 @@
         private System.Windows.Forms.ToolStripMenuItem gerencialToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem metaComissãoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem farmaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem criarNotaZanupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem criarNotaZanupToolStripMenuItem;       
     }
 }

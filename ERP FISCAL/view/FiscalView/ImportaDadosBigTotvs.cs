@@ -16,9 +16,9 @@ using System.Windows.Forms;
 
 namespace ERP_FISCAL.view
 {
-    public partial class ExportaDadosBig : Form
+    public partial class ImportaDadosBigTotvs : Form
     {
-        public ExportaDadosBig()
+        public ImportaDadosBigTotvs()
         {
             InitializeComponent();
             cbConferida.Items.Add("Sim");
@@ -148,7 +148,7 @@ namespace ERP_FISCAL.view
 
             foreach (DataGridViewRow row in dtNotasImportadas.SelectedRows)
             {
-                row.DefaultCellStyle.BackColor = Color.LightYellow;
+                row.DefaultCellStyle.BackColor = Color.LimeGreen;
 
             }
 

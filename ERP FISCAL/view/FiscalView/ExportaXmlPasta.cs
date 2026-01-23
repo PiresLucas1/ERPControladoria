@@ -1,4 +1,5 @@
-﻿using ERP_FISCAL.Controller.ExportaXmlController;
+﻿using DocumentFormat.OpenXml.Office.SpreadSheetML.Y2023.MsForms;
+using ERP_FISCAL.Controller.ExportaXmlController;
 using ERP_FISCAL.Repositories.ExportarXmlRepositories;
 using ERP_FISCAL.Utils;
 using System;
@@ -8,15 +9,17 @@ using System.Windows.Forms;
 
 namespace ERP_FISCAL.view.FiscalView
 {
-    public partial class ExportaXml : Form
+    public partial class ExportaXmlPasta : Form
     {
-        public ExportaXml()
+        Portal _formFocus = null;
+        public ExportaXmlPasta(Portal _form)
         {
             InitializeComponent();
             carregaComboBox();
             string placeholderText = "Ex: \\\\192.168.30.48\\xml\\2025 - 11 - 21_a_26\\";
             tbLocalExport.Text = placeholderText;
             tbLocalExport.ForeColor = SystemColors.GrayText;
+            _formFocus = _form;
             //AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
         }
         public void carregaComboBox()
@@ -43,17 +46,21 @@ namespace ERP_FISCAL.view.FiscalView
                 modeloDocumento = cbModeloDocumento.Text.Substring(0, 2);
 
             }
+
+            //var progress = new Progress<string>(s =>
+            //{
+            //    view.AlteraTipoMovimento(s);
+            //});
+
             string cabecalhoDePesquisa = tbLocalExport.Text + dtInicio.Value.ToString() + dtFim.Text.ToString();
-            VisuExportacaoXml view = new VisuExportacaoXml(cabecalhoDePesquisa);
-            view.Visible = true;
 
-            var progress = new Progress<string>(mensagem =>
-            {
-                view.AlteraValorTexto(mensagem);
-            });
+            _formFocus.AbrirFecharMonitoramentoExportacao(cabecalhoDePesquisa);
 
-            DataTable retorno =  await exportaXmlController.ExportaXmlPostoLago(dtInicio.Value, dtFim.Value, tbLocalExport.Text, modeloDocumento ?? "", cbTipoExportacao.Text == "Sim" ? 1 : 0, progress);
-                                
+            this.Visible = false;
+            DataTable retorno =  await exportaXmlController.ExportaXmlPostoLago(dtInicio.Value, dtFim.Value, tbLocalExport.Text, modeloDocumento ?? "", cbTipoExportacao.Text == "Sim" ? 1 : 0);
+            _formFocus.AbrirFecharMonitoramentoExportacao();
+            this.Close();
+
         }
 
     }

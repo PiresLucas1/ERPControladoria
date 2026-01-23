@@ -11,24 +11,20 @@ using System.Windows.Forms;
 namespace ERP_FISCAL.view.FiscalView
 {
     
-    public partial class VisuExportacaoXml : Form
+    public partial class VisuExportacaoXml : UserControl
     {
         public static string valorRb { get; set; }
         public VisuExportacaoXml(string value = "")
         {
             InitializeComponent();
             header.Text = value;
+            AlteraValorTexto();
 
 
         }
-
-        private void rtBoxResultado_TextChanged(object sender, EventArgs e)
+        public void AlteraValorTexto(string valor ="")
         {
-
-        }
-        public void AlteraValorTexto(string valor)
-        {
-            rtBoxResultado.Text = valorRb;
+            rtBoxResultado.Text = "Importando XMLs... Aguarde o processo ser concluído!";
         }
     }
 }

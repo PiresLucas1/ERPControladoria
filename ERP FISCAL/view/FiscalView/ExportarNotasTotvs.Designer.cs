@@ -1,6 +1,6 @@
 ﻿namespace ERP_FISCAL
 {
-    partial class ImportarNotaView
+    partial class ExportarNotasTotvs
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportarNotaView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportarNotasTotvs));
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.btnListaNotas = new System.Windows.Forms.Button();
             this.btnExportarTotvs = new System.Windows.Forms.Button();

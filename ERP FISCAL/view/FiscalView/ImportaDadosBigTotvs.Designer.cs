@@ -1,6 +1,6 @@
 ﻿namespace ERP_FISCAL.view
 {
-    partial class ExportaDadosBig
+    partial class ImportaDadosBigTotvs
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportaDadosBig));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportaDadosBigTotvs));
             this.dtPickerInicio = new System.Windows.Forms.DateTimePicker();
             this.dtPickerFinal = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();

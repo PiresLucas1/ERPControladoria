@@ -20,7 +20,7 @@ using TextBox = System.Windows.Forms.TextBox;
 
 namespace ERP_FISCAL
 {
-    public partial class ImportarNotaView : Form
+    public partial class ExportarNotasTotvs : Form
     {
         public string cfopSelecionado;
         public string valorDeCelula;
@@ -28,7 +28,7 @@ namespace ERP_FISCAL
         public DataGridViewRow cellAlteracao;
         public int colAlteracao;
         private DataTable dtOrignal;
-        public ImportarNotaView()
+        public ExportarNotasTotvs()
         {
             InitializeComponent();
             this.Resize += new System.EventHandler(this.ResizeForm);
@@ -311,6 +311,11 @@ namespace ERP_FISCAL
                 var valorRetorno = row.Cells["Retorno"].Value?.ToString();
                 if (!string.IsNullOrWhiteSpace(valorRetorno))
                 {
+                    if (valorRetorno.Contains("Sucesso"))
+                    {
+                        row.DefaultCellStyle.BackColor = Color.LimeGreen; // Cor da linha
+                        row.DefaultCellStyle.ForeColor = Color.Black;      // Cor do texto
+                    }
                     row.DefaultCellStyle.BackColor = Color.LightSalmon; // Cor da linha
                     row.DefaultCellStyle.ForeColor = Color.Black;      // Cor do texto
                 }

@@ -14,6 +14,7 @@ using System.Windows.Forms;
 
 namespace ERP_FISCAL.view
 {
+    
     public enum MenuTela
     {
         AlteracaoFiscal = 1,
@@ -30,12 +31,15 @@ namespace ERP_FISCAL.view
         public string nomeUsuario = "";
         public int perfil = 0;
         public int contadorTheme = 0;
+        private VisuExportacaoXml monitoramentoExportacao;
         public Portal()
         {
             InitializeComponent();
+            this.IsMdiContainer = true;                
 
-            this.Shown += Portal_Shown;           
-            DesabilitaItemMenu(menuBarTop,"", false);
+
+            this.Shown += Portal_Shown;
+            DesabilitaItemMenu(menuBarTop, "", false);
             this.nomeUsuario = Environment.UserName;
 
             // 🔹 Carrega a cor salva
@@ -52,8 +56,8 @@ namespace ERP_FISCAL.view
             txtVersao.Text = $"Versão: {versaoAssembly}";
             txtNomeUsuario.Text = $"Usuário: {nomeUsuario}";
 
-            
-            AplicarFonte.AplicarFonteForm(this,new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
+
+            AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
 
 
         }
@@ -63,7 +67,7 @@ namespace ERP_FISCAL.view
             this.Shown -= Portal_Shown;
 
             PrimeiroLogin primeiroLogin = new PrimeiroLogin();
-            primeiroLogin.StartPosition = FormStartPosition.CenterScreen;                
+            primeiroLogin.StartPosition = FormStartPosition.CenterScreen;
             primeiroLogin.Show();   // Aparece apenas uma vez
 
             await Task.Delay(2000); // Simula tempo de carregamento
@@ -88,13 +92,13 @@ namespace ERP_FISCAL.view
             {
                 DesabilitaItemMenu(menuBarTop, "", true);
             }
-            if(usuario == nomeUsuario)
+            if (usuario == nomeUsuario)
             {
-                
+
                 LiberaOpcoesDeAcordoComPermissoes(perfil);
             }
 
-            
+
             // Fecha o splash!
             primeiroLogin.Close();
 
@@ -105,7 +109,7 @@ namespace ERP_FISCAL.view
             switch (permissaoMenu)
             {
                 case 1:
-                    DesabilitaItemMenu(menuBarTop, "FiscalMenu",true);
+                    DesabilitaItemMenu(menuBarTop, "FiscalMenu", true);
                     cadastrarUsuarioToolStripMenuItem.Enabled = false;
                     cadastrarUsuarioToolStripMenuItem.Visible = false;
                     break;
@@ -119,26 +123,14 @@ namespace ERP_FISCAL.view
 
             }
 
-        }
-
-        private void importarNFSEToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ////ImportarNotaView eRPFiscal = new ImportarNotaView();
-            ////eRPFiscal.Show();
-
-            //using (var eRPFiscal = new ImportarNotaView())
-            //{
-            //    eRPFiscal.ShowDialog(this);
-            //}
-
-        }
-
+        }    
         private void importarToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            if (!FormAberto(typeof(ImportarNotaView)))
+            if (!FormAberto(typeof(ExportarNotasTotvs)))
             {
-                ImportarNotaView eRPFiscal = new ImportarNotaView();                
+                ExportarNotasTotvs eRPFiscal = new ExportarNotasTotvs();
+                eRPFiscal.MdiParent = this;
                 eRPFiscal.Show();
 
             }
@@ -146,9 +138,10 @@ namespace ERP_FISCAL.view
 
         private void importarNotasParaOBigToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(!FormAberto(typeof(ExportaDadosBig)))
+            if (!FormAberto(typeof(ImportaDadosBigTotvs)))
             {
-                ExportaDadosBig exportaDadosBig = new ExportaDadosBig();                
+                ImportaDadosBigTotvs exportaDadosBig = new ImportaDadosBigTotvs();
+                exportaDadosBig.MdiParent = this;
                 exportaDadosBig.Show();
             }
 
@@ -161,7 +154,7 @@ namespace ERP_FISCAL.view
             //    AlterarContaDebitoFrete alterarContaDebitoFrete = new AlterarContaDebitoFrete();
             //    alterarContaDebitoFrete.Show();
             //}
-            
+
         }
         private bool FormAberto(Type tipoForm)
         {
@@ -190,7 +183,7 @@ namespace ERP_FISCAL.view
 
                     // Se quiser pegar o valor RGB:
                     System.Drawing.Color corSelecionada = colorDialog.Color;
-                    
+
                     menuBarBottom.BackColor = corSelecionada;
                     menuBarTop.BackColor = corSelecionada;
                     txtVersao.BackColor = corSelecionada;
@@ -208,7 +201,8 @@ namespace ERP_FISCAL.view
         {
             if (!FormAberto(typeof(ConsultaSaldoNotasFiscais)))
             {
-                ConsultaSaldoNotasFiscais alteraTipoMovimento = new ConsultaSaldoNotasFiscais();                
+                ConsultaSaldoNotasFiscais alteraTipoMovimento = new ConsultaSaldoNotasFiscais();
+                alteraTipoMovimento.MdiParent = this;
                 alteraTipoMovimento.Show();
             }
         }
@@ -217,17 +211,19 @@ namespace ERP_FISCAL.view
         {
             if (!FormAberto(typeof(ImportacaoRecebimento)))
             {
-                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();                
+                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
+                importacaoRecebimento.MdiParent = this;
                 importacaoRecebimento.Show();
             }
-            
+
         }
 
         private void atualizarGestãoPatrimonialToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!FormAberto(typeof(ImportacaoRecebimento)))
             {
-                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();                
+                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
+                importacaoRecebimento.MdiParent = this;
                 importacaoRecebimento.Show();
             }
         }
@@ -239,7 +235,7 @@ namespace ERP_FISCAL.view
             if (contadorTheme == 5)
             {
                 MessageBox.Show("Tema Secreto habilitado");
-                
+
 
             }
         }
@@ -247,7 +243,7 @@ namespace ERP_FISCAL.view
         public void HabilitaThema()
         {
             string caminho = Path.Combine(Application.StartupPath, "theme", "themeDracula.json");
-            
+
             //this.BackColor 
 
         }
@@ -256,7 +252,8 @@ namespace ERP_FISCAL.view
         {
             if (!FormAberto(typeof(AlteraTipoMovimento)))
             {
-                AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();                
+                AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
+                alteraTipoMovimento.MdiParent = this;
                 alteraTipoMovimento.Show();
             }
         }
@@ -265,18 +262,20 @@ namespace ERP_FISCAL.view
         {
             if (!FormAberto(typeof(AlterarTipoMovimentoLista)))
             {
-                AlterarTipoMovimentoLista alteraTipoMovimentoLista = new AlterarTipoMovimentoLista();                
+                AlterarTipoMovimentoLista alteraTipoMovimentoLista = new AlterarTipoMovimentoLista();
+                alteraTipoMovimentoLista.MdiParent = this;
                 alteraTipoMovimentoLista.Show();
             }
         }
 
         private async void cadastrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(!FormAberto(typeof(CadUsu)))
+            if (!FormAberto(typeof(CadUsu)))
             {
                 SegCadastroController segCadastroController = new SegCadastroController();
                 DataTable dt = await segCadastroController.ListaDados("%", 1);
-                CadUsu cadastroUsuario = new CadUsu(dt);                
+                CadUsu cadastroUsuario = new CadUsu(dt);
+                cadastroUsuario.MdiParent = this;
                 cadastroUsuario.Show();
             }
         }
@@ -343,12 +342,13 @@ namespace ERP_FISCAL.view
 
         private void xMLPostoDoLagoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FormAberto(typeof(ExportaXml)))
+            if (!FormAberto(typeof(ExportaXmlPasta)))
             {
-                ExportaXml exportaXml = new ExportaXml();                
+                ExportaXmlPasta exportaXml = new ExportaXmlPasta(this);
+                exportaXml.MdiParent = this;
                 exportaXml.Show();
             }
-            
+
         }
 
         private void grandeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -374,12 +374,40 @@ namespace ERP_FISCAL.view
 
         private void criarNotaZanupToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FormAberto(typeof(ExportaXml)))
+            if (!FormAberto(typeof(ExportaXmlPasta)))
             {
                 ConsultaNotaItem consultaNotaItem = new ConsultaNotaItem();
+                consultaNotaItem.MdiParent = this;
                 consultaNotaItem.Show();
             }
         }
+
+        public void AbrirFecharMonitoramentoExportacao(string mensagem = null)
+        {
+            if (monitoramentoExportacao == null)
+            {
+                monitoramentoExportacao = new VisuExportacaoXml(mensagem);
+
+                monitoramentoExportacao.Anchor =
+                    AnchorStyles.Bottom | AnchorStyles.Right;
+
+                monitoramentoExportacao.Location = new Point(
+                    this.ClientSize.Width - monitoramentoExportacao.Width - 10,
+                    this.ClientSize.Height - monitoramentoExportacao.Height - 10
+                );
+
+                this.Controls.Add(monitoramentoExportacao);
+                monitoramentoExportacao.BringToFront();
+            }
+            else
+            {
+                this.Controls.Remove(monitoramentoExportacao);
+                monitoramentoExportacao.Dispose();
+                monitoramentoExportacao = null;
+            }
+        }
+
+
     }
 }
 

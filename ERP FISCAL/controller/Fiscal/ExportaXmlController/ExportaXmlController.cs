@@ -9,7 +9,7 @@ namespace ERP_FISCAL.Controller.ExportaXmlController
 {
     public class ExportaXmlController
     {
-        public async Task<DataTable> ExportaXmlPostoLago(DateTime dataInicio, DateTime dataFim, string localExportacao, string modeloDocumento, int exportarTudo, Progress<string> valor)
+        public async Task<DataTable> ExportaXmlPostoLago(DateTime dataInicio, DateTime dataFim, string localExportacao, string modeloDocumento, int exportarTudo, Progress<string> valor = null)
         {
             ExportarXmlRepositorio exportarXmlRepositorio = new ExportarXmlRepositorio();
             DataTable retorno = new DataTable();

@@ -1,6 +1,6 @@
 ﻿namespace ERP_FISCAL.view.FiscalView
 {
-    partial class ExportaXml
+    partial class ExportaXmlPasta
     {
         /// <summary>
         /// Required designer variable.
