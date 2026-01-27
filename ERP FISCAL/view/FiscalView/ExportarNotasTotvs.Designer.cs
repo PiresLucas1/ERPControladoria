@@ -34,6 +34,7 @@
             this.btnExportarTotvs = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnPreenche = new System.Windows.Forms.Button();
             this.btnAutoPreencherCfop = new System.Windows.Forms.Button();
             this.checkBoxMostraComErro = new System.Windows.Forms.CheckBox();
             this.cbLancadasNoERP = new System.Windows.Forms.CheckBox();
@@ -57,7 +58,6 @@
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnSelecionarTodas = new System.Windows.Forms.Button();
             this.dtImportacao = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
@@ -122,7 +122,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.btnPreenche);
             this.groupBox2.Controls.Add(this.btnAutoPreencherCfop);
             this.groupBox2.Location = new System.Drawing.Point(974, 76);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -132,6 +132,18 @@
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Auto preenchimento";
+            // 
+            // btnPreenche
+            // 
+            this.btnPreenche.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnPreenche.Location = new System.Drawing.Point(12, 83);
+            this.btnPreenche.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnPreenche.Name = "btnPreenche";
+            this.btnPreenche.Size = new System.Drawing.Size(183, 40);
+            this.btnPreenche.TabIndex = 13;
+            this.btnPreenche.Text = "Preencher campos";
+            this.btnPreenche.UseVisualStyleBackColor = true;
+            this.btnPreenche.Click += new System.EventHandler(this.btnPreenche_Click);
             // 
             // btnAutoPreencherCfop
             // 
@@ -374,17 +386,6 @@
             this.dtImportacao.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dtImportacao_EditingControlShowing);
             this.dtImportacao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
-            // button1
-            // 
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button1.Location = new System.Drawing.Point(12, 83);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(183, 40);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Preencher campos";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // ExportarNotasTotvs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -441,7 +442,7 @@
         private System.Windows.Forms.CheckBox checkBoxMostraComErro;
         private System.Windows.Forms.Button btnAutoPreencherCfop;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPreenche;
     }
 }
 

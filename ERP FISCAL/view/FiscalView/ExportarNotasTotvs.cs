@@ -1,4 +1,5 @@
-﻿using ERP_FISCAL.controller;
+﻿using ClosedXML;
+using ERP_FISCAL.controller;
 using ERP_FISCAL.Controller;
 using ERP_FISCAL.Utils;
 using ERP_FISCAL.view.DialogUI;
@@ -941,6 +942,14 @@ namespace ERP_FISCAL
             MessageBox.Show("CFOPs preenchidos automaticamente conforme regras definidas.");
         }
 
-
+        private void btnPreenche_Click(object sender, EventArgs e)
+        {            
+            foreach (DataGridViewRow item in dtImportacao.Rows)
+            {
+                var valorLinha = item.Cells["CNPJ Prestador"].Value;
+                //var retorno = consultaLinha(valorLinha)
+                //altera valor linha 
+            }
+        }
     }
 }
