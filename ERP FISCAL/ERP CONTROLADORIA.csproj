@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>63</ApplicationRevision>
+    <ApplicationRevision>64</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -146,8 +146,8 @@
     <Compile Include="Controller\Fiscal\AlteraTipoMovimentoController\AlterarTipoMovimento.cs" />
     <Compile Include="Controller\Zanup\ConsultaNotasItensController.cs" />
     <Compile Include="Controller\Zanup\ConsultaSaldoNotasZanupController.cs" />
-    <Compile Include="Controller\Fiscal\ExportaXmlController\ExportaXmlController.cs" />
-    <Compile Include="Controller\Fiscal\ImportarNotasController\CfopController.cs" />
+    <Compile Include="Controller\Fiscal\ExportaXmlWebPostoController\ExportaXmlController.cs" />
+    <Compile Include="Controller\Fiscal\ImportarNotasTotvsController\CfopController.cs" />
     <Compile Include="Controller\ContaDebitoFreteController\AlteraContaDebitoController.cs" />
     <Compile Include="Controller\Fiscal\ExportaDadosBigController\ExportaDadosBigController.cs" />
     <Compile Include="Controller\MetaComissaoFarmaController\MetaComissaoFarmaController.cs" />
@@ -164,7 +164,7 @@
     <Compile Include="Repositories\Zanup\ConsultaSaldoNotasZanupRepositories.cs" />
     <Compile Include="Repositories\Fiscal\ExportaDadosBigRepositories\ExportaDadosBigRepositories.cs" />
     <Compile Include="Repositories\Fiscal\ExportaDadosBigRepositories\RetornoExportaBig.cs" />
-    <Compile Include="Repositories\Fiscal\ExportarXmlRepositories\ExportarXmlRepositorio.cs" />
+    <Compile Include="Repositories\Fiscal\ExportarXmlWebPostoRepositories\ExportarXmlRepositorio.cs" />
     <Compile Include="Repositories\MetaComissaoFarmaRepositories\MetaComissaoFarmaRepositories.cs" />
     <Compile Include="Repositories\RepositoriesAlterarContaDebito\AlteraContaDebitoRepositories.cs" />
     <Compile Include="Repositories\SegCadastroRepositories\SegCadastroRepositories.cs" />
@@ -176,16 +176,17 @@
     <Compile Include="Service\BlingService.ts\CriaNotaBlingService.cs" />
     <Compile Include="Utils\AgrupaProdutosDaMesmaNota.cs" />
     <Compile Include="Utils\AplicarFonte.cs" />
+    <Compile Include="Utils\ControleNotasCriadaBling.cs" />
     <Compile Include="Utils\NotaProdutoDTO.cs" />
     <Compile Include="Utils\GetToken.cs" />
     <Compile Include="Utils\MascaraDeColuna.cs" />
-    <Compile Include="Controller\Fiscal\ImportarNotasController\ProdutoServicoController.cs" />
-    <Compile Include="Controller\Fiscal\ImportarNotasController\UIController.cs" />
-    <Compile Include="Repositories\Fiscal\ImportarNotasRepositories\CfopRepositories.cs" />
-    <Compile Include="Repositories\Fiscal\ImportarNotasRepositories\UIRepositorio.cs" />
-    <Compile Include="Repositories\Fiscal\ImportarNotasRepositories\NotasRepositories.cs" />
-    <Compile Include="Controller\Fiscal\ImportarNotasController\NotasController.cs" />
-    <Compile Include="Repositories\Fiscal\ImportarNotasRepositories\ProdutoServicoRepositories.cs" />
+    <Compile Include="Controller\Fiscal\ImportarNotasTotvsController\ProdutoServicoController.cs" />
+    <Compile Include="Controller\Fiscal\ImportarNotasTotvsController\UIController.cs" />
+    <Compile Include="Repositories\Fiscal\ImportarNotasTotvsRepositories\CfopRepositories.cs" />
+    <Compile Include="Repositories\Fiscal\ImportarNotasTotvsRepositories\UIRepositorio.cs" />
+    <Compile Include="Repositories\Fiscal\ImportarNotasTotvsRepositories\NotasRepositories.cs" />
+    <Compile Include="Controller\Fiscal\ImportarNotasTotvsController\NotasController.cs" />
+    <Compile Include="Repositories\Fiscal\ImportarNotasTotvsRepositories\ProdutoServicoRepositories.cs" />
     <Compile Include="Utils\dateParse.cs" />
     <Compile Include="Utils\DecimalParse.cs" />
     <Compile Include="Utils\theme\CoresConfig.cs" />

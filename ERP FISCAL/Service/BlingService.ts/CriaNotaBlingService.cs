@@ -1,17 +1,17 @@
 ﻿using ERP_FISCAL.Models;
 using ERP_FISCAL.service;
+using ERP_FISCAL.Utils;
 using ERP_FISCAL.view;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.Remoting.Messaging;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace ERP_FISCAL.Utils
+namespace ERP_FISCAL.Services
 {
     public class CriaNotaBlingService
     {
@@ -165,7 +165,7 @@ namespace ERP_FISCAL.Utils
                 response = await blingService.CriarNotaAsync(novaNotaFiscal);
 
                 if (response.IsSuccessStatusCode)
-                {
+                {                    
                     form.MarcaLinhaImportadaParaOBling(primeiraLinha.NumDocumento, primeiraLinha.IDProduto, primeiraLinha.QtdParaDevolver);
 
                 }

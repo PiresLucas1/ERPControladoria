@@ -1,7 +1,9 @@
 ﻿
 using DocumentFormat.OpenXml.InkML;
 using ERP_FISCAL.Controller.ConsultaSaldoNotasZanup;
+using ERP_FISCAL.Services;
 using ERP_FISCAL.Utils;
+using ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela;
 using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
 using System;
 using System.Collections.Generic;
@@ -35,6 +37,7 @@ namespace ERP_FISCAL.view
             cbFilial.Items.Add("Todas");
             cbFilial.Items.Add("1 - Farma");
             cbFilial.Items.Add("9 - Alimentar");
+            cbFilial.Enabled = false;
         }
         private async void Button1_Click(object sender, EventArgs e)
         {
@@ -92,7 +95,10 @@ namespace ERP_FISCAL.view
                 CarregaDataTable(retorno);
                 txtCountNotas.Text = retorno.Rows.Count.ToString();
 
-
+                if(retorno.Rows.Count > 0)
+                {
+                    cbFilial.Enabled = true;
+                }
             }
             catch (Exception ex)
             {
@@ -240,9 +246,20 @@ namespace ERP_FISCAL.view
             finally
             {
                 ProcessStatusManager.Stop();
+                var notas = ControleNotasCriadaBling.jsonNotasParaRegistro;
+                DataTable notasCriadas = await new ConsultaSaldoNotasZanupController().RegistraNotasCriadasNoBlink(notas);
+                if(notas.Count > 0)
+                {
+                    RetornoEmTabela retorno = new RetornoEmTabela(notasCriadas);
+                    retorno.Visible = true;
+
+                }
+
                 btGerarNotaFiscal.Enabled = !btGerarNotaFiscal.Enabled;
             }
-                                 
+            
+
+
         }
 
         private async void btGerarNotaFiscal_Click(object sender, EventArgs e)
@@ -284,14 +301,14 @@ namespace ERP_FISCAL.view
                     continue;
                 }
                 int doc = Convert.ToInt32(row.Cells["NumDocumento"].Value);
-                int prod = Convert.ToInt32(row.Cells["IDProduto"].Value);
-                decimal qtd = Convert.ToDecimal(row.Cells["Qtd para Devolver"].Value);
+                //int prod = Convert.ToInt32(row.Cells["IDProduto"].Value);
+                //decimal qtd = Convert.ToDecimal(row.Cells["Qtd para Devolver"].Value);
 
-                if (doc == valorDocumento && prod == IdProduto && qtd == quantidadeParaDevolver)
+                if (doc == valorDocumento)
                 {
                     row.DefaultCellStyle.BackColor = Color.LightGreen;   // fundo
                     row.DefaultCellStyle.ForeColor = Color.Black;        // texto (opcional)
-                    break; // Se quiser marcar só o primeiro que encontrar
+                    
                 }
             }
         }

@@ -1,17 +1,14 @@
-﻿using DocumentFormat.OpenXml.Office2016.Excel;
-using ERP_FISCAL.Models;
-
+﻿using ERP_FISCAL.Models;
 using ERP_FISCAL.Utils;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using static ERP_FISCAL.Utils.ControleNotasCriadaBling;
 
 namespace ERP_FISCAL.service
 {
@@ -44,11 +41,8 @@ namespace ERP_FISCAL.service
                 }
             }
         
-            var body = await response.Content.ReadAsStringAsync();
-
-            Console.WriteLine(body);
-
             var retorno = await response.Content.ReadAsStringAsync();
+            
 
             if (!response.IsSuccessStatusCode)
             {
@@ -56,6 +50,27 @@ namespace ERP_FISCAL.service
                 Console.WriteLine($"Erro: {(int)response.StatusCode} - {response.ReasonPhrase}");
                 throw new Exception($"Erro na requisição: {(int)response.StatusCode} - {errorBody}");                                
             }
+
+            var body = await response.Content.ReadAsStringAsync();
+
+
+            Console.WriteLine(JsonConvert.DeserializeObject<RootObject>(body));
+            RootObject bodyToObject = JsonConvert.DeserializeObject<RootObject>(body);
+           
+
+            Console.WriteLine(body);
+            JsonParaDadoTabela nota = new JsonParaDadoTabela()
+            {
+                id = Convert.ToInt64(bodyToObject.data.id),
+                numero = bodyToObject.data.numero,
+                serie = bodyToObject.data.serie,
+                contato = bodyToObject.data.contato.nome
+
+            };
+
+            new ControleNotasCriadaBling().AdicionarNotaCriada(nota);
+
+
             return response;
             
         }

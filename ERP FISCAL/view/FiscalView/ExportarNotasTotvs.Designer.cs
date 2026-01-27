@@ -57,6 +57,7 @@
             this.btnLimpar = new System.Windows.Forms.Button();
             this.btnSelecionarTodas = new System.Windows.Forms.Button();
             this.dtImportacao = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtImportacao)).BeginInit();
@@ -121,12 +122,13 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.btnAutoPreencherCfop);
-            this.groupBox2.Location = new System.Drawing.Point(997, 76);
+            this.groupBox2.Location = new System.Drawing.Point(974, 76);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(219, 132);
+            this.groupBox2.Size = new System.Drawing.Size(242, 132);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Auto preenchimento";
@@ -137,7 +139,7 @@
             this.btnAutoPreencherCfop.Location = new System.Drawing.Point(12, 34);
             this.btnAutoPreencherCfop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAutoPreencherCfop.Name = "btnAutoPreencherCfop";
-            this.btnAutoPreencherCfop.Size = new System.Drawing.Size(143, 40);
+            this.btnAutoPreencherCfop.Size = new System.Drawing.Size(183, 40);
             this.btnAutoPreencherCfop.TabIndex = 12;
             this.btnAutoPreencherCfop.Text = "Preencher CFOP";
             this.btnAutoPreencherCfop.UseVisualStyleBackColor = true;
@@ -272,7 +274,6 @@
             this.txtBoxNumDoc.Name = "txtBoxNumDoc";
             this.txtBoxNumDoc.Size = new System.Drawing.Size(165, 26);
             this.txtBoxNumDoc.TabIndex = 7;
-
             // 
             // lbCodColigada
             // 
@@ -373,7 +374,18 @@
             this.dtImportacao.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dtImportacao_EditingControlShowing);
             this.dtImportacao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             // 
-            // ImportarNotaView
+            // button1
+            // 
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button1.Location = new System.Drawing.Point(12, 83);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(183, 40);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Preencher campos";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // ExportarNotasTotvs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -387,7 +399,7 @@
             this.Controls.Add(this.dtImportacao);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "ImportarNotaView";
+            this.Name = "ExportarNotasTotvs";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Importação NFS-E";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -429,6 +441,7 @@
         private System.Windows.Forms.CheckBox checkBoxMostraComErro;
         private System.Windows.Forms.Button btnAutoPreencherCfop;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button1;
     }
 }
 
