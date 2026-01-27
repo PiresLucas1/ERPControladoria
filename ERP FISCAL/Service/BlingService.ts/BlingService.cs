@@ -12,8 +12,11 @@ using static ERP_FISCAL.Utils.ControleNotasCriadaBling;
 
 namespace ERP_FISCAL.service
 {
+    
     public class BlingService
     {
+        public string urlBlingApiDev = "https://developer.bling.com.br/api/bling/nfse";
+        public string urlBlingApiProd = "https://api.bling.com.br/Api/v3/nfe";
         public async Task<HttpResponseMessage> CriarNotaAsync(NotaFiscal data)
         {
             GetToken obterTokenAsync = new GetToken();
@@ -30,7 +33,7 @@ namespace ERP_FISCAL.service
             
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await httpClient.PostAsync("https://api.bling.com.br/Api/v3/nfe", content);
+            var response = await httpClient.PostAsync(urlBlingApiProd, content);
             int contadorDeTentativasDeConexao = 0;
             if((int)response.StatusCode == 429)
             {
