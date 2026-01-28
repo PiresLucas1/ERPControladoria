@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>67</ApplicationRevision>
+    <ApplicationRevision>69</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -143,6 +143,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\Fiscal\AlteraDataDocumentoMovimentoTotvs\AlteraDataDocumentoMovimentoTotvs.cs" />
     <Compile Include="Controller\Fiscal\AlteraTipoMovimentoController\AlterarTipoMovimento.cs" />
     <Compile Include="Controller\Fiscal\ImportarNotasTotvsController\ConsultaServicoController.cs" />
     <Compile Include="Controller\Zanup\ConsultaNotasItensController.cs" />
@@ -160,6 +161,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Fiscal\AlteraDataDocumentoMovimentoTotvs\AlteraDataDocumentoMovimentoTotvsRepositories.cs" />
     <Compile Include="Repositories\Fiscal\AlteraTipoMovimentoRepositories\AlteraTipoMovimentoRepositories.cs" />
     <Compile Include="Repositories\Fiscal\ImportarNotasTotvsRepositories\ConsultaServicoRepositories.cs" />
     <Compile Include="Repositories\Zanup\ConsultaNotaItensZanupRepositories.cs" />

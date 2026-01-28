@@ -1,16 +1,12 @@
 ﻿using ERP_FISCAL.Controller.AlteraTipoMovimentoController;
+using ERP_FISCAL.Controller.Fiscal.AlteraDataDocumentoMovimentoTotvs;
 using ERP_FISCAL.Utils;
 using ERP_FISCAL.view.UIComponentes.UIDialog.AlteraUnicoItemEmBloco;
-using ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco;
 using ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela;
 using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,44 +16,92 @@ namespace ERP_FISCAL.view.FiscalView
     {
         public AlterarTipoMovimentoLista()
         {
+            
             InitializeComponent();
+            cbColigada.Items.Add(2);
+            rbAlteraDataDocumento.Checked = true;
             AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
         }
 
         private async void btnConsultar_Click(object sender, EventArgs e)
         {
-            if (txtFiltroInput.Text == "")
+            if (rbAlteraDataDocumento.Checked)
             {
-                MessageBox.Show("Por favor, insira um valor para consulta.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                var dataInicio = dtInicio.Value.Date;
+                var dataFim = dtFim.Value.Date;
+                var codColigada = cbColigada.SelectedItem;
+                DataTable retorno = new DataTable();
+                if (dataInicio > dataFim)
+                {
+                    MessageBox.Show("A data de início não pode ser maior que a data final.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (codColigada == null)
+                {
+                    MessageBox.Show("Por favor, selecione uma coligada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                try
+                {
+                    ProcessStatusManager.Start("Carregando dados...");
+                    ProcessStatusManager.Update("Processando...");
+                    retorno = await new AlteraDataDocumentoMovimentoTotvs().ConsultaMovimentoTovts(2, dataInicio, dataFim);
+                }
+                catch (Exception ex)
+                {
+                    ProcessStatusManager.Error(ex); // Fecha e mostra o erro
+                }
+                finally
+                {
+                    ProcessStatusManager.Stop(); // Garante o fechamento
+                }
 
-            DataTable retorno = new DataTable();
-            try
-            {
-            ProcessStatusManager.Start("Carregando dados...");
-            ProcessStatusManager.Update("Processando...");
-            retorno = await BuscaMovimentos();
+                
+                CarregaDataGridView(retorno);
+                txtCountRows.Text = retorno.Rows.Count.ToString();
 
             }
-            catch (Exception ex)
+            if (rbAlteraCodTmtv.Checked)
             {
-                ProcessStatusManager.Error(ex); // Fecha e mostra o erro
-            }
-            finally
-            {
-                ProcessStatusManager.Stop(); // Garante o fechamento
-            }
+                if (txtFiltroInput.Text == "")
+                {
+                    MessageBox.Show("Por favor, insira um valor para consulta.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                DataTable retorno = new DataTable();
+                try
+                {
+                    ProcessStatusManager.Start("Carregando dados...");
+                    ProcessStatusManager.Update("Processando...");
+                    retorno = await BuscaMovimentos();
+
+                }
+                catch (Exception ex)
+                {
+                    ProcessStatusManager.Error(ex); // Fecha e mostra o erro
+                }
+                finally
+                {
+                    ProcessStatusManager.Stop(); // Garante o fechamento
+                }
+
+
+                CarregaDataGridView(retorno);
+                txtCountRows.Text = retorno.Rows.Count.ToString();
+            }
             
-            CarregaDataGridView(retorno);
-            txtCountRows.Text = retorno.Rows.Count.ToString();
         }
 
         public async Task<DataTable> BuscaMovimentos()
         {
             AlterarTipoMovimentoController alterarTipoMovimento = new AlterarTipoMovimentoController();
-            DataTable retorno = await alterarTipoMovimento.ConsultaListaMovimento(txtFiltroInput.Text);
+            var textoSeparadoPorVirugula = txtFiltroInput.Text.
+                Replace("\n", ",")
+                .Replace("\r\n", ",");
+            var textoFormatoParaConsulta = textoSeparadoPorVirugula.Substring(0, textoSeparadoPorVirugula.Length - 1);
+            
+            DataTable retorno = await alterarTipoMovimento.ConsultaListaMovimento(textoFormatoParaConsulta);
             return retorno;
         }
         public void CarregaDataGridView(DataTable data)
@@ -66,12 +110,15 @@ namespace ERP_FISCAL.view.FiscalView
             {
                 MessageBox.Show("Não existe nenhum dado para ser carregado no Data Grid", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            if(!data.Columns.Contains("Cod TMV novo"))
+            if (!rbAlteraDataDocumento.Checked)
             {
-                DataColumn colQuantidade = new DataColumn("Cod TMV novo", typeof(string));
-                colQuantidade.DefaultValue = 0;
-                data.Columns.Add(colQuantidade);
-            }
+                if (!data.Columns.Contains("Cod TMV novo"))
+                {
+                    DataColumn colQuantidade = new DataColumn("Cod TMV novo", typeof(string));                    
+                    colQuantidade.DefaultValue = 0;
+                    data.Columns.Add(colQuantidade);
+                }
+            }          
             if (!data.Columns.Contains("colSelecionado"))
             {
                 DataColumn colSelecionado = new DataColumn("colSelecionado", typeof(bool));
@@ -79,7 +126,16 @@ namespace ERP_FISCAL.view.FiscalView
                 data.Columns.Add(colSelecionado);
             }
             dvgIDMovs.DataSource = data;
+            if (!rbAlteraDataDocumento.Checked)
+            {
+                dvgIDMovs.Columns["Cod TMV novo"].DefaultCellStyle.BackColor = Color.PaleGreen;
+                dvgIDMovs.Columns["Cod TMV novo"].DefaultCellStyle.ForeColor = Color.Black;
 
+            }
+            if (rbAlteraDataDocumento.Checked)
+            {
+                dvgIDMovs.Columns["Data Pagamento"].DefaultCellStyle.BackColor = Color.PaleGreen;
+            }
             dvgIDMovs.Columns["colSelecionado"].DisplayIndex = 0;
             dvgIDMovs.Columns["colSelecionado"].HeaderText = "✓";
 
@@ -136,7 +192,7 @@ namespace ERP_FISCAL.view.FiscalView
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("IDMOV", typeof(long));
-            dt.Columns.Add("CODTMV", typeof(string));
+            dt.Columns.Add("COD. TMV", typeof(string));
 
             DataTable dtToDvg = (DataTable)dvgIDMovs.DataSource;
 
@@ -146,7 +202,7 @@ namespace ERP_FISCAL.view.FiscalView
                 {
                     DataRow novaLinha = dt.NewRow();
                     novaLinha["IDMOV"] = Convert.ToInt64(row["IDMOV"]);
-                    novaLinha["CODTMV"] = row["Cod TMV novo"].ToString();
+                    novaLinha["COD. TMV"] = row["Cod TMV novo"].ToString();
                     dt.Rows.Add(novaLinha);
                 }
             }
@@ -156,6 +212,28 @@ namespace ERP_FISCAL.view.FiscalView
             RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retorno);
             retornoEmTabela.ShowDialog();
 
+
+        }
+
+        private void rbAlteraCodTmtv_CheckedChanged(object sender, EventArgs e)
+        {            
+            dtInicio.Enabled = !dtInicio.Enabled;
+            dtFim.Enabled = !dtFim.Enabled;
+            cbColigada.Enabled = !cbColigada.Enabled;
+        }
+
+        private void rbAlteraDataDocumento_CheckedChanged(object sender, EventArgs e)
+        {
+                        
+        }
+
+        private async void btnAlteraDataDocumento_Click(object sender, EventArgs e)
+        {
+            if (!rbAlteraDataDocumento.Checked)
+            {
+                return;
+            }
+            DataTable retorno =  await new AlteraDataDocumentoMovimentoTotvs().AlteraDataDocumentoTotvs((DataTable)dvgIDMovs.DataSource);
 
         }
     }

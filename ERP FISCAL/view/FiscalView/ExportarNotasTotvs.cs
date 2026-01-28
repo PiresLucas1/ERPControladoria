@@ -694,13 +694,13 @@ namespace ERP_FISCAL
                         if (Convert.ToInt32(codColigada) == 2)
                         {
                             ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial();
-                            bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valorEncontrado, Convert.ToInt32(filial), ufTomador, ufPrestador);
+                            //bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valorEncontrado, Convert.ToInt32(filial), ufTomador, ufPrestador);
 
-                            if (!validacao)
-                            {
-                                dtImportacao.Rows[cellAlteracao.Index].Cells[nomeColuna].Value = "";
-                                return;
-                            }
+                            //if (!validacao)
+                            //{
+                            //    dtImportacao.Rows[cellAlteracao.Index].Cells[nomeColuna].Value = "";
+                            //    return;
+                            //}
                         }
                     }
                     //validaNatureza.ValidaCodigoNaturezaFilial()
@@ -734,12 +734,12 @@ namespace ERP_FISCAL
                     if (Convert.ToInt32(codColigada) == 2)
                     {
 
-                        bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valor, Convert.ToInt32(filial), ufTomador, ufPrestador);
+                        //bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valor, Convert.ToInt32(filial), ufTomador, ufPrestador);
 
-                        if (!validacao)
-                        {
-                            return;
-                        }
+                        //if (!validacao)
+                        //{
+                        //    return;
+                        //}
                     }
                 }
 
