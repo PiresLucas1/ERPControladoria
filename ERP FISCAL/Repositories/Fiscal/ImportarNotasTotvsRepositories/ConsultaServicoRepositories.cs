@@ -11,7 +11,7 @@ namespace ERP_FISCAL.Repositories.Fiscal.ImportarNotasTotvsRepositories
 {
     public class ConsultaServicoRepositories
     {
-        public async Task<DataTable> Executar(string valor)
+        public async Task<DataTable> Executar(string cnpjValor, int valorTipo)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
@@ -23,7 +23,8 @@ namespace ERP_FISCAL.Repositories.Fiscal.ImportarNotasTotvsRepositories
                     using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaRelacaoClienteServico", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@INvchCnpj", valor);
+                        cmd.Parameters.AddWithValue("@INvchCnpj", cnpjValor);
+                        cmd.Parameters.AddWithValue("@INintTipo", valorTipo);
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {
                             adapter.Fill(tabela);
@@ -42,5 +43,5 @@ namespace ERP_FISCAL.Repositories.Fiscal.ImportarNotasTotvsRepositories
             return tabela;
         }
     }
-    }
 }
+

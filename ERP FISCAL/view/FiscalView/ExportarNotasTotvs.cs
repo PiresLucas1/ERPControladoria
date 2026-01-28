@@ -1,6 +1,7 @@
 ﻿using ClosedXML;
 using ERP_FISCAL.controller;
 using ERP_FISCAL.Controller;
+using ERP_FISCAL.Controller.Fiscal.ImportarNotasTotvsController;
 using ERP_FISCAL.Utils;
 using ERP_FISCAL.view.DialogUI;
 using ERP_FISCAL.view.DialogUI.interfacesUI;
@@ -84,8 +85,9 @@ namespace ERP_FISCAL
         }
         private async void btnListaNotas_Click(object sender, EventArgs e)
         {
-            
-            if (dtImportacao.Rows.Count > 0 &&  dtImportacao.Columns[0].Frozen == true){
+
+            if (dtImportacao.Rows.Count > 0 && dtImportacao.Columns[0].Frozen == true)
+            {
                 dtImportacao.Columns[0].Frozen = false;
 
             }
@@ -109,12 +111,12 @@ namespace ERP_FISCAL
                     // Mostra a tela de carregamento
                     ProcessStatusManager.Start("Carregando dados...");
                     ProcessStatusManager.Update("Processando...");
-                                        
+
 
                     NotasController exportServiceNotes = new NotasController();
 
                     DataTable notas = await exportServiceNotes.ListServiceNotesAsync(dataInicio, dataFim, Convert.ToInt32(txtBoxColigada.Text), cbLancadasNoERP.Checked);
-                    
+
 
                     DataTable notasFormatada = exportServiceNotes.ReorganizarDataTable(notas);
                     dtOrignal = notasFormatada;
@@ -129,8 +131,8 @@ namespace ERP_FISCAL
                     dtImportacao.AllowUserToAddRows = false;
                     dtImportacao.ReadOnly = false;
                     dtImportacao.AutoGenerateColumns = true;
-                    
-                    
+
+
 
                     if (!dtImportacao.Columns.Contains("IDMov"))
                     {
@@ -179,7 +181,7 @@ namespace ERP_FISCAL
                     foreach (DataGridViewColumn col in dtImportacao.Columns)
                     {
                         col.ReadOnly = true;
-                       //col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                        //col.SortMode = DataGridViewColumnSortMode.NotSortable;
                     }
 
                     dtImportacao.Columns["Data Lançamento"].ReadOnly = false;
@@ -196,14 +198,14 @@ namespace ERP_FISCAL
 
                     // finalização de ajuste ----------------------------------------
 
-                    
-                  
+
+
 
                 }
                 catch (Exception ex)
                 {
                     ProcessStatusManager.Error(ex); // Fecha e mostra o erro
-                    this.Enabled = true;                    
+                    this.Enabled = true;
 
                 }
                 finally
@@ -290,7 +292,7 @@ namespace ERP_FISCAL
         {
             NotasController exportServiceNotes = new NotasController();
             var dtOriginal = (DataTable)dtImportacao.DataSource;
-            if(dtOriginal == null)
+            if (dtOriginal == null)
             {
                 MessageBox.Show("Não há dados para exportar");
                 return;
@@ -490,7 +492,7 @@ namespace ERP_FISCAL
                 titulo = "Cód. Serviço Totvs",
                 dataTable = listaNatureza
             };
-            
+
             using (var dialog = new InsercaoBloco(dialogo))
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
@@ -687,7 +689,7 @@ namespace ERP_FISCAL
 
                     string codColigada = dtImportacao.Rows[cellAlteracao.Index].Cells["CodColigada"].Value.ToString();
 
-                    if(ufTomador != "")
+                    if (ufTomador != "")
                     {
                         if (Convert.ToInt32(codColigada) == 2)
                         {
@@ -723,11 +725,12 @@ namespace ERP_FISCAL
                 string ufPrestador = dtImportacao.Rows[rowLinha.Index].Cells["UF Prestador"].Value.ToString();
                 string ufTomador = dtImportacao.Rows[rowLinha.Index].Cells["UF Tomador"].Value.ToString();
                 string filial = dtImportacao.Rows[rowLinha.Index].Cells["CodFilial"].Value.ToString();
-                if(ufTomador != "")
-                {                
+                string codColigada = dtImportacao.Rows[cellAlteracao.Index].Cells["CodColigada"].Value.ToString() ?? "";
+                if (ufTomador != "")
+                {
                     ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial();
 
-                    string codColigada = dtImportacao.Rows[cellAlteracao.Index].Cells["CodColigada"].Value.ToString();
+                    //string codColigada = dtImportacao.Rows[cellAlteracao.Index].Cells["CodColigada"].Value.ToString();
                     if (Convert.ToInt32(codColigada) == 2)
                     {
 
@@ -870,7 +873,7 @@ namespace ERP_FISCAL
                 }
 
 
-              
+
                 valorFiltro = txtBoxNumDoc.Text;
                 if (valorFiltro == "")
                 {
@@ -914,10 +917,10 @@ namespace ERP_FISCAL
 
         private void btnAutoPreencherCfop_Click(object sender, EventArgs e)
         {
-            foreach(DataGridViewRow linha in dtImportacao.Rows)
+            foreach (DataGridViewRow linha in dtImportacao.Rows)
             {
-                string filial = linha.Cells["CodFilial"].Value.ToString(); 
-                string codColigada = linha.Cells["CodColigada"].Value.ToString(); 
+                string filial = linha.Cells["CodFilial"].Value.ToString();
+                string codColigada = linha.Cells["CodColigada"].Value.ToString();
                 string ufTomador = linha.Cells["UF Tomador"].Value.ToString();
                 string ufPrestador = linha.Cells["UF Prestador"].Value.ToString();
 
@@ -925,31 +928,54 @@ namespace ERP_FISCAL
 
                 if (Convert.ToInt32(filial) != 1 && Convert.ToInt32(codColigada) == 2)
                 {
-                  
-                  if (ufPrestador == ufTomador) 
-                  {
-                      linha.Cells["CFOP"].Value = "1.933.008";
-                      linha.Cells["CFOP Descrição"].Value = "AQUISIÇÃO DE SERVIÇOS - FILIAL";
-                  }
-                  else
-                  {
-                      linha.Cells["CFOP"].Value = "2.933.006";
-                      linha.Cells["CFOP Descrição"].Value = "AQUISIÇÃO DE SERVIÇOS - FILIAL";
-                  }
+
+                    if (ufPrestador == ufTomador)
+                    {
+                        linha.Cells["CFOP"].Value = "1.933.008";
+                        linha.Cells["CFOP Descrição"].Value = "AQUISIÇÃO DE SERVIÇOS - FILIAL";
+                    }
+                    else
+                    {
+                        linha.Cells["CFOP"].Value = "2.933.006";
+                        linha.Cells["CFOP Descrição"].Value = "AQUISIÇÃO DE SERVIÇOS - FILIAL";
+                    }
                 }
 
             }
             MessageBox.Show("CFOPs preenchidos automaticamente conforme regras definidas.");
         }
 
-        private void btnPreenche_Click(object sender, EventArgs e)
-        {            
+        public async Task<(string codigoServico, string descricaoServico, string codigoNatureza, string descricaoNatureza)> BuscaValorServico(string cnpjPrestador, int valorTipo)
+        {
+            var retorno = await new ConsultaServicoController().Executar(cnpjPrestador, valorTipo);
+            return retorno;
+        }
+
+        private async void btnPreenche_Click(object sender, EventArgs e)
+        {
             foreach (DataGridViewRow item in dtImportacao.Rows)
             {
-                var valorLinha = item.Cells["CNPJ Prestador"].Value;
-                //var retorno = consultaLinha(valorLinha)
-                //altera valor linha 
+                var cnpjValor = item.Cells["CNPJ Prestador"].Value;
+
+                var ufPrestador = item.Cells["UF Prestador"].Value;
+                var ufTomador = item.Cells["UF Tomador"].Value;
+
+                var valorTipo = 1;
+                if(ufPrestador.ToString() == ufTomador.ToString())
+                {
+                    valorTipo = 1;
+                }
+                else
+                {
+                    valorTipo = 2;
+                }
+
+                var retorno = await BuscaValorServico(cnpjValor.ToString(), valorTipo);
+                item.Cells["Cód. Serviço TOTVS"].Value = retorno.codigoServico;
+                item.Cells["Descrição"].Value = retorno.descricaoServico;
+                item.Cells["CFOP"].Value = retorno.codigoNatureza;
+                item.Cells["CFOP Descrição"].Value = retorno.descricaoNatureza;
             }
         }
     }
-}
+    }

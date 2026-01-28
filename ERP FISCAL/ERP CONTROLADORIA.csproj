@@ -27,7 +27,7 @@
     <MinimumRequiredVersion>1.0.0.7</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>65</ApplicationRevision>
+    <ApplicationRevision>67</ApplicationRevision>
     <ApplicationVersion>25.8.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\Fiscal\AlteraTipoMovimentoController\AlterarTipoMovimento.cs" />
+    <Compile Include="Controller\Fiscal\ImportarNotasTotvsController\ConsultaServicoController.cs" />
     <Compile Include="Controller\Zanup\ConsultaNotasItensController.cs" />
     <Compile Include="Controller\Zanup\ConsultaSaldoNotasZanupController.cs" />
     <Compile Include="Controller\Fiscal\ExportaXmlWebPostoController\ExportaXmlController.cs" />
@@ -160,6 +161,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Repositories\Fiscal\AlteraTipoMovimentoRepositories\AlteraTipoMovimentoRepositories.cs" />
+    <Compile Include="Repositories\Fiscal\ImportarNotasTotvsRepositories\ConsultaServicoRepositories.cs" />
     <Compile Include="Repositories\Zanup\ConsultaNotaItensZanupRepositories.cs" />
     <Compile Include="Repositories\Zanup\ConsultaSaldoNotasZanupRepositories.cs" />
     <Compile Include="Repositories\Fiscal\ExportaDadosBigRepositories\ExportaDadosBigRepositories.cs" />
@@ -174,11 +176,11 @@
     <Compile Include="Service\BlingService.ts\DtoDataRowToDocumentoNota.cs" />
     <Compile Include="Service\UploadFile\UploadFileService.cs" />
     <Compile Include="Service\BlingService.ts\CriaNotaBlingService.cs" />
-    <Compile Include="Utils\AgrupaProdutosDaMesmaNota.cs" />
+    <Compile Include="Utils\ZanupUtils\AgrupaProdutosDaMesmaNota.cs" />
     <Compile Include="Utils\AplicarFonte.cs" />
-    <Compile Include="Utils\ControleNotasCriadaBling.cs" />
-    <Compile Include="Utils\NotaProdutoDTO.cs" />
-    <Compile Include="Utils\GetToken.cs" />
+    <Compile Include="Utils\ZanupUtils\ControleNotasCriadaBling.cs" />
+    <Compile Include="Utils\FiscalUtils\NotaProdutoDTO.cs" />
+    <Compile Include="Utils\ZanupUtils\GetToken.cs" />
     <Compile Include="Utils\MascaraDeColuna.cs" />
     <Compile Include="Controller\Fiscal\ImportarNotasTotvsController\ProdutoServicoController.cs" />
     <Compile Include="Controller\Fiscal\ImportarNotasTotvsController\UIController.cs" />
@@ -190,7 +192,7 @@
     <Compile Include="Utils\dateParse.cs" />
     <Compile Include="Utils\DecimalParse.cs" />
     <Compile Include="Utils\theme\CoresConfig.cs" />
-    <Compile Include="Utils\ValidaNaturezaFilial.cs" />
+    <Compile Include="Utils\FiscalUtils\ValidaNaturezaFilial.cs" />
     <Compile Include="view\CadUsu.cs">
       <SubType>Form</SubType>
     </Compile>
