@@ -3,12 +3,13 @@ using System.Data;
 using System.Threading.Tasks;
 using ERP_FISCAL.Utils;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ERP_FISCAL.Controller.ConsultaSaldoNotasZanup
 {
     public class ConsultaSaldoNotasZanupController
     {
-        public DataTable dtRetornoNotasCriadas;
+        public static DataTable dtRetornoNotasCriadas;
         public async Task <DataTable> ConsultaSaldoNotas(int IDProduto = 0,int NumDoc = 0) 
         {
             ConsultaSaldoNotasZanupRepositories consultaSaldoNotas = new ConsultaSaldoNotasZanupRepositories();
@@ -17,20 +18,20 @@ namespace ERP_FISCAL.Controller.ConsultaSaldoNotasZanup
         }
         public async Task<DataTable> RegistraNotasCriadasNoBlink(List<ControleNotasCriadaBling.JsonParaDadoTabela> notas)
         {
-            ConsultaSaldoNotasZanupRepositories consultaSaldoNotas = new ConsultaSaldoNotasZanupRepositories();  
-            foreach(var nota in notas)
+
+            ConsultaSaldoNotasZanupRepositories consultaSaldoNotas = new ConsultaSaldoNotasZanupRepositories();
+
+            if(dtRetornoNotasCriadas == null)
             {
-                DataTable retorno = await consultaSaldoNotas.RegistraNotasCriadasNoBlink(nota);
-                DataTable cloneRetorno = retorno.Clone();
-                dtRetornoNotasCriadas = cloneRetorno.Copy();
-
-                DataRow primeiraLinha = retorno.Rows[0];
-
-
-                dtRetornoNotasCriadas.Rows.Add(primeiraLinha.ItemArray);
-            }
-
-            //DataTable retorno = await consultaSaldoNotas.RegistraNotasCriadasNoBlink(notas);
+                var primeiroRetorno = await consultaSaldoNotas.RegistraNotasCriadasNoBlink(notas.First());
+                dtRetornoNotasCriadas = primeiroRetorno.Clone();
+                dtRetornoNotasCriadas.ImportRow(primeiroRetorno.Rows[0]);
+            }            
+            foreach (var nota in notas.Skip(1))
+            {
+                var retorno = await consultaSaldoNotas.RegistraNotasCriadasNoBlink(nota);
+                dtRetornoNotasCriadas.ImportRow(retorno.Rows[0]);
+            }            
             return dtRetornoNotasCriadas;
         }
     }

@@ -178,6 +178,7 @@
     <Compile Include="Service\BlingService.ts\DtoDataRowToDocumentoNota.cs" />
     <Compile Include="Service\UploadFile\UploadFileService.cs" />
     <Compile Include="Service\BlingService.ts\CriaNotaBlingService.cs" />
+    <Compile Include="Utils\ToDataTableExtension.cs" />
     <Compile Include="Utils\ZanupUtils\AgrupaProdutosDaMesmaNota.cs" />
     <Compile Include="Utils\AplicarFonte.cs" />
     <Compile Include="Utils\ZanupUtils\ControleNotasCriadaBling.cs" />

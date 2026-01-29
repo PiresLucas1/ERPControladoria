@@ -254,7 +254,7 @@ namespace ERP_FISCAL.view
                     retorno.Visible = true;
 
                 }
-
+                new ControleNotasCriadaBling().LimparNotasCriadas();
                 btGerarNotaFiscal.Enabled = !btGerarNotaFiscal.Enabled;
             }
             
