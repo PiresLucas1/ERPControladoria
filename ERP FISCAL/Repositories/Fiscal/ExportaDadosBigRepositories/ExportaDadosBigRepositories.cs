@@ -64,7 +64,7 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
                     using (SqlCommand cmd = new SqlCommand("dbo.upsIntegracaoTotvsExportaNotaFiscalSat", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandTimeout = 1600;
+                        cmd.CommandTimeout = 0;
                         //SqlParameter p;
                         cmd.Parameters.AddWithValue("@INdatDataInicio", dataInicio);
                         cmd.Parameters.AddWithValue("@INdatDataFim", dataFim);                    
@@ -85,7 +85,10 @@ namespace ERP_FISCAL.Repositories.ExportaDadosBigRepositories
 
                         retornoMensagem = msgRetorno.Value?.ToString();
                     }
-                    string retorno = tabelaRetorno.Rows[0].ToString() ?? "Nada Encontrado";
+                    if (tabelaRetorno.Rows[0] != null)
+                    {
+                        string retorno = tabelaRetorno.Rows[0].ToString() ?? "Nada Encontrado";
+                    }
                     conexaoBanco.FecharConexao(conn);
                     retornoExportaBigRepository.MensagemRetorno = retornoMensagem;
                     retornoExportaBigRepository.DtRetorno = tabelaRetorno;

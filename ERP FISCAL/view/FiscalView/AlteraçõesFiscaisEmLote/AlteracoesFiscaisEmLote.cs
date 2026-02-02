@@ -7,14 +7,15 @@ using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
 using System;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ERP_FISCAL.view.FiscalView
 {
-    public partial class AlterarTipoMovimentoLista : Form
+    public partial class AlteracoesFiscaisEmLote : Form
     {
-        public AlterarTipoMovimentoLista()
+        public AlteracoesFiscaisEmLote()
         {
             
             InitializeComponent();
@@ -224,7 +225,7 @@ namespace ERP_FISCAL.view.FiscalView
 
         private void rbAlteraDataDocumento_CheckedChanged(object sender, EventArgs e)
         {
-                        
+            txtFiltroInput.Enabled = !txtFiltroInput.Enabled;
         }
 
         private async void btnAlteraDataDocumento_Click(object sender, EventArgs e)
@@ -233,8 +234,69 @@ namespace ERP_FISCAL.view.FiscalView
             {
                 return;
             }
-            DataTable retorno =  await new AlteraDataDocumentoMovimentoTotvs().AlteraDataDocumentoTotvs((DataTable)dvgIDMovs.DataSource);
+            foreach (DataGridViewRow item in dvgIDMovs.Rows)
+            {
+                bool isChecked = (bool)item.Cells["colSelecionado"].Value;
+                if (isChecked)
+                {
+                    if(item.Cells["Data Pagamento"].Value == DBNull.Value)
+                    {
+                        DialogResult result = MessageBox.Show(
+                            "Existe itens selecionados sem data marcada, deseja inserir manualmente?",
+                            "Confirmação",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question);
 
+                        if (result == DialogResult.Yes) 
+                        {
+                            AlteraUnicoValorEmBloco alteraUnicoValor = new AlteraUnicoValorEmBloco();
+                            alteraUnicoValor.Text = "Insira a nova data de pagamento:";
+                            DialogResult dialogResult = alteraUnicoValor.ShowDialog();
+                            if(dialogResult == DialogResult.OK)
+                            {
+                                DateTime data;
+                                bool ok = DateTime.TryParseExact(
+                                     alteraUnicoValor.valorDigitado,
+                                     "dd/MM/yyyy",
+                                     CultureInfo.GetCultureInfo("pt-BR"),
+                                     DateTimeStyles.None,
+                                     out data
+                                 );
+                                if (ok)
+                                {
+                                    PreencheDataVazia(data);
+
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Data inválida. Operação cancelada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    return;
+                                }
+
+                            }
+                        }
+                        return;
+                    }
+                }
+            }            
+            DataTable retorno =  await new AlteraDataDocumentoMovimentoTotvs().AlteraDataDocumentoTotvs((DataTable)dvgIDMovs.DataSource);
+            if(retorno.Rows.Count == 0)
+            {
+                MessageBox.Show("Nenhum Registro Retornado, Verifique se a Operação foi Realizada com Sucesso!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            };
+            RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retorno);
+            retornoEmTabela.Show();
+        }
+        public void PreencheDataVazia(DateTime date)
+        {
+            foreach (DataGridViewRow item in dvgIDMovs.Rows)
+            {                            
+                if (item.Cells["Data Pagamento"].Value == DBNull.Value)
+                {
+                    item.Cells["Data Pagamento"].Value = date;
+                }
+            }
         }
     }
-}
+  }
+

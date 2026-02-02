@@ -22,7 +22,7 @@ using TextBox = System.Windows.Forms.TextBox;
 
 namespace ERP_FISCAL
 {
-    public partial class ExportarNotasTotvs : Form
+    public partial class ImportarNotasTotvs : Form
     {
         public string cfopSelecionado;
         public string valorDeCelula;
@@ -30,7 +30,7 @@ namespace ERP_FISCAL
         public DataGridViewRow cellAlteracao;
         public int colAlteracao;
         private DataTable dtOrignal;
-        public ExportarNotasTotvs()
+        public ImportarNotasTotvs()
         {
             InitializeComponent();
             this.Resize += new System.EventHandler(this.ResizeForm);

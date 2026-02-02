@@ -127,9 +127,9 @@ namespace ERP_FISCAL.view
         private void importarToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            if (!FormAberto(typeof(ExportarNotasTotvs)))
+            if (!FormAberto(typeof(ImportarNotasTotvs)))
             {
-                ExportarNotasTotvs eRPFiscal = new ExportarNotasTotvs();
+                ImportarNotasTotvs eRPFiscal = new ImportarNotasTotvs();
                 eRPFiscal.MdiParent = this;
                 eRPFiscal.Show();
 
@@ -260,9 +260,9 @@ namespace ERP_FISCAL.view
 
         private void alteraçãoEmListaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FormAberto(typeof(AlterarTipoMovimentoLista)))
+            if (!FormAberto(typeof(AlteracoesFiscaisEmLote)))
             {
-                AlterarTipoMovimentoLista alteraTipoMovimentoLista = new AlterarTipoMovimentoLista();
+                AlteracoesFiscaisEmLote alteraTipoMovimentoLista = new AlteracoesFiscaisEmLote();
                 alteraTipoMovimentoLista.MdiParent = this;
                 alteraTipoMovimentoLista.Show();
             }

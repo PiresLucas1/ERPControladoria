@@ -1,6 +1,6 @@
 ﻿namespace ERP_FISCAL.view.FiscalView
 {
-    partial class AlterarTipoMovimentoLista
+    partial class AlteracoesFiscaisEmLote
     {
         /// <summary>
         /// Required designer variable.

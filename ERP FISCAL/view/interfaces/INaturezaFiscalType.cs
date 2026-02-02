@@ -11,7 +11,7 @@ namespace ERP_FISCAL.view.interfaces
 
         int ReqCodColigada { get; set; }
         int ReqIndexCelula { get; set; }
-        ExportarNotasTotvs FormFocus { get; set; }
+        ImportarNotasTotvs FormFocus { get; set; }
         string NumDoc { get; set; }
         string CodVerificacao { get; set; }
         string CnpjPrestador { get; set; }
@@ -25,7 +25,7 @@ namespace ERP_FISCAL.view.interfaces
         public string NumDoc { get; set; }
         public string CnpjPrestador { get; set; } 
         public string CodVerificacao { get; set; }
-        public ExportarNotasTotvs FormFocus { get; set; }
+        public ImportarNotasTotvs FormFocus { get; set; }
         public string RazaoSocial { get; set; }
     }
 
