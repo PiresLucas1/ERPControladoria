@@ -32,6 +32,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
@@ -100,13 +102,16 @@
     <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
       <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialSkin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialSkin.0.2.1\lib\MaterialSkin.dll</HintPath>
+    <Reference Include="MaterialDesignColors, Version=5.3.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.5.3.0\lib\net462\MaterialDesignColors.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.1\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.77\lib\net462\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -121,6 +126,7 @@
       <HintPath>..\packages\System.Buffers.4.6.1\lib\net462\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
     </Reference>
@@ -214,29 +220,35 @@
     <Compile Include="view\ContabilView\GestaoPatrimonio.Designer.cs">
       <DependentUpon>GestaoPatrimonio.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\FiscalView\AlterarTipoMovimentoLista.cs">
+    <Compile Include="view\FiscalView\AlteraçõesFiscaisEmLote\AlteracoesFiscaisEmLote.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\FiscalView\AlterarTipoMovimentoLista.Designer.cs">
-      <DependentUpon>AlterarTipoMovimentoLista.cs</DependentUpon>
+    <Compile Include="view\FiscalView\AlteraçõesFiscaisEmLote\AlteracoesFiscaisEmLote.Designer.cs">
+      <DependentUpon>AlteracoesFiscaisEmLote.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\FiscalView\AlteraTipoMovimento.cs">
+    <Compile Include="view\FiscalView\AlteraçõesFiscaisEmLote\AlteraTipoMovimento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\FiscalView\AlteraTipoMovimento.Designer.cs">
+    <Compile Include="view\FiscalView\AlteraçõesFiscaisEmLote\AlteraTipoMovimento.Designer.cs">
       <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\FiscalView\ExportaXmlPasta.cs">
+    <Compile Include="view\FiscalView\ExportaXMLWebPostoLago\ExportaXmlPasta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\FiscalView\ExportaXmlPasta.Designer.cs">
+    <Compile Include="view\FiscalView\ExportaXMLWebPostoLago\ExportaXmlPasta.Designer.cs">
       <DependentUpon>ExportaXmlPasta.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\FiscalView\VisuExportacaoXml.cs">
+    <Compile Include="view\FiscalView\ExportaXMLWebPostoLago\VisuExportacaoXml.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="view\FiscalView\VisuExportacaoXml.Designer.cs">
+    <Compile Include="view\FiscalView\ExportaXMLWebPostoLago\VisuExportacaoXml.Designer.cs">
       <DependentUpon>VisuExportacaoXml.cs</DependentUpon>
+    </Compile>
+    <Compile Include="view\GestaoProcessos\CriaCampanha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\GestaoProcessos\CriaCampanha.Designer.cs">
+      <DependentUpon>CriaCampanha.cs</DependentUpon>
     </Compile>
     <Compile Include="view\PrimeiroLogin.cs">
       <SubType>Form</SubType>
@@ -287,10 +299,10 @@
     <Compile Include="view\ContabilView\ImportacaoRecebimento.Designer.cs">
       <DependentUpon>ImportacaoRecebimento.cs</DependentUpon>
     </Compile>
-    <Compile Include="view\FiscalView\ImportaDadosBigTotvs.cs">
+    <Compile Include="view\FiscalView\ImportaDadosBigParaTotvs\ImportaDadosBigTotvs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\FiscalView\ImportaDadosBigTotvs.Designer.cs">
+    <Compile Include="view\FiscalView\ImportaDadosBigParaTotvs\ImportaDadosBigTotvs.Designer.cs">
       <DependentUpon>ImportaDadosBigTotvs.cs</DependentUpon>
     </Compile>
     <Compile Include="view\Interfaces\IProdutoServicoType.cs" />
@@ -311,11 +323,11 @@
       <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
     </Compile>
     <Compile Include="view\UIComponentes\UIDialog\IUInterfaces\IDialogoInsereInformacao.cs" />
-    <Compile Include="view\FiscalView\ExportarNotasTotvs.cs">
+    <Compile Include="view\FiscalView\ImportarNotasServicoTotvs\ImportarNotasTotvs.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\FiscalView\ExportarNotasTotvs.Designer.cs">
-      <DependentUpon>ExportarNotasTotvs.cs</DependentUpon>
+    <Compile Include="view\FiscalView\ImportarNotasServicoTotvs\ImportarNotasTotvs.Designer.cs">
+      <DependentUpon>ImportarNotasTotvs.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -360,18 +372,21 @@
     <EmbeddedResource Include="view\ContabilView\GestaoPatrimonio.resx">
       <DependentUpon>GestaoPatrimonio.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\FiscalView\AlterarTipoMovimentoLista.resx">
-      <DependentUpon>AlterarTipoMovimentoLista.cs</DependentUpon>
+    <EmbeddedResource Include="view\FiscalView\AlteraçõesFiscaisEmLote\AlteracoesFiscaisEmLote.resx">
+      <DependentUpon>AlteracoesFiscaisEmLote.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\FiscalView\AlteraTipoMovimento.resx">
+    <EmbeddedResource Include="view\FiscalView\AlteraçõesFiscaisEmLote\AlteraTipoMovimento.resx">
       <DependentUpon>AlteraTipoMovimento.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\FiscalView\ExportaXmlPasta.resx">
+    <EmbeddedResource Include="view\FiscalView\ExportaXMLWebPostoLago\ExportaXmlPasta.resx">
       <DependentUpon>ExportaXmlPasta.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\FiscalView\VisuExportacaoXml.resx">
+    <EmbeddedResource Include="view\FiscalView\ExportaXMLWebPostoLago\VisuExportacaoXml.resx">
       <DependentUpon>VisuExportacaoXml.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\GestaoProcessos\CriaCampanha.resx">
+      <DependentUpon>CriaCampanha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\PrimeiroLogin.resx">
       <DependentUpon>PrimeiroLogin.cs</DependentUpon>
@@ -397,7 +412,7 @@
     <EmbeddedResource Include="view\ContabilView\ImportacaoRecebimento.resx">
       <DependentUpon>ImportacaoRecebimento.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\FiscalView\ImportaDadosBigTotvs.resx">
+    <EmbeddedResource Include="view\FiscalView\ImportaDadosBigParaTotvs\ImportaDadosBigTotvs.resx">
       <DependentUpon>ImportaDadosBigTotvs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\UIComponentes\UIConsultaItem\ConsultaItem.resx">
@@ -407,8 +422,8 @@
     <EmbeddedResource Include="view\UIComponentes\UIDialog\DialogInsereInformacao.resx">
       <DependentUpon>DialogInsereInformacao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\FiscalView\ExportarNotasTotvs.resx">
-      <DependentUpon>ExportarNotasTotvs.cs</DependentUpon>
+    <EmbeddedResource Include="view\FiscalView\ImportarNotasServicoTotvs\ImportarNotasTotvs.resx">
+      <DependentUpon>ImportarNotasTotvs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

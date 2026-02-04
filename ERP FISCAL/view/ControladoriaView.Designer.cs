@@ -60,6 +60,9 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.txtNomeUsuario = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestãoProcessosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.campanhasTelevendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.criarCampanhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBarTop.SuspendLayout();
             this.menuBarBottom.SuspendLayout();
             this.SuspendLayout();
@@ -72,7 +75,8 @@
             this.FiscalMenu,
             this.contabilToolStripMenuItem,
             this.ZanupMenu,
-            this.gerencialToolStripMenuItem});
+            this.gerencialToolStripMenuItem,
+            this.gestãoProcessosToolStripMenuItem});
             this.menuBarTop.Location = new System.Drawing.Point(0, 0);
             this.menuBarTop.Name = "menuBarTop";
             this.menuBarTop.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
@@ -120,20 +124,20 @@
             this.alteraçãoUnicaToolStripMenuItem,
             this.alteraçãoEmListaToolStripMenuItem});
             this.alterarTipoDeMovimentoToolStripMenuItem.Name = "alterarTipoDeMovimentoToolStripMenuItem";
-            this.alterarTipoDeMovimentoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.alterarTipoDeMovimentoToolStripMenuItem.Size = new System.Drawing.Size(208, 26);
             this.alterarTipoDeMovimentoToolStripMenuItem.Text = "Alterações Fiscais";
             // 
             // alteraçãoUnicaToolStripMenuItem
             // 
             this.alteraçãoUnicaToolStripMenuItem.Name = "alteraçãoUnicaToolStripMenuItem";
-            this.alteraçãoUnicaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.alteraçãoUnicaToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
             this.alteraçãoUnicaToolStripMenuItem.Text = "Alteração unica";
             this.alteraçãoUnicaToolStripMenuItem.Click += new System.EventHandler(this.alteraçãoUnicaToolStripMenuItem_Click);
             // 
             // alteraçãoEmListaToolStripMenuItem
             // 
             this.alteraçãoEmListaToolStripMenuItem.Name = "alteraçãoEmListaToolStripMenuItem";
-            this.alteraçãoEmListaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.alteraçãoEmListaToolStripMenuItem.Size = new System.Drawing.Size(212, 26);
             this.alteraçãoEmListaToolStripMenuItem.Text = "Alteração em lista";
             this.alteraçãoEmListaToolStripMenuItem.Click += new System.EventHandler(this.alteraçãoEmListaToolStripMenuItem_Click);
             // 
@@ -148,7 +152,7 @@
             // xMLPostoDoLagoToolStripMenuItem
             // 
             this.xMLPostoDoLagoToolStripMenuItem.Name = "xMLPostoDoLagoToolStripMenuItem";
-            this.xMLPostoDoLagoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.xMLPostoDoLagoToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
             this.xMLPostoDoLagoToolStripMenuItem.Text = "XML Posto do Lago";
             this.xMLPostoDoLagoToolStripMenuItem.Click += new System.EventHandler(this.xMLPostoDoLagoToolStripMenuItem_Click);
             // 
@@ -212,7 +216,7 @@
             this.metaComissãoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.farmaToolStripMenuItem});
             this.metaComissãoToolStripMenuItem.Name = "metaComissãoToolStripMenuItem";
-            this.metaComissãoToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
+            this.metaComissãoToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.metaComissãoToolStripMenuItem.Text = "Meta Comissão";
             // 
             // farmaToolStripMenuItem
@@ -322,6 +326,29 @@
             this.txtNomeUsuario.Size = new System.Drawing.Size(116, 24);
             this.txtNomeUsuario.Text = "Nome usuario";
             // 
+            // gestãoProcessosToolStripMenuItem
+            // 
+            this.gestãoProcessosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.campanhasTelevendasToolStripMenuItem});
+            this.gestãoProcessosToolStripMenuItem.Name = "gestãoProcessosToolStripMenuItem";
+            this.gestãoProcessosToolStripMenuItem.Size = new System.Drawing.Size(137, 24);
+            this.gestãoProcessosToolStripMenuItem.Text = "Gestão Processos";
+            // 
+            // campanhasTelevendasToolStripMenuItem
+            // 
+            this.campanhasTelevendasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.criarCampanhaToolStripMenuItem});
+            this.campanhasTelevendasToolStripMenuItem.Name = "campanhasTelevendasToolStripMenuItem";
+            this.campanhasTelevendasToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
+            this.campanhasTelevendasToolStripMenuItem.Text = "Campanhas Televendas";
+            // 
+            // criarCampanhaToolStripMenuItem
+            // 
+            this.criarCampanhaToolStripMenuItem.Name = "criarCampanhaToolStripMenuItem";
+            this.criarCampanhaToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.criarCampanhaToolStripMenuItem.Text = "Criar Campanha";
+            this.criarCampanhaToolStripMenuItem.Click += new System.EventHandler(this.criarCampanhaToolStripMenuItem_Click);
+            // 
             // Portal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -382,6 +409,9 @@
         private System.Windows.Forms.ToolStripMenuItem gerencialToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem metaComissãoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem farmaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem criarNotaZanupToolStripMenuItem;       
+        private System.Windows.Forms.ToolStripMenuItem criarNotaZanupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestãoProcessosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem campanhasTelevendasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem criarCampanhaToolStripMenuItem;
     }
 }

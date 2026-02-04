@@ -3,6 +3,7 @@ using ERP_FISCAL.Controller.SegCadastroController;
 using ERP_FISCAL.Utils;
 using ERP_FISCAL.view.ContabilView;
 using ERP_FISCAL.view.FiscalView;
+using ERP_FISCAL.view.GestaoProcessos;
 using ERP_FISCAL.view.ZanupView;
 using System;
 using System.Data;
@@ -407,7 +408,15 @@ namespace ERP_FISCAL.view
             }
         }
 
-
+        private void criarCampanhaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(CriaCampanha)))
+            {
+                CriaCampanha criaCampanha = new CriaCampanha();
+                criaCampanha.MdiParent = this;
+                criaCampanha.Show();
+            }
+        }
     }
 }
 
