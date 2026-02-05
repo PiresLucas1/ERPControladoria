@@ -3,14 +3,14 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
-namespace ERP_FISCAL.Repositories.GPCampanhaRepositories.BuscaParametros
+namespace ERP_FISCAL.Repositories.RepositoriesAlterarContaDebito
 {
-    public class BuscaParametrosRepositories
+    public class AlteraContaDebitoRepositories
     {
-        public async Task<DataTable> BuscaParametros(int tipoCampanha, int tipoParametroPesquisa, int pesquisaPorId, string pesquisaDescr) 
+        public async Task<DataTable> PesquisarNotas(DateTime dataInicio, DateTime dataFim)
         {
             DataTable tabela = new DataTable();
-            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);            
             try
             {
                 using (SqlConnection conn = conexaoBanco.AbrirConexao()) // <<< apenas cria
@@ -20,10 +20,8 @@ namespace ERP_FISCAL.Repositories.GPCampanhaRepositories.BuscaParametros
                     using (SqlCommand cmd = new SqlCommand("dbo.uspUsuConsultaValidacaoContabilFrete", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@INintIDTipoCampanha", tipoCampanha);
-                        cmd.Parameters.AddWithValue("@INintIDTipoParametroParaPesquisar", tipoParametroPesquisa);
-                        cmd.Parameters.AddWithValue("@INintIDPesquisaPorId", pesquisaPorId);
-                        cmd.Parameters.AddWithValue("@INvchPesquisaPorDesc", pesquisaDescr);
+                        cmd.Parameters.AddWithValue("@INdatDataInicio", dataInicio);
+                        cmd.Parameters.AddWithValue("@INdatDataFim", dataFim);
 
                         using (var reader = await cmd.ExecuteReaderAsync())
                         {
@@ -40,5 +38,4 @@ namespace ERP_FISCAL.Repositories.GPCampanhaRepositories.BuscaParametros
             return tabela;
         }
     }
-    }
-}
+ }

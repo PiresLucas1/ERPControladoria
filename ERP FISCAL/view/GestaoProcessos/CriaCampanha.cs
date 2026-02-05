@@ -53,5 +53,10 @@ namespace ERP_FISCAL.view.GestaoProcessos
             }
             return false;
         }
+
+        private void btnBuscalApuracao_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

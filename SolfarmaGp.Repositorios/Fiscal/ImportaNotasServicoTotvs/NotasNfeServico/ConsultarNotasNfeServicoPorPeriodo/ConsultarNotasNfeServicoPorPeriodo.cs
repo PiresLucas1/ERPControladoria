@@ -1,17 +1,15 @@
-﻿using System;
+﻿using ERP_FISCAL;
+using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Data.SqlClient;
-using System.Windows.Forms;
 
-namespace ERP_FISCAL
+namespace SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.ConsultaNotasNfeServico.ConsultarNotasNfeServicoPorPeriodo
 {
-    internal class Carregar_Colunas
+    public class ConsultarNotasNfeServicoPorPeriodo
     {
-
-        public DataTable ObterNotas(DateTime dataInicio, DateTime dataFim, int codColigada, int bitExisteErp)
+        public DataTable Consultar(DateTime dataInicio, DateTime dataFim, int codColigada, int bitExisteErp)
         {
             DataTable tabela = new DataTable();
-            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);            
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
 
             try
             {
@@ -35,36 +33,15 @@ namespace ERP_FISCAL
                     conexaoBanco.FecharConexao(conexao);
                 }
             }
-            catch (Exception e )
+            catch (Exception e)
             {
                 Console.WriteLine("Ocorreu um erro: " + e.Message);
                 MessageBox.Show(e.Message);
                 throw new ArgumentException("Falha ao executar a operação", e);
-                
+
             }
 
             return tabela;
-        }
-
-        public DataTable FindUniqueNote(string noteId)
-        {
-            DataTable table = new DataTable();
-            DbConexaoConfig connectionDataBase = new DbConexaoConfig(DbName.DfeTotvs);  
-
-            using (SqlConnection conn = connectionDataBase.AbrirConexao())
-            {
-                using (SqlCommand cmd = new SqlCommand("uspQiveProcuraNotaIndividual", conn))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@INvchrChaveDeAcesso", noteId);
-
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(table);
-                }
-
-                connectionDataBase.FecharConexao(conn);
-            }
-            return table;
         }
     }
 }

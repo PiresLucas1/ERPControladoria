@@ -1,15 +1,10 @@
-﻿using ERP_FISCAL.controller;
-using System;
-using System.Collections.Generic;
+﻿using ERP_FISCAL;
+using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ERP_FISCAL.Repositories.Fiscal.ImportarNotasTotvsRepositories
+namespace SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaServico
 {
-    public class ConsultaServicoRepositories
+    public class ConsultaServicoRelacionadoAoCliente
     {
         public async Task<DataTable> Executar(string cnpjValor, int valorTipo)
         {
@@ -44,4 +39,3 @@ namespace ERP_FISCAL.Repositories.Fiscal.ImportarNotasTotvsRepositories
         }
     }
 }
-

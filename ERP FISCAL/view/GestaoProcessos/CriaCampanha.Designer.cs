@@ -33,32 +33,34 @@
             this.dtInicioApuracao = new System.Windows.Forms.DateTimePicker();
             this.dtFimApuracao = new System.Windows.Forms.DateTimePicker();
             this.gbMain = new System.Windows.Forms.GroupBox();
-            this.tbApuracao = new System.Windows.Forms.TextBox();
-            this.lbDataApuracao = new System.Windows.Forms.Label();
-            this.tbCalculo = new System.Windows.Forms.TextBox();
+            this.btnCriarCampanha = new System.Windows.Forms.Button();
             this.gbDataApurcao = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.lbDataApuracao = new System.Windows.Forms.Label();
             this.gbMecanica = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.chckRegraValidacao = new System.Windows.Forms.CheckBox();
-            this.tbMeta = new System.Windows.Forms.TextBox();
-            this.tbGatilhoPositivacao = new System.Windows.Forms.TextBox();
-            this.cbValores = new System.Windows.Forms.ComboBox();
+            this.btnBuscalApuracao = new System.Windows.Forms.Button();
             this.lbTipoValor = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lbGatilhoVenda = new System.Windows.Forms.Label();
-            this.tbGatilhoVenda = new System.Windows.Forms.TextBox();
-            this.tbObservação = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.chckGatilhoVenda = new System.Windows.Forms.CheckBox();
-            this.chckbGatilhoPositivacao = new System.Windows.Forms.CheckBox();
+            this.cbValores = new System.Windows.Forms.ComboBox();
+            this.chckRegraValidacao = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbCalculo = new System.Windows.Forms.TextBox();
+            this.tbApuracao = new System.Windows.Forms.TextBox();
             this.gbOutros = new System.Windows.Forms.GroupBox();
-            this.btnCriarCampanha = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tbGatilhoVenda = new System.Windows.Forms.TextBox();
+            this.tbGatilhoPositivacao = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tbMeta = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.chckbGatilhoPositivacao = new System.Windows.Forms.CheckBox();
+            this.lbGatilhoVenda = new System.Windows.Forms.Label();
+            this.tbObservação = new System.Windows.Forms.TextBox();
+            this.chckGatilhoVenda = new System.Windows.Forms.CheckBox();
             this.btnDetalhes = new System.Windows.Forms.Button();
             this.btnAtualizaVisualizacao = new System.Windows.Forms.Button();
             this.dvgCampanhas = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.btnBuscaCalculo = new System.Windows.Forms.Button();
             this.gbMain.SuspendLayout();
             this.gbDataApurcao.SuspendLayout();
             this.gbMecanica.SuspendLayout();
@@ -115,28 +117,15 @@
             this.gbMain.TabStop = false;
             this.gbMain.Text = "Parametros:";
             // 
-            // tbApuracao
+            // btnCriarCampanha
             // 
-            this.tbApuracao.Location = new System.Drawing.Point(36, 66);
-            this.tbApuracao.Name = "tbApuracao";
-            this.tbApuracao.Size = new System.Drawing.Size(486, 22);
-            this.tbApuracao.TabIndex = 5;
-            // 
-            // lbDataApuracao
-            // 
-            this.lbDataApuracao.AutoSize = true;
-            this.lbDataApuracao.Location = new System.Drawing.Point(18, 24);
-            this.lbDataApuracao.Name = "lbDataApuracao";
-            this.lbDataApuracao.Size = new System.Drawing.Size(41, 16);
-            this.lbDataApuracao.TabIndex = 4;
-            this.lbDataApuracao.Text = "Inicio:";
-            // 
-            // tbCalculo
-            // 
-            this.tbCalculo.Location = new System.Drawing.Point(36, 140);
-            this.tbCalculo.Name = "tbCalculo";
-            this.tbCalculo.Size = new System.Drawing.Size(486, 22);
-            this.tbCalculo.TabIndex = 6;
+            this.btnCriarCampanha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCriarCampanha.Location = new System.Drawing.Point(1309, 494);
+            this.btnCriarCampanha.Name = "btnCriarCampanha";
+            this.btnCriarCampanha.Size = new System.Drawing.Size(159, 37);
+            this.btnCriarCampanha.TabIndex = 22;
+            this.btnCriarCampanha.Text = "Criar Campanha";
+            this.btnCriarCampanha.UseVisualStyleBackColor = true;
             // 
             // gbDataApurcao
             // 
@@ -160,8 +149,19 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Fim:";
             // 
+            // lbDataApuracao
+            // 
+            this.lbDataApuracao.AutoSize = true;
+            this.lbDataApuracao.Location = new System.Drawing.Point(18, 24);
+            this.lbDataApuracao.Name = "lbDataApuracao";
+            this.lbDataApuracao.Size = new System.Drawing.Size(41, 16);
+            this.lbDataApuracao.TabIndex = 4;
+            this.lbDataApuracao.Text = "Inicio:";
+            // 
             // gbMecanica
             // 
+            this.gbMecanica.Controls.Add(this.btnBuscaCalculo);
+            this.gbMecanica.Controls.Add(this.btnBuscalApuracao);
             this.gbMecanica.Controls.Add(this.lbTipoValor);
             this.gbMecanica.Controls.Add(this.cbValores);
             this.gbMecanica.Controls.Add(this.chckRegraValidacao);
@@ -171,28 +171,37 @@
             this.gbMecanica.Controls.Add(this.tbApuracao);
             this.gbMecanica.Location = new System.Drawing.Point(486, 21);
             this.gbMecanica.Name = "gbMecanica";
-            this.gbMecanica.Size = new System.Drawing.Size(812, 236);
+            this.gbMecanica.Size = new System.Drawing.Size(858, 236);
             this.gbMecanica.TabIndex = 8;
             this.gbMecanica.TabStop = false;
             this.gbMecanica.Text = "Mecanica da Campanha";
             // 
-            // label2
+            // btnBuscalApuracao
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 30);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 16);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Tipo Apuração:";
+            this.btnBuscalApuracao.Location = new System.Drawing.Point(528, 63);
+            this.btnBuscalApuracao.Name = "btnBuscalApuracao";
+            this.btnBuscalApuracao.Size = new System.Drawing.Size(63, 29);
+            this.btnBuscalApuracao.TabIndex = 13;
+            this.btnBuscalApuracao.Text = "Buscar";
+            this.btnBuscalApuracao.UseVisualStyleBackColor = true;
+            this.btnBuscalApuracao.Click += new System.EventHandler(this.btnBuscalApuracao_Click);
             // 
-            // label3
+            // lbTipoValor
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 114);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 16);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Tipo Calculo:";
+            this.lbTipoValor.AutoSize = true;
+            this.lbTipoValor.Location = new System.Drawing.Point(663, 30);
+            this.lbTipoValor.Name = "lbTipoValor";
+            this.lbTipoValor.Size = new System.Drawing.Size(73, 16);
+            this.lbTipoValor.TabIndex = 12;
+            this.lbTipoValor.Text = "Tipo Valor:";
+            // 
+            // cbValores
+            // 
+            this.cbValores.FormattingEnabled = true;
+            this.cbValores.Location = new System.Drawing.Point(666, 67);
+            this.cbValores.Name = "cbValores";
+            this.cbValores.Size = new System.Drawing.Size(153, 24);
+            this.cbValores.TabIndex = 11;
             // 
             // chckRegraValidacao
             // 
@@ -204,111 +213,37 @@
             this.chckRegraValidacao.Text = "Existe Regra de Validação ?";
             this.chckRegraValidacao.UseVisualStyleBackColor = true;
             // 
-            // tbMeta
+            // label3
             // 
-            this.tbMeta.Location = new System.Drawing.Point(262, 125);
-            this.tbMeta.Name = "tbMeta";
-            this.tbMeta.Size = new System.Drawing.Size(175, 22);
-            this.tbMeta.TabIndex = 11;
-            this.tbMeta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMeta_KeyPress);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(33, 114);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(86, 16);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Tipo Calculo:";
             // 
-            // tbGatilhoPositivacao
+            // label2
             // 
-            this.tbGatilhoPositivacao.Location = new System.Drawing.Point(27, 204);
-            this.tbGatilhoPositivacao.Name = "tbGatilhoPositivacao";
-            this.tbGatilhoPositivacao.Size = new System.Drawing.Size(175, 22);
-            this.tbGatilhoPositivacao.TabIndex = 12;
-            this.tbGatilhoPositivacao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbGatilhoPositivacao_KeyPress);
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(33, 30);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 16);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Tipo Apuração:";
             // 
-            // cbValores
+            // tbCalculo
             // 
-            this.cbValores.FormattingEnabled = true;
-            this.cbValores.Location = new System.Drawing.Point(610, 64);
-            this.cbValores.Name = "cbValores";
-            this.cbValores.Size = new System.Drawing.Size(153, 24);
-            this.cbValores.TabIndex = 11;
+            this.tbCalculo.Location = new System.Drawing.Point(36, 140);
+            this.tbCalculo.Name = "tbCalculo";
+            this.tbCalculo.Size = new System.Drawing.Size(486, 22);
+            this.tbCalculo.TabIndex = 6;
             // 
-            // lbTipoValor
+            // tbApuracao
             // 
-            this.lbTipoValor.AutoSize = true;
-            this.lbTipoValor.Location = new System.Drawing.Point(607, 27);
-            this.lbTipoValor.Name = "lbTipoValor";
-            this.lbTipoValor.Size = new System.Drawing.Size(73, 16);
-            this.lbTipoValor.TabIndex = 12;
-            this.lbTipoValor.Text = "Tipo Valor:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(259, 93);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 16);
-            this.label4.TabIndex = 13;
-            this.label4.Text = "Valor Meta:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 172);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(126, 16);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Gatilho Positivação:";
-            // 
-            // lbGatilhoVenda
-            // 
-            this.lbGatilhoVenda.AutoSize = true;
-            this.lbGatilhoVenda.Location = new System.Drawing.Point(25, 92);
-            this.lbGatilhoVenda.Name = "lbGatilhoVenda";
-            this.lbGatilhoVenda.Size = new System.Drawing.Size(95, 16);
-            this.lbGatilhoVenda.TabIndex = 16;
-            this.lbGatilhoVenda.Text = "Gatilho Venda:";
-            // 
-            // tbGatilhoVenda
-            // 
-            this.tbGatilhoVenda.Location = new System.Drawing.Point(27, 123);
-            this.tbGatilhoVenda.Name = "tbGatilhoVenda";
-            this.tbGatilhoVenda.Size = new System.Drawing.Size(175, 22);
-            this.tbGatilhoVenda.TabIndex = 15;
-            this.tbGatilhoVenda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbGatilhoVenda_KeyPress);
-            // 
-            // tbObservação
-            // 
-            this.tbObservação.Location = new System.Drawing.Point(262, 195);
-            this.tbObservação.Name = "tbObservação";
-            this.tbObservação.Size = new System.Drawing.Size(485, 22);
-            this.tbObservação.TabIndex = 17;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(259, 160);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(85, 16);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Observação:";
-            // 
-            // chckGatilhoVenda
-            // 
-            this.chckGatilhoVenda.AutoSize = true;
-            this.chckGatilhoVenda.Location = new System.Drawing.Point(28, 32);
-            this.chckGatilhoVenda.Name = "chckGatilhoVenda";
-            this.chckGatilhoVenda.Size = new System.Drawing.Size(133, 20);
-            this.chckGatilhoVenda.TabIndex = 19;
-            this.chckGatilhoVenda.Text = "Gatilho de Venda";
-            this.chckGatilhoVenda.UseVisualStyleBackColor = true;
-            this.chckGatilhoVenda.CheckedChanged += new System.EventHandler(this.chckGatilhoVenda_CheckedChanged);
-            // 
-            // chckbGatilhoPositivacao
-            // 
-            this.chckbGatilhoPositivacao.AutoSize = true;
-            this.chckbGatilhoPositivacao.Location = new System.Drawing.Point(262, 32);
-            this.chckbGatilhoPositivacao.Name = "chckbGatilhoPositivacao";
-            this.chckbGatilhoPositivacao.Size = new System.Drawing.Size(145, 20);
-            this.chckbGatilhoPositivacao.TabIndex = 20;
-            this.chckbGatilhoPositivacao.Text = "Gatilho Positivação";
-            this.chckbGatilhoPositivacao.UseVisualStyleBackColor = true;
-            this.chckbGatilhoPositivacao.CheckedChanged += new System.EventHandler(this.chckbGatilhoPositivacao_CheckedChanged);
+            this.tbApuracao.Location = new System.Drawing.Point(36, 66);
+            this.tbApuracao.Name = "tbApuracao";
+            this.tbApuracao.Size = new System.Drawing.Size(486, 22);
+            this.tbApuracao.TabIndex = 5;
             // 
             // gbOutros
             // 
@@ -329,15 +264,94 @@
             this.gbOutros.TabStop = false;
             this.gbOutros.Text = "Valores:";
             // 
-            // btnCriarCampanha
+            // label5
             // 
-            this.btnCriarCampanha.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCriarCampanha.Location = new System.Drawing.Point(1309, 494);
-            this.btnCriarCampanha.Name = "btnCriarCampanha";
-            this.btnCriarCampanha.Size = new System.Drawing.Size(159, 37);
-            this.btnCriarCampanha.TabIndex = 22;
-            this.btnCriarCampanha.Text = "Criar Campanha";
-            this.btnCriarCampanha.UseVisualStyleBackColor = true;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(24, 172);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(126, 16);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Gatilho Positivação:";
+            // 
+            // tbGatilhoVenda
+            // 
+            this.tbGatilhoVenda.Location = new System.Drawing.Point(27, 123);
+            this.tbGatilhoVenda.Name = "tbGatilhoVenda";
+            this.tbGatilhoVenda.Size = new System.Drawing.Size(175, 22);
+            this.tbGatilhoVenda.TabIndex = 15;
+            this.tbGatilhoVenda.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbGatilhoVenda_KeyPress);
+            // 
+            // tbGatilhoPositivacao
+            // 
+            this.tbGatilhoPositivacao.Location = new System.Drawing.Point(27, 204);
+            this.tbGatilhoPositivacao.Name = "tbGatilhoPositivacao";
+            this.tbGatilhoPositivacao.Size = new System.Drawing.Size(175, 22);
+            this.tbGatilhoPositivacao.TabIndex = 12;
+            this.tbGatilhoPositivacao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbGatilhoPositivacao_KeyPress);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(259, 93);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(75, 16);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Valor Meta:";
+            // 
+            // tbMeta
+            // 
+            this.tbMeta.Location = new System.Drawing.Point(262, 125);
+            this.tbMeta.Name = "tbMeta";
+            this.tbMeta.Size = new System.Drawing.Size(175, 22);
+            this.tbMeta.TabIndex = 11;
+            this.tbMeta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMeta_KeyPress);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(259, 160);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(85, 16);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Observação:";
+            // 
+            // chckbGatilhoPositivacao
+            // 
+            this.chckbGatilhoPositivacao.AutoSize = true;
+            this.chckbGatilhoPositivacao.Location = new System.Drawing.Point(262, 32);
+            this.chckbGatilhoPositivacao.Name = "chckbGatilhoPositivacao";
+            this.chckbGatilhoPositivacao.Size = new System.Drawing.Size(145, 20);
+            this.chckbGatilhoPositivacao.TabIndex = 20;
+            this.chckbGatilhoPositivacao.Text = "Gatilho Positivação";
+            this.chckbGatilhoPositivacao.UseVisualStyleBackColor = true;
+            this.chckbGatilhoPositivacao.CheckedChanged += new System.EventHandler(this.chckbGatilhoPositivacao_CheckedChanged);
+            // 
+            // lbGatilhoVenda
+            // 
+            this.lbGatilhoVenda.AutoSize = true;
+            this.lbGatilhoVenda.Location = new System.Drawing.Point(25, 92);
+            this.lbGatilhoVenda.Name = "lbGatilhoVenda";
+            this.lbGatilhoVenda.Size = new System.Drawing.Size(95, 16);
+            this.lbGatilhoVenda.TabIndex = 16;
+            this.lbGatilhoVenda.Text = "Gatilho Venda:";
+            // 
+            // tbObservação
+            // 
+            this.tbObservação.Location = new System.Drawing.Point(262, 195);
+            this.tbObservação.Name = "tbObservação";
+            this.tbObservação.Size = new System.Drawing.Size(485, 22);
+            this.tbObservação.TabIndex = 17;
+            // 
+            // chckGatilhoVenda
+            // 
+            this.chckGatilhoVenda.AutoSize = true;
+            this.chckGatilhoVenda.Location = new System.Drawing.Point(28, 32);
+            this.chckGatilhoVenda.Name = "chckGatilhoVenda";
+            this.chckGatilhoVenda.Size = new System.Drawing.Size(133, 20);
+            this.chckGatilhoVenda.TabIndex = 19;
+            this.chckGatilhoVenda.Text = "Gatilho de Venda";
+            this.chckGatilhoVenda.UseVisualStyleBackColor = true;
+            this.chckGatilhoVenda.CheckedChanged += new System.EventHandler(this.chckGatilhoVenda_CheckedChanged);
             // 
             // btnDetalhes
             // 
@@ -371,6 +385,15 @@
             this.dvgCampanhas.RowTemplate.Height = 24;
             this.dvgCampanhas.Size = new System.Drawing.Size(1483, 172);
             this.dvgCampanhas.TabIndex = 5;
+            // 
+            // btnBuscaCalculo
+            // 
+            this.btnBuscaCalculo.Location = new System.Drawing.Point(528, 137);
+            this.btnBuscaCalculo.Name = "btnBuscaCalculo";
+            this.btnBuscaCalculo.Size = new System.Drawing.Size(63, 29);
+            this.btnBuscaCalculo.TabIndex = 14;
+            this.btnBuscaCalculo.Text = "Buscar";
+            this.btnBuscaCalculo.UseVisualStyleBackColor = true;
             // 
             // CriaCampanha
             // 
@@ -429,5 +452,7 @@
         private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dvgCampanhas;
         private System.Windows.Forms.Button btnDetalhes;
         private System.Windows.Forms.Button btnAtualizaVisualizacao;
+        private System.Windows.Forms.Button btnBuscalApuracao;
+        private System.Windows.Forms.Button btnBuscaCalculo;
     }
 }

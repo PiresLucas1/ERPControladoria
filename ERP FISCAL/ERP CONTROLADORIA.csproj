@@ -127,6 +127,7 @@
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Memory, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.6.3\lib\net462\System.Memory.dll</HintPath>
     </Reference>
@@ -152,6 +153,7 @@
     <Compile Include="Controller\Fiscal\AlteraDataDocumentoMovimentoTotvs\AlteraDataDocumentoMovimentoTotvs.cs" />
     <Compile Include="Controller\Fiscal\AlteraTipoMovimentoController\AlterarTipoMovimento.cs" />
     <Compile Include="Controller\Fiscal\ImportarNotasTotvsController\ConsultaServicoController.cs" />
+    <Compile Include="Controller\GPCampanhaController\BuscaParametros\BuscaParametrosController.cs" />
     <Compile Include="Controller\Zanup\ConsultaNotasItensController.cs" />
     <Compile Include="Controller\Zanup\ConsultaSaldoNotasZanupController.cs" />
     <Compile Include="Controller\Fiscal\ExportaXmlWebPostoController\ExportaXmlController.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="Repositories\Fiscal\AlteraDataDocumentoMovimentoTotvs\AlteraDataDocumentoMovimentoTotvsRepositories.cs" />
     <Compile Include="Repositories\Fiscal\AlteraTipoMovimentoRepositories\AlteraTipoMovimentoRepositories.cs" />
     <Compile Include="Repositories\Fiscal\ImportarNotasTotvsRepositories\ConsultaServicoRepositories.cs" />
+    <Compile Include="Repositories\GPCampanhaRepositories\BuscaParametros\BuscaParametrosRepositories.cs" />
     <Compile Include="Repositories\Zanup\ConsultaNotaItensZanupRepositories.cs" />
     <Compile Include="Repositories\Zanup\ConsultaSaldoNotasZanupRepositories.cs" />
     <Compile Include="Repositories\Fiscal\ExportaDadosBigRepositories\ExportaDadosBigRepositories.cs" />
@@ -489,12 +492,15 @@
   <ItemGroup>
     <Content Include="icon-new.ico" />
     <Content Include="links.txt" />
+    <None Include="Resources\icons8-search-26.png" />
     <Content Include="Resources\sol_background.jpeg" />
     <Content Include="Resources\sol_background2.jpeg" />
     <Content Include="Resources\trash2.png" />
     <Content Include="Resources\trash.bmp" />
     <None Include="Resources\icon-new.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Repositories\GPCampanhaRepositories\CriarCampanha\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
