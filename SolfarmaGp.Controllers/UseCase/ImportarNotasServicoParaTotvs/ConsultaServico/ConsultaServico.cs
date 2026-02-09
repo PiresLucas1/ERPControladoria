@@ -1,5 +1,4 @@
-﻿
-using SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaServico;
+﻿using SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaServico;
 using System.Data;
 
 namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ConsultaServico

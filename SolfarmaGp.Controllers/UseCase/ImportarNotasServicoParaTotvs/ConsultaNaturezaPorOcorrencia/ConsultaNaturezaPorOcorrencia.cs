@@ -1,6 +1,4 @@
-﻿using ERP_FISCAL.controller;
-using SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaNaturezaFiscal.ConsultaPorOcorrencia;
-using System.Data;
+﻿using System.Data;
 
 
 namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ConsultaNaturezaPorOcorrencia
