@@ -6,7 +6,7 @@ namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ConsultaT
 {
     public class ConsultaTodaNatureza
     {
-        public async Task<DataTable> CarregaTodos(int codColigada)
+        public async Task<DataTable> Executar(int codColigada)
         {
 
             ConsultaTodasNatureza cfops = new ConsultaTodasNatureza();

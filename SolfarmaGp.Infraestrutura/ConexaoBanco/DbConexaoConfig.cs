@@ -1,7 +1,5 @@
-﻿using System;
-using Microsoft.Data.SqlClient;
-
-namespace ERP_FISCAL
+﻿using Microsoft.Data.SqlClient;
+namespace SolfarmaGp.Infraestrutura
 {
 
     public enum DbName

@@ -334,12 +334,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="view\ControladoriaView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="view\ControladoriaView.Designer.cs">
-      <DependentUpon>ControladoriaView.cs</DependentUpon>
-    </Compile>
     <Compile Include="view\Interfaces\INaturezaFiscalType.cs" />
     <Compile Include="view\UIComponentes\UIDialog\UIAltetarEmBloco\AlteraEmBloco.cs">
       <SubType>Form</SubType>
@@ -432,10 +426,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="view\ControladoriaView.resx">
-      <DependentUpon>ControladoriaView.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="view\UIComponentes\UIDialog\UIAltetarEmBloco\AlteraEmBloco.resx">
       <DependentUpon>AlteraEmBloco.cs</DependentUpon>

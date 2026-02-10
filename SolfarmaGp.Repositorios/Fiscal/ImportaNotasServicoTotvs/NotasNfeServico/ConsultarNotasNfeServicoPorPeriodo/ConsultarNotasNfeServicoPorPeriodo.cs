@@ -1,12 +1,12 @@
-﻿using ERP_FISCAL;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
+using SolfarmaGp.Infraestrutura;
 using System.Data;
 
 namespace SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.ConsultaNotasNfeServico.ConsultarNotasNfeServicoPorPeriodo
 {
     public class ConsultarNotasNfeServicoPorPeriodo
     {
-        public DataTable Consultar(DateTime dataInicio, DateTime dataFim, int codColigada, int bitExisteErp)
+        public async Task<DataTable> Executar(DateTime dataInicio, DateTime dataFim, int codColigada, int bitExisteErp)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
@@ -35,8 +35,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.ConsultaNotasN
             }
             catch (Exception e)
             {
-                Console.WriteLine("Ocorreu um erro: " + e.Message);
-                MessageBox.Show(e.Message);
+                Console.WriteLine("Ocorreu um erro: " + e.Message);                
                 throw new ArgumentException("Falha ao executar a operação", e);
 
             }

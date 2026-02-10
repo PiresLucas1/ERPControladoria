@@ -8,46 +8,46 @@ namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ConsultaN
         {
             // ordem desejada (já inclui as colunas novas)
             string[] ordemColunas = new string[]{
-        "Documento",
-        "Razão Social Prestador",
-        "CNPJ Prestador",
-        "Código Verificação",
-        "Dt.Hora Emissão",
-        "Base Cálculo",
-        "Aliquota",
-        "Valor Líquido",
-        "UF Prestador",
-        "Total Serviços",
-        "Valor Pis",
-        "Valor Cofins",
-        "Valor IR",
-        "Valor Csll",
-        "Valor INSS",
-        "Valor ISS",
-        "Item Lista Serviço",
-        "Descriminação",
-        "CNPJ Tomador",
-        "Razão Social Tomador",
-        "UF Tomador",
-        "CodColigada",
-        "NomeColigada",
-        "CodFilial",
-        "NomeFilial",
-        "IDContasPagar",
-        "IDMov",
-        "Cód. Serviço TOTVS",
-        // >>> Colunas novas que você quer incluir <<<
-        "Descrição",
-        "CFOP",
-        "CFOP Descrição",
-        "Data Lançamento",
-        // <<< ------------------------------- >>>
-        "Retorno",
-        // Colunas invisíveis para tratativas
-        "ErpSitucaoContasPagar",
-        "IdErpTitulo",
-        "ErpSitucaoTitulo"
-    };
+                "Documento",
+                "Razão Social Prestador",
+                "CNPJ Prestador",
+                "Código Verificação",
+                "Dt.Hora Emissão",
+                "Base Cálculo",
+                "Aliquota",
+                "Valor Líquido",
+                "UF Prestador",
+                "Total Serviços",
+                "Valor Pis",
+                "Valor Cofins",
+                "Valor IR",
+                "Valor Csll",
+                "Valor INSS",
+                "Valor ISS",
+                "Item Lista Serviço",
+                "Descriminação",
+                "CNPJ Tomador",
+                "Razão Social Tomador",
+                "UF Tomador",
+                "CodColigada",
+                "NomeColigada",
+                "CodFilial",
+                "NomeFilial",
+                "IDContasPagar",
+                "IDMov",
+                "Cód. Serviço TOTVS",
+                // >>> Colunas novas que você quer incluir <<<
+                "Descrição",
+                "CFOP",
+                "CFOP Descrição",
+                "Data Lançamento",
+                // <<< ------------------------------- >>>
+                "Retorno",
+                // Colunas invisíveis para tratativas
+                "ErpSitucaoContasPagar",
+                "IdErpTitulo",
+                "ErpSitucaoTitulo"
+            };
 
             DataTable novo = new DataTable();
 

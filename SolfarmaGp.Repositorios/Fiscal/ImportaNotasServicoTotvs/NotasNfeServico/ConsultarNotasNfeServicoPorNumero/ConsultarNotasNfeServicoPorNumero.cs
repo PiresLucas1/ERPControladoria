@@ -1,15 +1,15 @@
-﻿using ERP_FISCAL;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System.Data;
+using SolfarmaGp.Infraestrutura;
 
 namespace SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.ConsultaNotasNfeServico.ConsultarNotasNfeServicoPorNumero
 {
     public class ConsultarNotasNfeServicoPorNumero
     {
-        public DataTable Consultar(string noteId)
+        public DataTable Executar(string noteId)
         {
             DataTable table = new DataTable();
-            DbConexaoConfig connectionDataBase = new DbConexaoConfig(DbName.DfeTotvs);
+           DbConexaoConfig connectionDataBase = new DbConexaoConfig(DbName.DfeTotvs);
 
             using (SqlConnection conn = connectionDataBase.AbrirConexao())
             {

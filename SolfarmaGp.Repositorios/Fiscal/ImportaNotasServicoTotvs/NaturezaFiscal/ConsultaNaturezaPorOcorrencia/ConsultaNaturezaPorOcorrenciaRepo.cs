@@ -1,12 +1,12 @@
 ﻿using Microsoft.Data.SqlClient;
-using System.Data;
 using SolfarmaGp.Infraestrutura;
+using System.Data;
 
-namespace SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaNaturezaFiscal.ConsultaTodos
+namespace SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaNaturezaFiscalRepositorio
 {
-    public class ConsultaTodasNatureza
+    public class ConsultaNaturezaPorOcorrenciaRepo
     {
-        public DataTable Executar(int codColigada)
+        public DataTable Executar(string valor, int codColigada, bool valorEmNumero)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
@@ -19,12 +19,18 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaNature
                     using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultaNaturezaFiscal", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandTimeout = 1200;
-
-                        cmd.Parameters.AddWithValue("@INCodColigada", codColigada);
-                        SqlParameter p = new SqlParameter("@INvchIDNatureza", SqlDbType.NVarChar);
-                        p.Value = DBNull.Value;
+                        SqlParameter p;                        
+                        if (valorEmNumero)
+                        {
+                            p = new SqlParameter("@INvchIDNatureza", SqlDbType.NVarChar);
+                        }
+                        else
+                        {
+                            p = new SqlParameter("@INvchDescricaoNatureza", SqlDbType.NVarChar);
+                        }
+                        p.Value = valor;
                         cmd.Parameters.Add(p);
+                        cmd.Parameters.AddWithValue("@INCodColigada", codColigada);
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {
                             adapter.Fill(tabela);
@@ -42,8 +48,5 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaNature
 
             return tabela;
         }
-
-
     }
-}
 }

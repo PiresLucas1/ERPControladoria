@@ -1,28 +1,29 @@
-﻿using System.Data;
+﻿using SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.ConsultaNotasNfeServico.ConsultarNotasNfeServicoPorNumero;
+using System.Data;
 
 namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ConsultaNotasServico
 {
     public class ConsultaNotaServicoPorNumero
     {
-        //public async Task<DataTable> Executar(string noteId)
-        //{
-        //    try
-        //    {
+        public async Task<DataTable> Executar(string noteId)
+        {
+            try
+            {
+                
+                DataTable nota = await Task.Run(() =>
+                {
+                    ConsultarNotasNfeServicoPorNumero consultaNota = new ConsultarNotasNfeServicoPorNumero();
+                    return consultaNota.Executar(noteId);
+                });
 
-        //        DataTable nota = await Task.Run(() =>
-        //        {
-        //            Carregar_Colunas util = new Carregar_Colunas();
-        //            return util.FindUniqueNote(noteId);
-        //        });
+                return nota;
 
-        //        return nota;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Não foi possivel retornar nota", ex);
 
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception("Não foi possivel retornar nota", ex);
-
-        //    }
-        //}
+            }
+        }
     }
 }
