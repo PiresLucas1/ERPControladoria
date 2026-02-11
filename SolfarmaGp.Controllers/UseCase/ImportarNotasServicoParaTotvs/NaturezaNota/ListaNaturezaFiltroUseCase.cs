@@ -3,9 +3,9 @@ using System.Data;
 using System.Text.RegularExpressions;
 
 
-namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ConsultaNaturezaPorOcorrencia
+namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.NaturezaNota.ConsultaNaturezaPorOcorrencia
 {
-    public class ConsultaNaturezaPorOcorrencia
+    public class ListaNaturezaFiltroUseCase
     {
         public async Task<DataTable> Executar(string valor, int codColigada)
         {

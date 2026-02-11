@@ -100,10 +100,16 @@ namespace SolfarmaGp.UI.MenuUI.MenuCompartilhados.ConsultaItens
 
 
         }
-        public void PesquisaValor()
+        public void PesquisaValor(string valorPesquisa = null)
         {
-            string valor = inputValor.Text.Trim();
-
+            string valor = string.Empty;
+            if (valorPesquisa == null)
+            {
+                valor = inputValor.Text.Trim();
+            }else
+                            {
+                valor = valorPesquisa.Trim();
+            }
             DataView view = _tabelaOrigem.DefaultView;
 
             if(string.IsNullOrEmpty(valor))

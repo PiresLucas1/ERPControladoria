@@ -34,5 +34,17 @@ namespace SolfarmaGp.UI {
                 this["CorCabecalho"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16")]
+        public int FonteTamanho {
+            get {
+                return ((int)(this["FonteTamanho"]));
+            }
+            set {
+                this["FonteTamanho"] = value;
+            }
+        }
     }
 }

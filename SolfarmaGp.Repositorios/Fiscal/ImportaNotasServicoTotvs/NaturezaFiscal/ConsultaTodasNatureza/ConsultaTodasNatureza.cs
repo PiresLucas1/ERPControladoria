@@ -46,4 +46,4 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaNature
 
     }
 }
-}
+

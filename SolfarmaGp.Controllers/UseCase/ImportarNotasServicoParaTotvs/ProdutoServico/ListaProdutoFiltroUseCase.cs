@@ -3,9 +3,9 @@ using System.Data;
 
 namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ProdutoServico
 {
-    public class ConsultaPorOcorrencia
+    public class ListaProdutoFiltroUseCase
     {
-        public async Task<DataTable> Consultar(string valor, int codColigada)
+        public async Task<DataTable> Executar(string valor, int codColigada)
         {
             ConsultarProdutoPorOcorrencia produtoServico = new ConsultarProdutoPorOcorrencia();
             DataTable tabelaDados = new DataTable();

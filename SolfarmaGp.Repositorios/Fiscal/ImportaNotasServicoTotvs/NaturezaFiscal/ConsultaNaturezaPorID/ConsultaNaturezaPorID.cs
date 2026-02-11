@@ -1,4 +1,4 @@
-﻿using ERP_FISCAL;
+﻿using SolfarmaGp.Infraestrutura;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
@@ -6,7 +6,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaNature
 {
     public class ConsultaNaturezaPorID
     {
-        public DataTable Consulta(string valor)
+        public async Task<DataTable> Executar(string valor)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);

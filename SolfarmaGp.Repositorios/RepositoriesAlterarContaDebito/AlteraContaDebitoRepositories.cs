@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using SolfarmaGp.Infraestrutura;
 using System.Data;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
 
 namespace ERP_FISCAL.Repositories.RepositoriesAlterarContaDebito
 {

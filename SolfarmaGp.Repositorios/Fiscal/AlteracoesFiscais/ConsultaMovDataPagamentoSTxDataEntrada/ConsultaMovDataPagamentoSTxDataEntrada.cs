@@ -1,5 +1,6 @@
 ﻿using ERP_FISCAL;
 using Microsoft.Data.SqlClient;
+using SolfarmaGp.Infraestrutura;
 using System.Data;
 
 namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.ConsultaMovDataPagamentoSTxDataEntrada

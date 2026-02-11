@@ -1,14 +1,6 @@
-﻿using ERP_FISCAL.NotaDinamicaBling;
-using ERP_FISCAL.service;
-using ERP_FISCAL.Utils;
-using System;
-using System.Collections.Generic;
+﻿using Microsoft.Data.SqlClient;
+using SolfarmaGp.Infraestrutura;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
 {
@@ -57,15 +49,15 @@ namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
 
         }
 
-        public async Task<HttpResponseMessage> CriaNotasItensZanup(NotaProdutoDTO novaNota)
-        {
-            CriarNotaBlingDinamica criarNotaBling = new CriarNotaBlingDinamica();
-            HttpResponseMessage response = await criarNotaBling.ExecutarCriacaoNota(novaNota);
+        //public async Task<HttpResponseMessage> CriaNotasItensZanup(NotaProdutoDTO novaNota)
+        //{
+        //    CriarNotaBlingDinamica criarNotaBling = new CriarNotaBlingDinamica();
+        //    HttpResponseMessage response = await criarNotaBling.ExecutarCriacaoNota(novaNota);
 
-            return response;
+        //    return response;
 
 
-        }
+        //}
         public async Task<DataTable> BuscaInformacoesCnpjZanup(string cnpj)
         {
             DataTable dataTable = new DataTable();

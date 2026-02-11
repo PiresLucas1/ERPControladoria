@@ -181,44 +181,44 @@ namespace ERP_FISCAL.view
                     txtVersao.BackColor = corSelecionada;
 
                     // 🔹 Salva no Settings (convertendo para HTML: #RRGGBB)
-                    Properties.Settings.Default.CorCabecalho = ColorTranslator.ToHtml(corSelecionada);
-                    Properties.Settings.Default.Save();
+                    UserConfig.Default.CorCabecalho = ColorTranslator.ToHtml(corSelecionada);
+                    UserConfig.Default.Save();
 
 
                 }
             }
         }
 
-        private void devoluçaoDeNotasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!FormAberto(typeof(ConsultaSaldoNotasFiscais)))
-            {
-                ConsultaSaldoNotasFiscais alteraTipoMovimento = new ConsultaSaldoNotasFiscais();
-                alteraTipoMovimento.MdiParent = this;
-                alteraTipoMovimento.Show();
-            }
-        }
+        //private void devoluçaoDeNotasToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (!FormAberto(typeof(ConsultaSaldoNotasFiscais)))
+        //    {
+        //        ConsultaSaldoNotasFiscais alteraTipoMovimento = new ConsultaSaldoNotasFiscais();
+        //        alteraTipoMovimento.MdiParent = this;
+        //        alteraTipoMovimento.Show();
+        //    }
+        //}
 
-        private void importarRecebimentoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!FormAberto(typeof(ImportacaoRecebimento)))
-            {
-                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
-                importacaoRecebimento.MdiParent = this;
-                importacaoRecebimento.Show();
-            }
+        //private void importarRecebimentoToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (!FormAberto(typeof(ImportacaoRecebimento)))
+        //    {
+        //        ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
+        //        importacaoRecebimento.MdiParent = this;
+        //        importacaoRecebimento.Show();
+        //    }
 
-        }
+        //}
 
-        private void atualizarGestãoPatrimonialToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!FormAberto(typeof(ImportacaoRecebimento)))
-            {
-                ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
-                importacaoRecebimento.MdiParent = this;
-                importacaoRecebimento.Show();
-            }
-        }
+        //private void atualizarGestãoPatrimonialToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (!FormAberto(typeof(ImportacaoRecebimento)))
+        //    {
+        //        ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
+        //        importacaoRecebimento.MdiParent = this;
+        //        importacaoRecebimento.Show();
+        //    }
+        //}
 
         private void txtVersao_Click(object sender, EventArgs e)
         {
@@ -240,37 +240,37 @@ namespace ERP_FISCAL.view
 
         }
 
-        private void alteraçãoUnicaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!FormAberto(typeof(AlteraTipoMovimento)))
-            {
-                AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
-                alteraTipoMovimento.MdiParent = this;
-                alteraTipoMovimento.Show();
-            }
-        }
+        //private void alteraçãoUnicaToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (!FormAberto(typeof(AlteraTipoMovimento)))
+        //    {
+        //        AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
+        //        alteraTipoMovimento.MdiParent = this;
+        //        alteraTipoMovimento.Show();
+        //    }
+        //}
 
-        private void alteraçãoEmListaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!FormAberto(typeof(AlteracoesFiscaisEmLote)))
-            {
-                AlteracoesFiscaisEmLote alteraTipoMovimentoLista = new AlteracoesFiscaisEmLote();
-                alteraTipoMovimentoLista.MdiParent = this;
-                alteraTipoMovimentoLista.Show();
-            }
-        }
+        //private void alteraçãoEmListaToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (!FormAberto(typeof(AlteracoesFiscaisEmLote)))
+        //    {
+        //        AlteracoesFiscaisEmLote alteraTipoMovimentoLista = new AlteracoesFiscaisEmLote();
+        //        alteraTipoMovimentoLista.MdiParent = this;
+        //        alteraTipoMovimentoLista.Show();
+        //    }
+        //}
 
-        private async void cadastrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!FormAberto(typeof(CadUsu)))
-            {
-                SegCadastroController segCadastroController = new SegCadastroController();
-                DataTable dt = await segCadastroController.ListaDados("%", 1);
-                CadUsu cadastroUsuario = new CadUsu(dt);
-                cadastroUsuario.MdiParent = this;
-                cadastroUsuario.Show();
-            }
-        }
+        //private async void cadastrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (!FormAberto(typeof(CadUsu)))
+        //    {
+        //        SegCadastroController segCadastroController = new SegCadastroController();
+        //        DataTable dt = await segCadastroController.ListaDados("%", 1);
+        //        CadUsu cadastroUsuario = new CadUsu(dt);
+        //        cadastroUsuario.MdiParent = this;
+        //        cadastroUsuario.Show();
+        //    }
+        //}
 
         public void DesabilitaItemMenu(MenuStrip menu, string nomeItem, bool valor)
         {
@@ -332,16 +332,16 @@ namespace ERP_FISCAL.view
             }
         }
 
-        private void xMLPostoDoLagoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!FormAberto(typeof(ExportaXmlPasta)))
-            {
-                ExportaXmlPasta exportaXml = new ExportaXmlPasta(this);
-                exportaXml.MdiParent = this;
-                exportaXml.Show();
-            }
+        //private void xMLPostoDoLagoToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (!FormAberto(typeof(ExportaXmlPasta)))
+        //    {
+        //        ExportaXmlPasta exportaXml = new ExportaXmlPasta(this);
+        //        exportaXml.MdiParent = this;
+        //        exportaXml.Show();
+        //    }
 
-        }
+        //}
 
         private void grandeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -360,54 +360,54 @@ namespace ERP_FISCAL.view
 
         public void alteraTamanhoFonte(int valor)
         {
-            Properties.Settings.Default.FonteTamanho = valor;
-            Properties.Settings.Default.Save();
+            UserConfig.Default.FonteTamanho = valor;
+            UserConfig.Default.Save();
         }
 
-        private void criarNotaZanupToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!FormAberto(typeof(ExportaXmlPasta)))
-            {
-                ConsultaNotaItem consultaNotaItem = new ConsultaNotaItem();
-                consultaNotaItem.MdiParent = this;
-                consultaNotaItem.Show();
-            }
-        }
+        //private void criarNotaZanupToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (!FormAberto(typeof(ExportaXmlPasta)))
+        //    {
+        //        ConsultaNotaItem consultaNotaItem = new ConsultaNotaItem();
+        //        consultaNotaItem.MdiParent = this;
+        //        consultaNotaItem.Show();
+        //    }
+        //}
 
-        public void AbrirFecharMonitoramentoExportacao(string mensagem = null)
-        {
-            if (monitoramentoExportacao == null)
-            {
-                monitoramentoExportacao = new VisuExportacaoXml(mensagem);
+        //public void AbrirFecharMonitoramentoExportacao(string mensagem = null)
+        //{
+        //    if (monitoramentoExportacao == null)
+        //    {
+        //        monitoramentoExportacao = new VisuExportacaoXml(mensagem);
 
-                monitoramentoExportacao.Anchor =
-                    AnchorStyles.Bottom | AnchorStyles.Right;
+        //        monitoramentoExportacao.Anchor =
+        //            AnchorStyles.Bottom | AnchorStyles.Right;
 
-                monitoramentoExportacao.Location = new Point(
-                    this.ClientSize.Width - monitoramentoExportacao.Width - 10,
-                    this.ClientSize.Height - monitoramentoExportacao.Height - 10
-                );
+        //        monitoramentoExportacao.Location = new Point(
+        //            this.ClientSize.Width - monitoramentoExportacao.Width - 10,
+        //            this.ClientSize.Height - monitoramentoExportacao.Height - 10
+        //        );
 
-                this.Controls.Add(monitoramentoExportacao);
-                monitoramentoExportacao.BringToFront();
-            }
-            else
-            {
-                this.Controls.Remove(monitoramentoExportacao);
-                monitoramentoExportacao.Dispose();
-                monitoramentoExportacao = null;
-            }
-        }
+        //        this.Controls.Add(monitoramentoExportacao);
+        //        monitoramentoExportacao.BringToFront();
+        //    }
+        //    else
+        //    {
+        //        this.Controls.Remove(monitoramentoExportacao);
+        //        monitoramentoExportacao.Dispose();
+        //        monitoramentoExportacao = null;
+        //    }
+        //}
 
-        private void criarCampanhaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!FormAberto(typeof(CriaCampanha)))
-            {
-                CriaCampanha criaCampanha = new CriaCampanha();
-                criaCampanha.MdiParent = this;
-                criaCampanha.Show();
-            }
-        }
+        //private void criarCampanhaToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    if (!FormAberto(typeof(CriaCampanha)))
+        //    {
+        //        CriaCampanha criaCampanha = new CriaCampanha();
+        //        criaCampanha.MdiParent = this;
+        //        criaCampanha.Show();
+        //    }
+        //}
     }
 }
 

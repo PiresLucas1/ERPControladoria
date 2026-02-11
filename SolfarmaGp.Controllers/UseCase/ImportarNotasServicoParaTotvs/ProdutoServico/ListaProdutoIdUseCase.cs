@@ -3,7 +3,7 @@ using System.Data;
 
 namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ProdutoServico
 {
-    public class ConsultaPorId
+    public class ListaProdutoIdUseCase
     {
         public async Task<DataTable> Consultar(string valor)
         {
@@ -13,7 +13,7 @@ namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ProdutoSe
 
             tabelaDados = await Task.Run(() =>
             {
-                return produtoServico.Consulta(valor);
+                return produtoServico.Executar(valor);
             });
 
             return tabelaDados;

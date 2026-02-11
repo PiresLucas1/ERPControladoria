@@ -1,8 +1,7 @@
-﻿using ERP_FISCAL.Controller.MetaComissaoFarmaController;
-using System;
+﻿using Microsoft.Data.SqlClient;
+using SolfarmaGp.Infraestrutura;
 using System.Data;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
+using static SolfarmaGp.Repositorios.MetaComissaoFarmaRepositories.IMetaComissaoObjetoPesquisa;
 
 namespace ERP_FISCAL.Repositories.MetaComissaoFarmaRepositories
 {

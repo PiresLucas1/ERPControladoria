@@ -9,12 +9,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="UIPortal\Controladoria.cs" />
-	  <Compile Remove="UIPortal\Controladoria.Designer.cs" />
+	  <Compile Remove="HomeUI\Controladoria.cs" />
+	  <Compile Remove="HomeUI\Controladoria.Designer.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Remove="UIPortal\Controladoria.resx" />
+	  <EmbeddedResource Remove="HomeUI\Controladoria.resx" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -22,10 +22,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="MenuUI\Fiscal\ImportarDadosBigTotvs\ImportaDadosBigTotvs.cs">
+	  <Compile Update="MenusUI\Fiscal\ImportarDadosBigTotvs\ImportaDadosBigTotvs.cs">
 	    <SubType>Form</SubType>
 	  </Compile>
-	  <Compile Update="MenuUI\MenuCompartilhados\ConsultaItens\ConsultaItem.cs">
+	  <Compile Update="MenusUI\MenuCompartilhados\ConsultaItens\ConsultaItem.cs">
 	    <SubType>Form</SubType>
 	  </Compile>
 	  <Compile Update="Properties\Resources.Designer.cs">
@@ -51,7 +51,7 @@
 	  <Compile Update="ComponentesTelaUI\ProcessoCarregamento\UIStatusDoProcessos\StatusProcess.cs">
 	    <SubType>Form</SubType>
 	  </Compile>
-	  <Compile Update="MenuUI\Fiscal\ImportarNotaServico\ImportarNotasTotvs.cs">
+	  <Compile Update="MenusUI\Fiscal\ImportarNotaServico\ImportarNotasTotvs.cs">
 	    <SubType>Form</SubType>
 	  </Compile>
 	  <Compile Update="UserConfig.Designer.cs">
@@ -62,7 +62,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="MenuUI\MenuCompartilhados\ConsultaItens\ConsultaItem.resx">
+	  <EmbeddedResource Update="MenusUI\MenuCompartilhados\ConsultaItens\ConsultaItem.resx">
 	    <SubType>Designer</SubType>
 	  </EmbeddedResource>
 	  <EmbeddedResource Update="Properties\Resources.resx">

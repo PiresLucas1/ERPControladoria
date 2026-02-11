@@ -1,6 +1,4 @@
-﻿using ERP_FISCAL.controller;
-using System.Data;
-using static ERP_FISCAL.controller.CfopController;
+﻿using System.Data;
 
 namespace SolfarmaGp.Controllers.Utils.AjudataDataGrid
 {

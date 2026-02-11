@@ -1,12 +1,12 @@
-﻿using ERP_FISCAL;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System.Data;
+using SolfarmaGp.Infraestrutura;
 
 namespace SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultarProdutoFiscal.ConsultarProdutoPorDescricao
 {
     public class ConsultarProdutoPorDescricao
     {
-        public DataTable PegaValorPelaDescricao(string valor)
+        public async Task<DataTable> Executar(string valor)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);

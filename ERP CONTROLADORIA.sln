@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.2.11415.280 d18.0
+VisualStudioVersion = 18.2.11415.280
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP CONTROLADORIA", "ERP FISCAL\ERP CONTROLADORIA.csproj", "{D968ACB0-077F-4494-80EA-8A7EAA76DD37}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{380A7511-A354-6D7A-0CC0-8FA1F1BA7B6C}"
 	ProjectSection(SolutionItems) = preProject
 		\\192.168.30.56\gs300gp\icon-new.ico = \\192.168.30.56\gs300gp\icon-new.ico
@@ -26,10 +24,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D968ACB0-077F-4494-80EA-8A7EAA76DD37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D968ACB0-077F-4494-80EA-8A7EAA76DD37}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D968ACB0-077F-4494-80EA-8A7EAA76DD37}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D968ACB0-077F-4494-80EA-8A7EAA76DD37}.Release|Any CPU.Build.0 = Release|Any CPU
 		{25597C46-9E90-D328-E10B-DB319A4DA8D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{25597C46-9E90-D328-E10B-DB319A4DA8D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25597C46-9E90-D328-E10B-DB319A4DA8D2}.Release|Any CPU.ActiveCfg = Release|Any CPU

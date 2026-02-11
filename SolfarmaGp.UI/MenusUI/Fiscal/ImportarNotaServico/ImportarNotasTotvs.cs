@@ -1,11 +1,19 @@
 ﻿using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ConsultaNotasServico;
+using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ConsultaServico;
 using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ExportaNotaServico;
+using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.NaturezaNota;
+using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.NaturezaNota.ConsultaNaturezaPorOcorrencia;
+using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ProdutoServico;
+using SolfarmaGp.Controllers.Utils.Parse.FormatarDataDigitada;
+using SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaNaturezaFiscal.ConsultaNaturezaPorID;
 using SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaNaturezaFiscal.ConsultaTodos;
+using SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultarProdutoFiscal.ConsultarProdutoPorId;
 using SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultarProdutoFiscal.ConsultarTodosProdutos;
 using SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.ConsultaNotasNfeServico.ConsultarNotasNfeServicoPorPeriodo;
 using SolfarmaGp.UI.MenuUI.MenuCompartilhados.ConsultaItens;
 using SolfarmaGp.UI.UiComponentesTela.ProcessoCarregamento.UIStatusDoProcessos;
 using System.Data;
+using static SolfarmaGp.UI.MenuUI.MenuCompartilhados.ConsultaItens.InterfacesApoioClasse;
 using TextBox = System.Windows.Forms.TextBox;
 
 
@@ -340,16 +348,13 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
             int btnY = heightWindow - buttonHeight - bottomSpacing;
 
             btnSelecionarTodas.Top = btnY;
-            btnDesmarcarTodos.Top = btnY;
-            btnInserirEmBloco.Top = btnY;
+            btnDesmarcarTodos.Top = btnY;            
             btnLimpar.Top = btnY;
             btnExportarTotvs.Top = btnY;
 
             // Posicionamento dos botões em sequência
             btnSelecionarTodas.Left = sideMargin;
-            btnDesmarcarTodos.Left = btnSelecionarTodas.Right + buttonSpacing;
-            btnInserirEmBloco.Left = btnDesmarcarTodos.Right + buttonSpacing;
-            btnLimpar.Left = btnInserirEmBloco.Right + buttonSpacing;
+            btnDesmarcarTodos.Left = btnSelecionarTodas.Right + buttonSpacing;                        
 
             // Exportar no canto direito
             btnExportarTotvs.Left = widthWindow - btnExportarTotvs.Width - sideMargin;
@@ -395,7 +400,7 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
             if (colName == "CFOP")
             {
 
-                ConsultaItem
+                ConsultaTodasNatureza consultaProduto = new ConsultaTodasNatureza();
                 int codColigadaInt = Convert.ToInt32(codColigada);
                 DataTable dtNatureza = consultaProduto.Executar(codColigadaInt);
 
@@ -417,107 +422,20 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
 
         public void AtualizaCFOP(int index, string cfopSelecionado)
         {
-            CfopController cFOPController = new CfopController();
-            ValidaValorDeCelulaCfop(cfopSelecionado, cFOPController, index, "CFOP", "CFOP Descrição");
+            ConsultaNaturezaPorID consultaProduto = new ConsultaNaturezaPorID();
+            ValidaValorDeCelulaCfop(cfopSelecionado, consultaProduto, index, "CFOP", "CFOP Descrição");
 
 
         }
         public void AtualizaProduto(int index, string cProduto)
         {
-            ProdutoServicoController produtoServico = new ProdutoServicoController();
-            ValidaValorDeCelulaCProduto(cProduto, produtoServico, index, "Cód. Serviço TOTVS", "Descrição");
+            ConsultarProdutoPorId produtoServicoController = new ConsultarProdutoPorId();
+            ValidaValorDeCelulaCProduto(cProduto, produtoServicoController, index, "Cód. Serviço TOTVS", "Descrição");
 
         }
         public void AtualizaDataLancamento(int index, string dataLancamento)
         {
             dtImportacao.Rows[index].Cells["Data Lançamento"].Value = dataLancamento;
-        }
-        public DtoFormNotaParaNatureza PegaInformacaoParaNatureza(int index)
-        {
-
-            if (index > dtImportacao.RowCount - 1)
-            {
-                MessageBox.Show("Não há mais notas para percorrer");
-                return null;
-            }
-            var codColigada = dtImportacao.Rows[index].Cells["CodColigada"].Value.ToString();
-            var cnpjPrestador = dtImportacao.Rows[index].Cells["CNPJ Prestador"].Value.ToString();
-            var codVerificacao = dtImportacao.Rows[index].Cells["Código Verificação"].Value.ToString();
-            var numDoc = dtImportacao.Rows[index].Cells["Documento"].Value.ToString();
-            var razaoSocial = dtImportacao.Rows[index].Cells["Razão Social Prestador"].Value.ToString();
-            var quantidade = dtImportacao.RowCount - 1;
-            var informacaoParaNatureza = new DtoFormNotaParaNatureza
-            {
-                CodColigada = codColigada,
-                CnpjPrestador = cnpjPrestador,
-                CodVerificacao = codVerificacao,
-                NumDoc = numDoc,
-                QuantidadeNotas = quantidade,
-                RazaoSocial = razaoSocial
-            };
-            return informacaoParaNatureza;
-        }
-        private async void btnInserirEmBloco_Click(object sender, EventArgs e)
-        {
-            if (dtImportacao == null)
-            {
-                MessageBox.Show("Não há informação na tabela");
-                return;
-            }
-            var listaNatureza = await CarregaListaNatureza(0);
-            List<int> linhasParaInserir = new List<int>();
-            foreach (DataGridViewRow row in dtImportacao.Rows)
-            {
-                bool selecionado = Convert.ToBoolean(row.Cells["Selecionar"].Value);
-                if (selecionado)
-                {
-                    linhasParaInserir.Add(row.Index);
-                }
-            }
-            if (linhasParaInserir.Count < 1)
-            {
-                MessageBox.Show("Nenhuma informação foi selecionada");
-                return;
-            }
-
-            var dialogo = new DialogoInsereInformacao
-            {
-                titulo = "Cód. Serviço Totvs",
-                dataTable = listaNatureza
-            };
-
-            using (var dialog = new InsercaoBloco(dialogo))
-            {
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    foreach (int linha in linhasParaInserir)
-                    {
-                        if (dialog.cfopCbox.Checked)
-                        {
-                            AtualizaCFOP(linha, dialog.valorCfop);
-                        }
-
-                        if (dialog.cProdutoCbox.Checked)
-                        {
-                            AtualizaProduto(linha, dialog.valorProduto);
-                        }
-
-                        if (dialog.dataLancamentoCbox.Checked)
-                        {
-                            AtualizaDataLancamento(linha, dialog.valorData);
-                        }
-                    }
-                }
-            }
-            MessageBox.Show("Existe algumas informações que não existe em determinadas coligadas", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-
-        }
-        public async Task<DataTable> CarregaListaNatureza(int codColigada)
-        {
-            var carregaComboBoxCfop = new CfopController();
-            var lista = await carregaComboBoxCfop.CarregaTodos(codColigada);
-
-            return lista;
         }
 
         public void SelecionaValorProduto(string valor, int index)
@@ -565,8 +483,8 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
 
                 if (!string.IsNullOrEmpty(valorDigitado))
                 {
-                    ProdutoServicoController produtoController = new ProdutoServicoController();
-                    var retorno = await produtoController.PegaValorUnicoPeloCodigo(valorDigitado);
+                    ConsultarProdutoPorId produtoController = new ConsultarProdutoPorId();
+                    var retorno = await produtoController.Executar(valorDigitado);
 
 
                     // opcional: atualizar a célula atual com o retorno
@@ -579,7 +497,7 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
             string nomeColuna = dtImportacao.Columns[colAlteracao].Name;
             if (nomeColuna == "Data Lançamento")
             {
-                string valorDataFormatado = FormatarDataDigitada(valor);
+                string valorDataFormatado = new FormatarData().Executar(valor);
 
                 // 🟢 Força o encerramento da edição
                 dtImportacao.EndEdit();
@@ -606,15 +524,15 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
             if (nomeColuna == "Cód. Serviço TOTVS")
             {
 
-                ProdutoServicoController produtoController = new ProdutoServicoController();
-                retorno = await produtoController.CarregaComOcorrencia(valor, Convert.ToInt32(codColigadaLinha));
+                ListaProdutoFiltroUseCase produtoController = new ListaProdutoFiltroUseCase();
+                retorno = await produtoController.Executar(valor, Convert.ToInt32(codColigadaLinha));
                 itemColunaValor = "CODIGOPRD";
                 itemColunaDescricao = "DESCRICAO";
             }
             if (nomeColuna == "CFOP")
             {
-                CfopController cFOPController = new CfopController();
-                retorno = await cFOPController.CarregaComOcorrencia(valor, Convert.ToInt32(codColigadaLinha));
+                ListaNaturezaFiltroUseCase cFOPController = new ListaNaturezaFiltroUseCase();
+                retorno = await cFOPController.Executar(valor, Convert.ToInt32(codColigadaLinha));
                 itemColunaValor = "COD. NATUREZA";
                 itemColunaDescricao = "DESCRIÇÃO NATUREZA";
 
@@ -632,18 +550,21 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
             {
                 if (nomeColuna == "CFOP")
                 {
-                    CfopController cFOPController = new CfopController();
-                    ConsultaItem consultaItem = new ConsultaItem(linhaAtual, Convert.ToInt32(codColigadaLinha), cFOPController, "Consulta CFOP", this);
-                    await consultaItem.PesquisaValorPorString(valor);
+                    ListaTodosNaturezaUseCase cFOPController = new ListaTodosNaturezaUseCase();
+                    DataTable dtNatureza = await cFOPController.Executar(Convert.ToInt32(codColigadaLinha));
+                    ConsultaItem consultaItem = new ConsultaItem(linhaAtual, dtNatureza, "Consulta CFOP", this);
+                    //ConsultaItem consultaItem = new ConsultaItem(linhaAtual, Convert.ToInt32(codColigadaLinha), dtNatureza, "Consulta CFOP", this);
+                    consultaItem.PesquisaValor(valor);
                     //AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController, "cfop");
                     consultaItem.Show();
                     return;
                 }
                 if (nomeColuna == "Cód. Serviço TOTVS")
                 {
-                    ProdutoServicoController cProdutoCotroller = new ProdutoServicoController();
-                    ConsultaItem consultaItem = new ConsultaItem(linhaAtual, Convert.ToInt32(codColigadaLinha), cProdutoCotroller, "Consulta Produto", this);
-                    await consultaItem.PesquisaValorPorString(valor);
+                    ListaTodosProdutoUseCase cProdutoCotroller = new ListaTodosProdutoUseCase();
+                    DataTable dtProduto = await cProdutoCotroller.Executar(Convert.ToInt32(codColigadaLinha));
+                    ConsultaItem consultaItem = new ConsultaItem(linhaAtual, dtProduto, "Consulta Produto", this);
+                    consultaItem.PesquisaValor(valor);
                     //AbrirConsultaItem(e.RowIndex, Convert.ToInt32(codColigada), cfopController, "cfop");
                     consultaItem.Show();
                     return;
@@ -686,7 +607,7 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
                     {
                         if (Convert.ToInt32(codColigada) == 2)
                         {
-                            ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial();
+                           // ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial(); 
                             //bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valorEncontrado, Convert.ToInt32(filial), ufTomador, ufPrestador);
 
                             //if (!validacao)
@@ -721,7 +642,7 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
                 string codColigada = dtImportacao.Rows[cellAlteracao.Index].Cells["CodColigada"].Value.ToString() ?? "";
                 if (ufTomador != "")
                 {
-                    ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial();
+                    //ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial();
 
                     //string codColigada = dtImportacao.Rows[cellAlteracao.Index].Cells["CodColigada"].Value.ToString();
                     if (Convert.ToInt32(codColigada) == 2)
@@ -756,10 +677,10 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
             dtImportacao.Rows[row].Cells[coluna].Value = valor;
         }
 
-        public async void ValidaValorDeCelulaCfop(string valor, UIController controller, int index, string valorCelula1, string valorCelula2)
+        public async void ValidaValorDeCelulaCfop(string valor, ConsultaNaturezaPorID controller, int index, string valorCelula1, string valorCelula2)
         {
 
-            var retorno = await controller.PegaValorUnicoPeloCodigo(valor);
+            var retorno = await controller.Executar(valor);
             var codColigadaLinha = dtImportacao.Rows[index].Cells["CODCOLIGADA"].Value?.ToString();
             DataRow valorRow = null;
 
@@ -782,10 +703,10 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
             dtImportacao.Rows[index].Cells[valorCelula2].Value = valorRow["DESCRIÇÃO NATUREZA"].ToString();
 
         }
-        public async void ValidaValorDeCelulaCProduto(string valor, UIController controller, int index, string valorCelula1, string valorCelula2)
+        public async void ValidaValorDeCelulaCProduto(string valor, ConsultarProdutoPorId controller, int index, string valorCelula1, string valorCelula2)
         {
 
-            var retorno = await controller.PegaValorUnicoPeloCodigo(valor);
+            var retorno = await controller.Executar(valor);
             var codColigadaLinha = dtImportacao.Rows[index].Cells["CODCOLIGADA"].Value?.ToString();
             DataRow valorRow = null;
 
@@ -940,7 +861,7 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
 
         public async Task<(string codigoServico, string descricaoServico, string codigoNatureza, string descricaoNatureza)> BuscaValorServico(string cnpjPrestador, int valorTipo)
         {
-            var retorno = await new ConsultaServicoController().Executar(cnpjPrestador, valorTipo);
+            var retorno = await new ConsultaServico().Executar(cnpjPrestador, valorTipo);
             return retorno;
         }
 

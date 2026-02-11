@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using SolfarmaGp.Infraestrutura;
 using System.Data;
-using System.Data.SqlClient;
-using System.Threading.Tasks;
-using static ERP_FISCAL.Utils.ControleNotasCriadaBling;
+using static SolfarmaGp.Repositorios.Zanup.Interfaces.ControleNotaBling;
 
 namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
 {
