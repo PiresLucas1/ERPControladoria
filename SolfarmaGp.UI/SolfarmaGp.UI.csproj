@@ -9,15 +9,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="HomeUI\Controladoria.cs" />
-	  <Compile Remove="HomeUI\Controladoria.Designer.cs" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <EmbeddedResource Remove="HomeUI\Controladoria.resx" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\SolfarmaGp.Controllers\SolfarmaGp.Controllers.csproj" />
 	</ItemGroup>
 

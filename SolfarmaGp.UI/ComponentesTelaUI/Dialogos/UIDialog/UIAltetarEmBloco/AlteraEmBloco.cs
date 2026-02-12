@@ -1,16 +1,7 @@
-﻿using ERP_FISCAL.Repositories.AlteraTipoMovimentoRepositories;
-using SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.UIAltetarEmBloco;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.UIAltetarEmBloco;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco
+namespace SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.UIAltetarEmBloco
 {
     public partial class AlteraEmBloco : Form
     {
@@ -18,19 +9,15 @@ namespace ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco
         private readonly DataTable _dataGrid;
         private readonly int _codLayout;
         private readonly string[] _valorLabel;
-        private readonly string[] _valorTextBox;
-        private readonly AlteraTipoMovimentoRepositories _repo;
-        public AlteraEmBloco( int codLayout, string[] valoresLabel, string[] valorTextBox, AlteraTipoMovimentoRepositories repo, DataTable tabela = null)
+        private readonly string[] _valorTextBox;        
+        public AlteraEmBloco( int codLayout, string[] valoresLabel, string[] valorTextBox, DataTable tabela = null)
         {
             InitializeComponent();
             //_data = data;
             _dataGrid = tabela;
             _codLayout = codLayout;
             _valorLabel = valoresLabel;
-            _valorTextBox = valorTextBox;
-            _repo = repo;
-
-            //lb1.Text = data.TextLabel1;
+            _valorTextBox = valorTextBox;                        
             CarregaTerceiroLayout();
         }
 

@@ -1,4 +1,4 @@
-﻿namespace ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos
+﻿namespace SolfarmaGp.UI.UiComponentesTela.ProcessoCarregamento.UIStatusDoProcessos
 {
     partial class StatusProcess
     {

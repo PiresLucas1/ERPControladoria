@@ -1,4 +1,4 @@
-﻿namespace ERP_FISCAL.view
+﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs
 {
     partial class ImportaDadosBigTotvs
     {

@@ -20,7 +20,7 @@ namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ConsultaN
             DataTable notas = await Task.Run(() =>
             {
                 ConsultarNotasNfeServicoPorPeriodo consultarNotasServico = new ConsultarNotasNfeServicoPorPeriodo();
-                return consultarNotasServico.Consultar(valueDate1, valueDate2, codColigada, existeErp);
+                return consultarNotasServico.Executar(valueDate1, valueDate2, codColigada, existeErp);
             });
 
 

@@ -1,5 +1,8 @@
-namespace SolfarmaGp.UI
+using SolfarmaGp.UI.MenusUI;
+
+namespace SolfarmaGp.App
 {
+
     internal static class Program
     {
         /// <summary>
@@ -11,7 +14,7 @@ namespace SolfarmaGp.UI
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new Portal());
         }
     }
 }

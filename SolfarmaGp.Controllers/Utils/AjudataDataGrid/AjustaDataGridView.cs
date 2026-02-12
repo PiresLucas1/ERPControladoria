@@ -4,25 +4,17 @@ namespace SolfarmaGp.Controllers.Utils.AjudataDataGrid
 {
     public class AjustaDataGridView
     {
-        public IDataTableGridCFOPUi AjusteDataGrid(DataTable dataTable)
+        public DataTable AjusteDataGrid(DataTable dataTable)
         {
 
-            var resultado = new AjusteDataGridView();
-            resultado.DatatableNatureza.Columns.Add("COD. COLIGADA", typeof(int));
-            resultado.DatatableNatureza.Columns.Add("COD. NATUREZA", typeof(string));
-            resultado.DatatableNatureza.Columns.Add("DESCRIÇÃO NATUREZA", typeof(string));
-            resultado.DatatableNatureza.Columns.Add("TIPO CONTABILIZAÇÃO", typeof(string));
-            resultado.DatatableNatureza.Columns.Add("COD. CONTA", typeof(string));
+            var resultado = new DataTable();
+            resultado.Columns.Add("COD. COLIGADA", typeof(int));
+            resultado.Columns.Add("COD. NATUREZA", typeof(string));
+            resultado.Columns.Add("DESCRIÇÃO NATUREZA", typeof(string));
+            resultado.Columns.Add("TIPO CONTABILIZAÇÃO", typeof(string));
+            resultado.Columns.Add("COD. CONTA", typeof(string));
             foreach (DataRow row in dataTable.Rows)
             {
-
-                var keyColigada = row["COD. COLIGADA"].ToString();
-                var valorColigada = row["NOME COLIGADA"].ToString();
-
-                if (!resultado.DicionarioColigada.ContainsKey(keyColigada))
-                {
-                    resultado.DicionarioColigada.Add(keyColigada, valorColigada);
-                }
 
 
 
@@ -33,7 +25,7 @@ namespace SolfarmaGp.Controllers.Utils.AjudataDataGrid
                 var codConta = row["COD. CONTA"].ToString();
 
                 // cria uma nova linha no DataTable destino
-                DataRow novaLinha = resultado.DatatableNatureza.NewRow();
+                DataRow novaLinha = resultado.NewRow();
                 novaLinha["COD. COLIGADA"] = coligada;
                 novaLinha["COD. NATUREZA"] = idNatureza;
                 novaLinha["DESCRIÇÃO NATUREZA"] = natureza;
@@ -41,7 +33,8 @@ namespace SolfarmaGp.Controllers.Utils.AjudataDataGrid
                 novaLinha["COD. CONTA"] = codConta;
 
                 // adiciona a linha ao DataTable
-                resultado.DatatableNatureza.Rows.Add(novaLinha);
+                resultado.Rows.Add(novaLinha);
+                
 
 
 

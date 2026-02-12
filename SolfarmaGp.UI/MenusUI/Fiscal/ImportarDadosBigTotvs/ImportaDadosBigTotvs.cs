@@ -1,21 +1,10 @@
-﻿using ERP_FISCAL.controller;
-using ERP_FISCAL.Controller.ExportaDadosBigController;
-using ERP_FISCAL.Repositories.ExportaDadosBigRepositories;
-using ERP_FISCAL.Utils;
-using ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela;
-using ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using SolfarmaGp.Controllers.UseCase.ImportarDadosBigTotvs.ConsultaNotaNaoEncontradaBig;
+using SolfarmaGp.Controllers.UseCase.ImportarDadosBigTotvs.ImportaNotasNaoEncontradas;
+using SolfarmaGp.UI.UiComponentesTela.ProcessoCarregamento.UIStatusDoProcessos;
+using SolfarmaGp.UI.UiComponentesTela.Tabelas.UIRetornoEmTabela;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace ERP_FISCAL.view
-{
+namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs { 
     public partial class ImportaDadosBigTotvs : Form
     {
         public ImportaDadosBigTotvs()
@@ -26,13 +15,13 @@ namespace ERP_FISCAL.view
             cbConferida.Items.Add("Todos");
             cbConferida.SelectedIndex = 2;
             txtNumeroNota.Enabled = false;
-            AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
+            //AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
         }
 
         public async Task<DataTable> BuscaDataTable(DateTime dataInicio, DateTime dataFim, int filial, char verificaConferida)
         {
-            ExportaDadosBigController exportaDadosBigController = new ExportaDadosBigController();
-            DataTable retorno = await exportaDadosBigController.BuscaNotasDoBigNaoEncontradoNaTotvs(dataInicio, dataFim, filial, verificaConferida);
+            ConsultaNotaFiltroUseCase exportaDadosBigController = new ConsultaNotaFiltroUseCase();
+            DataTable retorno = await exportaDadosBigController.Executar(dataInicio, dataFim, filial, verificaConferida);
 
             return retorno;
         }
@@ -121,17 +110,17 @@ namespace ERP_FISCAL.view
             int conferida = chkNaoConferida.Checked ? 1 : 0;
 
 
+            (string Message, DataTable Dados) retornoExportaBigRepository= (string.Empty, new DataTable());
 
-            RetornoExportaBigRepository retornoExportaBigRepository = new RetornoExportaBigRepository();
 
             try
             {
                 ProcessStatusManager.Start("Carregando dados...");
                 ProcessStatusManager.Update("Processando...");
 
-                ExportaDadosBigController exportaDadosBigController = new ExportaDadosBigController();
+                ImportarNotasUseCase exportaDadosBigController = new ImportarNotasUseCase();
                 
-                retornoExportaBigRepository = await exportaDadosBigController.ImportaNotaBigParaTotvs(valorNumeroNota, dataInicio, dataFim, substituir, conferida, filial);
+                retornoExportaBigRepository = await exportaDadosBigController.Executar(valorNumeroNota, dataInicio, dataFim, substituir, conferida, filial);
 
             }
             catch (Exception ex)
@@ -143,7 +132,7 @@ namespace ERP_FISCAL.view
                 ProcessStatusManager.Stop(); // Garante o fechamento
             }
 
-            MessageBox.Show(retornoExportaBigRepository.MensagemRetorno, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(retornoExportaBigRepository.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             
 
             foreach (DataGridViewRow row in dtNotasImportadas.SelectedRows)
@@ -153,7 +142,7 @@ namespace ERP_FISCAL.view
             }
 
 
-            RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retornoExportaBigRepository.DtRetorno);
+                RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retornoExportaBigRepository.Dados);
                 var resultado = retornoEmTabela.ShowDialog();
 
                 if (resultado == DialogResult.OK)

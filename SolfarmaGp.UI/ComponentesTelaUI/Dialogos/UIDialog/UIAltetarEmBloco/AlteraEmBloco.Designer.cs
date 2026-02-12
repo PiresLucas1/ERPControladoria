@@ -1,4 +1,4 @@
-﻿namespace ERP_FISCAL.view.UIComponentes.UIDialog.UIAltetarEmBloco
+﻿namespace SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.UIAltetarEmBloco
 {
     partial class AlteraEmBloco
     {

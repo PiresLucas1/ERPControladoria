@@ -1,4 +1,4 @@
-﻿namespace ERP_FISCAL.view.UIComponentes.UIConsultaItem
+﻿namespace SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIConsultaItem
 {
     partial class ConsultaItem
     {

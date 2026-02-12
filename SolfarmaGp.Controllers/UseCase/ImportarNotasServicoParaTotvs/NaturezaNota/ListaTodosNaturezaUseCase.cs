@@ -16,7 +16,7 @@ namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.NaturezaN
             });
             AjustaDataGridView ajusta = new AjustaDataGridView();
             var resultado = ajusta.AjusteDataGrid(dataTable);
-            return resultado.DatatableNatureza;
+            return resultado;
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace ERP_FISCAL.view.UIComponentes.UIStatusDoProcessos
+﻿namespace SolfarmaGp.UI.UiComponentesTela.ProcessoCarregamento.UIStatusDoProcessos
 {
     public partial class StatusProcess : Form
     {

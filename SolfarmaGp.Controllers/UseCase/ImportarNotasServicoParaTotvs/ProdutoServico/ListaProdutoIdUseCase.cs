@@ -5,7 +5,7 @@ namespace SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ProdutoSe
 {
     public class ListaProdutoIdUseCase
     {
-        public async Task<DataTable> Consultar(string valor)
+        public async Task<DataTable> Executar(string valor)
         {
             ConsultarProdutoPorId produtoServico = new ConsultarProdutoPorId();
             DataTable tabelaDados = new DataTable();

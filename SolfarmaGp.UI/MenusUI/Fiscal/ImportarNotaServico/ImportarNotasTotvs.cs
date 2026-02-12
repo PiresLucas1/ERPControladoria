@@ -5,15 +5,12 @@ using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.NaturezaNota;
 using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.NaturezaNota.ConsultaNaturezaPorOcorrencia;
 using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ProdutoServico;
 using SolfarmaGp.Controllers.Utils.Parse.FormatarDataDigitada;
-using SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaNaturezaFiscal.ConsultaNaturezaPorID;
-using SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultaNaturezaFiscal.ConsultaTodos;
-using SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultarProdutoFiscal.ConsultarProdutoPorId;
-using SolfarmaGp.Repositorios.Fiscal.ImportaDadosBigParaTotvs.ConsultarProdutoFiscal.ConsultarTodosProdutos;
-using SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.ConsultaNotasNfeServico.ConsultarNotasNfeServicoPorPeriodo;
+
+
+
 using SolfarmaGp.UI.MenuUI.MenuCompartilhados.ConsultaItens;
 using SolfarmaGp.UI.UiComponentesTela.ProcessoCarregamento.UIStatusDoProcessos;
 using System.Data;
-using static SolfarmaGp.UI.MenuUI.MenuCompartilhados.ConsultaItens.InterfacesApoioClasse;
 using TextBox = System.Windows.Forms.TextBox;
 
 
@@ -111,9 +108,8 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
                     ProcessStatusManager.Update("Processando...");
 
 
-                    ConsultarNotasNfeServicoPorPeriodo consultarNotaServico = new ConsultarNotasNfeServicoPorPeriodo();
-                    var checkNotasDoErp = cbLancadasNoERP.Checked == true ? 1 : 0;
-                    DataTable notas = await consultarNotaServico.Executar(dataInicio, dataFim, Convert.ToInt32(txtBoxColigada.Text), checkNotasDoErp);
+                    ConsultaNotasServico consultarNotaServico = new ConsultaNotasServico();                    
+                    DataTable notas = await consultarNotaServico.Executar(dataInicio, dataFim, Convert.ToInt32(txtBoxColigada.Text), cbLancadasNoERP.Checked);
 
 
                     DataTable notasFormatada = new ReorganizaTabelaNotasServico().Executar(notas);
@@ -386,7 +382,7 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
             }
         }
 
-        private void dtImportacao_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void dtImportacao_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return; // ignora header
 
@@ -400,17 +396,17 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
             if (colName == "CFOP")
             {
 
-                ConsultaTodasNatureza consultaProduto = new ConsultaTodasNatureza();
+                ListaTodosNaturezaUseCase consultaProduto = new ListaTodosNaturezaUseCase();
                 int codColigadaInt = Convert.ToInt32(codColigada);
-                DataTable dtNatureza = consultaProduto.Executar(codColigadaInt);
+                DataTable dtNatureza = await consultaProduto.Executar(codColigadaInt);
 
                 AbrirConsultaItem(dtImportacao.Rows[e.RowIndex], dtNatureza, "Consulta CFOP");
             }
 
             if (colName == "Cód. Serviço TOTVS")
             {
-                ConsultarTodosProdutos produtoServicoController = new ConsultarTodosProdutos();
-                DataTable dtServico  = produtoServicoController.Executar(Convert.ToInt32(codColigada));
+                ListaTodosProdutoUseCase produtoServicoController = new ListaTodosProdutoUseCase();
+                DataTable dtServico  = await produtoServicoController.Executar(Convert.ToInt32(codColigada));
                 AbrirConsultaItem(dtImportacao.Rows[e.RowIndex], dtServico, "Consulta Produto");
             }
         }
@@ -422,14 +418,14 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
 
         public void AtualizaCFOP(int index, string cfopSelecionado)
         {
-            ConsultaNaturezaPorID consultaProduto = new ConsultaNaturezaPorID();
+            ConsultaValorUnicoUseCase consultaProduto = new ConsultaValorUnicoUseCase();
             ValidaValorDeCelulaCfop(cfopSelecionado, consultaProduto, index, "CFOP", "CFOP Descrição");
 
 
         }
         public void AtualizaProduto(int index, string cProduto)
         {
-            ConsultarProdutoPorId produtoServicoController = new ConsultarProdutoPorId();
+            ListaProdutoIdUseCase produtoServicoController = new ListaProdutoIdUseCase();
             ValidaValorDeCelulaCProduto(cProduto, produtoServicoController, index, "Cód. Serviço TOTVS", "Descrição");
 
         }
@@ -483,7 +479,7 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
 
                 if (!string.IsNullOrEmpty(valorDigitado))
                 {
-                    ConsultarProdutoPorId produtoController = new ConsultarProdutoPorId();
+                    ListaProdutoIdUseCase produtoController = new ListaProdutoIdUseCase();
                     var retorno = await produtoController.Executar(valorDigitado);
 
 
@@ -677,7 +673,7 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
             dtImportacao.Rows[row].Cells[coluna].Value = valor;
         }
 
-        public async void ValidaValorDeCelulaCfop(string valor, ConsultaNaturezaPorID controller, int index, string valorCelula1, string valorCelula2)
+        public async void ValidaValorDeCelulaCfop(string valor, ConsultaValorUnicoUseCase controller, int index, string valorCelula1, string valorCelula2)
         {
 
             var retorno = await controller.Executar(valor);
@@ -703,7 +699,7 @@ namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
             dtImportacao.Rows[index].Cells[valorCelula2].Value = valorRow["DESCRIÇÃO NATUREZA"].ToString();
 
         }
-        public async void ValidaValorDeCelulaCProduto(string valor, ConsultarProdutoPorId controller, int index, string valorCelula1, string valorCelula2)
+        public async void ValidaValorDeCelulaCProduto(string valor, ListaProdutoIdUseCase controller, int index, string valorCelula1, string valorCelula2)
         {
 
             var retorno = await controller.Executar(valor);

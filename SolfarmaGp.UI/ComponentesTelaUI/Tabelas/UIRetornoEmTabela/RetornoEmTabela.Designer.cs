@@ -1,4 +1,4 @@
-﻿namespace ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela
+﻿namespace SolfarmaGp.UI.UiComponentesTela.Tabelas.UIRetornoEmTabela
 {
     partial class RetornoEmTabela
     {
@@ -31,7 +31,7 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.txtBoxCount = new System.Windows.Forms.TextBox();
-            this.dataGridRetorno = new ERP_CONTROLADORIA.view.SubTipos.MyDataGridView();
+            this.dataGridRetorno = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridRetorno)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,6 +88,6 @@
         //private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dataGridRetorno;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtBoxCount;
-        private ERP_CONTROLADORIA.view.SubTipos.MyDataGridView dataGridRetorno;
+        private System.Windows.Forms.DataGridView dataGridRetorno;
     }
 }

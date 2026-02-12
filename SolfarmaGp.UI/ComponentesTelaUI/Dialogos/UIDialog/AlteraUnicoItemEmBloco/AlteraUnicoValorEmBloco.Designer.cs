@@ -1,4 +1,4 @@
-﻿namespace ERP_FISCAL.view.UIComponentes.UIDialog.AlteraUnicoItemEmBloco
+﻿namespace SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIDialog.AlteraUnicoItemEmBloco
 {
     partial class AlteraUnicoValorEmBloco
     {

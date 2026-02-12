@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DataGridViewAutoFilter;
+﻿using System.Data;
 
 
-namespace ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela
+namespace SolfarmaGp.UI.UiComponentesTela.Tabelas.UIRetornoEmTabela
 {
+
     public partial class RetornoEmTabela : Form
     {
         public DataTable _data = new DataTable();
@@ -36,7 +28,7 @@ namespace ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela
 
             foreach (DataColumn column in _data.Columns)
             {
-                var coluna = new DataGridViewAutoFilterTextBoxColumn
+                var coluna = new DataGridViewColumn
                 {
                     HeaderText = column.ColumnName,
                     DataPropertyName = column.ColumnName,
@@ -55,7 +47,7 @@ namespace ERP_FISCAL.view.UIComponentes.UIRetornoEmTabela
             dataGridRetorno.AllowUserToAddRows = false;
             dataGridRetorno.ReadOnly = true;
 
-            txtBoxCount.Text= $"Registros: {_data.Rows.Count}";
+            txtBoxCount.Text = $"Registros: {_data.Rows.Count}";
         }
 
 

@@ -1,4 +1,4 @@
-﻿namespace ERP_FISCAL.view.DialogUI
+﻿namespace SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.UIAltetarEmBloco.InsereInformacao
 {
     partial class InsercaoBloco
     {
