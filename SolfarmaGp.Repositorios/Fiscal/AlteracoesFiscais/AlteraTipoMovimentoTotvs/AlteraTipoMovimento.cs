@@ -1,5 +1,4 @@
-﻿using ERP_FISCAL;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using SolfarmaGp.Infraestrutura;
 using System.Data;
 
@@ -7,7 +6,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.AlteraTipoMovimentoTo
 {
     public class AlteraTipoMovimento
     {
-        public async Task<DataTable> Execute(int codMovimento, int coligada, string codTmovimento)
+        public async Task<DataTable> Executar(int codMovimento, int coligada, string codTmovimento)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);

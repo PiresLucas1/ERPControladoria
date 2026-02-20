@@ -1,7 +1,7 @@
-﻿using SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView;
+﻿using SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView;
 using System.Data;
 
-namespace SolfarmaGp.UI.MenuUI.MenuCompartilhados.ConsultaItens
+namespace SolfarmaGp.UI.MenusUI.MenuCompartilhados.ConsultaItens
 {
     public class InterfacesApoioClasse
     {

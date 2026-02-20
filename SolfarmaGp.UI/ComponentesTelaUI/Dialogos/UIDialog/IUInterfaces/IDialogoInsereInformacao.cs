@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.IUInterfaces
+namespace SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIDialog.IUInterfaces
 {
     public interface IDialogoInsereInformacao
     {

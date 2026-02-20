@@ -24,43 +24,81 @@ namespace SolfarmaGp.Infraestrutura
             switch (dbConexao)
             {
                 case DbName.DfeTotvs:
-                    connectionString = "Server=dbtotvs\\dbtotvs;Database=DFE;Integrated Security=True;";
+                    connectionString = "Server=dbtotvs\\dbtotvs;" +
+                        "Database=DFE;" +
+                        "Integrated Security=True;" +
+                        "Encrypt=True;" +
+                        "TrustServerCertificate=True;";
                     break;
 
                 case DbName.Totvs:
-                    connectionString = "Server=dbtotvs\\dbtotvs;Database=CORPORERM_PRODUCAO;Integrated Security=True;";
+                    connectionString = "Server=dbtotvs\\dbtotvs;" +
+                        "Database=CORPORERM_PRODUCAO;" +
+                        "Integrated Security=True;" +
+                        "Encrypt=True;" +
+                        "TrustServerCertificate=True;";
                     break;
 
                 case DbName.GpTotvs:
                     connectionString = "Server=dbtotvs\\dbtotvs;" +
-"Database=GestaoProcessos;" +
-"Integrated Security=True;" +
-"Encrypt=True;" +
-"TrustServerCertificate=True;"; 
+                    "Database=GestaoProcessos;" +
+                    "Integrated Security=True;" +
+                    "Encrypt=True;" +
+                    "TrustServerCertificate=True;"; 
                     break;
 
                 case DbName.GpWithLoginTotvs:
-                    connectionString = "Server=dbtotvs\\dbtotvs;Database=GestaoProcessos;User Id=rm;Password=rm;Encrypt=True;TrustServerCertificate=True;Connection Timeout=0;";
+                    connectionString = "Server=dbtotvs\\dbtotvs;" +
+                        "Database=GestaoProcessos;" +
+                        "User Id=rm;" +
+                        "Password=rm;" +
+                        "Encrypt=True;" +
+                        "TrustServerCertificate=True;" +
+                        "Connection Timeout=0;";
                     break;
 
                 case DbName.BigCentral:
-                    connectionString = "Server=dbtotvs\\dbtotvs;Database=BigCentral;Integrated Security=True;";
+                    connectionString = "Server=dbtotvs\\dbtotvs;" +
+                        "Database=BigCentral;" +
+                        "Integrated Security=True;" +
+                        "Encrypt=True;" +
+                        "TrustServerCertificate=True;";
                     break;
 
                 case DbName.GpDbsol:
-                    connectionString = "Server=dbsol\\dbsol;Database=GS300GP;Integrated Security=True;";
+                    connectionString = "Server=dbsol\\dbsol;" +
+                        "Database=GS300GP;" +
+                        "Integrated Security=True;" +
+                        "Encrypt=True;" +
+                        "TrustServerCertificate=True;";
                     break;
 
                 case DbName.ZanupTotvs:
-                    connectionString = "Server=dbtotvs\\dbtotvs;Database=Zanup;User Id=rm;Password=rm;Encrypt=True;TrustServerCertificate=True;Connection Timeout=0;";
+                    connectionString = "Server=dbtotvs\\dbtotvs;" +
+                        "Database=Zanup;" +
+                        "User Id=rm;" +
+                        "Password=rm;" +
+                        "Encrypt=True;" +
+                        "TrustServerCertificate=True;" +
+                        "Connection Timeout=0;";
                     break;
 
                 case DbName.WebPosto:
-                    connectionString = "Server=dbtotvs\\dbtotvs;Database=PostoLago_WebPosto;User Id=rm;Password=rm;Encrypt=True;TrustServerCertificate=True;Connection Timeout=0;";
+                    connectionString = "Server=dbtotvs\\dbtotvs;" +
+                        "Database=PostoLago_WebPosto;" +
+                        "User Id=rm;" +
+                        "Password=rm;" +
+                        "Encrypt=True;" +
+                        "TrustServerCertificate=True;" +
+                        "Connection Timeout=0;";
                     break;
 
                 case DbName.GpDbsolWithLogin:
-                    connectionString = "Server=dbsol\\dbsol;Database=GS300GP;User Id=rm;Password=rm;Integrated Security=True;";
+                    connectionString = "Server=dbsol\\dbsol;" +
+                        "Database=GS300GP;" +
+                        "User Id=rm;" +
+                        "Password=rm;" +
+                        "Integrated Security=True;";
                     break;
 
                 default:

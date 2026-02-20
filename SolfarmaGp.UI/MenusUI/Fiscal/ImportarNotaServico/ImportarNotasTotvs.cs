@@ -8,14 +8,14 @@ using SolfarmaGp.Controllers.Utils.Parse.FormatarDataDigitada;
 
 
 
-using SolfarmaGp.UI.MenuUI.MenuCompartilhados.ConsultaItens;
-using SolfarmaGp.UI.UiComponentesTela.ProcessoCarregamento.UIStatusDoProcessos;
+using SolfarmaGp.UI.MenusUI.MenuCompartilhados.ConsultaItens;
+using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
 using System.Data;
 using TextBox = System.Windows.Forms.TextBox;
 
 
 
-namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
+namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 {
     public partial class ImportarNotasTotvs : Form
     {

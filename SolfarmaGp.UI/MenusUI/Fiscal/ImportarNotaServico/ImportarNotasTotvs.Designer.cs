@@ -1,4 +1,4 @@
-﻿namespace SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView
+﻿namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 {
     partial class ImportarNotasTotvs
     {
@@ -56,7 +56,7 @@
             btnDesmarcarTodos = new Button();
             btnLimpar = new Button();
             btnSelecionarTodas = new Button();
-            dtImportacao = new DataGridView();
+            dtImportacao = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             groupBox1.SuspendLayout();
             gbAutoFuncoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtImportacao).BeginInit();
@@ -418,7 +418,7 @@
         private System.Windows.Forms.Button btnAutoPreencherCfop;
         private System.Windows.Forms.GroupBox gbAutoFuncoes;
         private System.Windows.Forms.Button btnPreenche;
-        private DataGridView dtImportacao;
+        private SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView dtImportacao;
     }
 }
 

@@ -1,16 +1,13 @@
 ﻿using ERP_FISCAL;
 using Microsoft.Data.SqlClient;
 using SolfarmaGp.Infraestrutura;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
-namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.ConsultaListaIDMovTotvs
+namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.TiposDeConsultas.ConsultaMovTotvsTrocaTipoMovimento
 {
-    public class ConsultaListaIDMovTotvs
+    public class ConsultaListaMovTotvsTrocaMovimento
     {
-        public async Task<DataTable> Consulta(string codMovimento)
+        public async Task<DataTable> Executar(string codMovimento, int coligada)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
@@ -20,11 +17,19 @@ namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.ConsultaListaIDMovTot
 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultaListaIDMov", conn))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspCadConsultaMultiplosIDMovTotvs", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        // SqlParameter p;   
-                        cmd.Parameters.AddWithValue("@vchIDMov", codMovimento);
+                        // SqlParameter p;
+                        cmd.Parameters.AddWithValue("@INintIDMOV", codMovimento);
+                        if (coligada == 0)
+                        {
+                            cmd.Parameters.AddWithValue("@INintCodColigada", DBNull.Value);
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@INintCodColigada", coligada);
+                        }
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             tabela.Load(reader);

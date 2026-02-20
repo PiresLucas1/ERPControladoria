@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Forms.Design;
 
-namespace SolfarmaGp.UI.UiComponentesTela.DataGridView
+namespace SolfarmaGp.UI.ComponentesTelaUI.DataGridView
 {
     [Designer(typeof(ControlDesigner))]
     [ToolboxItem(true)]

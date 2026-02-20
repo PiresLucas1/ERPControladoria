@@ -1,4 +1,4 @@
-﻿namespace SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.UIAltetarEmBloco
+﻿namespace SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIDialog.UIAltetarEmBloco
 {
     public class DTOAlteraEmBloco
     {

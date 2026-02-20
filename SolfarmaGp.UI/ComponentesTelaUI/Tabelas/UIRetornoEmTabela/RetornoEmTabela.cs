@@ -1,7 +1,7 @@
 ﻿using System.Data;
 
 
-namespace SolfarmaGp.UI.UiComponentesTela.Tabelas.UIRetornoEmTabela
+namespace SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela
 {
 
     public partial class RetornoEmTabela : Form
@@ -28,7 +28,7 @@ namespace SolfarmaGp.UI.UiComponentesTela.Tabelas.UIRetornoEmTabela
 
             foreach (DataColumn column in _data.Columns)
             {
-                var coluna = new DataGridViewColumn
+                var coluna = new DataGridViewTextBoxColumn
                 {
                     HeaderText = column.ColumnName,
                     DataPropertyName = column.ColumnName,

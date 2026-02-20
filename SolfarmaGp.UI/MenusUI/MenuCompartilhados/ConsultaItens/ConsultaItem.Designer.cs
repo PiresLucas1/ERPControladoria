@@ -1,4 +1,4 @@
-﻿namespace SolfarmaGp.UI.MenuUI.MenuCompartilhados.ConsultaItens
+﻿namespace SolfarmaGp.UI.MenusUI.MenuCompartilhados.ConsultaItens
 {
     partial class ConsultaItem
     {

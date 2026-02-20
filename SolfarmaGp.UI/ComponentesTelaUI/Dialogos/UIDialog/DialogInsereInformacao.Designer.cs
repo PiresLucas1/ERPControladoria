@@ -1,4 +1,4 @@
-﻿namespace SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.UIAltetarEmBloco.InsereInformacao
+﻿namespace SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIDialog.UIAltetarEmBloco.InsereInformacao
 {
     partial class InsercaoBloco
     {

@@ -1,4 +1,4 @@
-﻿namespace SolfarmaGp.UI.UiComponentesTela.ProcessoCarregamento.UIStatusDoProcessos
+﻿namespace SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos
 {
     public partial class StatusProcess : Form
     {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView;
+using SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView;
 using System.Data;
 
 namespace SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIConsultaItem

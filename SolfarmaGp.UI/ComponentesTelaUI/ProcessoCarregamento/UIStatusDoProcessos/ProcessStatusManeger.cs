@@ -1,6 +1,6 @@
 ﻿
 
-namespace SolfarmaGp.UI.UiComponentesTela.ProcessoCarregamento.UIStatusDoProcessos
+namespace SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos
 {
     public static class ProcessStatusManager
     {

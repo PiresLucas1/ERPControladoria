@@ -8,7 +8,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.AlteraDataDocumentoMo
     public class AlteraDataDocumentoMovimentoTotvsRepositories
     {
      
-        public async Task<DataTable> Execute(DataTable dtIdMovs)
+        public async Task<DataTable> Executar(DataTable dtIdMovs)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);

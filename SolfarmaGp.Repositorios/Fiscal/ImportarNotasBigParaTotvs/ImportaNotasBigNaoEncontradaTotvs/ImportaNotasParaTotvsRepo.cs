@@ -36,12 +36,14 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasServicoParaTotvs.ImportaNo
                         cmd.Parameters.Add(msgRetorno);
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
-                            tabelaRetorno.Load(reader);
+                            if (reader.HasRows)
+                                tabelaRetorno.Load(reader);
                         }
 
                         retornoMensagem = msgRetorno.Value?.ToString();
                     }
-                    if (tabelaRetorno.Rows[0] != null)
+
+                    if (tabelaRetorno.Columns.Count <= 0)
                     {
                         string retorno = tabelaRetorno.Rows[0].ToString() ?? "Nada Encontrado";
                     }

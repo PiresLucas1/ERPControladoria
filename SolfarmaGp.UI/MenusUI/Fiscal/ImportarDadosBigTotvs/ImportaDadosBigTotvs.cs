@@ -1,7 +1,7 @@
 ﻿using SolfarmaGp.Controllers.UseCase.ImportarDadosBigTotvs.ConsultaNotaNaoEncontradaBig;
 using SolfarmaGp.Controllers.UseCase.ImportarDadosBigTotvs.ImportaNotasNaoEncontradas;
-using SolfarmaGp.UI.UiComponentesTela.ProcessoCarregamento.UIStatusDoProcessos;
-using SolfarmaGp.UI.UiComponentesTela.Tabelas.UIRetornoEmTabela;
+using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
+using SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela;
 using System.Data;
 
 namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs { 

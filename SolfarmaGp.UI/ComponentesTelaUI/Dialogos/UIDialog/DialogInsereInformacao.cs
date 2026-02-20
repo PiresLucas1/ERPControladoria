@@ -1,7 +1,7 @@
-﻿using SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.IUInterfaces;
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIDialog.IUInterfaces;
 using System.Data;
 
-namespace SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.UIAltetarEmBloco.InsereInformacao
+namespace SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIDialog.UIAltetarEmBloco.InsereInformacao
 {
     public partial class InsercaoBloco : Form
     {

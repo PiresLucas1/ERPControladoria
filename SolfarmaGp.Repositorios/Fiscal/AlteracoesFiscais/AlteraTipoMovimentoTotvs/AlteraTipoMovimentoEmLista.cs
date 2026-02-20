@@ -1,5 +1,4 @@
-﻿using ERP_FISCAL;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using SolfarmaGp.Infraestrutura;
 using System.Data;
 
@@ -7,24 +6,20 @@ namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.AlteraTipoMovimentoTo
 {
     public class ALteraTipoMovimentoEmLista
     {
-        public async Task<DataTable> AlteraTipoMovimentoEmBloco(int codMovimento, int coligada, string codTmovimento)
+        public async Task<DataTable> Executar(DataTable data)
         {
             DataTable tabela = new DataTable();
-            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
 
             try
             {
 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspCadAlteraEmBlocoCodMovimentoTotvsTESTE", conn))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisAlteraTipoMovimento", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        //SqlParameter p;
-                        cmd.Parameters.AddWithValue("@INintIDMov", codMovimento);
-                        cmd.Parameters.AddWithValue("@INintCodColigada", coligada);
-                        cmd.Parameters.AddWithValue("@INvchCodTmv", codTmovimento);
-
+                        cmd.Parameters.AddWithValue("@TMP", data);
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             tabela.Load(reader);
@@ -37,9 +32,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.AlteraTipoMovimentoTo
             catch (Exception ex)
             {
                 throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
-            }
-
-
+            }            
             return tabela;
         }
     }

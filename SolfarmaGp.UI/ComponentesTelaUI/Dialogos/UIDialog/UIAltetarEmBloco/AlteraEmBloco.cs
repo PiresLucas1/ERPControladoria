@@ -1,7 +1,6 @@
-﻿using SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.UIAltetarEmBloco;
-using System.Data;
+﻿using System.Data;
 
-namespace SolfarmaGp.UI.UiComponentesTela.Dialogos.UIDialog.UIAltetarEmBloco
+namespace SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIDialog.UIAltetarEmBloco
 {
     public partial class AlteraEmBloco : Form
     {

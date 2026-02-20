@@ -1,4 +1,4 @@
-﻿namespace SolfarmaGp.UI.UiComponentesTela.Tabelas.UIRetornoEmTabela
+﻿namespace SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela
 {
     partial class RetornoEmTabela
     {

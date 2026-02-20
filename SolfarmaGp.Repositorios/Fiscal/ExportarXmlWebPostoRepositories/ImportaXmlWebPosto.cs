@@ -4,9 +4,9 @@ using SolfarmaGp.Infraestrutura;
 
 namespace ERP_FISCAL.Repositories.ExportarXmlRepositories
 {
-    public class ExportarXmlWebPosto
+    public class ImportaXmlWebPosto
     {
-        public async Task<DataTable> Execute(DateTime dataInicio, DateTime dataFim, string localExportacao, string modeloDocumento, int exportarTudo, IProgress<string> progress = null)
+        public async Task<DataTable> Executar(DateTime dataInicio, DateTime dataFim, string localExportacao, string modeloDocumento, int exportarTudo, IProgress<string> progress = null)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.WebPosto);            

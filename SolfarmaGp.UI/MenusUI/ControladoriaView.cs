@@ -1,7 +1,11 @@
-﻿using PrimeiroLoginView;
+﻿using ERP_FISCAL.view.FiscalView;
+using PrimeiroLoginView;
 using SolfarmaGp.Repositorios.SegurancaUserRepositories;
+using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote;
+using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs;
-using SolfarmaGP.UI.MenuUI.Fiscal.ImportarNotaServicoView;
+using SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml;
+using SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView;
 using System.Reflection;
 
 namespace SolfarmaGp.UI.MenusUI
@@ -23,10 +27,11 @@ namespace SolfarmaGp.UI.MenusUI
         public string nomeUsuario = "";
         public int perfil = 0;
         public int contadorTheme = 0;
+        private VisuExportacaoXml monitoramentoExportacao;
         public Portal()
         {
             InitializeComponent();
-            this.IsMdiContainer = true;                
+            this.IsMdiContainer = true;
 
 
             this.Shown += Portal_Shown;
@@ -114,7 +119,7 @@ namespace SolfarmaGp.UI.MenusUI
 
             }
 
-        }    
+        }
         private void importarToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -239,25 +244,25 @@ namespace SolfarmaGp.UI.MenusUI
 
         }
 
-        //private void alteraçãoUnicaToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    if (!FormAberto(typeof(AlteraTipoMovimento)))
-        //    {
-        //        AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
-        //        alteraTipoMovimento.MdiParent = this;
-        //        alteraTipoMovimento.Show();
-        //    }
-        //}
+        private void alteraçãoUnicaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(AlteraTipoMovimento)))
+            {
+                AlteraTipoMovimento alteraTipoMovimento = new AlteraTipoMovimento();
+                alteraTipoMovimento.MdiParent = this;
+                alteraTipoMovimento.Show();
+            }
+        }
 
-        //private void alteraçãoEmListaToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    if (!FormAberto(typeof(AlteracoesFiscaisEmLote)))
-        //    {
-        //        AlteracoesFiscaisEmLote alteraTipoMovimentoLista = new AlteracoesFiscaisEmLote();
-        //        alteraTipoMovimentoLista.MdiParent = this;
-        //        alteraTipoMovimentoLista.Show();
-        //    }
-        //}
+        private void alteraçãoEmListaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(AlteracoesFiscaisEmLote)))
+            {
+                AlteracoesFiscaisEmLote alteraTipoMovimentoLista = new AlteracoesFiscaisEmLote();
+                alteraTipoMovimentoLista.MdiParent = this;
+                alteraTipoMovimentoLista.Show();
+            }
+        }
 
         //private async void cadastrarUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         //{
@@ -363,6 +368,18 @@ namespace SolfarmaGp.UI.MenusUI
             UserConfig.Default.Save();
         }
 
+        private void xMLPostoDoLagoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ImportaXmlPasta)))
+            {
+                ImportaXmlPasta exportaXml = new ImportaXmlPasta(this);
+                exportaXml.MdiParent = this;
+                exportaXml.Show();
+            }
+        }
+
+
+
         //private void criarNotaZanupToolStripMenuItem_Click(object sender, EventArgs e)
         //{
         //    if (!FormAberto(typeof(ExportaXmlPasta)))
@@ -373,30 +390,30 @@ namespace SolfarmaGp.UI.MenusUI
         //    }
         //}
 
-        //public void AbrirFecharMonitoramentoExportacao(string mensagem = null)
-        //{
-        //    if (monitoramentoExportacao == null)
-        //    {
-        //        monitoramentoExportacao = new VisuExportacaoXml(mensagem);
+        public void AbrirFecharMonitoramentoExportacao(string mensagem = null)
+        {
+            if (monitoramentoExportacao == null)
+            {
+                monitoramentoExportacao = new VisuExportacaoXml(mensagem);
 
-        //        monitoramentoExportacao.Anchor =
-        //            AnchorStyles.Bottom | AnchorStyles.Right;
+                monitoramentoExportacao.Anchor =
+                    AnchorStyles.Bottom | AnchorStyles.Right;
 
-        //        monitoramentoExportacao.Location = new Point(
-        //            this.ClientSize.Width - monitoramentoExportacao.Width - 10,
-        //            this.ClientSize.Height - monitoramentoExportacao.Height - 10
-        //        );
+                monitoramentoExportacao.Location = new Point(
+                    this.ClientSize.Width - monitoramentoExportacao.Width - 10,
+                    this.ClientSize.Height - monitoramentoExportacao.Height - 10
+                );
 
-        //        this.Controls.Add(monitoramentoExportacao);
-        //        monitoramentoExportacao.BringToFront();
-        //    }
-        //    else
-        //    {
-        //        this.Controls.Remove(monitoramentoExportacao);
-        //        monitoramentoExportacao.Dispose();
-        //        monitoramentoExportacao = null;
-        //    }
-        //}
+                this.Controls.Add(monitoramentoExportacao);
+                monitoramentoExportacao.BringToFront();
+            }
+            else
+            {
+                this.Controls.Remove(monitoramentoExportacao);
+                monitoramentoExportacao.Dispose();
+                monitoramentoExportacao = null;
+            }
+        }
 
         //private void criarCampanhaToolStripMenuItem_Click(object sender, EventArgs e)
         //{
