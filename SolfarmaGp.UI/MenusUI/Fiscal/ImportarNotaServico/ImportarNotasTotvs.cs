@@ -1,15 +1,11 @@
-﻿using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ConsultaNotasServico;
-using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ConsultaServico;
-using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ExportaNotaServico;
-using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.NaturezaNota;
-using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.NaturezaNota.ConsultaNaturezaPorOcorrencia;
-using SolfarmaGp.Controllers.UseCase.ImportarNotasServicoParaTotvs.ProdutoServico;
+﻿using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.ConsultaNotasServico;
+using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.ConsultaServico;
+using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.ImportarNotaServico;
+using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.NaturezaNota;
+using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.ProdutoServico;
 using SolfarmaGp.Controllers.Utils.Parse.FormatarDataDigitada;
-
-
-
-using SolfarmaGp.UI.MenusUI.MenuCompartilhados.ConsultaItens;
 using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
+using SolfarmaGp.UI.MenusUI.MenuCompartilhados.ConsultaItens;
 using System.Data;
 using TextBox = System.Windows.Forms.TextBox;
 

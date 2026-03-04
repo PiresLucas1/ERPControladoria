@@ -1,7 +1,7 @@
-﻿using SolfarmaGp.Controllers.UseCase.AlteracaoFiscais.AlteraDataDocumento;
-using SolfarmaGp.Controllers.UseCase.AlteracaoFiscais.AlteraTipoMovimentoUnico;
-using SolfarmaGp.Controllers.UseCase.AlteracaoFiscais.TipoDeConsultas.ConsultaMovimentoPorFiltro;
-using SolfarmaGp.Controllers.UseCase.AlteracaoFiscais.TipoDeConsultas.ConsultaMovimentoSeparadoPorPontoVirgula;
+﻿using SolfarmaGp.Controllers.UseCase.Fiscal.AlteracaoFiscais.AlteraDataDocumento;
+using SolfarmaGp.Controllers.UseCase.Fiscal.AlteracaoFiscais.AlteraTipoMovimentoUnico;
+using SolfarmaGp.Controllers.UseCase.Fiscal.AlteracaoFiscais.TipoDeConsultas.ConsultaMovimentoPorFiltro;
+using SolfarmaGp.Controllers.UseCase.Fiscal.AlteracaoFiscais.TipoDeConsultas.ConsultaMovimentoSeparadoPorPontoVirgula;
 using SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIDialog.AlteraUnicoItemEmBloco;
 using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
 using SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela;
@@ -233,6 +233,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
             }
             foreach (DataGridViewRow item in dvgIDMovs.Rows)
             {
+                Console.WriteLine(item.Cells);
                 bool isChecked = (bool)item.Cells["colSelecionado"].Value;
                 if (isChecked)
                 {

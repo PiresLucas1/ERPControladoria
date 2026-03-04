@@ -1,0 +1,97 @@
+CREATE PROCEDURE dbo.uspContCadastraHistorico
+(
+    @INvchCodigo CHAR(10)
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO dbo.tblContHistorico
+    (
+        codigo
+    )
+    VALUES
+    (
+        @INvchCodigo
+    );
+
+END
+
+CREATE PROCEDURE DBO.uspContCadastraComplemento
+(
+    @INvchDescricaoComplemento VARCHAR(100)
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO dbo.tblContComplemento
+    (
+        descricaoComplemento
+    )
+    VALUES
+    (
+        @INvchDescricaoComplemento
+    );
+
+END
+
+CREATE PROCEDURE dbo.uspContCadastraContaContabil
+(
+    @INvchCodigo CHAR(10),
+    @INvchDescricaoConta VARCHAR(100) = null,
+    @INvchPlanoContas VARCHAR(100)
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO dbo.tblContConta
+    (
+        codigo,
+        descricaoConta,
+        planoContas
+    )
+    VALUES
+    (
+        @INvchCodigo,
+        @INvchDescricaoConta,
+        @INvchPlanoContas
+    );
+
+END
+
+
+CREATE PROCEDURE dbo.uspContCadastraLancamento
+(
+    @INidHistorico INT,
+    @INidComplemento INT,
+    @INidContaDebito INT,
+    @INidContaCredito INT,
+    @INvchDescricaoExtrato VARCHAR(100),
+    @INfilial INT
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    INSERT INTO dbo.tblContLancamento
+    (
+        idHistorico,
+        idComplemento,
+        idContaDebito,
+        idContaCredito,
+        descricaoExtrato,
+        filial
+    )
+    VALUES
+    (
+        @INidHistorico,
+        @INidComplemento,
+        @INidContaDebito,
+        @INidContaCredito,
+        @INvchDescricaoExtrato,
+        @INfilial
+    );
+
+END

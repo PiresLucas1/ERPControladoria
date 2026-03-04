@@ -1,6 +1,8 @@
 ﻿using ERP_FISCAL.view.FiscalView;
 using PrimeiroLoginView;
 using SolfarmaGp.Repositorios.SegurancaUserRepositories;
+using SolfarmaGp.UI.MenusUI.Contabil;
+using SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs;
@@ -413,6 +415,28 @@ namespace SolfarmaGp.UI.MenusUI
                 monitoramentoExportacao.Dispose();
                 monitoramentoExportacao = null;
             }
+        }
+
+        private void conferenciaDeBoletoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ConfereciaBoleto)))
+            {
+                ConfereciaBoleto confereciaBoleto = new ConfereciaBoleto();
+                confereciaBoleto.MdiParent = this;
+                confereciaBoleto.Show();
+            }
+
+        }
+
+        private void lançamentoContabilToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ParametrizacaoContabil)))
+            {
+                ParametrizacaoContabil parametrizacaoContabil = new ParametrizacaoContabil();
+                parametrizacaoContabil.MdiParent = this;
+                parametrizacaoContabil.Show();
+            }
+            
         }
 
         //private void criarCampanhaToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,5 +1,5 @@
-﻿using SolfarmaGp.Controllers.UseCase.AlteracaoFiscais.AlteraTipoMovimentoUnico;
-using SolfarmaGp.Controllers.UseCase.AlteracaoFiscais.TipoDeConsultas.ConsultaMovimento;
+﻿using SolfarmaGp.Controllers.UseCase.Fiscal.AlteracaoFiscais.AlteraTipoMovimentoUnico;
+using SolfarmaGp.Controllers.UseCase.Fiscal.AlteracaoFiscais.TipoDeConsultas.ConsultaMovimento;
 using SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIDialog.UIAltetarEmBloco;
 using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
 using System.Data;

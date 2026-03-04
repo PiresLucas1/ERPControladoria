@@ -28,304 +28,306 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.txtFiltroInput = new System.Windows.Forms.RichTextBox();
-            this.lblFiltro = new System.Windows.Forms.Label();
-            this.gpFiltro = new System.Windows.Forms.GroupBox();
-            this.btnConsultar = new System.Windows.Forms.Button();
-            this.gbTipoAlteracao = new System.Windows.Forms.GroupBox();
-            this.rbAlteraDataDocumento = new System.Windows.Forms.RadioButton();
-            this.rbAlteraCodTmtv = new System.Windows.Forms.RadioButton();
-            this.btnAlteraCodMovimento = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnAlterarSelecionados = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnSelecionarTudo = new System.Windows.Forms.Button();
-            this.txtCountRows = new System.Windows.Forms.TextBox();
-            this.dtInicio = new System.Windows.Forms.DateTimePicker();
-            this.dtFim = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbColigada = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dvgIDMovs = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            this.btnAlteraDataDocumento = new System.Windows.Forms.Button();
-            this.gpFiltro.SuspendLayout();
-            this.gbTipoAlteracao.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgIDMovs)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            txtFiltroInput = new RichTextBox();
+            lblFiltro = new Label();
+            gpFiltro = new GroupBox();
+            label3 = new Label();
+            cbColigada = new ComboBox();
+            label2 = new Label();
+            label1 = new Label();
+            dtFim = new DateTimePicker();
+            dtInicio = new DateTimePicker();
+            btnConsultar = new Button();
+            gbTipoAlteracao = new GroupBox();
+            rbAlteraDataDocumento = new RadioButton();
+            rbAlteraCodTmtv = new RadioButton();
+            btnAlteraCodMovimento = new Button();
+            groupBox1 = new GroupBox();
+            btnAlteraDataDocumento = new Button();
+            btnAlterarSelecionados = new Button();
+            button1 = new Button();
+            btnSelecionarTudo = new Button();
+            txtCountRows = new TextBox();
+            dvgIDMovs = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            gpFiltro.SuspendLayout();
+            gbTipoAlteracao.SuspendLayout();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dvgIDMovs).BeginInit();
+            SuspendLayout();
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            contextMenuStrip1.ImageScalingSize = new Size(24, 24);
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(61, 4);
             // 
             // txtFiltroInput
             // 
-            this.txtFiltroInput.Location = new System.Drawing.Point(657, 35);
-            this.txtFiltroInput.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtFiltroInput.Name = "txtFiltroInput";
-            this.txtFiltroInput.Size = new System.Drawing.Size(586, 76);
-            this.txtFiltroInput.TabIndex = 2;
-            this.txtFiltroInput.Text = "";
+            txtFiltroInput.Location = new Point(657, 44);
+            txtFiltroInput.Margin = new Padding(3, 2, 3, 2);
+            txtFiltroInput.Name = "txtFiltroInput";
+            txtFiltroInput.Size = new Size(586, 94);
+            txtFiltroInput.TabIndex = 2;
+            txtFiltroInput.Text = "";
             // 
             // lblFiltro
             // 
-            this.lblFiltro.AutoSize = true;
-            this.lblFiltro.Location = new System.Drawing.Point(661, 14);
-            this.lblFiltro.Name = "lblFiltro";
-            this.lblFiltro.Size = new System.Drawing.Size(282, 16);
-            this.lblFiltro.TabIndex = 3;
-            this.lblFiltro.Text = "Insira os IDMOV  separado por \",\" para buscar";
+            lblFiltro.AutoSize = true;
+            lblFiltro.Location = new Point(661, 18);
+            lblFiltro.Name = "lblFiltro";
+            lblFiltro.Size = new Size(312, 20);
+            lblFiltro.TabIndex = 3;
+            lblFiltro.Text = "Insira os IDMOV  separado por \",\" para buscar";
             // 
             // gpFiltro
             // 
-            this.gpFiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gpFiltro.Controls.Add(this.label3);
-            this.gpFiltro.Controls.Add(this.cbColigada);
-            this.gpFiltro.Controls.Add(this.label2);
-            this.gpFiltro.Controls.Add(this.label1);
-            this.gpFiltro.Controls.Add(this.dtFim);
-            this.gpFiltro.Controls.Add(this.dtInicio);
-            this.gpFiltro.Controls.Add(this.btnConsultar);
-            this.gpFiltro.Controls.Add(this.txtFiltroInput);
-            this.gpFiltro.Controls.Add(this.lblFiltro);
-            this.gpFiltro.Controls.Add(this.gbTipoAlteracao);
-            this.gpFiltro.Location = new System.Drawing.Point(11, 11);
-            this.gpFiltro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gpFiltro.Name = "gpFiltro";
-            this.gpFiltro.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.gpFiltro.Size = new System.Drawing.Size(1395, 133);
-            this.gpFiltro.TabIndex = 4;
-            this.gpFiltro.TabStop = false;
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConsultar.Location = new System.Drawing.Point(1272, 84);
-            this.btnConsultar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(108, 27);
-            this.btnConsultar.TabIndex = 6;
-            this.btnConsultar.Text = "Consultar";
-            this.btnConsultar.UseVisualStyleBackColor = true;
-            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
-            // 
-            // gbTipoAlteracao
-            // 
-            this.gbTipoAlteracao.Controls.Add(this.rbAlteraDataDocumento);
-            this.gbTipoAlteracao.Controls.Add(this.rbAlteraCodTmtv);
-            this.gbTipoAlteracao.Location = new System.Drawing.Point(7, 16);
-            this.gbTipoAlteracao.Name = "gbTipoAlteracao";
-            this.gbTipoAlteracao.Size = new System.Drawing.Size(251, 113);
-            this.gbTipoAlteracao.TabIndex = 9;
-            this.gbTipoAlteracao.TabStop = false;
-            this.gbTipoAlteracao.Text = "Alterações";
-            // 
-            // rbAlteraDataDocumento
-            // 
-            this.rbAlteraDataDocumento.AutoSize = true;
-            this.rbAlteraDataDocumento.Location = new System.Drawing.Point(8, 65);
-            this.rbAlteraDataDocumento.Name = "rbAlteraDataDocumento";
-            this.rbAlteraDataDocumento.Size = new System.Drawing.Size(148, 20);
-            this.rbAlteraDataDocumento.TabIndex = 8;
-            this.rbAlteraDataDocumento.TabStop = true;
-            this.rbAlteraDataDocumento.Text = "Data de Documento";
-            this.rbAlteraDataDocumento.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbAlteraDataDocumento.UseVisualStyleBackColor = true;
-            this.rbAlteraDataDocumento.CheckedChanged += new System.EventHandler(this.rbAlteraDataDocumento_CheckedChanged);
-            // 
-            // rbAlteraCodTmtv
-            // 
-            this.rbAlteraCodTmtv.AutoSize = true;
-            this.rbAlteraCodTmtv.Location = new System.Drawing.Point(8, 29);
-            this.rbAlteraCodTmtv.Name = "rbAlteraCodTmtv";
-            this.rbAlteraCodTmtv.Size = new System.Drawing.Size(97, 20);
-            this.rbAlteraCodTmtv.TabIndex = 7;
-            this.rbAlteraCodTmtv.TabStop = true;
-            this.rbAlteraCodTmtv.Text = "Cod. TMTV";
-            this.rbAlteraCodTmtv.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbAlteraCodTmtv.UseVisualStyleBackColor = true;
-            this.rbAlteraCodTmtv.CheckedChanged += new System.EventHandler(this.rbAlteraCodTmtv_CheckedChanged);
-            // 
-            // btnAlteraCodMovimento
-            // 
-            this.btnAlteraCodMovimento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAlteraCodMovimento.Location = new System.Drawing.Point(1192, 70);
-            this.btnAlteraCodMovimento.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnAlteraCodMovimento.Name = "btnAlteraCodMovimento";
-            this.btnAlteraCodMovimento.Size = new System.Drawing.Size(162, 37);
-            this.btnAlteraCodMovimento.TabIndex = 7;
-            this.btnAlteraCodMovimento.Text = "Alterar Cód Movimento";
-            this.btnAlteraCodMovimento.UseVisualStyleBackColor = true;
-            this.btnAlteraCodMovimento.Click += new System.EventHandler(this.btnAlteraCodMovimento_Click);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.btnAlteraDataDocumento);
-            this.groupBox1.Controls.Add(this.btnAlterarSelecionados);
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.btnAlteraCodMovimento);
-            this.groupBox1.Controls.Add(this.btnSelecionarTudo);
-            this.groupBox1.Controls.Add(this.txtCountRows);
-            this.groupBox1.Location = new System.Drawing.Point(12, 685);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(1394, 114);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            // 
-            // btnAlterarSelecionados
-            // 
-            this.btnAlterarSelecionados.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAlterarSelecionados.Location = new System.Drawing.Point(180, 70);
-            this.btnAlterarSelecionados.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnAlterarSelecionados.Name = "btnAlterarSelecionados";
-            this.btnAlterarSelecionados.Size = new System.Drawing.Size(134, 27);
-            this.btnAlterarSelecionados.TabIndex = 8;
-            this.btnAlterarSelecionados.Text = "Alt. Selecionados";
-            this.btnAlterarSelecionados.UseVisualStyleBackColor = true;
-            this.btnAlterarSelecionados.Click += new System.EventHandler(this.btnAlterarSelecionados_Click);
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(180, 36);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 27);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Limpar seleção";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnSelecionarTudo
-            // 
-            this.btnSelecionarTudo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSelecionarTudo.Location = new System.Drawing.Point(18, 36);
-            this.btnSelecionarTudo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnSelecionarTudo.Name = "btnSelecionarTudo";
-            this.btnSelecionarTudo.Size = new System.Drawing.Size(134, 27);
-            this.btnSelecionarTudo.TabIndex = 9;
-            this.btnSelecionarTudo.Text = "Selecionar  tudo";
-            this.btnSelecionarTudo.UseVisualStyleBackColor = true;
-            this.btnSelecionarTudo.Click += new System.EventHandler(this.btnSelecionarTudo_Click);
-            // 
-            // txtCountRows
-            // 
-            this.txtCountRows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtCountRows.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.txtCountRows.Location = new System.Drawing.Point(18, 77);
-            this.txtCountRows.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCountRows.Name = "txtCountRows";
-            this.txtCountRows.Size = new System.Drawing.Size(135, 22);
-            this.txtCountRows.TabIndex = 10;
-            // 
-            // dtInicio
-            // 
-            this.dtInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtInicio.Location = new System.Drawing.Point(445, 40);
-            this.dtInicio.Name = "dtInicio";
-            this.dtInicio.Size = new System.Drawing.Size(134, 22);
-            this.dtInicio.TabIndex = 10;
-            // 
-            // dtFim
-            // 
-            this.dtFim.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFim.Location = new System.Drawing.Point(445, 97);
-            this.dtFim.Name = "dtFim";
-            this.dtFim.Size = new System.Drawing.Size(134, 22);
-            this.dtFim.TabIndex = 11;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(442, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 16);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Data Inicio";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(442, 75);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 16);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Data Fim";
-            // 
-            // cbColigada
-            // 
-            this.cbColigada.FormattingEnabled = true;
-            this.cbColigada.Location = new System.Drawing.Point(287, 54);
-            this.cbColigada.Name = "cbColigada";
-            this.cbColigada.Size = new System.Drawing.Size(121, 24);
-            this.cbColigada.TabIndex = 14;
+            gpFiltro.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpFiltro.Controls.Add(label3);
+            gpFiltro.Controls.Add(cbColigada);
+            gpFiltro.Controls.Add(label2);
+            gpFiltro.Controls.Add(label1);
+            gpFiltro.Controls.Add(dtFim);
+            gpFiltro.Controls.Add(dtInicio);
+            gpFiltro.Controls.Add(btnConsultar);
+            gpFiltro.Controls.Add(txtFiltroInput);
+            gpFiltro.Controls.Add(lblFiltro);
+            gpFiltro.Controls.Add(gbTipoAlteracao);
+            gpFiltro.Location = new Point(11, 14);
+            gpFiltro.Margin = new Padding(3, 2, 3, 2);
+            gpFiltro.Name = "gpFiltro";
+            gpFiltro.Padding = new Padding(3, 2, 3, 2);
+            gpFiltro.Size = new Size(1395, 166);
+            gpFiltro.TabIndex = 4;
+            gpFiltro.TabStop = false;
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(284, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(93, 16);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Cod. Coligada";
+            label3.AutoSize = true;
+            label3.Location = new Point(284, 31);
+            label3.Name = "label3";
+            label3.Size = new Size(103, 20);
+            label3.TabIndex = 15;
+            label3.Text = "Cod. Coligada";
             // 
-            // dvgIDMovs
+            // cbColigada
             // 
-            this.dvgIDMovs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dvgIDMovs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dvgIDMovs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgIDMovs.Location = new System.Drawing.Point(11, 148);
-            this.dvgIDMovs.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dvgIDMovs.Name = "dvgIDMovs";
-            this.dvgIDMovs.RowHeadersWidth = 62;
-            this.dvgIDMovs.RowTemplate.Height = 28;
-            this.dvgIDMovs.Size = new System.Drawing.Size(1395, 533);
-            this.dvgIDMovs.TabIndex = 5;
+            cbColigada.FormattingEnabled = true;
+            cbColigada.Location = new Point(287, 68);
+            cbColigada.Margin = new Padding(3, 4, 3, 4);
+            cbColigada.Name = "cbColigada";
+            cbColigada.Size = new Size(121, 28);
+            cbColigada.TabIndex = 14;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(442, 94);
+            label2.Name = "label2";
+            label2.Size = new Size(69, 20);
+            label2.TabIndex = 13;
+            label2.Text = "Data Fim";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(442, 21);
+            label1.Name = "label1";
+            label1.Size = new Size(81, 20);
+            label1.TabIndex = 12;
+            label1.Text = "Data Inicio";
+            // 
+            // dtFim
+            // 
+            dtFim.Format = DateTimePickerFormat.Short;
+            dtFim.Location = new Point(445, 121);
+            dtFim.Margin = new Padding(3, 4, 3, 4);
+            dtFim.Name = "dtFim";
+            dtFim.Size = new Size(134, 27);
+            dtFim.TabIndex = 11;
+            // 
+            // dtInicio
+            // 
+            dtInicio.Format = DateTimePickerFormat.Short;
+            dtInicio.Location = new Point(445, 50);
+            dtInicio.Margin = new Padding(3, 4, 3, 4);
+            dtInicio.Name = "dtInicio";
+            dtInicio.Size = new Size(134, 27);
+            dtInicio.TabIndex = 10;
+            // 
+            // btnConsultar
+            // 
+            btnConsultar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnConsultar.Location = new Point(1272, 105);
+            btnConsultar.Margin = new Padding(3, 2, 3, 2);
+            btnConsultar.Name = "btnConsultar";
+            btnConsultar.Size = new Size(108, 34);
+            btnConsultar.TabIndex = 6;
+            btnConsultar.Text = "Consultar";
+            btnConsultar.UseVisualStyleBackColor = true;
+            btnConsultar.Click += btnConsultar_Click;
+            // 
+            // gbTipoAlteracao
+            // 
+            gbTipoAlteracao.Controls.Add(rbAlteraDataDocumento);
+            gbTipoAlteracao.Controls.Add(rbAlteraCodTmtv);
+            gbTipoAlteracao.Location = new Point(7, 20);
+            gbTipoAlteracao.Margin = new Padding(3, 4, 3, 4);
+            gbTipoAlteracao.Name = "gbTipoAlteracao";
+            gbTipoAlteracao.Padding = new Padding(3, 4, 3, 4);
+            gbTipoAlteracao.Size = new Size(251, 141);
+            gbTipoAlteracao.TabIndex = 9;
+            gbTipoAlteracao.TabStop = false;
+            gbTipoAlteracao.Text = "Alterações";
+            // 
+            // rbAlteraDataDocumento
+            // 
+            rbAlteraDataDocumento.AutoSize = true;
+            rbAlteraDataDocumento.Location = new Point(8, 81);
+            rbAlteraDataDocumento.Margin = new Padding(3, 4, 3, 4);
+            rbAlteraDataDocumento.Name = "rbAlteraDataDocumento";
+            rbAlteraDataDocumento.Size = new Size(165, 24);
+            rbAlteraDataDocumento.TabIndex = 8;
+            rbAlteraDataDocumento.TabStop = true;
+            rbAlteraDataDocumento.Text = "Data de Documento";
+            rbAlteraDataDocumento.TextAlign = ContentAlignment.MiddleCenter;
+            rbAlteraDataDocumento.UseVisualStyleBackColor = true;
+            rbAlteraDataDocumento.CheckedChanged += rbAlteraDataDocumento_CheckedChanged;
+            // 
+            // rbAlteraCodTmtv
+            // 
+            rbAlteraCodTmtv.AutoSize = true;
+            rbAlteraCodTmtv.Location = new Point(8, 36);
+            rbAlteraCodTmtv.Margin = new Padding(3, 4, 3, 4);
+            rbAlteraCodTmtv.Name = "rbAlteraCodTmtv";
+            rbAlteraCodTmtv.Size = new Size(102, 24);
+            rbAlteraCodTmtv.TabIndex = 7;
+            rbAlteraCodTmtv.TabStop = true;
+            rbAlteraCodTmtv.Text = "Cod. TMTV";
+            rbAlteraCodTmtv.TextAlign = ContentAlignment.MiddleCenter;
+            rbAlteraCodTmtv.UseVisualStyleBackColor = true;
+            rbAlteraCodTmtv.CheckedChanged += rbAlteraCodTmtv_CheckedChanged;
+            // 
+            // btnAlteraCodMovimento
+            // 
+            btnAlteraCodMovimento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnAlteraCodMovimento.Location = new Point(1151, 84);
+            btnAlteraCodMovimento.Margin = new Padding(3, 2, 3, 2);
+            btnAlteraCodMovimento.Name = "btnAlteraCodMovimento";
+            btnAlteraCodMovimento.Size = new Size(203, 38);
+            btnAlteraCodMovimento.TabIndex = 7;
+            btnAlteraCodMovimento.Text = "Alterar Cód Movimento";
+            btnAlteraCodMovimento.UseVisualStyleBackColor = true;
+            btnAlteraCodMovimento.Click += btnAlteraCodMovimento_Click;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(btnAlteraDataDocumento);
+            groupBox1.Controls.Add(btnAlterarSelecionados);
+            groupBox1.Controls.Add(button1);
+            groupBox1.Controls.Add(btnAlteraCodMovimento);
+            groupBox1.Controls.Add(btnSelecionarTudo);
+            groupBox1.Controls.Add(txtCountRows);
+            groupBox1.Location = new Point(12, 856);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(3, 2, 3, 2);
+            groupBox1.Size = new Size(1394, 142);
+            groupBox1.TabIndex = 7;
+            groupBox1.TabStop = false;
             // 
             // btnAlteraDataDocumento
             // 
-            this.btnAlteraDataDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAlteraDataDocumento.Location = new System.Drawing.Point(1192, 19);
-            this.btnAlteraDataDocumento.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnAlteraDataDocumento.Name = "btnAlteraDataDocumento";
-            this.btnAlteraDataDocumento.Size = new System.Drawing.Size(162, 37);
-            this.btnAlteraDataDocumento.TabIndex = 11;
-            this.btnAlteraDataDocumento.Text = "Alterar Data Documento";
-            this.btnAlteraDataDocumento.UseVisualStyleBackColor = true;
-            this.btnAlteraDataDocumento.Click += new System.EventHandler(this.btnAlteraDataDocumento_Click);
+            btnAlteraDataDocumento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnAlteraDataDocumento.Location = new Point(1151, 24);
+            btnAlteraDataDocumento.Margin = new Padding(3, 2, 3, 2);
+            btnAlteraDataDocumento.Name = "btnAlteraDataDocumento";
+            btnAlteraDataDocumento.Size = new Size(203, 46);
+            btnAlteraDataDocumento.TabIndex = 11;
+            btnAlteraDataDocumento.Text = "Alterar Data Documento";
+            btnAlteraDataDocumento.UseVisualStyleBackColor = true;
+            btnAlteraDataDocumento.Click += btnAlteraDataDocumento_Click;
             // 
-            // AlterarTipoMovimentoLista
+            // btnAlterarSelecionados
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1418, 810);
-            this.Controls.Add(this.dvgIDMovs);
-            this.Controls.Add(this.gpFiltro);
-            this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "AlterarTipoMovimentoLista";
-            this.Text = "AlterarTipoMovimentoLista";
-            this.gpFiltro.ResumeLayout(false);
-            this.gpFiltro.PerformLayout();
-            this.gbTipoAlteracao.ResumeLayout(false);
-            this.gbTipoAlteracao.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgIDMovs)).EndInit();
-            this.ResumeLayout(false);
+            btnAlterarSelecionados.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnAlterarSelecionados.Location = new Point(180, 88);
+            btnAlterarSelecionados.Margin = new Padding(3, 2, 3, 2);
+            btnAlterarSelecionados.Name = "btnAlterarSelecionados";
+            btnAlterarSelecionados.Size = new Size(134, 34);
+            btnAlterarSelecionados.TabIndex = 8;
+            btnAlterarSelecionados.Text = "Alt. Selecionados";
+            btnAlterarSelecionados.UseVisualStyleBackColor = true;
+            btnAlterarSelecionados.Click += btnAlterarSelecionados_Click;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button1.Location = new Point(180, 45);
+            button1.Margin = new Padding(3, 2, 3, 2);
+            button1.Name = "button1";
+            button1.Size = new Size(134, 34);
+            button1.TabIndex = 10;
+            button1.Text = "Limpar seleção";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // btnSelecionarTudo
+            // 
+            btnSelecionarTudo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnSelecionarTudo.Location = new Point(18, 45);
+            btnSelecionarTudo.Margin = new Padding(3, 2, 3, 2);
+            btnSelecionarTudo.Name = "btnSelecionarTudo";
+            btnSelecionarTudo.Size = new Size(134, 34);
+            btnSelecionarTudo.TabIndex = 9;
+            btnSelecionarTudo.Text = "Selecionar  tudo";
+            btnSelecionarTudo.UseVisualStyleBackColor = true;
+            btnSelecionarTudo.Click += btnSelecionarTudo_Click;
+            // 
+            // txtCountRows
+            // 
+            txtCountRows.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            txtCountRows.BackColor = SystemColors.ScrollBar;
+            txtCountRows.Location = new Point(18, 96);
+            txtCountRows.Margin = new Padding(3, 2, 3, 2);
+            txtCountRows.Name = "txtCountRows";
+            txtCountRows.Size = new Size(135, 27);
+            txtCountRows.TabIndex = 10;
+            // 
+            // dvgIDMovs
+            // 
+            dvgIDMovs.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dvgIDMovs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dvgIDMovs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dvgIDMovs.Location = new Point(11, 185);
+            dvgIDMovs.Margin = new Padding(3, 2, 3, 2);
+            dvgIDMovs.Name = "dvgIDMovs";
+            dvgIDMovs.RowHeadersWidth = 62;
+            dvgIDMovs.RowTemplate.Height = 28;
+            dvgIDMovs.Size = new Size(1395, 666);
+            dvgIDMovs.TabIndex = 5;
+            // 
+            // AlteracoesFiscaisEmLote
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1418, 1012);
+            Controls.Add(dvgIDMovs);
+            Controls.Add(gpFiltro);
+            Controls.Add(groupBox1);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "AlteracoesFiscaisEmLote";
+            Text = "AlterarTipoMovimentoLista";
+            gpFiltro.ResumeLayout(false);
+            gpFiltro.PerformLayout();
+            gbTipoAlteracao.ResumeLayout(false);
+            gbTipoAlteracao.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dvgIDMovs).EndInit();
+            ResumeLayout(false);
 
         }
 

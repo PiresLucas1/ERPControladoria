@@ -42,6 +42,9 @@
             contabilToolStripMenuItem = new ToolStripMenuItem();
             importarRecebimentoToolStripMenuItem = new ToolStripMenuItem();
             atualizarGestãoPatrimonialToolStripMenuItem = new ToolStripMenuItem();
+            conferenciaDeBoletoToolStripMenuItem = new ToolStripMenuItem();
+            parametrizaçãoToolStripMenuItem = new ToolStripMenuItem();
+            lançamentoContabilToolStripMenuItem = new ToolStripMenuItem();
             ZanupMenu = new ToolStripMenuItem();
             devoluçaoDeNotasToolStripMenuItem = new ToolStripMenuItem();
             criarNotaZanupToolStripMenuItem = new ToolStripMenuItem();
@@ -112,20 +115,20 @@
             // 
             alterarTipoDeMovimentoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { alteraçãoUnicaToolStripMenuItem, alteraçãoEmListaToolStripMenuItem });
             alterarTipoDeMovimentoToolStripMenuItem.Name = "alterarTipoDeMovimentoToolStripMenuItem";
-            alterarTipoDeMovimentoToolStripMenuItem.Size = new Size(224, 26);
+            alterarTipoDeMovimentoToolStripMenuItem.Size = new Size(208, 26);
             alterarTipoDeMovimentoToolStripMenuItem.Text = "Alterações Fiscais";
             // 
             // alteraçãoUnicaToolStripMenuItem
             // 
             alteraçãoUnicaToolStripMenuItem.Name = "alteraçãoUnicaToolStripMenuItem";
-            alteraçãoUnicaToolStripMenuItem.Size = new Size(224, 26);
+            alteraçãoUnicaToolStripMenuItem.Size = new Size(212, 26);
             alteraçãoUnicaToolStripMenuItem.Text = "Alteração unica";
             alteraçãoUnicaToolStripMenuItem.Click += alteraçãoUnicaToolStripMenuItem_Click;
             // 
             // alteraçãoEmListaToolStripMenuItem
             // 
             alteraçãoEmListaToolStripMenuItem.Name = "alteraçãoEmListaToolStripMenuItem";
-            alteraçãoEmListaToolStripMenuItem.Size = new Size(224, 26);
+            alteraçãoEmListaToolStripMenuItem.Size = new Size(212, 26);
             alteraçãoEmListaToolStripMenuItem.Text = "Alteração em lista";
             alteraçãoEmListaToolStripMenuItem.Click += alteraçãoEmListaToolStripMenuItem_Click;
             // 
@@ -139,13 +142,13 @@
             // xMLPostoDoLagoToolStripMenuItem
             // 
             xMLPostoDoLagoToolStripMenuItem.Name = "xMLPostoDoLagoToolStripMenuItem";
-            xMLPostoDoLagoToolStripMenuItem.Size = new Size(224, 26);
+            xMLPostoDoLagoToolStripMenuItem.Size = new Size(220, 26);
             xMLPostoDoLagoToolStripMenuItem.Text = "XML Posto do Lago";
             xMLPostoDoLagoToolStripMenuItem.Click += xMLPostoDoLagoToolStripMenuItem_Click;
             // 
             // contabilToolStripMenuItem
             // 
-            contabilToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { importarRecebimentoToolStripMenuItem, atualizarGestãoPatrimonialToolStripMenuItem });
+            contabilToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { importarRecebimentoToolStripMenuItem, atualizarGestãoPatrimonialToolStripMenuItem, conferenciaDeBoletoToolStripMenuItem, parametrizaçãoToolStripMenuItem });
             contabilToolStripMenuItem.Name = "contabilToolStripMenuItem";
             contabilToolStripMenuItem.Size = new Size(79, 24);
             contabilToolStripMenuItem.Text = "Contabil";
@@ -161,6 +164,27 @@
             atualizarGestãoPatrimonialToolStripMenuItem.Name = "atualizarGestãoPatrimonialToolStripMenuItem";
             atualizarGestãoPatrimonialToolStripMenuItem.Size = new Size(280, 26);
             atualizarGestãoPatrimonialToolStripMenuItem.Text = "Atualizar Gestão Patrimonial";
+            // 
+            // conferenciaDeBoletoToolStripMenuItem
+            // 
+            conferenciaDeBoletoToolStripMenuItem.Name = "conferenciaDeBoletoToolStripMenuItem";
+            conferenciaDeBoletoToolStripMenuItem.Size = new Size(280, 26);
+            conferenciaDeBoletoToolStripMenuItem.Text = "Conferencia de Boleto";
+            conferenciaDeBoletoToolStripMenuItem.Click += conferenciaDeBoletoToolStripMenuItem_Click;
+            // 
+            // parametrizaçãoToolStripMenuItem
+            // 
+            parametrizaçãoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { lançamentoContabilToolStripMenuItem });
+            parametrizaçãoToolStripMenuItem.Name = "parametrizaçãoToolStripMenuItem";
+            parametrizaçãoToolStripMenuItem.Size = new Size(280, 26);
+            parametrizaçãoToolStripMenuItem.Text = "Parametrização";
+            // 
+            // lançamentoContabilToolStripMenuItem
+            // 
+            lançamentoContabilToolStripMenuItem.Name = "lançamentoContabilToolStripMenuItem";
+            lançamentoContabilToolStripMenuItem.Size = new Size(233, 26);
+            lançamentoContabilToolStripMenuItem.Text = "Lançamento Contabil";
+            lançamentoContabilToolStripMenuItem.Click += lançamentoContabilToolStripMenuItem_Click;
             // 
             // ZanupMenu
             // 
@@ -375,5 +399,8 @@
         private System.Windows.Forms.ToolStripMenuItem gestãoProcessosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem campanhasTelevendasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem criarCampanhaToolStripMenuItem;
+        private ToolStripMenuItem conferenciaDeBoletoToolStripMenuItem;
+        private ToolStripMenuItem parametrizaçãoToolStripMenuItem;
+        private ToolStripMenuItem lançamentoContabilToolStripMenuItem;
     }
 }

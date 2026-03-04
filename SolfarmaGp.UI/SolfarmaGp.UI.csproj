@@ -76,4 +76,8 @@
 	  <Folder Include="MenusUI\Zanup\DevolucaoNotasComSaldo\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="EPPlus" Version="8.4.2" />
+	</ItemGroup>
+
 </Project>

@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EPPlus" Version="8.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SolfarmaGp.Repositorios\SolfarmaGp.Repositorios.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,4 @@
-﻿using SolfarmaGp.Controllers.UseCase.ImportaXml.WebPostoXml;
+﻿using SolfarmaGp.Controllers.UseCase.Fiscal.ImportaXml.WebPostoXml;
 using SolfarmaGp.UI.MenusUI;
 using System.Data;
 
