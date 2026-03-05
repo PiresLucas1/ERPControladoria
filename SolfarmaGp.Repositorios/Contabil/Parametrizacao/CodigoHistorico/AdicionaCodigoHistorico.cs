@@ -2,7 +2,7 @@
 using SolfarmaGp.Infraestrutura;
 using System.Data;
 
-namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
+namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao.CodigoHistorico
 {
     public class AdicionaCodigoHistorico
     {
@@ -14,7 +14,7 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
             {
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("uspContCadastraHistorico", conn))
+                    using (SqlCommand cmd = new SqlCommand("uspContabilConferenciaRecebimentosCadastraHistorico", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         var param = cmd.Parameters.AddWithValue("@INvchCodigo", valor);                                                
@@ -26,7 +26,7 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
                     conexaoBanco.FecharConexao(conn);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
             }

@@ -1,6 +1,6 @@
-﻿using SolfarmaGp.Repositorios.Contabil.Parametrizacao;
+﻿using SolfarmaGp.Repositorios.Contabil.Parametrizacao.Complemento;
 
-namespace SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao
+namespace SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Complemento
 {
     public class AdicionaComplementoUseCase
     {

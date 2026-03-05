@@ -67,8 +67,7 @@ namespace SolfarmaGp.UI.MenusUI
             PrimeiroLogin primeiroLogin = new PrimeiroLogin();
             primeiroLogin.StartPosition = FormStartPosition.CenterScreen;
             primeiroLogin.Show();   // Aparece apenas uma vez
-
-            await Task.Delay(2000); // Simula tempo de carregamento
+            
 
             ConsultarUnicoUsuarioRepo segCadastroController = new ConsultarUnicoUsuarioRepo();
             var result = await segCadastroController.Executar(nomeUsuario);

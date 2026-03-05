@@ -4,9 +4,9 @@ using System.Data;
 
 namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
 {
-    public class AdicionaConta()
+    public class ConsultaLancamentoContabilParametrizado
     {
-        public async Task<DataTable> Executar(string valorCodigo, string planoContas)
+        public async Task<DataTable> Execute()
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
@@ -14,12 +14,15 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
             {
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("uspContCadastraContaContabil", conn))
+                    using (SqlCommand cmd = new SqlCommand("uspContabilConferenciaRecebimentosLancamentosParametrizados", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        var param1 = cmd.Parameters.AddWithValue("@codigo", valorCodigo);
-                        var param2 = cmd.Parameters.AddWithValue("@INvchDescricaoConta", DBNull.Value);
-                        var param3 = cmd.Parameters.AddWithValue("@INvchPlanoContas", planoContas);
+                        cmd.Parameters.AddWithValue("@INchCodigoContaDebito", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@INchCodigoContaCredito", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@INchCodigoHistorico", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@INvchDescricaoComplemento", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@INvchDescricaoExtrato", DBNull.Value);
+                        cmd.Parameters.AddWithValue("@INintFilial", DBNull.Value);
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             tabela.Load(reader);

@@ -30,25 +30,31 @@
         {
             btnImportarArquivo = new Button();
             gpHeader = new GroupBox();
+            lbFilial = new Label();
+            tbFilial = new TextBox();
+            lbBanco = new Label();
+            btnConferencia = new Button();
+            cbBanco = new ComboBox();
+            groupBox1 = new GroupBox();
+            btnFiltrar = new Button();
+            tbValorPesquisa = new TextBox();
             label1 = new Label();
-            textBox1 = new TextBox();
-            lbNomaArquivo = new Label();
+            cbFiltro = new ComboBox();
             txtFiltroTipo = new Label();
-            comboBox1 = new ComboBox();
+            lbNomaArquivo = new Label();
             txtFileName = new TextBox();
             dvgRelacaoBoletos = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             tbControlBase = new TabControl();
             tbBaseImportada = new TabPage();
             tbBaseConferencia = new TabPage();
-            groupBox1 = new GroupBox();
-            comboBox2 = new ComboBox();
-            btnConferencia = new Button();
-            lbBanco = new Label();
+            dvgConferencia = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             gpHeader.SuspendLayout();
+            groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRelacaoBoletos).BeginInit();
             tbControlBase.SuspendLayout();
             tbBaseImportada.SuspendLayout();
-            groupBox1.SuspendLayout();
+            tbBaseConferencia.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dvgConferencia).BeginInit();
             SuspendLayout();
             // 
             // btnImportarArquivo
@@ -63,9 +69,12 @@
             // 
             // gpHeader
             // 
+            gpHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpHeader.Controls.Add(lbFilial);
+            gpHeader.Controls.Add(tbFilial);
             gpHeader.Controls.Add(lbBanco);
             gpHeader.Controls.Add(btnConferencia);
-            gpHeader.Controls.Add(comboBox2);
+            gpHeader.Controls.Add(cbBanco);
             gpHeader.Controls.Add(groupBox1);
             gpHeader.Controls.Add(lbNomaArquivo);
             gpHeader.Controls.Add(txtFileName);
@@ -77,21 +86,105 @@
             gpHeader.TabStop = false;
             gpHeader.Text = "Geral";
             // 
+            // lbFilial
+            // 
+            lbFilial.AutoSize = true;
+            lbFilial.Location = new Point(240, 133);
+            lbFilial.Name = "lbFilial";
+            lbFilial.Size = new Size(43, 20);
+            lbFilial.TabIndex = 12;
+            lbFilial.Text = "Filial:";
+            // 
+            // tbFilial
+            // 
+            tbFilial.Location = new Point(240, 156);
+            tbFilial.Name = "tbFilial";
+            tbFilial.Size = new Size(111, 27);
+            tbFilial.TabIndex = 11;
+            // 
+            // lbBanco
+            // 
+            lbBanco.AutoSize = true;
+            lbBanco.Location = new Point(22, 133);
+            lbBanco.Name = "lbBanco";
+            lbBanco.Size = new Size(134, 20);
+            lbBanco.TabIndex = 10;
+            lbBanco.Text = "Selecione o Banco:";
+            // 
+            // btnConferencia
+            // 
+            btnConferencia.Location = new Point(1179, 156);
+            btnConferencia.Name = "btnConferencia";
+            btnConferencia.Size = new Size(138, 29);
+            btnConferencia.TabIndex = 9;
+            btnConferencia.Text = "Conferir";
+            btnConferencia.UseVisualStyleBackColor = true;
+            btnConferencia.Click += btnConferencia_Click;
+            // 
+            // cbBanco
+            // 
+            cbBanco.FormattingEnabled = true;
+            cbBanco.Location = new Point(22, 156);
+            cbBanco.Name = "cbBanco";
+            cbBanco.Size = new Size(174, 28);
+            cbBanco.TabIndex = 8;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(btnFiltrar);
+            groupBox1.Controls.Add(tbValorPesquisa);
+            groupBox1.Controls.Add(label1);
+            groupBox1.Controls.Add(cbFiltro);
+            groupBox1.Controls.Add(txtFiltroTipo);
+            groupBox1.Location = new Point(495, 14);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(369, 171);
+            groupBox1.TabIndex = 7;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Filtros:";
+            // 
+            // btnFiltrar
+            // 
+            btnFiltrar.Location = new Point(245, 129);
+            btnFiltrar.Name = "btnFiltrar";
+            btnFiltrar.Size = new Size(100, 29);
+            btnFiltrar.TabIndex = 10;
+            btnFiltrar.Text = "Filtrar";
+            btnFiltrar.UseVisualStyleBackColor = true;
+            btnFiltrar.Click += btnFiltrar_Click;
+            // 
+            // tbValorPesquisa
+            // 
+            tbValorPesquisa.Location = new Point(28, 129);
+            tbValorPesquisa.Name = "tbValorPesquisa";
+            tbValorPesquisa.Size = new Size(189, 27);
+            tbValorPesquisa.TabIndex = 5;
+            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(21, 38);
+            label1.Location = new Point(28, 101);
             label1.Name = "label1";
-            label1.Size = new Size(107, 20);
+            label1.Size = new Size(106, 20);
             label1.TabIndex = 6;
-            label1.Text = "Complemento:";
+            label1.Text = "Valor Pesquisa:";
             // 
-            // textBox1
+            // cbFiltro
             // 
-            textBox1.Location = new Point(21, 61);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(189, 27);
-            textBox1.TabIndex = 5;
+            cbFiltro.FormattingEnabled = true;
+            cbFiltro.Location = new Point(28, 60);
+            cbFiltro.Name = "cbFiltro";
+            cbFiltro.Size = new Size(163, 28);
+            cbFiltro.TabIndex = 2;
+            // 
+            // txtFiltroTipo
+            // 
+            txtFiltroTipo.AutoSize = true;
+            txtFiltroTipo.Location = new Point(28, 31);
+            txtFiltroTipo.Name = "txtFiltroTipo";
+            txtFiltroTipo.Size = new Size(141, 20);
+            txtFiltroTipo.TabIndex = 3;
+            txtFiltroTipo.Text = "Selecione o Campo:";
             // 
             // lbNomaArquivo
             // 
@@ -101,23 +194,6 @@
             lbNomaArquivo.Size = new Size(109, 20);
             lbNomaArquivo.TabIndex = 4;
             lbNomaArquivo.Text = "Nome Arquivo:";
-            // 
-            // txtFiltroTipo
-            // 
-            txtFiltroTipo.AutoSize = true;
-            txtFiltroTipo.Location = new Point(21, 105);
-            txtFiltroTipo.Name = "txtFiltroTipo";
-            txtFiltroTipo.Size = new Size(106, 20);
-            txtFiltroTipo.TabIndex = 3;
-            txtFiltroTipo.Text = "Tipo Natureza:";
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(21, 128);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(163, 28);
-            comboBox1.TabIndex = 2;
             // 
             // txtFileName
             // 
@@ -143,6 +219,7 @@
             // 
             // tbControlBase
             // 
+            tbControlBase.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tbControlBase.Controls.Add(tbBaseImportada);
             tbControlBase.Controls.Add(tbBaseConferencia);
             tbControlBase.Location = new Point(12, 211);
@@ -164,6 +241,7 @@
             // 
             // tbBaseConferencia
             // 
+            tbBaseConferencia.Controls.Add(dvgConferencia);
             tbBaseConferencia.Location = new Point(4, 29);
             tbBaseConferencia.Name = "tbBaseConferencia";
             tbBaseConferencia.Padding = new Padding(3);
@@ -172,44 +250,16 @@
             tbBaseConferencia.Text = "Base Conferencia";
             tbBaseConferencia.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // dvgConferencia
             // 
-            groupBox1.Controls.Add(textBox1);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(comboBox1);
-            groupBox1.Controls.Add(txtFiltroTipo);
-            groupBox1.Location = new Point(368, 13);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(369, 171);
-            groupBox1.TabIndex = 7;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Filtros:";
-            // 
-            // comboBox2
-            // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(22, 156);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(174, 28);
-            comboBox2.TabIndex = 8;
-            // 
-            // btnConferencia
-            // 
-            btnConferencia.Location = new Point(1179, 156);
-            btnConferencia.Name = "btnConferencia";
-            btnConferencia.Size = new Size(138, 29);
-            btnConferencia.TabIndex = 9;
-            btnConferencia.Text = "Conferir";
-            btnConferencia.UseVisualStyleBackColor = true;
-            // 
-            // lbBanco
-            // 
-            lbBanco.AutoSize = true;
-            lbBanco.Location = new Point(22, 133);
-            lbBanco.Name = "lbBanco";
-            lbBanco.Size = new Size(134, 20);
-            lbBanco.TabIndex = 10;
-            lbBanco.Text = "Selecione o Banco:";
+            dvgConferencia.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dvgConferencia.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dvgConferencia.ColumnHeadersHeight = 29;
+            dvgConferencia.Location = new Point(3, 6);
+            dvgConferencia.Name = "dvgConferencia";
+            dvgConferencia.RowHeadersWidth = 51;
+            dvgConferencia.Size = new Size(1306, 517);
+            dvgConferencia.TabIndex = 0;
             // 
             // ConfereciaBoleto
             // 
@@ -222,11 +272,13 @@
             Text = "ConfereciaBoleto";
             gpHeader.ResumeLayout(false);
             gpHeader.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRelacaoBoletos).EndInit();
             tbControlBase.ResumeLayout(false);
             tbBaseImportada.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            tbBaseConferencia.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dvgConferencia).EndInit();
             ResumeLayout(false);
         }
 
@@ -237,16 +289,20 @@
         private ComponentesTelaUI.DataGridView.MyDataGridView dvgRelacaoBoletos;
         private TextBox txtFileName;
         private Label txtFiltroTipo;
-        private ComboBox comboBox1;
+        private ComboBox cbFiltro;
         private TabControl tbControlBase;
         private TabPage tbBaseImportada;
         private TabPage tbBaseConferencia;
         private Label lbNomaArquivo;
         private Label label1;
-        private TextBox textBox1;
+        private TextBox tbValorPesquisa;
         private Button btnConferencia;
-        private ComboBox comboBox2;
+        private ComboBox cbBanco;
         private GroupBox groupBox1;
         private Label lbBanco;
+        private ComponentesTelaUI.DataGridView.MyDataGridView dvgConferencia;
+        private Label lbFilial;
+        private TextBox tbFilial;
+        private Button btnFiltrar;
     }
 }

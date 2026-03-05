@@ -1,5 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao;
+using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.CodigoHistorico;
+using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Complemento;
+using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Conta;
 
 namespace SolfarmaGp.UI.MenusUI.Contabil
 {
@@ -11,8 +13,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             cbTipoItem.Items.Add("Conta");
             cbTipoItem.Items.Add("Historico");
             cbTipoItem.Items.Add("Complemento");
-
-            cbTipoItem.SelectedItem = "Conta";
+            
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
@@ -25,26 +26,39 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                 MessageBox.Show("O campo de item não pode estar vazio.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if(valorPlanoContas.IsNullOrEmpty() && cbTipoItem.SelectedItem == "Conta")
+            if (valorPlanoContas.IsNullOrEmpty() && cbTipoItem.SelectedItem == "Conta")
             {
                 MessageBox.Show("O campo de plano de contas não pode estar vazio para o tipo 'Conta'.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (cbTipoItem.SelectedItem == "Conta")
+            try
             {
-                AdicionaContaUseCase useCase = new AdicionaContaUseCase();
-                useCase.Execute(valor, valorPlanoContas);
+                if (cbTipoItem.SelectedItem == "Conta")
+                {
+                    AdicionaContaUseCase useCase = new AdicionaContaUseCase();
+                    useCase.Execute(valor, valorPlanoContas);
+                }
+                if (cbTipoItem.SelectedItem == "Historico")
+                {
+                    AdicionaCodigoHistoricoUseCase useCase = new AdicionaCodigoHistoricoUseCase();
+                    useCase.Execute(valor);
+                }
+                if (cbTipoItem.SelectedItem == "Complemento")
+                {
+                    AdicionaComplementoUseCase useCase = new AdicionaComplementoUseCase();
+                    useCase.Execute(valor);
+                }
             }
-            if (cbTipoItem.SelectedItem == "Historico")
+            catch (Exception ex)
             {
-                AdicionaCodigoHistoricoUseCase useCase = new AdicionaCodigoHistoricoUseCase();
-                useCase.Execute(valor);
+                MessageBox.Show(ex.Message);
             }
-            if (cbTipoItem.SelectedItem == "Complemento")
+            finally
             {
-                AdicionaComplementoUseCase useCase = new AdicionaComplementoUseCase();
-                useCase.Execute(valor);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
+
         }
 
         private void cbTipoItem_SelectedIndexChanged(object sender, EventArgs e)
@@ -67,6 +81,12 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                 tbPlanoContas.Enabled = false;
                 tbPlanoContas.PlaceholderText = "Plano de contas não necessário para complemento";
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }
