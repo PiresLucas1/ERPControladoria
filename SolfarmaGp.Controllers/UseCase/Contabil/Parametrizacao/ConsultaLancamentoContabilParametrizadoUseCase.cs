@@ -5,7 +5,7 @@ namespace SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao
 {
     public class ConsultaLancamentoContabilParametrizadoUseCase
     {
-        public async Task<DataTable> Execute()
+        public async Task<DataTable> Execute(int codColigada = 0)
         {
             ConsultaLancamentoContabilParametrizado repositorio = new ConsultaLancamentoContabilParametrizado();
             DataTable resultado = await repositorio.Execute();

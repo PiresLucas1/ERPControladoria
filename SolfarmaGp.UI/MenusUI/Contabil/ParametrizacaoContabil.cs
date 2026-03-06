@@ -18,13 +18,14 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
         {
             InitializeComponent();
             cbTipoPesquisa.Items.AddRange(new object[] {
-                "Conta Débito",
-                "Conta Crédito",
-                "Histórico",
-                "Descrição Complemento",
+                "Cod. Conta Debito",
+                "Cod. Conta Credito",
+                "Cod. Histórico",
+                "Complemento",
                 "Descrição Extrato",
                 "Filial"
-            });            
+            });
+            cbColigada.Items.AddRange(new object[] { 10 });
         }
         private async void btnAddItem_Click(object sender, EventArgs e)
         {
@@ -34,10 +35,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                 adicionarItemParametro.StartPosition = FormStartPosition.CenterParent;
                 DialogResult resultado = adicionarItemParametro.ShowDialog(this);
 
-                if(resultado == DialogResult.Cancel)
+                if (resultado == DialogResult.Cancel)
                 {
                     return;
-                }if(resultado == DialogResult.OK)
+                }
+                if (resultado == DialogResult.OK)
                 {
                     await CarregaTela();
                 }
@@ -49,10 +51,10 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             await CarregaTela();
 
         }
-        public async Task<DataTable> AtualizarDataGrid()
+        public async Task<DataTable> AtualizarDataGrid(int codcoligada = 0)
         {
             ConsultaLancamentoContabilParametrizadoUseCase usecase = new ConsultaLancamentoContabilParametrizadoUseCase();
-            DataTable dt = await usecase.Execute();
+            DataTable dt = await usecase.Execute(codcoligada);
             return dt;
         }
 
@@ -66,7 +68,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                 cbCodigoReduzidoDebito.ValueMember = "label";
             }
             var cbCodigoReduzidoCredito = new DataGridViewComboBoxCell();
-            if(cbContaCotabil.Count > 0)
+            if (cbContaCotabil.Count > 0)
             {
                 cbCodigoReduzidoCredito.DataSource = cbContaCotabil;
                 cbCodigoReduzidoCredito.DisplayMember = "valor";
@@ -75,7 +77,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             }
 
             var cbCodigoHistorico = new DataGridViewComboBoxCell();
-            if(cbContaCotabil.Count   > 0)
+            if (cbContaCotabil.Count > 0)
             {
 
                 cbCodigoHistorico.DataSource = cbHistorico;
@@ -112,17 +114,17 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             cbContaCotabil = result
                 .Select(x => new dtoObjetoComboBoxInteface
                 {
-                    label= x.label,
+                    label = x.label,
                     valor = x.valor
                 })
                 .ToList();
-            
+
         }
         public async Task CarregaCodigoHistorico()
         {
             ConsultaCodigoHistorioUseCase usecase = new ConsultaCodigoHistorioUseCase();
             var result = await usecase.Execute();
-            cbHistorico =  result
+            cbHistorico = result
                 .Select(x => new dtoObjetoComboBoxInteface
                 {
                     label = x.label,
@@ -135,7 +137,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
         {
             ConsultaComplementoUseCase usecase = new ConsultaComplementoUseCase();
             var result = await usecase.Execute();
-            cbCodComplemento =  result
+            cbCodComplemento = result
                 .Select(x => new dtoObjetoComboBoxInteface
                 {
                     label = x.label,
@@ -143,7 +145,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                 })
                 .ToList();
         }
-        
+
         public async Task CarregaTela()
         {
             //carrega as informação para o cb de inserção
@@ -163,14 +165,65 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             {
                 row.ReadOnly = true;
             }
+            tbCount.Text = dt.Rows.Count.ToString();
         }
-
-
-
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
-            
+            DataTable dt = (DataTable)dvgParametrizacao.DataSource;
+
+            string valorPesquisa = tbValorPesquisa.Text;
+            string valorFiltro = cbTipoPesquisa.Text;
+
+            if (string.IsNullOrEmpty(valorFiltro))
+            {
+                dvgParametrizacao.DataSource = dt;
+                return;
+            }
+            valorPesquisa = valorPesquisa.Replace("'", "''");
+            DataView dv = new DataView(dt);
+            dv.RowFilter = $"{valorFiltro} LIKE '%{valorPesquisa}%'";
+
+            dvgParametrizacao.DataSource = dv;
+        }
+
+        private async void cbColigada_SelectedValueChanged(object sender, EventArgs e)
+        {
+            int valorCodColigada = Convert.ToInt32(cbColigada.SelectedValue.ToString());
+            await AtualizarDataGrid(valorCodColigada);
+
+        }
+
+        private async void btnAdicionaLinha_Click(object sender, EventArgs e)
+        {
+            dvgParametrizacao.EndEdit();
+
+            DataGridViewRow novaLinha = dvgParametrizacao.CurrentRow;
+
+            var contaDebito = novaLinha.Cells["Cod. Conta Debito"].Value?.ToString();
+            var contaCredito = novaLinha.Cells["Cod. Conta Credito"].Value?.ToString();
+            var codHistorico = novaLinha.Cells["Cod. Historico"].Value?.ToString();
+            var complemento = novaLinha.Cells["Complemento"].Value?.ToString();
+            var extrato = novaLinha.Cells["Descricão Extrato"].Value?.ToString();
+            var filial = novaLinha.Cells["Filial"].Value?.ToString();
+            var coligada = novaLinha.Cells["Cod. Coligada"].Value?.ToString();
+
+            DtoLancamentoNovo novoLancamento = new DtoLancamentoNovo{
+                IDContaContabilDebito= Convert.ToInt32(contaDebito),
+                IDContaContabilCredito = Convert.ToInt32(contaCredito),
+                IDHistorico = Convert.ToInt32(codHistorico),
+                IDComplemento = Convert.ToInt32(complemento),
+                DescricaoExtrato = extrato,
+                Filial = Convert.ToInt32(filial),
+                CodColigada = Convert.ToInt32(coligada)
+
+            };
+
+            AdicionaLancamentoParametrizadoUseCase usecase = new AdicionaLancamentoParametrizadoUseCase();
+            await usecase.Execute(novoLancamento);
+            await CarregaTela();
+
+
         }
     }
 }

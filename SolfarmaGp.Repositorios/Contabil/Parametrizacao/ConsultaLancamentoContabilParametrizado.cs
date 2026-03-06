@@ -6,12 +6,13 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
 {
     public class ConsultaLancamentoContabilParametrizado
     {
-        public async Task<DataTable> Execute()
+        public async Task<DataTable> Execute(int codColigada = 0)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
             try
             {
+
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
                     using (SqlCommand cmd = new SqlCommand("uspContabilConferenciaRecebimentosLancamentosParametrizados", conn))
@@ -23,6 +24,12 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
                         cmd.Parameters.AddWithValue("@INvchDescricaoComplemento", DBNull.Value);
                         cmd.Parameters.AddWithValue("@INvchDescricaoExtrato", DBNull.Value);
                         cmd.Parameters.AddWithValue("@INintFilial", DBNull.Value);
+                        if (codColigada == 0)                        
+                            cmd.Parameters.AddWithValue("@INintCodColigada", DBNull.Value);                        
+                        else                        
+                            cmd.Parameters.AddWithValue("@INintCodColigada", codColigada);
+                        
+
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             tabela.Load(reader);

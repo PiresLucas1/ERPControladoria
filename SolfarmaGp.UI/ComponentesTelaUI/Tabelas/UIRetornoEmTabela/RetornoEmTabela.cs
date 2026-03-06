@@ -56,5 +56,19 @@ namespace SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void btnCopiaTabela_Click(object sender, EventArgs e)
+        {
+            dataGridRetorno.SelectAll();
+            dataGridRetorno.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
+
+            DataObject dataObj = dataGridRetorno.GetClipboardContent();
+
+            if (dataObj != null)
+            {
+                Clipboard.SetDataObject(dataObj);
+                MessageBox.Show("Dados copiados! Agora cole no Excel (CTRL + V).");
+            }
+        }
     }
 }

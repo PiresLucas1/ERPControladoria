@@ -32,6 +32,7 @@
             button1 = new Button();
             txtBoxCount = new TextBox();
             dataGridRetorno = new System.Windows.Forms.DataGridView();
+            btnCopiaTabela = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridRetorno).BeginInit();
             SuspendLayout();
             // 
@@ -67,12 +68,23 @@
             dataGridRetorno.Size = new Size(949, 567);
             dataGridRetorno.TabIndex = 3;
             // 
+            // btnCopiaTabela
+            // 
+            btnCopiaTabela.Location = new Point(684, 626);
+            btnCopiaTabela.Name = "btnCopiaTabela";
+            btnCopiaTabela.Size = new Size(140, 44);
+            btnCopiaTabela.TabIndex = 4;
+            btnCopiaTabela.Text = "Copia tabela";
+            btnCopiaTabela.UseVisualStyleBackColor = true;
+            btnCopiaTabela.Click += btnCopiaTabela_Click;
+            // 
             // RetornoEmTabela
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ButtonFace;
             ClientSize = new Size(971, 692);
+            Controls.Add(btnCopiaTabela);
             Controls.Add(dataGridRetorno);
             Controls.Add(txtBoxCount);
             Controls.Add(button1);
@@ -92,5 +104,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtBoxCount;
         private System.Windows.Forms.DataGridView dataGridRetorno;
+        private Button btnCopiaTabela;
     }
 }

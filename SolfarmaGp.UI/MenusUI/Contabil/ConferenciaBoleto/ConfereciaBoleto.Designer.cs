@@ -30,6 +30,8 @@
         {
             btnImportarArquivo = new Button();
             gpHeader = new GroupBox();
+            lbCodPessoa = new Label();
+            tbCodPessoa = new TextBox();
             lbFilial = new Label();
             tbFilial = new TextBox();
             lbBanco = new Label();
@@ -48,6 +50,8 @@
             tbBaseImportada = new TabPage();
             tbBaseConferencia = new TabPage();
             dvgConferencia = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            btnGeraLote = new Button();
+            btnVisualiza = new Button();
             gpHeader.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRelacaoBoletos).BeginInit();
@@ -70,6 +74,8 @@
             // gpHeader
             // 
             gpHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpHeader.Controls.Add(lbCodPessoa);
+            gpHeader.Controls.Add(tbCodPessoa);
             gpHeader.Controls.Add(lbFilial);
             gpHeader.Controls.Add(tbFilial);
             gpHeader.Controls.Add(lbBanco);
@@ -85,6 +91,22 @@
             gpHeader.TabIndex = 1;
             gpHeader.TabStop = false;
             gpHeader.Text = "Geral";
+            // 
+            // lbCodPessoa
+            // 
+            lbCodPessoa.AutoSize = true;
+            lbCodPessoa.Location = new Point(378, 27);
+            lbCodPessoa.Name = "lbCodPessoa";
+            lbCodPessoa.Size = new Size(87, 20);
+            lbCodPessoa.TabIndex = 14;
+            lbCodPessoa.Text = "Cod. Pessoa";
+            // 
+            // tbCodPessoa
+            // 
+            tbCodPessoa.Location = new Point(378, 51);
+            tbCodPessoa.Name = "tbCodPessoa";
+            tbCodPessoa.Size = new Size(111, 27);
+            tbCodPessoa.TabIndex = 13;
             // 
             // lbFilial
             // 
@@ -113,6 +135,7 @@
             // 
             // btnConferencia
             // 
+            btnConferencia.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnConferencia.Location = new Point(1179, 156);
             btnConferencia.Name = "btnConferencia";
             btnConferencia.Size = new Size(138, 29);
@@ -136,7 +159,7 @@
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(cbFiltro);
             groupBox1.Controls.Add(txtFiltroTipo);
-            groupBox1.Location = new Point(495, 14);
+            groupBox1.Location = new Point(647, 23);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(369, 171);
             groupBox1.TabIndex = 7;
@@ -261,11 +284,35 @@
             dvgConferencia.Size = new Size(1306, 517);
             dvgConferencia.TabIndex = 0;
             // 
+            // btnGeraLote
+            // 
+            btnGeraLote.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnGeraLote.Location = new Point(1165, 788);
+            btnGeraLote.Name = "btnGeraLote";
+            btnGeraLote.Size = new Size(153, 38);
+            btnGeraLote.TabIndex = 10;
+            btnGeraLote.Text = "Gerar lotes";
+            btnGeraLote.UseVisualStyleBackColor = true;
+            btnGeraLote.Click += btnGeraLote_Click;
+            // 
+            // btnVisualiza
+            // 
+            btnVisualiza.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnVisualiza.Location = new Point(988, 788);
+            btnVisualiza.Name = "btnVisualiza";
+            btnVisualiza.Size = new Size(153, 38);
+            btnVisualiza.TabIndex = 11;
+            btnVisualiza.Text = "Visualizar";
+            btnVisualiza.UseVisualStyleBackColor = true;
+            btnVisualiza.Click += btnVisualiza_Click;
+            // 
             // ConfereciaBoleto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1347, 838);
+            Controls.Add(btnVisualiza);
+            Controls.Add(btnGeraLote);
             Controls.Add(tbControlBase);
             Controls.Add(gpHeader);
             Name = "ConfereciaBoleto";
@@ -304,5 +351,9 @@
         private Label lbFilial;
         private TextBox tbFilial;
         private Button btnFiltrar;
+        private Label lbCodPessoa;
+        private TextBox tbCodPessoa;
+        private Button btnGeraLote;
+        private Button btnVisualiza;
     }
 }

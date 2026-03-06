@@ -31,15 +31,17 @@
             dvgParametrizacao = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             btnAddItem = new Button();
             btnAdicionaLinha = new Button();
-            textBox1 = new TextBox();
+            tbCount = new TextBox();
             cbTipoPesquisa = new ComboBox();
-            groupBox1 = new GroupBox();
+            gpGeral = new GroupBox();
+            lbCodColigada = new Label();
+            cbColigada = new ComboBox();
             btnFiltrar = new Button();
             lbValor = new Label();
             lbCbTipoFiltro = new Label();
             tbValorPesquisa = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dvgParametrizacao).BeginInit();
-            groupBox1.SuspendLayout();
+            gpGeral.SuspendLayout();
             SuspendLayout();
             // 
             // dvgParametrizacao
@@ -74,39 +76,60 @@
             btnAdicionaLinha.TabIndex = 2;
             btnAdicionaLinha.Text = "Incluir Linha";
             btnAdicionaLinha.UseVisualStyleBackColor = true;
+            btnAdicionaLinha.Click += btnAdicionaLinha_Click;
             // 
-            // textBox1
+            // tbCount
             // 
-            textBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            textBox1.BackColor = SystemColors.ScrollBar;
-            textBox1.Enabled = false;
-            textBox1.Location = new Point(12, 857);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(122, 27);
-            textBox1.TabIndex = 3;
+            tbCount.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            tbCount.BackColor = SystemColors.ScrollBar;
+            tbCount.Enabled = false;
+            tbCount.Location = new Point(12, 857);
+            tbCount.Name = "tbCount";
+            tbCount.Size = new Size(122, 27);
+            tbCount.TabIndex = 3;
             // 
             // cbTipoPesquisa
             // 
             cbTipoPesquisa.FormattingEnabled = true;
-            cbTipoPesquisa.Location = new Point(18, 66);
+            cbTipoPesquisa.Location = new Point(6, 138);
             cbTipoPesquisa.Name = "cbTipoPesquisa";
             cbTipoPesquisa.Size = new Size(131, 28);
             cbTipoPesquisa.TabIndex = 4;
             // 
-            // groupBox1
+            // gpGeral
             // 
-            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            groupBox1.Controls.Add(btnFiltrar);
-            groupBox1.Controls.Add(lbValor);
-            groupBox1.Controls.Add(lbCbTipoFiltro);
-            groupBox1.Controls.Add(tbValorPesquisa);
-            groupBox1.Controls.Add(cbTipoPesquisa);
-            groupBox1.Location = new Point(12, 12);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1133, 193);
-            groupBox1.TabIndex = 5;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
+            gpGeral.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpGeral.Controls.Add(lbCodColigada);
+            gpGeral.Controls.Add(cbColigada);
+            gpGeral.Controls.Add(btnFiltrar);
+            gpGeral.Controls.Add(lbValor);
+            gpGeral.Controls.Add(lbCbTipoFiltro);
+            gpGeral.Controls.Add(tbValorPesquisa);
+            gpGeral.Controls.Add(cbTipoPesquisa);
+            gpGeral.Location = new Point(12, 12);
+            gpGeral.Name = "gpGeral";
+            gpGeral.Size = new Size(1133, 193);
+            gpGeral.TabIndex = 5;
+            gpGeral.TabStop = false;
+            gpGeral.Text = "Geral";
+            // 
+            // lbCodColigada
+            // 
+            lbCodColigada.AutoSize = true;
+            lbCodColigada.Location = new Point(6, 32);
+            lbCodColigada.Name = "lbCodColigada";
+            lbCodColigada.Size = new Size(72, 20);
+            lbCodColigada.TabIndex = 10;
+            lbCodColigada.Text = "Coligada:";
+            // 
+            // cbColigada
+            // 
+            cbColigada.FormattingEnabled = true;
+            cbColigada.Location = new Point(6, 65);
+            cbColigada.Name = "cbColigada";
+            cbColigada.Size = new Size(131, 28);
+            cbColigada.TabIndex = 9;
+            cbColigada.SelectedValueChanged += cbColigada_SelectedValueChanged;
             // 
             // btnFiltrar
             // 
@@ -122,7 +145,7 @@
             // lbValor
             // 
             lbValor.AutoSize = true;
-            lbValor.Location = new Point(18, 112);
+            lbValor.Location = new Point(160, 111);
             lbValor.Name = "lbValor";
             lbValor.Size = new Size(126, 20);
             lbValor.TabIndex = 7;
@@ -131,7 +154,7 @@
             // lbCbTipoFiltro
             // 
             lbCbTipoFiltro.AutoSize = true;
-            lbCbTipoFiltro.Location = new Point(18, 34);
+            lbCbTipoFiltro.Location = new Point(6, 106);
             lbCbTipoFiltro.Name = "lbCbTipoFiltro";
             lbCbTipoFiltro.Size = new Size(125, 20);
             lbCbTipoFiltro.TabIndex = 6;
@@ -139,7 +162,7 @@
             // 
             // tbValorPesquisa
             // 
-            tbValorPesquisa.Location = new Point(18, 139);
+            tbValorPesquisa.Location = new Point(160, 138);
             tbValorPesquisa.Name = "tbValorPesquisa";
             tbValorPesquisa.Size = new Size(173, 27);
             tbValorPesquisa.TabIndex = 5;
@@ -149,8 +172,8 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1160, 910);
-            Controls.Add(groupBox1);
-            Controls.Add(textBox1);
+            Controls.Add(gpGeral);
+            Controls.Add(tbCount);
             Controls.Add(btnAdicionaLinha);
             Controls.Add(btnAddItem);
             Controls.Add(dvgParametrizacao);
@@ -158,8 +181,8 @@
             Text = "ParametrizacaoContabil";
             Load += ParametrizacaoContabil_Load;
             ((System.ComponentModel.ISupportInitialize)dvgParametrizacao).EndInit();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            gpGeral.ResumeLayout(false);
+            gpGeral.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -170,12 +193,14 @@
         private Label label1;
         private Button btnAddItem;
         private Button btnAdicionaLinha;
-        private TextBox textBox1;
+        private TextBox tbCount;
         private ComboBox cbTipoPesquisa;
-        private GroupBox groupBox1;
+        private GroupBox gpGeral;
         private Label lbValor;
         private Label lbCbTipoFiltro;
         private TextBox tbValorPesquisa;
         private Button btnFiltrar;
+        private Label lbCodColigada;
+        private ComboBox cbColigada;
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
 namespace SolfarmaGp.Controllers.Utils.EnumerableToDateTable
 {
@@ -33,5 +28,27 @@ namespace SolfarmaGp.Controllers.Utils.EnumerableToDateTable
 
             return table;
         }
+        public static DataTable ListToDataTable<T>(List<T> items)
+        {
+            DataTable table = new DataTable(typeof(T).Name);
+
+            var props = typeof(T).GetProperties();
+
+            foreach (var prop in props)
+                table.Columns.Add(prop.Name, prop.PropertyType);
+
+            foreach (var item in items)
+            {
+                var values = new object[props.Length];
+
+                for (int i = 0; i < props.Length; i++)
+                    values[i] = props[i].GetValue(item);
+
+                table.Rows.Add(values);
+            }
+
+            return table;
+        }
     }
+
 }
