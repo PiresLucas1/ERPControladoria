@@ -111,7 +111,7 @@
             // lbFilial
             // 
             lbFilial.AutoSize = true;
-            lbFilial.Location = new Point(240, 133);
+            lbFilial.Location = new Point(378, 129);
             lbFilial.Name = "lbFilial";
             lbFilial.Size = new Size(43, 20);
             lbFilial.TabIndex = 12;
@@ -119,7 +119,7 @@
             // 
             // tbFilial
             // 
-            tbFilial.Location = new Point(240, 156);
+            tbFilial.Location = new Point(378, 152);
             tbFilial.Name = "tbFilial";
             tbFilial.Size = new Size(111, 27);
             tbFilial.TabIndex = 11;

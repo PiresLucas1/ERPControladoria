@@ -16,9 +16,10 @@ namespace SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.CodigoHistorico
             var retorno = dt.AsEnumerable()
                 .Select(row => new dtoObjetoComboBoxInteface
                 {
-                    label = row["IDHistorico"].ToString(),
-                    valor = row["CodigoHistorico"].ToString()
-                });
+                    valor = row.Field<int>("IDHistorico"),
+                    label = row.Field<string>("CodigoHistorico")
+                })
+                .ToList();
             return retorno;
         } 
     }

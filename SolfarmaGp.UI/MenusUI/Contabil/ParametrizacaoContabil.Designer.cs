@@ -51,10 +51,10 @@
             dvgParametrizacao.ColumnHeadersHeight = 29;
             dvgParametrizacao.Location = new Point(12, 211);
             dvgParametrizacao.Name = "dvgParametrizacao";
+            dvgParametrizacao.RowHeadersVisible = false;
             dvgParametrizacao.RowHeadersWidth = 51;
             dvgParametrizacao.Size = new Size(1133, 617);
             dvgParametrizacao.TabIndex = 0;
-            dvgParametrizacao.DefaultValuesNeeded += dvgParametrizacao_DefaultValuesNeeded;
             // 
             // btnAddItem
             // 

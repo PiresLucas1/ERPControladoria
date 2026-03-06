@@ -15,8 +15,8 @@ namespace SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Complemento
             var retorno = dt.AsEnumerable()
                 .Select(row => new dtoObjetoComboBoxInteface
                 {
-                    label = row["IDComplemento"].ToString(),
-                    valor = row["Descricao"].ToString()
+                    valor = row.Field<int>("IDComplemento"),
+                    label = row.Field<string>("Descricao").ToString()
                 });
  
             return retorno;

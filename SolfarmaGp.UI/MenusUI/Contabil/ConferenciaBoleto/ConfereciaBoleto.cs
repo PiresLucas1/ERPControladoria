@@ -131,13 +131,15 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
         {
             ConsultaLancamentoContabilParametrizadoUseCase usecase = new ConsultaLancamentoContabilParametrizadoUseCase();
             DataTable dtParametros = await usecase.Execute(codColigada);
+            string coligada = cbBanco.Text;
 
             var resultado = from baseImportada in dt.AsEnumerable()
                             from baseParametros in dtParametros.AsEnumerable()
                             let palavras = baseParametros.Field<string>("Descricão Extrato")
                                            .Split(' ', StringSplitOptions.RemoveEmptyEntries)
                             where
-                                baseImportada.Field<string>("TIPO").ToLower() == "c"
+                                baseImportada.Field<string>("Cod. Coligada").ToLower() == coligada
+                                && baseImportada.Field<string>("TIPO").ToLower() == "c"
                                 && baseParametros.Field<int>("Filial") == filial
                                 && palavras.All(p =>
                                             baseImportada.Field<string>("HISTÓRICO")
@@ -210,7 +212,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             {
                 saveFileDialog.Filter = "Arquivo de Importação (*.txt)|*.txt";
                 saveFileDialog.Title = "Salvar arquivo de conciliação";
-                saveFileDialog.FileName = $"Conciliação {tbCodPessoa.Text}";
+                saveFileDialog.FileName = $"Conciliação Coligada {cbBanco.Text} - Filial {tbFilial.Text}";
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {

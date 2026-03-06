@@ -15,7 +15,7 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("uspContabilConferenciaRecebimentosLancamentosParametrizados", conn))
+                    using (SqlCommand cmd = new SqlCommand("uspContabilConferenciaRecebimentosLancamentosParametrizadosDados", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@INchCodigoContaDebito", DBNull.Value);

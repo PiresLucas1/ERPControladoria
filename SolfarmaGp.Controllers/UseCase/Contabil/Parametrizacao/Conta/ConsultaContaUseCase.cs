@@ -15,8 +15,8 @@ namespace SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Conta
             var retorno = dt.AsEnumerable()
                 .Select(row => new dtoObjetoComboBoxInteface
                 {
-                    label = row["IDContaContabil"].ToString(),
-                    valor = row["CodigoConta"].ToString()
+                    valor = row.Field<int>("IDContaContabil"),
+                    label = row.Field<string>("CodigoConta").ToString()
                 });
             return retorno;
         }

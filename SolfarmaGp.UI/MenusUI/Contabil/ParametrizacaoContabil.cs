@@ -17,15 +17,26 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
         public ParametrizacaoContabil()
         {
             InitializeComponent();
+
+            dvgParametrizacao.DataError += (s, e) =>
+            {
+                e.ThrowException = false;
+            };
+
             cbTipoPesquisa.Items.AddRange(new object[] {
                 "Cod. Conta Debito",
                 "Cod. Conta Credito",
-                "Cod. Histórico",
+                "Cod. Historico",
                 "Complemento",
                 "Descrição Extrato",
                 "Filial"
             });
             cbColigada.Items.AddRange(new object[] { 10 });
+            dvgParametrizacao.CurrentCellDirtyStateChanged += (s, e) =>
+            {
+                if (dvgParametrizacao.IsCurrentCellDirty)
+                    dvgParametrizacao.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            };
         }
         private async void btnAddItem_Click(object sender, EventArgs e)
         {
@@ -56,57 +67,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             ConsultaLancamentoContabilParametrizadoUseCase usecase = new ConsultaLancamentoContabilParametrizadoUseCase();
             DataTable dt = await usecase.Execute(codcoligada);
             return dt;
-        }
-
-        private void dvgParametrizacao_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
-        {
-            var cbCodigoReduzidoDebito = new DataGridViewComboBoxCell();
-            if (cbContaCotabil.Count > 0)
-            {
-                cbCodigoReduzidoDebito.DataSource = cbContaCotabil;
-                cbCodigoReduzidoDebito.DisplayMember = "valor";
-                cbCodigoReduzidoDebito.ValueMember = "label";
-            }
-            var cbCodigoReduzidoCredito = new DataGridViewComboBoxCell();
-            if (cbContaCotabil.Count > 0)
-            {
-                cbCodigoReduzidoCredito.DataSource = cbContaCotabil;
-                cbCodigoReduzidoCredito.DisplayMember = "valor";
-                cbCodigoReduzidoCredito.ValueMember = "label";
-
-            }
-
-            var cbCodigoHistorico = new DataGridViewComboBoxCell();
-            if (cbContaCotabil.Count > 0)
-            {
-
-                cbCodigoHistorico.DataSource = cbHistorico;
-                cbCodigoHistorico.DisplayMember = "valor";
-                cbCodigoHistorico.ValueMember = "label";
-            }
-
-            var cbComplemento = new DataGridViewComboBoxCell();
-            if (cbCodComplemento.Count > 0)
-            {
-                cbComplemento.DataSource = cbCodComplemento;
-                cbComplemento.DisplayMember = "valor";
-                cbComplemento.ValueMember = "label";
-            }
-
-            var tbDescricaoExtrato = new DataGridViewTextBoxCell();
-
-            var cbFilial = new DataGridViewTextBoxCell();
-
-            e.Row.Cells["Cod. Conta Debito"] = cbCodigoReduzidoDebito;
-            e.Row.Cells["Cod. Conta Credito"] = cbCodigoReduzidoCredito;
-            e.Row.Cells["Cod. Historico"] = cbCodigoHistorico;
-            e.Row.Cells["Complemento"] = cbComplemento;
-            e.Row.Cells["Descricão Extrato"] = tbDescricaoExtrato;
-            e.Row.Cells["Filial"] = cbFilial;
-
-            e.Row.ReadOnly = false;
-            return;
-        }
+        }       
         public async Task CarregaCodigoReduzido()
         {
             ConsultaContaUseCase usecase = new ConsultaContaUseCase();
@@ -117,7 +78,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                     label = x.label,
                     valor = x.valor
                 })
-                .ToList();
+                .ToList();            
 
         }
         public async Task CarregaCodigoHistorico()
@@ -144,30 +105,39 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                     valor = x.valor
                 })
                 .ToList();
+            
         }
 
         public async Task CarregaTela()
         {
-            //carrega as informação para o cb de inserção
             await CarregaComplemento();
             await CarregaCodigoHistorico();
             await CarregaCodigoReduzido();
-            //carrega os dados do banco e preenche o datagrid
+
+            dvgParametrizacao.AutoGenerateColumns = false;
             dvgParametrizacao.AllowUserToAddRows = true;
+            dvgParametrizacao.RowHeadersVisible = false;
+            dvgParametrizacao.ReadOnly = false;
+            dvgParametrizacao.EditMode = DataGridViewEditMode.EditOnEnter;
+
+            dvgParametrizacao.Columns.Clear();
+            ConfigurarColunasCombo();
+
             DataTable dt = await AtualizarDataGrid();
             dvgParametrizacao.DataSource = dt;
+
             if (dt.Rows.Count <= 0)
             {
-                MessageBox.Show("Nenhum item parametrizado encontrado. Clique em 'Adicionar Item' para criar uma nova parametrização.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    "Nenhum item parametrizado encontrado. Clique em 'Adicionar Item' para criar uma nova parametrização.",
+                    "Informação",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
                 return;
             }
-            foreach (DataGridViewRow row in dvgParametrizacao.Rows)
-            {
-                row.ReadOnly = true;
-            }
+
             tbCount.Text = dt.Rows.Count.ToString();
         }
-
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
             DataTable dt = (DataTable)dvgParametrizacao.DataSource;
@@ -196,7 +166,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
 
         private async void btnAdicionaLinha_Click(object sender, EventArgs e)
         {
-            dvgParametrizacao.EndEdit();
+            
 
             DataGridViewRow novaLinha = dvgParametrizacao.CurrentRow;
 
@@ -224,6 +194,93 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             await CarregaTela();
 
 
+        }
+        private void ConfigurarColunasCombo()
+        {
+            dvgParametrizacao.Columns.Clear();
+
+            var colDebito = new DataGridViewComboBoxColumn
+            {
+                HeaderText = "Conta Débito",
+                DataPropertyName = "Cod. Conta Debito",
+                DataSource = cbContaCotabil,
+                DisplayMember = "label",
+                ValueMember = "valor",
+                ValueType = typeof(int),
+                FlatStyle = FlatStyle.Flat,
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
+            };
+
+            var colCredito = new DataGridViewComboBoxColumn
+            {
+                HeaderText = "Conta Crédito",
+                DataPropertyName = "Cod. Conta Credito",
+                DataSource = cbContaCotabil,
+                DisplayMember = "label",
+                ValueMember = "valor",
+                ValueType = typeof(int),
+                FlatStyle = FlatStyle.Flat,
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
+            };
+
+            var colHistorico = new DataGridViewComboBoxColumn
+            {
+                HeaderText = "Histórico",
+                DataPropertyName = "Cod. Historico",
+                DataSource = cbHistorico,
+                DisplayMember = "label",
+                ValueMember = "valor",
+                ValueType = typeof(int),
+                FlatStyle = FlatStyle.Flat,
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
+            };
+
+            var colComplemento = new DataGridViewComboBoxColumn
+            {
+                HeaderText = "Complemento",
+                DataPropertyName = "Complemento",
+                DataSource = cbCodComplemento,
+                DisplayMember = "label",
+                ValueMember = "valor",
+                ValueType = typeof(int),
+                FlatStyle = FlatStyle.Flat,
+                DisplayStyle = DataGridViewComboBoxDisplayStyle.DropDownButton
+            };
+
+            var colDescricao = new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Descrição Extrato",
+                DataPropertyName = "Descricão Extrato"
+            };
+
+            var colFilial = new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Filial",
+                DataPropertyName = "Filial"
+            };
+
+            var colColigada = new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Cod. Coligada",
+                DataPropertyName = "Cod. Coligada"
+            };
+
+            var colBanco = new DataGridViewTextBoxColumn
+            {
+                HeaderText = "Cod. Banco",
+                DataPropertyName = "Cod. Banco"
+            };
+
+            dvgParametrizacao.Columns.AddRange(
+                colDebito,
+                colCredito,
+                colHistorico,
+                colComplemento,
+                colDescricao,
+                colFilial,
+                colColigada,
+                colBanco
+            );
         }
     }
 }
