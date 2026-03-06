@@ -111,11 +111,15 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             }
             if (cbBanco.SelectedItem == null)
             {
-                MessageBox.Show("Necessário selecionar banco"); return;
+                MessageBox.Show("Necessário selecionar coligada"); return;
             }
             if (dtProcesso.Rows.Count == 0)
             {
                 MessageBox.Show("Não foi possivel Localizar base importada"); return;
+            }
+            if(tbCodPessoa.Text.IsNullOrEmpty())
+            {
+                MessageBox.Show("Necessário informar o codigo da pessoa"); return;
             }
             var numberFilial = Convert.ToInt32(tbFilial.Text);
             var numberColigada = Convert.ToInt32(cbBanco.Text);

@@ -129,9 +129,9 @@
             lbBanco.AutoSize = true;
             lbBanco.Location = new Point(22, 133);
             lbBanco.Name = "lbBanco";
-            lbBanco.Size = new Size(134, 20);
+            lbBanco.Size = new Size(152, 20);
             lbBanco.TabIndex = 10;
-            lbBanco.Text = "Selecione o Banco:";
+            lbBanco.Text = "Selecione a Coligada:";
             // 
             // btnConferencia
             // 
