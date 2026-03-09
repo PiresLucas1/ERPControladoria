@@ -1,11 +1,13 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using OfficeOpenXml;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao;
+using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Banco;
 using SolfarmaGp.Controllers.Utils.EnumerableToDateTable;
 using SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela;
 using System.Collections;
 using System.Data;
 using System.Text;
+using static SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.ConsultaLancamentoContabilParametrizadoUseCase;
 
 namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 {
@@ -23,14 +25,16 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             public string ContaCompletaDebito { get; set; }
             public string ContaCompletaCredito { get; set; }
         }
+        public DataTable dtBancoIds = new DataTable();
         List<ConferenciaResultado> listaResultado { get; set; } = new List<ConferenciaResultado>();
 
         public ConfereciaBoleto()
         {
             InitializeComponent();
             ExcelPackage.License.SetNonCommercialPersonal("SolfarmaGP");
-            cbBanco.Items.Add(10);
+            cbColigada.Items.Add(10);
             cbFiltro.Items.AddRange(new string[] { "ContaDebito", "ContaCredito", "Complemento" });
+            cbBanco.DataSource = dtBancoIds;
         }
 
         private void btnImportarArquivo_Click(object sender, EventArgs e)
@@ -109,7 +113,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             {
                 MessageBox.Show("Necessário informar Filial"); return;
             }
-            if (cbBanco.SelectedItem == null)
+            if (cbColigada.SelectedItem == null)
             {
                 MessageBox.Show("Necessário selecionar coligada"); return;
             }
@@ -117,21 +121,30 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             {
                 MessageBox.Show("Não foi possivel Localizar base importada"); return;
             }
-            if(tbCodPessoa.Text.IsNullOrEmpty())
+            if (tbCodPessoa.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("Necessário informar o codigo da pessoa"); return;
             }
             var numberFilial = Convert.ToInt32(tbFilial.Text);
-            var numberColigada = Convert.ToInt32(cbBanco.Text);
-            await ExecutaConferencia(dtProcesso, numberFilial, numberColigada);
+            var numberColigada = Convert.ToInt32(cbColigada.Text);
+            var numberBanco = Convert.ToInt32(cbBanco.Text);
+            await ExecutaConferencia(dtProcesso, numberFilial, numberColigada, numberBanco);
 
 
         }
-        public async Task ExecutaConferencia(DataTable dt, int filial, int codColigada)
+        public async Task ExecutaConferencia(DataTable dt, int filial, int codColigada, int banco)
         {
             ConsultaLancamentoContabilParametrizadoUseCase usecase = new ConsultaLancamentoContabilParametrizadoUseCase();
-            DataTable dtParametros = await usecase.Execute(codColigada);
-            string coligada = cbBanco.Text;
+            ObjetoPesquisaParametrosContabil objPesquisa = new ObjetoPesquisaParametrosContabil
+            {
+                CodColigada = codColigada,
+                filial = filial,
+                banco = banco,
+                reduzidoCredito = 0,
+                reduzidoDebito = 0
+            };
+            DataTable dtParametros = await usecase.Execute(objPesquisa);
+            string coligada = cbColigada.Text;
 
             var resultado = from baseImportada in dt.AsEnumerable()
                             from baseParametros in dtParametros.AsEnumerable()
@@ -212,11 +225,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             {
                 saveFileDialog.Filter = "Arquivo de Importação (*.txt)|*.txt";
                 saveFileDialog.Title = "Salvar arquivo de conciliação";
-                saveFileDialog.FileName = $"Conciliação Coligada {cbBanco.Text} - Filial {tbFilial.Text}";
+                saveFileDialog.FileName = $"Conciliação Coligada {cbColigada.Text} - Filial {tbFilial.Text}";
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Encoding encoding = Encoding.GetEncoding(1252);              
+                    Encoding encoding = Encoding.GetEncoding(1252);
 
                     File.WriteAllText(saveFileDialog.FileName, resultado, new UTF8Encoding(false));
 
@@ -342,6 +355,13 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
         {
             DataTable dt = EnumerableToDataTable.ListToDataTable(lista);
             return dt;
+        }
+
+        private async void ConfereciaBoleto_Load(object sender, EventArgs e)
+        {
+            BuscaBancoIDsUseCase useCase = new BuscaBancoIDsUseCase();
+            DataTable bancoIds = await useCase.Execute();
+            dtBancoIds =  bancoIds;  
         }
     }
 }

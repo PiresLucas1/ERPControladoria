@@ -36,7 +36,7 @@
             tbFilial = new TextBox();
             lbBanco = new Label();
             btnConferencia = new Button();
-            cbBanco = new ComboBox();
+            cbColigada = new ComboBox();
             groupBox1 = new GroupBox();
             btnFiltrar = new Button();
             tbValorPesquisa = new TextBox();
@@ -52,6 +52,8 @@
             dvgConferencia = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             btnGeraLote = new Button();
             btnVisualiza = new Button();
+            cbBanco = new ComboBox();
+            laBanco = new Label();
             gpHeader.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRelacaoBoletos).BeginInit();
@@ -74,13 +76,15 @@
             // gpHeader
             // 
             gpHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpHeader.Controls.Add(laBanco);
+            gpHeader.Controls.Add(cbBanco);
             gpHeader.Controls.Add(lbCodPessoa);
             gpHeader.Controls.Add(tbCodPessoa);
             gpHeader.Controls.Add(lbFilial);
             gpHeader.Controls.Add(tbFilial);
             gpHeader.Controls.Add(lbBanco);
             gpHeader.Controls.Add(btnConferencia);
-            gpHeader.Controls.Add(cbBanco);
+            gpHeader.Controls.Add(cbColigada);
             gpHeader.Controls.Add(groupBox1);
             gpHeader.Controls.Add(lbNomaArquivo);
             gpHeader.Controls.Add(txtFileName);
@@ -95,7 +99,7 @@
             // lbCodPessoa
             // 
             lbCodPessoa.AutoSize = true;
-            lbCodPessoa.Location = new Point(378, 27);
+            lbCodPessoa.Location = new Point(457, 27);
             lbCodPessoa.Name = "lbCodPessoa";
             lbCodPessoa.Size = new Size(87, 20);
             lbCodPessoa.TabIndex = 14;
@@ -103,7 +107,7 @@
             // 
             // tbCodPessoa
             // 
-            tbCodPessoa.Location = new Point(378, 51);
+            tbCodPessoa.Location = new Point(457, 51);
             tbCodPessoa.Name = "tbCodPessoa";
             tbCodPessoa.Size = new Size(111, 27);
             tbCodPessoa.TabIndex = 13;
@@ -111,7 +115,7 @@
             // lbFilial
             // 
             lbFilial.AutoSize = true;
-            lbFilial.Location = new Point(378, 129);
+            lbFilial.Location = new Point(457, 129);
             lbFilial.Name = "lbFilial";
             lbFilial.Size = new Size(43, 20);
             lbFilial.TabIndex = 12;
@@ -119,7 +123,7 @@
             // 
             // tbFilial
             // 
-            tbFilial.Location = new Point(378, 152);
+            tbFilial.Location = new Point(457, 152);
             tbFilial.Name = "tbFilial";
             tbFilial.Size = new Size(111, 27);
             tbFilial.TabIndex = 11;
@@ -144,13 +148,13 @@
             btnConferencia.UseVisualStyleBackColor = true;
             btnConferencia.Click += btnConferencia_Click;
             // 
-            // cbBanco
+            // cbColigada
             // 
-            cbBanco.FormattingEnabled = true;
-            cbBanco.Location = new Point(22, 156);
-            cbBanco.Name = "cbBanco";
-            cbBanco.Size = new Size(174, 28);
-            cbBanco.TabIndex = 8;
+            cbColigada.FormattingEnabled = true;
+            cbColigada.Location = new Point(22, 156);
+            cbColigada.Name = "cbColigada";
+            cbColigada.Size = new Size(174, 28);
+            cbColigada.TabIndex = 8;
             // 
             // groupBox1
             // 
@@ -306,6 +310,23 @@
             btnVisualiza.UseVisualStyleBackColor = true;
             btnVisualiza.Click += btnVisualiza_Click;
             // 
+            // cbBanco
+            // 
+            cbBanco.FormattingEnabled = true;
+            cbBanco.Location = new Point(223, 156);
+            cbBanco.Name = "cbBanco";
+            cbBanco.Size = new Size(174, 28);
+            cbBanco.TabIndex = 15;
+            // 
+            // laBanco
+            // 
+            laBanco.AutoSize = true;
+            laBanco.Location = new Point(223, 129);
+            laBanco.Name = "laBanco";
+            laBanco.Size = new Size(134, 20);
+            laBanco.TabIndex = 16;
+            laBanco.Text = "Selecione o Banco:";
+            // 
             // ConfereciaBoleto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -317,6 +338,7 @@
             Controls.Add(gpHeader);
             Name = "ConfereciaBoleto";
             Text = "ConfereciaBoleto";
+            Load += ConfereciaBoleto_Load;
             gpHeader.ResumeLayout(false);
             gpHeader.PerformLayout();
             groupBox1.ResumeLayout(false);
@@ -344,7 +366,7 @@
         private Label label1;
         private TextBox tbValorPesquisa;
         private Button btnConferencia;
-        private ComboBox cbBanco;
+        private ComboBox cbColigada;
         private GroupBox groupBox1;
         private Label lbBanco;
         private ComponentesTelaUI.DataGridView.MyDataGridView dvgConferencia;
@@ -355,5 +377,7 @@
         private TextBox tbCodPessoa;
         private Button btnGeraLote;
         private Button btnVisualiza;
+        private Label laBanco;
+        private ComboBox cbBanco;
     }
 }

@@ -30,16 +30,20 @@
         {
             dvgParametrizacao = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             btnAddItem = new Button();
-            btnAdicionaLinha = new Button();
             tbCount = new TextBox();
-            cbTipoPesquisa = new ComboBox();
             gpGeral = new GroupBox();
+            this.tbReduzidoCredito = new TextBox();
+            tbReduzidoDebito = new TextBox();
+            lbCredito = new Label();
+            blContaDebito = new Label();
+            lbBanco = new Label();
+            tbBanco = new TextBox();
+            tbFilial = new TextBox();
             lbCodColigada = new Label();
             cbColigada = new ComboBox();
             btnFiltrar = new Button();
-            lbValor = new Label();
-            lbCbTipoFiltro = new Label();
-            tbValorPesquisa = new TextBox();
+            lbFilial = new Label();
+            btnSalvaParametros = new Button();
             ((System.ComponentModel.ISupportInitialize)dvgParametrizacao).BeginInit();
             gpGeral.SuspendLayout();
             SuspendLayout();
@@ -55,28 +59,19 @@
             dvgParametrizacao.RowHeadersWidth = 51;
             dvgParametrizacao.Size = new Size(1133, 617);
             dvgParametrizacao.TabIndex = 0;
+            dvgParametrizacao.CellDoubleClick += dvgParametrizacao_CellDoubleClick;
+            dvgParametrizacao.CellEndEdit += dvgParametrizacao_CellEndEdit;
             // 
             // btnAddItem
             // 
             btnAddItem.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnAddItem.Location = new Point(345, 851);
+            btnAddItem.Location = new Point(188, 851);
             btnAddItem.Name = "btnAddItem";
             btnAddItem.Size = new Size(131, 39);
             btnAddItem.TabIndex = 1;
             btnAddItem.Text = "Adicionar Item";
             btnAddItem.UseVisualStyleBackColor = true;
             btnAddItem.Click += btnAddItem_Click;
-            // 
-            // btnAdicionaLinha
-            // 
-            btnAdicionaLinha.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnAdicionaLinha.Location = new Point(172, 851);
-            btnAdicionaLinha.Name = "btnAdicionaLinha";
-            btnAdicionaLinha.Size = new Size(131, 39);
-            btnAdicionaLinha.TabIndex = 2;
-            btnAdicionaLinha.Text = "Incluir Linha";
-            btnAdicionaLinha.UseVisualStyleBackColor = true;
-            btnAdicionaLinha.Click += btnAdicionaLinha_Click;
             // 
             // tbCount
             // 
@@ -88,24 +83,20 @@
             tbCount.Size = new Size(122, 27);
             tbCount.TabIndex = 3;
             // 
-            // cbTipoPesquisa
-            // 
-            cbTipoPesquisa.FormattingEnabled = true;
-            cbTipoPesquisa.Location = new Point(6, 138);
-            cbTipoPesquisa.Name = "cbTipoPesquisa";
-            cbTipoPesquisa.Size = new Size(131, 28);
-            cbTipoPesquisa.TabIndex = 4;
-            // 
             // gpGeral
             // 
             gpGeral.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpGeral.Controls.Add(this.tbReduzidoCredito);
+            gpGeral.Controls.Add(tbReduzidoDebito);
+            gpGeral.Controls.Add(lbCredito);
+            gpGeral.Controls.Add(blContaDebito);
+            gpGeral.Controls.Add(lbBanco);
+            gpGeral.Controls.Add(tbBanco);
+            gpGeral.Controls.Add(tbFilial);
             gpGeral.Controls.Add(lbCodColigada);
             gpGeral.Controls.Add(cbColigada);
             gpGeral.Controls.Add(btnFiltrar);
-            gpGeral.Controls.Add(lbValor);
-            gpGeral.Controls.Add(lbCbTipoFiltro);
-            gpGeral.Controls.Add(tbValorPesquisa);
-            gpGeral.Controls.Add(cbTipoPesquisa);
+            gpGeral.Controls.Add(lbFilial);
             gpGeral.Location = new Point(12, 12);
             gpGeral.Name = "gpGeral";
             gpGeral.Size = new Size(1133, 193);
@@ -113,10 +104,65 @@
             gpGeral.TabStop = false;
             gpGeral.Text = "Geral";
             // 
+            // tbReduzidoCredito
+            // 
+            this.tbReduzidoCredito.Location = new Point(505, 148);
+            this.tbReduzidoCredito.Name = "tbReduzidoCredito";
+            this.tbReduzidoCredito.Size = new Size(139, 27);
+            this.tbReduzidoCredito.TabIndex = 17;
+            // 
+            // tbReduzidoDebito
+            // 
+            tbReduzidoDebito.Location = new Point(270, 148);
+            tbReduzidoDebito.Name = "tbReduzidoDebito";
+            tbReduzidoDebito.Size = new Size(139, 27);
+            tbReduzidoDebito.TabIndex = 16;
+            // 
+            // lbCredito
+            // 
+            lbCredito.AutoSize = true;
+            lbCredito.Location = new Point(505, 115);
+            lbCredito.Name = "lbCredito";
+            lbCredito.Size = new Size(128, 20);
+            lbCredito.TabIndex = 15;
+            lbCredito.Text = "Reduzido Crédito:";
+            // 
+            // blContaDebito
+            // 
+            blContaDebito.AutoSize = true;
+            blContaDebito.Location = new Point(270, 115);
+            blContaDebito.Name = "blContaDebito";
+            blContaDebito.Size = new Size(125, 20);
+            blContaDebito.TabIndex = 14;
+            blContaDebito.Text = "Reduzido Débito:";
+            // 
+            // lbBanco
+            // 
+            lbBanco.AutoSize = true;
+            lbBanco.Location = new Point(270, 31);
+            lbBanco.Name = "lbBanco";
+            lbBanco.Size = new Size(53, 20);
+            lbBanco.TabIndex = 13;
+            lbBanco.Text = "Banco:";
+            // 
+            // tbBanco
+            // 
+            tbBanco.Location = new Point(270, 64);
+            tbBanco.Name = "tbBanco";
+            tbBanco.Size = new Size(139, 27);
+            tbBanco.TabIndex = 12;
+            // 
+            // tbFilial
+            // 
+            tbFilial.Location = new Point(29, 148);
+            tbFilial.Name = "tbFilial";
+            tbFilial.Size = new Size(139, 27);
+            tbFilial.TabIndex = 11;
+            // 
             // lbCodColigada
             // 
             lbCodColigada.AutoSize = true;
-            lbCodColigada.Location = new Point(6, 32);
+            lbCodColigada.Location = new Point(29, 31);
             lbCodColigada.Name = "lbCodColigada";
             lbCodColigada.Size = new Size(72, 20);
             lbCodColigada.TabIndex = 10;
@@ -125,11 +171,10 @@
             // cbColigada
             // 
             cbColigada.FormattingEnabled = true;
-            cbColigada.Location = new Point(6, 65);
+            cbColigada.Location = new Point(29, 64);
             cbColigada.Name = "cbColigada";
             cbColigada.Size = new Size(131, 28);
-            cbColigada.TabIndex = 9;
-            cbColigada.SelectedValueChanged += cbColigada_SelectedValueChanged;
+            cbColigada.TabIndex = 9;            
             // 
             // btnFiltrar
             // 
@@ -142,39 +187,33 @@
             btnFiltrar.UseVisualStyleBackColor = true;
             btnFiltrar.Click += btnFiltrar_Click;
             // 
-            // lbValor
+            // lbFilial
             // 
-            lbValor.AutoSize = true;
-            lbValor.Location = new Point(160, 111);
-            lbValor.Name = "lbValor";
-            lbValor.Size = new Size(126, 20);
-            lbValor.TabIndex = 7;
-            lbValor.Text = "Valor de pesquisa";
+            lbFilial.AutoSize = true;
+            lbFilial.Location = new Point(29, 115);
+            lbFilial.Name = "lbFilial";
+            lbFilial.Size = new Size(43, 20);
+            lbFilial.TabIndex = 6;
+            lbFilial.Text = "Filial:";
             // 
-            // lbCbTipoFiltro
+            // btnSalvaParametros
             // 
-            lbCbTipoFiltro.AutoSize = true;
-            lbCbTipoFiltro.Location = new Point(6, 106);
-            lbCbTipoFiltro.Name = "lbCbTipoFiltro";
-            lbCbTipoFiltro.Size = new Size(125, 20);
-            lbCbTipoFiltro.TabIndex = 6;
-            lbCbTipoFiltro.Text = "Tipo de pesquisa:";
-            // 
-            // tbValorPesquisa
-            // 
-            tbValorPesquisa.Location = new Point(160, 138);
-            tbValorPesquisa.Name = "tbValorPesquisa";
-            tbValorPesquisa.Size = new Size(173, 27);
-            tbValorPesquisa.TabIndex = 5;
+            btnSalvaParametros.Location = new Point(956, 851);
+            btnSalvaParametros.Name = "btnSalvaParametros";
+            btnSalvaParametros.Size = new Size(165, 39);
+            btnSalvaParametros.TabIndex = 6;
+            btnSalvaParametros.Text = "Salvar Parametrização";
+            btnSalvaParametros.UseVisualStyleBackColor = true;
+            btnSalvaParametros.Click += btnSalvaParametros_Click;
             // 
             // ParametrizacaoContabil
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1160, 910);
+            Controls.Add(btnSalvaParametros);
             Controls.Add(gpGeral);
             Controls.Add(tbCount);
-            Controls.Add(btnAdicionaLinha);
             Controls.Add(btnAddItem);
             Controls.Add(dvgParametrizacao);
             Name = "ParametrizacaoContabil";
@@ -192,15 +231,22 @@
         private ComponentesTelaUI.DataGridView.MyDataGridView dvgParametrizacao;
         private Label label1;
         private Button btnAddItem;
-        private Button btnAdicionaLinha;
         private TextBox tbCount;
         private ComboBox cbTipoPesquisa;
         private GroupBox gpGeral;
         private Label lbValor;
-        private Label lbCbTipoFiltro;
+        private Label lbFilial;
         private TextBox tbValorPesquisa;
         private Button btnFiltrar;
         private Label lbCodColigada;
         private ComboBox cbColigada;
+        private Button btnSalvaParametros;
+        private TextBox tbBanco;
+        private TextBox tbFilial;
+        private TextBox tbReduzidoCredito;
+        private TextBox tbReduzidoDebito;
+        private Label lbCredito;
+        private Label blContaDebito;
+        private Label lbBanco;
     }
 }

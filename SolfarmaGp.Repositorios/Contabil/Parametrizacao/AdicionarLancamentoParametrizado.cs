@@ -2,7 +2,7 @@
 using SolfarmaGp.Infraestrutura;
 using System.Data;
 
-namespace SolfarmaGp.Repositorios.Contabil
+namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
 {
     public class AdicionarLancamentoParametrizado
     {

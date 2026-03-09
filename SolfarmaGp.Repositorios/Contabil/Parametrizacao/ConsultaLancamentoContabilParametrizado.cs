@@ -6,7 +6,16 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
 {
     public class ConsultaLancamentoContabilParametrizado
     {
-        public async Task<DataTable> Execute(int codColigada = 0)
+        public class DtoObjetoPesquisa
+        {
+            public int CodColigada { get; set; }
+            public int filial { get; set; }
+            public int banco { get; set; }
+            public int reduzidoCredito { get; set; }
+            public int reduzidoDebito { get; set; }
+
+        }
+        public async Task<DataTable> Execute(DtoObjetoPesquisa objeto)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
@@ -18,17 +27,35 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
                     using (SqlCommand cmd = new SqlCommand("uspContabilConferenciaRecebimentosLancamentosParametrizadosDados", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@INchCodigoContaDebito", DBNull.Value);
-                        cmd.Parameters.AddWithValue("@INchCodigoContaCredito", DBNull.Value);
+                        //reduzidoDebito
+                        if(objeto.reduzidoDebito == 0)
+                            cmd.Parameters.AddWithValue("@INchCodigoContaDebito", DBNull.Value);
+                        else
+                            cmd.Parameters.AddWithValue("@INchCodigoContaDebito", objeto.reduzidoDebito);
+                        //ReduzidoCredito
+                        if(objeto.reduzidoCredito == 0)
+                            cmd.Parameters.AddWithValue("@INchCodigoContaCredito", DBNull.Value);
+                        else
+                            cmd.Parameters.AddWithValue("@INchCodigoContaCredito", objeto.reduzidoCredito);                       
                         cmd.Parameters.AddWithValue("@INchCodigoHistorico", DBNull.Value);
                         cmd.Parameters.AddWithValue("@INvchDescricaoComplemento", DBNull.Value);
                         cmd.Parameters.AddWithValue("@INvchDescricaoExtrato", DBNull.Value);
-                        cmd.Parameters.AddWithValue("@INintFilial", DBNull.Value);
-                        if (codColigada == 0)                        
+                        //FILIAL
+                        if(objeto.filial == 0)
+                            cmd.Parameters.AddWithValue("@INintFilial", DBNull.Value);
+                        else
+                            cmd.Parameters.AddWithValue("@INintFilial", objeto.filial);
+                        //CodColigada
+                        if (objeto.CodColigada == 0)                        
                             cmd.Parameters.AddWithValue("@INintCodColigada", DBNull.Value);                        
                         else                        
-                            cmd.Parameters.AddWithValue("@INintCodColigada", codColigada);
-                        
+                            cmd.Parameters.AddWithValue("@INintCodColigada", objeto.CodColigada);
+                        //CodigoBanco
+                        if(objeto.banco ==0)
+                            cmd.Parameters.AddWithValue("@INIntCodigoBanco", DBNull.Value);
+                        else
+                            cmd.Parameters.AddWithValue("@INIntCodigoBanco", objeto.banco);
+
 
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {

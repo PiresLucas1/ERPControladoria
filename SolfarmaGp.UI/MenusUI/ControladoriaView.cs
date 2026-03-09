@@ -56,8 +56,10 @@ namespace SolfarmaGp.UI.MenusUI
 
 
             //AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
-
-
+        }
+        public string pegaValorUsuario()
+        {
+            return nomeUsuario;
         }
         private async void Portal_Shown(object sender, EventArgs e)
         {
