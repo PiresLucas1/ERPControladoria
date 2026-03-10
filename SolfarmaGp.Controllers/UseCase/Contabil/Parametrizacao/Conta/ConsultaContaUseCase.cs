@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dto;
 using SolfarmaGp.Repositorios.Contabil.Parametrizacao.Conta;
 using System.Data;
 

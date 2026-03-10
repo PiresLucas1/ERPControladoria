@@ -8,6 +8,7 @@ using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml;
 using SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView;
+using SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota;
 using System.Reflection;
 
 namespace SolfarmaGp.UI.MenusUI
@@ -69,7 +70,7 @@ namespace SolfarmaGp.UI.MenusUI
             PrimeiroLogin primeiroLogin = new PrimeiroLogin();
             primeiroLogin.StartPosition = FormStartPosition.CenterScreen;
             primeiroLogin.Show();   // Aparece apenas uma vez
-            
+
 
             ConsultarUnicoUsuarioRepo segCadastroController = new ConsultarUnicoUsuarioRepo();
             var result = await segCadastroController.Executar(nomeUsuario);
@@ -441,18 +442,21 @@ namespace SolfarmaGp.UI.MenusUI
                 parametrizacaoContabil.MdiParent = this;
                 parametrizacaoContabil.Show();
             }
-            
+
         }
 
-        //private void criarCampanhaToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    if (!FormAberto(typeof(CriaCampanha)))
-        //    {
-        //        CriaCampanha criaCampanha = new CriaCampanha();
-        //        criaCampanha.MdiParent = this;
-        //        criaCampanha.Show();
-        //    }
-        //}
+        private void devoluçaoDeNotasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ConsultaSaldoNotasFiscais)))
+            {
+                ConsultaSaldoNotasFiscais alteraTipoMovimento = new ConsultaSaldoNotasFiscais();
+                alteraTipoMovimento.MdiParent = this;
+                alteraTipoMovimento.Show();
+            }
+        }
     }
-}
+
+ }
+
+
 

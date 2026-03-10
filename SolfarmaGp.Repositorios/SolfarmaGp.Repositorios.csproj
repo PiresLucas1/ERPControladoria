@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SolfarmaGp.Infraestrutura\SolfarmaGp.Infraestrutura.csproj" />
+    <ProjectReference Include="..\SolfarmaGp.Services\SolfarmaGp.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao
+﻿namespace SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dto
 {
     public class dtoObjetoComboBoxInteface
     {

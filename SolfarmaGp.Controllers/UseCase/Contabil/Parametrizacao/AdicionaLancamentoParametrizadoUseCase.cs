@@ -1,4 +1,5 @@
-﻿using SolfarmaGp.Repositorios.Contabil.Parametrizacao;
+﻿using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dto;
+using SolfarmaGp.Repositorios.Contabil.Parametrizacao;
 using static SolfarmaGp.Repositorios.Contabil.Parametrizacao.AdicionarLancamentoParametrizado;
 
 namespace SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao

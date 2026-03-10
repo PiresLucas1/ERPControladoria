@@ -4,9 +4,9 @@ using System.Data;
 
 namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
 {
-    public class ConsultaNotaItensZanupRepositories
+    public class ConsultaNotaItens
     {
-        public async Task<DataTable> ConsultaNotaItens(DateTime dataInicio, DateTime dataFim,string cnpjCpf ,string idProduto = null)
+        public async Task<DataTable> Executar(DateTime dataInicio, DateTime dataFim,string cnpjCpf ,string idProduto = null)
         {
             //uspZanConsultaNotaItens
             DataTable dataTable = new DataTable();
@@ -49,44 +49,6 @@ namespace ERP_FISCAL.Repositories.ConsultaSaldoNotasZanup
 
         }
 
-        //public async Task<HttpResponseMessage> CriaNotasItensZanup(NotaProdutoDTO novaNota)
-        //{
-        //    CriarNotaBlingDinamica criarNotaBling = new CriarNotaBlingDinamica();
-        //    HttpResponseMessage response = await criarNotaBling.ExecutarCriacaoNota(novaNota);
-
-        //    return response;
-
-
-        //}
-        public async Task<DataTable> BuscaInformacoesCnpjZanup(string cnpj)
-        {
-            DataTable dataTable = new DataTable();
-            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
-
-            try
-            {
-                using (SqlConnection conn = conexaoBanco.AbrirConexao())
-                {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspConsultaDestinatarioInformacoesZanup", conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.AddWithValue("@INvchCNPJ", cnpj);                       
-                        using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
-                        {
-                            dataTable.Load(reader);
-                        }
-                    }
-
-                    conexaoBanco.FecharConexao(conn);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
-            }
-
-            return dataTable;
-        }
+       
     }
 }
