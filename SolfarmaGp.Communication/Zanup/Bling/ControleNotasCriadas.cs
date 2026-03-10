@@ -1,7 +1,8 @@
-﻿namespace SolfarmaGp.Repositorios.Zanup.Interfaces
+﻿namespace SolfarmaGp.Communication.Zanup.Bling
 {
-    public class ControleNotaBling
+    public class ControleNotasCriadas
     {
+
         public static List<JsonParaDadoTabela> jsonNotasParaRegistro = new List<JsonParaDadoTabela>();
         public class JsonParaDadoTabela
         {
@@ -37,4 +38,3 @@
             jsonNotasParaRegistro.Clear();
         }
     }
-}

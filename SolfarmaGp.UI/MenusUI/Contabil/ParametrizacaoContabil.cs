@@ -2,6 +2,7 @@
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.CodigoHistorico;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Complemento;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Conta;
+using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dto;
 using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
 using SolfarmaGp.UI.Utils;
 using System.Data;
