@@ -38,3 +38,4 @@
             jsonNotasParaRegistro.Clear();
         }
     }
+}

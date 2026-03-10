@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using SolfarmaGp.Communication.Zanup.Bling;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
+using static SolfarmaGp.Communication.Zanup.Bling.ControleNotasCriadas;
 using static SolfarmaGp.Services.Zanup.Bling.DtoNotaFiscalBling;
 
 namespace SolfarmaGp.Services.Zanup.Bling.ComunicacaoApiBling
@@ -63,46 +65,12 @@ namespace SolfarmaGp.Services.Zanup.Bling.ComunicacaoApiBling
 
             };
 
-            new ControleNotasCriadaBling().AdicionarNotaCriada(nota);
+            new ControleNotasCriadas().AdicionarNotaCriada(nota);
 
 
             return response;
 
         }
-
-        public async Task<NotaFiscal> ConsultarNotaAsync()
-        {
-            GetToken obterTokenAsync = new GetToken();
-
-            string token = await obterTokenAsync.ObterTokenAsync();
-
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", token);
-
-            var response = await httpClient.GetAsync($"https://api.bling.com.br/Api/v3/nfe?pagina=1&limite=1&tipo=1&serie=5");
-
-            while ((int)response.StatusCode == 429)
-            {
-                await Task.Delay(7000);
-                response = await httpClient.GetAsync($"https://api.bling.com.br/Api/v3/nfe?pagina=1&limite=1&tipo=1&serie=5");
-            }
-            if (!response.IsSuccessStatusCode)
-            {
-                Console.WriteLine($"Erro: {(int)response.StatusCode} - {response.ReasonPhrase}");
-                return null;
-            }
-
-            var json = await response.Content.ReadAsStringAsync();
-            Console.Write("twste");
-            var data = JsonConvert.DeserializeObject<Root>(json);
-            var notaFiscal = data.Data.FirstOrDefault();
-            await Task.Delay(7000);
-
-            return notaFiscal;
-        }
     }
 }
-}
+

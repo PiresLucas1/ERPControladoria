@@ -6,14 +6,13 @@ using System.Data;
 namespace SolfarmaGp.Controllers.UseCase.Zanup
 {
     public class CriaNotasDevolucaoUseCase
-    {
-        public string varreduraDeCriacao { get; set; }
+    {        
 
-        public async Task<DataTable> Execute(List<DataRow> listRow, IProgress<ProgressoCriacaoNota> progress)
+        public async Task Execute(List<DataRow> listRow, IProgress<ProgressoCriacaoNota> progress)
         {
             var token = await new PegaTokenApiBling().Execute();
-            DataTable result = await new CriaNotaDevolucaoService().Execute(listRow, token, progress);
-            return result;
+            await new CriaNotaDevolucaoService().Execute(listRow, token, progress);
+            
         }
 
     }

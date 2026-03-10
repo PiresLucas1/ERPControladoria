@@ -183,19 +183,21 @@ namespace SolfarmaGp.Services.Zanup.Bling.CriaNotaDevolucao
 
 
             }
-            if (response.IsSuccessStatusCode)
-            {
-                // limpa tabela de itens selecionados
-                DialogResult resultado = MessageBox.Show("Deseja limpar a relação na tabela", "Limpar tabela", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    // limpa tabela de itens selecionados
+            //    DialogResult resultado = MessageBox.Show("Deseja limpar a relação na tabela", "Limpar tabela", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (resultado == DialogResult.Yes)
-                    form.LimpaDataGridViewItensSelecionados();
+            //    if (resultado == DialogResult.Yes)
+            //        form.LimpaDataGridViewItensSelecionados();
 
-                MessageBox.Show("Notas Criadas", "Dados enviados para criação da nota", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    MessageBox.Show("Notas Criadas", "Dados enviados para criação da nota", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            }
+            //}
 
 
             return;
         }
+    }
 }
+

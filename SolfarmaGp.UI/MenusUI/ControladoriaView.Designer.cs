@@ -199,6 +199,7 @@
             devoluçaoDeNotasToolStripMenuItem.Name = "devoluçaoDeNotasToolStripMenuItem";
             devoluçaoDeNotasToolStripMenuItem.Size = new Size(224, 26);
             devoluçaoDeNotasToolStripMenuItem.Text = "Devoluçao de notas";
+            devoluçaoDeNotasToolStripMenuItem.Click += devoluçaoDeNotasToolStripMenuItem_Click;
             // 
             // criarNotaZanupToolStripMenuItem
             // 

@@ -1,9 +1,7 @@
 ﻿using SolfarmaGp.Communication.Zanup.Bling;
 using SolfarmaGp.Controllers.UseCase.Zanup;
-using SolfarmaGp.Controllers.UseCase.Zanup.DTO;
 using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
 using SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela;
-using SolfarmaGp.UI.MenusUI.Zanup.DevolucaoNotasComSaldo.utils;
 using System.Data;
 using Color = System.Drawing.Color;
 
@@ -239,7 +237,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                 });
                 CriaNotasDevolucaoUseCase dataRowToObject = new CriaNotasDevolucaoUseCase();
 
-                var result = await dataRowToObject.Execute(linhasSelecionadas, progress);
+                await dataRowToObject.Execute(linhasSelecionadas, progress);
 
             }
             catch(Exception ex)
