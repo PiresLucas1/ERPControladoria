@@ -15,7 +15,7 @@ namespace SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao
             public int reduzidoDebito { get; set; }
 
         }
-        public async Task<DataTable> Execute(ObjetoPesquisaParametrosContabil objeto = null)
+        public async Task<DataTable> Execute(ObjetoPesquisaParametrosContabil objeto)
         {
             
             ConsultaLancamentoContabilParametrizado repositorio = new ConsultaLancamentoContabilParametrizado();

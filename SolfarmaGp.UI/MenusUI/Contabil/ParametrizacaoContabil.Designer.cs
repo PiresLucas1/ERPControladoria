@@ -32,7 +32,7 @@
             btnAddItem = new Button();
             tbCount = new TextBox();
             gpGeral = new GroupBox();
-            this.tbReduzidoCredito = new TextBox();
+            tbReduzidoCredito = new TextBox();
             tbReduzidoDebito = new TextBox();
             lbCredito = new Label();
             blContaDebito = new Label();
@@ -86,7 +86,7 @@
             // gpGeral
             // 
             gpGeral.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            gpGeral.Controls.Add(this.tbReduzidoCredito);
+            gpGeral.Controls.Add(tbReduzidoCredito);
             gpGeral.Controls.Add(tbReduzidoDebito);
             gpGeral.Controls.Add(lbCredito);
             gpGeral.Controls.Add(blContaDebito);
@@ -106,10 +106,10 @@
             // 
             // tbReduzidoCredito
             // 
-            this.tbReduzidoCredito.Location = new Point(505, 148);
-            this.tbReduzidoCredito.Name = "tbReduzidoCredito";
-            this.tbReduzidoCredito.Size = new Size(139, 27);
-            this.tbReduzidoCredito.TabIndex = 17;
+            tbReduzidoCredito.Location = new Point(505, 148);
+            tbReduzidoCredito.Name = "tbReduzidoCredito";
+            tbReduzidoCredito.Size = new Size(139, 27);
+            tbReduzidoCredito.TabIndex = 17;
             // 
             // tbReduzidoDebito
             // 
@@ -174,7 +174,7 @@
             cbColigada.Location = new Point(29, 64);
             cbColigada.Name = "cbColigada";
             cbColigada.Size = new Size(131, 28);
-            cbColigada.TabIndex = 9;            
+            cbColigada.TabIndex = 9;
             // 
             // btnFiltrar
             // 
@@ -198,6 +198,7 @@
             // 
             // btnSalvaParametros
             // 
+            btnSalvaParametros.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnSalvaParametros.Location = new Point(956, 851);
             btnSalvaParametros.Name = "btnSalvaParametros";
             btnSalvaParametros.Size = new Size(165, 39);

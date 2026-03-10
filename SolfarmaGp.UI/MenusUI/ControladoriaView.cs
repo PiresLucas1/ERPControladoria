@@ -118,7 +118,11 @@ namespace SolfarmaGp.UI.MenusUI
                     cadastrarUsuarioToolStripMenuItem.Enabled = false;
                     cadastrarUsuarioToolStripMenuItem.Visible = false;
                     break;
-
+                case 7:
+                    DesabilitaItemMenu(menuBarTop, "contabilToolStripMenuItem", true);
+                    cadastrarUsuarioToolStripMenuItem.Enabled = false;
+                    cadastrarUsuarioToolStripMenuItem.Visible = false;
+                    break;
 
             }
 

@@ -16,7 +16,7 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao.Banco
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
                     string query = @"
-                SELECT
+                SELECT DISTINCT
                     tblBanco.bancos_id
                 FROM
                     tblBancosContas tblBanco (NOLOCK)

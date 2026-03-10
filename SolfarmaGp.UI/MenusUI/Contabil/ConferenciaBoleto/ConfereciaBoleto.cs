@@ -24,8 +24,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             public DateTime DataDocumento { get; set; }
             public string ContaCompletaDebito { get; set; }
             public string ContaCompletaCredito { get; set; }
-        }
-        public DataTable dtBancoIds = new DataTable();
+        }        
         List<ConferenciaResultado> listaResultado { get; set; } = new List<ConferenciaResultado>();
 
         public ConfereciaBoleto()
@@ -34,7 +33,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             ExcelPackage.License.SetNonCommercialPersonal("SolfarmaGP");
             cbColigada.Items.Add(10);
             cbFiltro.Items.AddRange(new string[] { "ContaDebito", "ContaCredito", "Complemento" });
-            cbBanco.DataSource = dtBancoIds;
+            
         }
 
         private void btnImportarArquivo_Click(object sender, EventArgs e)
@@ -229,9 +228,9 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    Encoding encoding = Encoding.GetEncoding(1252);
+                    Encoding encoding = Encoding.GetEncoding(1252); //ANSI
 
-                    File.WriteAllText(saveFileDialog.FileName, resultado, new UTF8Encoding(false));
+                    File.WriteAllText(saveFileDialog.FileName, resultado, encoding);
 
                     MessageBox.Show("Arquivo gerado com sucesso!");
                 }
@@ -361,7 +360,9 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
         {
             BuscaBancoIDsUseCase useCase = new BuscaBancoIDsUseCase();
             DataTable bancoIds = await useCase.Execute();
-            dtBancoIds =  bancoIds;  
+            cbBanco.DataSource =  bancoIds;
+            cbBanco.DisplayMember = "bancos_id";
+            cbBanco.ValueMember = "bancos_id";
         }
     }
 }
