@@ -344,11 +344,12 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                     row.Cells["CodBanco"].Value
                 );
             }
-            
-            StatusProcess statusProcess = new StatusProcess();
+
+            ProcessStatusManager.Start("Carregando dados...");
+            ProcessStatusManager.Update("Processando...");
             try
             {
-                statusProcess.Visible = true;
+                
                 string user = new Portal().pegaValorUsuario();
                 AlteraLancamentoParametrizadoUseCase usecase = new AlteraLancamentoParametrizadoUseCase();
                 var result = await usecase.Execute(dt, user);
@@ -359,12 +360,13 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             }
             catch (Exception ex)
             {
+                ProcessStatusManager.Error(ex);
                 MessageBox.Show(ex.Message,"Erro Ao salvar Parametros",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                statusProcess.Visible = false;
-                statusProcess.Close();
+                ProcessStatusManager.Stop();
+
             }
            
 

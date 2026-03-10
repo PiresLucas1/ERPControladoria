@@ -4,7 +4,7 @@ using System.Data;
 
 namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
 {
-    public class  
+    public class AlteraLancamentoParametrizado
     {
         public async Task<Boolean> Execute(DataTable dt, string user)
         {
