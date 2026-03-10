@@ -11,7 +11,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SolfarmaGp.Communication\SolfarmaGp.Communication.csproj" />
     <ProjectReference Include="..\SolfarmaGp.Repositorios\SolfarmaGp.Repositorios.csproj" />
+    <ProjectReference Include="..\SolfarmaGp.Services\SolfarmaGp.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Utils\Zanup\" />
   </ItemGroup>
 
 </Project>

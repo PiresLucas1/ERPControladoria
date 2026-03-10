@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\SolfarmaGp.Communication\SolfarmaGp.Communication.csproj" />
 	  <ProjectReference Include="..\SolfarmaGp.Controllers\SolfarmaGp.Controllers.csproj" />
 	</ItemGroup>
 
@@ -73,11 +74,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="MenusUI\Zanup\DevolucaoNotasComSaldo\" />
+	  <PackageReference Include="EPPlus" Version="8.4.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="EPPlus" Version="8.4.2" />
+	  <Folder Include="MenusUI\Zanup\DevolucaoNotasComSaldo\utils\" />
 	</ItemGroup>
 
 </Project>
