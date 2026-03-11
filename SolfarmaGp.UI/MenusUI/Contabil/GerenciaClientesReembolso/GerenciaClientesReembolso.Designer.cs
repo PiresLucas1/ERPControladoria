@@ -28,29 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            myDataGridView1 = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            dvgGerenciar = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             btnSalvar = new Button();
-            textBox1 = new TextBox();
+            tbContador = new TextBox();
             btnCancelar = new Button();
             textBox2 = new TextBox();
             label1 = new Label();
             textBox3 = new TextBox();
             lbNome = new Label();
             btnFiltrar = new Button();
-            ((System.ComponentModel.ISupportInitialize)myDataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dvgGerenciar).BeginInit();
             SuspendLayout();
             // 
-            // myDataGridView1
+            // dvgGerenciar
             // 
-            myDataGridView1.ColumnHeadersHeight = 29;
-            myDataGridView1.Location = new Point(12, 141);
-            myDataGridView1.Name = "myDataGridView1";
-            myDataGridView1.RowHeadersWidth = 51;
-            myDataGridView1.Size = new Size(801, 472);
-            myDataGridView1.TabIndex = 0;
+            dvgGerenciar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dvgGerenciar.ColumnHeadersHeight = 29;
+            dvgGerenciar.Location = new Point(12, 141);
+            dvgGerenciar.Name = "dvgGerenciar";
+            dvgGerenciar.RowHeadersWidth = 51;
+            dvgGerenciar.Size = new Size(818, 472);
+            dvgGerenciar.TabIndex = 0;
             // 
             // btnSalvar
             // 
+            btnSalvar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnSalvar.Location = new Point(670, 629);
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Size = new Size(138, 39);
@@ -58,16 +60,18 @@
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // tbContador
             // 
-            textBox1.BackColor = SystemColors.ScrollBar;
-            textBox1.Location = new Point(12, 641);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(111, 27);
-            textBox1.TabIndex = 2;
+            tbContador.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            tbContador.BackColor = SystemColors.ScrollBar;
+            tbContador.Location = new Point(12, 641);
+            tbContador.Name = "tbContador";
+            tbContador.Size = new Size(111, 27);
+            tbContador.TabIndex = 2;
             // 
             // btnCancelar
             // 
+            btnCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnCancelar.Location = new Point(483, 629);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(128, 39);
@@ -128,21 +132,22 @@
             Controls.Add(label1);
             Controls.Add(textBox2);
             Controls.Add(btnCancelar);
-            Controls.Add(textBox1);
+            Controls.Add(tbContador);
             Controls.Add(btnSalvar);
-            Controls.Add(myDataGridView1);
+            Controls.Add(dvgGerenciar);
             Name = "GerenciaClientesReembolso";
             Text = "GerenciaClientesReembolso";
-            ((System.ComponentModel.ISupportInitialize)myDataGridView1).EndInit();
+            Load += GerenciaClientesReembolso_Load;
+            ((System.ComponentModel.ISupportInitialize)dvgGerenciar).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ComponentesTelaUI.DataGridView.MyDataGridView myDataGridView1;
+        private ComponentesTelaUI.DataGridView.MyDataGridView dvgGerenciar;
         private Button btnSalvar;
-        private TextBox textBox1;
+        private TextBox tbContador;
         private Button btnCancelar;
         private TextBox textBox2;
         private Label label1;

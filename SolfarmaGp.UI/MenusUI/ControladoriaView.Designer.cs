@@ -45,6 +45,8 @@
             conferenciaDeBoletoToolStripMenuItem = new ToolStripMenuItem();
             parametrizaçãoToolStripMenuItem = new ToolStripMenuItem();
             lançamentoContabilToolStripMenuItem = new ToolStripMenuItem();
+            gerenciarToolStripMenuItem = new ToolStripMenuItem();
+            pessoasToolStripMenuItem = new ToolStripMenuItem();
             ZanupMenu = new ToolStripMenuItem();
             devoluçaoDeNotasToolStripMenuItem = new ToolStripMenuItem();
             criarNotaZanupToolStripMenuItem = new ToolStripMenuItem();
@@ -66,6 +68,7 @@
             toolStripMenuItem4 = new ToolStripMenuItem();
             toolStripMenuItem5 = new ToolStripMenuItem();
             txtNomeUsuario = new ToolStripMenuItem();
+            importarNotasToolStripMenuItem = new ToolStripMenuItem();
             menuBarTop.SuspendLayout();
             menuBarBottom.SuspendLayout();
             SuspendLayout();
@@ -84,7 +87,7 @@
             // 
             // FiscalMenu
             // 
-            FiscalMenu.DropDownItems.AddRange(new ToolStripItem[] { importarToolStripMenuItem, importarNotasParaOBigToolStripMenuItem, alteraçõesFiscaisToolStripMenuItem1, exportarXMLToolStripMenuItem });
+            FiscalMenu.DropDownItems.AddRange(new ToolStripItem[] { importarToolStripMenuItem, importarNotasParaOBigToolStripMenuItem, alteraçõesFiscaisToolStripMenuItem1, exportarXMLToolStripMenuItem, importarNotasToolStripMenuItem });
             FiscalMenu.Name = "FiscalMenu";
             FiscalMenu.ShowShortcutKeys = false;
             FiscalMenu.Size = new Size(59, 24);
@@ -148,8 +151,9 @@
             // 
             // contabilToolStripMenuItem
             // 
-            contabilToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { importarRecebimentoToolStripMenuItem, atualizarGestãoPatrimonialToolStripMenuItem, conferenciaDeBoletoToolStripMenuItem, parametrizaçãoToolStripMenuItem });
+            contabilToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { importarRecebimentoToolStripMenuItem, atualizarGestãoPatrimonialToolStripMenuItem, conferenciaDeBoletoToolStripMenuItem, parametrizaçãoToolStripMenuItem, gerenciarToolStripMenuItem });
             contabilToolStripMenuItem.Name = "contabilToolStripMenuItem";
+            contabilToolStripMenuItem.ShowShortcutKeys = false;
             contabilToolStripMenuItem.Size = new Size(79, 24);
             contabilToolStripMenuItem.Text = "Contabil";
             // 
@@ -185,6 +189,20 @@
             lançamentoContabilToolStripMenuItem.Size = new Size(233, 26);
             lançamentoContabilToolStripMenuItem.Text = "Lançamento Contabil";
             lançamentoContabilToolStripMenuItem.Click += lançamentoContabilToolStripMenuItem_Click;
+            // 
+            // gerenciarToolStripMenuItem
+            // 
+            gerenciarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pessoasToolStripMenuItem });
+            gerenciarToolStripMenuItem.Name = "gerenciarToolStripMenuItem";
+            gerenciarToolStripMenuItem.Size = new Size(280, 26);
+            gerenciarToolStripMenuItem.Text = "Gerenciar";
+            // 
+            // pessoasToolStripMenuItem
+            // 
+            pessoasToolStripMenuItem.Name = "pessoasToolStripMenuItem";
+            pessoasToolStripMenuItem.Size = new Size(146, 26);
+            pessoasToolStripMenuItem.Text = "Pessoas ";
+            pessoasToolStripMenuItem.Click += pessoasToolStripMenuItem_Click;
             // 
             // ZanupMenu
             // 
@@ -336,6 +354,13 @@
             txtNomeUsuario.Size = new Size(116, 24);
             txtNomeUsuario.Text = "Nome usuario";
             // 
+            // importarNotasToolStripMenuItem
+            // 
+            importarNotasToolStripMenuItem.Name = "importarNotasToolStripMenuItem";
+            importarNotasToolStripMenuItem.Size = new Size(239, 26);
+            importarNotasToolStripMenuItem.Text = "Importar Notas";
+            importarNotasToolStripMenuItem.Click += importarNotasToolStripMenuItem_Click;
+            // 
             // Portal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -403,5 +428,8 @@
         private ToolStripMenuItem conferenciaDeBoletoToolStripMenuItem;
         private ToolStripMenuItem parametrizaçãoToolStripMenuItem;
         private ToolStripMenuItem lançamentoContabilToolStripMenuItem;
+        private ToolStripMenuItem gerenciarToolStripMenuItem;
+        private ToolStripMenuItem pessoasToolStripMenuItem;
+        private ToolStripMenuItem importarNotasToolStripMenuItem;
     }
 }

@@ -6,7 +6,13 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyName>Solfarma GP</AssemblyName>
+		<ApplicationIcon>icon-new - Copia.ico</ApplicationIcon>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Include="icon-new - Copia.ico" />
+	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\SolfarmaGp.Communication\SolfarmaGp.Communication.csproj" />

@@ -51,7 +51,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasServicoParaTotvs.ImportaNo
                     return (retornoMensagem , tabelaRetorno);
                 }
             }
-            catch (Exception ex)
+            catch (SqlException ex)
             {
                 throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
             }

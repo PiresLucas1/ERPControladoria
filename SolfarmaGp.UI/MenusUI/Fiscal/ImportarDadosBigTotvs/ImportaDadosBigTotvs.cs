@@ -114,7 +114,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs {
 
 
             try
-            {
+             {
                 ProcessStatusManager.Start("Carregando dados...");
                 ProcessStatusManager.Update("Processando...");
 

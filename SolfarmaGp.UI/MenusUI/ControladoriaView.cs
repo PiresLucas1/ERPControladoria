@@ -3,10 +3,12 @@ using PrimeiroLoginView;
 using SolfarmaGp.Repositorios.SegurancaUserRepositories;
 using SolfarmaGp.UI.MenusUI.Contabil;
 using SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto;
+using SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml;
+using SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais;
 using SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView;
 using SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota;
 using System.Reflection;
@@ -34,6 +36,7 @@ namespace SolfarmaGp.UI.MenusUI
         public Portal()
         {
             InitializeComponent();
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             this.IsMdiContainer = true;
 
 
@@ -454,9 +457,30 @@ namespace SolfarmaGp.UI.MenusUI
                 alteraTipoMovimento.Show();
             }
         }
+
+        private void pessoasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(GerenciaClientesReembolso)))
+            {
+                GerenciaClientesReembolso gerencia = new GerenciaClientesReembolso();
+                gerencia.MdiParent = this;
+                gerencia.Show();
+            }
+
+        }
+
+        private void importarNotasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(InclusaoNotasIndividuais)))
+            {
+                InclusaoNotasIndividuais inclusaoNotas = new InclusaoNotasIndividuais();
+                inclusaoNotas.MdiParent = this;
+                inclusaoNotas.Show();
+            }
+        }
     }
 
- }
+}
 
 
 
