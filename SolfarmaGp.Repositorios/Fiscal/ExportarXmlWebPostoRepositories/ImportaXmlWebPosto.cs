@@ -2,7 +2,7 @@
 using Microsoft.Data.SqlClient;
 using SolfarmaGp.Infraestrutura;
 
-namespace ERP_FISCAL.Repositories.ExportarXmlRepositories
+namespace SolfarmaGp.Repositories.ExportarXmlRepositories
 {
     public class ImportaXmlWebPosto
     {

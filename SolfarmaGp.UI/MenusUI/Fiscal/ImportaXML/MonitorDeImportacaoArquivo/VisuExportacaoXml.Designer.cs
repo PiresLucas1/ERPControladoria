@@ -1,4 +1,4 @@
-﻿namespace ERP_FISCAL.view.FiscalView
+﻿namespace SolfarmaGP.view.FiscalView
 {
     partial class VisuExportacaoXml
     {

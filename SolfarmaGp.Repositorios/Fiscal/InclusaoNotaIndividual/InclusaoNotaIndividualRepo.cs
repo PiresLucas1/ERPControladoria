@@ -6,10 +6,11 @@ namespace SolfarmaGp.Repositorios.Fiscal.InclusaoNotaIndividuak
 {
     public class InclusaoNotaIndividualRepo
     {
-        public async Task<(DataTable, DataTable)> Execute(string numeroDocumentos, DateTime dataInicio, DateTime dataFim)
+        public async Task<(DataTable, string)> Execute(string numeroDocumentos, DateTime dataInicio, DateTime dataFim)
         {
             DataTable dtresultado = new DataTable();
             DataTable dtnotas = new DataTable();
+            SqlParameter msgRetorno;
             DbConexaoConfig conexao = new DbConexaoConfig(DbName.GpWithLoginTotvs);
             try
             {
@@ -27,23 +28,17 @@ namespace SolfarmaGp.Repositorios.Fiscal.InclusaoNotaIndividuak
                         cmd.Parameters.AddWithValue("@INvchNumeroDocumentos", numeroDocumentos ?? (object)DBNull.Value);
                         cmd.Parameters.AddWithValue("@INbitRetornaDados", true);
 
-                        var msgRetorno = new SqlParameter("OUTvchMsgRetorno", SqlDbType.VarChar, -1)
+                        msgRetorno = new SqlParameter("OUTvchMsgRetorno", SqlDbType.VarChar, -1)
                         {
                             Direction = ParameterDirection.Output
                         };
                         cmd.Parameters.Add(msgRetorno);
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
-                            // primeiro SELECT (#tblNotasImportadas)
-                            dtresultado.Load(reader);
-
-                            // segundo SELECT (#tblNotasNaoimportadas)
-                            if (await reader.NextResultAsync())
-                            {
-                                dtnotas.Load(reader);
-                            }
+                            if (reader.HasRows)
+                                dtresultado.Load(reader);
                         }
-                        
+
                         conexao.FecharConexao(conn);
 
                     }
@@ -53,7 +48,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.InclusaoNotaIndividuak
             {
                 throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
             }
-            return (dt,dt);
+            return (dtresultado, msgRetorno.Value.ToString());
         }
     }
 }

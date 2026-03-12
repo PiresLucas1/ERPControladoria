@@ -33,16 +33,18 @@
             dvgNotasIncluidas = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             lbdtInicio = new Label();
             lbDataFim = new Label();
-            this.dtpInicio = new DateTimePicker();
+            dtpInicio = new DateTimePicker();
             dtpFim = new DateTimePicker();
             rtbNumDocs = new RichTextBox();
+            groupBox1 = new GroupBox();
             ((System.ComponentModel.ISupportInitialize)dvgNotasIncluidas).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // btnAdiciona
             // 
             btnAdiciona.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnAdiciona.Location = new Point(660, 149);
+            btnAdiciona.Location = new Point(632, 149);
             btnAdiciona.Name = "btnAdiciona";
             btnAdiciona.Size = new Size(128, 30);
             btnAdiciona.TabIndex = 1;
@@ -61,6 +63,7 @@
             // 
             // dvgNotasIncluidas
             // 
+            dvgNotasIncluidas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dvgNotasIncluidas.ColumnHeadersHeight = 29;
             dvgNotasIncluidas.Location = new Point(12, 216);
             dvgNotasIncluidas.Name = "dvgNotasIncluidas";
@@ -88,11 +91,11 @@
             // 
             // dtpInicio
             // 
-            this.dtpInicio.Format = DateTimePickerFormat.Short;
-            this.dtpInicio.Location = new Point(29, 152);
-            this.dtpInicio.Name = "dtpInicio";
-            this.dtpInicio.Size = new Size(160, 27);
-            this.dtpInicio.TabIndex = 8;
+            dtpInicio.Format = DateTimePickerFormat.Short;
+            dtpInicio.Location = new Point(29, 152);
+            dtpInicio.Name = "dtpInicio";
+            dtpInicio.Size = new Size(160, 27);
+            dtpInicio.TabIndex = 8;
             // 
             // dtpFim
             // 
@@ -110,6 +113,16 @@
             rtbNumDocs.TabIndex = 10;
             rtbNumDocs.Text = "";
             // 
+            // groupBox1
+            // 
+            groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(btnAdiciona);
+            groupBox1.Location = new Point(12, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(776, 207);
+            groupBox1.TabIndex = 11;
+            groupBox1.TabStop = false;
+            // 
             // InclusaoNotasIndividuais
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -117,15 +130,16 @@
             ClientSize = new Size(800, 602);
             Controls.Add(rtbNumDocs);
             Controls.Add(dtpFim);
-            Controls.Add(this.dtpInicio);
+            Controls.Add(dtpInicio);
             Controls.Add(lbDataFim);
             Controls.Add(lbdtInicio);
             Controls.Add(dvgNotasIncluidas);
             Controls.Add(lbNumdoc);
-            Controls.Add(btnAdiciona);
+            Controls.Add(groupBox1);
             Name = "InclusaoNotasIndividuais";
             Text = "InclusaoNotasIndividuais";
             ((System.ComponentModel.ISupportInitialize)dvgNotasIncluidas).EndInit();
+            groupBox1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -139,5 +153,6 @@
         private DateTimePicker dtpInicio;
         private DateTimePicker dtpFim;
         private RichTextBox rtbNumDocs;
+        private GroupBox groupBox1;
     }
 }

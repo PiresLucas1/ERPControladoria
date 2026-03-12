@@ -1,11 +1,11 @@
-﻿using ERP_FISCAL.Repositories.ExportarXmlRepositories;
+﻿using SolfarmaGp.Repositories.ExportarXmlRepositories;
 using System.Data;
 
 namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportaXml.WebPostoXml
 {
     public class ImportaXmlPostoUseCase
     {
-        public async Task<DataTable> ExportaXmlPostoLago(DateTime dataInicio, DateTime dataFim, string localExportacao, string modeloDocumento, int exportarTudo, Progress<string> valor = null)
+        public async Task<DataTable> Execute(DateTime dataInicio, DateTime dataFim, string localExportacao, string modeloDocumento, int exportarTudo, Progress<string> valor = null)
         {
             ImportaXmlWebPosto exportarXmlRepositorio = new ImportaXmlWebPosto();
             DataTable retorno = new DataTable();

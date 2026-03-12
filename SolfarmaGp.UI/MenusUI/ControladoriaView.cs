@@ -1,5 +1,4 @@
-﻿using ERP_FISCAL.view.FiscalView;
-using PrimeiroLoginView;
+﻿using PrimeiroLoginView;
 using SolfarmaGp.Repositorios.SegurancaUserRepositories;
 using SolfarmaGp.UI.MenusUI.Contabil;
 using SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto;
@@ -11,6 +10,7 @@ using SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml;
 using SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais;
 using SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView;
 using SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota;
+using SolfarmaGP.view.FiscalView;
 using System.Reflection;
 
 namespace SolfarmaGp.UI.MenusUI
@@ -401,7 +401,7 @@ namespace SolfarmaGp.UI.MenusUI
         //    }
         //}
 
-        public void AbrirFecharMonitoramentoExportacao(string mensagem = null)
+        public VisuExportacaoXml? AbrirFecharMonitoramentoExportacao(string mensagem = null)
         {
             if (monitoramentoExportacao == null)
             {
@@ -424,6 +424,7 @@ namespace SolfarmaGp.UI.MenusUI
                 monitoramentoExportacao.Dispose();
                 monitoramentoExportacao = null;
             }
+            return monitoramentoExportacao;
         }
 
         private void conferenciaDeBoletoToolStripMenuItem_Click(object sender, EventArgs e)
