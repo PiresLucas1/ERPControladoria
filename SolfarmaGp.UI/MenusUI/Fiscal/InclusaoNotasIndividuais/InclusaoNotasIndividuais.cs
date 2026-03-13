@@ -31,10 +31,10 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais
         public async Task IncluirNota(string notas, DateTime dataInicio, DateTime dataFim)
         {
             InclusaoNotaIndividualUseCase usecase = new InclusaoNotaIndividualUseCase();
-            var (dtResultado, mensagemRetorno, isWork) = await usecase.Execute(notas, dataInicio, dataFim);
             try
             {
                 ProcessStatusManager.Start();
+                var (dtResultado, mensagemRetorno, isWork) = await usecase.Execute(notas, dataInicio, dataFim);
                 if (isWork)
                 {
                     MessageBox.Show(
