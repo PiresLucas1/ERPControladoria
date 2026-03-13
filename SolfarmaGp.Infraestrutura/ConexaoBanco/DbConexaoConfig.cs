@@ -12,7 +12,8 @@ namespace SolfarmaGp.Infraestrutura
         GpDbsol,
         ZanupTotvs,
         WebPosto,
-        GpDbsolWithLogin
+        GpDbsolWithLogin,
+        TotvsTeste
     }
 
     public class DbConexaoConfig
@@ -99,6 +100,15 @@ namespace SolfarmaGp.Infraestrutura
                         "User Id=rm;" +
                         "Password=rm;" +
                         "Integrated Security=True;";
+                    break;
+                case DbName.TotvsTeste:
+                    connectionString = "Server=dbtotvs\\dbtotvs;" +
+                        "Database=CORPORERM_TESTE;" +
+                        "User Id=rm;" +
+                        "Password=rm;" +
+                        "Encrypt=True;" +
+                        "TrustServerCertificate=True;" +
+                        "Connection Timeout=0;";
                     break;
 
                 default:

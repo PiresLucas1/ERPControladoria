@@ -14,7 +14,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
     {
         public AlteracoesFiscaisEmLote()
         {
-            
+
             InitializeComponent();
             cbColigada.Items.Add(2);
             rbAlteraDataDocumento.Checked = true;
@@ -54,7 +54,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
                     ProcessStatusManager.Stop(); // Garante o fechamento
                 }
 
-                
+
                 CarregaDataGridView(retorno);
                 txtCountRows.Text = retorno.Rows.Count.ToString();
 
@@ -88,7 +88,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
                 CarregaDataGridView(retorno);
                 txtCountRows.Text = retorno.Rows.Count.ToString();
             }
-            
+
         }
 
         public async Task<DataTable> BuscaMovimentos()
@@ -98,7 +98,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
                 Replace("\n", ",")
                 .Replace("\r\n", ",");
             var textoFormatoParaConsulta = textoSeparadoPorVirugula.Substring(0, textoSeparadoPorVirugula.Length);
-            
+
             DataTable retorno = await alterarTipoMovimento.Executar(textoFormatoParaConsulta);
             return retorno;
         }
@@ -112,11 +112,11 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
             {
                 if (!data.Columns.Contains("Cod TMV novo"))
                 {
-                    DataColumn colQuantidade = new DataColumn("Cod TMV novo", typeof(string));                    
+                    DataColumn colQuantidade = new DataColumn("Cod TMV novo", typeof(string));
                     colQuantidade.DefaultValue = 0;
                     data.Columns.Add(colQuantidade);
                 }
-            }          
+            }
             if (!data.Columns.Contains("colSelecionado"))
             {
                 DataColumn colSelecionado = new DataColumn("colSelecionado", typeof(bool));
@@ -148,7 +148,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
             {
                 row.Cells["colSelecionado"].Value = true;
             }
-        
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -161,7 +161,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
 
         private void btnAlterarSelecionados_Click(object sender, EventArgs e)
         {
-            string valorRetorno ="";
+            string valorRetorno = "";
             using (AlteraUnicoValorEmBloco frm = new AlteraUnicoValorEmBloco())
             {
                 if (frm.ShowDialog() == DialogResult.OK)
@@ -178,12 +178,27 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
         private void AlteraValorCodTMV(string valor)
         {
             DataTable dt = (DataTable)dvgIDMovs.DataSource;
-
-            foreach (DataRow row in dt.Rows)
+            if (rbAlteraCodTmtv.Checked)
             {
-                row["Cod TMV novo"] = valor;
+                foreach (DataRow row in dt.Rows)
+                {
+                    if ((bool)row["colSelecionado"])
+                    {
+                        row["Cod TMV novo"] = valor;
+                    }
+                }
+
             }
-            
+            else
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    if ((bool)row["colSelecionado"])
+                    {
+                        row["Data Pagamento"] = valor;
+                    }
+                }
+            }
         }
 
         private async void btnAlteraCodMovimento_Click(object sender, EventArgs e)
@@ -194,7 +209,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
 
             DataTable dtToDvg = (DataTable)dvgIDMovs.DataSource;
 
-            foreach(DataRow row in dtToDvg.Rows)
+            foreach (DataRow row in dtToDvg.Rows)
             {
                 if (Convert.ToBoolean(row["colSelecionado"]) == true)
                 {
@@ -214,7 +229,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
         }
 
         private void rbAlteraCodTmtv_CheckedChanged(object sender, EventArgs e)
-        {            
+        {
             dtInicio.Enabled = !dtInicio.Enabled;
             dtFim.Enabled = !dtFim.Enabled;
             cbColigada.Enabled = !cbColigada.Enabled;
@@ -237,7 +252,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
                 bool isChecked = (bool)item.Cells["colSelecionado"].Value;
                 if (isChecked)
                 {
-                    if(item.Cells["Data Pagamento"].Value == DBNull.Value)
+                    if (item.Cells["Data Pagamento"].Value == DBNull.Value)
                     {
                         DialogResult result = MessageBox.Show(
                             "Existe itens selecionados sem data marcada, deseja inserir manualmente?",
@@ -245,12 +260,12 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
                             MessageBoxButtons.YesNo,
                             MessageBoxIcon.Question);
 
-                        if (result == DialogResult.Yes) 
+                        if (result == DialogResult.Yes)
                         {
                             AlteraUnicoValorEmBloco alteraUnicoValor = new AlteraUnicoValorEmBloco();
                             alteraUnicoValor.Text = "Insira a nova data de pagamento:";
                             DialogResult dialogResult = alteraUnicoValor.ShowDialog();
-                            if(dialogResult == DialogResult.OK)
+                            if (dialogResult == DialogResult.OK)
                             {
                                 DateTime data;
                                 bool ok = DateTime.TryParseExact(
@@ -276,25 +291,38 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
                         return;
                     }
                 }
-            }            
-            DataTable retorno =  await new AltDataDocumentoUseCase().Executar((DataTable)dvgIDMovs.DataSource);
-            if(retorno.Rows.Count == 0)
+            }
+            DataTable retorno = await new AltDataDocumentoUseCase().Executar((DataTable)dvgIDMovs.DataSource);
+            if (retorno.Rows.Count == 0)
             {
                 MessageBox.Show("Nenhum Registro Retornado, Verifique se a Operação foi Realizada com Sucesso!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            };
+            }
+            ;
             RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retorno);
             retornoEmTabela.Show();
         }
         public void PreencheDataVazia(DateTime date)
         {
             foreach (DataGridViewRow item in dvgIDMovs.Rows)
-            {                            
+            {
                 if (item.Cells["Data Pagamento"].Value == DBNull.Value)
                 {
                     item.Cells["Data Pagamento"].Value = date;
                 }
             }
         }
+
+        private void btnSelecionarVazio_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in dvgIDMovs.Rows)
+            {
+                if (item.Cells["Data Pagamento"].Value == DBNull.Value)
+                {
+                    item.Cells["colSelecionado"].Value = true;
+                }
+
+            }
+        }
     }
-  }
+}
 

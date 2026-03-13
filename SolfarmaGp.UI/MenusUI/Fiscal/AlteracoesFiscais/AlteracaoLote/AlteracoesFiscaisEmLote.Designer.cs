@@ -51,6 +51,7 @@
             btnSelecionarTudo = new Button();
             txtCountRows = new TextBox();
             dvgIDMovs = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            btnSelecionarVazio = new Button();
             gpFiltro.SuspendLayout();
             gbTipoAlteracao.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -224,6 +225,7 @@
             // groupBox1
             // 
             groupBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(btnSelecionarVazio);
             groupBox1.Controls.Add(btnAlteraDataDocumento);
             groupBox1.Controls.Add(btnAlterarSelecionados);
             groupBox1.Controls.Add(button1);
@@ -241,10 +243,10 @@
             // btnAlteraDataDocumento
             // 
             btnAlteraDataDocumento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnAlteraDataDocumento.Location = new Point(1151, 24);
+            btnAlteraDataDocumento.Location = new Point(1151, 35);
             btnAlteraDataDocumento.Margin = new Padding(3, 2, 3, 2);
             btnAlteraDataDocumento.Name = "btnAlteraDataDocumento";
-            btnAlteraDataDocumento.Size = new Size(203, 46);
+            btnAlteraDataDocumento.Size = new Size(203, 39);
             btnAlteraDataDocumento.TabIndex = 11;
             btnAlteraDataDocumento.Text = "Alterar Data Documento";
             btnAlteraDataDocumento.UseVisualStyleBackColor = true;
@@ -309,6 +311,18 @@
             dvgIDMovs.Size = new Size(1395, 666);
             dvgIDMovs.TabIndex = 5;
             // 
+            // btnSelecionarVazio
+            // 
+            btnSelecionarVazio.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnSelecionarVazio.Location = new Point(336, 86);
+            btnSelecionarVazio.Margin = new Padding(3, 2, 3, 2);
+            btnSelecionarVazio.Name = "btnSelecionarVazio";
+            btnSelecionarVazio.Size = new Size(134, 34);
+            btnSelecionarVazio.TabIndex = 12;
+            btnSelecionarVazio.Text = "Selecionar Vazios";
+            btnSelecionarVazio.UseVisualStyleBackColor = true;
+            btnSelecionarVazio.Click += btnSelecionarVazio_Click;
+            // 
             // AlteracoesFiscaisEmLote
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -355,5 +369,6 @@
         private System.Windows.Forms.ComboBox cbColigada;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAlteraDataDocumento;
+        private Button btnSelecionarVazio;
     }
 }
