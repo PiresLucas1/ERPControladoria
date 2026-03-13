@@ -64,6 +64,7 @@
             // dvgNotasIncluidas
             // 
             dvgNotasIncluidas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dvgNotasIncluidas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dvgNotasIncluidas.ColumnHeadersHeight = 29;
             dvgNotasIncluidas.Location = new Point(12, 216);
             dvgNotasIncluidas.Name = "dvgNotasIncluidas";

@@ -14,7 +14,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais
             dtNotasIncluidas.Columns.Add("Numero Documento Totvs", typeof(string));
             dtNotasIncluidas.Columns.Add("IDMOV", typeof(string));
             dtNotasIncluidas.Columns.Add("Numero Documento", typeof(string));
-            dtNotasIncluidas.Columns.Add("Data Importação", typeof(DateTime));
+            dtNotasIncluidas.Columns.Add("Data Importacao", typeof(DateTime));
 
         }
 
@@ -91,6 +91,12 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais
 
                 dtNotasIncluidas.Rows.Add(novaLinha);
             }
+            AtualizaDataGridView();
+        }
+
+        public void AtualizaDataGridView()
+        {
+            dvgNotasIncluidas.DataSource = dtNotasIncluidas;
         }
     }
 }
