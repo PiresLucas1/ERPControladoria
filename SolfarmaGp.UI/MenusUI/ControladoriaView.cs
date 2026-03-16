@@ -5,6 +5,7 @@ using SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto;
 using SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica;
+using SolfarmaGp.UI.MenusUI.Fiscal.Gerenciar;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml;
 using SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais;
@@ -477,6 +478,16 @@ namespace SolfarmaGp.UI.MenusUI
                 InclusaoNotasIndividuais inclusaoNotas = new InclusaoNotasIndividuais();
                 inclusaoNotas.MdiParent = this;
                 inclusaoNotas.Show();
+            }
+        }
+
+        private void periodoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(AlteracaoDePeriodo)))
+            {
+                AlteracaoDePeriodo peridoFis = new AlteracaoDePeriodo();
+                peridoFis.MdiParent = this;
+                peridoFis.Show();
             }
         }
     }

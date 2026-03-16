@@ -39,6 +39,7 @@
             alteraçãoEmListaToolStripMenuItem = new ToolStripMenuItem();
             exportarXMLToolStripMenuItem = new ToolStripMenuItem();
             xMLPostoDoLagoToolStripMenuItem = new ToolStripMenuItem();
+            importarNotasToolStripMenuItem = new ToolStripMenuItem();
             contabilToolStripMenuItem = new ToolStripMenuItem();
             importarRecebimentoToolStripMenuItem = new ToolStripMenuItem();
             atualizarGestãoPatrimonialToolStripMenuItem = new ToolStripMenuItem();
@@ -68,7 +69,8 @@
             toolStripMenuItem4 = new ToolStripMenuItem();
             toolStripMenuItem5 = new ToolStripMenuItem();
             txtNomeUsuario = new ToolStripMenuItem();
-            importarNotasToolStripMenuItem = new ToolStripMenuItem();
+            gerenciarItensToolStripMenuItem = new ToolStripMenuItem();
+            periodoToolStripMenuItem = new ToolStripMenuItem();
             menuBarTop.SuspendLayout();
             menuBarBottom.SuspendLayout();
             SuspendLayout();
@@ -87,7 +89,7 @@
             // 
             // FiscalMenu
             // 
-            FiscalMenu.DropDownItems.AddRange(new ToolStripItem[] { importarToolStripMenuItem, importarNotasParaOBigToolStripMenuItem, alteraçõesFiscaisToolStripMenuItem1, exportarXMLToolStripMenuItem, importarNotasToolStripMenuItem });
+            FiscalMenu.DropDownItems.AddRange(new ToolStripItem[] { importarToolStripMenuItem, importarNotasParaOBigToolStripMenuItem, alteraçõesFiscaisToolStripMenuItem1, exportarXMLToolStripMenuItem, importarNotasToolStripMenuItem, gerenciarItensToolStripMenuItem });
             FiscalMenu.Name = "FiscalMenu";
             FiscalMenu.ShowShortcutKeys = false;
             FiscalMenu.Size = new Size(59, 24);
@@ -148,6 +150,13 @@
             xMLPostoDoLagoToolStripMenuItem.Size = new Size(220, 26);
             xMLPostoDoLagoToolStripMenuItem.Text = "XML Posto do Lago";
             xMLPostoDoLagoToolStripMenuItem.Click += xMLPostoDoLagoToolStripMenuItem_Click;
+            // 
+            // importarNotasToolStripMenuItem
+            // 
+            importarNotasToolStripMenuItem.Name = "importarNotasToolStripMenuItem";
+            importarNotasToolStripMenuItem.Size = new Size(239, 26);
+            importarNotasToolStripMenuItem.Text = "Importar Notas";
+            importarNotasToolStripMenuItem.Click += importarNotasToolStripMenuItem_Click;
             // 
             // contabilToolStripMenuItem
             // 
@@ -236,7 +245,7 @@
             // 
             metaComissãoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { farmaToolStripMenuItem });
             metaComissãoToolStripMenuItem.Name = "metaComissãoToolStripMenuItem";
-            metaComissãoToolStripMenuItem.Size = new Size(194, 26);
+            metaComissãoToolStripMenuItem.Size = new Size(224, 26);
             metaComissãoToolStripMenuItem.Text = "Meta Comissão";
             // 
             // farmaToolStripMenuItem
@@ -354,12 +363,19 @@
             txtNomeUsuario.Size = new Size(116, 24);
             txtNomeUsuario.Text = "Nome usuario";
             // 
-            // importarNotasToolStripMenuItem
+            // gerenciarItensToolStripMenuItem
             // 
-            importarNotasToolStripMenuItem.Name = "importarNotasToolStripMenuItem";
-            importarNotasToolStripMenuItem.Size = new Size(239, 26);
-            importarNotasToolStripMenuItem.Text = "Importar Notas";
-            importarNotasToolStripMenuItem.Click += importarNotasToolStripMenuItem_Click;
+            gerenciarItensToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { periodoToolStripMenuItem });
+            gerenciarItensToolStripMenuItem.Name = "gerenciarItensToolStripMenuItem";
+            gerenciarItensToolStripMenuItem.Size = new Size(239, 26);
+            gerenciarItensToolStripMenuItem.Text = "Gerenciar Itens";
+            // 
+            // periodoToolStripMenuItem
+            // 
+            periodoToolStripMenuItem.Name = "periodoToolStripMenuItem";
+            periodoToolStripMenuItem.Size = new Size(224, 26);
+            periodoToolStripMenuItem.Text = "Periodo";
+            periodoToolStripMenuItem.Click += periodoToolStripMenuItem_Click;
             // 
             // Portal
             // 
@@ -431,5 +447,7 @@
         private ToolStripMenuItem gerenciarToolStripMenuItem;
         private ToolStripMenuItem pessoasToolStripMenuItem;
         private ToolStripMenuItem importarNotasToolStripMenuItem;
+        private ToolStripMenuItem gerenciarItensToolStripMenuItem;
+        private ToolStripMenuItem periodoToolStripMenuItem;
     }
 }
