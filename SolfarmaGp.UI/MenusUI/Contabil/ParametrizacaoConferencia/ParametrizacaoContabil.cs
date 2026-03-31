@@ -268,14 +268,14 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             {
                 int index = dvgParametrizacao.Rows.Add();
 
-                dvgParametrizacao.Rows[index].Cells["ContaDebito"].Value = row["Cod. Conta Debito"];
-                dvgParametrizacao.Rows[index].Cells["ContaCredito"].Value = row["Cod. Conta Credito"];
-                dvgParametrizacao.Rows[index].Cells["Historico"].Value = row["Cod. Historico"];
+                dvgParametrizacao.Rows[index].Cells["ContaDebito"].Value = row["CodContaDebito"];
+                dvgParametrizacao.Rows[index].Cells["ContaCredito"].Value = row["CodContaCredito"];
+                dvgParametrizacao.Rows[index].Cells["Historico"].Value = row["CodHistorico"];
                 dvgParametrizacao.Rows[index].Cells["Complemento"].Value = row["Complemento"];
-                dvgParametrizacao.Rows[index].Cells["DescricaoExtrato"].Value = row["Descricão Extrato"];
+                dvgParametrizacao.Rows[index].Cells["DescricaoExtrato"].Value = row["DescricaoExtrato"];
                 dvgParametrizacao.Rows[index].Cells["Filial"].Value = row["Filial"];
-                dvgParametrizacao.Rows[index].Cells["CodColigada"].Value = row["Cod. Coligada"];
-                dvgParametrizacao.Rows[index].Cells["CodBanco"].Value = row["Cod. Banco"];
+                dvgParametrizacao.Rows[index].Cells["CodColigada"].Value = row["CodColigada"];
+                dvgParametrizacao.Rows[index].Cells["CodBanco"].Value = row["CodBanco"];
             }
         }
 

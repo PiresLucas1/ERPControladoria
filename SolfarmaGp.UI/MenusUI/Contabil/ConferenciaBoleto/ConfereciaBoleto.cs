@@ -143,25 +143,27 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                 reduzidoDebito = 0
             };
             DataTable dtParametros = await usecase.Execute(objPesquisa);
-            string coligada = cbColigada.Text;
+
+            int coligada = int.Parse(cbColigada.Text);
 
             var resultado = from baseImportada in dt.AsEnumerable()
                             from baseParametros in dtParametros.AsEnumerable()
-                            let palavras = baseParametros.Field<string>("Descricão Extrato")
+                            let palavras = baseParametros.Field<string>("DescricaoExtrato")
                                            .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+
                             where
-                                baseImportada.Field<string>("Cod. Coligada").ToLower() == coligada
-                                && baseImportada.Field<string>("TIPO").ToLower() == "c"
+                                baseParametros.Field<int>("CodColigada") == coligada
+                                && baseImportada.Field<string>("Tipo")?.Trim().Equals("C", StringComparison.OrdinalIgnoreCase) == true
                                 && baseParametros.Field<int>("Filial") == filial
                                 && palavras.All(p =>
                                             baseImportada.Field<string>("HISTÓRICO")
                                             .Contains(p, StringComparison.OrdinalIgnoreCase))
                             select new ConferenciaResultado
                             {
-                                ContaDebito = baseParametros.Field<string>("Cod. Conta Debito") ?? "",
-                                ContaCredito = baseParametros.Field<string>("Cod. Conta Credito") ?? "",
+                                ContaDebito = baseParametros.Field<string>("CodContaDebito").ToString() ?? "",
+                                ContaCredito = baseParametros.Field<string>("CodContaCredito").ToString() ?? "",
                                 Valor = baseImportada.Field<string>("VALOR") ?? "",
-                                CodigoHistorico = baseParametros.Field<string>("Cod. Historico") ?? "",
+                                CodigoHistorico = baseParametros.Field<int>("CodHistorico").ToString() ?? "",
                                 Complemento = baseParametros.Field<string>("Complemento") ?? "",
                                 Filial = baseParametros.Field<int?>("Filial") ?? 0,
                                 DataDocumento = Convert.ToDateTime(baseImportada.Field<string>("DATA")),

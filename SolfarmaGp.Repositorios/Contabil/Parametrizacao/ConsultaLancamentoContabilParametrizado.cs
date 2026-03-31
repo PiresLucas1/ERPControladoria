@@ -24,7 +24,7 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("uspContabilConferenciaRecebimentosLancamentosParametrizadosDados", conn))
+                    using (SqlCommand cmd = new SqlCommand("uspContabilConferenciaRecebimentosLancamentosParametrizados", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         //reduzidoDebito

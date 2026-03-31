@@ -31,25 +31,28 @@ namespace SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao
             DataTable resultado = await repositorio.Execute(dto);
             DataTable novo = resultado.Clone();
 
-            novo.Columns["Cod. Conta Debito"].DataType = typeof(int);
-            novo.Columns["Cod. Conta Credito"].DataType = typeof(int);
-            novo.Columns["Cod. Historico"].DataType = typeof(int);
-            novo.Columns["Complemento"].DataType = typeof(int);                        
+            novo.Columns.Remove("CodContaDebito");
+            novo.Columns.Add("CodContaDebito", typeof(int));
+            novo.Columns.Remove("CodContaCredito");
+            novo.Columns.Add("CodContaCredito", typeof(int));
+
             novo.Columns["Filial"].DataType = typeof(int);
-            novo.Columns["Cod. Coligada"].DataType = typeof(int);
+            novo.Columns["CodColigada"].DataType = typeof(int);
 
             foreach (DataRow row in resultado.Rows)
             {
                 DataRow novaRow = novo.NewRow();
 
-                novaRow["Cod. Conta Debito"] = Convert.ToInt32(row["Cod. Conta Debito"]);
-                novaRow["Cod. Conta Credito"] = Convert.ToInt32(row["Cod. Conta Credito"]);
-                novaRow["Cod. Historico"] = Convert.ToInt32(row["Cod. Historico"]);
-                novaRow["Complemento"] = Convert.ToInt32(row["Complemento"]);
-                novaRow["Descricão Extrato"] = (row["Descricão Extrato"]);
-                novaRow["Cod. Banco"] = row["Cod. Banco"] == DBNull.Value ? row["Cod. Banco"] :  Convert.ToInt32(row["Cod. Banco"]);
+                novaRow["CodContaDebito"] = Convert.ToInt32(row["CodContaDebito"].ToString().Trim());
+                novaRow["CodContaCredito"] = Convert.ToInt32(row["CodContaCredito"].ToString().Trim());
+                novaRow["CodHistorico"] = (row["CodHistorico"]).ToString().Trim();
+                novaRow["Complemento"] = (row["Complemento"]).ToString().Trim();
+                novaRow["DescricAoExtrato"] = (row["DescricaoExtrato"]).ToString().Trim();
                 novaRow["Filial"] = Convert.ToInt32(row["Filial"]);
-                novaRow["Cod. Coligada"] = Convert.ToInt32(row["Cod. Coligada"]);
+                novaRow["CodColigada"] = Convert.ToInt32(row["CodColigada"]);
+                novaRow["ContaCompletaDebito"] = row["ContaCompletaDebito"].ToString().Trim();
+                novaRow["ContaCompletaCredito"] = row["ContaCompletaCredito"].ToString().Trim();
+                novaRow["CodBanco"] = row["CodBanco"] == DBNull.Value ? row["CodBanco"] :  Convert.ToInt32(row["CodBanco"]);
 
                 novo.Rows.Add(novaRow);
             }

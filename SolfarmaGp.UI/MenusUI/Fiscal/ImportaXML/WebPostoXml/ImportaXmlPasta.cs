@@ -43,13 +43,14 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml
 
             }
 
-            //var progress = new Progress<string>(s =>
-            //{
-            //    view.AlteraTipoMovimento(s);
-            //});
-     
-
-            string cabecalhoDePesquisa = tbLocalExport.Text + dtInicio.Value.ToString() + dtFim.Text.ToString();
+            string dataInicio = dtInicio.Value.Date.ToString();
+            string dataFim = dtFim.Value.Date.ToString();
+            string cabecalhoDePesquisa = tbLocalExport.Text;
+            char existeBarraFinal = cabecalhoDePesquisa[cabecalhoDePesquisa.Length - 1];
+            if (existeBarraFinal != '\\' )
+            {
+                cabecalhoDePesquisa = cabecalhoDePesquisa + '\\';
+            }
 
             var Visualizacao = _formFocus.AbrirFecharMonitoramentoExportacao(cabecalhoDePesquisa);
             var progress = new Progress<string>(s =>
@@ -59,9 +60,9 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml
 
             this.Visible = false;
             DataTable retorno =  await exportaXmlController.Execute(
-                dtInicio.Value,
-                dtFim.Value,
-                tbLocalExport.Text, 
+                dtInicio.Value.Date,
+                dtFim.Value.Date,
+                cabecalhoDePesquisa, 
                 modeloDocumento ?? "", 
                 cbTipoExportacao.Text == "Sim" ? 1 : 0, 
                 progress);
