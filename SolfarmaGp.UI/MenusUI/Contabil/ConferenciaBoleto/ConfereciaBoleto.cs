@@ -149,7 +149,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             var resultado = from baseImportada in dt.AsEnumerable()
                             from baseParametros in dtParametros.AsEnumerable()
                             let palavras = baseParametros.Field<string>("DescricaoExtrato")
-                                           //.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                                           .Split(' ', StringSplitOptions.RemoveEmptyEntries)
 
                             where
                                 baseParametros.Field<int>("CodColigada") == coligada
