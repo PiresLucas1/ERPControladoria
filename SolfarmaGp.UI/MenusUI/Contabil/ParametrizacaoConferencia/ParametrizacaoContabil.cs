@@ -2,11 +2,13 @@
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.CodigoHistorico;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Complemento;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Conta;
+using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dados;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dto;
 using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
 using SolfarmaGp.UI.Utils;
 using System.Data;
 using static SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.ConsultaLancamentoContabilParametrizadoUseCase;
+using static SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dados.ConsultaLancamentoContabilParametrizadoDadosUseCase;
 
 namespace SolfarmaGp.UI.MenusUI.Contabil
 {
@@ -47,26 +49,26 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                 }
                 if (resultado == DialogResult.OK)
                 {
-                    await CarregaTela(new ObjetoPesquisaParametrosContabil { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
+                    await CarregaTela(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
                 }
             }
         }
 
         private async void ParametrizacaoContabil_Load(object sender, EventArgs e)
         {
-            await CarregaTela(new ObjetoPesquisaParametrosContabil { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito=0});
+            await CarregaTela(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito=0});
 
         }
-        public async Task<DataTable> AtualizarDataGrid(ObjetoPesquisaParametrosContabil objeto)
+        public async Task<DataTable> AtualizarDataGrid(ObjetoPesquisaParametrosContabilDados objeto)
         {
-            ConsultaLancamentoContabilParametrizadoUseCase usecase = new ConsultaLancamentoContabilParametrizadoUseCase();
+            ConsultaLancamentoContabilParametrizadoDadosUseCase usecase = new ConsultaLancamentoContabilParametrizadoDadosUseCase();
             DataTable dt = new DataTable();
             if (objeto != null)
             {
                 dt = await usecase.Execute(objeto);
                 return dt;
             }
-             await usecase.Execute(new ObjetoPesquisaParametrosContabil { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
+             await usecase.Execute(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
             return dt;
         }
         public async Task CarregaCodigoReduzido()
@@ -109,7 +111,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
 
         }
 
-        public async Task CarregaTela(ObjetoPesquisaParametrosContabil objeto)
+        public async Task CarregaTela(ObjetoPesquisaParametrosContabilDados objeto)
         {
             await CarregaComplemento();
             await CarregaCodigoHistorico();
@@ -130,7 +132,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             }
             else
             {
-                dt = await AtualizarDataGrid(new ObjetoPesquisaParametrosContabil { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
+                dt = await AtualizarDataGrid(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
 
             }
 
@@ -156,7 +158,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             int reduzidoCredito = tbReduzidoCredito.Text != "" ? Convert.ToInt32(tbReduzidoCredito.Text): 0;
             int reduzidoDebito = tbReduzidoDebito.Text != "" ? Convert.ToInt32(tbReduzidoDebito.Text) : 0;
 
-            ObjetoPesquisaParametrosContabil pesquisa = new ObjetoPesquisaParametrosContabil
+            ObjetoPesquisaParametrosContabilDados pesquisa = new ObjetoPesquisaParametrosContabilDados
             {
                 CodColigada = CodColigada ,
                 filial = filial ,
@@ -355,7 +357,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                 var result = await usecase.Execute(dt, user);
                 if (result)
                 {
-                    await CarregaTela(new ObjetoPesquisaParametrosContabil { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
+                    await CarregaTela(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
                 }
             }
             catch (Exception ex)

@@ -149,7 +149,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             var resultado = from baseImportada in dt.AsEnumerable()
                             from baseParametros in dtParametros.AsEnumerable()
                             let palavras = baseParametros.Field<string>("DescricaoExtrato")
-                                           .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                                           //.Split(' ', StringSplitOptions.RemoveEmptyEntries)
 
                             where
                                 baseParametros.Field<int>("CodColigada") == coligada
@@ -160,10 +160,10 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                                             .Contains(p, StringComparison.OrdinalIgnoreCase))
                             select new ConferenciaResultado
                             {
-                                ContaDebito = baseParametros.Field<string>("CodContaDebito").ToString() ?? "",
-                                ContaCredito = baseParametros.Field<string>("CodContaCredito").ToString() ?? "",
+                                ContaDebito = baseParametros.Field<int>("CodContaDebito").ToString() ?? "",
+                                ContaCredito = baseParametros.Field<int>("CodContaCredito").ToString() ?? "",
                                 Valor = baseImportada.Field<string>("VALOR") ?? "",
-                                CodigoHistorico = baseParametros.Field<int>("CodHistorico").ToString() ?? "",
+                                CodigoHistorico = baseParametros.Field<string>("CodHistorico").ToString() ?? "",
                                 Complemento = baseParametros.Field<string>("Complemento") ?? "",
                                 Filial = baseParametros.Field<int?>("Filial") ?? 0,
                                 DataDocumento = Convert.ToDateTime(baseImportada.Field<string>("DATA")),
@@ -175,6 +175,12 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             dvgConferencia.Columns["ContaCompletaDebito"].Visible = false;
             dvgConferencia.Columns["ContaCompletaCredito"].Visible = false;
 
+            decimal valorTotal = 0;
+            foreach(var row in resultado.ToList())
+            {
+                valorTotal += Convert.ToDecimal(row.Valor);
+            }
+            tbValor.Text = valorTotal.ToString();
             MessageBox.Show("Conferencia Finalizada");
 
 

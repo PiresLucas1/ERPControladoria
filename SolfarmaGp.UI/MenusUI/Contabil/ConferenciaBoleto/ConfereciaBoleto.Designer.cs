@@ -30,6 +30,8 @@
         {
             btnImportarArquivo = new Button();
             gpHeader = new GroupBox();
+            laBanco = new Label();
+            cbBanco = new ComboBox();
             lbCodPessoa = new Label();
             tbCodPessoa = new TextBox();
             lbFilial = new Label();
@@ -52,8 +54,8 @@
             dvgConferencia = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             btnGeraLote = new Button();
             btnVisualiza = new Button();
-            cbBanco = new ComboBox();
-            laBanco = new Label();
+            tbValor = new TextBox();
+            label2 = new Label();
             gpHeader.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRelacaoBoletos).BeginInit();
@@ -95,6 +97,23 @@
             gpHeader.TabIndex = 1;
             gpHeader.TabStop = false;
             gpHeader.Text = "Geral";
+            // 
+            // laBanco
+            // 
+            laBanco.AutoSize = true;
+            laBanco.Location = new Point(223, 129);
+            laBanco.Name = "laBanco";
+            laBanco.Size = new Size(134, 20);
+            laBanco.TabIndex = 16;
+            laBanco.Text = "Selecione o Banco:";
+            // 
+            // cbBanco
+            // 
+            cbBanco.FormattingEnabled = true;
+            cbBanco.Location = new Point(223, 156);
+            cbBanco.Name = "cbBanco";
+            cbBanco.Size = new Size(174, 28);
+            cbBanco.TabIndex = 15;
             // 
             // lbCodPessoa
             // 
@@ -310,28 +329,31 @@
             btnVisualiza.UseVisualStyleBackColor = true;
             btnVisualiza.Click += btnVisualiza_Click;
             // 
-            // cbBanco
+            // tbValor
             // 
-            cbBanco.FormattingEnabled = true;
-            cbBanco.Location = new Point(223, 156);
-            cbBanco.Name = "cbBanco";
-            cbBanco.Size = new Size(174, 28);
-            cbBanco.TabIndex = 15;
+            tbValor.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            tbValor.Location = new Point(780, 795);
+            tbValor.Name = "tbValor";
+            tbValor.Size = new Size(108, 27);
+            tbValor.TabIndex = 17;
             // 
-            // laBanco
+            // label2
             // 
-            laBanco.AutoSize = true;
-            laBanco.Location = new Point(223, 129);
-            laBanco.Name = "laBanco";
-            laBanco.Size = new Size(134, 20);
-            laBanco.TabIndex = 16;
-            laBanco.Text = "Selecione o Banco:";
+            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            label2.AutoSize = true;
+            label2.Location = new Point(728, 798);
+            label2.Name = "label2";
+            label2.Size = new Size(46, 20);
+            label2.TabIndex = 18;
+            label2.Text = "Valor:";
             // 
             // ConfereciaBoleto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1347, 838);
+            Controls.Add(label2);
+            Controls.Add(tbValor);
             Controls.Add(btnVisualiza);
             Controls.Add(btnGeraLote);
             Controls.Add(tbControlBase);
@@ -349,6 +371,7 @@
             tbBaseConferencia.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dvgConferencia).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -379,5 +402,7 @@
         private Button btnVisualiza;
         private Label laBanco;
         private ComboBox cbBanco;
+        private TextBox tbValor;
+        private Label label2;
     }
 }
