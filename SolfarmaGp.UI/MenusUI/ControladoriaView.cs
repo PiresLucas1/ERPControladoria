@@ -9,6 +9,7 @@ using SolfarmaGp.UI.MenusUI.Fiscal.Gerenciar;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml;
 using SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais;
+using SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta;
 using SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView;
 using SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota;
 using SolfarmaGP.view.FiscalView;
@@ -489,6 +490,17 @@ namespace SolfarmaGp.UI.MenusUI
                 peridoFis.MdiParent = this;
                 peridoFis.Show();
             }
+        }
+
+        private void importarXMLTOTVSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ImportarNotasFiscaisXmlPataTotvs)))
+            {
+                ImportarNotasFiscaisXmlPataTotvs importaXml = new ImportarNotasFiscaisXmlPataTotvs();
+                importaXml.MdiParent = this;
+                importaXml.Show();
+            }
+            
         }
     }
 

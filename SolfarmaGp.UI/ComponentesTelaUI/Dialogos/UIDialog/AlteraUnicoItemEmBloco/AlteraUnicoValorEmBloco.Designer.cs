@@ -28,62 +28,72 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbValor = new System.Windows.Forms.Label();
-            this.txtValor = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            lbValor = new Label();
+            txtValor = new TextBox();
+            button1 = new Button();
+            button2 = new Button();
+            cbValue = new ComboBox();
+            SuspendLayout();
             // 
             // lbValor
             // 
-            this.lbValor.AutoSize = true;
-            this.lbValor.Location = new System.Drawing.Point(43, 45);
-            this.lbValor.Name = "lbValor";
-            this.lbValor.Size = new System.Drawing.Size(153, 30);
-            this.lbValor.TabIndex = 1;
-            this.lbValor.Text = "Insira o valor:";
+            lbValor.AutoSize = true;
+            lbValor.Location = new Point(38, 45);
+            lbValor.Name = "lbValor";
+            lbValor.Size = new Size(97, 20);
+            lbValor.TabIndex = 1;
+            lbValor.Text = "Insira o valor:";
             // 
             // txtValor
             // 
-            this.txtValor.Location = new System.Drawing.Point(47, 78);
-            this.txtValor.Name = "txtValor";
-            this.txtValor.Size = new System.Drawing.Size(277, 26);
-            this.txtValor.TabIndex = 2;
+            txtValor.Location = new Point(42, 78);
+            txtValor.Name = "txtValor";
+            txtValor.Size = new Size(247, 27);
+            txtValor.TabIndex = 2;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(236, 167);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 32);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Confirmar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            button1.Location = new Point(210, 167);
+            button1.Name = "button1";
+            button1.Size = new Size(78, 32);
+            button1.TabIndex = 3;
+            button1.Text = "Confirmar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(130, 167);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(86, 32);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Cancelar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            button2.Location = new Point(116, 167);
+            button2.Name = "button2";
+            button2.Size = new Size(76, 32);
+            button2.TabIndex = 4;
+            button2.Text = "Cancelar";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // cbValue
+            // 
+            cbValue.FormattingEnabled = true;
+            cbValue.Location = new Point(42, 88);
+            cbValue.Name = "cbValue";
+            cbValue.Size = new Size(247, 28);
+            cbValue.TabIndex = 5;
             // 
             // AlteraUnicoValorEmBloco
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 211);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.txtValor);
-            this.Controls.Add(this.lbValor);
-            this.Name = "AlteraUnicoValorEmBloco";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Alterar";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(336, 211);
+            Controls.Add(cbValue);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(txtValor);
+            Controls.Add(lbValor);
+            Name = "AlteraUnicoValorEmBloco";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Alterar";
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -93,5 +103,6 @@
         private System.Windows.Forms.TextBox txtValor;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private ComboBox cbValue;
     }
 }

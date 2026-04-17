@@ -1,5 +1,6 @@
 ﻿using SolfarmaGp.Communication.Zanup.Bling;
 using SolfarmaGp.Controllers.UseCase.Zanup;
+using SolfarmaGp.UI.ComponentesTelaUI.Dialogos.UIDialog.AlteraUnicoItemEmBloco;
 using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
 using SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela;
 using System.Data;
@@ -20,7 +21,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
         {
             InitializeComponent();
             cbFiltroSaldo.Items.Add("IDProduto");
-            cbFiltroSaldo.Items.Add("Num.doc");            
+            cbFiltroSaldo.Items.Add("Num.doc");
             cbFilial.Items.Add("Todas");
             cbFilial.Items.Add("1 - Farma");
             cbFilial.Items.Add("9 - Alimentar");
@@ -47,16 +48,16 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                                 MessageBoxIcon.Warning);
                 return;
             }
-           
-           
-          
+
+
+
 
             btnListaNotas.Enabled = false;
             btnListaNotas.Enabled = false;
             ProcessStatusManager.Start("Carregando dados...");
             ProcessStatusManager.Update("Processando...");
             try
-            {                
+            {
                 ConsultaNotasNumDocOuProdutoUseCase consultaSaldoNotasZanup = new ConsultaNotasNumDocOuProdutoUseCase();
 
                 DataTable retorno = new DataTable();
@@ -82,7 +83,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                 CarregaDataTable(retorno);
                 txtCountNotas.Text = retorno.Rows.Count.ToString();
 
-                if(retorno.Rows.Count > 0)
+                if (retorno.Rows.Count > 0)
                 {
                     cbFilial.Enabled = true;
                 }
@@ -95,7 +96,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
             {
                 ProcessStatusManager.Stop(); // Garante o fechamento
             }
-            
+
             btnListaNotas.Enabled = true;
 
         }
@@ -122,7 +123,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
             dvgConsultaNotas.Columns["Qtd para Devolver"].Width = 30;
             dvgConsultaNotas.Columns["Qtd para Devolver"].Width = 30;
             dvgConsultaNotas.Columns["Qtd para Devolver"].DefaultCellStyle.ForeColor = Color.Red;
-            
+
             dvgConsultaNotas.Columns["colSelecionado"].Visible = false;
             dvgConsultaNotas.Columns["IDPessoaEmitente"].Visible = false;
 
@@ -214,7 +215,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                 .Cast<DataGridViewRow>()
                 .Where(r => Convert.ToBoolean(r.Cells["Selecionar"].Value) == true)
                 .Select(r => ((DataRowView)r.DataBoundItem).Row)
-                .ToList();            
+                .ToList();
             try
             {
                 ProcessStatusManager.Start("Carregando dados...");
@@ -223,7 +224,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
 
                 var progress = new Progress<ProgressoCriacaoNota>(p =>
                 {
-                    if(p.NumDocumento != 0)
+                    if (p.NumDocumento != 0)
                     {
                         MarcaLinhaImportadaParaOBling(
                             p.NumDocumento,
@@ -240,7 +241,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                 await dataRowToObject.Execute(linhasSelecionadas, progress);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ProcessStatusManager.Error(ex);
                 btGerarNotaFiscal.Enabled = true;
@@ -250,7 +251,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                 ProcessStatusManager.Stop();
                 var notas = ControleNotasCriadas.jsonNotasParaRegistro;
                 DataTable notasCriadas = await new RegistraNotaBaseDadosUseCase().Execute(notas);
-                if(notas.Count > 0)
+                if (notas.Count > 0)
                 {
                     RetornoEmTabela retorno = new RetornoEmTabela(notasCriadas);
                     retorno.Visible = true;
@@ -259,7 +260,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                 new ControleNotasCriadas().LimparNotasCriadas();
                 btGerarNotaFiscal.Enabled = true;
             }
-            
+
 
 
         }
@@ -279,7 +280,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
 
             if (result == DialogResult.Yes)
             {
-                                
+
                 await CriarNotaFiscal();
             }
 
@@ -296,7 +297,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
         }
         public void MarcaLinhaImportadaParaOBling(int valorDocumento, int IdProduto, decimal quantidadeParaDevolver)
         {
-            foreach(DataGridViewRow row in dvgItensSelecionados.Rows)
+            foreach (DataGridViewRow row in dvgItensSelecionados.Rows)
             {
                 if (row.IsNewRow)
                 {
@@ -310,7 +311,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                 {
                     row.DefaultCellStyle.BackColor = Color.LightGreen;   // fundo
                     row.DefaultCellStyle.ForeColor = Color.Black;        // texto (opcional)
-                    
+
                 }
             }
         }
@@ -333,10 +334,10 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
         public void ImportaItemParaDvgItensSelecionado(List<DataRow> linhasSelecionadas)
         {
             var dtOriginal = (DataTable)dvgConsultaNotas.DataSource;
-            
-            if(dataItensSelecionados.Rows.Count <= 0)
+
+            if (dataItensSelecionados.Rows.Count <= 0)
                 dataItensSelecionados = dtOriginal.Clone();
-            
+
 
             if (!dataItensSelecionados.Columns.Contains("Estoque origem"))
             {
@@ -357,13 +358,13 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
 
             MessageBox.Show("Itens importados com sucesso!");
 
-            
+
         }
 
 
         private void tabNavegacaoAba_Selected(object sender, TabControlEventArgs e)
         {
-            if(dvgItensSelecionados.Rows.Count <= 0)
+            if (dvgItensSelecionados.Rows.Count <= 0)
             {
                 txtCountNotas.Text = "0";
                 return;
@@ -383,17 +384,17 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                     dvgItensSelecionados.Columns["Estoque origem"].DisplayIndex = dvgItensSelecionados.Columns["Qtd para Devolver"].Index + 1;
                 }
 
-                dvgItensSelecionados.Columns["colSelecionado"].Visible= false;
+                dvgItensSelecionados.Columns["colSelecionado"].Visible = false;
                 txtCountNotas.Text = dvgItensSelecionados.Rows.Count.ToString();
 
                 btnSelecionarTudo.Enabled = true;
                 btnLimparTela.Enabled = true;
                 return;
-                
+
             }
             else
             {
-                txtCountNotas.Text =  dvgConsultaNotas.RowCount.ToString();
+                txtCountNotas.Text = dvgConsultaNotas.RowCount.ToString();
                 btnSelecionarTudo.Enabled = false;
                 btnLimparTela.Enabled = false;
             }
@@ -446,9 +447,9 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                 DataGridViewCheckBoxColumn coluna = new DataGridViewCheckBoxColumn();
                 coluna.Name = "Selecionar";
                 coluna.HeaderText = "✓";
-                coluna.DataPropertyName = "Selecionar"; 
+                coluna.DataPropertyName = "Selecionar";
                 coluna.Width = 80;
-                coluna.ReadOnly = false; 
+                coluna.ReadOnly = false;
 
                 dvgItensSelecionados.Columns.Insert(0, coluna);
 
@@ -659,7 +660,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                 }
 
                 dvgConsultaNotas.DataSource = dtFiltrado;
-                
+
             }
             else
             {
@@ -695,7 +696,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
             foreach (DataGridViewRow row in dvgItensSelecionados.Rows)
             {
                 row.Cells["Selecionar"].Value = true;
-            }            
+            }
         }
 
         private void btnLimparTela_Click(object sender, EventArgs e)
@@ -709,7 +710,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
             switch (cbFilial.SelectedIndex)
             {
 
-                case 0:                    
+                case 0:
                     dt.DefaultView.RowFilter = "";
                     break;
 
@@ -721,7 +722,39 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                     dt.DefaultView.RowFilter = "IDPessoaEmitente = 9";
                     break;
             }
-           
+
+        }
+
+        private void btnAlteraEstoque_Click(object sender, EventArgs e)
+        {
+            AlteraUnicoValorEmBloco alteraUnicoValorEmBloco = new AlteraUnicoValorEmBloco(2, new string[] {
+                    "Amazon - FBA Onsite (Full)",
+                    "Geral",
+                    "Mercado Livre - FULL",
+                    "Mercado Livre - Local",
+                    "Raia Drogasil",
+                    "Shopee",
+                    "Shopee 205632595 (Fulfillment)",
+                    "Shopee 205655037 (Fulfillment)",
+                    "Shopee 205655101 (Fulfillment)",
+                    "Shopee Garnier (Fulfillment)",
+                    "Shopee L'Oréal (Fulfillment)",
+                    "Shopee Maybelline (Fulfillment)",
+                    "Shopee Zanup (Fulfillm)",
+                    "Solfarma",
+                    "TikTok Shop"                
+            });
+
+            var resultado = alteraUnicoValorEmBloco.ShowDialog();
+            if(resultado == DialogResult.OK)
+            {
+                string valorDigitado = alteraUnicoValorEmBloco.valorDigitado;
+                foreach (DataGridViewRow row in dvgItensSelecionados.Rows)
+                {
+                    if (Convert.ToBoolean(row.Cells["Selecionar"].Value))
+                    row.Cells["Estoque Origem"].Value = valorDigitado;
+                }
+            }
         }
     }
 }

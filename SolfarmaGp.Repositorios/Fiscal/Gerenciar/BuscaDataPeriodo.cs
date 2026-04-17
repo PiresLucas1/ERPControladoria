@@ -16,12 +16,13 @@ namespace SolfarmaGp.Repositorios.Fiscal.Gerenciar
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
                     string sql = @"
-                        SELECT
+                        SELECT TOP 1
                             tbl.DataApuracaoInicio,
                             tbl.DataApuracaoFim,
                             tbl.StatusApuracao
                         FROM tblConfiguracaoPeriodo tbl
-                        WHERE tbl.StatusApuracao = 1";
+                        ORDER BY
+                        tbl.DataApuracaoFim DESC ";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {

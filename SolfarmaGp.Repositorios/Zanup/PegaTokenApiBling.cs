@@ -20,13 +20,13 @@ namespace SolfarmaGp.Repositorios.Zanup
                     cmd.CommandTimeout = 0;
 
                     // Parâmetro de entrada
-                    cmd.Parameters.Add(new SqlParameter("@INvchURL", SqlDbType.VarChar, 100)
+                    cmd.Parameters.Add(new SqlParameter("@INvchURL", SqlDbType.VarChar,100)
                     {
                         Value = "Aplicação GP - POST DEV https://api.bling.com.br/Api/v3/nfe" /* POPULA TABELA DE LOGS TBLLOGREQUESICAOAPIBLING */
                     });
 
                     // Parâmetro de saída
-                    SqlParameter paramToken = new SqlParameter("@OUTvchBearerToken", SqlDbType.VarChar, 100)
+                    SqlParameter paramToken = new SqlParameter("@OUTvchBearerToken", SqlDbType.VarChar, 3500)
                     {
                         Direction = ParameterDirection.Output
                     };

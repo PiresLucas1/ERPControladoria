@@ -28,285 +28,292 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gbFiltro = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chkExibirRelacionados = new System.Windows.Forms.CheckBox();
-            this.txtFiltro = new System.Windows.Forms.TextBox();
-            this.lbFiltroSaldo = new System.Windows.Forms.Label();
-            this.btnListaNotas = new System.Windows.Forms.Button();
-            this.cbFiltroSaldo = new System.Windows.Forms.ComboBox();
-            this.btnRelacionaItens = new System.Windows.Forms.Button();
-            this.btGerarNotaFiscal = new System.Windows.Forms.Button();
-            this.tabNavegacaoAba = new System.Windows.Forms.TabControl();
-            this.tabConsultaItens = new System.Windows.Forms.TabPage();
-            this.tabItensSelecionado = new System.Windows.Forms.TabPage();
-            this.txtCountNotas = new System.Windows.Forms.TextBox();
-            this.btnLimparTela = new System.Windows.Forms.Button();
-            this.btnSelecionarTudo = new System.Windows.Forms.Button();
-            this.dvgConsultaNotas = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            this.dvgItensSelecionados = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            this.cbFilial = new System.Windows.Forms.ComboBox();
-            this.gbFiltro.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tabNavegacaoAba.SuspendLayout();
-            this.tabConsultaItens.SuspendLayout();
-            this.tabItensSelecionado.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgItensSelecionados)).BeginInit();
-            this.SuspendLayout();
+            gbFiltro = new GroupBox();
+            groupBox1 = new GroupBox();
+            cbFilial = new ComboBox();
+            chkExibirRelacionados = new CheckBox();
+            txtFiltro = new TextBox();
+            lbFiltroSaldo = new Label();
+            btnListaNotas = new Button();
+            cbFiltroSaldo = new ComboBox();
+            btnRelacionaItens = new Button();
+            btGerarNotaFiscal = new Button();
+            tabNavegacaoAba = new TabControl();
+            tabConsultaItens = new TabPage();
+            dvgConsultaNotas = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            tabItensSelecionado = new TabPage();
+            dvgItensSelecionados = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            txtCountNotas = new TextBox();
+            btnLimparTela = new Button();
+            btnSelecionarTudo = new Button();
+            btnAlteraEstoque = new Button();
+            gbFiltro.SuspendLayout();
+            groupBox1.SuspendLayout();
+            tabNavegacaoAba.SuspendLayout();
+            tabConsultaItens.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dvgConsultaNotas).BeginInit();
+            tabItensSelecionado.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dvgItensSelecionados).BeginInit();
+            SuspendLayout();
             // 
             // gbFiltro
             // 
-            this.gbFiltro.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbFiltro.Controls.Add(this.groupBox1);
-            this.gbFiltro.Controls.Add(this.btnRelacionaItens);
-            this.gbFiltro.Location = new System.Drawing.Point(19, 15);
-            this.gbFiltro.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbFiltro.Name = "gbFiltro";
-            this.gbFiltro.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gbFiltro.Size = new System.Drawing.Size(1153, 164);
-            this.gbFiltro.TabIndex = 0;
-            this.gbFiltro.TabStop = false;
+            gbFiltro.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gbFiltro.Controls.Add(groupBox1);
+            gbFiltro.Controls.Add(btnRelacionaItens);
+            gbFiltro.Location = new Point(17, 15);
+            gbFiltro.Margin = new Padding(3, 4, 3, 4);
+            gbFiltro.Name = "gbFiltro";
+            gbFiltro.Padding = new Padding(3, 4, 3, 4);
+            gbFiltro.Size = new Size(1025, 164);
+            gbFiltro.TabIndex = 0;
+            gbFiltro.TabStop = false;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cbFilial);
-            this.groupBox1.Controls.Add(this.chkExibirRelacionados);
-            this.groupBox1.Controls.Add(this.txtFiltro);
-            this.groupBox1.Controls.Add(this.lbFiltroSaldo);
-            this.groupBox1.Controls.Add(this.btnListaNotas);
-            this.groupBox1.Controls.Add(this.cbFiltroSaldo);
-            this.groupBox1.Location = new System.Drawing.Point(10, 14);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(637, 142);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filtro Prioritário";
-            // 
-            // chkExibirRelacionados
-            // 
-            this.chkExibirRelacionados.AutoSize = true;
-            this.chkExibirRelacionados.Location = new System.Drawing.Point(218, 108);
-            this.chkExibirRelacionados.Name = "chkExibirRelacionados";
-            this.chkExibirRelacionados.Size = new System.Drawing.Size(206, 24);
-            this.chkExibirRelacionados.TabIndex = 3;
-            this.chkExibirRelacionados.Text = "Exibir da NF relacionada";
-            this.chkExibirRelacionados.UseVisualStyleBackColor = true;
-            this.chkExibirRelacionados.CheckedChanged += new System.EventHandler(this.chkExibirRelacionados_CheckedChanged_1);
-            // 
-            // txtFiltro
-            // 
-            this.txtFiltro.Location = new System.Drawing.Point(10, 108);
-            this.txtFiltro.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(156, 26);
-            this.txtFiltro.TabIndex = 2;
-            this.txtFiltro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFiltro_KeyPress);
-            // 
-            // lbFiltroSaldo
-            // 
-            this.lbFiltroSaldo.AutoSize = true;
-            this.lbFiltroSaldo.Location = new System.Drawing.Point(7, 22);
-            this.lbFiltroSaldo.Name = "lbFiltroSaldo";
-            this.lbFiltroSaldo.Size = new System.Drawing.Size(44, 20);
-            this.lbFiltroSaldo.TabIndex = 5;
-            this.lbFiltroSaldo.Text = "Filtro";
-            // 
-            // btnListaNotas
-            // 
-            this.btnListaNotas.Location = new System.Drawing.Point(504, 98);
-            this.btnListaNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnListaNotas.Name = "btnListaNotas";
-            this.btnListaNotas.Size = new System.Drawing.Size(114, 36);
-            this.btnListaNotas.TabIndex = 4;
-            this.btnListaNotas.Text = "Listar notas";
-            this.btnListaNotas.UseVisualStyleBackColor = true;
-            this.btnListaNotas.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // cbFiltroSaldo
-            // 
-            this.cbFiltroSaldo.FormattingEnabled = true;
-            this.cbFiltroSaldo.Location = new System.Drawing.Point(10, 46);
-            this.cbFiltroSaldo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cbFiltroSaldo.Name = "cbFiltroSaldo";
-            this.cbFiltroSaldo.Size = new System.Drawing.Size(156, 28);
-            this.cbFiltroSaldo.TabIndex = 1;
-            this.cbFiltroSaldo.SelectedIndexChanged += new System.EventHandler(this.cbFiltroSaldo_SelectedIndexChanged);
-            // 
-            // btnRelacionaItens
-            // 
-            this.btnRelacionaItens.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRelacionaItens.Location = new System.Drawing.Point(977, 120);
-            this.btnRelacionaItens.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnRelacionaItens.Name = "btnRelacionaItens";
-            this.btnRelacionaItens.Size = new System.Drawing.Size(156, 36);
-            this.btnRelacionaItens.TabIndex = 5;
-            this.btnRelacionaItens.Text = "Relacionar itens";
-            this.btnRelacionaItens.UseVisualStyleBackColor = true;
-            this.btnRelacionaItens.Click += new System.EventHandler(this.btnRelacionaItens_Click);
-            // 
-            // btGerarNotaFiscal
-            // 
-            this.btGerarNotaFiscal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btGerarNotaFiscal.Location = new System.Drawing.Point(996, 795);
-            this.btGerarNotaFiscal.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btGerarNotaFiscal.Name = "btGerarNotaFiscal";
-            this.btGerarNotaFiscal.Size = new System.Drawing.Size(170, 41);
-            this.btGerarNotaFiscal.TabIndex = 6;
-            this.btGerarNotaFiscal.Text = "Gerar nota fiscal";
-            this.btGerarNotaFiscal.UseVisualStyleBackColor = true;
-            this.btGerarNotaFiscal.Click += new System.EventHandler(this.btGerarNotaFiscal_Click);
-            // 
-            // tabNavegacaoAba
-            // 
-            this.tabNavegacaoAba.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabNavegacaoAba.Controls.Add(this.tabConsultaItens);
-            this.tabNavegacaoAba.Controls.Add(this.tabItensSelecionado);
-            this.tabNavegacaoAba.Location = new System.Drawing.Point(19, 186);
-            this.tabNavegacaoAba.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabNavegacaoAba.Name = "tabNavegacaoAba";
-            this.tabNavegacaoAba.SelectedIndex = 0;
-            this.tabNavegacaoAba.Size = new System.Drawing.Size(1156, 584);
-            this.tabNavegacaoAba.TabIndex = 4;
-            this.tabNavegacaoAba.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabNavegacaoAba_Selected);
-            // 
-            // tabConsultaItens
-            // 
-            this.tabConsultaItens.Controls.Add(this.dvgConsultaNotas);
-            this.tabConsultaItens.Location = new System.Drawing.Point(4, 29);
-            this.tabConsultaItens.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabConsultaItens.Name = "tabConsultaItens";
-            this.tabConsultaItens.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabConsultaItens.Size = new System.Drawing.Size(1148, 551);
-            this.tabConsultaItens.TabIndex = 0;
-            this.tabConsultaItens.Text = "Consulta Itens";
-            this.tabConsultaItens.UseVisualStyleBackColor = true;
-            // 
-            // tabItensSelecionado
-            // 
-            this.tabItensSelecionado.Controls.Add(this.dvgItensSelecionados);
-            this.tabItensSelecionado.Location = new System.Drawing.Point(4, 29);
-            this.tabItensSelecionado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabItensSelecionado.Name = "tabItensSelecionado";
-            this.tabItensSelecionado.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabItensSelecionado.Size = new System.Drawing.Size(1148, 551);
-            this.tabItensSelecionado.TabIndex = 1;
-            this.tabItensSelecionado.Text = "Itens Selecionados";
-            this.tabItensSelecionado.UseVisualStyleBackColor = true;
-            // 
-            // txtCountNotas
-            // 
-            this.txtCountNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtCountNotas.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.txtCountNotas.Enabled = false;
-            this.txtCountNotas.Location = new System.Drawing.Point(29, 802);
-            this.txtCountNotas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtCountNotas.Name = "txtCountNotas";
-            this.txtCountNotas.Size = new System.Drawing.Size(186, 26);
-            this.txtCountNotas.TabIndex = 7;
-            // 
-            // btnLimparTela
-            // 
-            this.btnLimparTela.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLimparTela.Enabled = false;
-            this.btnLimparTela.Location = new System.Drawing.Point(794, 795);
-            this.btnLimparTela.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnLimparTela.Name = "btnLimparTela";
-            this.btnLimparTela.Size = new System.Drawing.Size(170, 41);
-            this.btnLimparTela.TabIndex = 8;
-            this.btnLimparTela.Text = "Limpar Tela";
-            this.btnLimparTela.UseVisualStyleBackColor = true;
-            this.btnLimparTela.Click += new System.EventHandler(this.btnLimparTela_Click);
-            // 
-            // btnSelecionarTudo
-            // 
-            this.btnSelecionarTudo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelecionarTudo.Enabled = false;
-            this.btnSelecionarTudo.Location = new System.Drawing.Point(312, 795);
-            this.btnSelecionarTudo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnSelecionarTudo.Name = "btnSelecionarTudo";
-            this.btnSelecionarTudo.Size = new System.Drawing.Size(170, 41);
-            this.btnSelecionarTudo.TabIndex = 9;
-            this.btnSelecionarTudo.Text = "Selecionar tudo";
-            this.btnSelecionarTudo.UseVisualStyleBackColor = true;
-            this.btnSelecionarTudo.Click += new System.EventHandler(this.btnSelecionarTudo_Click);
-            // 
-            // dvgConsultaNotas
-            // 
-            this.dvgConsultaNotas.AllowUserToAddRows = false;
-            this.dvgConsultaNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dvgConsultaNotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgConsultaNotas.Location = new System.Drawing.Point(6, 6);
-            this.dvgConsultaNotas.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dvgConsultaNotas.Name = "dvgConsultaNotas";
-            this.dvgConsultaNotas.RowHeadersWidth = 62;
-            this.dvgConsultaNotas.RowTemplate.Height = 28;
-            this.dvgConsultaNotas.Size = new System.Drawing.Size(1137, 539);
-            this.dvgConsultaNotas.TabIndex = 0;
-            this.dvgConsultaNotas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgConsultaNotas_CellClick);
-            this.dvgConsultaNotas.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dvgConsultaNotas_CellFormatting);
-            this.dvgConsultaNotas.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dvgConsultaNotas_EditingControlShowing);
-            // 
-            // dvgItensSelecionados
-            // 
-            this.dvgItensSelecionados.AllowUserToAddRows = false;
-            this.dvgItensSelecionados.AllowUserToResizeRows = false;
-            this.dvgItensSelecionados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dvgItensSelecionados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dvgItensSelecionados.Location = new System.Drawing.Point(6, 6);
-            this.dvgItensSelecionados.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dvgItensSelecionados.Name = "dvgItensSelecionados";
-            this.dvgItensSelecionados.RowHeadersVisible = false;
-            this.dvgItensSelecionados.RowHeadersWidth = 62;
-            this.dvgItensSelecionados.RowTemplate.Height = 28;
-            this.dvgItensSelecionados.Size = new System.Drawing.Size(1136, 539);
-            this.dvgItensSelecionados.TabIndex = 0;
-            this.dvgItensSelecionados.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellClick);
-            this.dvgItensSelecionados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dvgItensSelecionados_CellDoubleClick);
+            groupBox1.Controls.Add(cbFilial);
+            groupBox1.Controls.Add(chkExibirRelacionados);
+            groupBox1.Controls.Add(txtFiltro);
+            groupBox1.Controls.Add(lbFiltroSaldo);
+            groupBox1.Controls.Add(btnListaNotas);
+            groupBox1.Controls.Add(cbFiltroSaldo);
+            groupBox1.Location = new Point(9, 14);
+            groupBox1.Margin = new Padding(3, 4, 3, 4);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Padding = new Padding(3, 4, 3, 4);
+            groupBox1.Size = new Size(566, 142);
+            groupBox1.TabIndex = 5;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Filtro Prioritário";
             // 
             // cbFilial
             // 
-            this.cbFilial.FormattingEnabled = true;
-            this.cbFilial.Location = new System.Drawing.Point(218, 46);
-            this.cbFilial.Name = "cbFilial";
-            this.cbFilial.Size = new System.Drawing.Size(197, 28);
-            this.cbFilial.TabIndex = 6;
-            this.cbFilial.SelectedIndexChanged += new System.EventHandler(this.cbFilial_SelectedIndexChanged);
+            cbFilial.FormattingEnabled = true;
+            cbFilial.Location = new Point(194, 46);
+            cbFilial.Name = "cbFilial";
+            cbFilial.Size = new Size(176, 28);
+            cbFilial.TabIndex = 6;
+            cbFilial.SelectedIndexChanged += cbFilial_SelectedIndexChanged;
+            // 
+            // chkExibirRelacionados
+            // 
+            chkExibirRelacionados.AutoSize = true;
+            chkExibirRelacionados.Location = new Point(194, 108);
+            chkExibirRelacionados.Name = "chkExibirRelacionados";
+            chkExibirRelacionados.Size = new Size(193, 24);
+            chkExibirRelacionados.TabIndex = 3;
+            chkExibirRelacionados.Text = "Exibir da NF relacionada";
+            chkExibirRelacionados.UseVisualStyleBackColor = true;
+            chkExibirRelacionados.CheckedChanged += chkExibirRelacionados_CheckedChanged_1;
+            // 
+            // txtFiltro
+            // 
+            txtFiltro.Location = new Point(9, 108);
+            txtFiltro.Margin = new Padding(3, 4, 3, 4);
+            txtFiltro.Name = "txtFiltro";
+            txtFiltro.Size = new Size(139, 27);
+            txtFiltro.TabIndex = 2;
+            txtFiltro.KeyPress += txtFiltro_KeyPress;
+            // 
+            // lbFiltroSaldo
+            // 
+            lbFiltroSaldo.AutoSize = true;
+            lbFiltroSaldo.Location = new Point(6, 22);
+            lbFiltroSaldo.Name = "lbFiltroSaldo";
+            lbFiltroSaldo.Size = new Size(43, 20);
+            lbFiltroSaldo.TabIndex = 5;
+            lbFiltroSaldo.Text = "Filtro";
+            // 
+            // btnListaNotas
+            // 
+            btnListaNotas.Location = new Point(448, 98);
+            btnListaNotas.Margin = new Padding(3, 4, 3, 4);
+            btnListaNotas.Name = "btnListaNotas";
+            btnListaNotas.Size = new Size(101, 36);
+            btnListaNotas.TabIndex = 4;
+            btnListaNotas.Text = "Listar notas";
+            btnListaNotas.UseVisualStyleBackColor = true;
+            btnListaNotas.Click += Button1_Click;
+            // 
+            // cbFiltroSaldo
+            // 
+            cbFiltroSaldo.FormattingEnabled = true;
+            cbFiltroSaldo.Location = new Point(9, 46);
+            cbFiltroSaldo.Margin = new Padding(3, 4, 3, 4);
+            cbFiltroSaldo.Name = "cbFiltroSaldo";
+            cbFiltroSaldo.Size = new Size(139, 28);
+            cbFiltroSaldo.TabIndex = 1;
+            cbFiltroSaldo.SelectedIndexChanged += cbFiltroSaldo_SelectedIndexChanged;
+            // 
+            // btnRelacionaItens
+            // 
+            btnRelacionaItens.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnRelacionaItens.Location = new Point(868, 120);
+            btnRelacionaItens.Margin = new Padding(3, 4, 3, 4);
+            btnRelacionaItens.Name = "btnRelacionaItens";
+            btnRelacionaItens.Size = new Size(139, 36);
+            btnRelacionaItens.TabIndex = 5;
+            btnRelacionaItens.Text = "Relacionar itens";
+            btnRelacionaItens.UseVisualStyleBackColor = true;
+            btnRelacionaItens.Click += btnRelacionaItens_Click;
+            // 
+            // btGerarNotaFiscal
+            // 
+            btGerarNotaFiscal.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btGerarNotaFiscal.Location = new Point(885, 795);
+            btGerarNotaFiscal.Margin = new Padding(3, 4, 3, 4);
+            btGerarNotaFiscal.Name = "btGerarNotaFiscal";
+            btGerarNotaFiscal.Size = new Size(151, 41);
+            btGerarNotaFiscal.TabIndex = 6;
+            btGerarNotaFiscal.Text = "Gerar nota fiscal";
+            btGerarNotaFiscal.UseVisualStyleBackColor = true;
+            btGerarNotaFiscal.Click += btGerarNotaFiscal_Click;
+            // 
+            // tabNavegacaoAba
+            // 
+            tabNavegacaoAba.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabNavegacaoAba.Controls.Add(tabConsultaItens);
+            tabNavegacaoAba.Controls.Add(tabItensSelecionado);
+            tabNavegacaoAba.Location = new Point(17, 186);
+            tabNavegacaoAba.Margin = new Padding(3, 2, 3, 2);
+            tabNavegacaoAba.Name = "tabNavegacaoAba";
+            tabNavegacaoAba.SelectedIndex = 0;
+            tabNavegacaoAba.Size = new Size(1028, 584);
+            tabNavegacaoAba.TabIndex = 4;
+            tabNavegacaoAba.Selected += tabNavegacaoAba_Selected;
+            // 
+            // tabConsultaItens
+            // 
+            tabConsultaItens.Controls.Add(dvgConsultaNotas);
+            tabConsultaItens.Location = new Point(4, 29);
+            tabConsultaItens.Margin = new Padding(3, 2, 3, 2);
+            tabConsultaItens.Name = "tabConsultaItens";
+            tabConsultaItens.Padding = new Padding(3, 2, 3, 2);
+            tabConsultaItens.Size = new Size(1020, 551);
+            tabConsultaItens.TabIndex = 0;
+            tabConsultaItens.Text = "Consulta Itens";
+            tabConsultaItens.UseVisualStyleBackColor = true;
+            // 
+            // dvgConsultaNotas
+            // 
+            dvgConsultaNotas.AllowUserToAddRows = false;
+            dvgConsultaNotas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dvgConsultaNotas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dvgConsultaNotas.Location = new Point(5, 6);
+            dvgConsultaNotas.Margin = new Padding(3, 2, 3, 2);
+            dvgConsultaNotas.Name = "dvgConsultaNotas";
+            dvgConsultaNotas.RowHeadersWidth = 62;
+            dvgConsultaNotas.RowTemplate.Height = 28;
+            dvgConsultaNotas.Size = new Size(1011, 539);
+            dvgConsultaNotas.TabIndex = 0;
+            dvgConsultaNotas.CellClick += dvgConsultaNotas_CellClick;
+            dvgConsultaNotas.CellFormatting += dvgConsultaNotas_CellFormatting;
+            dvgConsultaNotas.EditingControlShowing += dvgConsultaNotas_EditingControlShowing;
+            // 
+            // tabItensSelecionado
+            // 
+            tabItensSelecionado.Controls.Add(dvgItensSelecionados);
+            tabItensSelecionado.Location = new Point(4, 29);
+            tabItensSelecionado.Margin = new Padding(3, 2, 3, 2);
+            tabItensSelecionado.Name = "tabItensSelecionado";
+            tabItensSelecionado.Padding = new Padding(3, 2, 3, 2);
+            tabItensSelecionado.Size = new Size(1020, 551);
+            tabItensSelecionado.TabIndex = 1;
+            tabItensSelecionado.Text = "Itens Selecionados";
+            tabItensSelecionado.UseVisualStyleBackColor = true;
+            // 
+            // dvgItensSelecionados
+            // 
+            dvgItensSelecionados.AllowUserToAddRows = false;
+            dvgItensSelecionados.AllowUserToResizeRows = false;
+            dvgItensSelecionados.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dvgItensSelecionados.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dvgItensSelecionados.Location = new Point(5, 6);
+            dvgItensSelecionados.Margin = new Padding(3, 2, 3, 2);
+            dvgItensSelecionados.Name = "dvgItensSelecionados";
+            dvgItensSelecionados.RowHeadersVisible = false;
+            dvgItensSelecionados.RowHeadersWidth = 62;
+            dvgItensSelecionados.RowTemplate.Height = 28;
+            dvgItensSelecionados.Size = new Size(1010, 539);
+            dvgItensSelecionados.TabIndex = 0;
+            dvgItensSelecionados.CellClick += dvgItensSelecionados_CellClick;
+            dvgItensSelecionados.CellDoubleClick += dvgItensSelecionados_CellDoubleClick;
+            // 
+            // txtCountNotas
+            // 
+            txtCountNotas.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            txtCountNotas.BackColor = SystemColors.ScrollBar;
+            txtCountNotas.Enabled = false;
+            txtCountNotas.Location = new Point(26, 802);
+            txtCountNotas.Margin = new Padding(3, 4, 3, 4);
+            txtCountNotas.Name = "txtCountNotas";
+            txtCountNotas.Size = new Size(166, 27);
+            txtCountNotas.TabIndex = 7;
+            // 
+            // btnLimparTela
+            // 
+            btnLimparTela.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnLimparTela.Enabled = false;
+            btnLimparTela.Location = new Point(706, 795);
+            btnLimparTela.Margin = new Padding(3, 4, 3, 4);
+            btnLimparTela.Name = "btnLimparTela";
+            btnLimparTela.Size = new Size(151, 41);
+            btnLimparTela.TabIndex = 8;
+            btnLimparTela.Text = "Limpar Tela";
+            btnLimparTela.UseVisualStyleBackColor = true;
+            btnLimparTela.Click += btnLimparTela_Click;
+            // 
+            // btnSelecionarTudo
+            // 
+            btnSelecionarTudo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnSelecionarTudo.Enabled = false;
+            btnSelecionarTudo.Location = new Point(220, 798);
+            btnSelecionarTudo.Margin = new Padding(3, 4, 3, 4);
+            btnSelecionarTudo.Name = "btnSelecionarTudo";
+            btnSelecionarTudo.Size = new Size(136, 34);
+            btnSelecionarTudo.TabIndex = 9;
+            btnSelecionarTudo.Text = "Selecionar tudo";
+            btnSelecionarTudo.UseVisualStyleBackColor = true;
+            btnSelecionarTudo.Click += btnSelecionarTudo_Click;
+            // 
+            // btnAlteraEstoque
+            // 
+            btnAlteraEstoque.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnAlteraEstoque.Location = new Point(376, 798);
+            btnAlteraEstoque.Margin = new Padding(3, 4, 3, 4);
+            btnAlteraEstoque.Name = "btnAlteraEstoque";
+            btnAlteraEstoque.Size = new Size(163, 33);
+            btnAlteraEstoque.TabIndex = 10;
+            btnAlteraEstoque.Text = "Alt Estoque Em Bloco";
+            btnAlteraEstoque.UseVisualStyleBackColor = true;
+            btnAlteraEstoque.Click += btnAlteraEstoque_Click;
             // 
             // ConsultaSaldoNotasFiscais
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1192, 866);
-            this.Controls.Add(this.btnSelecionarTudo);
-            this.Controls.Add(this.btnLimparTela);
-            this.Controls.Add(this.txtCountNotas);
-            this.Controls.Add(this.tabNavegacaoAba);
-            this.Controls.Add(this.btGerarNotaFiscal);
-            this.Controls.Add(this.gbFiltro);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "ConsultaSaldoNotasFiscais";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Consulta Saldo Notas Fiscais";
-            this.gbFiltro.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.tabNavegacaoAba.ResumeLayout(false);
-            this.tabConsultaItens.ResumeLayout(false);
-            this.tabItensSelecionado.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dvgConsultaNotas)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dvgItensSelecionados)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1060, 866);
+            Controls.Add(btnAlteraEstoque);
+            Controls.Add(btnSelecionarTudo);
+            Controls.Add(btnLimparTela);
+            Controls.Add(txtCountNotas);
+            Controls.Add(tabNavegacaoAba);
+            Controls.Add(btGerarNotaFiscal);
+            Controls.Add(gbFiltro);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "ConsultaSaldoNotasFiscais";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Consulta Saldo Notas Fiscais";
+            gbFiltro.ResumeLayout(false);
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            tabNavegacaoAba.ResumeLayout(false);
+            tabConsultaItens.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dvgConsultaNotas).EndInit();
+            tabItensSelecionado.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dvgItensSelecionados).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -330,5 +337,6 @@
         private System.Windows.Forms.Button btnLimparTela;
         private System.Windows.Forms.Button btnSelecionarTudo;
         private System.Windows.Forms.ComboBox cbFilial;
+        private Button btnAlteraEstoque;
     }
 }
