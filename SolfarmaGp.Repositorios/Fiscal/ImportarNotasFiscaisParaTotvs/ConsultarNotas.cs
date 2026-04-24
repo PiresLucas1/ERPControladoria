@@ -9,7 +9,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
         public async Task<DataTable> Executar(DateTime dataInicio, DateTime dataFim)
         {
             DataTable tabela = new DataTable();
-            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpDbsol);
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
 
             try
             {

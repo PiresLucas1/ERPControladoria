@@ -35,7 +35,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         }
         public void PreencherGrid(DataTable data)
         {
-            if(data != null)
+            if (data != null)
             {
                 dvgNotas.DataSource = data;
                 tbRegistros.Text = data.Rows.Count.ToString();
@@ -43,7 +43,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             }
             MessageBox.Show("Nenhum registro encontrado para o período selecionado.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-        }   
+        }
 
         private void cbTipoData_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -53,6 +53,10 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             //    return;
             //}
         }
-        
+
+        private void btnConsultarXml_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

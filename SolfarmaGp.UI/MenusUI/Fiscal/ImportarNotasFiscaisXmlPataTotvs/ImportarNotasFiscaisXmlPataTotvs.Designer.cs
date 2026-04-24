@@ -45,7 +45,7 @@
             label1 = new Label();
             tbRegistrosAtencao = new TextBox();
             button2 = new Button();
-            button1 = new Button();
+            btnConsultarXml = new Button();
             lbRegistro = new Label();
             Filtros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgNotas).BeginInit();
@@ -160,7 +160,7 @@
             gpAcoes.Controls.Add(label1);
             gpAcoes.Controls.Add(tbRegistrosAtencao);
             gpAcoes.Controls.Add(button2);
-            gpAcoes.Controls.Add(button1);
+            gpAcoes.Controls.Add(btnConsultarXml);
             gpAcoes.Controls.Add(lbRegistro);
             gpAcoes.Controls.Add(tbRegistros);
             gpAcoes.Location = new Point(12, 637);
@@ -171,8 +171,8 @@
             // 
             // button4
             // 
-            button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button4.Location = new Point(643, 69);
+            button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button4.Location = new Point(202, 74);
             button4.Name = "button4";
             button4.Size = new Size(147, 30);
             button4.TabIndex = 13;
@@ -181,8 +181,8 @@
             // 
             // button3
             // 
-            button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button3.Location = new Point(643, 24);
+            button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button3.Location = new Point(202, 29);
             button3.Name = "button3";
             button3.Size = new Size(147, 30);
             button3.TabIndex = 12;
@@ -226,15 +226,16 @@
             button2.Text = "Importar Totvs";
             button2.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnConsultarXml
             // 
-            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button1.Location = new Point(825, 24);
-            button1.Name = "button1";
-            button1.Size = new Size(147, 30);
-            button1.TabIndex = 7;
-            button1.Text = "Consultar XMLs";
-            button1.UseVisualStyleBackColor = true;
+            btnConsultarXml.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnConsultarXml.Location = new Point(825, 24);
+            btnConsultarXml.Name = "btnConsultarXml";
+            btnConsultarXml.Size = new Size(147, 30);
+            btnConsultarXml.TabIndex = 7;
+            btnConsultarXml.Text = "Consultar XML";
+            btnConsultarXml.UseVisualStyleBackColor = true;
+            btnConsultarXml.Click += btnConsultarXml_Click;
             // 
             // lbRegistro
             // 
@@ -277,7 +278,7 @@
         private TextBox tbRegistros;
         private GroupBox gpAcoes;
         private Button button2;
-        private Button button1;
+        private Button btnConsultarXml;
         private Label lbRegistro;
         private Button btnCadastrarEans;
         private Label label1;
