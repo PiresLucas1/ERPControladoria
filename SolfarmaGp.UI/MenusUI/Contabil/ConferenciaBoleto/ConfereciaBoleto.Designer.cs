@@ -39,7 +39,7 @@
             lbBanco = new Label();
             btnConferencia = new Button();
             cbColigada = new ComboBox();
-            groupBox1 = new GroupBox();
+            gbFiltros = new GroupBox();
             btnFiltrar = new Button();
             tbValorPesquisa = new TextBox();
             label1 = new Label();
@@ -56,8 +56,10 @@
             btnVisualiza = new Button();
             tbValor = new TextBox();
             label2 = new Label();
+            label3 = new Label();
+            tbValorReferente = new TextBox();
             gpHeader.SuspendLayout();
-            groupBox1.SuspendLayout();
+            gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRelacaoBoletos).BeginInit();
             tbControlBase.SuspendLayout();
             tbBaseImportada.SuspendLayout();
@@ -87,7 +89,7 @@
             gpHeader.Controls.Add(lbBanco);
             gpHeader.Controls.Add(btnConferencia);
             gpHeader.Controls.Add(cbColigada);
-            gpHeader.Controls.Add(groupBox1);
+            gpHeader.Controls.Add(gbFiltros);
             gpHeader.Controls.Add(lbNomaArquivo);
             gpHeader.Controls.Add(txtFileName);
             gpHeader.Controls.Add(btnImportarArquivo);
@@ -175,19 +177,19 @@
             cbColigada.Size = new Size(174, 28);
             cbColigada.TabIndex = 8;
             // 
-            // groupBox1
+            // gbFiltros
             // 
-            groupBox1.Controls.Add(btnFiltrar);
-            groupBox1.Controls.Add(tbValorPesquisa);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(cbFiltro);
-            groupBox1.Controls.Add(txtFiltroTipo);
-            groupBox1.Location = new Point(647, 23);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(369, 171);
-            groupBox1.TabIndex = 7;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Filtros:";
+            gbFiltros.Controls.Add(btnFiltrar);
+            gbFiltros.Controls.Add(tbValorPesquisa);
+            gbFiltros.Controls.Add(label1);
+            gbFiltros.Controls.Add(cbFiltro);
+            gbFiltros.Controls.Add(txtFiltroTipo);
+            gbFiltros.Location = new Point(647, 23);
+            gbFiltros.Name = "gbFiltros";
+            gbFiltros.Size = new Size(369, 171);
+            gbFiltros.TabIndex = 7;
+            gbFiltros.TabStop = false;
+            gbFiltros.Text = "Filtros:";
             // 
             // btnFiltrar
             // 
@@ -260,7 +262,7 @@
             dvgRelacaoBoletos.Location = new Point(13, 8);
             dvgRelacaoBoletos.Name = "dvgRelacaoBoletos";
             dvgRelacaoBoletos.RowHeadersWidth = 51;
-            dvgRelacaoBoletos.Size = new Size(1289, 512);
+            dvgRelacaoBoletos.Size = new Size(1289, 538);
             dvgRelacaoBoletos.TabIndex = 2;
             // 
             // tbControlBase
@@ -271,7 +273,7 @@
             tbControlBase.Location = new Point(12, 211);
             tbControlBase.Name = "tbControlBase";
             tbControlBase.SelectedIndex = 0;
-            tbControlBase.Size = new Size(1323, 559);
+            tbControlBase.Size = new Size(1323, 585);
             tbControlBase.TabIndex = 3;
             // 
             // tbBaseImportada
@@ -280,7 +282,7 @@
             tbBaseImportada.Location = new Point(4, 29);
             tbBaseImportada.Name = "tbBaseImportada";
             tbBaseImportada.Padding = new Padding(3);
-            tbBaseImportada.Size = new Size(1315, 526);
+            tbBaseImportada.Size = new Size(1315, 552);
             tbBaseImportada.TabIndex = 0;
             tbBaseImportada.Text = "Base Importada";
             tbBaseImportada.UseVisualStyleBackColor = true;
@@ -291,7 +293,7 @@
             tbBaseConferencia.Location = new Point(4, 29);
             tbBaseConferencia.Name = "tbBaseConferencia";
             tbBaseConferencia.Padding = new Padding(3);
-            tbBaseConferencia.Size = new Size(1315, 526);
+            tbBaseConferencia.Size = new Size(1315, 552);
             tbBaseConferencia.TabIndex = 1;
             tbBaseConferencia.Text = "Base Conferencia";
             tbBaseConferencia.UseVisualStyleBackColor = true;
@@ -310,7 +312,7 @@
             // btnGeraLote
             // 
             btnGeraLote.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnGeraLote.Location = new Point(1165, 788);
+            btnGeraLote.Location = new Point(1165, 814);
             btnGeraLote.Name = "btnGeraLote";
             btnGeraLote.Size = new Size(153, 38);
             btnGeraLote.TabIndex = 10;
@@ -321,7 +323,7 @@
             // btnVisualiza
             // 
             btnVisualiza.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnVisualiza.Location = new Point(988, 788);
+            btnVisualiza.Location = new Point(988, 814);
             btnVisualiza.Name = "btnVisualiza";
             btnVisualiza.Size = new Size(153, 38);
             btnVisualiza.TabIndex = 11;
@@ -332,7 +334,7 @@
             // tbValor
             // 
             tbValor.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            tbValor.Location = new Point(780, 795);
+            tbValor.Location = new Point(141, 829);
             tbValor.Name = "tbValor";
             tbValor.Size = new Size(108, 27);
             tbValor.TabIndex = 17;
@@ -341,17 +343,37 @@
             // 
             label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             label2.AutoSize = true;
-            label2.Location = new Point(728, 798);
+            label2.Location = new Point(26, 799);
             label2.Name = "label2";
-            label2.Size = new Size(46, 20);
+            label2.Size = new Size(109, 20);
             label2.TabIndex = 18;
-            label2.Text = "Valor:";
+            label2.Text = "Total referente:";
+            // 
+            // label3
+            // 
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            label3.AutoSize = true;
+            label3.Location = new Point(26, 832);
+            label3.Name = "label3";
+            label3.Size = new Size(45, 20);
+            label3.TabIndex = 19;
+            label3.Text = "Total:";
+            // 
+            // tbValorReferente
+            // 
+            tbValorReferente.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            tbValorReferente.Location = new Point(141, 796);
+            tbValorReferente.Name = "tbValorReferente";
+            tbValorReferente.Size = new Size(108, 27);
+            tbValorReferente.TabIndex = 20;
             // 
             // ConfereciaBoleto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1347, 838);
+            ClientSize = new Size(1347, 864);
+            Controls.Add(tbValorReferente);
+            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(tbValor);
             Controls.Add(btnVisualiza);
@@ -363,8 +385,8 @@
             Load += ConfereciaBoleto_Load;
             gpHeader.ResumeLayout(false);
             gpHeader.PerformLayout();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            gbFiltros.ResumeLayout(false);
+            gbFiltros.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRelacaoBoletos).EndInit();
             tbControlBase.ResumeLayout(false);
             tbBaseImportada.ResumeLayout(false);
@@ -390,7 +412,7 @@
         private TextBox tbValorPesquisa;
         private Button btnConferencia;
         private ComboBox cbColigada;
-        private GroupBox groupBox1;
+        private GroupBox gbFiltros;
         private Label lbBanco;
         private ComponentesTelaUI.DataGridView.MyDataGridView dvgConferencia;
         private Label lbFilial;
@@ -404,5 +426,7 @@
         private ComboBox cbBanco;
         private TextBox tbValor;
         private Label label2;
+        private Label label3;
+        private TextBox tbValorReferente;
     }
 }

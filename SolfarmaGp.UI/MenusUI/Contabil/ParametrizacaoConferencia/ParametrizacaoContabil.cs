@@ -68,7 +68,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                 dt = await usecase.Execute(objeto);
                 return dt;
             }
-             await usecase.Execute(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
+            dt = await usecase.Execute(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
             return dt;
         }
         public async Task CarregaCodigoReduzido()

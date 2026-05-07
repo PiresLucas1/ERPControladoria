@@ -31,6 +31,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         {
             ConsultaNotasUseCase useCase = new ConsultaNotasUseCase();
             DataTable result = await useCase.Execute(dataInicio, dataFim);
+
             PreencherGrid(result);
         }
         public void PreencherGrid(DataTable data)

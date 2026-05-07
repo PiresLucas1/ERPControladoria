@@ -1,12 +1,17 @@
 ﻿using Microsoft.Data.SqlClient;
 using SolfarmaGp.Infraestrutura;
+using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
 {
-    public class AlteraLancamentoParametrizado
+    public class AdicionaParametrosResumido
     {
-        public async Task<Boolean> Execute(DataTable dt, string user)
+        public async Task<bool> Execute(DataTable dt, string user)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
@@ -23,7 +28,7 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
                         param.TypeName = "TpLancamentoContabilParametrizado";
                         cmd.Parameters.Add(param);
                         cmd.Parameters.AddWithValue("@INvchUsuario", user);
-                        cmd.Parameters.AddWithValue("@@INintFlag", 1);
+                        cmd.Parameters.AddWithValue("@INintFlag", 2);
 
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {

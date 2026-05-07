@@ -35,9 +35,11 @@ namespace SolfarmaGp.Infraestrutura
                 case DbName.Totvs:
                     connectionString = "Server=dbtotvs\\dbtotvs;" +
                         "Database=CORPORERM_PRODUCAO;" +
-                        "Integrated Security=True;" +
+                        "User Id=rm;" +
+                        "Password=rm;" +
                         "Encrypt=True;" +
-                        "TrustServerCertificate=True;";
+                        "TrustServerCertificate=True;" +
+                        "Connection Timeout=0;";
                     break;
 
                 case DbName.GpTotvs:
