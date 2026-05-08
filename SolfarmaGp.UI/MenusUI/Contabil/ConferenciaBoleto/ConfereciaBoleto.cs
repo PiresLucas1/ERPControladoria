@@ -6,10 +6,13 @@ using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dados;
 using SolfarmaGp.Controllers.Utils.EnumerableToDateTable;
 using SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela;
 using SolfarmaGp.UI.MenusUI.Contabil.ParametrizacaoConferencia;
+using System.ComponentModel;
 using System.Data;
+using System.Globalization;
 using System.Text;
 using static SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.ConsultaLancamentoContabilParametrizadoUseCase;
 using static SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dados.ConsultaLancamentoContabilParametrizadoDadosUseCase;
+
 
 namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 {
@@ -26,17 +29,48 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             public DateTime DataDocumento { get; set; }
             public string ContaCompletaDebito { get; set; }
             public string ContaCompletaCredito { get; set; }
-        }        
-        List<ConferenciaResultado> listaResultado { get; set; } = new List<ConferenciaResultado>();
+        }
+
+        private List<ConferenciaResultado> listaResultado = new();
+        private BindingList<ConferenciaResultado> listaExibida = new();
+        private BindingSource bsConferencia = new();
 
         public ConfereciaBoleto()
         {
             InitializeComponent();
             ExcelPackage.License.SetNonCommercialPersonal("SolfarmaGP");
             cbColigada.Items.Add(10);
-            cbFiltro.Items.AddRange(new string[] { "ContaDebito", "ContaCredito", "Complemento" });
             gbFiltros.Enabled = false;
+            dtpDocumento.Enabled = false;
+            checkDataFiltro.Checked = false;
 
+            bsConferencia.DataSource = listaExibida;
+            dvgConferencia.DataSource = bsConferencia;
+
+
+        }
+
+        private void CarregarGrid(IEnumerable<ConferenciaResultado> dados)
+        {
+            listaExibida = new BindingList<ConferenciaResultado>(dados.ToList());
+            bsConferencia.DataSource = listaExibida;
+
+            if (dvgConferencia.Columns["ContaCompletaDebito"] != null)
+                dvgConferencia.Columns["ContaCompletaDebito"].Visible = false;
+
+            if (dvgConferencia.Columns["ContaCompletaCredito"] != null)
+                dvgConferencia.Columns["ContaCompletaCredito"].Visible = false;
+
+            if (dvgConferencia.Columns["DataDocumento"] != null)
+                dvgConferencia.Columns["DataDocumento"].DefaultCellStyle.Format = "dd/MM/yyyy";
+
+            AtualizarTotal(listaExibida);
+        }
+        private void AtualizarTotal(IEnumerable<ConferenciaResultado> lista)
+        {
+            decimal valorTotal = lista.Sum(x => Convert.ToDecimal(x.Valor, new CultureInfo("en-US")));
+
+            tbValorReferente.Text = valorTotal.ToString();
         }
 
         private void btnImportarArquivo_Click(object sender, EventArgs e)
@@ -120,7 +154,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             {
                 MessageBox.Show("Necessário selecionar coligada"); return;
             }
-            if (dtProcesso.Rows.Count < 1 )
+            if (dtProcesso.Rows.Count < 1 || dtProcesso == null)
             {
                 MessageBox.Show("Não foi possivel Localizar base importada"); return;
             }
@@ -133,7 +167,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             var numberBanco = Convert.ToInt32(cbBanco.Text);
 
             var result = await VerificaSeExisteValorEmParametros(numberFilial, numberColigada, numberBanco, dtProcesso);
-            if(result != 1) { return; }
+            if (result != 1) { return; }
             await ExecutaConferencia(dtProcesso, numberFilial, numberColigada, numberBanco);
         }
         public async Task<int> VerificaSeExisteValorEmParametros(int numberFilial, int numberColigada, int numberBanco, DataTable dtProcesso)
@@ -181,11 +215,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                 dtParametrosNaoEncontrados.Columns.Add("CodColigada", typeof(int));
                 dtParametrosNaoEncontrados.Columns.Add("CodBanco", typeof(int));
 
-                foreach(string descricaoExtrato in listaParametrosNaoEncontrado)
+                foreach (string descricaoExtrato in listaParametrosNaoEncontrado)
                 {
                     DataRow row = dtParametrosNaoEncontrados.NewRow();
 
-                    row["CodContaDebito"]= DBNull.Value;
+                    row["CodContaDebito"] = DBNull.Value;
                     row["CodContaCredito"] = DBNull.Value;
                     row["CodHistorico"] = DBNull.Value;
                     row["Complemento"] = DBNull.Value;
@@ -194,15 +228,15 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                     row["Filial"] = numberFilial;
                     row["CodColigada"] = numberColigada;
                     row["CodBanco"] = numberBanco;
-                    dtParametrosNaoEncontrados.Rows.Add(row);  
+                    dtParametrosNaoEncontrados.Rows.Add(row);
                 }
                 //dtParametrosNaoEncontrados.Rows.Add(0, 0, 0, descricaoExtrato, descricaoExtrato, numberFilial, numberColigada, numberBanco);
-                
+
                 string mensagem = "Os seguintes complementos não foram encontrados nos parâmetros:\n" + string.Join("\n", listaParametrosNaoEncontrado);
                 MessageBox.Show(mensagem, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 DialogResult result = MessageBox.Show("Deseja inserir os complementos não encontrados nos parâmetros?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if(result == DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
                     // Lógica para inserir os complementos não encontrados nos parâmetros
                     using (var form = new AdicionaParametroResumido(dtParametrosNaoEncontrados))
@@ -214,14 +248,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                         else
                         {
                             // O usuário cancelou a operação, então você pode optar por não fazer nada ou fechar a aplicação, dependendo do seu fluxo
-                            
                         }
                     }
-                    
-                    
                     //MessageBox.Show("Complementos inseridos nos parâmetros com sucesso!");
                 }
-                
+
             }
             return 1;
 
@@ -244,21 +275,27 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
             var resultado = from baseImportada in dt.AsEnumerable()
                             from baseParametros in dtParametros.AsEnumerable()
-                            let palavras = baseParametros.Field<string>("DescricaoExtrato")
-                                           .Split(' ', StringSplitOptions.RemoveEmptyEntries)
+
+                            let complemento = RemoverAcentos(baseImportada.Field<string>("Complemento") ?? "")
+                            let descricao = RemoverAcentos(baseParametros.Field<string>("DescricaoExtrato") ?? "")
+
+                            let palavras = descricao.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+
+                            //let palavras = baseParametros.Field<string>("DescricaoExtrato")
+                            //               .Split(' ', StringSplitOptions.RemoveEmptyEntries)
 
                             where
                                 baseParametros.Field<int>("CodColigada") == coligada
                                 && baseImportada.Field<string>("Movimentacao")?.Trim().Equals("C", StringComparison.OrdinalIgnoreCase) == true
                                 && baseParametros.Field<int>("Filial") == filial
+                                && baseParametros.Field<int>("CodBanco") == banco
                                 && palavras.All(p =>
-                                            baseImportada.Field<string>("Complemento")
-                                            .Contains(p, StringComparison.OrdinalIgnoreCase))
+                                        complemento.Contains(p, StringComparison.OrdinalIgnoreCase))
                             select new ConferenciaResultado
                             {
                                 ContaDebito = baseParametros.Field<int>("CodContaDebito").ToString() ?? "",
                                 ContaCredito = baseParametros.Field<int>("CodContaCredito").ToString() ?? "",
-                                Valor = baseImportada.Field<string>("Valor") ?? "",
+                                Valor = ConverterValor(baseImportada.Field<string>("Valor")).ToString("N2", new CultureInfo("en-US")) ?? "",
                                 CodigoHistorico = baseParametros.Field<string>("CodHistorico").ToString() ?? "",
                                 Complemento = baseParametros.Field<string>("Complemento") ?? "",
                                 Filial = baseParametros.Field<int?>("Filial") ?? 0,
@@ -267,51 +304,95 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                                 ContaCompletaCredito = baseParametros.Field<string>("ContaCompletaCredito"),
                             };
             listaResultado = resultado.ToList();
-            dvgConferencia.DataSource = resultado.ToList();
-            dvgConferencia.Columns["ContaCompletaDebito"].Visible = false;
-            dvgConferencia.Columns["ContaCompletaCredito"].Visible = false;
 
-            decimal valorTotal = 0;
-            foreach(var row in resultado.ToList())
-            {
-                valorTotal += Convert.ToDecimal(row.Valor);
-            }
-            tbValor.Text = valorTotal.ToString();
-            tbValorReferente.Text = valorTotal.ToString();
+            //dvgConferencia.Columns["ContaCompletaDebito"].Visible = false;
+            //dvgConferencia.Columns["ContaCompletaCredito"].Visible = false;
+            //dvgConferencia.Columns["DataDocumento"].DefaultCellStyle.Format = "dd/MM/yyyy";
+
+            //decimal valorTotal = listaResultado.Sum(row => Convert.ToDecimal(row.Valor, new CultureInfo("en-US")));
+            //tbValor.Text = valorTotal.ToString("N2", new CultureInfo("en-US"));
+            //tbValorReferente.Text = valorTotal.ToString("N2", new CultureInfo("en-US"));            
+            CarregarGrid(listaResultado);
+
+            tbValor.Text = listaResultado
+                .Sum(x => Convert.ToDecimal(x.Valor, new CultureInfo("en-US")))
+                .ToString();
+
             MessageBox.Show("Conferencia Finalizada");
             gbFiltros.Enabled = true;
 
         }
+        private string RemoverAcentos(string texto)
+        {
+            var normalizado = texto.Normalize(System.Text.NormalizationForm.FormD);
+
+            var chars = normalizado
+                .Where(c => System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c)
+                    != System.Globalization.UnicodeCategory.NonSpacingMark)
+                .ToArray();
+
+            return new string(chars).Normalize(System.Text.NormalizationForm.FormC);
+        }
+        private decimal ConverterValor(string valor)
+        {
+            if (string.IsNullOrWhiteSpace(valor))
+                return 0;
+
+            valor = valor.Trim();
+
+            var culturas = new[]
+            {
+                new CultureInfo("pt-BR"),
+                new CultureInfo("en-US")
+            };
+
+            foreach (var cultura in culturas)
+            {
+                if (decimal.TryParse(valor, NumberStyles.Number, cultura, out decimal resultado))
+                    return resultado;
+            }
+
+            throw new FormatException($"Valor inválido: {valor}");
+        }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
-            string filtroSelecionado = cbFiltro.Text;
-            string valorPesquisa = tbValorPesquisa.Text;
+            string valorContaDebito = tbContaDebito.Text;
+            string valorContaCredito = tbContaCredito.Text;
+            string valorComplemento = tbComplemento.Text;
+            string valorHistorico = tbHistorico.Text;
+            string valorDocumento = tbValorDocumento.Text;
+            DateTime valorData = dtpDocumento.Value.Date;
 
             //List<ConferenciaResultado> listaResultado = (List<ConferenciaResultado>)dvgConferencia.DataSource;
 
-            if (string.IsNullOrWhiteSpace(valorPesquisa))
+            if (string.IsNullOrWhiteSpace(valorContaDebito) &&
+               string.IsNullOrWhiteSpace(valorContaCredito) &&
+               string.IsNullOrWhiteSpace(valorComplemento) &&
+               string.IsNullOrWhiteSpace(valorHistorico) &&
+               string.IsNullOrWhiteSpace(valorDocumento) &&
+               checkDataFiltro.Checked == false
+               )
             {
-                dvgConferencia.DataSource = listaResultado;
+                MessageBox.Show("Informe ao menos um filtro para realizar a busca.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            valorPesquisa = valorPesquisa.ToLower();
 
-            var filtrado = listaResultado.Where(x =>
-            {
-                var propriedade = x.GetType().GetProperty(filtroSelecionado);
-
-                if (propriedade == null)
-                    return false;
-
-                var valor = propriedade.GetValue(x)?.ToString()?.ToLower();
-
-                return valor != null && valor.Contains(valorPesquisa);
-            }).ToList();
+            var filtrado = listaResultado
+                .AsEnumerable()
+                .Where(x =>
+                    (string.IsNullOrWhiteSpace(valorContaDebito) || x.ContaDebito.Contains(valorContaDebito, StringComparison.OrdinalIgnoreCase)) &&
+                    (string.IsNullOrWhiteSpace(valorContaCredito) || x.ContaCredito.Contains(valorContaCredito, StringComparison.OrdinalIgnoreCase)) &&
+                    (string.IsNullOrWhiteSpace(valorComplemento) || x.Complemento.Contains(valorComplemento, StringComparison.OrdinalIgnoreCase)) &&
+                    (string.IsNullOrWhiteSpace(valorHistorico) || x.CodigoHistorico.Contains(valorHistorico, StringComparison.OrdinalIgnoreCase)) &&
+                    (string.IsNullOrWhiteSpace(valorDocumento) || x.Valor.Contains(valorDocumento, StringComparison.OrdinalIgnoreCase)) &&
+                    (!checkDataFiltro.Checked || x.DataDocumento.Date == valorData.Date)
+                )
+                .ToList();
 
             dvgConferencia.DataSource = filtrado;
-            tbValorReferente.Text = filtrado.Sum(x => Convert.ToDecimal(x.Valor)).ToString("N2");        
+            tbValorReferente.Text = filtrado.Sum(x => Convert.ToDecimal(x.Valor)).ToString("N2");
         }
 
         private void btnGeraLote_Click(object sender, EventArgs e)
@@ -468,9 +549,42 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
         {
             BuscaBancoIDsUseCase useCase = new BuscaBancoIDsUseCase();
             DataTable bancoIds = await useCase.Execute();
-            cbBanco.DataSource =  bancoIds;
+            cbBanco.DataSource = bancoIds;
             cbBanco.DisplayMember = "bancos_id";
             cbBanco.ValueMember = "bancos_id";
+        }
+
+        private void checkDataFiltro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkDataFiltro.Checked)
+            {
+                dtpDocumento.Enabled = true;
+            }
+            else
+            {
+                dtpDocumento.Enabled = false;
+                dtpDocumento.Value = DateTime.Now;
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (bsConferencia.Current is not ConferenciaResultado item)
+                return;
+
+            listaResultado.Remove(item);
+            listaExibida.Remove(item);
+
+            AtualizarTotal(listaExibida);
+
+            tbValor.Text = listaResultado
+                .Sum(x => Convert.ToDecimal(x.Valor, new CultureInfo("en-US")))
+                .ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -18,7 +18,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
         public List<dtoObjetoComboBoxInteface> cbHistorico { get; set; }
         public List<dtoObjetoComboBoxInteface> cbCodComplemento { get; set; }
         public List<dtoObjetoComboBoxInteface> cbContaCotabil { get; set; }
-              
+
         public ParametrizacaoContabil()
         {
             InitializeComponent();
@@ -56,7 +56,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
 
         private async void ParametrizacaoContabil_Load(object sender, EventArgs e)
         {
-            await CarregaTela(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito=0});
+            await CarregaTela(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
 
         }
         public async Task<DataTable> AtualizarDataGrid(ObjetoPesquisaParametrosContabilDados objeto)
@@ -128,7 +128,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             DataTable dt = new DataTable();
             if (objeto != null)
             {
-                 dt = await AtualizarDataGrid(objeto);
+                dt = await AtualizarDataGrid(objeto);
             }
             else
             {
@@ -151,20 +151,20 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             tbCount.Text = dt.Rows.Count.ToString();
         }
         private async void btnFiltrar_Click(object sender, EventArgs e)
-        {            
-            int CodColigada = cbColigada.Text  != "" ? Convert.ToInt32(cbColigada.Text) : 0;
+        {
+            int CodColigada = cbColigada.Text != "" ? Convert.ToInt32(cbColigada.Text) : 0;
             int filial = tbFilial.Text != "" ? Convert.ToInt32(tbFilial.Text) : 0;
-            int banco = tbBanco.Text != "" ?  Convert.ToInt32(tbBanco.Text) : 0;
-            int reduzidoCredito = tbReduzidoCredito.Text != "" ? Convert.ToInt32(tbReduzidoCredito.Text): 0;
+            int banco = tbBanco.Text != "" ? Convert.ToInt32(tbBanco.Text) : 0;
+            int reduzidoCredito = tbReduzidoCredito.Text != "" ? Convert.ToInt32(tbReduzidoCredito.Text) : 0;
             int reduzidoDebito = tbReduzidoDebito.Text != "" ? Convert.ToInt32(tbReduzidoDebito.Text) : 0;
 
             ObjetoPesquisaParametrosContabilDados pesquisa = new ObjetoPesquisaParametrosContabilDados
             {
-                CodColigada = CodColigada ,
-                filial = filial ,
-                banco = banco ,
+                CodColigada = CodColigada,
+                filial = filial,
+                banco = banco,
                 reduzidoCredito = reduzidoCredito,
-                reduzidoDebito = reduzidoDebito 
+                reduzidoDebito = reduzidoDebito
             };
 
             await CarregaTela(pesquisa);
@@ -351,7 +351,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             ProcessStatusManager.Update("Processando...");
             try
             {
-                
+
                 string user = new Portal().pegaValorUsuario();
                 AlteraLancamentoParametrizadoUseCase usecase = new AlteraLancamentoParametrizadoUseCase();
                 var result = await usecase.Execute(dt, user);
@@ -363,17 +363,26 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             catch (Exception ex)
             {
                 ProcessStatusManager.Error(ex);
-                MessageBox.Show(ex.Message,"Erro Ao salvar Parametros",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Erro Ao salvar Parametros", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 ProcessStatusManager.Stop();
 
             }
-           
 
 
 
+
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            if (dvgParametrizacao.CurrentRow == null)
+                return;
+            if(dvgParametrizacao.CurrentRow.IsNewRow)
+                return;
+            dvgParametrizacao.Rows.RemoveAt(dvgParametrizacao.CurrentRow.Index);
         }
     }
 }

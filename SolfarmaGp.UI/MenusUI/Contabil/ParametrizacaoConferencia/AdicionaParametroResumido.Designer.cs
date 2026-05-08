@@ -31,6 +31,7 @@
             dvgResumo = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             btnCancelar = new Button();
             btnConfirmar = new Button();
+            btnAdicionarItem = new Button();
             ((System.ComponentModel.ISupportInitialize)dvgResumo).BeginInit();
             SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             // btnCancelar
             // 
             btnCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnCancelar.Location = new Point(696, 606);
+            btnCancelar.Location = new Point(12, 606);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(94, 29);
             btnCancelar.TabIndex = 1;
@@ -67,11 +68,23 @@
             btnConfirmar.UseVisualStyleBackColor = true;
             btnConfirmar.Click += btnConfirmar_Click;
             // 
+            // btnAdicionarItem
+            // 
+            btnAdicionarItem.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnAdicionarItem.Location = new Point(641, 606);
+            btnAdicionarItem.Name = "btnAdicionarItem";
+            btnAdicionarItem.Size = new Size(141, 29);
+            btnAdicionarItem.TabIndex = 3;
+            btnAdicionarItem.Text = "Adicionar Item";
+            btnAdicionarItem.UseVisualStyleBackColor = true;
+            btnAdicionarItem.Click += btnAdicionarItem_Click;
+            // 
             // AdicionaParametroResumido
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(920, 661);
+            Controls.Add(btnAdicionarItem);
             Controls.Add(btnConfirmar);
             Controls.Add(btnCancelar);
             Controls.Add(dvgResumo);
@@ -86,5 +99,6 @@
         private ComponentesTelaUI.DataGridView.MyDataGridView dvgResumo;
         private Button btnCancelar;
         private Button btnConfirmar;
+        private Button btnAdicionarItem;
     }
 }

@@ -23,7 +23,7 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao
                         param.TypeName = "TpLancamentoContabilParametrizado";
                         cmd.Parameters.Add(param);
                         cmd.Parameters.AddWithValue("@INvchUsuario", user);
-                        cmd.Parameters.AddWithValue("@@INintFlag", 1);
+                        cmd.Parameters.AddWithValue("@INintFlag", 1);
 
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {

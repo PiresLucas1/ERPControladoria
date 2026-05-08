@@ -37,16 +37,25 @@
             lbFilial = new Label();
             tbFilial = new TextBox();
             lbBanco = new Label();
-            btnConferencia = new Button();
             cbColigada = new ComboBox();
             gbFiltros = new GroupBox();
-            btnFiltrar = new Button();
-            tbValorPesquisa = new TextBox();
+            checkDataFiltro = new CheckBox();
+            label6 = new Label();
+            dtpDocumento = new DateTimePicker();
+            tbValorDocumento = new TextBox();
+            label5 = new Label();
+            tbHistorico = new TextBox();
+            label4 = new Label();
             label1 = new Label();
-            cbFiltro = new ComboBox();
-            txtFiltroTipo = new Label();
+            tbComplemento = new TextBox();
+            tbContaCredito = new TextBox();
+            lbCredito = new Label();
+            btnFiltrar = new Button();
+            tbContaDebito = new TextBox();
+            lbContaDebito = new Label();
             lbNomaArquivo = new Label();
             txtFileName = new TextBox();
+            btnConferencia = new Button();
             dvgRelacaoBoletos = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             tbControlBase = new TabControl();
             tbBaseImportada = new TabPage();
@@ -58,6 +67,9 @@
             label2 = new Label();
             label3 = new Label();
             tbValorReferente = new TextBox();
+            groupBox1 = new GroupBox();
+            btnExcluir = new Button();
+            button1 = new Button();
             gpHeader.SuspendLayout();
             gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRelacaoBoletos).BeginInit();
@@ -65,6 +77,7 @@
             tbBaseImportada.SuspendLayout();
             tbBaseConferencia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgConferencia).BeginInit();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // btnImportarArquivo
@@ -87,7 +100,6 @@
             gpHeader.Controls.Add(lbFilial);
             gpHeader.Controls.Add(tbFilial);
             gpHeader.Controls.Add(lbBanco);
-            gpHeader.Controls.Add(btnConferencia);
             gpHeader.Controls.Add(cbColigada);
             gpHeader.Controls.Add(gbFiltros);
             gpHeader.Controls.Add(lbNomaArquivo);
@@ -95,7 +107,7 @@
             gpHeader.Controls.Add(btnImportarArquivo);
             gpHeader.Location = new Point(12, 5);
             gpHeader.Name = "gpHeader";
-            gpHeader.Size = new Size(1323, 200);
+            gpHeader.Size = new Size(1409, 200);
             gpHeader.TabIndex = 1;
             gpHeader.TabStop = false;
             gpHeader.Text = "Geral";
@@ -158,17 +170,6 @@
             lbBanco.TabIndex = 10;
             lbBanco.Text = "Selecione a Coligada:";
             // 
-            // btnConferencia
-            // 
-            btnConferencia.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnConferencia.Location = new Point(1179, 156);
-            btnConferencia.Name = "btnConferencia";
-            btnConferencia.Size = new Size(138, 29);
-            btnConferencia.TabIndex = 9;
-            btnConferencia.Text = "Conferir";
-            btnConferencia.UseVisualStyleBackColor = true;
-            btnConferencia.Click += btnConferencia_Click;
-            // 
             // cbColigada
             // 
             cbColigada.FormattingEnabled = true;
@@ -179,60 +180,145 @@
             // 
             // gbFiltros
             // 
-            gbFiltros.Controls.Add(btnFiltrar);
-            gbFiltros.Controls.Add(tbValorPesquisa);
+            gbFiltros.Controls.Add(button1);
+            gbFiltros.Controls.Add(checkDataFiltro);
+            gbFiltros.Controls.Add(label6);
+            gbFiltros.Controls.Add(dtpDocumento);
+            gbFiltros.Controls.Add(tbValorDocumento);
+            gbFiltros.Controls.Add(label5);
+            gbFiltros.Controls.Add(tbHistorico);
+            gbFiltros.Controls.Add(label4);
             gbFiltros.Controls.Add(label1);
-            gbFiltros.Controls.Add(cbFiltro);
-            gbFiltros.Controls.Add(txtFiltroTipo);
-            gbFiltros.Location = new Point(647, 23);
+            gbFiltros.Controls.Add(tbComplemento);
+            gbFiltros.Controls.Add(tbContaCredito);
+            gbFiltros.Controls.Add(lbCredito);
+            gbFiltros.Controls.Add(btnFiltrar);
+            gbFiltros.Controls.Add(tbContaDebito);
+            gbFiltros.Controls.Add(lbContaDebito);
+            gbFiltros.Location = new Point(614, 17);
             gbFiltros.Name = "gbFiltros";
-            gbFiltros.Size = new Size(369, 171);
+            gbFiltros.Size = new Size(741, 171);
             gbFiltros.TabIndex = 7;
             gbFiltros.TabStop = false;
             gbFiltros.Text = "Filtros:";
             // 
+            // checkDataFiltro
+            // 
+            checkDataFiltro.AutoSize = true;
+            checkDataFiltro.Location = new Point(545, 81);
+            checkDataFiltro.Name = "checkDataFiltro";
+            checkDataFiltro.Size = new Size(145, 24);
+            checkDataFiltro.TabIndex = 21;
+            checkDataFiltro.Text = "Data Documento";
+            checkDataFiltro.UseVisualStyleBackColor = true;
+            checkDataFiltro.CheckedChanged += checkDataFiltro_CheckedChanged;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(539, 23);
+            label6.Name = "label6";
+            label6.Size = new Size(44, 20);
+            label6.TabIndex = 20;
+            label6.Text = "Data:";
+            // 
+            // dtpDocumento
+            // 
+            dtpDocumento.Format = DateTimePickerFormat.Short;
+            dtpDocumento.Location = new Point(545, 49);
+            dtpDocumento.Name = "dtpDocumento";
+            dtpDocumento.Size = new Size(150, 27);
+            dtpDocumento.TabIndex = 19;
+            // 
+            // tbValorDocumento
+            // 
+            tbValorDocumento.Location = new Point(279, 113);
+            tbValorDocumento.Name = "tbValorDocumento";
+            tbValorDocumento.Size = new Size(129, 27);
+            tbValorDocumento.TabIndex = 18;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(279, 85);
+            label5.Name = "label5";
+            label5.Size = new Size(43, 20);
+            label5.TabIndex = 17;
+            label5.Text = "Valor";
+            // 
+            // tbHistorico
+            // 
+            tbHistorico.Location = new Point(370, 51);
+            tbHistorico.Name = "tbHistorico";
+            tbHistorico.Size = new Size(129, 27);
+            tbHistorico.TabIndex = 16;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(370, 25);
+            label4.Name = "label4";
+            label4.Size = new Size(72, 20);
+            label4.TabIndex = 15;
+            label4.Text = "Histórico:";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(28, 83);
+            label1.Name = "label1";
+            label1.Size = new Size(107, 20);
+            label1.TabIndex = 14;
+            label1.Text = "Complemento:";
+            // 
+            // tbComplemento
+            // 
+            tbComplemento.Location = new Point(28, 110);
+            tbComplemento.Name = "tbComplemento";
+            tbComplemento.Size = new Size(217, 27);
+            tbComplemento.TabIndex = 13;
+            // 
+            // tbContaCredito
+            // 
+            tbContaCredito.Location = new Point(196, 51);
+            tbContaCredito.Name = "tbContaCredito";
+            tbContaCredito.Size = new Size(129, 27);
+            tbContaCredito.TabIndex = 12;
+            // 
+            // lbCredito
+            // 
+            lbCredito.AutoSize = true;
+            lbCredito.Location = new Point(196, 25);
+            lbCredito.Name = "lbCredito";
+            lbCredito.Size = new Size(104, 20);
+            lbCredito.TabIndex = 11;
+            lbCredito.Text = "Conta Credito:";
+            // 
             // btnFiltrar
             // 
-            btnFiltrar.Location = new Point(245, 129);
+            btnFiltrar.Location = new Point(596, 116);
             btnFiltrar.Name = "btnFiltrar";
-            btnFiltrar.Size = new Size(100, 29);
+            btnFiltrar.Size = new Size(114, 34);
             btnFiltrar.TabIndex = 10;
             btnFiltrar.Text = "Filtrar";
             btnFiltrar.UseVisualStyleBackColor = true;
             btnFiltrar.Click += btnFiltrar_Click;
             // 
-            // tbValorPesquisa
+            // tbContaDebito
             // 
-            tbValorPesquisa.Location = new Point(28, 129);
-            tbValorPesquisa.Name = "tbValorPesquisa";
-            tbValorPesquisa.Size = new Size(189, 27);
-            tbValorPesquisa.TabIndex = 5;
+            tbContaDebito.Location = new Point(28, 51);
+            tbContaDebito.Name = "tbContaDebito";
+            tbContaDebito.Size = new Size(120, 27);
+            tbContaDebito.TabIndex = 5;
             // 
-            // label1
+            // lbContaDebito
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(28, 101);
-            label1.Name = "label1";
-            label1.Size = new Size(106, 20);
-            label1.TabIndex = 6;
-            label1.Text = "Valor Pesquisa:";
-            // 
-            // cbFiltro
-            // 
-            cbFiltro.FormattingEnabled = true;
-            cbFiltro.Location = new Point(28, 60);
-            cbFiltro.Name = "cbFiltro";
-            cbFiltro.Size = new Size(163, 28);
-            cbFiltro.TabIndex = 2;
-            // 
-            // txtFiltroTipo
-            // 
-            txtFiltroTipo.AutoSize = true;
-            txtFiltroTipo.Location = new Point(28, 31);
-            txtFiltroTipo.Name = "txtFiltroTipo";
-            txtFiltroTipo.Size = new Size(141, 20);
-            txtFiltroTipo.TabIndex = 3;
-            txtFiltroTipo.Text = "Selecione o Campo:";
+            lbContaDebito.AutoSize = true;
+            lbContaDebito.Location = new Point(28, 25);
+            lbContaDebito.Name = "lbContaDebito";
+            lbContaDebito.Size = new Size(101, 20);
+            lbContaDebito.TabIndex = 6;
+            lbContaDebito.Text = "Conta Débito:";
             // 
             // lbNomaArquivo
             // 
@@ -252,6 +338,17 @@
             txtFileName.Size = new Size(269, 27);
             txtFileName.TabIndex = 1;
             // 
+            // btnConferencia
+            // 
+            btnConferencia.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnConferencia.Location = new Point(1065, 63);
+            btnConferencia.Name = "btnConferencia";
+            btnConferencia.Size = new Size(140, 35);
+            btnConferencia.TabIndex = 9;
+            btnConferencia.Text = "Conferir";
+            btnConferencia.UseVisualStyleBackColor = true;
+            btnConferencia.Click += btnConferencia_Click;
+            // 
             // dvgRelacaoBoletos
             // 
             dvgRelacaoBoletos.AllowUserToAddRows = false;
@@ -262,7 +359,7 @@
             dvgRelacaoBoletos.Location = new Point(13, 8);
             dvgRelacaoBoletos.Name = "dvgRelacaoBoletos";
             dvgRelacaoBoletos.RowHeadersWidth = 51;
-            dvgRelacaoBoletos.Size = new Size(1289, 538);
+            dvgRelacaoBoletos.Size = new Size(1375, 632);
             dvgRelacaoBoletos.TabIndex = 2;
             // 
             // tbControlBase
@@ -273,7 +370,7 @@
             tbControlBase.Location = new Point(12, 211);
             tbControlBase.Name = "tbControlBase";
             tbControlBase.SelectedIndex = 0;
-            tbControlBase.Size = new Size(1323, 585);
+            tbControlBase.Size = new Size(1409, 679);
             tbControlBase.TabIndex = 3;
             // 
             // tbBaseImportada
@@ -282,7 +379,7 @@
             tbBaseImportada.Location = new Point(4, 29);
             tbBaseImportada.Name = "tbBaseImportada";
             tbBaseImportada.Padding = new Padding(3);
-            tbBaseImportada.Size = new Size(1315, 552);
+            tbBaseImportada.Size = new Size(1401, 646);
             tbBaseImportada.TabIndex = 0;
             tbBaseImportada.Text = "Base Importada";
             tbBaseImportada.UseVisualStyleBackColor = true;
@@ -293,7 +390,7 @@
             tbBaseConferencia.Location = new Point(4, 29);
             tbBaseConferencia.Name = "tbBaseConferencia";
             tbBaseConferencia.Padding = new Padding(3);
-            tbBaseConferencia.Size = new Size(1315, 552);
+            tbBaseConferencia.Size = new Size(1401, 646);
             tbBaseConferencia.TabIndex = 1;
             tbBaseConferencia.Text = "Base Conferencia";
             tbBaseConferencia.UseVisualStyleBackColor = true;
@@ -306,15 +403,15 @@
             dvgConferencia.Location = new Point(3, 6);
             dvgConferencia.Name = "dvgConferencia";
             dvgConferencia.RowHeadersWidth = 51;
-            dvgConferencia.Size = new Size(1306, 517);
+            dvgConferencia.Size = new Size(1392, 634);
             dvgConferencia.TabIndex = 0;
             // 
             // btnGeraLote
             // 
             btnGeraLote.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnGeraLote.Location = new Point(1165, 814);
+            btnGeraLote.Location = new Point(1227, 63);
             btnGeraLote.Name = "btnGeraLote";
-            btnGeraLote.Size = new Size(153, 38);
+            btnGeraLote.Size = new Size(153, 35);
             btnGeraLote.TabIndex = 10;
             btnGeraLote.Text = "Gerar lotes";
             btnGeraLote.UseVisualStyleBackColor = true;
@@ -323,9 +420,9 @@
             // btnVisualiza
             // 
             btnVisualiza.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnVisualiza.Location = new Point(988, 814);
+            btnVisualiza.Location = new Point(1227, 20);
             btnVisualiza.Name = "btnVisualiza";
-            btnVisualiza.Size = new Size(153, 38);
+            btnVisualiza.Size = new Size(153, 35);
             btnVisualiza.TabIndex = 11;
             btnVisualiza.Text = "Visualizar";
             btnVisualiza.UseVisualStyleBackColor = true;
@@ -333,17 +430,17 @@
             // 
             // tbValor
             // 
-            tbValor.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            tbValor.Location = new Point(141, 829);
+            tbValor.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            tbValor.Location = new Point(148, 65);
             tbValor.Name = "tbValor";
             tbValor.Size = new Size(108, 27);
             tbValor.TabIndex = 17;
             // 
             // label2
             // 
-            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label2.AutoSize = true;
-            label2.Location = new Point(26, 799);
+            label2.Location = new Point(31, 34);
             label2.Name = "label2";
             label2.Size = new Size(109, 20);
             label2.TabIndex = 18;
@@ -351,9 +448,9 @@
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label3.AutoSize = true;
-            label3.Location = new Point(26, 832);
+            label3.Location = new Point(36, 74);
             label3.Name = "label3";
             label3.Size = new Size(45, 20);
             label3.TabIndex = 19;
@@ -361,25 +458,58 @@
             // 
             // tbValorReferente
             // 
-            tbValorReferente.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            tbValorReferente.Location = new Point(141, 796);
+            tbValorReferente.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            tbValorReferente.Location = new Point(148, 34);
             tbValorReferente.Name = "tbValorReferente";
             tbValorReferente.Size = new Size(108, 27);
             tbValorReferente.TabIndex = 20;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox1.Controls.Add(btnExcluir);
+            groupBox1.Controls.Add(btnGeraLote);
+            groupBox1.Controls.Add(btnVisualiza);
+            groupBox1.Controls.Add(tbValorReferente);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(tbValor);
+            groupBox1.Controls.Add(label2);
+            groupBox1.Controls.Add(btnConferencia);
+            groupBox1.Location = new Point(16, 872);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(1401, 108);
+            groupBox1.TabIndex = 21;
+            groupBox1.TabStop = false;
+            // 
+            // btnExcluir
+            // 
+            btnExcluir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExcluir.Location = new Point(889, 63);
+            btnExcluir.Name = "btnExcluir";
+            btnExcluir.Size = new Size(140, 35);
+            btnExcluir.TabIndex = 21;
+            btnExcluir.Text = "Excluir";
+            btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(469, 116);
+            button1.Name = "button1";
+            button1.Size = new Size(114, 34);
+            button1.TabIndex = 22;
+            button1.Text = "Limpar filtro";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // ConfereciaBoleto
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1347, 864);
-            Controls.Add(tbValorReferente);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(tbValor);
-            Controls.Add(btnVisualiza);
-            Controls.Add(btnGeraLote);
+            ClientSize = new Size(1433, 982);
             Controls.Add(tbControlBase);
             Controls.Add(gpHeader);
+            Controls.Add(groupBox1);
             Name = "ConfereciaBoleto";
             Text = "ConfereciaBoleto";
             Load += ConfereciaBoleto_Load;
@@ -392,8 +522,9 @@
             tbBaseImportada.ResumeLayout(false);
             tbBaseConferencia.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dvgConferencia).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -402,14 +533,11 @@
         private GroupBox gpHeader;
         private ComponentesTelaUI.DataGridView.MyDataGridView dvgRelacaoBoletos;
         private TextBox txtFileName;
-        private Label txtFiltroTipo;
-        private ComboBox cbFiltro;
         private TabControl tbControlBase;
         private TabPage tbBaseImportada;
         private TabPage tbBaseConferencia;
         private Label lbNomaArquivo;
-        private Label label1;
-        private TextBox tbValorPesquisa;
+        private TextBox tbContaDebito;
         private Button btnConferencia;
         private ComboBox cbColigada;
         private GroupBox gbFiltros;
@@ -428,5 +556,20 @@
         private Label label2;
         private Label label3;
         private TextBox tbValorReferente;
+        private Label label1;
+        private TextBox tbComplemento;
+        private TextBox tbContaCredito;
+        private Label lbCredito;
+        private Label lbContaDebito;
+        private GroupBox groupBox1;
+        private TextBox tbHistorico;
+        private Label label4;
+        private TextBox tbValorDocumento;
+        private Label label5;
+        private DateTimePicker dtpDocumento;
+        private Label label6;
+        private CheckBox checkDataFiltro;
+        private Button btnExcluir;
+        private Button button1;
     }
 }

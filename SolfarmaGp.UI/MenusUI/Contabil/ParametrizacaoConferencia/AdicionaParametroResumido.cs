@@ -19,7 +19,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ParametrizacaoConferencia
         {
             InitializeComponent();
             dtResumo = dt;
-            _= CarregaTelaAsync();
+            _ = CarregaTelaAsync();
         }
 
         private async Task CarregaTelaAsync()
@@ -50,7 +50,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ParametrizacaoConferencia
             this.Close();
         }
 
-        
+
         public void AjustaColunasComboBox()
         {
             dvgResumo.Columns.Clear();
@@ -64,7 +64,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ParametrizacaoConferencia
                 DisplayMember = "label",
                 ValueMember = "valor",
                 ValueType = typeof(int),
-                FlatStyle = FlatStyle.Flat                
+                FlatStyle = FlatStyle.Flat
             };
 
             var colCredito = new DataGridViewComboBoxColumn
@@ -76,7 +76,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ParametrizacaoConferencia
                 DisplayMember = "label",
                 ValueMember = "valor",
                 ValueType = typeof(int),
-                FlatStyle = FlatStyle.Flat                
+                FlatStyle = FlatStyle.Flat
             };
 
             var colHistorico = new DataGridViewComboBoxColumn
@@ -88,7 +88,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ParametrizacaoConferencia
                 DisplayMember = "label",
                 ValueMember = "valor",
                 ValueType = typeof(int),
-                FlatStyle = FlatStyle.Flat                
+                FlatStyle = FlatStyle.Flat
             };
 
             var colComplemento = new DataGridViewComboBoxColumn
@@ -100,7 +100,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ParametrizacaoConferencia
                 DisplayMember = "label",
                 ValueMember = "valor",
                 ValueType = typeof(int),
-                FlatStyle = FlatStyle.Flat                
+                FlatStyle = FlatStyle.Flat
             };
 
             var colFilial = new DataGridViewTextBoxColumn
@@ -237,6 +237,15 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ParametrizacaoConferencia
             }
         }
 
-
+        private void btnAdicionarItem_Click(object sender, EventArgs e)
+        {
+            using(AdicionarItemParametro form = new AdicionarItemParametro())
+            {
+                if(form.ShowDialog() == DialogResult.OK)
+                {
+                    _ = CarregaTelaAsync();
+                }
+            }
         }
     }
+}

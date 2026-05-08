@@ -44,6 +44,7 @@
             btnFiltrar = new Button();
             lbFilial = new Label();
             btnSalvaParametros = new Button();
+            btnExcluir = new Button();
             ((System.ComponentModel.ISupportInitialize)dvgParametrizacao).BeginInit();
             gpGeral.SuspendLayout();
             SuspendLayout();
@@ -65,7 +66,7 @@
             // btnAddItem
             // 
             btnAddItem.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnAddItem.Location = new Point(188, 851);
+            btnAddItem.Location = new Point(329, 851);
             btnAddItem.Name = "btnAddItem";
             btnAddItem.Size = new Size(131, 39);
             btnAddItem.TabIndex = 1;
@@ -207,11 +208,23 @@
             btnSalvaParametros.UseVisualStyleBackColor = true;
             btnSalvaParametros.Click += btnSalvaParametros_Click;
             // 
+            // btnExcluir
+            // 
+            btnExcluir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnExcluir.Location = new Point(179, 851);
+            btnExcluir.Name = "btnExcluir";
+            btnExcluir.Size = new Size(131, 39);
+            btnExcluir.TabIndex = 7;
+            btnExcluir.Text = "Excluir item";
+            btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
+            // 
             // ParametrizacaoContabil
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1160, 910);
+            Controls.Add(btnExcluir);
             Controls.Add(btnSalvaParametros);
             Controls.Add(gpGeral);
             Controls.Add(tbCount);
@@ -249,5 +262,6 @@
         private Label lbCredito;
         private Label blContaDebito;
         private Label lbBanco;
+        private Button btnExcluir;
     }
 }
