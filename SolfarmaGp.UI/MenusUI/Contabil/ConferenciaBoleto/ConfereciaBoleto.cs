@@ -390,8 +390,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                     (!checkDataFiltro.Checked || x.DataDocumento.Date == valorData.Date)
                 )
                 .ToList();
-
-            dvgConferencia.DataSource = filtrado;
+            CarregarGrid(filtrado);
+            //dvgConferencia.DataSource = filtrado;
             tbValorReferente.Text = filtrado.Sum(x => Convert.ToDecimal(x.Valor)).ToString("N2");
         }
 
@@ -584,7 +584,20 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
         private void button1_Click(object sender, EventArgs e)
         {
+            tbContaDebito.Clear();
+            tbContaCredito.Clear();
+            tbComplemento.Clear();
+            tbHistorico.Clear();
+            tbValorDocumento.Clear();
 
+            checkDataFiltro.Checked = false;
+            dtpDocumento.Enabled = false;
+            dtpDocumento.Value = DateTime.Now;
+
+            listaExibida = new BindingList<ConferenciaResultado>(listaResultado.ToList());
+            bsConferencia.DataSource = listaExibida;
+
+            AtualizarTotal(listaExibida);
         }
     }
 }
