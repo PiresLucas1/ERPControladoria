@@ -39,8 +39,8 @@
             dvgNotas = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             tbRegistros = new TextBox();
             gpAcoes = new GroupBox();
-            button4 = new Button();
-            button3 = new Button();
+            btnLimparSelecao = new Button();
+            btnSelecionaTodos = new Button();
             btnCadastrarEans = new Button();
             label1 = new Label();
             tbRegistrosAtencao = new TextBox();
@@ -134,11 +134,14 @@
             // 
             // dvgNotas
             // 
+            dvgNotas.AllowUserToAddRows = false;
+            dvgNotas.AllowUserToDeleteRows = false;
             dvgNotas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dvgNotas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dvgNotas.ColumnHeadersHeight = 29;
-            dvgNotas.Location = new Point(12, 196);
+            dvgNotas.Location = new Point(12, 197);
             dvgNotas.Name = "dvgNotas";
+            dvgNotas.RowHeadersVisible = false;
             dvgNotas.RowHeadersWidth = 51;
             dvgNotas.Size = new Size(1171, 435);
             dvgNotas.TabIndex = 1;
@@ -154,8 +157,8 @@
             // gpAcoes
             // 
             gpAcoes.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            gpAcoes.Controls.Add(button4);
-            gpAcoes.Controls.Add(button3);
+            gpAcoes.Controls.Add(btnLimparSelecao);
+            gpAcoes.Controls.Add(btnSelecionaTodos);
             gpAcoes.Controls.Add(btnCadastrarEans);
             gpAcoes.Controls.Add(label1);
             gpAcoes.Controls.Add(tbRegistrosAtencao);
@@ -168,26 +171,29 @@
             gpAcoes.Size = new Size(1171, 119);
             gpAcoes.TabIndex = 3;
             gpAcoes.TabStop = false;
+            gpAcoes.Enter += gpAcoes_Enter;
             // 
-            // button4
+            // btnLimparSelecao
             // 
-            button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button4.Location = new Point(202, 74);
-            button4.Name = "button4";
-            button4.Size = new Size(147, 30);
-            button4.TabIndex = 13;
-            button4.Text = "Desmarcar tudo";
-            button4.UseVisualStyleBackColor = true;
+            btnLimparSelecao.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnLimparSelecao.Location = new Point(202, 74);
+            btnLimparSelecao.Name = "btnLimparSelecao";
+            btnLimparSelecao.Size = new Size(147, 30);
+            btnLimparSelecao.TabIndex = 13;
+            btnLimparSelecao.Text = "Desmarcar tudo";
+            btnLimparSelecao.UseVisualStyleBackColor = true;
+            btnLimparSelecao.Click += btnLimparSelecao_Click;
             // 
-            // button3
+            // btnSelecionaTodos
             // 
-            button3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            button3.Location = new Point(202, 29);
-            button3.Name = "button3";
-            button3.Size = new Size(147, 30);
-            button3.TabIndex = 12;
-            button3.Text = "Selecionar Tudo";
-            button3.UseVisualStyleBackColor = true;
+            btnSelecionaTodos.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnSelecionaTodos.Location = new Point(202, 29);
+            btnSelecionaTodos.Name = "btnSelecionaTodos";
+            btnSelecionaTodos.Size = new Size(147, 30);
+            btnSelecionaTodos.TabIndex = 12;
+            btnSelecionaTodos.Text = "Selecionar Tudo";
+            btnSelecionaTodos.UseVisualStyleBackColor = true;
+            btnSelecionaTodos.Click += btnSelecionaTodos_Click;
             // 
             // btnCadastrarEans
             // 
@@ -283,7 +289,7 @@
         private Button btnCadastrarEans;
         private Label label1;
         private TextBox tbRegistrosAtencao;
-        private Button button3;
-        private Button button4;
+        private Button btnSelecionaTodos;
+        private Button btnLimparSelecao;
     }
 }

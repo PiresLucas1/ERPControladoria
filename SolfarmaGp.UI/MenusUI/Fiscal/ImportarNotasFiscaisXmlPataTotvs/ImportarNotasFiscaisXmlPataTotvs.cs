@@ -1,10 +1,13 @@
 ﻿using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs;
+using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
 using System.Data;
 
 namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
 {
     public partial class ImportarNotasFiscaisXmlPataTotvs : Form
     {
+        private DataTable _tabela;
+        private BindingSource _bs = new BindingSource();
         public ImportarNotasFiscaisXmlPataTotvs()
         {
             InitializeComponent();
@@ -24,7 +27,22 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
                 return;
             }
             //instacia controller + consulta itens
-            await ConsultaNotas(dataInicio, dataFim);
+            try
+            {
+                ProcessStatusManager.Start("Carregando dados...");
+                ProcessStatusManager.Update("Processando...");
+                await ConsultaNotas(dataInicio, dataFim);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro ao consultar as notas: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            finally
+            {
+                ProcessStatusManager.Stop();
+            }
             //recuperar valor
         }
         public async Task ConsultaNotas(DateTime dataInicio, DateTime dataFim)
@@ -36,16 +54,50 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         }
         public void PreencherGrid(DataTable data)
         {
-            if (data != null)
+
+            if (data == null || data.Rows.Count == 0)
             {
-                dvgNotas.DataSource = data;
-                tbRegistros.Text = data.Rows.Count.ToString();
+                _tabela = null;
+                _bs.DataSource = null;
+                dvgNotas.DataSource = _bs;
+                tbRegistros.Text = "0";
+
+                MessageBox.Show(
+                    "Nenhum registro encontrado para o período selecionado.",
+                    "Informação",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
+
                 return;
             }
-            MessageBox.Show("Nenhum registro encontrado para o período selecionado.", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            _tabela = data;
+            _bs.DataSource = _tabela;
+            dvgNotas.DataSource = _bs;
+            AdicionarColunaSelecao();
+
+            dvgNotas.Columns["DataVencimento"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dvgNotas.Columns["DataPagamento"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dvgNotas.Columns["DataDocumento"].DefaultCellStyle.Format = "dd/MM/yyyy";
+
+            tbRegistros.Text = _tabela.Rows.Count.ToString();
         }
 
+        private void AdicionarColunaSelecao()
+        {
+            if (dvgNotas.Columns.Contains("Selecionado"))
+                return;
+
+            DataGridViewCheckBoxColumn colunaSelecao = new DataGridViewCheckBoxColumn();
+
+            colunaSelecao.Name = "Selecionado";
+            colunaSelecao.HeaderText = "";
+            colunaSelecao.Width = 40;
+            colunaSelecao.ReadOnly = false;
+
+            dvgNotas.Columns.Insert(0, colunaSelecao);
+        }
         private void cbTipoData_SelectedIndexChanged(object sender, EventArgs e)
         {
             //if(cbTipoData.SelectedText != "Data de Lançamento" )
@@ -58,6 +110,35 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         private void btnConsultarXml_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSelecionaTodos_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dvgNotas.Rows)
+            {
+                DataGridViewCheckBoxCell checkBoxCell = row.Cells["Selecionado"] as DataGridViewCheckBoxCell;
+                if (checkBoxCell != null)
+                {
+                    checkBoxCell.Value = true;
+                }
+            }
+        }
+
+        private void gpAcoes_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLimparSelecao_Click(object sender, EventArgs e)
+        {
+            foreach(DataGridViewRow row in dvgNotas.Rows)
+            {
+                DataGridViewCheckBoxCell checkBoxCell = row.Cells["Selecionado"] as DataGridViewCheckBoxCell;
+                if (checkBoxCell != null)
+                {
+                    checkBoxCell.Value = false;
+                }
+            }
         }
     }
 }
