@@ -6,6 +6,7 @@ using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dados;
 using SolfarmaGp.Controllers.Utils.EnumerableToDateTable;
 using SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela;
 using SolfarmaGp.UI.MenusUI.Contabil.ParametrizacaoConferencia;
+using SolfarmaGp.UI.Utils;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
@@ -276,10 +277,10 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             var resultado = from baseImportada in dt.AsEnumerable()
                             from baseParametros in dtParametros.AsEnumerable()
 
-                            let complemento = RemoverAcentos(baseImportada.Field<string>("Complemento") ?? "")
-                            let descricao = RemoverAcentos(baseParametros.Field<string>("DescricaoExtrato") ?? "")
+                            let complemento = NormalizaTextoComparacao.Normalizar(baseImportada.Field<string>("Complemento") ?? "")
+                            let descricao = NormalizaTextoComparacao.Normalizar(baseParametros.Field<string>("DescricaoExtrato") ?? "")
 
-                            let palavras = descricao.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                            //let palavras = descricao.Split(' ', StringSplitOptions.RemoveEmptyEntries)
 
                             //let palavras = baseParametros.Field<string>("DescricaoExtrato")
                             //               .Split(' ', StringSplitOptions.RemoveEmptyEntries)
@@ -289,13 +290,14 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                                 && baseImportada.Field<string>("Movimentacao")?.Trim().Equals("C", StringComparison.OrdinalIgnoreCase) == true
                                 && baseParametros.Field<int>("Filial") == filial
                                 && baseParametros.Field<int>("CodBanco") == banco
-                                && palavras.All(p =>
-                                        complemento.Contains(p, StringComparison.OrdinalIgnoreCase))
+                                && complemento.Equals(descricao, StringComparison.OrdinalIgnoreCase)
+                                //&& palavras.All(p =>
+                                //        complemento.Contains(p, StringComparison.OrdinalIgnoreCase))
                             select new ConferenciaResultado
                             {
                                 ContaDebito = baseParametros.Field<int>("CodContaDebito").ToString() ?? "",
                                 ContaCredito = baseParametros.Field<int>("CodContaCredito").ToString() ?? "",
-                                Valor = ConverterValor(baseImportada.Field<string>("Valor")).ToString("N2", new CultureInfo("en-US")) ?? "",
+                                Valor = Convert.ToDecimal(baseImportada.Field<string>("Valor")).ToString() ?? "",
                                 CodigoHistorico = baseParametros.Field<string>("CodHistorico").ToString() ?? "",
                                 Complemento = baseParametros.Field<string>("Complemento") ?? "",
                                 Filial = baseParametros.Field<int?>("Filial") ?? 0,
@@ -322,46 +324,15 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             gbFiltros.Enabled = true;
 
         }
-        private string RemoverAcentos(string texto)
-        {
-            var normalizado = texto.Normalize(System.Text.NormalizationForm.FormD);
 
-            var chars = normalizado
-                .Where(c => System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c)
-                    != System.Globalization.UnicodeCategory.NonSpacingMark)
-                .ToArray();
-
-            return new string(chars).Normalize(System.Text.NormalizationForm.FormC);
-        }
-        private decimal ConverterValor(string valor)
-        {
-            if (string.IsNullOrWhiteSpace(valor))
-                return 0;
-
-            valor = valor.Trim();
-
-            var culturas = new[]
-            {
-                new CultureInfo("pt-BR"),
-                new CultureInfo("en-US")
-            };
-
-            foreach (var cultura in culturas)
-            {
-                if (decimal.TryParse(valor, NumberStyles.Number, cultura, out decimal resultado))
-                    return resultado;
-            }
-
-            throw new FormatException($"Valor inválido: {valor}");
-        }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
-            string valorContaDebito = tbContaDebito.Text;
-            string valorContaCredito = tbContaCredito.Text;
-            string valorComplemento = tbComplemento.Text;
-            string valorHistorico = tbHistorico.Text;
-            string valorDocumento = tbValorDocumento.Text;
+            string valorContaDebito = NormalizarFiltro.Normalizar(tbContaDebito.Text);
+            string valorContaCredito = NormalizarFiltro.Normalizar(tbContaCredito.Text);
+            string valorComplemento = NormalizarFiltro.Normalizar(tbComplemento.Text);
+            string valorHistorico = NormalizarFiltro.Normalizar(tbHistorico.Text);
+            string valorDocumento = NormalizarFiltro.Normalizar(tbValorDocumento.Text);
             DateTime valorData = dtpDocumento.Value.Date;
 
             //List<ConferenciaResultado> listaResultado = (List<ConferenciaResultado>)dvgConferencia.DataSource;
@@ -382,11 +353,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             var filtrado = listaResultado
                 .AsEnumerable()
                 .Where(x =>
-                    (string.IsNullOrWhiteSpace(valorContaDebito) || x.ContaDebito.Contains(valorContaDebito, StringComparison.OrdinalIgnoreCase)) &&
-                    (string.IsNullOrWhiteSpace(valorContaCredito) || x.ContaCredito.Contains(valorContaCredito, StringComparison.OrdinalIgnoreCase)) &&
-                    (string.IsNullOrWhiteSpace(valorComplemento) || x.Complemento.Contains(valorComplemento, StringComparison.OrdinalIgnoreCase)) &&
-                    (string.IsNullOrWhiteSpace(valorHistorico) || x.CodigoHistorico.Contains(valorHistorico, StringComparison.OrdinalIgnoreCase)) &&
-                    (string.IsNullOrWhiteSpace(valorDocumento) || x.Valor.Contains(valorDocumento, StringComparison.OrdinalIgnoreCase)) &&
+                    (string.IsNullOrWhiteSpace(valorContaDebito) || NormalizarFiltro.Normalizar(x.ContaDebito).Contains(valorContaDebito)) &&
+                    (string.IsNullOrWhiteSpace(valorContaCredito) || NormalizarFiltro.Normalizar(x.ContaCredito).Contains(valorContaCredito)) &&
+                    (string.IsNullOrWhiteSpace(valorComplemento) || NormalizarFiltro.Normalizar(x.Complemento).Contains(valorComplemento)) &&
+                    (string.IsNullOrWhiteSpace(valorHistorico) || NormalizarFiltro.Normalizar(x.CodigoHistorico).Contains(valorHistorico)) &&
+                    (string.IsNullOrWhiteSpace(valorDocumento) || NormalizarFiltro.Normalizar(x.Valor).Contains(valorDocumento)) &&
                     (!checkDataFiltro.Checked || x.DataDocumento.Date == valorData.Date)
                 )
                 .ToList();
@@ -395,6 +366,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             tbValorReferente.Text = filtrado.Sum(x => Convert.ToDecimal(x.Valor)).ToString("N2");
         }
 
+       
         private void btnGeraLote_Click(object sender, EventArgs e)
         {
             var lista = (List<ConferenciaResultado>)dvgConferencia.DataSource;
