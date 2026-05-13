@@ -77,8 +77,6 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             dvgNotas.DataSource = _bs;
             AdicionarColunaSelecao();
 
-            dvgNotas.Columns["DataVencimento"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            dvgNotas.Columns["DataPagamento"].DefaultCellStyle.Format = "dd/MM/yyyy";
             dvgNotas.Columns["DataDocumento"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
             tbRegistros.Text = _tabela.Rows.Count.ToString();
