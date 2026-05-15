@@ -145,6 +145,7 @@
             dvgNotas.RowHeadersWidth = 51;
             dvgNotas.Size = new Size(1171, 435);
             dvgNotas.TabIndex = 1;
+            dvgNotas.CellContentDoubleClick += dvgNotas_CellContentDoubleClick;
             // 
             // tbRegistros
             // 

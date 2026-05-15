@@ -318,6 +318,10 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
             bool existeDocumentoForaDoPerido = false;
             foreach(DataGridViewRow row in dtImportacao.Rows)
             {
+                bool linhaSelecionada = Convert.ToBoolean(row.Cells["Selecionar"].Value);
+
+                if (!linhaSelecionada)
+                    continue;
                 var dataLancamentoItem = row.Cells["Data Lançamento"].Value.ToString();
                 if(Convert.ToDateTime(dataLancamentoItem) < this.dataPeriodoInicio || Convert.ToDateTime(dataLancamentoItem) > this.dataPeridoFim)
                 {

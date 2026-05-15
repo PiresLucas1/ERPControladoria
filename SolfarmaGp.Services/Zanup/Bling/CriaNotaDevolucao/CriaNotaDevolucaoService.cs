@@ -42,7 +42,7 @@ namespace SolfarmaGp.Services.Zanup.Bling.CriaNotaDevolucao
                     Serie = 5,
                     NaturezaOperacao = new NaturezaOperacao
                     {
-                        Id = 15101770690
+                        Id = 15110201292
                     },
                     DataOperacao = dataAtualFormatada,
                     Finalidade = 4,

@@ -1,5 +1,6 @@
 ﻿using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs;
 using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
+using SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs;
 using System.Data;
 
 namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
@@ -129,13 +130,29 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
 
         private void btnLimparSelecao_Click(object sender, EventArgs e)
         {
-            foreach(DataGridViewRow row in dvgNotas.Rows)
+            foreach (DataGridViewRow row in dvgNotas.Rows)
             {
                 DataGridViewCheckBoxCell checkBoxCell = row.Cells["Selecionado"] as DataGridViewCheckBoxCell;
                 if (checkBoxCell != null)
                 {
                     checkBoxCell.Value = false;
                 }
+            }
+        }
+
+        private void dvgNotas_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {                        
+            var IDQiveArquivoXMLString = dvgNotas.Rows[e.RowIndex].Cells["IDQiveArquivoXML"].Value.ToString();
+            var numDocumentoString = dvgNotas.Rows[e.RowIndex].Cells["NumDocumento"].Value.ToString();
+            int IDQiveArquivoXML = int.Parse(IDQiveArquivoXMLString);
+
+            using (var form = new ImportarNotasFiscaisXmlParaTotvsDetalhes(
+                                  IDQiveArquivoXML,
+                                  numDocumentoString,
+                                  new ConsultaNotasExportaTotvsDetalhes())
+                  )
+            {
+                DialogResult result =form.ShowDialog(this);
             }
         }
     }

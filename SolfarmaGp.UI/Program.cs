@@ -16,13 +16,13 @@ namespace SolfarmaGp.App
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-            var cultura = new CultureInfo("en-US");
+            //var cultura = new CultureInfo("en-US");
 
-            CultureInfo.DefaultThreadCurrentCulture = cultura;
-            CultureInfo.DefaultThreadCurrentUICulture = cultura;
+            //CultureInfo.DefaultThreadCurrentCulture = cultura;
+            //CultureInfo.DefaultThreadCurrentUICulture = cultura;
 
-            Thread.CurrentThread.CurrentCulture = cultura;
-            Thread.CurrentThread.CurrentUICulture = cultura;
+            //Thread.CurrentThread.CurrentCulture = cultura;
+            //Thread.CurrentThread.CurrentUICulture = cultura;
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             Application.SetCompatibleTextRenderingDefault(false);
             ApplicationConfiguration.Initialize();
