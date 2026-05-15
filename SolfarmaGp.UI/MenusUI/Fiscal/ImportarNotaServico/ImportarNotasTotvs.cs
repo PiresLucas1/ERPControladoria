@@ -21,9 +21,11 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
         public DataRow dataRowSelecionado;
         public DataGridViewRow cellAlteracao;
         public int colAlteracao;
-        private DataTable dtOrignal;
         public DateTime dataPeriodoInicio;
         public DateTime dataPeridoFim;
+
+        private DataTable dtOrignal;        
+        private BindingSource _bs = new BindingSource();
         public ImportarNotasTotvs()
         {
             InitializeComponent();
@@ -122,7 +124,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 
                     DataTable notasFormatada = new ReorganizaTabelaNotasServico().Executar(notas);
                     dtOrignal = notasFormatada;
-
+                    _bs.DataSource = dtOrignal;
 
 
                     dtImportacao.RowHeadersWidth = 20;
