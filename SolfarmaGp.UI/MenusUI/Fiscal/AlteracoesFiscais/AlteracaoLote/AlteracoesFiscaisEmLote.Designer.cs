@@ -34,7 +34,6 @@
             lblFiltro = new Label();
             gpFiltro = new GroupBox();
             label3 = new Label();
-            cbColigada = new ComboBox();
             label2 = new Label();
             label1 = new Label();
             dtFim = new DateTimePicker();
@@ -45,13 +44,14 @@
             rbAlteraCodTmtv = new RadioButton();
             btnAlteraCodMovimento = new Button();
             groupBox1 = new GroupBox();
+            btnSelecionarVazio = new Button();
             btnAlteraDataDocumento = new Button();
             btnAlterarSelecionados = new Button();
             button1 = new Button();
             btnSelecionarTudo = new Button();
             txtCountRows = new TextBox();
             dvgIDMovs = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            btnSelecionarVazio = new Button();
+            cbColigada = new TextBox();
             gpFiltro.SuspendLayout();
             gbTipoAlteracao.SuspendLayout();
             groupBox1.SuspendLayout();
@@ -85,8 +85,8 @@
             // gpFiltro
             // 
             gpFiltro.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            gpFiltro.Controls.Add(label3);
             gpFiltro.Controls.Add(cbColigada);
+            gpFiltro.Controls.Add(label3);
             gpFiltro.Controls.Add(label2);
             gpFiltro.Controls.Add(label1);
             gpFiltro.Controls.Add(dtFim);
@@ -111,15 +111,6 @@
             label3.Size = new Size(103, 20);
             label3.TabIndex = 15;
             label3.Text = "Cod. Coligada";
-            // 
-            // cbColigada
-            // 
-            cbColigada.FormattingEnabled = true;
-            cbColigada.Location = new Point(287, 68);
-            cbColigada.Margin = new Padding(3, 4, 3, 4);
-            cbColigada.Name = "cbColigada";
-            cbColigada.Size = new Size(121, 28);
-            cbColigada.TabIndex = 14;
             // 
             // label2
             // 
@@ -240,6 +231,18 @@
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
             // 
+            // btnSelecionarVazio
+            // 
+            btnSelecionarVazio.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnSelecionarVazio.Location = new Point(336, 86);
+            btnSelecionarVazio.Margin = new Padding(3, 2, 3, 2);
+            btnSelecionarVazio.Name = "btnSelecionarVazio";
+            btnSelecionarVazio.Size = new Size(134, 34);
+            btnSelecionarVazio.TabIndex = 12;
+            btnSelecionarVazio.Text = "Selecionar Vazios";
+            btnSelecionarVazio.UseVisualStyleBackColor = true;
+            btnSelecionarVazio.Click += btnSelecionarVazio_Click;
+            // 
             // btnAlteraDataDocumento
             // 
             btnAlteraDataDocumento.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -311,17 +314,12 @@
             dvgIDMovs.Size = new Size(1395, 666);
             dvgIDMovs.TabIndex = 5;
             // 
-            // btnSelecionarVazio
+            // cbColigada
             // 
-            btnSelecionarVazio.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnSelecionarVazio.Location = new Point(336, 86);
-            btnSelecionarVazio.Margin = new Padding(3, 2, 3, 2);
-            btnSelecionarVazio.Name = "btnSelecionarVazio";
-            btnSelecionarVazio.Size = new Size(134, 34);
-            btnSelecionarVazio.TabIndex = 12;
-            btnSelecionarVazio.Text = "Selecionar Vazios";
-            btnSelecionarVazio.UseVisualStyleBackColor = true;
-            btnSelecionarVazio.Click += btnSelecionarVazio_Click;
+            cbColigada.Location = new Point(284, 69);
+            cbColigada.Name = "cbColigada";
+            cbColigada.Size = new Size(121, 27);
+            cbColigada.TabIndex = 16;
             // 
             // AlteracoesFiscaisEmLote
             // 
@@ -366,9 +364,9 @@
         private System.Windows.Forms.DateTimePicker dtInicio;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbColigada;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAlteraDataDocumento;
         private Button btnSelecionarVazio;
+        private TextBox cbColigada;
     }
 }

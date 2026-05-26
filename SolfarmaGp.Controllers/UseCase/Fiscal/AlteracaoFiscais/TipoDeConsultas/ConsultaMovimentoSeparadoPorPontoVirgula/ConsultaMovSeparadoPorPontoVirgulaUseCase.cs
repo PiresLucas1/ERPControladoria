@@ -5,10 +5,10 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.AlteracaoFiscais.TipoDeConsultas
 {
     public class ConsultaMovSeparadoPorPontoVirgulaUseCase
     {
-        public async Task<DataTable> Executar(string codMovimento)
+        public async Task<DataTable> Executar(string codMovimento, int codColigada)
         {
             ConsultaListaIDMovTotvs alteraTipoMovimento = new ConsultaListaIDMovTotvs();
-            DataTable retorno = await alteraTipoMovimento.Executar(codMovimento);
+            DataTable retorno = await alteraTipoMovimento.Executar(codMovimento, codColigada);
 
             return retorno;
         }

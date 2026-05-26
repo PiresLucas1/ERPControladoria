@@ -15,8 +15,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
         public AlteracoesFiscaisEmLote()
         {
 
-            InitializeComponent();
-            cbColigada.Items.Add(2);
+            InitializeComponent();            
             rbAlteraDataDocumento.Checked = true;
             //AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
         }
@@ -27,7 +26,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
             {
                 var dataInicio = dtInicio.Value.Date;
                 var dataFim = dtFim.Value.Date;
-                var codColigada = cbColigada.SelectedItem;
+                var codColigada = cbColigada.Text;
                 DataTable retorno = new DataTable();
                 if (dataInicio > dataFim)
                 {
@@ -43,7 +42,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
                 {
                     ProcessStatusManager.Start("Carregando dados...");
                     ProcessStatusManager.Update("Processando...");
-                    retorno = await new ConsultaMovimentoPorFiltro().Executar(2, dataInicio, dataFim);
+                    retorno = await new ConsultaMovimentoPorFiltro().Executar(Convert.ToInt32(codColigada), dataInicio, dataFim);
                 }
                 catch (Exception ex)
                 {
@@ -99,7 +98,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
                 .Replace("\r\n", ",");
             var textoFormatoParaConsulta = textoSeparadoPorVirugula.Substring(0, textoSeparadoPorVirugula.Length);
 
-            DataTable retorno = await alterarTipoMovimento.Executar(textoFormatoParaConsulta);
+            DataTable retorno = await alterarTipoMovimento.Executar(textoFormatoParaConsulta, Convert.ToInt32(cbColigada.Text));
             return retorno;
         }
         public void CarregaDataGridView(DataTable data)
@@ -220,7 +219,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
                 }
             }
             AltListaMovimentoUseCase alterarTipoMovimento = new AltListaMovimentoUseCase();
-            DataTable retorno = await alterarTipoMovimento.Executar(dt);
+            DataTable retorno = await alterarTipoMovimento.Executar(dt, Convert.ToInt32(cbColigada.Text));
 
             RetornoEmTabela retornoEmTabela = new RetornoEmTabela(retorno);
             retornoEmTabela.ShowDialog();
@@ -232,7 +231,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
         {
             dtInicio.Enabled = !dtInicio.Enabled;
             dtFim.Enabled = !dtFim.Enabled;
-            cbColigada.Enabled = !cbColigada.Enabled;
+            
         }
 
         private void rbAlteraDataDocumento_CheckedChanged(object sender, EventArgs e)

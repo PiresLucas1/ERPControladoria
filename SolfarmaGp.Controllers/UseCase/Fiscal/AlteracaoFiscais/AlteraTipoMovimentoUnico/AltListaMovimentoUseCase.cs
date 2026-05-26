@@ -5,10 +5,10 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.AlteracaoFiscais.AlteraTipoMovim
 {
     public class AltListaMovimentoUseCase
     {
-        public async Task<DataTable> Executar(DataTable data)
+        public async Task<DataTable> Executar(DataTable data, int codColigada)
         {
             ALteraTipoMovimentoEmLista alteraTipoMovimento = new ALteraTipoMovimentoEmLista();
-            DataTable retorno = await alteraTipoMovimento.Executar(data);
+            DataTable retorno = await alteraTipoMovimento.Executar(data, codColigada);
 
             return retorno;
         }

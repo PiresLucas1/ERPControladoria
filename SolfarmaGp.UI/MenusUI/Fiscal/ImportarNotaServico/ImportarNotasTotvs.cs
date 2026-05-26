@@ -24,7 +24,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
         public DateTime dataPeriodoInicio;
         public DateTime dataPeridoFim;
 
-        private DataTable dtOrignal;        
+        private DataTable dtOrignal;
         private BindingSource _bs = new BindingSource();
         public ImportarNotasTotvs()
         {
@@ -118,7 +118,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
                     ProcessStatusManager.Update("Processando...");
 
 
-                    ConsultaNotasServico consultarNotaServico = new ConsultaNotasServico();                    
+                    ConsultaNotasServico consultarNotaServico = new ConsultaNotasServico();
                     DataTable notas = await consultarNotaServico.Executar(dataInicio, dataFim, Convert.ToInt32(txtBoxColigada.Text), cbLancadasNoERP.Checked);
 
 
@@ -315,21 +315,21 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 
             VerificaLinha();
         }
-        private  bool ValidaSeNotaEstaNoPeriodoAtivo()
+        private bool ValidaSeNotaEstaNoPeriodoAtivo()
         {
             bool existeDocumentoForaDoPerido = false;
-            foreach(DataGridViewRow row in dtImportacao.Rows)
+            foreach (DataGridViewRow row in dtImportacao.Rows)
             {
                 bool linhaSelecionada = Convert.ToBoolean(row.Cells["Selecionar"].Value);
 
                 if (!linhaSelecionada)
                     continue;
                 var dataLancamentoItem = row.Cells["Data Lançamento"].Value.ToString();
-                if(Convert.ToDateTime(dataLancamentoItem) < this.dataPeriodoInicio || Convert.ToDateTime(dataLancamentoItem) > this.dataPeridoFim)
+                if (Convert.ToDateTime(dataLancamentoItem) < this.dataPeriodoInicio || Convert.ToDateTime(dataLancamentoItem) > this.dataPeridoFim)
                 {
                     row.DefaultCellStyle.BackColor = Color.LightSalmon; // Cor da linha
                     row.DefaultCellStyle.ForeColor = Color.Black;      // Cor do texto                    
-                    existeDocumentoForaDoPerido = true;                   
+                    existeDocumentoForaDoPerido = true;
                 }
             }
             return existeDocumentoForaDoPerido;
@@ -379,13 +379,13 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
             int btnY = heightWindow - buttonHeight - bottomSpacing;
 
             btnSelecionarTodas.Top = btnY;
-            btnDesmarcarTodos.Top = btnY;            
+            btnDesmarcarTodos.Top = btnY;
             btnLimpar.Top = btnY;
             btnExportarTotvs.Top = btnY;
 
             // Posicionamento dos botões em sequência
             btnSelecionarTodas.Left = sideMargin;
-            btnDesmarcarTodos.Left = btnSelecionarTodas.Right + buttonSpacing;                        
+            btnDesmarcarTodos.Left = btnSelecionarTodas.Right + buttonSpacing;
 
             // Exportar no canto direito
             btnExportarTotvs.Left = widthWindow - btnExportarTotvs.Width - sideMargin;
@@ -441,7 +441,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
             if (colName == "Cód. Serviço TOTVS")
             {
                 ListaTodosProdutoUseCase produtoServicoController = new ListaTodosProdutoUseCase();
-                DataTable dtServico  = await produtoServicoController.Executar(Convert.ToInt32(codColigada));
+                DataTable dtServico = await produtoServicoController.Executar(Convert.ToInt32(codColigada));
                 AbrirConsultaItem(dtImportacao.Rows[e.RowIndex], dtServico, "Consulta Produto");
             }
         }
@@ -638,7 +638,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
                     {
                         if (Convert.ToInt32(codColigada) == 2)
                         {
-                           // ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial(); 
+                            // ValidaNaturezaFilial validaNatureza = new ValidaNaturezaFilial(); 
                             //bool validacao = validaNatureza.ValidaCodigoNaturezaFilial(valorEncontrado, Convert.ToInt32(filial), ufTomador, ufPrestador);
 
                             //if (!validacao)
@@ -906,7 +906,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
                 var ufTomador = item.Cells["UF Tomador"].Value;
 
                 var valorTipo = 1;
-                if(ufPrestador.ToString() == ufTomador.ToString())
+                if (ufPrestador.ToString() == ufTomador.ToString())
                 {
                     valorTipo = 1;
                 }
@@ -922,5 +922,10 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
                 item.Cells["CFOP Descrição"].Value = retorno.descricaoNatureza;
             }
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
-    }
+}

@@ -10,7 +10,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.TiposDeConsultas.Cons
 {
     public class ConsultaListaIDMovTotvs
     {
-        public async Task<DataTable> Executar(string codMovimento)
+        public async Task<DataTable> Executar(string codMovimento, int codColigada)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
@@ -25,6 +25,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.TiposDeConsultas.Cons
                         cmd.CommandType = CommandType.StoredProcedure;
                         // SqlParameter p;   
                         cmd.Parameters.AddWithValue("@vchIDMov", codMovimento);
+                        cmd.Parameters.AddWithValue("@intCodColigada", codColigada);
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             tabela.Load(reader);

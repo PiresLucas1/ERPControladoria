@@ -6,7 +6,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.AlteraTipoMovimentoTo
 {
     public class ALteraTipoMovimentoEmLista
     {
-        public async Task<DataTable> Executar(DataTable data)
+        public async Task<DataTable> Executar(DataTable data, int codColigada)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
@@ -20,6 +20,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.AlteracoesFiscais.AlteraTipoMovimentoTo
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("@TMP", data);
+                        cmd.Parameters.AddWithValue("@INintCodColigada", codColigada);
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             tabela.Load(reader);

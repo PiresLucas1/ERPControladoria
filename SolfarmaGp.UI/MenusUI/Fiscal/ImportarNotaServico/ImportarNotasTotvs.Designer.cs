@@ -117,6 +117,7 @@
             groupBox1.TabIndex = 5;
             groupBox1.TabStop = false;
             groupBox1.Text = "Filtro Prioritário";
+            groupBox1.Enter += groupBox1_Enter;
             // 
             // gbAutoFuncoes
             // 
