@@ -73,6 +73,7 @@
             btnLancarNota.TabIndex = 1;
             btnLancarNota.Text = "Lançar Nota";
             btnLancarNota.UseVisualStyleBackColor = true;
+            btnLancarNota.Click += btnLancarNota_Click;
             // 
             // btnCancelar
             // 

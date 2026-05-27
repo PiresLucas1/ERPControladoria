@@ -20,22 +20,23 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             AjustarFonteTextBoxesGroupBox();
             Load += ImportarNotasFiscaisXmlParaTotvsDetalhes_Load;
         }
-        private async void ImportarNotasFiscaisXmlParaTotvsDetalhes_Load(object sender, EventArgs e) 
+        private async void ImportarNotasFiscaisXmlParaTotvsDetalhes_Load(object sender, EventArgs e)
         {
             await CarregarDadosAsync();
-            
+
         }
         private async Task CarregarDadosAsync()
         {
             try
-            {         
+            {
                 DataTable dtRetorno = await _consultaDetalhes.Executar(_IDQiveArquivoXML);
                 _tabela = dtRetorno;
-                _bs.DataSource = _tabela;                
+                _bs.DataSource = _tabela;
                 AjustaTela();
             }
-            catch (Exception ex) { 
-            
+            catch (Exception ex)
+            {
+
                 MessageBox.Show($"Ocorreu um erro ao carregar os detalhes: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -48,8 +49,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             dvgDataNotaItens.Columns["ERP_IDContasPagar"].Visible = false;
             dvgDataNotaItens.Columns["CNPJFornecedor"].Visible = false;
             dvgDataNotaItens.Columns["NomeFornecedor"].Visible = false;
-            dvgDataNotaItens.Columns["UnidadeComercial"].Visible =false;
-            
+            dvgDataNotaItens.Columns["UnidadeComercial"].Visible = false;
+
 
 
             tbIdQive.Text = _tabela.Rows[0]["IDQiveArquivoXML"].ToString();
@@ -84,5 +85,9 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             dvgDataNotaItens.Columns["Natureza"].ReadOnly = false;
         }
 
+        private void btnLancarNota_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

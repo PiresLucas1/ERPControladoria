@@ -9,12 +9,11 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
     {
         private DataTable _tabela;
         private BindingSource _bs = new BindingSource();
+        private DataRowView _linhaSelecionada = null;
         public ImportarNotasFiscaisXmlPataTotvs()
         {
             InitializeComponent();
-            cbTipoData.Items.AddRange(new string[] { "Data de Lançamento", "Data de Documento" });
-            cbTipoData.SelectedText = "Data de Lançamento";
-            cbTipoData.Enabled = false;
+            dvgNotas.ReadOnly = true;
         }
 
         private async void btnConsultar_Click(object sender, EventArgs e)
@@ -76,7 +75,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             _tabela = data;
             _bs.DataSource = _tabela;
             dvgNotas.DataSource = _bs;
-            AdicionarColunaSelecao();
+            AdicionarColunaSelecao();                        
+            dvgNotas.Sorted += (s, e) => AtualizarCoresDaGrid();
 
             dvgNotas.Columns["DataDocumento"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
@@ -141,18 +141,49 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         }
 
         private void dvgNotas_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {                        
+        {
             var IDQiveArquivoXMLString = dvgNotas.Rows[e.RowIndex].Cells["IDQiveArquivoXML"].Value.ToString();
             var numDocumentoString = dvgNotas.Rows[e.RowIndex].Cells["NumDocumento"].Value.ToString();
             int IDQiveArquivoXML = int.Parse(IDQiveArquivoXMLString);
 
+            ConsultaDetalhesNota(IDQiveArquivoXML, numDocumentoString);
+        }
+
+        private void btnVisualizarNota_Click(object sender, EventArgs e)
+        {
+            var IDQiveArquivoXMLString = dvgNotas.CurrentRow.Cells["IDQiveArquivoXML"].Value.ToString();
+            var numDocumentoString = dvgNotas.CurrentRow.Cells["NumDocumento"].Value.ToString();
+            int IDQiveArquivoXML = int.Parse(IDQiveArquivoXMLString);
+
+            ConsultaDetalhesNota(IDQiveArquivoXML, numDocumentoString);
+        }
+
+        private void dvgNotas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            _linhaSelecionada = dvgNotas.Rows[e.RowIndex].DataBoundItem as DataRowView;
+            AtualizarCoresDaGrid();
+        }
+        private void AtualizarCoresDaGrid()
+        {
+            foreach (DataGridViewRow row in dvgNotas.Rows)
+            {
+                if (row.DataBoundItem == _linhaSelecionada)
+                    row.DefaultCellStyle.BackColor = Color.LightBlue;
+                else
+                    row.DefaultCellStyle.BackColor = Color.White;
+            }
+        }
+        private void ConsultaDetalhesNota(int IDQiveArquivoXML, string numDocumentoString)
+        {
             using (var form = new ImportarNotasFiscaisXmlParaTotvsDetalhes(
                                   IDQiveArquivoXML,
                                   numDocumentoString,
                                   new ConsultaNotasExportaTotvsDetalhes())
                   )
             {
-                DialogResult result =form.ShowDialog(this);
+                DialogResult result = form.ShowDialog(this);
             }
         }
     }

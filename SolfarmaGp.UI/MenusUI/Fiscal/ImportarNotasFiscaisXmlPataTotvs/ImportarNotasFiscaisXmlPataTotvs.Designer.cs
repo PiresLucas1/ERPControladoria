@@ -30,8 +30,6 @@
         {
             Filtros = new GroupBox();
             btnConsultar = new Button();
-            lbTipoData = new Label();
-            cbTipoData = new ComboBox();
             lbFim = new Label();
             lbInicio = new Label();
             dtFim = new DateTimePicker();
@@ -39,9 +37,9 @@
             dvgNotas = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             tbRegistros = new TextBox();
             gpAcoes = new GroupBox();
+            btnVisualizarNota = new Button();
             btnLimparSelecao = new Button();
             btnSelecionaTodos = new Button();
-            btnCadastrarEans = new Button();
             label1 = new Label();
             tbRegistrosAtencao = new TextBox();
             button2 = new Button();
@@ -56,8 +54,6 @@
             // 
             Filtros.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             Filtros.Controls.Add(btnConsultar);
-            Filtros.Controls.Add(lbTipoData);
-            Filtros.Controls.Add(cbTipoData);
             Filtros.Controls.Add(lbFim);
             Filtros.Controls.Add(lbInicio);
             Filtros.Controls.Add(dtFim);
@@ -79,24 +75,6 @@
             btnConsultar.Text = "Consultar";
             btnConsultar.UseVisualStyleBackColor = true;
             btnConsultar.Click += btnConsultar_Click;
-            // 
-            // lbTipoData
-            // 
-            lbTipoData.AutoSize = true;
-            lbTipoData.Location = new Point(21, 88);
-            lbTipoData.Name = "lbTipoData";
-            lbTipoData.Size = new Size(75, 20);
-            lbTipoData.TabIndex = 5;
-            lbTipoData.Text = "Tipo Data";
-            // 
-            // cbTipoData
-            // 
-            cbTipoData.FormattingEnabled = true;
-            cbTipoData.Location = new Point(21, 111);
-            cbTipoData.Name = "cbTipoData";
-            cbTipoData.Size = new Size(124, 28);
-            cbTipoData.TabIndex = 4;
-            cbTipoData.SelectedIndexChanged += cbTipoData_SelectedIndexChanged;
             // 
             // lbFim
             // 
@@ -145,7 +123,8 @@
             dvgNotas.RowHeadersWidth = 51;
             dvgNotas.Size = new Size(1171, 435);
             dvgNotas.TabIndex = 1;
-            dvgNotas.CellContentDoubleClick += dvgNotas_CellContentDoubleClick;
+            dvgNotas.CellClick += dvgNotas_CellClick;
+            dvgNotas.CellDoubleClick += dvgNotas_CellContentDoubleClick;
             // 
             // tbRegistros
             // 
@@ -158,9 +137,9 @@
             // gpAcoes
             // 
             gpAcoes.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gpAcoes.Controls.Add(btnVisualizarNota);
             gpAcoes.Controls.Add(btnLimparSelecao);
             gpAcoes.Controls.Add(btnSelecionaTodos);
-            gpAcoes.Controls.Add(btnCadastrarEans);
             gpAcoes.Controls.Add(label1);
             gpAcoes.Controls.Add(tbRegistrosAtencao);
             gpAcoes.Controls.Add(button2);
@@ -173,6 +152,17 @@
             gpAcoes.TabIndex = 3;
             gpAcoes.TabStop = false;
             gpAcoes.Enter += gpAcoes_Enter;
+            // 
+            // btnVisualizarNota
+            // 
+            btnVisualizarNota.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnVisualizarNota.Location = new Point(834, 69);
+            btnVisualizarNota.Name = "btnVisualizarNota";
+            btnVisualizarNota.Size = new Size(151, 30);
+            btnVisualizarNota.TabIndex = 14;
+            btnVisualizarNota.Text = "Visualizar Nota";
+            btnVisualizarNota.UseVisualStyleBackColor = true;
+            btnVisualizarNota.Click += btnVisualizarNota_Click;
             // 
             // btnLimparSelecao
             // 
@@ -195,16 +185,6 @@
             btnSelecionaTodos.Text = "Selecionar Tudo";
             btnSelecionaTodos.UseVisualStyleBackColor = true;
             btnSelecionaTodos.Click += btnSelecionaTodos_Click;
-            // 
-            // btnCadastrarEans
-            // 
-            btnCadastrarEans.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnCadastrarEans.Location = new Point(825, 69);
-            btnCadastrarEans.Name = "btnCadastrarEans";
-            btnCadastrarEans.Size = new Size(147, 30);
-            btnCadastrarEans.TabIndex = 11;
-            btnCadastrarEans.Text = "Cadastrar Itens";
-            btnCadastrarEans.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -236,7 +216,7 @@
             // btnConsultarXml
             // 
             btnConsultarXml.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnConsultarXml.Location = new Point(825, 24);
+            btnConsultarXml.Location = new Point(1001, 24);
             btnConsultarXml.Name = "btnConsultarXml";
             btnConsultarXml.Size = new Size(147, 30);
             btnConsultarXml.TabIndex = 7;
@@ -275,8 +255,6 @@
 
         private GroupBox Filtros;
         private Button btnConsultar;
-        private Label lbTipoData;
-        private ComboBox cbTipoData;
         private Label lbFim;
         private Label lbInicio;
         private DateTimePicker dtFim;
@@ -287,10 +265,10 @@
         private Button button2;
         private Button btnConsultarXml;
         private Label lbRegistro;
-        private Button btnCadastrarEans;
         private Label label1;
         private TextBox tbRegistrosAtencao;
         private Button btnSelecionaTodos;
         private Button btnLimparSelecao;
+        private Button btnVisualizarNota;
     }
 }
