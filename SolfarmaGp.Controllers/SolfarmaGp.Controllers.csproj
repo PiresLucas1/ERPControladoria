@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="UseCase\Contabil\NovaPasta\" />
     <Folder Include="Utils\Zanup\" />
   </ItemGroup>
 

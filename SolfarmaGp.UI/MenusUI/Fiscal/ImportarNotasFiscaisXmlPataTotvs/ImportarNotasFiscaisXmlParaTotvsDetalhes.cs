@@ -89,5 +89,11 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
         {
 
         }
+
+        private async void btnAbrirXml_Click(object sender, EventArgs e)
+        {
+            ConsultarXmlNotaQiveUseCase useCase = new ConsultarXmlNotaQiveUseCase();
+            string result = await useCase.Executar(_IDQiveArquivoXML);
+        }
     }
 }

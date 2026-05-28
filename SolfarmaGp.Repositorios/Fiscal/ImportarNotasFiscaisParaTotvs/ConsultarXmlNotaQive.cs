@@ -4,28 +4,25 @@ using System.Data;
 
 namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
 {
-    public class ConsultaNotasExportaDetalhes
+    public class ConsultarXmlNotaQive
     {
         public async Task<DataTable> Executar(int IDQiveArquivoXML)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
-
             try
             {
-
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultaItensNotaQive", conn))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultaXMLNotaQive", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@IDQiveArquivoXML", IDQiveArquivoXML);                        
+                        cmd.Parameters.AddWithValue("@IDQiveArquivoXML", IDQiveArquivoXML);
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             tabela.Load(reader);
                         }
                     }
-
                     conexaoBanco.FecharConexao(conn);
                 }
             }
@@ -33,8 +30,6 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
             {
                 throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
             }
-
-
             return tabela;
         }
     }

@@ -156,7 +156,7 @@
             // btnVisualizarNota
             // 
             btnVisualizarNota.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnVisualizarNota.Location = new Point(834, 69);
+            btnVisualizarNota.Location = new Point(807, 69);
             btnVisualizarNota.Name = "btnVisualizarNota";
             btnVisualizarNota.Size = new Size(151, 30);
             btnVisualizarNota.TabIndex = 14;

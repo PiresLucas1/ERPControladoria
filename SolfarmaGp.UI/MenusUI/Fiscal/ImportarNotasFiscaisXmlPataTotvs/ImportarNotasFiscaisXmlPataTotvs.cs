@@ -106,9 +106,16 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             //}
         }
 
-        private void btnConsultarXml_Click(object sender, EventArgs e)
+        private async void btnConsultarXml_Click(object sender, EventArgs e)
         {
+            var IDqiveArquivoXMLString = dvgNotas.CurrentRow.Cells["IDQiveArquivoXML"].Value.ToString();
+            var IDQiveArquivoXMLString = dvgNotas.CurrentRow.Cells["IDQiveArquivoXML"].Value.ToString();
 
+            var numDocumentoString = dvgNotas.CurrentRow.Cells["NumDocumento"].Value.ToString();
+            int IDQiveArquivoXML = int.Parse(IDQiveArquivoXMLString);
+
+            ConsultarXmlNotaQiveUseCase useCase = new ConsultarXmlNotaQiveUseCase();
+            string result = await useCase.Executar(IDQiveArquivoXML);
         }
 
         private void btnSelecionaTodos_Click(object sender, EventArgs e)
