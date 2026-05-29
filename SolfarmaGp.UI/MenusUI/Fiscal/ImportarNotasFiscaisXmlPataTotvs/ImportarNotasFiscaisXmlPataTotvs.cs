@@ -1,7 +1,10 @@
 ﻿using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs;
 using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs;
+using SolfarmaGp.UI.Utils;
 using System.Data;
+using System.Diagnostics;
+using System.Text;
 
 namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
 {
@@ -48,7 +51,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         public async Task ConsultaNotas(DateTime dataInicio, DateTime dataFim)
         {
             ConsultaNotasUseCase useCase = new ConsultaNotasUseCase();
-            DataTable result = await useCase.Execute(dataInicio, dataFim);
+            var result = await useCase.Execute(dataInicio, dataFim);
 
             PreencherGrid(result);
         }
@@ -107,15 +110,17 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         }
 
         private async void btnConsultarXml_Click(object sender, EventArgs e)
-        {
-            var IDqiveArquivoXMLString = dvgNotas.CurrentRow.Cells["IDQiveArquivoXML"].Value.ToString();
+        {            
             var IDQiveArquivoXMLString = dvgNotas.CurrentRow.Cells["IDQiveArquivoXML"].Value.ToString();
-
             var numDocumentoString = dvgNotas.CurrentRow.Cells["NumDocumento"].Value.ToString();
+
             int IDQiveArquivoXML = int.Parse(IDQiveArquivoXMLString);
 
             ConsultarXmlNotaQiveUseCase useCase = new ConsultarXmlNotaQiveUseCase();
             string result = await useCase.Executar(IDQiveArquivoXML);
+            string formattedXml = FormatarXml.Executar(result);
+
+            VisualizarXml(formattedXml);
         }
 
         private void btnSelecionaTodos_Click(object sender, EventArgs e)
@@ -160,6 +165,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         {
             var IDQiveArquivoXMLString = dvgNotas.CurrentRow.Cells["IDQiveArquivoXML"].Value.ToString();
             var numDocumentoString = dvgNotas.CurrentRow.Cells["NumDocumento"].Value.ToString();
+            //var teste = _linhaSelecionada.Row["NumDocumento"];
             int IDQiveArquivoXML = int.Parse(IDQiveArquivoXMLString);
 
             ConsultaDetalhesNota(IDQiveArquivoXML, numDocumentoString);
@@ -192,6 +198,18 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             {
                 DialogResult result = form.ShowDialog(this);
             }
+        }
+        private void VisualizarXml(string xmlFile)
+        {
+            string caminhoTemp = Path.Combine(Path.GetTempPath(), "visualizar.xml");
+            File.WriteAllText(caminhoTemp, xmlFile, Encoding.UTF8);
+
+            Process.Start(new ProcessStartInfo
+            {
+
+                FileName = caminhoTemp,
+                UseShellExecute = true
+            });
         }
     }
 }

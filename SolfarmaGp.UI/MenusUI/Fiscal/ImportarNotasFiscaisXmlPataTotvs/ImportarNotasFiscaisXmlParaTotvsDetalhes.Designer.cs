@@ -60,11 +60,16 @@
             // 
             // dvgDataNotaItens
             // 
+            dvgDataNotaItens.AllowUserToAddRows = false;
+            dvgDataNotaItens.AllowUserToDeleteRows = false;
+            dvgDataNotaItens.AllowUserToResizeColumns = false;
+            dvgDataNotaItens.AllowUserToResizeRows = false;
             dvgDataNotaItens.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dvgDataNotaItens.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dvgDataNotaItens.ColumnHeadersHeight = 29;
             dvgDataNotaItens.Location = new Point(12, 166);
             dvgDataNotaItens.Name = "dvgDataNotaItens";
+            dvgDataNotaItens.ReadOnly = true;
             dvgDataNotaItens.RowHeadersWidth = 51;
             dvgDataNotaItens.Size = new Size(1093, 384);
             dvgDataNotaItens.TabIndex = 0;
@@ -173,7 +178,7 @@
             tbNomeFornecedor.BackColor = SystemColors.ScrollBar;
             tbNomeFornecedor.Location = new Point(623, 116);
             tbNomeFornecedor.Name = "tbNomeFornecedor";
-            tbNomeFornecedor.Size = new Size(303, 27);
+            tbNomeFornecedor.Size = new Size(387, 27);
             tbNomeFornecedor.TabIndex = 20;
             // 
             // tbCodFornecedor
@@ -181,7 +186,7 @@
             tbCodFornecedor.BackColor = SystemColors.ScrollBar;
             tbCodFornecedor.Location = new Point(623, 55);
             tbCodFornecedor.Name = "tbCodFornecedor";
-            tbCodFornecedor.Size = new Size(91, 27);
+            tbCodFornecedor.Size = new Size(182, 27);
             tbCodFornecedor.TabIndex = 19;
             // 
             // tbIdContasPagar
@@ -189,7 +194,7 @@
             tbIdContasPagar.BackColor = SystemColors.ScrollBar;
             tbIdContasPagar.Location = new Point(368, 55);
             tbIdContasPagar.Name = "tbIdContasPagar";
-            tbIdContasPagar.Size = new Size(131, 27);
+            tbIdContasPagar.Size = new Size(161, 27);
             tbIdContasPagar.TabIndex = 18;
             // 
             // tbNumDoc
@@ -197,7 +202,7 @@
             tbNumDoc.BackColor = SystemColors.ScrollBar;
             tbNumDoc.Location = new Point(180, 55);
             tbNumDoc.Name = "tbNumDoc";
-            tbNumDoc.Size = new Size(131, 27);
+            tbNumDoc.Size = new Size(161, 27);
             tbNumDoc.TabIndex = 17;
             // 
             // tbIdQive
@@ -272,17 +277,23 @@
             // 
             // dvgContaFinanceira
             // 
-            dvgContaFinanceira.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dvgContaFinanceira.AllowUserToAddRows = false;
+            dvgContaFinanceira.AllowUserToDeleteRows = false;
+            dvgContaFinanceira.AllowUserToResizeColumns = false;
+            dvgContaFinanceira.AllowUserToResizeRows = false;
+            dvgContaFinanceira.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dvgContaFinanceira.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dvgContaFinanceira.ColumnHeadersHeight = 29;
             dvgContaFinanceira.Location = new Point(5, 26);
             dvgContaFinanceira.Name = "dvgContaFinanceira";
+            dvgContaFinanceira.ReadOnly = true;
             dvgContaFinanceira.RowHeadersWidth = 51;
             dvgContaFinanceira.Size = new Size(1081, 167);
             dvgContaFinanceira.TabIndex = 8;
             // 
             // gpContas
             // 
+            gpContas.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             gpContas.Controls.Add(dvgContaFinanceira);
             gpContas.Location = new Point(12, 556);
             gpContas.Name = "gpContas";

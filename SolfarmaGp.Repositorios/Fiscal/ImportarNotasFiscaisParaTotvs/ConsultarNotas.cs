@@ -9,6 +9,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
         public async Task<DataTable> Executar(DateTime dataInicio, DateTime dataFim)
         {
             DataTable tabela = new DataTable();
+            //DataSet dataSet = new DataSet();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
 
             try
@@ -16,7 +17,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
 
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspUsuConsultarContasPagarParcelaGP", conn))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultarContasPagarParcelaGP", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;                        
                         cmd.Parameters.AddWithValue("@INdatDataLancamentoInicio", dataInicio);

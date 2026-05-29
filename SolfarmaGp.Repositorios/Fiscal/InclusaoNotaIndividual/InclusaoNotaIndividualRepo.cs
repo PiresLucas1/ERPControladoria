@@ -19,6 +19,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.InclusaoNotaIndividuak
                     using (SqlCommand cmd = new SqlCommand("upsIntegracaoTotvsExportaNotaFiscalSat", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandTimeout = 0;
                         cmd.Parameters.AddWithValue("@INdatDataInicio", dataInicio);
                         cmd.Parameters.AddWithValue("@INdatDataFim", dataFim);
                         cmd.Parameters.AddWithValue("@INintFilial", 0);
@@ -27,7 +28,8 @@ namespace SolfarmaGp.Repositorios.Fiscal.InclusaoNotaIndividuak
                         cmd.Parameters.AddWithValue("@INvchCodTmv", DBNull.Value);
                         cmd.Parameters.AddWithValue("@INvchNumeroDocumentos", numeroDocumentos ?? (object)DBNull.Value);
                         cmd.Parameters.AddWithValue("@INbitRetornaDados", true);
-
+                        
+                        
                         msgRetorno = new SqlParameter("OUTvchMsgRetorno", SqlDbType.VarChar, -1)
                         {
                             Direction = ParameterDirection.Output

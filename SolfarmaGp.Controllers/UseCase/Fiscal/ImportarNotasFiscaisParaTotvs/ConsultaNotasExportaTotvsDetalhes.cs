@@ -5,13 +5,16 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs
 {
     public class ConsultaNotasExportaTotvsDetalhes
     {
-        public async Task<DataTable>Executar(int IDQiveArquivoXML)
+        public async Task<(DataTable, DataTable)> Executar(int IDQiveArquivoXML)
         {
             ConsultaNotasExportaDetalhes repo = new ConsultaNotasExportaDetalhes();
-            DataTable dtRetorno = await repo.Executar(IDQiveArquivoXML);
+            DataSet dataSetRetorno = await repo.Executar(IDQiveArquivoXML);
+            DataTable dtNotaItens = dataSetRetorno.Tables[0];
+            DataTable dtNotaContaFinanceira = dataSetRetorno.Tables[1];
 
-            
-            return dtRetorno;
+
+
+            return (dtNotaItens, dtNotaContaFinanceira);
         }
     }
 }

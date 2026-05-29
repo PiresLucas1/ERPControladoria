@@ -10,7 +10,9 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs
             {
                 var consulta = new ConsultarXmlNotaQive();
                 var resultado = await consulta.Executar(IDQiveArquivoXML);
-                return resultado.ToString();
+
+                string xmlConteudo = resultado.Rows[0][0].ToString();
+                return xmlConteudo;
             }
             catch (Exception ex)
             {

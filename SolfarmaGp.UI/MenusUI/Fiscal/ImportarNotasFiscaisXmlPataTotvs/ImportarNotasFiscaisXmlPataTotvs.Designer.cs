@@ -114,6 +114,8 @@
             // 
             dvgNotas.AllowUserToAddRows = false;
             dvgNotas.AllowUserToDeleteRows = false;
+            dvgNotas.AllowUserToResizeColumns = false;
+            dvgNotas.AllowUserToResizeRows = false;
             dvgNotas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dvgNotas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dvgNotas.ColumnHeadersHeight = 29;
@@ -242,7 +244,7 @@
             Controls.Add(dvgNotas);
             Controls.Add(Filtros);
             Name = "ImportarNotasFiscaisXmlPataTotvs";
-            Text = "ImportarNotasFiscaisXmlPataTotvs";
+            Text = "Importar Notas Fiscais XML Para TOTVS";
             Filtros.ResumeLayout(false);
             Filtros.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dvgNotas).EndInit();

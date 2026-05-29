@@ -6,9 +6,9 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
 {
     public class ConsultaNotasExportaDetalhes
     {
-        public async Task<DataTable> Executar(int IDQiveArquivoXML)
+        public async Task<DataSet> Executar(int IDQiveArquivoXML)
         {
-            DataTable tabela = new DataTable();
+            DataSet dataSet = new DataSet();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
 
             try
@@ -22,7 +22,19 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
                         cmd.Parameters.AddWithValue("@IDQiveArquivoXML", IDQiveArquivoXML);                        
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
-                            tabela.Load(reader);
+
+                            // Carrega a primeira tabela
+                            DataTable tabela1 = new DataTable();
+                            tabela1.Load(reader);
+                            dataSet.Tables.Add(tabela1);
+
+                            // Avança para o próximo result set e carrega a segunda tabela
+                            if (!reader.IsClosed)
+                            {
+                                DataTable tabela2 = new DataTable();
+                                tabela2.Load(reader);
+                                dataSet.Tables.Add(tabela2);
+                            }
                         }
                     }
 
@@ -35,7 +47,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
             }
 
 
-            return tabela;
+            return dataSet;
         }
     }
 }
