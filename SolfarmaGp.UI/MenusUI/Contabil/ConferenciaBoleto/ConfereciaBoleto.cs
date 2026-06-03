@@ -47,6 +47,13 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
             bsConferencia.DataSource = listaExibida;
             dvgConferencia.DataSource = bsConferencia;
+            //cbBanco.Items.Add(new { id = 104, nome = "Caixa Econômica Federa" });
+            cbBanco.Items.Add(new { id = 111, nome = "Banco 111" });
+            cbBanco.Items.Add(new { id = 151, nome = "Banco 151" });
+            cbBanco.Items.Add(new { id = 197, nome = "Banco Stone" });
+            cbBanco.Items.Add(new { id = 290, nome = "Banco 290" });
+            cbBanco.Items.Add(new { id = 341, nome = "Itau" });
+            cbBanco.Items.Add(new { id = 756, nome = "Sicoob" });
 
 
         }
@@ -76,6 +83,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
         private void btnImportarArquivo_Click(object sender, EventArgs e)
         {
+            
+            
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
