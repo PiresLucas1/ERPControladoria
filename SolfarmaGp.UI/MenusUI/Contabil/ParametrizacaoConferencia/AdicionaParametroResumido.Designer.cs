@@ -48,7 +48,7 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             btnCancelar.Location = new Point(12, 606);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(94, 29);

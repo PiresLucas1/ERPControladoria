@@ -39,6 +39,7 @@
             lbBanco = new Label();
             cbColigada = new ComboBox();
             gbFiltros = new GroupBox();
+            button1 = new Button();
             checkDataFiltro = new CheckBox();
             label6 = new Label();
             dtpDocumento = new DateTimePicker();
@@ -67,9 +68,14 @@
             label2 = new Label();
             label3 = new Label();
             tbValorReferente = new TextBox();
-            groupBox1 = new GroupBox();
+            gpBottom = new GroupBox();
             btnExcluir = new Button();
-            button1 = new Button();
+            tbCreditoTotal = new TextBox();
+            label7 = new Label();
+            label8 = new Label();
+            label9 = new Label();
+            tbDebitoTotal = new TextBox();
+            label10 = new Label();
             gpHeader.SuspendLayout();
             gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRelacaoBoletos).BeginInit();
@@ -77,7 +83,7 @@
             tbBaseImportada.SuspendLayout();
             tbBaseConferencia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgConferencia).BeginInit();
-            groupBox1.SuspendLayout();
+            gpBottom.SuspendLayout();
             SuspendLayout();
             // 
             // btnImportarArquivo
@@ -134,9 +140,9 @@
             lbCodPessoa.AutoSize = true;
             lbCodPessoa.Location = new Point(457, 27);
             lbCodPessoa.Name = "lbCodPessoa";
-            lbCodPessoa.Size = new Size(87, 20);
+            lbCodPessoa.Size = new Size(72, 20);
             lbCodPessoa.TabIndex = 14;
-            lbCodPessoa.Text = "Cod. Pessoa";
+            lbCodPessoa.Text = "Cod. Lote";
             // 
             // tbCodPessoa
             // 
@@ -201,6 +207,16 @@
             gbFiltros.TabIndex = 7;
             gbFiltros.TabStop = false;
             gbFiltros.Text = "Filtros:";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(469, 116);
+            button1.Name = "button1";
+            button1.Size = new Size(114, 34);
+            button1.TabIndex = 22;
+            button1.Text = "Limpar filtro";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // checkDataFiltro
             // 
@@ -359,7 +375,7 @@
             dvgRelacaoBoletos.Location = new Point(13, 8);
             dvgRelacaoBoletos.Name = "dvgRelacaoBoletos";
             dvgRelacaoBoletos.RowHeadersWidth = 51;
-            dvgRelacaoBoletos.Size = new Size(1375, 632);
+            dvgRelacaoBoletos.Size = new Size(1375, 628);
             dvgRelacaoBoletos.TabIndex = 2;
             // 
             // tbControlBase
@@ -370,7 +386,7 @@
             tbControlBase.Location = new Point(12, 211);
             tbControlBase.Name = "tbControlBase";
             tbControlBase.SelectedIndex = 0;
-            tbControlBase.Size = new Size(1409, 679);
+            tbControlBase.Size = new Size(1409, 675);
             tbControlBase.TabIndex = 3;
             // 
             // tbBaseImportada
@@ -379,7 +395,7 @@
             tbBaseImportada.Location = new Point(4, 29);
             tbBaseImportada.Name = "tbBaseImportada";
             tbBaseImportada.Padding = new Padding(3);
-            tbBaseImportada.Size = new Size(1401, 646);
+            tbBaseImportada.Size = new Size(1401, 642);
             tbBaseImportada.TabIndex = 0;
             tbBaseImportada.Text = "Base Importada";
             tbBaseImportada.UseVisualStyleBackColor = true;
@@ -431,7 +447,7 @@
             // tbValor
             // 
             tbValor.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            tbValor.Location = new Point(148, 65);
+            tbValor.Location = new Point(456, 71);
             tbValor.Name = "tbValor";
             tbValor.Size = new Size(108, 27);
             tbValor.TabIndex = 17;
@@ -440,7 +456,7 @@
             // 
             label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label2.AutoSize = true;
-            label2.Location = new Point(31, 34);
+            label2.Location = new Point(338, 44);
             label2.Name = "label2";
             label2.Size = new Size(109, 20);
             label2.TabIndex = 18;
@@ -450,7 +466,7 @@
             // 
             label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label3.AutoSize = true;
-            label3.Location = new Point(36, 74);
+            label3.Location = new Point(341, 72);
             label3.Name = "label3";
             label3.Size = new Size(45, 20);
             label3.TabIndex = 19;
@@ -459,27 +475,33 @@
             // tbValorReferente
             // 
             tbValorReferente.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            tbValorReferente.Location = new Point(148, 34);
+            tbValorReferente.Location = new Point(456, 41);
             tbValorReferente.Name = "tbValorReferente";
             tbValorReferente.Size = new Size(108, 27);
             tbValorReferente.TabIndex = 20;
             // 
-            // groupBox1
+            // gpBottom
             // 
-            groupBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            groupBox1.Controls.Add(btnExcluir);
-            groupBox1.Controls.Add(btnGeraLote);
-            groupBox1.Controls.Add(btnVisualiza);
-            groupBox1.Controls.Add(tbValorReferente);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(tbValor);
-            groupBox1.Controls.Add(label2);
-            groupBox1.Controls.Add(btnConferencia);
-            groupBox1.Location = new Point(16, 872);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1401, 108);
-            groupBox1.TabIndex = 21;
-            groupBox1.TabStop = false;
+            gpBottom.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gpBottom.Controls.Add(label10);
+            gpBottom.Controls.Add(tbDebitoTotal);
+            gpBottom.Controls.Add(label9);
+            gpBottom.Controls.Add(label8);
+            gpBottom.Controls.Add(tbCreditoTotal);
+            gpBottom.Controls.Add(label7);
+            gpBottom.Controls.Add(btnExcluir);
+            gpBottom.Controls.Add(btnGeraLote);
+            gpBottom.Controls.Add(btnVisualiza);
+            gpBottom.Controls.Add(tbValorReferente);
+            gpBottom.Controls.Add(label3);
+            gpBottom.Controls.Add(tbValor);
+            gpBottom.Controls.Add(label2);
+            gpBottom.Controls.Add(btnConferencia);
+            gpBottom.Location = new Point(16, 872);
+            gpBottom.Name = "gpBottom";
+            gpBottom.Size = new Size(1401, 108);
+            gpBottom.TabIndex = 21;
+            gpBottom.TabStop = false;
             // 
             // btnExcluir
             // 
@@ -492,15 +514,59 @@
             btnExcluir.UseVisualStyleBackColor = true;
             btnExcluir.Click += btnExcluir_Click;
             // 
-            // button1
+            // tbCreditoTotal
             // 
-            button1.Location = new Point(469, 116);
-            button1.Name = "button1";
-            button1.Size = new Size(114, 34);
-            button1.TabIndex = 22;
-            button1.Text = "Limpar filtro";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            tbCreditoTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            tbCreditoTotal.Location = new Point(133, 41);
+            tbCreditoTotal.Name = "tbCreditoTotal";
+            tbCreditoTotal.Size = new Size(108, 27);
+            tbCreditoTotal.TabIndex = 23;
+            // 
+            // label7
+            // 
+            label7.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label7.AutoSize = true;
+            label7.Location = new Point(18, 44);
+            label7.Name = "label7";
+            label7.Size = new Size(98, 20);
+            label7.TabIndex = 22;
+            label7.Text = "Total Crédito:";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(18, 17);
+            label8.Name = "label8";
+            label8.Size = new Size(117, 20);
+            label8.TabIndex = 24;
+            label8.Text = "Base Importada:";
+            // 
+            // label9
+            // 
+            label9.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label9.AutoSize = true;
+            label9.Location = new Point(18, 79);
+            label9.Name = "label9";
+            label9.Size = new Size(95, 20);
+            label9.TabIndex = 25;
+            label9.Text = "Total Débito:";
+            // 
+            // tbDebitoTotal
+            // 
+            tbDebitoTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            tbDebitoTotal.Location = new Point(133, 75);
+            tbDebitoTotal.Name = "tbDebitoTotal";
+            tbDebitoTotal.Size = new Size(108, 27);
+            tbDebitoTotal.TabIndex = 26;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(341, 17);
+            label10.Name = "label10";
+            label10.Size = new Size(112, 20);
+            label10.TabIndex = 27;
+            label10.Text = "Base Conferida:";
             // 
             // ConfereciaBoleto
             // 
@@ -509,9 +575,9 @@
             ClientSize = new Size(1433, 982);
             Controls.Add(tbControlBase);
             Controls.Add(gpHeader);
-            Controls.Add(groupBox1);
+            Controls.Add(gpBottom);
             Name = "ConfereciaBoleto";
-            Text = "ConfereciaBoleto";
+            Text = "Conferecia de Extrato";
             Load += ConfereciaBoleto_Load;
             gpHeader.ResumeLayout(false);
             gpHeader.PerformLayout();
@@ -522,8 +588,8 @@
             tbBaseImportada.ResumeLayout(false);
             tbBaseConferencia.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dvgConferencia).EndInit();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            gpBottom.ResumeLayout(false);
+            gpBottom.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -561,7 +627,7 @@
         private TextBox tbContaCredito;
         private Label lbCredito;
         private Label lbContaDebito;
-        private GroupBox groupBox1;
+        private GroupBox gpBottom;
         private TextBox tbHistorico;
         private Label label4;
         private TextBox tbValorDocumento;
@@ -571,5 +637,11 @@
         private CheckBox checkDataFiltro;
         private Button btnExcluir;
         private Button button1;
+        private TextBox tbCreditoTotal;
+        private Label label7;
+        private Label label8;
+        private Label label10;
+        private TextBox tbDebitoTotal;
+        private Label label9;
     }
 }

@@ -138,6 +138,31 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                     {
                         MessageBox.Show("Erro ao importar o arquivo:\n" + ex.Message);
                     }
+                    finally
+                    {
+                        if (dvgRelacaoBoletos.DataSource is DataTable dt && dt.Rows.Count > 0)
+                        {
+                            DataTable dtBaseImportada = (DataTable)dvgRelacaoBoletos.DataSource;
+                            tbCreditoTotal.Text = dtBaseImportada.AsEnumerable()
+                                .Where(row =>
+                                    row.Field<string>("Movimentacao")?.Trim().Equals("C", StringComparison.OrdinalIgnoreCase) == true ||
+                                    row.Field<string>("Movimentacao")?.Trim().Equals("Crédito", StringComparison.OrdinalIgnoreCase) == true ||
+                                    row.Field<string>("Movimentacao")?.Trim().Equals("Credito", StringComparison.OrdinalIgnoreCase) == true
+                                )
+                                .Sum(row => Convert.ToDecimal(row.Field<string>("Valor")))
+                                .ToString();
+                            tbDebitoTotal.Text =  dtBaseImportada.AsEnumerable()
+                                .Where(row =>
+                                    row.Field<string>("Movimentacao")?.Trim().Equals("D", StringComparison.OrdinalIgnoreCase) == true ||
+                                    row.Field<string>("Movimentacao")?.Trim().Equals("Débito", StringComparison.OrdinalIgnoreCase) == true ||
+                                    row.Field<string>("Movimentacao")?.Trim().Equals("Debito", StringComparison.OrdinalIgnoreCase) == true
+                                )
+                                .Sum(row => Convert.ToDecimal(row.Field<string>("Valor")))
+                                .ToString();
+                        }
+                        
+                        
+                    }
                 }
             }
 

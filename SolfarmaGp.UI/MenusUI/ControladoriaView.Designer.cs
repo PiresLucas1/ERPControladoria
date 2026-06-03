@@ -42,6 +42,7 @@
             importarNotasToolStripMenuItem = new ToolStripMenuItem();
             gerenciarItensToolStripMenuItem = new ToolStripMenuItem();
             periodoToolStripMenuItem = new ToolStripMenuItem();
+            importarXMLTOTVSToolStripMenuItem = new ToolStripMenuItem();
             contabilToolStripMenuItem = new ToolStripMenuItem();
             importarRecebimentoToolStripMenuItem = new ToolStripMenuItem();
             atualizarGestãoPatrimonialToolStripMenuItem = new ToolStripMenuItem();
@@ -71,7 +72,6 @@
             toolStripMenuItem4 = new ToolStripMenuItem();
             toolStripMenuItem5 = new ToolStripMenuItem();
             txtNomeUsuario = new ToolStripMenuItem();
-            importarXMLTOTVSToolStripMenuItem = new ToolStripMenuItem();
             menuBarTop.SuspendLayout();
             menuBarBottom.SuspendLayout();
             SuspendLayout();
@@ -173,6 +173,13 @@
             periodoToolStripMenuItem.Text = "Periodo";
             periodoToolStripMenuItem.Click += periodoToolStripMenuItem_Click;
             // 
+            // importarXMLTOTVSToolStripMenuItem
+            // 
+            importarXMLTOTVSToolStripMenuItem.Name = "importarXMLTOTVSToolStripMenuItem";
+            importarXMLTOTVSToolStripMenuItem.Size = new Size(239, 26);
+            importarXMLTOTVSToolStripMenuItem.Text = "Importar XML TOTVS";
+            importarXMLTOTVSToolStripMenuItem.Click += importarXMLTOTVSToolStripMenuItem_Click;
+            // 
             // contabilToolStripMenuItem
             // 
             contabilToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { importarRecebimentoToolStripMenuItem, atualizarGestãoPatrimonialToolStripMenuItem, conferenciaDeBoletoToolStripMenuItem, parametrizaçãoToolStripMenuItem, gerenciarToolStripMenuItem });
@@ -197,7 +204,7 @@
             // 
             conferenciaDeBoletoToolStripMenuItem.Name = "conferenciaDeBoletoToolStripMenuItem";
             conferenciaDeBoletoToolStripMenuItem.Size = new Size(280, 26);
-            conferenciaDeBoletoToolStripMenuItem.Text = "Conferencia de Boleto";
+            conferenciaDeBoletoToolStripMenuItem.Text = "Conferencia de Extrato";
             conferenciaDeBoletoToolStripMenuItem.Click += conferenciaDeBoletoToolStripMenuItem_Click;
             // 
             // parametrizaçãoToolStripMenuItem
@@ -377,13 +384,6 @@
             txtNomeUsuario.Name = "txtNomeUsuario";
             txtNomeUsuario.Size = new Size(116, 24);
             txtNomeUsuario.Text = "Nome usuario";
-            // 
-            // importarXMLTOTVSToolStripMenuItem
-            // 
-            importarXMLTOTVSToolStripMenuItem.Name = "importarXMLTOTVSToolStripMenuItem";
-            importarXMLTOTVSToolStripMenuItem.Size = new Size(239, 26);
-            importarXMLTOTVSToolStripMenuItem.Text = "Importar XML TOTVS";
-            importarXMLTOTVSToolStripMenuItem.Click += importarXMLTOTVSToolStripMenuItem_Click;
             // 
             // Portal
             // 
