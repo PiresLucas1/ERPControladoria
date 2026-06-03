@@ -69,7 +69,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
         }
         private void AtualizarTotal(IEnumerable<ConferenciaResultado> lista)
         {
-            decimal valorTotal = lista.Sum(x => Convert.ToDecimal(x.Valor, new CultureInfo("en-US")));
+            decimal valorTotal = lista.Sum(x => Convert.ToDecimal(x.Valor));
 
             tbValorReferente.Text = valorTotal.ToString();
         }
@@ -287,7 +287,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
                             where
                                 baseParametros.Field<int>("CodColigada") == coligada
-                                && baseImportada.Field<string>("Movimentacao")?.Trim().Equals("C", StringComparison.OrdinalIgnoreCase) == true
+                                && (
+                                    baseImportada.Field<string>("Movimentacao")?.Trim().Equals("C", StringComparison.OrdinalIgnoreCase) == true ||
+                                    baseImportada.Field<string>("Movimentacao")?.Trim().Equals("Crédito", StringComparison.OrdinalIgnoreCase) == true ||
+                                    baseImportada.Field<string>("Movimentacao")?.Trim().Equals("Credito", StringComparison.OrdinalIgnoreCase) == true
+                                   )
                                 && baseParametros.Field<int>("Filial") == filial
                                 && baseParametros.Field<int>("CodBanco") == banco
                                 && complemento.Equals(descricao, StringComparison.OrdinalIgnoreCase)
@@ -317,7 +321,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             CarregarGrid(listaResultado);
 
             tbValor.Text = listaResultado
-                .Sum(x => Convert.ToDecimal(x.Valor, new CultureInfo("en-US")))
+                .Sum(x => Convert.ToDecimal(x.Valor))
                 .ToString();
 
             MessageBox.Show("Conferencia Finalizada");
@@ -363,20 +367,20 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                 .ToList();
             CarregarGrid(filtrado);
             //dvgConferencia.DataSource = filtrado;
-            tbValorReferente.Text = filtrado.Sum(x => Convert.ToDecimal(x.Valor)).ToString("N2");
+            tbValorReferente.Text = filtrado.Sum(x => Convert.ToDecimal(x.Valor)).ToString();
         }
 
        
         private void btnGeraLote_Click(object sender, EventArgs e)
         {
-            var lista = (List<ConferenciaResultado>)dvgConferencia.DataSource;
+            //var lista = (List<ConferenciaResultado>)dvgConferencia.DataSource;
+            var lista = ((BindingList<ConferenciaResultado>)bsConferencia.DataSource)
+                .ToList();
+            //var lista = (List<ConferenciaResultado>)bsConferencia.DataSource;
             DataTable dt = new DataTable();
             dt = ConverteEnumerableParaDataTable(lista);
             string retorno = GeraLoteDrogaCentro(dt);
             SalvaArquivoTexto(retorno);
-
-
-
 
         }
         public void SalvaArquivoTexto(string resultado)
@@ -504,7 +508,10 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
         private void btnVisualiza_Click(object sender, EventArgs e)
         {
-            var lista = (List<ConferenciaResultado>)dvgConferencia.DataSource;
+            //var lista = (List<ConferenciaResultado>)dvgConferencia.DataSource;
+            //var lista = (List<ConferenciaResultado>)bsConferencia.DataSource;
+            var lista = ((BindingList<ConferenciaResultado>)bsConferencia.DataSource)
+                .ToList();
             DataTable dt = new DataTable();
             dt = ConverteEnumerableParaDataTable(lista);
             DataTable retorno = CriaDataTableLoteImportacao(dt, tbCodPessoa.Text);
