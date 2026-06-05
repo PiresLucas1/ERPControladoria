@@ -19,6 +19,9 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
         public List<dtoObjetoComboBoxInteface> cbCodComplemento { get; set; }
         public List<dtoObjetoComboBoxInteface> cbContaCotabil { get; set; }
 
+        private DataTable _tabela;
+        private BindingSource _bs = new BindingSource();
+
         public ParametrizacaoContabil()
         {
             InitializeComponent();
