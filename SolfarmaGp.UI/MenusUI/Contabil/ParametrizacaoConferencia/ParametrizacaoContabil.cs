@@ -26,6 +26,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
         {
             InitializeComponent();
 
+            dvgParametrizacao.DataSource = _bs;
             dvgParametrizacao.DataError += (s, e) =>
             {
                 e.ThrowException = false;
@@ -37,6 +38,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                 if (dvgParametrizacao.IsCurrentCellDirty)
                     dvgParametrizacao.CommitEdit(DataGridViewDataErrorContexts.Commit);
             };
+            toolTip1.SetToolTip(btnLimpaFiltro, "Limpar Filtro");
         }
         private async void btnAddItem_Click(object sender, EventArgs e)
         {
@@ -64,15 +66,12 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
         }
         public async Task<DataTable> AtualizarDataGrid(ObjetoPesquisaParametrosContabilDados objeto)
         {
-            ConsultaLancamentoContabilParametrizadoDadosUseCase usecase = new ConsultaLancamentoContabilParametrizadoDadosUseCase();
             DataTable dt = new DataTable();
-            if (objeto != null)
-            {
-                dt = await usecase.Execute(objeto);
-                return dt;
-            }
-            dt = await usecase.Execute(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
+            ConsultaLancamentoContabilParametrizadoDadosUseCase usecase = new ConsultaLancamentoContabilParametrizadoDadosUseCase();
+            dt = await usecase.Execute(objeto);
             return dt;
+
+
         }
         public async Task CarregaCodigoReduzido()
         {
@@ -128,16 +127,16 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
 
             dvgParametrizacao.Columns.Clear();
             ConfigurarColunasCombo();
-            DataTable dt = new DataTable();
-            if (objeto != null)
+            //DataTable dt = new DataTable();
+            var parametros = objeto ?? new ObjetoPesquisaParametrosContabilDados
             {
-                dt = await AtualizarDataGrid(objeto);
-            }
-            else
-            {
-                dt = await AtualizarDataGrid(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
-
-            }
+                CodColigada = 0,
+                banco = 0,
+                filial = 0,
+                reduzidoCredito = 0,
+                reduzidoDebito = 0
+            };
+            DataTable dt = await AtualizarDataGrid(parametros);
 
 
             if (dt.Rows.Count <= 0)
@@ -153,7 +152,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
 
             tbCount.Text = dt.Rows.Count.ToString();
         }
-        private async void btnFiltrar_Click(object sender, EventArgs e)
+        private void btnFiltrar_Click(object sender, EventArgs e)
         {
             int CodColigada = cbColigada.Text != "" ? Convert.ToInt32(cbColigada.Text) : 0;
             int filial = tbFilial.Text != "" ? Convert.ToInt32(tbFilial.Text) : 0;
@@ -170,7 +169,34 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                 reduzidoDebito = reduzidoDebito
             };
 
-            await CarregaTela(pesquisa);
+            FiltraValorTabel(pesquisa);
+        }
+        public void FiltraValorTabel(ObjetoPesquisaParametrosContabilDados parametros)
+        {
+            List<string> filtros = new List<string>();
+            if (parametros.CodColigada != 0)
+                filtros.Add($"CodColigada = {parametros.CodColigada}");
+
+            if (parametros.filial != 0)
+                filtros.Add($"Filial = {parametros.filial}");
+
+            if (parametros.banco != 0)
+                filtros.Add($"CodBanco = {parametros.banco}");
+
+            if (parametros.reduzidoCredito != 0)
+                filtros.Add($"CodContaCredito = {parametros.reduzidoCredito}");
+
+            if (parametros.reduzidoDebito != 0)
+                filtros.Add($"CodContaDebito = {parametros.reduzidoDebito}");
+
+            _bs.Filter = string.Join(" AND ", filtros);
+
+            tbCount.Text = _bs.Count.ToString();
+        }
+        public void LimpaFiltro()
+        {
+            _bs.Filter = "";
+            tbCount.Text = _bs.Count.ToString();
         }
 
 
@@ -183,6 +209,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             {
                 Name = "ContaDebito",
                 HeaderText = "Conta Débito",
+                DataPropertyName = "CodContaDebito",
                 DataSource = cbContaCotabil,
                 DisplayMember = "label",
                 ValueMember = "valor",
@@ -195,6 +222,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             {
                 Name = "ContaCredito",
                 HeaderText = "Conta Crédito",
+                DataPropertyName = "CodContaCredito",
                 DataSource = cbContaCotabil,
                 DisplayMember = "label",
                 ValueMember = "valor",
@@ -207,6 +235,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             {
                 Name = "Historico",
                 HeaderText = "Histórico",
+                DataPropertyName = "CodHistorico",
                 DataSource = cbHistorico,
                 DisplayMember = "label",
                 ValueMember = "valor",
@@ -219,6 +248,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             {
                 Name = "Complemento",
                 HeaderText = "Complemento",
+                DataPropertyName = "Complemento",
                 DataSource = cbCodComplemento,
                 DisplayMember = "label",
                 ValueMember = "valor",
@@ -231,12 +261,14 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             {
                 Name = "DescricaoExtrato",
                 HeaderText = "Descrição Extrato",
+                DataPropertyName = "DescricaoExtrato",
             };
 
             var colFilial = new DataGridViewTextBoxColumn
             {
                 Name = "Filial",
                 HeaderText = "Filial",
+                DataPropertyName = "Filial",
 
             };
 
@@ -244,6 +276,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             {
                 Name = "CodColigada",
                 HeaderText = "Cod. Coligada",
+                DataPropertyName = "CodColigada",
 
             };
 
@@ -251,6 +284,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             {
                 Name = "CodBanco",
                 HeaderText = "Cod. Banco",
+                DataPropertyName = "CodBanco"
 
             };
 
@@ -267,21 +301,10 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
         }
         private void PopularGrid(DataTable dt)
         {
-            dvgParametrizacao.Rows.Clear();
-
-            foreach (DataRow row in dt.Rows)
-            {
-                int index = dvgParametrizacao.Rows.Add();
-
-                dvgParametrizacao.Rows[index].Cells["ContaDebito"].Value = row["CodContaDebito"];
-                dvgParametrizacao.Rows[index].Cells["ContaCredito"].Value = row["CodContaCredito"];
-                dvgParametrizacao.Rows[index].Cells["Historico"].Value = row["CodHistorico"];
-                dvgParametrizacao.Rows[index].Cells["Complemento"].Value = row["Complemento"];
-                dvgParametrizacao.Rows[index].Cells["DescricaoExtrato"].Value = row["DescricaoExtrato"];
-                dvgParametrizacao.Rows[index].Cells["Filial"].Value = row["Filial"];
-                dvgParametrizacao.Rows[index].Cells["CodColigada"].Value = row["CodColigada"];
-                dvgParametrizacao.Rows[index].Cells["CodBanco"].Value = row["CodBanco"];
-            }
+            //População de dvg e binding
+            _tabela = dt;
+            _bs.DataSource = _tabela;
+            dvgParametrizacao.DataSource = _bs;
         }
 
         private void dvgParametrizacao_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -322,6 +345,55 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
 
         private async void btnSalvaParametros_Click(object sender, EventArgs e)
         {
+            // Confirma qualquer edição pendente no grid
+            _bs.EndEdit();
+            DataTable dtParaSalvar = PrepararTabelaParaSalvar();
+
+            // Pega só as linhas que foram alteradas (Added, Modified, Deleted)
+            //DataTable alteracoes = _tabela.GetChanges();
+
+            //if (alteracoes == null || alteracoes.Rows.Count == 0)
+            //{
+            //    MessageBox.Show("Nenhuma alteração encontrada.", "Informação",
+            //        MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //    return;
+            //}
+
+            ProcessStatusManager.Start("Carregando dados...");
+            ProcessStatusManager.Update("Processando...");
+            try
+            {
+                string user = new Portal().pegaValorUsuario();
+                AlteraLancamentoParametrizadoUseCase usecase = new AlteraLancamentoParametrizadoUseCase();
+                var result = await usecase.Execute(dtParaSalvar, user);
+
+                if (result)
+                {
+                    // Confirma as alterações no DataTable (limpa os RowState)
+                    _tabela.AcceptChanges();
+                    await CarregaTela(new ObjetoPesquisaParametrosContabilDados
+                    {
+                        CodColigada = 0,
+                        banco = 0,
+                        filial = 0,
+                        reduzidoCredito = 0,
+                        reduzidoDebito = 0
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                ProcessStatusManager.Error(ex);
+                MessageBox.Show(ex.Message, "Erro Ao salvar Parametros",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                ProcessStatusManager.Stop();
+            }
+        }
+        private DataTable PrepararTabelaParaSalvar()
+        {
             DataTable dt = new DataTable();
 
             dt.Columns.Add("CodContaDebito", typeof(int));
@@ -333,59 +405,47 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             dt.Columns.Add("CodColigada", typeof(int));
             dt.Columns.Add("CodBanco", typeof(int));
 
-            foreach (DataGridViewRow row in dvgParametrizacao.Rows)
+            foreach (DataRow row in _tabela.Rows)
             {
-                if (row.IsNewRow)
+                // ignora linhas deletadas
+                if (row.RowState == DataRowState.Deleted)
                     continue;
 
                 dt.Rows.Add(
-                    row.Cells["ContaDebito"].Value,
-                    row.Cells["ContaCredito"].Value,
-                    row.Cells["Historico"].Value,
-                    row.Cells["Complemento"].Value,
-                    row.Cells["DescricaoExtrato"].Value,
-                    row.Cells["Filial"].Value,
-                    row.Cells["CodColigada"].Value,
-                    row.Cells["CodBanco"].Value
+                    row["CodContaDebito"],
+                    row["CodContaCredito"],
+                    row["CodHistorico"],
+                    row["Complemento"],
+                    row["DescricaoExtrato"],
+                    row["Filial"],
+                    row["CodColigada"],
+                    row["CodBanco"]
                 );
             }
 
-            ProcessStatusManager.Start("Carregando dados...");
-            ProcessStatusManager.Update("Processando...");
-            try
-            {
-
-                string user = new Portal().pegaValorUsuario();
-                AlteraLancamentoParametrizadoUseCase usecase = new AlteraLancamentoParametrizadoUseCase();
-                var result = await usecase.Execute(dt, user);
-                if (result)
-                {
-                    await CarregaTela(new ObjetoPesquisaParametrosContabilDados { CodColigada = 0, banco = 0, filial = 0, reduzidoCredito = 0, reduzidoDebito = 0 });
-                }
-            }
-            catch (Exception ex)
-            {
-                ProcessStatusManager.Error(ex);
-                MessageBox.Show(ex.Message, "Erro Ao salvar Parametros", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                ProcessStatusManager.Stop();
-
-            }
-
-
-
-
+            return dt;
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
-            if (dvgParametrizacao.CurrentRow == null)
+            if(_bs.Current == null)
+            {
                 return;
-            if(dvgParametrizacao.CurrentRow.IsNewRow)
-                return;
-            dvgParametrizacao.Rows.RemoveAt(dvgParametrizacao.CurrentRow.Index);
+            }
+            if(_bs.Current is DataRowView drv && drv.Row.RowState == DataRowState.Added)
+            {
+                _bs.RemoveCurrent();
+            }
+            else
+            {
+                (_bs.Current as DataRowView)?.Row.Delete();
+            }
+            tbCount.Text = _bs.Count.ToString();
+        }
+
+        private void btnLimpaFiltro_Click(object sender, EventArgs e)
+        {
+            LimpaFiltro();
         }
     }
 }

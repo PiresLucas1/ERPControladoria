@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             dvgParametrizacao = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             btnAddItem = new Button();
             tbCount = new TextBox();
             gpGeral = new GroupBox();
+            btnLimpaFiltro = new Button();
             tbReduzidoCredito = new TextBox();
             tbReduzidoDebito = new TextBox();
             lbCredito = new Label();
@@ -45,6 +47,7 @@
             lbFilial = new Label();
             btnSalvaParametros = new Button();
             btnExcluir = new Button();
+            toolTip1 = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)dvgParametrizacao).BeginInit();
             gpGeral.SuspendLayout();
             SuspendLayout();
@@ -87,6 +90,7 @@
             // gpGeral
             // 
             gpGeral.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpGeral.Controls.Add(btnLimpaFiltro);
             gpGeral.Controls.Add(tbReduzidoCredito);
             gpGeral.Controls.Add(tbReduzidoDebito);
             gpGeral.Controls.Add(lbCredito);
@@ -104,6 +108,18 @@
             gpGeral.TabIndex = 5;
             gpGeral.TabStop = false;
             gpGeral.Text = "Geral";
+            // 
+            // btnLimpaFiltro
+            // 
+            btnLimpaFiltro.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnLimpaFiltro.BackgroundImage = Properties.Resources.trash_solid;
+            btnLimpaFiltro.BackgroundImageLayout = ImageLayout.Stretch;
+            btnLimpaFiltro.Location = new Point(934, 124);
+            btnLimpaFiltro.Name = "btnLimpaFiltro";
+            btnLimpaFiltro.Size = new Size(38, 39);
+            btnLimpaFiltro.TabIndex = 18;
+            btnLimpaFiltro.UseVisualStyleBackColor = true;
+            btnLimpaFiltro.Click += btnLimpaFiltro_Click;
             // 
             // tbReduzidoCredito
             // 
@@ -180,7 +196,7 @@
             // btnFiltrar
             // 
             btnFiltrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnFiltrar.Location = new Point(978, 127);
+            btnFiltrar.Location = new Point(978, 124);
             btnFiltrar.Name = "btnFiltrar";
             btnFiltrar.Size = new Size(131, 39);
             btnFiltrar.TabIndex = 8;
@@ -218,6 +234,10 @@
             btnExcluir.Text = "Excluir item";
             btnExcluir.UseVisualStyleBackColor = true;
             btnExcluir.Click += btnExcluir_Click;
+            // 
+            // toolTip1
+            // 
+            toolTip1.Tag = "Limpar Filtro";
             // 
             // ParametrizacaoContabil
             // 
@@ -263,5 +283,7 @@
         private Label blContaDebito;
         private Label lbBanco;
         private Button btnExcluir;
+        private Button btnLimpaFiltro;
+        private ToolTip toolTip1;
     }
 }
