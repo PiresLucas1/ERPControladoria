@@ -23,6 +23,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
         public int colAlteracao;
         public DateTime dataPeriodoInicio;
         public DateTime dataPeridoFim;
+        public int numeroSelecionado;
 
         private DataTable dtOrignal;
         private BindingSource _bs = new BindingSource();
@@ -36,6 +37,9 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            txtTotal.Text = "0";
+            txtSelecionado.Text = "0";
+
             DtPickerInicio.Format = DateTimePickerFormat.Custom;
             DtPickerInicio.CustomFormat = "dd/MM/yyyy";
             DtPickerFim.Format = DateTimePickerFormat.Custom;
@@ -202,6 +206,8 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 
                     // finalização de ajuste ----------------------------------------
 
+                    var rowCount = dtImportacao.Rows.Count;
+                    txtTotal.Text= rowCount.ToString();
 
 
 
@@ -218,6 +224,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
                     this.Enabled = true;
                     this.BringToFront();
                     this.Activate();
+                    this.numeroSelecionado = 0;
                 }
             }
             else
@@ -784,14 +791,23 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
             if (e.RowIndex < 0) return; // Ignora cliques no header
 
             // Remove a seleção de todas as linhas
-            dtImportacao.ClearSelection();
-
-            // Destaca a linha clicada
-            dtImportacao.Rows[e.RowIndex].Selected = true;
-
-            // Opcional: Define cores personalizadas para a linha selecionada
+            dtImportacao.ClearSelection();            
+            dtImportacao.Rows[e.RowIndex].Selected = true;                    
             dtImportacao.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightSteelBlue;
             dtImportacao.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            dtImportacao.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            dtImportacao.EndEdit();
+            AtualizaValorTotalDeItensSelecionados();
+        }
+        private void AtualizaValorTotalDeItensSelecionados()
+        {
+            var dtOriginal = (DataTable)dtImportacao.DataSource;
+            if (dtOriginal == null) return;
+            var linhasSelecionadas = dtOriginal.AsEnumerable()
+                .Where(r => r.Field<bool>("Selecionar"))
+                .ToList();
+            txtSelecionado.Text = linhasSelecionadas.Count.ToString();
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)

@@ -57,9 +57,15 @@
             btnLimpar = new Button();
             btnSelecionarTodas = new Button();
             dtImportacao = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            txtTotal = new TextBox();
+            label5 = new Label();
+            label6 = new Label();
+            groupBox2 = new GroupBox();
+            txtSelecionado = new TextBox();
             groupBox1.SuspendLayout();
             gbAutoFuncoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtImportacao).BeginInit();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // btnListaNotas
@@ -78,7 +84,7 @@
             // btnExportarTotvs
             // 
             btnExportarTotvs.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnExportarTotvs.Location = new Point(1124, 952);
+            btnExportarTotvs.Location = new Point(1124, 960);
             btnExportarTotvs.Margin = new Padding(3, 4, 3, 4);
             btnExportarTotvs.Name = "btnExportarTotvs";
             btnExportarTotvs.Size = new Size(135, 41);
@@ -320,7 +326,7 @@
             // btnDesmarcarTodos
             // 
             btnDesmarcarTodos.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnDesmarcarTodos.Location = new Point(16, 952);
+            btnDesmarcarTodos.Location = new Point(285, 21);
             btnDesmarcarTodos.Margin = new Padding(3, 4, 3, 4);
             btnDesmarcarTodos.Name = "btnDesmarcarTodos";
             btnDesmarcarTodos.Size = new Size(136, 41);
@@ -331,7 +337,7 @@
             // btnLimpar
             // 
             btnLimpar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnLimpar.Location = new Point(379, 952);
+            btnLimpar.Location = new Point(433, 66);
             btnLimpar.Margin = new Padding(3, 4, 3, 4);
             btnLimpar.Name = "btnLimpar";
             btnLimpar.Size = new Size(112, 41);
@@ -343,10 +349,10 @@
             // btnSelecionarTodas
             // 
             btnSelecionarTodas.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnSelecionarTodas.Location = new Point(163, 952);
+            btnSelecionarTodas.Location = new Point(285, 66);
             btnSelecionarTodas.Margin = new Padding(3, 4, 3, 4);
             btnSelecionarTodas.Name = "btnSelecionarTodas";
-            btnSelecionarTodas.Size = new Size(145, 41);
+            btnSelecionarTodas.Size = new Size(136, 41);
             btnSelecionarTodas.TabIndex = 6;
             btnSelecionarTodas.Text = "Selecionar todos";
             btnSelecionarTodas.UseVisualStyleBackColor = true;
@@ -358,24 +364,76 @@
             dtImportacao.Location = new Point(16, 219);
             dtImportacao.Name = "dtImportacao";
             dtImportacao.RowHeadersWidth = 51;
-            dtImportacao.Size = new Size(1259, 710);
+            dtImportacao.Size = new Size(1259, 669);
             dtImportacao.TabIndex = 7;
             dtImportacao.CellClick += dtImportacao_CellClick;
             dtImportacao.CellDoubleClick += dtImportacao_CellContentClick;
             dtImportacao.EditingControlShowing += dtImportacao_EditingControlShowing;
             dtImportacao.KeyDown += TextBox_KeyDown;
             // 
+            // txtTotal
+            // 
+            txtTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            txtTotal.Location = new Point(16, 68);
+            txtTotal.Name = "txtTotal";
+            txtTotal.ReadOnly = true;
+            txtTotal.Size = new Size(76, 27);
+            txtTotal.TabIndex = 9;
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label5.AutoSize = true;
+            label5.Location = new Point(98, 42);
+            label5.Name = "label5";
+            label5.Size = new Size(134, 20);
+            label5.TabIndex = 10;
+            label5.Text = "Total Selecionados";
+            // 
+            // label6
+            // 
+            label6.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label6.AutoSize = true;
+            label6.Location = new Point(98, 75);
+            label6.Name = "label6";
+            label6.Size = new Size(42, 20);
+            label6.TabIndex = 11;
+            label6.Text = "Total";
+            // 
+            // groupBox2
+            // 
+            groupBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(label6);
+            groupBox2.Controls.Add(txtSelecionado);
+            groupBox2.Controls.Add(label5);
+            groupBox2.Controls.Add(txtTotal);
+            groupBox2.Controls.Add(btnLimpar);
+            groupBox2.Controls.Add(btnSelecionarTodas);
+            groupBox2.Controls.Add(btnDesmarcarTodos);
+            groupBox2.Location = new Point(12, 894);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(1263, 117);
+            groupBox2.TabIndex = 12;
+            groupBox2.TabStop = false;
+            // 
+            // txtSelecionado
+            // 
+            txtSelecionado.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            txtSelecionado.Location = new Point(16, 35);
+            txtSelecionado.Name = "txtSelecionado";
+            txtSelecionado.ReadOnly = true;
+            txtSelecionado.Size = new Size(76, 27);
+            txtSelecionado.TabIndex = 13;
+            // 
             // ImportarNotasTotvs
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1289, 1006);
+            ClientSize = new Size(1289, 1014);
             Controls.Add(dtImportacao);
-            Controls.Add(btnDesmarcarTodos);
-            Controls.Add(btnLimpar);
-            Controls.Add(btnSelecionarTodas);
             Controls.Add(groupBox1);
             Controls.Add(btnExportarTotvs);
+            Controls.Add(groupBox2);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
             Name = "ImportarNotasTotvs";
@@ -386,6 +444,8 @@
             groupBox1.PerformLayout();
             gbAutoFuncoes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dtImportacao).EndInit();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
 
         }
@@ -420,6 +480,12 @@
         private System.Windows.Forms.GroupBox gbAutoFuncoes;
         private System.Windows.Forms.Button btnPreenche;
         private SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView dtImportacao;
+        private TextBox textBox1;
+        private TextBox txtTotal;
+        private Label label5;
+        private Label label6;
+        private GroupBox groupBox2;
+        private TextBox txtSelecionado;
     }
 }
 
