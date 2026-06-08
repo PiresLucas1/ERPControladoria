@@ -302,6 +302,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
         private async void btnExportarTotvs_Click(object sender, EventArgs e)
         {
             bool existeDocumentoForaDoPerido = ValidaSeNotaEstaNoPeriodoAtivo();
+            await BuscaDataPeridoParametriza();
             if (existeDocumentoForaDoPerido)
             {
                 MessageBox.Show("Existe Documentos com data fora do periodo");

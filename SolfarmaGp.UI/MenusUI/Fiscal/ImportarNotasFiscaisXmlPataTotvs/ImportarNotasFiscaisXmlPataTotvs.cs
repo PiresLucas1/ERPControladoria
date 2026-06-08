@@ -78,7 +78,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             _tabela = data;
             _bs.DataSource = _tabela;
             dvgNotas.DataSource = _bs;
-            AdicionarColunaSelecao();                        
+            AdicionarColunaSelecao();
             dvgNotas.Sorted += (s, e) => AtualizarCoresDaGrid();
 
             dvgNotas.Columns["DataDocumento"].DefaultCellStyle.Format = "dd/MM/yyyy";
@@ -110,7 +110,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         }
 
         private async void btnConsultarXml_Click(object sender, EventArgs e)
-        {            
+        {
             var IDQiveArquivoXMLString = dvgNotas.CurrentRow.Cells["IDQiveArquivoXML"].Value.ToString();
             var numDocumentoString = dvgNotas.CurrentRow.Cells["NumDocumento"].Value.ToString();
 
@@ -211,5 +211,6 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
                 UseShellExecute = true
             });
         }
+
     }
 }

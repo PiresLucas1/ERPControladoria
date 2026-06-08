@@ -42,9 +42,9 @@
             btnSelecionaTodos = new Button();
             label1 = new Label();
             tbRegistrosAtencao = new TextBox();
-            button2 = new Button();
             btnConsultarXml = new Button();
             lbRegistro = new Label();
+            button2 = new Button();
             Filtros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgNotas).BeginInit();
             gpAcoes.SuspendLayout();
@@ -205,16 +205,6 @@
             tbRegistrosAtencao.Size = new Size(72, 27);
             tbRegistrosAtencao.TabIndex = 9;
             // 
-            // button2
-            // 
-            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button2.Location = new Point(1001, 69);
-            button2.Name = "button2";
-            button2.Size = new Size(147, 30);
-            button2.TabIndex = 8;
-            button2.Text = "Importar Totvs";
-            button2.UseVisualStyleBackColor = true;
-            // 
             // btnConsultarXml
             // 
             btnConsultarXml.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -234,6 +224,17 @@
             lbRegistro.Size = new Size(68, 20);
             lbRegistro.TabIndex = 4;
             lbRegistro.Text = "Registos:";
+            // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button2.Enabled = false;
+            button2.Location = new Point(1001, 69);
+            button2.Name = "button2";
+            button2.Size = new Size(147, 30);
+            button2.TabIndex = 8;
+            button2.Text = "Importar Totvs";
+            button2.UseVisualStyleBackColor = true;
             // 
             // ImportarNotasFiscaisXmlPataTotvs
             // 
@@ -264,7 +265,6 @@
         private ComponentesTelaUI.DataGridView.MyDataGridView dvgNotas;
         private TextBox tbRegistros;
         private GroupBox gpAcoes;
-        private Button button2;
         private Button btnConsultarXml;
         private Label lbRegistro;
         private Label label1;
@@ -272,5 +272,6 @@
         private Button btnSelecionaTodos;
         private Button btnLimparSelecao;
         private Button btnVisualizarNota;
+        private Button button2;
     }
 }
