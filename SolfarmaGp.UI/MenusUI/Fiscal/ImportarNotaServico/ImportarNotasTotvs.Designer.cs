@@ -53,19 +53,21 @@
             lbCodColigada = new Label();
             coBoxTipeFilter = new ComboBox();
             label1 = new Label();
-            btnDesmarcarTodos = new Button();
-            btnLimpar = new Button();
-            btnSelecionarTodas = new Button();
             dtImportacao = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
             txtTotal = new TextBox();
             label5 = new Label();
             label6 = new Label();
             groupBox2 = new GroupBox();
+            btnLimpar = new Button();
+            btnDesmarcarTodos = new Button();
+            btnSelecionarTodas = new Button();
+            groupBox3 = new GroupBox();
             txtSelecionado = new TextBox();
             groupBox1.SuspendLayout();
             gbAutoFuncoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtImportacao).BeginInit();
             groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
             SuspendLayout();
             // 
             // btnListaNotas
@@ -323,45 +325,11 @@
             label1.TabIndex = 2;
             label1.Text = "Filtro";
             // 
-            // btnDesmarcarTodos
-            // 
-            btnDesmarcarTodos.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnDesmarcarTodos.Location = new Point(285, 21);
-            btnDesmarcarTodos.Margin = new Padding(3, 4, 3, 4);
-            btnDesmarcarTodos.Name = "btnDesmarcarTodos";
-            btnDesmarcarTodos.Size = new Size(136, 41);
-            btnDesmarcarTodos.TabIndex = 6;
-            btnDesmarcarTodos.Text = "Desmarcar todos";
-            btnDesmarcarTodos.Click += btnDesmarcarTodos_Click;
-            // 
-            // btnLimpar
-            // 
-            btnLimpar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnLimpar.Location = new Point(433, 66);
-            btnLimpar.Margin = new Padding(3, 4, 3, 4);
-            btnLimpar.Name = "btnLimpar";
-            btnLimpar.Size = new Size(112, 41);
-            btnLimpar.TabIndex = 6;
-            btnLimpar.Text = "Limpar";
-            btnLimpar.UseVisualStyleBackColor = true;
-            btnLimpar.Click += btLimpar_Click;
-            // 
-            // btnSelecionarTodas
-            // 
-            btnSelecionarTodas.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnSelecionarTodas.Location = new Point(285, 66);
-            btnSelecionarTodas.Margin = new Padding(3, 4, 3, 4);
-            btnSelecionarTodas.Name = "btnSelecionarTodas";
-            btnSelecionarTodas.Size = new Size(136, 41);
-            btnSelecionarTodas.TabIndex = 6;
-            btnSelecionarTodas.Text = "Selecionar todos";
-            btnSelecionarTodas.UseVisualStyleBackColor = true;
-            btnSelecionarTodas.Click += btnSelecionarTodos_Click;
-            // 
             // dtImportacao
             // 
+            dtImportacao.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dtImportacao.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtImportacao.Location = new Point(16, 219);
+            dtImportacao.Location = new Point(16, 224);
             dtImportacao.Name = "dtImportacao";
             dtImportacao.RowHeadersWidth = 51;
             dtImportacao.Size = new Size(1259, 669);
@@ -374,7 +342,7 @@
             // txtTotal
             // 
             txtTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            txtTotal.Location = new Point(16, 68);
+            txtTotal.Location = new Point(6, 75);
             txtTotal.Name = "txtTotal";
             txtTotal.ReadOnly = true;
             txtTotal.Size = new Size(76, 27);
@@ -384,7 +352,7 @@
             // 
             label5.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label5.AutoSize = true;
-            label5.Location = new Point(98, 42);
+            label5.Location = new Point(88, 39);
             label5.Name = "label5";
             label5.Size = new Size(134, 20);
             label5.TabIndex = 10;
@@ -394,7 +362,7 @@
             // 
             label6.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label6.AutoSize = true;
-            label6.Location = new Point(98, 75);
+            label6.Location = new Point(90, 82);
             label6.Name = "label6";
             label6.Size = new Size(42, 20);
             label6.TabIndex = 11;
@@ -403,23 +371,67 @@
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            groupBox2.Controls.Add(label6);
-            groupBox2.Controls.Add(txtSelecionado);
-            groupBox2.Controls.Add(label5);
-            groupBox2.Controls.Add(txtTotal);
             groupBox2.Controls.Add(btnLimpar);
-            groupBox2.Controls.Add(btnSelecionarTodas);
             groupBox2.Controls.Add(btnDesmarcarTodos);
+            groupBox2.Controls.Add(btnSelecionarTodas);
+            groupBox2.Controls.Add(groupBox3);
             groupBox2.Location = new Point(12, 894);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(1263, 117);
             groupBox2.TabIndex = 12;
             groupBox2.TabStop = false;
             // 
+            // btnLimpar
+            // 
+            btnLimpar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnLimpar.Location = new Point(485, 75);
+            btnLimpar.Name = "btnLimpar";
+            btnLimpar.Size = new Size(114, 29);
+            btnLimpar.TabIndex = 17;
+            btnLimpar.Text = "Limpar";
+            btnLimpar.UseVisualStyleBackColor = true;
+            btnLimpar.Click += btLimpar_Click;
+            // 
+            // btnDesmarcarTodos
+            // 
+            btnDesmarcarTodos.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnDesmarcarTodos.Location = new Point(303, 26);
+            btnDesmarcarTodos.Name = "btnDesmarcarTodos";
+            btnDesmarcarTodos.Size = new Size(151, 29);
+            btnDesmarcarTodos.TabIndex = 16;
+            btnDesmarcarTodos.Text = "Limpar Seleção";
+            btnDesmarcarTodos.UseVisualStyleBackColor = true;
+            btnDesmarcarTodos.Click += btnDesmarcarTodos_Click;
+            // 
+            // btnSelecionarTodas
+            // 
+            btnSelecionarTodas.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnSelecionarTodas.Location = new Point(303, 75);
+            btnSelecionarTodas.Name = "btnSelecionarTodas";
+            btnSelecionarTodas.Size = new Size(151, 29);
+            btnSelecionarTodas.TabIndex = 15;
+            btnSelecionarTodas.Text = "Selecionar Todos";
+            btnSelecionarTodas.UseVisualStyleBackColor = true;
+            btnSelecionarTodas.Click += btnSelecionarTodos_Click;
+            // 
+            // groupBox3
+            // 
+            groupBox3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            groupBox3.Controls.Add(txtSelecionado);
+            groupBox3.Controls.Add(label6);
+            groupBox3.Controls.Add(label5);
+            groupBox3.Controls.Add(txtTotal);
+            groupBox3.Location = new Point(4, 0);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(250, 111);
+            groupBox3.TabIndex = 14;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Totais";
+            // 
             // txtSelecionado
             // 
             txtSelecionado.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            txtSelecionado.Location = new Point(16, 35);
+            txtSelecionado.Location = new Point(6, 36);
             txtSelecionado.Name = "txtSelecionado";
             txtSelecionado.ReadOnly = true;
             txtSelecionado.Size = new Size(76, 27);
@@ -445,7 +457,8 @@
             gbAutoFuncoes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dtImportacao).EndInit();
             groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             ResumeLayout(false);
 
         }
@@ -467,9 +480,6 @@
         private System.Windows.Forms.DateTimePicker DtPickerInicio;
         private System.Windows.Forms.DateTimePicker DtPickerFim;
         private System.Windows.Forms.CheckBox cbLancadasNoERP;
-        private System.Windows.Forms.Button btnDesmarcarTodos;
-        private System.Windows.Forms.Button btnLimpar;
-        private System.Windows.Forms.Button btnSelecionarTodas;
         private System.Windows.Forms.Button btnFiltrar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtBoxNumDoc;
@@ -486,6 +496,10 @@
         private Label label6;
         private GroupBox groupBox2;
         private TextBox txtSelecionado;
+        private GroupBox groupBox3;
+        private Button btnLimpar;
+        private Button btnDesmarcarTodos;
+        private Button btnSelecionarTodas;
     }
 }
 

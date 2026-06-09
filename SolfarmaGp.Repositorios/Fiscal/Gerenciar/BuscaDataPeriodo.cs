@@ -20,9 +20,12 @@ namespace SolfarmaGp.Repositorios.Fiscal.Gerenciar
                             tbl.DataApuracaoInicio,
                             tbl.DataApuracaoFim,
                             tbl.StatusApuracao
-                        FROM tblConfiguracaoPeriodo tbl
+                        FROM 
+                            tblConfiguracaoPeriodo tbl
+                        WHERE
+                            tbl.StatusApuracao = 1
                         ORDER BY
-                        tbl.DataApuracaoFim DESC ";
+                            tbl.DataApuracaoFim DESC ";
 
                     using (SqlCommand cmd = new SqlCommand(sql, conn))
                     {

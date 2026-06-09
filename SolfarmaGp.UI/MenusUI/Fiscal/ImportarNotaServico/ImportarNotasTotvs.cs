@@ -29,8 +29,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
         private BindingSource _bs = new BindingSource();
         public ImportarNotasTotvs()
         {
-            InitializeComponent();
-            this.Resize += new System.EventHandler(this.ResizeForm);
+            InitializeComponent();            
             //AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
 
         }
@@ -44,36 +43,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
             DtPickerInicio.CustomFormat = "dd/MM/yyyy";
             DtPickerFim.Format = DateTimePickerFormat.Custom;
             DtPickerFim.CustomFormat = "dd/MM/yyyy";
-
-            btnListaNotas.FlatStyle = FlatStyle.Flat;
-            btnListaNotas.BackColor = Color.SteelBlue;
-            btnListaNotas.ForeColor = Color.White;
-            btnListaNotas.FlatAppearance.BorderSize = 0;
-            btnListaNotas.AutoSize = true;
-
-            btnSelecionarTodas.FlatStyle = FlatStyle.Flat;
-            btnSelecionarTodas.BackColor = Color.SteelBlue;
-            btnSelecionarTodas.ForeColor = Color.White;
-            btnSelecionarTodas.FlatAppearance.BorderSize = 0;
-            btnSelecionarTodas.AutoSize = true;
-
-            btnDesmarcarTodos.FlatStyle = FlatStyle.Flat;
-            btnDesmarcarTodos.BackColor = Color.SteelBlue;
-            btnDesmarcarTodos.ForeColor = Color.White;
-            btnDesmarcarTodos.FlatAppearance.BorderSize = 0;
-            btnDesmarcarTodos.AutoSize = true;
-
-            btnLimpar.FlatStyle = FlatStyle.Flat;
-            btnLimpar.BackColor = Color.SteelBlue;
-            btnLimpar.ForeColor = Color.White;
-            btnLimpar.FlatAppearance.BorderSize = 0;
-            btnLimpar.AutoSize = true;
-
-            btnExportarTotvs.FlatStyle = FlatStyle.Flat;
-            btnExportarTotvs.BackColor = Color.SteelBlue;
-            btnExportarTotvs.ForeColor = Color.White;
-            btnExportarTotvs.FlatAppearance.BorderSize = 0;
-            btnExportarTotvs.AutoSize = true;
+                                    
 
             DtPickerInicio.Enabled = false;
             DtPickerFim.Enabled = false;
@@ -82,15 +52,19 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
             string[] itens = { "Periodo" };
             coBoxTipeFilter.Items.AddRange(itens);
             coBoxTipeFilter.SelectedIndex = 0;
-            await BuscaDataPeridoParametriza();
-        }
-        public async Task BuscaDataPeridoParametriza()
-        {
-            (DateTime dtInico, DateTime dtFim, bool status) = await new BuscaDataPeriodoUseCase().Execute();
-
+            var (dtInico, dtFim) = await BuscaDataPeridoParametriza();
             this.dataPeriodoInicio = dtInico;
             this.dataPeridoFim = dtFim;
-
+            await MostraValorPeriodo(dtInico, dtFim);
+        }
+        public async Task<(DateTime dataInicio, DateTime dataFim)> BuscaDataPeridoParametriza()
+        {
+            (DateTime dtInico, DateTime dtFim, bool status) = await new BuscaDataPeriodoUseCase().Execute();            
+            return (dtInico, dtFim);            
+        }
+        public async Task MostraValorPeriodo(DateTime dataInicio, DateTime dataFim)
+        {
+            MessageBox.Show($"Período Fiscal Aberto no Sistema: {dataInicio.ToShortDateString()} - {dataFim.ToShortDateString()}", "Período Fiscal", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private async void btnListaNotas_Click(object sender, EventArgs e)
         {
@@ -275,7 +249,8 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
             DtPickerInicio.Value = DateTime.Today;
             DtPickerFim.Value = DateTime.Today;
 
-
+            txtTotal.Text = "0";
+            
             // Limpa a grid
             dtImportacao.DataSource = null;
 
@@ -301,8 +276,8 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 
         private async void btnExportarTotvs_Click(object sender, EventArgs e)
         {
-            bool existeDocumentoForaDoPerido = ValidaSeNotaEstaNoPeriodoAtivo();
-            await BuscaDataPeridoParametriza();
+            
+            bool existeDocumentoForaDoPerido = await ValidaSeNotaEstaNoPeriodoAtivo();
             if (existeDocumentoForaDoPerido)
             {
                 MessageBox.Show("Existe Documentos com data fora do periodo");
@@ -323,9 +298,10 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 
             VerificaLinha();
         }
-        private bool ValidaSeNotaEstaNoPeriodoAtivo()
+        private async Task<bool> ValidaSeNotaEstaNoPeriodoAtivo()
         {
             bool existeDocumentoForaDoPerido = false;
+            var (dtInico, dtFim) = await BuscaDataPeridoParametriza();
             foreach (DataGridViewRow row in dtImportacao.Rows)
             {
                 bool linhaSelecionada = Convert.ToBoolean(row.Cells["Selecionar"].Value);
@@ -333,7 +309,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
                 if (!linhaSelecionada)
                     continue;
                 var dataLancamentoItem = row.Cells["Data Lançamento"].Value.ToString();
-                if (Convert.ToDateTime(dataLancamentoItem) < this.dataPeriodoInicio || Convert.ToDateTime(dataLancamentoItem) > this.dataPeridoFim)
+                if (Convert.ToDateTime(dataLancamentoItem) < dtInico || Convert.ToDateTime(dataLancamentoItem) > dtFim)
                 {
                     row.DefaultCellStyle.BackColor = Color.LightSalmon; // Cor da linha
                     row.DefaultCellStyle.ForeColor = Color.Black;      // Cor do texto                    
@@ -364,49 +340,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 
         }
 
-        /* Ajusta tela conforme altera o tamanho dela */
-        private void ResizeForm(object sender, EventArgs e)
-        {
-            int bottomSpacing = 10;   // distância da janela até os botões
-            int sideMargin = 10;      // margem lateral
-            int buttonHeight = 30;    // altura dos botões
-            int buttonSpacing = 5;    // espaçamento entre botões
-            int gridButtonSpacing = 30; // distância entre DataGridView e botões
-
-            int widthWindow = this.ClientSize.Width;
-            int heightWindow = this.ClientSize.Height;
-
-            // GroupBox (fixo no topo)
-            groupBox1.Left = sideMargin;
-            groupBox1.Top = sideMargin;
-            groupBox1.Width = widthWindow - 2 * sideMargin;
-
-
-
-            // Botões na parte de baixo
-            int btnY = heightWindow - buttonHeight - bottomSpacing;
-
-            btnSelecionarTodas.Top = btnY;
-            btnDesmarcarTodos.Top = btnY;
-            btnLimpar.Top = btnY;
-            btnExportarTotvs.Top = btnY;
-
-            // Posicionamento dos botões em sequência
-            btnSelecionarTodas.Left = sideMargin;
-            btnDesmarcarTodos.Left = btnSelecionarTodas.Right + buttonSpacing;
-
-            // Exportar no canto direito
-            btnExportarTotvs.Left = widthWindow - btnExportarTotvs.Width - sideMargin;
-
-            // DataGridView — mantém 30px entre o grid e os botões
-            dtImportacao.Left = sideMargin;
-            dtImportacao.Top = groupBox1.Bottom + sideMargin;
-            dtImportacao.Width = widthWindow - 2 * sideMargin;
-            dtImportacao.Height = btnSelecionarTodas.Top - dtImportacao.Top - gridButtonSpacing;
-
-            int pesquisarRightMargin = 20; // Margem direita dentro do GroupBox
-            btnListaNotas.Left = groupBox1.Width - btnListaNotas.Width - pesquisarRightMargin;
-        }
+        
         private void coBoxTipeFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             Console.WriteLine(coBoxTipeFilter.SelectedIndex);
@@ -790,12 +724,17 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
         private void dtImportacao_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return; // Ignora cliques no header
-
-            // Remove a seleção de todas as linhas
+            
             dtImportacao.ClearSelection();            
             dtImportacao.Rows[e.RowIndex].Selected = true;                    
             dtImportacao.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightSteelBlue;
             dtImportacao.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
+
+            if (dtImportacao.Columns[e.ColumnIndex].Name == "Selecionar")
+            {
+                var cell = dtImportacao.Rows[e.RowIndex].Cells["Selecionar"];
+                cell.Value = !(bool)(cell.Value ?? false);
+            }
 
             dtImportacao.CommitEdit(DataGridViewDataErrorContexts.Commit);
             dtImportacao.EndEdit();
