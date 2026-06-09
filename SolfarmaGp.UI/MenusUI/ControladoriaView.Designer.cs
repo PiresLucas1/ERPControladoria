@@ -32,13 +32,13 @@
             menuBarTop = new MenuStrip();
             FiscalMenu = new ToolStripMenuItem();
             importarToolStripMenuItem = new ToolStripMenuItem();
-            importarNotasParaOBigToolStripMenuItem = new ToolStripMenuItem();
             alteraçõesFiscaisToolStripMenuItem1 = new ToolStripMenuItem();
             alterarTipoDeMovimentoToolStripMenuItem = new ToolStripMenuItem();
             alteraçãoUnicaToolStripMenuItem = new ToolStripMenuItem();
             alteraçãoEmListaToolStripMenuItem = new ToolStripMenuItem();
             exportarXMLToolStripMenuItem = new ToolStripMenuItem();
             xMLPostoDoLagoToolStripMenuItem = new ToolStripMenuItem();
+            xMLBigToolStripMenuItem = new ToolStripMenuItem();
             importarNotasToolStripMenuItem = new ToolStripMenuItem();
             gerenciarItensToolStripMenuItem = new ToolStripMenuItem();
             periodoToolStripMenuItem = new ToolStripMenuItem();
@@ -90,7 +90,7 @@
             // 
             // FiscalMenu
             // 
-            FiscalMenu.DropDownItems.AddRange(new ToolStripItem[] { importarToolStripMenuItem, importarNotasParaOBigToolStripMenuItem, alteraçõesFiscaisToolStripMenuItem1, exportarXMLToolStripMenuItem, importarNotasToolStripMenuItem, gerenciarItensToolStripMenuItem, importarXMLTOTVSToolStripMenuItem });
+            FiscalMenu.DropDownItems.AddRange(new ToolStripItem[] { importarToolStripMenuItem, alteraçõesFiscaisToolStripMenuItem1, exportarXMLToolStripMenuItem, importarNotasToolStripMenuItem, gerenciarItensToolStripMenuItem, importarXMLTOTVSToolStripMenuItem });
             FiscalMenu.Name = "FiscalMenu";
             FiscalMenu.ShowShortcutKeys = false;
             FiscalMenu.Size = new Size(59, 24);
@@ -99,29 +99,22 @@
             // importarToolStripMenuItem
             // 
             importarToolStripMenuItem.Name = "importarToolStripMenuItem";
-            importarToolStripMenuItem.Size = new Size(239, 26);
+            importarToolStripMenuItem.Size = new Size(310, 26);
             importarToolStripMenuItem.Text = "Importar XML Serviço";
             importarToolStripMenuItem.Click += importarToolStripMenuItem_Click;
-            // 
-            // importarNotasParaOBigToolStripMenuItem
-            // 
-            importarNotasParaOBigToolStripMenuItem.Name = "importarNotasParaOBigToolStripMenuItem";
-            importarNotasParaOBigToolStripMenuItem.Size = new Size(239, 26);
-            importarNotasParaOBigToolStripMenuItem.Text = "Exportar Notas do Big";
-            importarNotasParaOBigToolStripMenuItem.Click += importarNotasParaOBigToolStripMenuItem_Click;
             // 
             // alteraçõesFiscaisToolStripMenuItem1
             // 
             alteraçõesFiscaisToolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { alterarTipoDeMovimentoToolStripMenuItem });
             alteraçõesFiscaisToolStripMenuItem1.Name = "alteraçõesFiscaisToolStripMenuItem1";
-            alteraçõesFiscaisToolStripMenuItem1.Size = new Size(239, 26);
+            alteraçõesFiscaisToolStripMenuItem1.Size = new Size(310, 26);
             alteraçõesFiscaisToolStripMenuItem1.Text = "Alterações Fiscais";
             // 
             // alterarTipoDeMovimentoToolStripMenuItem
             // 
             alterarTipoDeMovimentoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { alteraçãoUnicaToolStripMenuItem, alteraçãoEmListaToolStripMenuItem });
             alterarTipoDeMovimentoToolStripMenuItem.Name = "alterarTipoDeMovimentoToolStripMenuItem";
-            alterarTipoDeMovimentoToolStripMenuItem.Size = new Size(208, 26);
+            alterarTipoDeMovimentoToolStripMenuItem.Size = new Size(224, 26);
             alterarTipoDeMovimentoToolStripMenuItem.Text = "Alterações Fiscais";
             // 
             // alteraçãoUnicaToolStripMenuItem
@@ -140,30 +133,37 @@
             // 
             // exportarXMLToolStripMenuItem
             // 
-            exportarXMLToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { xMLPostoDoLagoToolStripMenuItem });
+            exportarXMLToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { xMLPostoDoLagoToolStripMenuItem, xMLBigToolStripMenuItem });
             exportarXMLToolStripMenuItem.Name = "exportarXMLToolStripMenuItem";
-            exportarXMLToolStripMenuItem.Size = new Size(239, 26);
+            exportarXMLToolStripMenuItem.Size = new Size(310, 26);
             exportarXMLToolStripMenuItem.Text = "Exportar XML ";
             // 
             // xMLPostoDoLagoToolStripMenuItem
             // 
             xMLPostoDoLagoToolStripMenuItem.Name = "xMLPostoDoLagoToolStripMenuItem";
-            xMLPostoDoLagoToolStripMenuItem.Size = new Size(220, 26);
+            xMLPostoDoLagoToolStripMenuItem.Size = new Size(224, 26);
             xMLPostoDoLagoToolStripMenuItem.Text = "XML Posto do Lago";
             xMLPostoDoLagoToolStripMenuItem.Click += xMLPostoDoLagoToolStripMenuItem_Click;
+            // 
+            // xMLBigToolStripMenuItem
+            // 
+            xMLBigToolStripMenuItem.Name = "xMLBigToolStripMenuItem";
+            xMLBigToolStripMenuItem.Size = new Size(224, 26);
+            xMLBigToolStripMenuItem.Text = "XML Big";
+            xMLBigToolStripMenuItem.Click += xMLBigToolStripMenuItem_Click;
             // 
             // importarNotasToolStripMenuItem
             // 
             importarNotasToolStripMenuItem.Name = "importarNotasToolStripMenuItem";
-            importarNotasToolStripMenuItem.Size = new Size(239, 26);
-            importarNotasToolStripMenuItem.Text = "Importar Notas";
+            importarNotasToolStripMenuItem.Size = new Size(310, 26);
+            importarNotasToolStripMenuItem.Text = "Importar Notas Não Encontradas";
             importarNotasToolStripMenuItem.Click += importarNotasToolStripMenuItem_Click;
             // 
             // gerenciarItensToolStripMenuItem
             // 
             gerenciarItensToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { periodoToolStripMenuItem });
             gerenciarItensToolStripMenuItem.Name = "gerenciarItensToolStripMenuItem";
-            gerenciarItensToolStripMenuItem.Size = new Size(239, 26);
+            gerenciarItensToolStripMenuItem.Size = new Size(310, 26);
             gerenciarItensToolStripMenuItem.Text = "Gerenciar Itens";
             // 
             // periodoToolStripMenuItem
@@ -176,8 +176,8 @@
             // importarXMLTOTVSToolStripMenuItem
             // 
             importarXMLTOTVSToolStripMenuItem.Name = "importarXMLTOTVSToolStripMenuItem";
-            importarXMLTOTVSToolStripMenuItem.Size = new Size(239, 26);
-            importarXMLTOTVSToolStripMenuItem.Text = "Importar XML TOTVS";
+            importarXMLTOTVSToolStripMenuItem.Size = new Size(310, 26);
+            importarXMLTOTVSToolStripMenuItem.Text = "Importar XML Uso e Consumo";
             importarXMLTOTVSToolStripMenuItem.Click += importarXMLTOTVSToolStripMenuItem_Click;
             // 
             // contabilToolStripMenuItem
@@ -418,7 +418,6 @@
         private System.Windows.Forms.MenuStrip menuBarTop;
         private System.Windows.Forms.ToolStripMenuItem FiscalMenu;
         private System.Windows.Forms.ToolStripMenuItem importarToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem importarNotasParaOBigToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contabilToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuBarBottom;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
@@ -458,5 +457,6 @@
         private ToolStripMenuItem gerenciarItensToolStripMenuItem;
         private ToolStripMenuItem periodoToolStripMenuItem;
         private ToolStripMenuItem importarXMLTOTVSToolStripMenuItem;
+        private ToolStripMenuItem xMLBigToolStripMenuItem;
     }
 }

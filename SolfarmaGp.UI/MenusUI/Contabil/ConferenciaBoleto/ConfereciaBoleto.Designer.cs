@@ -69,13 +69,13 @@
             label3 = new Label();
             tbValorReferente = new TextBox();
             gpBottom = new GroupBox();
-            btnExcluir = new Button();
+            label10 = new Label();
+            tbDebitoTotal = new TextBox();
+            label9 = new Label();
+            label8 = new Label();
             tbCreditoTotal = new TextBox();
             label7 = new Label();
-            label8 = new Label();
-            label9 = new Label();
-            tbDebitoTotal = new TextBox();
-            label10 = new Label();
+            btnExcluir = new Button();
             gpHeader.SuspendLayout();
             gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRelacaoBoletos).BeginInit();
@@ -130,6 +130,7 @@
             // cbBanco
             // 
             cbBanco.FormattingEnabled = true;
+            cbBanco.Items.AddRange(new object[] { "" });
             cbBanco.Location = new Point(223, 156);
             cbBanco.Name = "cbBanco";
             cbBanco.Size = new Size(174, 28);
@@ -406,7 +407,7 @@
             tbBaseConferencia.Location = new Point(4, 29);
             tbBaseConferencia.Name = "tbBaseConferencia";
             tbBaseConferencia.Padding = new Padding(3);
-            tbBaseConferencia.Size = new Size(1401, 646);
+            tbBaseConferencia.Size = new Size(1401, 642);
             tbBaseConferencia.TabIndex = 1;
             tbBaseConferencia.Text = "Base Conferencia";
             tbBaseConferencia.UseVisualStyleBackColor = true;
@@ -419,7 +420,7 @@
             dvgConferencia.Location = new Point(3, 6);
             dvgConferencia.Name = "dvgConferencia";
             dvgConferencia.RowHeadersWidth = 51;
-            dvgConferencia.Size = new Size(1392, 634);
+            dvgConferencia.Size = new Size(1392, 630);
             dvgConferencia.TabIndex = 0;
             // 
             // btnGeraLote
@@ -503,16 +504,41 @@
             gpBottom.TabIndex = 21;
             gpBottom.TabStop = false;
             // 
-            // btnExcluir
+            // label10
             // 
-            btnExcluir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnExcluir.Location = new Point(889, 63);
-            btnExcluir.Name = "btnExcluir";
-            btnExcluir.Size = new Size(140, 35);
-            btnExcluir.TabIndex = 21;
-            btnExcluir.Text = "Excluir";
-            btnExcluir.UseVisualStyleBackColor = true;
-            btnExcluir.Click += btnExcluir_Click;
+            label10.AutoSize = true;
+            label10.Location = new Point(341, 17);
+            label10.Name = "label10";
+            label10.Size = new Size(112, 20);
+            label10.TabIndex = 27;
+            label10.Text = "Base Conferida:";
+            // 
+            // tbDebitoTotal
+            // 
+            tbDebitoTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            tbDebitoTotal.Location = new Point(133, 75);
+            tbDebitoTotal.Name = "tbDebitoTotal";
+            tbDebitoTotal.Size = new Size(108, 27);
+            tbDebitoTotal.TabIndex = 26;
+            // 
+            // label9
+            // 
+            label9.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label9.AutoSize = true;
+            label9.Location = new Point(18, 79);
+            label9.Name = "label9";
+            label9.Size = new Size(95, 20);
+            label9.TabIndex = 25;
+            label9.Text = "Total Débito:";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(18, 17);
+            label8.Name = "label8";
+            label8.Size = new Size(117, 20);
+            label8.TabIndex = 24;
+            label8.Text = "Base Importada:";
             // 
             // tbCreditoTotal
             // 
@@ -532,41 +558,16 @@
             label7.TabIndex = 22;
             label7.Text = "Total Crédito:";
             // 
-            // label8
+            // btnExcluir
             // 
-            label8.AutoSize = true;
-            label8.Location = new Point(18, 17);
-            label8.Name = "label8";
-            label8.Size = new Size(117, 20);
-            label8.TabIndex = 24;
-            label8.Text = "Base Importada:";
-            // 
-            // label9
-            // 
-            label9.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label9.AutoSize = true;
-            label9.Location = new Point(18, 79);
-            label9.Name = "label9";
-            label9.Size = new Size(95, 20);
-            label9.TabIndex = 25;
-            label9.Text = "Total Débito:";
-            // 
-            // tbDebitoTotal
-            // 
-            tbDebitoTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            tbDebitoTotal.Location = new Point(133, 75);
-            tbDebitoTotal.Name = "tbDebitoTotal";
-            tbDebitoTotal.Size = new Size(108, 27);
-            tbDebitoTotal.TabIndex = 26;
-            // 
-            // label10
-            // 
-            label10.AutoSize = true;
-            label10.Location = new Point(341, 17);
-            label10.Name = "label10";
-            label10.Size = new Size(112, 20);
-            label10.TabIndex = 27;
-            label10.Text = "Base Conferida:";
+            btnExcluir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExcluir.Location = new Point(889, 63);
+            btnExcluir.Name = "btnExcluir";
+            btnExcluir.Size = new Size(140, 35);
+            btnExcluir.TabIndex = 21;
+            btnExcluir.Text = "Excluir";
+            btnExcluir.UseVisualStyleBackColor = true;
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // ConfereciaBoleto
             // 

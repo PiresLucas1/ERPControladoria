@@ -145,17 +145,6 @@ namespace SolfarmaGp.UI.MenusUI
             }
         }
 
-        private void importarNotasParaOBigToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!FormAberto(typeof(ImportaDadosBigTotvs)))
-            {
-                ImportaDadosBigTotvs exportaDadosBig = new ImportaDadosBigTotvs();
-                exportaDadosBig.MdiParent = this;
-                exportaDadosBig.Show();
-            }
-
-        }
-
         private void alterarContaFreteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //if(!FormAberto(typeof (AlterarContaDebitoFrete)))
@@ -205,37 +194,6 @@ namespace SolfarmaGp.UI.MenusUI
                 }
             }
         }
-
-        //private void devoluçaoDeNotasToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    if (!FormAberto(typeof(ConsultaSaldoNotasFiscais)))
-        //    {
-        //        ConsultaSaldoNotasFiscais alteraTipoMovimento = new ConsultaSaldoNotasFiscais();
-        //        alteraTipoMovimento.MdiParent = this;
-        //        alteraTipoMovimento.Show();
-        //    }
-        //}
-
-        //private void importarRecebimentoToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    if (!FormAberto(typeof(ImportacaoRecebimento)))
-        //    {
-        //        ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
-        //        importacaoRecebimento.MdiParent = this;
-        //        importacaoRecebimento.Show();
-        //    }
-
-        //}
-
-        //private void atualizarGestãoPatrimonialToolStripMenuItem_Click(object sender, EventArgs e)
-        //{
-        //    if (!FormAberto(typeof(ImportacaoRecebimento)))
-        //    {
-        //        ImportacaoRecebimento importacaoRecebimento = new ImportacaoRecebimento();
-        //        importacaoRecebimento.MdiParent = this;
-        //        importacaoRecebimento.Show();
-        //    }
-        //}
 
         private void txtVersao_Click(object sender, EventArgs e)
         {
@@ -500,7 +458,17 @@ namespace SolfarmaGp.UI.MenusUI
                 importaXml.MdiParent = this;
                 importaXml.Show();
             }
-            
+
+        }
+
+        private void xMLBigToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ImportaDadosBigTotvs)))
+            {
+                ImportaDadosBigTotvs exportaDadosBig = new ImportaDadosBigTotvs();
+                exportaDadosBig.MdiParent = this;
+                exportaDadosBig.Show();
+            }
         }
     }
 

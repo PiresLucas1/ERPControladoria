@@ -46,16 +46,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             checkDataFiltro.Checked = false;
 
             bsConferencia.DataSource = listaExibida;
-            dvgConferencia.DataSource = bsConferencia;
-            //cbBanco.Items.Add(new { id = 104, nome = "Caixa Econômica Federa" });
-            cbBanco.Items.Add(new { id = 111, nome = "Banco 111" });
-            cbBanco.Items.Add(new { id = 151, nome = "Banco 151" });
-            cbBanco.Items.Add(new { id = 197, nome = "Banco Stone" });
-            cbBanco.Items.Add(new { id = 290, nome = "Banco 290" });
-            cbBanco.Items.Add(new { id = 341, nome = "Itau" });
-            cbBanco.Items.Add(new { id = 756, nome = "Sicoob" });
-
-
+            dvgConferencia.DataSource = bsConferencia;            
         }
 
         private void CarregarGrid(IEnumerable<ConferenciaResultado> dados)
@@ -562,9 +553,47 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
         {
             BuscaBancoIDsUseCase useCase = new BuscaBancoIDsUseCase();
             DataTable bancoIds = await useCase.Execute();
-            cbBanco.DataSource = bancoIds;
-            cbBanco.DisplayMember = "bancos_id";
-            cbBanco.ValueMember = "bancos_id";
+
+            var bancoIdsLegendasList = bancoIds.AsEnumerable()
+                .Select(row => new
+                {
+                    idBanco = row.Field<string>("bancos_id"),
+                    nome = RetornaValorNomeBanco(Convert.ToInt32(row.Field<string>("bancos_id")))
+
+                }).ToDataTable();
+
+            var linhaVazia = bancoIdsLegendasList.NewRow();
+            linhaVazia["idBanco"] = 0;
+            linhaVazia["nome"] = "";
+            bancoIdsLegendasList.Rows.InsertAt(linhaVazia, 0);
+
+            cbBanco.DataSource = bancoIdsLegendasList;
+            cbBanco.DisplayMember = "nome";
+            cbBanco.ValueMember = "idBanco";
+        }
+        private string RetornaValorNomeBanco(int id)
+        {
+            switch (id)
+            {
+                case 104:
+                    return "104 - Cx Econ. Federal";
+                case 111:
+                    return "111 - Banco";
+                case 151:
+                    return "151 - Ban. Nossa Caixa S.A";
+                case 197:
+                    return "197 - Stone";
+                case 290:
+                    return "290 - PagBank";
+                case 341:
+                    return "341 - Itau";
+                case 756:
+                    return "756 - Sicoob";
+                default:
+                    return "";
+            }
+                
+
         }
 
         private void checkDataFiltro_CheckedChanged(object sender, EventArgs e)
