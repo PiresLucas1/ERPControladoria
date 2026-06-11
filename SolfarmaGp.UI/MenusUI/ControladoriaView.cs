@@ -470,6 +470,16 @@ namespace SolfarmaGp.UI.MenusUI
                 exportaDadosBig.Show();
             }
         }
+
+        private void renomearPDFNotaFiscaisToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ExcutaAutomacaoRenomearArquivos)))
+            {
+                ExcutaAutomacaoRenomearArquivos renomearArquivos = new ExcutaAutomacaoRenomearArquivos();
+                renomearArquivos.MdiParent = this;
+                renomearArquivos.Show();
+            }
+        }
     }
 
 }

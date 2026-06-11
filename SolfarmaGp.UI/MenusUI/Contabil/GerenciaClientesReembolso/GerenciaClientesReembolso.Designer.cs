@@ -59,6 +59,7 @@
             btnSalvar.TabIndex = 1;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // tbContador
             // 

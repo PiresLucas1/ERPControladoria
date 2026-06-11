@@ -34,10 +34,12 @@
             btnCancelar = new Button();
             btnAbrirPasta = new Button();
             rtbInfo = new RichTextBox();
+            pgBar = new ProgressBar();
             SuspendLayout();
             // 
             // txbPath
             // 
+            txbPath.BackColor = SystemColors.InactiveBorder;
             txbPath.Location = new Point(12, 67);
             txbPath.Name = "txbPath";
             txbPath.PlaceholderText = "C://www/jhondoe/arquivos";
@@ -47,11 +49,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 31);
+            label1.Location = new Point(12, 35);
             label1.Name = "label1";
-            label1.Size = new Size(182, 20);
+            label1.Size = new Size(217, 20);
             label1.TabIndex = 1;
-            label1.Text = "Insira o caminho da pasta:";
+            label1.Text = "Caminho da pasta dos arquivos";
             // 
             // btnExecutar
             // 
@@ -65,21 +67,23 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(27, 408);
+            btnCancelar.Location = new Point(354, 408);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(109, 30);
             btnCancelar.TabIndex = 3;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // btnAbrirPasta
             // 
-            btnAbrirPasta.Location = new Point(464, 408);
+            btnAbrirPasta.Location = new Point(500, 408);
             btnAbrirPasta.Name = "btnAbrirPasta";
             btnAbrirPasta.Size = new Size(109, 30);
             btnAbrirPasta.TabIndex = 4;
             btnAbrirPasta.Text = "Abrir Pasta";
             btnAbrirPasta.UseVisualStyleBackColor = true;
+            btnAbrirPasta.Click += btnAbrirPasta_Click;
             // 
             // rtbInfo
             // 
@@ -91,19 +95,29 @@
             rtbInfo.TabIndex = 5;
             rtbInfo.Text = "";
             // 
+            // pgBar
+            // 
+            pgBar.Location = new Point(11, 386);
+            pgBar.Name = "pgBar";
+            pgBar.Size = new Size(598, 10);
+            pgBar.TabIndex = 6;
+            // 
             // ExcutaAutomacaoRenomearArquivos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(621, 450);
+            Controls.Add(pgBar);
             Controls.Add(rtbInfo);
             Controls.Add(btnAbrirPasta);
             Controls.Add(btnCancelar);
             Controls.Add(btnExecutar);
             Controls.Add(label1);
             Controls.Add(txbPath);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "ExcutaAutomacaoRenomearArquivos";
-            Text = "ExcutaAutomacaoRenomearArquivos";
+            Text = "Renomear PDF (NFe | NFS-e)";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -116,5 +130,6 @@
         private Button btnCancelar;
         private Button btnAbrirPasta;
         private RichTextBox rtbInfo;
+        private ProgressBar pgBar;
     }
 }

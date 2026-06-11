@@ -1,33 +1,44 @@
 ﻿using System.Diagnostics;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SolfarmaGp.Services.AutomacoesPy.RenomearArquivos
 {
     public class RenomearArquivosNotasFiscal
     {
-        public void Execute(string pathFile, Action<string> onOutput) 
+        public async Task ExecuteAsync(string path, Action<string> onOutput)
         {
-            string pythonExe = "";
-            string script = "";
+            string exePath = Path.Combine(@"C:\gs300gp\py_automation_rename_file\dist", "main.exe");
 
             ProcessStartInfo psi = new ProcessStartInfo
             {
-                FileName = pythonExe,
-                Arguments = $"\"{script}\" \"{pathFile}\"",
+                FileName = exePath,
+                Arguments = $"\"{path}\"",
                 UseShellExecute = false,
-                RedirectStandardOutput = true,   // captura o print() do Python
-                RedirectStandardError = true,   // captura erros
-                CreateNoWindow = true    // não abre janela do terminal
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                CreateNoWindow = true,
+                StandardOutputEncoding = System.Text.Encoding.UTF8
             };
 
             using (Process process = Process.Start(psi))
             {
+                // lê stderr em paralelo para não causar deadlock
+                Task erroTask = Task.Run(async () =>
+                {
+                    string erro;
+                    while ((erro = await process.StandardError.ReadLineAsync()) != null)
+                    {
+                        onOutput("[ERRO] " + erro);
+                    }
+                });
+
+                // lê stdout linha a linha em tempo real
                 string linha;
-                while ((linha = process.StandardOutput.ReadLine()) != null)
+                while ((linha = await process.StandardOutput.ReadLineAsync()) != null)
                 {
                     onOutput(linha);
                 }
-                process.WaitForExit();
+
+                await Task.WhenAll(erroTask, process.WaitForExitAsync());
             }
         }
 

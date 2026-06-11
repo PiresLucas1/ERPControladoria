@@ -22,5 +22,10 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso
             dvgGerenciar.DataSource = dt;
             tbContador.Text = dt.Rows.Count.ToString();
         }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
