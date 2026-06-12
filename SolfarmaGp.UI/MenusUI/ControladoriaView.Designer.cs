@@ -43,6 +43,8 @@
             gerenciarItensToolStripMenuItem = new ToolStripMenuItem();
             periodoToolStripMenuItem = new ToolStripMenuItem();
             importarXMLTOTVSToolStripMenuItem = new ToolStripMenuItem();
+            automaçãoToolStripMenuItem = new ToolStripMenuItem();
+            renomearPDFNotaFiscaisToolStripMenuItem = new ToolStripMenuItem();
             contabilToolStripMenuItem = new ToolStripMenuItem();
             importarRecebimentoToolStripMenuItem = new ToolStripMenuItem();
             atualizarGestãoPatrimonialToolStripMenuItem = new ToolStripMenuItem();
@@ -72,8 +74,7 @@
             toolStripMenuItem4 = new ToolStripMenuItem();
             toolStripMenuItem5 = new ToolStripMenuItem();
             txtNomeUsuario = new ToolStripMenuItem();
-            automaçãoToolStripMenuItem = new ToolStripMenuItem();
-            renomearPDFNotaFiscaisToolStripMenuItem = new ToolStripMenuItem();
+            contabilizaçãoCustoDosProdutosToolStripMenuItem = new ToolStripMenuItem();
             menuBarTop.SuspendLayout();
             menuBarBottom.SuspendLayout();
             SuspendLayout();
@@ -182,9 +183,23 @@
             importarXMLTOTVSToolStripMenuItem.Text = "Importar XML Uso e Consumo";
             importarXMLTOTVSToolStripMenuItem.Click += importarXMLTOTVSToolStripMenuItem_Click;
             // 
+            // automaçãoToolStripMenuItem
+            // 
+            automaçãoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { renomearPDFNotaFiscaisToolStripMenuItem });
+            automaçãoToolStripMenuItem.Name = "automaçãoToolStripMenuItem";
+            automaçãoToolStripMenuItem.Size = new Size(310, 26);
+            automaçãoToolStripMenuItem.Text = "Automação";
+            // 
+            // renomearPDFNotaFiscaisToolStripMenuItem
+            // 
+            renomearPDFNotaFiscaisToolStripMenuItem.Name = "renomearPDFNotaFiscaisToolStripMenuItem";
+            renomearPDFNotaFiscaisToolStripMenuItem.Size = new Size(273, 26);
+            renomearPDFNotaFiscaisToolStripMenuItem.Text = "Renomear PDF Nota Fiscais";
+            renomearPDFNotaFiscaisToolStripMenuItem.Click += renomearPDFNotaFiscaisToolStripMenuItem_Click;
+            // 
             // contabilToolStripMenuItem
             // 
-            contabilToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { importarRecebimentoToolStripMenuItem, atualizarGestãoPatrimonialToolStripMenuItem, conferenciaDeBoletoToolStripMenuItem, parametrizaçãoToolStripMenuItem, gerenciarToolStripMenuItem });
+            contabilToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { importarRecebimentoToolStripMenuItem, atualizarGestãoPatrimonialToolStripMenuItem, conferenciaDeBoletoToolStripMenuItem, parametrizaçãoToolStripMenuItem, gerenciarToolStripMenuItem, contabilizaçãoCustoDosProdutosToolStripMenuItem });
             contabilToolStripMenuItem.Name = "contabilToolStripMenuItem";
             contabilToolStripMenuItem.ShowShortcutKeys = false;
             contabilToolStripMenuItem.Size = new Size(79, 24);
@@ -193,19 +208,19 @@
             // importarRecebimentoToolStripMenuItem
             // 
             importarRecebimentoToolStripMenuItem.Name = "importarRecebimentoToolStripMenuItem";
-            importarRecebimentoToolStripMenuItem.Size = new Size(280, 26);
+            importarRecebimentoToolStripMenuItem.Size = new Size(323, 26);
             importarRecebimentoToolStripMenuItem.Text = "Importar Recebimento";
             // 
             // atualizarGestãoPatrimonialToolStripMenuItem
             // 
             atualizarGestãoPatrimonialToolStripMenuItem.Name = "atualizarGestãoPatrimonialToolStripMenuItem";
-            atualizarGestãoPatrimonialToolStripMenuItem.Size = new Size(280, 26);
+            atualizarGestãoPatrimonialToolStripMenuItem.Size = new Size(323, 26);
             atualizarGestãoPatrimonialToolStripMenuItem.Text = "Atualizar Gestão Patrimonial";
             // 
             // conferenciaDeBoletoToolStripMenuItem
             // 
             conferenciaDeBoletoToolStripMenuItem.Name = "conferenciaDeBoletoToolStripMenuItem";
-            conferenciaDeBoletoToolStripMenuItem.Size = new Size(280, 26);
+            conferenciaDeBoletoToolStripMenuItem.Size = new Size(323, 26);
             conferenciaDeBoletoToolStripMenuItem.Text = "Conferencia de Extrato";
             conferenciaDeBoletoToolStripMenuItem.Click += conferenciaDeBoletoToolStripMenuItem_Click;
             // 
@@ -213,7 +228,7 @@
             // 
             parametrizaçãoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { lançamentoContabilToolStripMenuItem });
             parametrizaçãoToolStripMenuItem.Name = "parametrizaçãoToolStripMenuItem";
-            parametrizaçãoToolStripMenuItem.Size = new Size(280, 26);
+            parametrizaçãoToolStripMenuItem.Size = new Size(323, 26);
             parametrizaçãoToolStripMenuItem.Text = "Parametrização";
             // 
             // lançamentoContabilToolStripMenuItem
@@ -227,7 +242,7 @@
             // 
             gerenciarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pessoasToolStripMenuItem });
             gerenciarToolStripMenuItem.Name = "gerenciarToolStripMenuItem";
-            gerenciarToolStripMenuItem.Size = new Size(280, 26);
+            gerenciarToolStripMenuItem.Size = new Size(323, 26);
             gerenciarToolStripMenuItem.Text = "Gerenciar";
             // 
             // pessoasToolStripMenuItem
@@ -387,19 +402,12 @@
             txtNomeUsuario.Size = new Size(116, 24);
             txtNomeUsuario.Text = "Nome usuario";
             // 
-            // automaçãoToolStripMenuItem
+            // contabilizaçãoCustoDosProdutosToolStripMenuItem
             // 
-            automaçãoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { renomearPDFNotaFiscaisToolStripMenuItem });
-            automaçãoToolStripMenuItem.Name = "automaçãoToolStripMenuItem";
-            automaçãoToolStripMenuItem.Size = new Size(310, 26);
-            automaçãoToolStripMenuItem.Text = "Automação";
-            // 
-            // renomearPDFNotaFiscaisToolStripMenuItem
-            // 
-            renomearPDFNotaFiscaisToolStripMenuItem.Name = "renomearPDFNotaFiscaisToolStripMenuItem";
-            renomearPDFNotaFiscaisToolStripMenuItem.Size = new Size(273, 26);
-            renomearPDFNotaFiscaisToolStripMenuItem.Text = "Renomear PDF Nota Fiscais";
-            renomearPDFNotaFiscaisToolStripMenuItem.Click += renomearPDFNotaFiscaisToolStripMenuItem_Click;
+            contabilizaçãoCustoDosProdutosToolStripMenuItem.Name = "contabilizaçãoCustoDosProdutosToolStripMenuItem";
+            contabilizaçãoCustoDosProdutosToolStripMenuItem.Size = new Size(323, 26);
+            contabilizaçãoCustoDosProdutosToolStripMenuItem.Text = "Contabilização Custo dos Produtos";
+            contabilizaçãoCustoDosProdutosToolStripMenuItem.Click += contabilizaçãoCustoDosProdutosToolStripMenuItem_Click;
             // 
             // Portal
             // 
@@ -476,5 +484,6 @@
         private ToolStripMenuItem xMLBigToolStripMenuItem;
         private ToolStripMenuItem automaçãoToolStripMenuItem;
         private ToolStripMenuItem renomearPDFNotaFiscaisToolStripMenuItem;
+        private ToolStripMenuItem contabilizaçãoCustoDosProdutosToolStripMenuItem;
     }
 }

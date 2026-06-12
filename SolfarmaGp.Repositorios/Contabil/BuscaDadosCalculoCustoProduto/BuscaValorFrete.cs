@@ -18,6 +18,7 @@ namespace SolfarmaGp.Repositorios.Contabil.BuscaDadosCalculoCustoProduto
                     using (SqlCommand cmd = new SqlCommand("uspCustoContabilProduto_BuscaDadosERP_FRETE", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandTimeout = 0;
                         cmd.Parameters.AddWithValue("@INdatDataInicio", dataInicio);
                         cmd.Parameters.AddWithValue("@INdatDataFim", dataFim);
 

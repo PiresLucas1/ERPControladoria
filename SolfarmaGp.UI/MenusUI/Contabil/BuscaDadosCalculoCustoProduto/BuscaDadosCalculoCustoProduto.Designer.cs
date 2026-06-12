@@ -31,10 +31,10 @@
             dtFim = new DateTimePicker();
             dtInicio = new DateTimePicker();
             gpHeader = new GroupBox();
-            button1 = new Button();
+            btnExecutar = new Button();
             lbDataInicio = new Label();
             lbDataFim = new Label();
-            richTextBox1 = new RichTextBox();
+            rtbResultado = new RichTextBox();
             prbar = new ProgressBar();
             btnClose = new Button();
             gbFooter = new GroupBox();
@@ -66,7 +66,7 @@
             // 
             // gpHeader
             // 
-            gpHeader.Controls.Add(button1);
+            gpHeader.Controls.Add(btnExecutar);
             gpHeader.Controls.Add(lbDataInicio);
             gpHeader.Controls.Add(lbDataFim);
             gpHeader.Controls.Add(dtInicio);
@@ -78,15 +78,15 @@
             gpHeader.TabStop = false;
             gpHeader.Text = "Parâmetros para pesquisa";
             // 
-            // button1
+            // btnExecutar
             // 
-            button1.Location = new Point(537, 115);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 40);
-            button1.TabIndex = 2;
-            button1.Text = "Executar";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnExecutar.Location = new Point(537, 115);
+            btnExecutar.Name = "btnExecutar";
+            btnExecutar.Size = new Size(94, 40);
+            btnExecutar.TabIndex = 2;
+            btnExecutar.Text = "Executar";
+            btnExecutar.UseVisualStyleBackColor = true;
+            btnExecutar.Click += btnExecutar_click;
             // 
             // lbDataInicio
             // 
@@ -106,16 +106,16 @@
             lbDataFim.TabIndex = 2;
             lbDataFim.Text = "Data Fim:";
             // 
-            // richTextBox1
+            // rtbResultado
             // 
-            richTextBox1.BackColor = SystemColors.Info;
-            richTextBox1.Location = new Point(12, 208);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.ReadOnly = true;
-            richTextBox1.ScrollBars = RichTextBoxScrollBars.None;
-            richTextBox1.Size = new Size(648, 258);
-            richTextBox1.TabIndex = 4;
-            richTextBox1.Text = "";
+            rtbResultado.BackColor = SystemColors.Info;
+            rtbResultado.Location = new Point(12, 208);
+            rtbResultado.Name = "rtbResultado";
+            rtbResultado.ReadOnly = true;
+            rtbResultado.ScrollBars = RichTextBoxScrollBars.None;
+            rtbResultado.Size = new Size(648, 258);
+            rtbResultado.TabIndex = 4;
+            rtbResultado.Text = "";
             // 
             // prbar
             // 
@@ -216,9 +216,11 @@
             ClientSize = new Size(677, 650);
             Controls.Add(gbFooter);
             Controls.Add(prbar);
-            Controls.Add(richTextBox1);
+            Controls.Add(rtbResultado);
             Controls.Add(gpHeader);
             Controls.Add(btnClose);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "BuscaDadosCalculoCustoProduto";
             Text = "Contabilização do Custo dos Produtos";
             gpHeader.ResumeLayout(false);
@@ -235,9 +237,9 @@
         private GroupBox gpHeader;
         private Label lbDataInicio;
         private Label lbDataFim;
-        private RichTextBox richTextBox1;
+        private RichTextBox rtbResultado;
         private ProgressBar prbar;
-        private Button button1;
+        private Button btnExecutar;
         private Button btnClose;
         private GroupBox gbFooter;
         private CheckBox chkBoxIcmsRetidoSubstituido;

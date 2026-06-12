@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using SolfarmaGp.Repositorios.Contabil.BuscaDadosCalculoCustoProduto;
+using System.Threading.Tasks;
 
 namespace SolfarmaGp.Controllers.UseCase.Contabil.BuscaDadosCalculoCustoProduto
 {
@@ -6,9 +7,10 @@ namespace SolfarmaGp.Controllers.UseCase.Contabil.BuscaDadosCalculoCustoProduto
     {
         public async Task<string> ExecuteAsync(DateTime dataInicio, DateTime dataFim)
         {
-            BuscaAqsValorTransferenciaUsecase repo = new BuscaAqsValorTransferenciaUsecase();
-            var resultado = await repo.ExecuteAsync(dataInicio, dataFim);
-            return resultado.ToString();
+            BuscaAqsValorTransferencia repo = new BuscaAqsValorTransferencia();
+            var resultado = await repo.ExecutarAsync(dataInicio, dataFim);
+            string mensagem = resultado.Rows[0][0].ToString() ?? "Não obteve retorno";
+            return mensagem;
         }
     }
 }

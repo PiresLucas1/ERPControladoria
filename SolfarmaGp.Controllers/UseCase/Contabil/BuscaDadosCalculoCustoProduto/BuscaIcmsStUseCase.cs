@@ -9,7 +9,8 @@ namespace SolfarmaGp.Controllers.UseCase.Contabil.BuscaDadosCalculoCustoProduto
             // Lógica para buscar dados de ICMS ST
             BuscaIcmsSt repo = new BuscaIcmsSt();
             var resultado = await repo.ExecutarAsync(dataInicio, dataFim);
-            return resultado.ToString();
+            string mensagem = resultado.Rows[0][0].ToString() ?? "Não obteve retorno";
+            return mensagem;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using PrimeiroLoginView;
 using SolfarmaGp.Repositorios.SegurancaUserRepositories;
 using SolfarmaGp.UI.MenusUI.Contabil;
+using SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto;
 using SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto;
 using SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote;
@@ -478,6 +479,16 @@ namespace SolfarmaGp.UI.MenusUI
                 ExcutaAutomacaoRenomearArquivos renomearArquivos = new ExcutaAutomacaoRenomearArquivos();
                 renomearArquivos.MdiParent = this;
                 renomearArquivos.Show();
+            }
+        }
+
+        private void contabilizaçãoCustoDosProdutosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(BuscaDadosCalculoCustoProduto)))
+            {
+                BuscaDadosCalculoCustoProduto buscaDados = new BuscaDadosCalculoCustoProduto();
+                buscaDados.MdiParent = this;
+                buscaDados.Show();
             }
         }
     }
