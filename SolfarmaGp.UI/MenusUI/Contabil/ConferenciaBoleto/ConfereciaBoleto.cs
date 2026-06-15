@@ -190,7 +190,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             }
             var numberFilial = Convert.ToInt32(tbFilial.Text);
             var numberColigada = Convert.ToInt32(cbColigada.Text);
-            var numberBanco = Convert.ToInt32(cbBanco.Text);
+            var numberBanco = Convert.ToInt32(cbBanco.SelectedValue);
 
             var result = await VerificaSeExisteValorEmParametros(numberFilial, numberColigada, numberBanco, dtProcesso);
             if (result != 1) { return; }
