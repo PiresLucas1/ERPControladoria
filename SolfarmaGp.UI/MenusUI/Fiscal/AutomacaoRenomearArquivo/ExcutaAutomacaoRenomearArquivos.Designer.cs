@@ -35,6 +35,7 @@
             btnAbrirPasta = new Button();
             rtbInfo = new RichTextBox();
             pgBar = new ProgressBar();
+            chkNotasQive = new CheckBox();
             SuspendLayout();
             // 
             // txbPath
@@ -67,7 +68,7 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(354, 408);
+            btnCancelar.Location = new Point(354, 455);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(109, 30);
             btnCancelar.TabIndex = 3;
@@ -77,7 +78,7 @@
             // 
             // btnAbrirPasta
             // 
-            btnAbrirPasta.Location = new Point(500, 408);
+            btnAbrirPasta.Location = new Point(500, 455);
             btnAbrirPasta.Name = "btnAbrirPasta";
             btnAbrirPasta.Size = new Size(109, 30);
             btnAbrirPasta.TabIndex = 4;
@@ -88,25 +89,36 @@
             // rtbInfo
             // 
             rtbInfo.BackColor = SystemColors.Info;
-            rtbInfo.Location = new Point(12, 103);
+            rtbInfo.Location = new Point(12, 162);
             rtbInfo.Name = "rtbInfo";
             rtbInfo.ReadOnly = true;
-            rtbInfo.Size = new Size(597, 277);
+            rtbInfo.Size = new Size(597, 265);
             rtbInfo.TabIndex = 5;
             rtbInfo.Text = "";
             // 
             // pgBar
             // 
-            pgBar.Location = new Point(11, 386);
+            pgBar.Location = new Point(11, 433);
             pgBar.Name = "pgBar";
             pgBar.Size = new Size(598, 10);
             pgBar.TabIndex = 6;
+            // 
+            // chkNotasQive
+            // 
+            chkNotasQive.AutoSize = true;
+            chkNotasQive.Location = new Point(12, 114);
+            chkNotasQive.Name = "chkNotasQive";
+            chkNotasQive.Size = new Size(184, 24);
+            chkNotasQive.TabIndex = 7;
+            chkNotasQive.Text = "Renomear Notas Quive";
+            chkNotasQive.UseVisualStyleBackColor = true;
             // 
             // ExcutaAutomacaoRenomearArquivos
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(621, 450);
+            ClientSize = new Size(637, 518);
+            Controls.Add(chkNotasQive);
             Controls.Add(pgBar);
             Controls.Add(rtbInfo);
             Controls.Add(btnAbrirPasta);
@@ -114,7 +126,7 @@
             Controls.Add(btnExecutar);
             Controls.Add(label1);
             Controls.Add(txbPath);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "ExcutaAutomacaoRenomearArquivos";
             Text = "Renomear PDF (NFe | NFS-e)";
@@ -131,5 +143,7 @@
         private Button btnAbrirPasta;
         private RichTextBox rtbInfo;
         private ProgressBar pgBar;
+        private CheckBox chkNotasQive;
+        private RadioButton radioButton1;
     }
 }

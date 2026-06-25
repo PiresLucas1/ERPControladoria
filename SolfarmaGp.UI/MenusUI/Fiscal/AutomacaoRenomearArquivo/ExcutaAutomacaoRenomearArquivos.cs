@@ -15,16 +15,17 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         private async void btnExecutar_Click(object sender, EventArgs e)
         {
             var path = txbPath.Text;
-            await ExecutaAutomacao(path);
+            string opcao = chkNotasQive.Checked ? RenomearArquivosNotasFiscal.OPCAO_RENOMEAR : RenomearArquivosNotasFiscal.OPCAO_OCR;
+            await ExecutaAutomacao(path, opcao);
 
         }
-        private async Task ExecutaAutomacao(string path)
+        private async Task ExecutaAutomacao(string path, string opcao)
         {
             rtbInfo.Clear();
             btnExecutar.Enabled = false;
             pgBar.Style = ProgressBarStyle.Marquee; // fica animando em loop
             pgBar.Visible = true;
-            await _service.ExecuteAsync(path, linha =>
+            await _service.ExecuteAsync(path, opcao, linha =>
             {
                 if (rtbInfo.InvokeRequired)
                 {

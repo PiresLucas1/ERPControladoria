@@ -69,7 +69,15 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.Co
                 {
                     if (original.Columns.Contains(nome))
                     {
-                        novaLinha[nome] = row[nome];
+                        if (nome == "Documento")  // compara o nome da coluna
+                        {
+                            string val = row[nome].ToString();
+                            novaLinha[nome] = val.Length > 9 ? val.Substring(val.Length - 9) : val;
+                        }
+                        else
+                        {
+                            novaLinha[nome] = row[nome];
+                        }
                     }
                     else
                     {
