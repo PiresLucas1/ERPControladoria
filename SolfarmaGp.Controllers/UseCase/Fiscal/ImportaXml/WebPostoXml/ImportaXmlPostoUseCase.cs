@@ -5,11 +5,11 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportaXml.WebPostoXml
 {
     public class ImportaXmlPostoUseCase
     {
-        public async Task<DataTable> Execute(DateTime dataInicio, DateTime dataFim, string localExportacao, string modeloDocumento, int exportarTudo, Progress<string> valor = null)
+        public async Task<DataTable> Execute(DateTime dataInicio, DateTime dataFim, string localExportacao, string modeloDocumento, int exportarTudo,string empresa, Progress<string> valor = null)
         {
             ImportaXmlWebPosto exportarXmlRepositorio = new ImportaXmlWebPosto();
             DataTable retorno = new DataTable();
-            retorno = await exportarXmlRepositorio.Executar(dataInicio, dataFim, localExportacao, modeloDocumento, exportarTudo, valor);
+            retorno = await exportarXmlRepositorio.Executar(dataInicio, dataFim, localExportacao, modeloDocumento, exportarTudo, empresa, valor);
 
             return retorno;
 

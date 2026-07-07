@@ -53,6 +53,7 @@
             lançamentoContabilToolStripMenuItem = new ToolStripMenuItem();
             gerenciarToolStripMenuItem = new ToolStripMenuItem();
             pessoasToolStripMenuItem = new ToolStripMenuItem();
+            contabilizaçãoCustoDosProdutosToolStripMenuItem = new ToolStripMenuItem();
             ZanupMenu = new ToolStripMenuItem();
             devoluçaoDeNotasToolStripMenuItem = new ToolStripMenuItem();
             criarNotaZanupToolStripMenuItem = new ToolStripMenuItem();
@@ -74,7 +75,6 @@
             toolStripMenuItem4 = new ToolStripMenuItem();
             toolStripMenuItem5 = new ToolStripMenuItem();
             txtNomeUsuario = new ToolStripMenuItem();
-            contabilizaçãoCustoDosProdutosToolStripMenuItem = new ToolStripMenuItem();
             menuBarTop.SuspendLayout();
             menuBarBottom.SuspendLayout();
             SuspendLayout();
@@ -252,6 +252,13 @@
             pessoasToolStripMenuItem.Text = "Pessoas ";
             pessoasToolStripMenuItem.Click += pessoasToolStripMenuItem_Click;
             // 
+            // contabilizaçãoCustoDosProdutosToolStripMenuItem
+            // 
+            contabilizaçãoCustoDosProdutosToolStripMenuItem.Name = "contabilizaçãoCustoDosProdutosToolStripMenuItem";
+            contabilizaçãoCustoDosProdutosToolStripMenuItem.Size = new Size(323, 26);
+            contabilizaçãoCustoDosProdutosToolStripMenuItem.Text = "Contabilização Custo dos Produtos";
+            contabilizaçãoCustoDosProdutosToolStripMenuItem.Click += contabilizaçãoCustoDosProdutosToolStripMenuItem_Click;
+            // 
             // ZanupMenu
             // 
             ZanupMenu.DropDownItems.AddRange(new ToolStripItem[] { devoluçaoDeNotasToolStripMenuItem, criarNotaZanupToolStripMenuItem });
@@ -402,19 +409,11 @@
             txtNomeUsuario.Size = new Size(116, 24);
             txtNomeUsuario.Text = "Nome usuario";
             // 
-            // contabilizaçãoCustoDosProdutosToolStripMenuItem
-            // 
-            contabilizaçãoCustoDosProdutosToolStripMenuItem.Name = "contabilizaçãoCustoDosProdutosToolStripMenuItem";
-            contabilizaçãoCustoDosProdutosToolStripMenuItem.Size = new Size(323, 26);
-            contabilizaçãoCustoDosProdutosToolStripMenuItem.Text = "Contabilização Custo dos Produtos";
-            contabilizaçãoCustoDosProdutosToolStripMenuItem.Click += contabilizaçãoCustoDosProdutosToolStripMenuItem_Click;
-            // 
             // Portal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ScrollBar;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(1636, 875);
             Controls.Add(menuBarBottom);

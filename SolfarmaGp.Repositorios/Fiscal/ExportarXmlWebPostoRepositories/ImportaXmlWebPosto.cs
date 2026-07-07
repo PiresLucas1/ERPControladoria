@@ -6,7 +6,7 @@ namespace SolfarmaGp.Repositories.ExportarXmlRepositories
 {
     public class ImportaXmlWebPosto
     {
-        public async Task<DataTable> Executar(DateTime dataInicio, DateTime dataFim, string localExportacao, string modeloDocumento, int exportarTudo, IProgress<string> progress = null)
+        public async Task<DataTable> Executar(DateTime dataInicio, DateTime dataFim, string localExportacao, string modeloDocumento, int exportarTudo, string empresa,IProgress<string> progress = null)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.WebPosto);            
@@ -30,8 +30,18 @@ namespace SolfarmaGp.Repositories.ExportarXmlRepositories
                         //SqlParameter p;
                         cmd.Parameters.AddWithValue("@INdatDataInicio", dataInicio);
                         cmd.Parameters.AddWithValue("@INdatDataFim", dataFim);
-                        cmd.Parameters.AddWithValue("@INvchLocal", localExportacao);
-                        if(modeloDocumento == "")
+                        cmd.Parameters.AddWithValue("@INvchLocal", localExportacao);                        
+
+                        if(empresa == "")
+                        {
+                            cmd.Parameters.AddWithValue("@INvchEmpresa", DBNull.Value);
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue("@INvchEmpresa", empresa);
+                        }
+
+                        if (modeloDocumento == "")
                         {
                             cmd.Parameters.AddWithValue("@INModeloDocumento", DBNull.Value);
                         }

@@ -28,183 +28,205 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.dtInicio = new System.Windows.Forms.DateTimePicker();
-            this.dtFim = new System.Windows.Forms.DateTimePicker();
-            this.tbLocalExport = new System.Windows.Forms.TextBox();
-            this.cbModeloDocumento = new System.Windows.Forms.ComboBox();
-            this.cbTipoExportacao = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnExecute = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            richTextBox1 = new RichTextBox();
+            dtInicio = new DateTimePicker();
+            dtFim = new DateTimePicker();
+            tbLocalExport = new TextBox();
+            cbModeloDocumento = new ComboBox();
+            cbTipoExportacao = new ComboBox();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            btnExecute = new Button();
+            tbCnpj = new TextBox();
+            lbCnpj = new Label();
+            chkBoxTipoImportacao = new CheckBox();
+            SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.BackColor = System.Drawing.SystemColors.Menu;
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.richTextBox1.Enabled = false;
-            this.richTextBox1.Font = new System.Drawing.Font("Sans Serif Collection", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.richTextBox1.Location = new System.Drawing.Point(139, 24);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(220, 70);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "Exportação de XML";
+            richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            richTextBox1.BackColor = SystemColors.Menu;
+            richTextBox1.BorderStyle = BorderStyle.None;
+            richTextBox1.Enabled = false;
+            richTextBox1.Font = new Font("Sans Serif Collection", 15F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            richTextBox1.ForeColor = SystemColors.InfoText;
+            richTextBox1.Location = new Point(185, 37);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(340, 103);
+            richTextBox1.TabIndex = 0;
+            richTextBox1.Text = "Exportação de XML";
             // 
             // dtInicio
             // 
-            this.dtInicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtInicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtInicio.Location = new System.Drawing.Point(31, 135);
-            this.dtInicio.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.dtInicio.MaximumSize = new System.Drawing.Size(168, 250);
-            this.dtInicio.Name = "dtInicio";
-            this.dtInicio.Size = new System.Drawing.Size(168, 26);
-            this.dtInicio.TabIndex = 3;
+            dtInicio.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtInicio.Format = DateTimePickerFormat.Short;
+            dtInicio.Location = new Point(41, 177);
+            dtInicio.MaximumSize = new Size(223, 250);
+            dtInicio.Name = "dtInicio";
+            dtInicio.Size = new Size(223, 30);
+            dtInicio.TabIndex = 3;
             // 
             // dtFim
             // 
-            this.dtFim.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.dtFim.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtFim.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtFim.Location = new System.Drawing.Point(285, 135);
-            this.dtFim.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.dtFim.MaximumSize = new System.Drawing.Size(168, 250);
-            this.dtFim.Name = "dtFim";
-            this.dtFim.Size = new System.Drawing.Size(168, 26);
-            this.dtFim.TabIndex = 4;
+            dtFim.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            dtFim.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtFim.Format = DateTimePickerFormat.Short;
+            dtFim.Location = new Point(380, 177);
+            dtFim.MaximumSize = new Size(223, 250);
+            dtFim.Name = "dtFim";
+            dtFim.Size = new Size(223, 30);
+            dtFim.TabIndex = 4;
             // 
             // tbLocalExport
             // 
-            this.tbLocalExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbLocalExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbLocalExport.Location = new System.Drawing.Point(32, 222);
-            this.tbLocalExport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tbLocalExport.Name = "tbLocalExport";
-            this.tbLocalExport.Size = new System.Drawing.Size(421, 26);
-            this.tbLocalExport.TabIndex = 5;
+            tbLocalExport.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            tbLocalExport.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbLocalExport.Location = new Point(37, 275);
+            tbLocalExport.Name = "tbLocalExport";
+            tbLocalExport.Size = new Size(560, 30);
+            tbLocalExport.TabIndex = 5;
             // 
             // cbModeloDocumento
             // 
-            this.cbModeloDocumento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbModeloDocumento.FormattingEnabled = true;
-            this.cbModeloDocumento.Location = new System.Drawing.Point(31, 296);
-            this.cbModeloDocumento.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cbModeloDocumento.Name = "cbModeloDocumento";
-            this.cbModeloDocumento.Size = new System.Drawing.Size(203, 28);
-            this.cbModeloDocumento.TabIndex = 6;
+            cbModeloDocumento.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cbModeloDocumento.FormattingEnabled = true;
+            cbModeloDocumento.Location = new Point(34, 362);
+            cbModeloDocumento.Name = "cbModeloDocumento";
+            cbModeloDocumento.Size = new Size(269, 33);
+            cbModeloDocumento.TabIndex = 6;
             // 
             // cbTipoExportacao
             // 
-            this.cbTipoExportacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbTipoExportacao.FormattingEnabled = true;
-            this.cbTipoExportacao.Location = new System.Drawing.Point(292, 296);
-            this.cbTipoExportacao.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cbTipoExportacao.Name = "cbTipoExportacao";
-            this.cbTipoExportacao.Size = new System.Drawing.Size(156, 28);
-            this.cbTipoExportacao.TabIndex = 7;
+            cbTipoExportacao.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cbTipoExportacao.FormattingEnabled = true;
+            cbTipoExportacao.Location = new Point(389, 362);
+            cbTipoExportacao.Name = "cbTipoExportacao";
+            cbTipoExportacao.Size = new Size(207, 33);
+            cbTipoExportacao.TabIndex = 7;
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(29, 110);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 17);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Data Início:";
+            label1.AutoSize = true;
+            label1.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(39, 138);
+            label1.Name = "label1";
+            label1.Size = new Size(94, 20);
+            label1.TabIndex = 8;
+            label1.Text = "Data Início:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(277, 109);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 17);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Data Fim:";
+            label2.AutoSize = true;
+            label2.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(369, 137);
+            label2.Name = "label2";
+            label2.Size = new Size(83, 20);
+            label2.TabIndex = 9;
+            label2.Text = "Data Fim:";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(29, 194);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(141, 17);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Local de Exportação:";
+            label3.AutoSize = true;
+            label3.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(35, 242);
+            label3.Name = "label3";
+            label3.Size = new Size(167, 20);
+            label3.TabIndex = 10;
+            label3.Text = "Local de Exportação:";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(28, 270);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(221, 17);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Modelo do Documento (opcional):";
+            label4.AutoSize = true;
+            label4.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(30, 322);
+            label4.Name = "label4";
+            label4.Size = new Size(261, 20);
+            label4.TabIndex = 11;
+            label4.Text = "Modelo do Documento (opcional):";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(289, 270);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 17);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Exportar Tudo?";
+            label5.AutoSize = true;
+            label5.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(385, 322);
+            label5.Name = "label5";
+            label5.Size = new Size(123, 20);
+            label5.TabIndex = 12;
+            label5.Text = "Exportar Tudo?";
             // 
             // btnExecute
             // 
-            this.btnExecute.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnExecute.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExecute.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnExecute.Location = new System.Drawing.Point(32, 352);
-            this.btnExecute.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnExecute.Name = "btnExecute";
-            this.btnExecute.Size = new System.Drawing.Size(415, 42);
-            this.btnExecute.TabIndex = 13;
-            this.btnExecute.Text = "Executar Exportação";
-            this.btnExecute.UseVisualStyleBackColor = false;
-            this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
+            btnExecute.BackColor = SystemColors.Highlight;
+            btnExecute.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnExecute.ForeColor = SystemColors.ControlLightLight;
+            btnExecute.Location = new Point(37, 589);
+            btnExecute.Name = "btnExecute";
+            btnExecute.Size = new Size(553, 65);
+            btnExecute.TabIndex = 13;
+            btnExecute.Text = "Executar Exportação";
+            btnExecute.UseVisualStyleBackColor = false;
+            btnExecute.Click += btnExecute_Click;
             // 
-            // ExportaXml
+            // tbCnpj
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(481, 417);
-            this.Controls.Add(this.btnExecute);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.cbTipoExportacao);
-            this.Controls.Add(this.cbModeloDocumento);
-            this.Controls.Add(this.tbLocalExport);
-            this.Controls.Add(this.dtFim);
-            this.Controls.Add(this.dtInicio);
-            this.Controls.Add(this.richTextBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.MaximizeBox = false;
-            this.Name = "ExportaXml";
-            this.Text = "ExportaXml";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            tbCnpj.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            tbCnpj.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tbCnpj.Location = new Point(37, 510);
+            tbCnpj.Name = "tbCnpj";
+            tbCnpj.Size = new Size(269, 30);
+            tbCnpj.TabIndex = 14;
+            tbCnpj.TextChanged += tbCnpj_TextChanged;
+            // 
+            // lbCnpj
+            // 
+            lbCnpj.AutoSize = true;
+            lbCnpj.Font = new Font("Microsoft Sans Serif", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbCnpj.Location = new Point(37, 471);
+            lbCnpj.Name = "lbCnpj";
+            lbCnpj.Size = new Size(58, 20);
+            lbCnpj.TabIndex = 15;
+            lbCnpj.Text = "CNPJ:";
+            // 
+            // chkBoxTipoImportacao
+            // 
+            chkBoxTipoImportacao.AutoSize = true;
+            chkBoxTipoImportacao.Location = new Point(37, 434);
+            chkBoxTipoImportacao.Name = "chkBoxTipoImportacao";
+            chkBoxTipoImportacao.Size = new Size(218, 24);
+            chkBoxTipoImportacao.TabIndex = 16;
+            chkBoxTipoImportacao.Text = "Importa por CNPJ Especifico";
+            chkBoxTipoImportacao.UseVisualStyleBackColor = true;
+            chkBoxTipoImportacao.CheckedChanged += chkBoxTipoImportacao_CheckedChanged;
+            // 
+            // ImportaXmlPasta
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(641, 696);
+            Controls.Add(chkBoxTipoImportacao);
+            Controls.Add(lbCnpj);
+            Controls.Add(tbCnpj);
+            Controls.Add(btnExecute);
+            Controls.Add(label5);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(cbTipoExportacao);
+            Controls.Add(cbModeloDocumento);
+            Controls.Add(tbLocalExport);
+            Controls.Add(dtFim);
+            Controls.Add(dtInicio);
+            Controls.Add(richTextBox1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            Name = "ImportaXmlPasta";
+            Text = "ExportaXml";
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -222,5 +244,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnExecute;
+        private TextBox tbCnpj;
+        private Label lbCnpj;
+        private CheckBox chkBoxTipoImportacao;
     }
 }
