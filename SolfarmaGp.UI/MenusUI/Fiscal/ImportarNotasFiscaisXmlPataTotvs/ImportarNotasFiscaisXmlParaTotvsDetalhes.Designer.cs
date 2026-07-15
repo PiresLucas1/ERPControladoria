@@ -62,7 +62,6 @@
             // 
             dvgDataNotaItens.AllowUserToAddRows = false;
             dvgDataNotaItens.AllowUserToDeleteRows = false;
-            dvgDataNotaItens.AllowUserToResizeColumns = false;
             dvgDataNotaItens.AllowUserToResizeRows = false;
             dvgDataNotaItens.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dvgDataNotaItens.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;

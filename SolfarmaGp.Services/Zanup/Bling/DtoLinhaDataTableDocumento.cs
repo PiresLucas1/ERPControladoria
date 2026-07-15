@@ -25,6 +25,10 @@
             public decimal CofinsValor { get; set; }
             public decimal QtdParaDevolver { get; set; }
             public string EstoqueOrigem { get; set; }
+            public string CPFCNPJEmitente { get; set; } = string.Empty;
+            public string RazaoSocialEmitente { get; set; } = string.Empty;
+            public int CodFilial { get; set; }
+
         }
     }
 }

@@ -55,7 +55,10 @@ namespace SolfarmaGp.Services.Zanup.Bling.utils
                 PisValor = Convert.ToDecimal(row["PisValor"]),
                 CofinsValor = Convert.ToDecimal(row["CofinsValor"]),
                 QtdParaDevolver = Convert.ToDecimal(row["Qtd para Devolver"]),
-                EstoqueOrigem = row["Estoque origem"].ToString()
+                EstoqueOrigem = row["Estoque origem"].ToString(),
+                CPFCNPJEmitente = row["CPF/CNPJ"].ToString(),
+                RazaoSocialEmitente = row["Razao Social Emitente"].ToString(),
+                CodFilial = Convert.ToInt32(row["IDPessoaEmitente"])
             };
         }
 

@@ -699,6 +699,14 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
             }
         }
 
+        private void btnDesmarcarTudo_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dvgItensSelecionados.Rows)
+            {
+                row.Cells["Selecionar"].Value = false;
+            }
+        }
+
         private void btnLimparTela_Click(object sender, EventArgs e)
         {
             dvgItensSelecionados.DataSource = null;

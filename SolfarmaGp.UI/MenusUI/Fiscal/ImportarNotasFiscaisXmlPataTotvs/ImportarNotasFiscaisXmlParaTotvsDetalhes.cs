@@ -110,6 +110,39 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
         private void btnLancarNota_Click(object sender, EventArgs e)
         {
+            DataTable dt = (DataTable)_bs.DataSource;
+
+            Console.Write(dt);
+            var objetoNota = new
+            {
+                IDQiveArquivoXml = tbIdQive.Text,                
+                ChaveAcesso = tbChaveAcesso.Text,
+                CnpjFornecedor = tbCodFornecedor.Text,                
+                IDErpContasPagar = tbIdContasPagar.Text,
+                NumDocumento = tbNumDoc.Text
+            };
+            var itens = new List<object>();
+            foreach (DataRow row in dt.Rows)
+            {
+                var Novoitem = new
+                {
+                    IDProduto = row["IDProdFornecedor"],
+                    DescricaoProduto = row["DescricaoProduto"],
+                    NCM = row["NCM"],
+                    CEST = row["CEST"],
+                    CFOP = row["CFOP"],
+                    UnidadeComercial = row["UnidadeComercial"],
+                    Valor = row["Valor"],
+                    CodEAN = row["CodEAN"],
+                    Quantidade = row["Quantidade"],
+                    ValorIBSMunicipio = row["ValorIBSMunicipio"],
+                    Natureza = row["Natureza"]
+                };
+                itens.Add(Novoitem);
+            };
+
+
+
 
         }
 

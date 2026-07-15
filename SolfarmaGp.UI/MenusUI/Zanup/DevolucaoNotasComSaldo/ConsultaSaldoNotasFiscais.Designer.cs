@@ -47,6 +47,7 @@
             btnLimparTela = new Button();
             btnSelecionarTudo = new Button();
             btnAlteraEstoque = new Button();
+            btnDesmarcarTudo = new Button();
             gbFiltro.SuspendLayout();
             groupBox1.SuspendLayout();
             tabNavegacaoAba.SuspendLayout();
@@ -267,7 +268,7 @@
             // 
             btnSelecionarTudo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnSelecionarTudo.Enabled = false;
-            btnSelecionarTudo.Location = new Point(220, 798);
+            btnSelecionarTudo.Location = new Point(220, 776);
             btnSelecionarTudo.Margin = new Padding(3, 4, 3, 4);
             btnSelecionarTudo.Name = "btnSelecionarTudo";
             btnSelecionarTudo.Size = new Size(136, 34);
@@ -279,7 +280,7 @@
             // btnAlteraEstoque
             // 
             btnAlteraEstoque.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnAlteraEstoque.Location = new Point(376, 798);
+            btnAlteraEstoque.Location = new Point(518, 799);
             btnAlteraEstoque.Margin = new Padding(3, 4, 3, 4);
             btnAlteraEstoque.Name = "btnAlteraEstoque";
             btnAlteraEstoque.Size = new Size(163, 33);
@@ -288,11 +289,24 @@
             btnAlteraEstoque.UseVisualStyleBackColor = true;
             btnAlteraEstoque.Click += btnAlteraEstoque_Click;
             // 
+            // btnDesmarcarTudo
+            // 
+            btnDesmarcarTudo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnDesmarcarTudo.Enabled = false;
+            btnDesmarcarTudo.Location = new Point(220, 819);
+            btnDesmarcarTudo.Margin = new Padding(3, 4, 3, 4);
+            btnDesmarcarTudo.Name = "btnDesmarcarTudo";
+            btnDesmarcarTudo.Size = new Size(136, 34);
+            btnDesmarcarTudo.TabIndex = 11;
+            btnDesmarcarTudo.Text = "Desmarcar Tudo";
+            btnDesmarcarTudo.UseVisualStyleBackColor = true;
+            // 
             // ConsultaSaldoNotasFiscais
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1060, 866);
+            Controls.Add(btnDesmarcarTudo);
             Controls.Add(btnAlteraEstoque);
             Controls.Add(btnSelecionarTudo);
             Controls.Add(btnLimparTela);
@@ -338,5 +352,6 @@
         private System.Windows.Forms.Button btnSelecionarTudo;
         private System.Windows.Forms.ComboBox cbFilial;
         private Button btnAlteraEstoque;
+        private Button btnDesmarcarTudo;
     }
 }

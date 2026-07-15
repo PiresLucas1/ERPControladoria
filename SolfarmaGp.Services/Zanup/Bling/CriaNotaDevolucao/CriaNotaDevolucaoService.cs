@@ -1,4 +1,5 @@
 ﻿using SolfarmaGp.Communication.Zanup.Bling;
+using SolfarmaGp.Services.Utils;
 using SolfarmaGp.Services.Zanup.Bling.ComunicacaoApiBling;
 using SolfarmaGp.Services.Zanup.Bling.utils;
 using System.Data;
@@ -34,7 +35,7 @@ namespace SolfarmaGp.Services.Zanup.Bling.CriaNotaDevolucao
             {
                 var primeiraLinha = itemGrupo.First();
 
-
+                var enderecoFilial = new RetornaEnderecoFilial().RetornaEnderecoFilialPorCodigo(primeiraLinha.CodFilial);
 
                 NotaFiscal novaNotaFiscal = new NotaFiscal
                 {
@@ -72,19 +73,21 @@ namespace SolfarmaGp.Services.Zanup.Bling.CriaNotaDevolucao
                     },
                     Contato = new Contato
                     {
-                        NumeroDocumento = "46.054.219/0001-74",
-                        Nome = "SOLFARMA COMERCIO DE PRODUTOS FARMACEUTICOS S.A.",
+                        //NumeroDocumento = "46.054.219/0001-74",
+                        NumeroDocumento = primeiraLinha.CPFCNPJEmitente,
+                        //Nome = "SOLFARMA COMERCIO DE PRODUTOS FARMACEUTICOS S.A.",
+                        Nome = primeiraLinha.RazaoSocialEmitente,
                         tipoPessoa = "J",
                         contribuinte = 1,
                         ie = 210030251111,
                         endereco = new EnderecoCliente
                         {
-                            endereco = "Avenida João Ferreira Penna",
-                            numero = 147,
-                            bairro = "DISTRITO INDUSTRIAL III",
-                            cep = "14707-002",
-                            municipio = "Bebedouro",
-                            uf = "SP"
+                            endereco = enderecoFilial.EnderecoFilial,
+                            numero = enderecoFilial.NumeroEnderecoFilial,
+                            bairro = enderecoFilial.BairroEnderecoFilial,
+                            cep = enderecoFilial.CepEnderecoFilial,
+                            municipio = enderecoFilial.MunicipioEnderecoFilial,
+                            uf = enderecoFilial.UfEnderecoFilial
 
                         }
                     },
