@@ -750,7 +750,8 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                     "Shopee Maybelline (Fulfillment)",
                     "Shopee Zanup (Fulfillm)",
                     "Solfarma",
-                    "TikTok Shop"                
+                    "TikTok Shop",
+                    "Gaiola"
             });
 
             var resultado = alteraUnicoValorEmBloco.ShowDialog();
