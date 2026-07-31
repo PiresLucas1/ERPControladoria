@@ -9,20 +9,18 @@ namespace SolfarmaGp.Repositorios.Contabil.Parametrizacao.Banco
         public async Task<DataTable> Execute()
         {
             DataTable tabela = new DataTable();
-            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.BigCentral);
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
 
             try
             {
                 using (SqlConnection conn = conexaoBanco.AbrirConexao())
                 {
                     string query = @"
-                SELECT DISTINCT
-                    tblBanco.bancos_id
-                FROM
-                    tblBancosContas tblBanco (NOLOCK)
-                WHERE
-                    tblBanco.bancos_id IS NOT NULL
-                    AND tblBanco.bancos_id <> ''";
+                        SELECT DISTINCT
+                            tblBanco.IDBanco
+                        FROM
+                            tblBancosContabilGP tblBanco (NOLOCK)
+                     ";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {

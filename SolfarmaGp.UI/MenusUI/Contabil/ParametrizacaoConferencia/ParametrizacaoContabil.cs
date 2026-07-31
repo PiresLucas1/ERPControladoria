@@ -157,16 +157,19 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             int CodColigada = cbColigada.Text != "" ? Convert.ToInt32(cbColigada.Text) : 0;
             int filial = tbFilial.Text != "" ? Convert.ToInt32(tbFilial.Text) : 0;
             int banco = tbBanco.Text != "" ? Convert.ToInt32(tbBanco.Text) : 0;
-            int reduzidoCredito = tbReduzidoCredito.Text != "" ? Convert.ToInt32(tbReduzidoCredito.Text) : 0;
-            int reduzidoDebito = tbReduzidoDebito.Text != "" ? Convert.ToInt32(tbReduzidoDebito.Text) : 0;
+            var reduzidoCredito = tbReduzidoCredito.Text != "" ? tbReduzidoCredito.Text : "";
+            var reduzidoDebito = tbReduzidoDebito.Text != "" ? tbReduzidoDebito.Text : "";
+
+            var retornoCodReduzidoDebito = cbContaCotabil.FirstOrDefault(x => x.label == reduzidoDebito);
+            var retornoCodReduzidoCredito = cbContaCotabil.FirstOrDefault(x => x.label == reduzidoCredito);
 
             ObjetoPesquisaParametrosContabilDados pesquisa = new ObjetoPesquisaParametrosContabilDados
             {
                 CodColigada = CodColigada,
                 filial = filial,
                 banco = banco,
-                reduzidoCredito = reduzidoCredito,
-                reduzidoDebito = reduzidoDebito
+                reduzidoCredito = retornoCodReduzidoCredito?.valor ?? 0,
+                reduzidoDebito = retornoCodReduzidoDebito?.valor ?? 0
             };
 
             FiltraValorTabel(pesquisa);
@@ -188,6 +191,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
 
             if (parametros.reduzidoDebito != 0)
                 filtros.Add($"CodContaDebito = {parametros.reduzidoDebito}");
+
+            
 
             _bs.Filter = string.Join(" AND ", filtros);
 

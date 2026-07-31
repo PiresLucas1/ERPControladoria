@@ -388,6 +388,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                 txtCountNotas.Text = dvgItensSelecionados.Rows.Count.ToString();
 
                 btnSelecionarTudo.Enabled = true;
+                btnDesmarcarTudo.Enabled = true;
                 btnLimparTela.Enabled = true;
                 return;
 
@@ -396,6 +397,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
             {
                 txtCountNotas.Text = dvgConsultaNotas.RowCount.ToString();
                 btnSelecionarTudo.Enabled = false;
+                btnDesmarcarTudo.Enabled = false;
                 btnLimparTela.Enabled = false;
             }
         }
@@ -432,7 +434,8 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                     "Shopee Maybelline (Fulfillment)",
                     "Shopee Zanup (Fulfillm)",
                     "Solfarma",
-                    "TikTok Shop"
+                    "TikTok Shop",
+                    "Gaiola"
                 );
 
                 dvgItensSelecionados.Columns.Add(colCombo);

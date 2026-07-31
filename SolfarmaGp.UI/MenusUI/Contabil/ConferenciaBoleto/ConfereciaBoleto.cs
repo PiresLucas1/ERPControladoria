@@ -557,8 +557,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             var bancoIdsLegendasList = bancoIds.AsEnumerable()
                 .Select(row => new
                 {
-                    idBanco = row.Field<string>("bancos_id"),
-                    nome = RetornaValorNomeBanco(Convert.ToInt32(row.Field<string>("bancos_id")))
+                    idBanco = row.Field<int>("IDBanco"),
+                    nome = RetornaValorNomeBanco(Convert.ToInt32(row.Field<int>("IDBanco")))
 
                 }).ToDataTable();
 
@@ -589,6 +589,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                     return "341 - Itau";
                 case 756:
                     return "756 - Sicoob";
+                case 1:
+                    return "001 - Banco do Brasil";
+                case 184:
+                    return "184 - Itau BBA";
+
                 default:
                     return "";
             }

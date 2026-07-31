@@ -35,7 +35,7 @@
             lbTotalItens = new Label();
             gpFooter = new GroupBox();
             btnAbrirXml = new Button();
-            btnPreencherCFOP = new Button();
+            btnCadastrarProduto = new Button();
             gpHeader = new GroupBox();
             tbNomeFornecedor = new TextBox();
             tbCodFornecedor = new TextBox();
@@ -68,7 +68,6 @@
             dvgDataNotaItens.ColumnHeadersHeight = 29;
             dvgDataNotaItens.Location = new Point(12, 166);
             dvgDataNotaItens.Name = "dvgDataNotaItens";
-            dvgDataNotaItens.ReadOnly = true;
             dvgDataNotaItens.RowHeadersWidth = 51;
             dvgDataNotaItens.Size = new Size(1093, 384);
             dvgDataNotaItens.TabIndex = 0;
@@ -87,7 +86,7 @@
             // btnCancelar
             // 
             btnCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnCancelar.Location = new Point(485, 26);
+            btnCancelar.Location = new Point(402, 26);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(127, 36);
             btnCancelar.TabIndex = 3;
@@ -117,7 +116,7 @@
             // 
             gpFooter.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             gpFooter.Controls.Add(btnAbrirXml);
-            gpFooter.Controls.Add(btnPreencherCFOP);
+            gpFooter.Controls.Add(btnCadastrarProduto);
             gpFooter.Controls.Add(btnCancelar);
             gpFooter.Controls.Add(btnLancarNota);
             gpFooter.Controls.Add(lbTotalItens);
@@ -131,7 +130,7 @@
             // btnAbrirXml
             // 
             btnAbrirXml.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnAbrirXml.Location = new Point(678, 26);
+            btnAbrirXml.Location = new Point(578, 26);
             btnAbrirXml.Name = "btnAbrirXml";
             btnAbrirXml.Size = new Size(127, 36);
             btnAbrirXml.TabIndex = 6;
@@ -139,15 +138,16 @@
             btnAbrirXml.UseVisualStyleBackColor = true;
             btnAbrirXml.Click += btnAbrirXml_Click;
             // 
-            // btnPreencherCFOP
+            // btnCadastrarProduto
             // 
-            btnPreencherCFOP.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnPreencherCFOP.Location = new Point(811, 26);
-            btnPreencherCFOP.Name = "btnPreencherCFOP";
-            btnPreencherCFOP.Size = new Size(127, 36);
-            btnPreencherCFOP.TabIndex = 2;
-            btnPreencherCFOP.Text = "Preencher CFOP";
-            btnPreencherCFOP.UseVisualStyleBackColor = true;
+            btnCadastrarProduto.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnCadastrarProduto.Location = new Point(809, 26);
+            btnCadastrarProduto.Name = "btnCadastrarProduto";
+            btnCadastrarProduto.Size = new Size(127, 36);
+            btnCadastrarProduto.TabIndex = 2;
+            btnCadastrarProduto.Text = "Cad. Produtos";
+            btnCadastrarProduto.UseVisualStyleBackColor = true;
+            btnCadastrarProduto.Click += btnCadastrarProduto_Click;
             // 
             // gpHeader
             // 
@@ -344,7 +344,7 @@
         private Label lbIDContasPagar;
         private Label lbNumDoc;
         private Label lbIDQiveArquivoXml;
-        private Button btnPreencherCFOP;
+        private Button btnCadastrarProduto;
         private TextBox tbNumDoc;
         private ComponentesTelaUI.DataGridView.MyDataGridView dvgContaFinanceira;
         private GroupBox gpContas;

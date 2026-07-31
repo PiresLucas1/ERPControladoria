@@ -49,7 +49,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
                 dvgContaFinanceira.DataSource = _bsContaFinanceira;
                 AjustaTela();
-                
+
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
             tbChaveAcesso.Text = _tabela.Rows[0]["ChaveAcesso"].ToString();
 
-            
+
         }
         private void AjustarFonteTextBoxesGroupBox()
         {
@@ -96,15 +96,32 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             {
                 _tabela.Columns.Add("Natureza", typeof(string));
             }
+            if(!_tabela.Columns.Contains("Selecionado"))
+            {
+                _tabela.Columns.Add("Selecionado", typeof(bool));
+            }
 
+
+
+
+            dvgDataNotaItens.ReadOnly = false;
             _bs.DataSource = _tabela;
             dvgDataNotaItens.DataSource = _bs;
+
+            dvgDataNotaItens.Columns["Selecionado"].DisplayIndex = 1;
+            dvgDataNotaItens.Columns["Selecionado"].HeaderText = "*";
+
             var indexColunaNatureza = dvgDataNotaItens.Columns["CFOP"].Index;
 
             dvgDataNotaItens.Columns["Natureza"].HeaderText = "Natureza Fiscal";
-            dvgDataNotaItens.Columns["Natureza"].ReadOnly = false;
+            //dvgDataNotaItens.Columns["Natureza"].ReadOnly = false;
             dvgDataNotaItens.Columns["Natureza"].DisplayIndex = indexColunaNatureza + 1;
-            
+            // e trava todas as outras colunas manualmente
+            foreach (DataGridViewColumn col in dvgDataNotaItens.Columns)
+            {
+                col.ReadOnly = (col.Name != "Natureza" && col.Name != "Selecionado");
+            }
+
             ValidaColunasIBSCBS();
         }
 
@@ -115,9 +132,9 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             Console.Write(dt);
             var objetoNota = new
             {
-                IDQiveArquivoXml = tbIdQive.Text,                
+                IDQiveArquivoXml = tbIdQive.Text,
                 ChaveAcesso = tbChaveAcesso.Text,
-                CnpjFornecedor = tbCodFornecedor.Text,                
+                CnpjFornecedor = tbCodFornecedor.Text,
                 IDErpContasPagar = tbIdContasPagar.Text,
                 NumDocumento = tbNumDoc.Text
             };
@@ -139,7 +156,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                     Natureza = row["Natureza"]
                 };
                 itens.Add(Novoitem);
-            };
+            }
+            ;
 
 
 
@@ -158,7 +176,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
         private void VisualizarXML(string xml)
         {
             string caminhoTemp = Path.Combine(Path.GetTempPath(), "VisualizarXml.xml");
-            File.WriteAllText(caminhoTemp,xml, Encoding.UTF8);
+            File.WriteAllText(caminhoTemp, xml, Encoding.UTF8);
 
             Process.Start(new ProcessStartInfo
             {
@@ -183,13 +201,53 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                     /*zera o campo ibs*/
                     row["Valor IBS UF"] = 0;
                     row["Valor IBS Mun."] = 0;
-                }   
-            }            
+                }
+            }
             if (flagIBS)
             {
                 MessageBox.Show("As colunas IBS e CBS não foram localizadas no XML, valide o XML se for preciso .", "Colunas não localizadas no XML", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+        }
+
+        private async void btnCadastrarProduto_Click(object sender, EventArgs e)
+        {
+
+            var linhasSelecionadas = _tabela.AsEnumerable()
+                .Where(row => row.Field<bool>("Selecionado"))
+                .ToList();
+            if(linhasSelecionadas.Count == 0)
+            {
+                MessageBox.Show("Nenhuma linha selecionada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            ConsultaProdutoTotvsUseCase usecase = new ConsultaProdutoTotvsUseCase();
+            var resultados = new List<DataTable>();
+            var erros = new List<string>();
+            foreach (DataRow row in linhasSelecionadas) {
+
+                if (!int.TryParse(row["IDProdFornecedor"]?.ToString(), out int codNoForn))
+                {
+                    erros.Add($"Produto '{row["DescricaoProduto"]}' possui código de fornecedor inválido.");
+                    continue;
+                }
+
+                try
+                {
+                    DataTable resultado = await usecase.Executar(codNoForn);
+                    resultados.Add(resultado);
+                }
+                catch (Exception ex)
+                {
+                    erros.Add($"Erro ao consultar produto '{row["DescricaoProduto"]}' (cod {codNoForn}): {ex.Message}");
+                }
+            }
+
+            if (erros.Count > 0)
+            {
+                MessageBox.Show(string.Join(Environment.NewLine, erros), "Erros ao cadastrar produto(s)", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }        
         }
     }
 }

@@ -55,7 +55,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml
 
 
             tipoExportacao = chkBoxTipoImportacao.Checked ? tbCnpj.Text : "";
-            string idEmpresa = ConverteCnpjParaIdEmpresa(tipoExportacao);
+            string idEmpresa = tipoExportacao == "" ? "" : ConverteCnpjParaIdEmpresa(tipoExportacao);
             string dataInicio = dtInicio.Value.Date.ToString();
             string dataFim = dtFim.Value.Date.ToString();
             string cabecalhoDePesquisa = tbLocalExport.Text;
@@ -133,6 +133,11 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml
             txt.Text = formatado;
             txt.SelectionStart = txt.Text.Length; // mantém o cursor no final
             txt.TextChanged += tbCnpj_TextChanged;
+        }
+
+        private void ImportaXmlPasta_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -225,6 +225,7 @@
             MaximizeBox = false;
             Name = "ImportaXmlPasta";
             Text = "ExportaXml";
+            Load += ImportaXmlPasta_Load;
             ResumeLayout(false);
             PerformLayout();
 
