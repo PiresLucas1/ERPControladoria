@@ -6,11 +6,11 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
 {
     public class ConsultaProdutoTotvs
     {
-        public async Task<DataTable> Executar(int codNoForn)
+        public async Task<DataTable> Executar(string codNoForn)
         {
             DataTable tabela = new DataTable();
             //DataSet dataSet = new DataSet();
-            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.TotvsTeste);
             SqlConnection conn = null;
 
             try

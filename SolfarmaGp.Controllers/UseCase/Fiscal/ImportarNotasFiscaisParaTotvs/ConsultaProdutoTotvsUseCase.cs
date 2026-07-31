@@ -5,7 +5,7 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs
 {
     public class ConsultaProdutoTotvsUseCase
     {
-        public async Task<DataTable> Executar(int codNoForn)
+        public async Task<DataTable> Executar(string codNoForn)
         {
             var consultaProdutoTotvs = new ConsultaProdutoTotvs();
             return await consultaProdutoTotvs.Executar(codNoForn);

@@ -121,6 +121,11 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             {
                 col.ReadOnly = (col.Name != "Natureza" && col.Name != "Selecionado");
             }
+            if (!_tabela.Columns.Contains("Selecionado"))
+            {
+                _tabela.Columns.Add("Selecionado", typeof(bool));
+                _tabela.Columns["Selecionado"].DefaultValue = false;
+            }
 
             ValidaColunasIBSCBS();
         }
@@ -212,11 +217,17 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
         private async void btnCadastrarProduto_Click(object sender, EventArgs e)
         {
+            VerificaSeProdutoExisteTotvs();
 
+
+        }
+
+        private async void VerificaSeProdutoExisteTotvs()
+        {
             var linhasSelecionadas = _tabela.AsEnumerable()
-                .Where(row => row.Field<bool>("Selecionado"))
-                .ToList();
-            if(linhasSelecionadas.Count == 0)
+               .Where(row => row.Field<bool?>("Selecionado") == true)
+               .ToList();
+            if (linhasSelecionadas.Count == 0)
             {
                 MessageBox.Show("Nenhuma linha selecionada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -225,14 +236,9 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             ConsultaProdutoTotvsUseCase usecase = new ConsultaProdutoTotvsUseCase();
             var resultados = new List<DataTable>();
             var erros = new List<string>();
-            foreach (DataRow row in linhasSelecionadas) {
-
-                if (!int.TryParse(row["IDProdFornecedor"]?.ToString(), out int codNoForn))
-                {
-                    erros.Add($"Produto '{row["DescricaoProduto"]}' possui código de fornecedor inválido.");
-                    continue;
-                }
-
+            foreach (DataRow row in linhasSelecionadas)
+            {
+                var codNoForn = row["IDProdFornecedor"]?.ToString();
                 try
                 {
                     DataTable resultado = await usecase.Executar(codNoForn);
@@ -247,7 +253,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             if (erros.Count > 0)
             {
                 MessageBox.Show(string.Join(Environment.NewLine, erros), "Erros ao cadastrar produto(s)", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }        
+            }
         }
     }
 }
