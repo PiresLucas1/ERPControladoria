@@ -6,6 +6,14 @@ using System.Text;
 
 namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 {
+    public class NotaCapa
+    {
+         public string IDQiveArquivoXml { get; set; }
+         public string ChaveAcesso { get; set; }
+         public string CnpjFornecedor { get; set; }
+         public string IDErpContasPagar { get; set; }
+         public string NumDocumento { get; set; }
+    };
     public partial class ImportarNotasFiscaisXmlParaTotvsDetalhes : Form
     {
         private int _IDQiveArquivoXML;
@@ -130,12 +138,12 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             ValidaColunasIBSCBS();
         }
 
-        private void btnLancarNota_Click(object sender, EventArgs e)
+        private async  void btnLancarNota_Click(object sender, EventArgs e)
         {
             DataTable dt = (DataTable)_bs.DataSource;
 
             Console.Write(dt);
-            var objetoNota = new
+            NotaCapa objetoNota = new NotaCapa
             {
                 IDQiveArquivoXml = tbIdQive.Text,
                 ChaveAcesso = tbChaveAcesso.Text,
@@ -161,12 +169,81 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                     Natureza = row["Natureza"]
                 };
                 itens.Add(Novoitem);
+            };
+
+             var resultado = await ValidaProdutoExistente();
+
+            if (resultado)
+                return ;
+            
+
+                
+
+        }
+        public static DataTable ListaParaDataTable<T>(List<T> lista)
+        {
+            DataTable tabela = new DataTable();
+            var propriedades = typeof(T).GetProperties();
+
+            foreach (var prop in propriedades)
+            {
+                tabela.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
             }
-            ;
+
+            foreach (var item in lista)
+            {
+                var linha = tabela.NewRow();
+                foreach (var prop in propriedades)
+                {
+                    linha[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                }
+                tabela.Rows.Add(linha);
+            }
+
+            return tabela;
+        }
+
+        public async Task<bool> ValidaProdutoExistente()
+        {
+            DataTable dt = (DataTable)_bs.DataSource;
+            var itensNaoEncontrado = new List<string>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                string codigoFornecedor = row["IDProdFornecedor"].ToString();
+                ConsultaProdutoTotvsUseCase useCase = new ConsultaProdutoTotvsUseCase();
+                var retorno = await useCase.Executar(codigoFornecedor);
+
+                itensNaoEncontrado.Add(codigoFornecedor);
+            };
+            if(itensNaoEncontrado.Count > 0)
+            {
+                string mensagem = "Os seguintes produtos não foram encontrados no Totvs:\n" + string.Join("\n", itensNaoEncontrado);
+                MessageBox.Show(mensagem, "Produtos não encontrados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
 
 
-
+        }
+        public async void LancamentoNota(NotaCapa nota, List<object> itensNotas)
+        {
+            CriarNotaDevolucaoUseCase useCase = new CriarNotaDevolucaoUseCase();
+            await useCase.Executar(
+                intCodColigada: 2,
+                intCodFilial: 1,
+                vchCodCCFO: nota.ChaveAcesso,
+                vchSerieDocumento: "1", 
+                vchCodTipoMovimento: "1", 
+                INvchNumeroDocumento: nota.NumDocumento, 
+                INvchChaveAcesso: nota.ChaveAcesso, 
+                INdatDataEmissao: DateTime.Now, 
+                INdatDataLancamento: DateTime.Now, 
+                tvpItens: ListaParaDataTable(itensNotas));
         }
 
         private async void btnAbrirXml_Click(object sender, EventArgs e)
