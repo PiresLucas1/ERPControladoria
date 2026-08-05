@@ -1,4 +1,5 @@
 ﻿using PrimeiroLoginView;
+using SolfarmaGp.Repositorios.Contabil.BuscaDadosCalculoCustoProduto;
 using SolfarmaGp.Repositorios.SegurancaUserRepositories;
 using SolfarmaGp.UI.MenusUI.Contabil;
 using SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto;
@@ -6,6 +7,7 @@ using SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto;
 using SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica;
+using SolfarmaGp.UI.MenusUI.Fiscal.EntradasComFiltro;
 using SolfarmaGp.UI.MenusUI.Fiscal.Gerenciar;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml;
@@ -489,6 +491,16 @@ namespace SolfarmaGp.UI.MenusUI
                 BuscaDadosCalculoCustoProduto buscaDados = new BuscaDadosCalculoCustoProduto();
                 buscaDados.MdiParent = this;
                 buscaDados.Show();
+            }
+        }
+
+        private void entradasComFiltroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(BuscaReembolsoEntrada)))
+            {
+                BuscaEntradasComFiltro buscaEntradasComFiltro = new BuscaEntradasComFiltro();
+                buscaEntradasComFiltro.MdiParent = this;
+                buscaEntradasComFiltro.Show();
             }
         }
     }

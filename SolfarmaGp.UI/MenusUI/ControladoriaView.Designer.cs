@@ -75,6 +75,7 @@
             toolStripMenuItem4 = new ToolStripMenuItem();
             toolStripMenuItem5 = new ToolStripMenuItem();
             txtNomeUsuario = new ToolStripMenuItem();
+            entradasComFiltroToolStripMenuItem = new ToolStripMenuItem();
             menuBarTop.SuspendLayout();
             menuBarBottom.SuspendLayout();
             SuspendLayout();
@@ -93,7 +94,7 @@
             // 
             // FiscalMenu
             // 
-            FiscalMenu.DropDownItems.AddRange(new ToolStripItem[] { importarToolStripMenuItem, alteraçõesFiscaisToolStripMenuItem1, exportarXMLToolStripMenuItem, importarNotasToolStripMenuItem, gerenciarItensToolStripMenuItem, importarXMLTOTVSToolStripMenuItem, automaçãoToolStripMenuItem });
+            FiscalMenu.DropDownItems.AddRange(new ToolStripItem[] { importarToolStripMenuItem, alteraçõesFiscaisToolStripMenuItem1, exportarXMLToolStripMenuItem, importarNotasToolStripMenuItem, gerenciarItensToolStripMenuItem, importarXMLTOTVSToolStripMenuItem, automaçãoToolStripMenuItem, entradasComFiltroToolStripMenuItem });
             FiscalMenu.Name = "FiscalMenu";
             FiscalMenu.ShowShortcutKeys = false;
             FiscalMenu.Size = new Size(59, 24);
@@ -409,6 +410,13 @@
             txtNomeUsuario.Size = new Size(116, 24);
             txtNomeUsuario.Text = "Nome usuario";
             // 
+            // entradasComFiltroToolStripMenuItem
+            // 
+            entradasComFiltroToolStripMenuItem.Name = "entradasComFiltroToolStripMenuItem";
+            entradasComFiltroToolStripMenuItem.Size = new Size(310, 26);
+            entradasComFiltroToolStripMenuItem.Text = "Entradas Com Filtro";
+            entradasComFiltroToolStripMenuItem.Click += entradasComFiltroToolStripMenuItem_Click;
+            // 
             // Portal
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -484,5 +492,6 @@
         private ToolStripMenuItem automaçãoToolStripMenuItem;
         private ToolStripMenuItem renomearPDFNotaFiscaisToolStripMenuItem;
         private ToolStripMenuItem contabilizaçãoCustoDosProdutosToolStripMenuItem;
+        private ToolStripMenuItem entradasComFiltroToolStripMenuItem;
     }
 }
