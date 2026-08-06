@@ -6,14 +6,7 @@ using System.Text;
 
 namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 {
-    public class NotaCapa
-    {
-         public string IDQiveArquivoXml { get; set; }
-         public string ChaveAcesso { get; set; }
-         public string CnpjFornecedor { get; set; }
-         public string IDErpContasPagar { get; set; }
-         public string NumDocumento { get; set; }
-    };
+
     public partial class ImportarNotasFiscaisXmlParaTotvsDetalhes : Form
     {
         private int _IDQiveArquivoXML;
@@ -171,10 +164,9 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 itens.Add(Novoitem);
             };
 
-             var resultado = await ValidaProdutoExistente();
+             var resultado = await VerificaSeProdutoExisteTotvs();
 
-            if (resultado)
-                return ;
+           
             
 
                 
@@ -203,33 +195,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             return tabela;
         }
 
-        public async Task<bool> ValidaProdutoExistente()
-        {
-            DataTable dt = (DataTable)_bs.DataSource;
-            var itensNaoEncontrado = new List<string>();
-
-            foreach (DataRow row in dt.Rows)
-            {
-                string codigoFornecedor = row["IDProdFornecedor"].ToString();
-                ConsultaProdutoTotvsUseCase useCase = new ConsultaProdutoTotvsUseCase();
-                var retorno = await useCase.Executar(codigoFornecedor);
-
-                itensNaoEncontrado.Add(codigoFornecedor);
-            };
-            if(itensNaoEncontrado.Count > 0)
-            {
-                string mensagem = "Os seguintes produtos não foram encontrados no Totvs:\n" + string.Join("\n", itensNaoEncontrado);
-                MessageBox.Show(mensagem, "Produtos não encontrados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-
-
-        }
+       
         public async void LancamentoNota(NotaCapa nota, List<object> itensNotas)
         {
             CriarNotaDevolucaoUseCase useCase = new CriarNotaDevolucaoUseCase();
@@ -294,36 +260,85 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
         private async void btnCadastrarProduto_Click(object sender, EventArgs e)
         {
-            VerificaSeProdutoExisteTotvs();
-
-
-        }
-
-        private async void VerificaSeProdutoExisteTotvs()
-        {
             var linhasSelecionadas = _tabela.AsEnumerable()
-               .Where(row => row.Field<bool?>("Selecionado") == true)
-               .ToList();
-            if (linhasSelecionadas.Count == 0)
+                .Where(row => row.Field<bool?>("Selecionado") == true)
+                .ToList();
+            if(linhasSelecionadas.Count == 0)
             {
                 MessageBox.Show("Nenhuma linha selecionada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }   
+            var resultado = await VerificaSeProdutoExisteTotvs();
+
+            if(resultado != null && resultado.Count > 0)
+            {
+                string mensagem = "Os seguintes produtos foram encontrados no Totvs:\n" + string.Join("\n", resultado);
+                MessageBox.Show(mensagem, "Produtos encontrados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
-            ConsultaProdutoTotvsUseCase usecase = new ConsultaProdutoTotvsUseCase();
-            var resultados = new List<DataTable>();
-            var erros = new List<string>();
+            CadastrarProdutoUseCase useCase = new CadastrarProdutoUseCase();
+
+
             foreach (DataRow row in linhasSelecionadas)
             {
-                var codNoForn = row["IDProdFornecedor"]?.ToString();
+                var descricao = row["ProdutoDescricao"]?.ToString();
+                var codProduto = row["IDProdFornecedor"]?.ToString();
+                var ncm = row["NCM"]?.ToString();
+                var cest = row["CEST"]?.ToString();
+                var codUnidade = row["UnidadeComercial"]?.ToString();
+                var preco = Convert.ToDecimal(row["ValorItem"]);
+                var origem = "0"; // Defina a origem conforme necessário
+                var cnpjFornecedor = tbCodFornecedor.Text;
                 try
                 {
-                    DataTable resultado = await usecase.Executar(codNoForn);
-                    resultados.Add(resultado);
+                    await useCase.Executar(codProduto, descricao, ncm, cest, codUnidade, preco, origem, cnpjFornecedor);
                 }
                 catch (Exception ex)
                 {
-                    erros.Add($"Erro ao consultar produto '{row["DescricaoProduto"]}' (cod {codNoForn}): {ex.Message}");
+                    MessageBox.Show($"Erro ao cadastrar produto '{descricao}': {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }            
+
+        }
+        private async Task<List<string>> VerificaSeProdutoExisteTotvs()
+        {
+            var linhasSelecionadas = _tabela.AsEnumerable()
+                .Where(row => row.Field<bool?>("Selecionado") == true)
+                .ToList();
+            var cnpjFornecedor = tbCodFornecedor.Text;
+
+            if (linhasSelecionadas.Count == 0)
+            {
+                MessageBox.Show("Nenhuma linha selecionada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+
+            var usecase = new ConsultaProdutoTotvsUseCase();
+            var resultados = new List<string>();
+            var erros = new List<string>();
+
+            foreach (DataRow row in linhasSelecionadas)
+            {
+                var codNoForn = row["IDProdFornecedor"]?.ToString();
+                var descricaoProduto = row["ProdutoDescricao"]?.ToString();
+
+                try
+                {
+                    var resultado = await usecase.Executar(codNoForn, cnpjFornecedor);
+
+                    if (resultado.Encontrado)
+                    {
+                        resultados.Add($"Fornecedor: {resultado.CodCfo} - Cod. Produto: {resultado.CodNoFornecedor}");
+                    }
+                    else
+                    {
+                        erros.Add($"Produto '{descricaoProduto}' (cod {codNoForn}) não encontrado no TOTVS.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    erros.Add($"Erro ao consultar produto '{descricaoProduto}' (cod {codNoForn}): {ex.Message}");
                 }
             }
 
@@ -331,6 +346,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             {
                 MessageBox.Show(string.Join(Environment.NewLine, erros), "Erros ao cadastrar produto(s)", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            return resultados.Count > 0 ? resultados : null;
         }
     }
 }
