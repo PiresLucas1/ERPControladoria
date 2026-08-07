@@ -1,4 +1,6 @@
 ﻿using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs;
+using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
+using SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela;
 using SolfarmaGp.UI.Utils;
 using System.Data;
 using System.Diagnostics;
@@ -128,7 +130,10 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 _tabela.Columns["Selecionado"].DefaultValue = false;
             }
 
-            ValidaColunasIBSCBS();
+            var resultadoValidaColunasIBSCBS = ValidaColunasIBSCBS();
+
+            
+                //MessageBox.Show("As colunas IBS e CBS não foram localizadas no XML, valide o XML se for preciso .", "Colunas não localizadas no XML", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private async  void btnLancarNota_Click(object sender, EventArgs e)
@@ -164,7 +169,13 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 itens.Add(Novoitem);
             };
 
-             var resultado = await VerificaSeProdutoExisteTotvs();
+            var resultado = await VerificaSeProdutoExisteTotvs();
+            if(resultado.Count > 0)
+            {               
+                MessageBox.Show("Existe produto sem cadastro na Totvs", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
 
            
             
@@ -233,7 +244,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 UseShellExecute = true
             });
         }
-        private void ValidaColunasIBSCBS()
+        private bool ValidaColunasIBSCBS()
         {
             bool flagIBS = false;
             foreach (DataRowView row in _bs)
@@ -251,11 +262,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                     row["Valor IBS Mun."] = 0;
                 }
             }
-            if (flagIBS)
-            {
-                MessageBox.Show("As colunas IBS e CBS não foram localizadas no XML, valide o XML se for preciso .", "Colunas não localizadas no XML", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            return flagIBS;
         }
 
         private async void btnCadastrarProduto_Click(object sender, EventArgs e)
@@ -270,17 +277,16 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             }   
             var resultado = await VerificaSeProdutoExisteTotvs();
 
-            if(resultado != null && resultado.Count > 0)
+            if(resultado.Count == 0)
             {
-                string mensagem = "Os seguintes produtos foram encontrados no Totvs:\n" + string.Join("\n", resultado);
-                MessageBox.Show(mensagem, "Produtos encontrados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Todos os produtos selecionados já existem no TOTVS.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             CadastrarProdutoUseCase useCase = new CadastrarProdutoUseCase();
+            DataTable resultadosCadastro= new DataTable();
 
-
-            foreach (DataRow row in linhasSelecionadas)
+            foreach (DataRow row in resultado)
             {
                 var descricao = row["ProdutoDescricao"]?.ToString();
                 var codProduto = row["IDProdFornecedor"]?.ToString();
@@ -290,18 +296,32 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 var preco = Convert.ToDecimal(row["ValorItem"]);
                 var origem = "0"; // Defina a origem conforme necessário
                 var cnpjFornecedor = tbCodFornecedor.Text;
+                StatusProcess processo = new StatusProcess();
                 try
                 {
-                    await useCase.Executar(codProduto, descricao, ncm, cest, codUnidade, preco, origem, cnpjFornecedor);
+                    ProcessStatusManager.Start("Carregando dados...");
+                    ProcessStatusManager.Update("Processando...");
+
+                    resultadosCadastro = await useCase.Executar(codProduto, descricao, ncm, cest, codUnidade, preco, origem, cnpjFornecedor);
                 }
                 catch (Exception ex)
                 {
+                    ProcessStatusManager.Stop();
                     MessageBox.Show($"Erro ao cadastrar produto '{descricao}': {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }            
+                finally
+                {
+                    ProcessStatusManager.Stop();
+                }
+            }
+
+            RetornoEmTabela retorno = new RetornoEmTabela(resultadosCadastro);
+            retorno.ShowDialog();
+
+
 
         }
-        private async Task<List<string>> VerificaSeProdutoExisteTotvs()
+        private async Task<List<DataRow>> VerificaSeProdutoExisteTotvs()
         {
             var linhasSelecionadas = _tabela.AsEnumerable()
                 .Where(row => row.Field<bool?>("Selecionado") == true)
@@ -314,9 +334,11 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 return null;
             }
 
-            var usecase = new ConsultaProdutoTotvsUseCase();
-            var resultados = new List<string>();
-            var erros = new List<string>();
+            var usecase = new ConsultaProdutoTotvsUseCase(); //controller
+            var produtosEncontrados = new List<string>(); //lista de produto econtrados, produtos que não vai precisar de cadastro
+            var produtosNaoEncontrados = new List<DataRow>(); // lista de produtos que não foram encontrados, produtos que vai precisar de cadastro
+            var mensagensNaoEncontrados = new List<string>(); // lista de mensagens de produtos não encontrados, para exibir na tela
+            var erros = new List<string>(); // lista de mensagens de erros, para exibir na tela
 
             foreach (DataRow row in linhasSelecionadas)
             {
@@ -329,11 +351,12 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
                     if (resultado.Encontrado)
                     {
-                        resultados.Add($"Fornecedor: {resultado.CodCfo} - Cod. Produto: {resultado.CodNoFornecedor}");
+                        produtosEncontrados.Add($"Fornecedor: {resultado.CodCfo} - Cod. Produto: {resultado.CodNoFornecedor}");
                     }
                     else
                     {
-                        erros.Add($"Produto '{descricaoProduto}' (cod {codNoForn}) não encontrado no TOTVS.");
+                        produtosNaoEncontrados.Add(row);
+                        mensagensNaoEncontrados.Add($"Produto '{descricaoProduto}' (cod {codNoForn}) não encontrado no TOTVS.");
                     }
                 }
                 catch (Exception ex)
@@ -345,9 +368,19 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             if (erros.Count > 0)
             {
                 MessageBox.Show(string.Join(Environment.NewLine, erros), "Erros ao cadastrar produto(s)", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
 
-            return resultados.Count > 0 ? resultados : null;
+            if (mensagensNaoEncontrados.Count > 0)
+            {
+                MessageBox.Show(string.Join(Environment.NewLine, mensagensNaoEncontrados), "Produtos não encontrados", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            if (produtosEncontrados.Count > 0)
+            {
+                MessageBox.Show(string.Join(Environment.NewLine, produtosEncontrados), "Produtos encontrados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            return produtosNaoEncontrados;
         }
     }
 }

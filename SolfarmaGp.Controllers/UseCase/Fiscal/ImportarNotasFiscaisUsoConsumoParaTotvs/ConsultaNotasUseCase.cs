@@ -7,7 +7,7 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs
     {
         public async Task<DataTable> Execute(DateTime dataInicio, DateTime dataFim)
         {
-            ConsultarNotas repositorio = new ConsultarNotas();
+            ConsultarNotasUsoConsumoGP repositorio = new ConsultarNotasUsoConsumoGP();
             DataTable result = await repositorio.Executar(dataInicio, dataFim);
             return result;
         }

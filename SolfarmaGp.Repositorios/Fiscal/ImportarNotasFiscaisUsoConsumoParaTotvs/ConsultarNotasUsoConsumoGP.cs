@@ -4,7 +4,7 @@ using System.Data;
 
 namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
 {
-    public class ConsultarNotas
+    public class ConsultarNotasUsoConsumoGP
     {
         public async Task<DataTable> Executar(DateTime dataInicio, DateTime dataFim)
         {

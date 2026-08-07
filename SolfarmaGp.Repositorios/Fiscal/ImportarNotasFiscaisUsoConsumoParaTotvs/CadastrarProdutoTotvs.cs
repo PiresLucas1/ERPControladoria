@@ -33,6 +33,8 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
                         cmd.Parameters.AddWithValue("@PRECO", preco);
                         cmd.Parameters.AddWithValue("@ORIGEM", origem);
                         cmd.Parameters.AddWithValue("@CNPJFORNECEDOR", cnpjFornecedor);
+                        cmd.Parameters.AddWithValue("@CODIGOPRD_FORNECEDOR", codProduto);
+                        
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
 

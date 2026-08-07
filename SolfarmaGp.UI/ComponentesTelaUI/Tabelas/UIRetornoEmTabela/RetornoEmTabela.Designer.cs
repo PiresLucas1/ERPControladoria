@@ -88,6 +88,7 @@
             Controls.Add(dataGridRetorno);
             Controls.Add(txtBoxCount);
             Controls.Add(button1);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "RetornoEmTabela";
             StartPosition = FormStartPosition.CenterScreen;
