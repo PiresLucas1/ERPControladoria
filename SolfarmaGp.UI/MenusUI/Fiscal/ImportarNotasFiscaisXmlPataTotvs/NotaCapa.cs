@@ -1,6 +1,6 @@
 ﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 {
-    public class NotaCapa
+    public class NotaCapaOld
     {
             public string IDQiveArquivoXml { get; set; }
             public string ChaveAcesso { get; set; }

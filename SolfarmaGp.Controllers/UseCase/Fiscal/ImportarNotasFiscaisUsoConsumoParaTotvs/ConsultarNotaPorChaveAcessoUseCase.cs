@@ -1,14 +1,15 @@
-﻿using System.Data;
+﻿using SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs;
+using System.Data;
 
 namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs
 {
-    public class ConsultarNotaPorChaveAcesso
+    public class ConsultarNotaPorChaveAcessoUseCAse
     {
 
         public async Task<DataTable> Execute(string chaveAcesso)
         {
             DataTable dtResult = new DataTable();
-            dtResult = await new SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs.ConsultaNotaPorChaveAcesso().Executar(chaveAcesso);
+            dtResult = await new ConsultaNotaPorChaveAcesso().Executar(chaveAcesso);
             return dtResult;
         }
     

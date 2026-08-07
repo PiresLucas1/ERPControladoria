@@ -6,6 +6,7 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs
     public class ConsultaProdutoTotvsResultado
     {
         public bool Encontrado { get; set; }
+        public int IDProduto { get; set; }
         public string CodCfo { get; set; }
         public string CodNoFornecedor { get; set; }
     }
@@ -27,6 +28,7 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs
             return new ConsultaProdutoTotvsResultado
             {
                 Encontrado = true,
+                IDProduto = linha["IDPRD"] != DBNull.Value ? Convert.ToInt32(linha["IDPRD"]) : 0,
                 CodCfo = linha["CODCFO"] != DBNull.Value ? linha["CODCFO"].ToString() : null,
                 CodNoFornecedor = linha["CODNOFORN"] != DBNull.Value ? linha["CODNOFORN"].ToString() : null
             };
