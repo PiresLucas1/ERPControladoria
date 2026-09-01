@@ -30,6 +30,9 @@
         {
             btnImportarArquivo = new Button();
             gpHeader = new GroupBox();
+            btnBuscarBase = new Button();
+            chkBoxTikTok = new CheckBox();
+            chkBoxComum = new CheckBox();
             laBanco = new Label();
             cbBanco = new ComboBox();
             lbCodPessoa = new Label();
@@ -69,6 +72,7 @@
             label3 = new Label();
             tbValorReferente = new TextBox();
             gpBottom = new GroupBox();
+            btnTotaisOutros = new Button();
             label10 = new Label();
             tbDebitoTotal = new TextBox();
             label9 = new Label();
@@ -99,6 +103,9 @@
             // gpHeader
             // 
             gpHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpHeader.Controls.Add(btnBuscarBase);
+            gpHeader.Controls.Add(chkBoxTikTok);
+            gpHeader.Controls.Add(chkBoxComum);
             gpHeader.Controls.Add(laBanco);
             gpHeader.Controls.Add(cbBanco);
             gpHeader.Controls.Add(lbCodPessoa);
@@ -113,15 +120,47 @@
             gpHeader.Controls.Add(btnImportarArquivo);
             gpHeader.Location = new Point(12, 5);
             gpHeader.Name = "gpHeader";
-            gpHeader.Size = new Size(1409, 200);
+            gpHeader.Size = new Size(1409, 234);
             gpHeader.TabIndex = 1;
             gpHeader.TabStop = false;
             gpHeader.Text = "Geral";
             // 
+            // btnBuscarBase
+            // 
+            btnBuscarBase.Location = new Point(479, 195);
+            btnBuscarBase.Name = "btnBuscarBase";
+            btnBuscarBase.Size = new Size(89, 34);
+            btnBuscarBase.TabIndex = 19;
+            btnBuscarBase.Text = "Buscar";
+            btnBuscarBase.UseVisualStyleBackColor = true;
+            btnBuscarBase.Click += btnBuscarBase_Click;
+            // 
+            // chkBoxTikTok
+            // 
+            chkBoxTikTok.AutoSize = true;
+            chkBoxTikTok.Location = new Point(137, 195);
+            chkBoxTikTok.Name = "chkBoxTikTok";
+            chkBoxTikTok.Size = new Size(73, 24);
+            chkBoxTikTok.TabIndex = 18;
+            chkBoxTikTok.Text = "TikTok";
+            chkBoxTikTok.UseVisualStyleBackColor = true;
+            chkBoxTikTok.CheckedChanged += chkBoxTikTok_CheckedChanged;
+            //
+            // chkBoxComum
+            // 
+            chkBoxComum.AutoSize = true;
+            chkBoxComum.Location = new Point(25, 195);
+            chkBoxComum.Name = "chkBoxComum";
+            chkBoxComum.Size = new Size(83, 24);
+            chkBoxComum.TabIndex = 17;
+            chkBoxComum.Text = "Comum";
+            chkBoxComum.UseVisualStyleBackColor = true;
+            chkBoxComum.CheckedChanged += chkBoxComum_CheckedChanged;
+            // 
             // laBanco
             // 
             laBanco.AutoSize = true;
-            laBanco.Location = new Point(223, 129);
+            laBanco.Location = new Point(223, 123);
             laBanco.Name = "laBanco";
             laBanco.Size = new Size(134, 20);
             laBanco.TabIndex = 16;
@@ -131,7 +170,7 @@
             // 
             cbBanco.FormattingEnabled = true;
             cbBanco.Items.AddRange(new object[] { "" });
-            cbBanco.Location = new Point(223, 156);
+            cbBanco.Location = new Point(223, 150);
             cbBanco.Name = "cbBanco";
             cbBanco.Size = new Size(174, 28);
             cbBanco.TabIndex = 15;
@@ -155,7 +194,7 @@
             // lbFilial
             // 
             lbFilial.AutoSize = true;
-            lbFilial.Location = new Point(457, 129);
+            lbFilial.Location = new Point(457, 128);
             lbFilial.Name = "lbFilial";
             lbFilial.Size = new Size(43, 20);
             lbFilial.TabIndex = 12;
@@ -163,7 +202,7 @@
             // 
             // tbFilial
             // 
-            tbFilial.Location = new Point(457, 152);
+            tbFilial.Location = new Point(457, 151);
             tbFilial.Name = "tbFilial";
             tbFilial.Size = new Size(111, 27);
             tbFilial.TabIndex = 11;
@@ -171,7 +210,7 @@
             // lbBanco
             // 
             lbBanco.AutoSize = true;
-            lbBanco.Location = new Point(22, 133);
+            lbBanco.Location = new Point(22, 127);
             lbBanco.Name = "lbBanco";
             lbBanco.Size = new Size(152, 20);
             lbBanco.TabIndex = 10;
@@ -180,7 +219,7 @@
             // cbColigada
             // 
             cbColigada.FormattingEnabled = true;
-            cbColigada.Location = new Point(22, 156);
+            cbColigada.Location = new Point(22, 150);
             cbColigada.Name = "cbColigada";
             cbColigada.Size = new Size(174, 28);
             cbColigada.TabIndex = 8;
@@ -376,7 +415,7 @@
             dvgRelacaoBoletos.Location = new Point(13, 8);
             dvgRelacaoBoletos.Name = "dvgRelacaoBoletos";
             dvgRelacaoBoletos.RowHeadersWidth = 51;
-            dvgRelacaoBoletos.Size = new Size(1375, 628);
+            dvgRelacaoBoletos.Size = new Size(1375, 594);
             dvgRelacaoBoletos.TabIndex = 2;
             // 
             // tbControlBase
@@ -384,10 +423,10 @@
             tbControlBase.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tbControlBase.Controls.Add(tbBaseImportada);
             tbControlBase.Controls.Add(tbBaseConferencia);
-            tbControlBase.Location = new Point(12, 211);
+            tbControlBase.Location = new Point(12, 245);
             tbControlBase.Name = "tbControlBase";
             tbControlBase.SelectedIndex = 0;
-            tbControlBase.Size = new Size(1409, 675);
+            tbControlBase.Size = new Size(1409, 641);
             tbControlBase.TabIndex = 3;
             // 
             // tbBaseImportada
@@ -396,7 +435,7 @@
             tbBaseImportada.Location = new Point(4, 29);
             tbBaseImportada.Name = "tbBaseImportada";
             tbBaseImportada.Padding = new Padding(3);
-            tbBaseImportada.Size = new Size(1401, 642);
+            tbBaseImportada.Size = new Size(1401, 608);
             tbBaseImportada.TabIndex = 0;
             tbBaseImportada.Text = "Base Importada";
             tbBaseImportada.UseVisualStyleBackColor = true;
@@ -407,7 +446,7 @@
             tbBaseConferencia.Location = new Point(4, 29);
             tbBaseConferencia.Name = "tbBaseConferencia";
             tbBaseConferencia.Padding = new Padding(3);
-            tbBaseConferencia.Size = new Size(1401, 642);
+            tbBaseConferencia.Size = new Size(1401, 608);
             tbBaseConferencia.TabIndex = 1;
             tbBaseConferencia.Text = "Base Conferencia";
             tbBaseConferencia.UseVisualStyleBackColor = true;
@@ -420,7 +459,7 @@
             dvgConferencia.Location = new Point(3, 6);
             dvgConferencia.Name = "dvgConferencia";
             dvgConferencia.RowHeadersWidth = 51;
-            dvgConferencia.Size = new Size(1392, 630);
+            dvgConferencia.Size = new Size(1392, 596);
             dvgConferencia.TabIndex = 0;
             // 
             // btnGeraLote
@@ -484,6 +523,7 @@
             // gpBottom
             // 
             gpBottom.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gpBottom.Controls.Add(btnTotaisOutros);
             gpBottom.Controls.Add(label10);
             gpBottom.Controls.Add(tbDebitoTotal);
             gpBottom.Controls.Add(label9);
@@ -504,10 +544,20 @@
             gpBottom.TabIndex = 21;
             gpBottom.TabStop = false;
             // 
+            // btnTotaisOutros
+            // 
+            btnTotaisOutros.Location = new Point(638, 56);
+            btnTotaisOutros.Name = "btnTotaisOutros";
+            btnTotaisOutros.Size = new Size(94, 36);
+            btnTotaisOutros.TabIndex = 28;
+            btnTotaisOutros.Text = "Ver Totais";
+            btnTotaisOutros.UseVisualStyleBackColor = true;
+            btnTotaisOutros.Click += btnTotaisOutros_Click;
+            // 
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(341, 17);
+            label10.Location = new Point(335, 17);
             label10.Name = "label10";
             label10.Size = new Size(112, 20);
             label10.TabIndex = 27;
@@ -644,5 +694,9 @@
         private Label label10;
         private TextBox tbDebitoTotal;
         private Label label9;
+        private CheckBox chkBoxComum;
+        private CheckBox chkBoxTikTok;
+        private Button btnBuscarBase;
+        private Button btnTotaisOutros;
     }
 }

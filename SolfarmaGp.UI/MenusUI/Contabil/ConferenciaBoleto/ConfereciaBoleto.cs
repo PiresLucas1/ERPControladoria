@@ -3,7 +3,9 @@ using OfficeOpenXml;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Banco;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dados;
+using SolfarmaGp.Controllers.UseCase.Contabil.Tiktok;
 using SolfarmaGp.Controllers.Utils.EnumerableToDateTable;
+using SolfarmaGp.UI.ComponentesTelaUI;
 using SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela;
 using SolfarmaGp.UI.MenusUI.Contabil.ParametrizacaoConferencia;
 using SolfarmaGp.UI.Utils;
@@ -44,9 +46,39 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             gbFiltros.Enabled = false;
             dtpDocumento.Enabled = false;
             checkDataFiltro.Checked = false;
+            chkBoxComum.Checked = true;
 
             bsConferencia.DataSource = listaExibida;
-            dvgConferencia.DataSource = bsConferencia;            
+            dvgConferencia.DataSource = bsConferencia;
+
+            AtualizaControlesPorTipoProcesso();
+        }
+
+        private void chkBoxComum_CheckedChanged(object sender, EventArgs e)
+        {
+            AtualizaControlesPorTipoProcesso();
+        }
+
+        private void chkBoxTikTok_CheckedChanged(object sender, EventArgs e)
+        {
+            AtualizaControlesPorTipoProcesso();
+        }
+
+        private void AtualizaControlesPorTipoProcesso()
+        {
+            bool comum = chkBoxComum.Checked;
+            bool tiktok = chkBoxTikTok.Checked;
+
+            btnBuscarBase.Enabled = !comum;
+            btnTotaisOutros.Enabled = !comum && tiktok;
+
+            btnImportarArquivo.Enabled = !tiktok;
+            tbValor.Enabled = !tiktok;
+            tbValorReferente.Enabled = !tiktok;
+            tbCreditoTotal.Enabled = !tiktok;
+            tbDebitoTotal.Enabled = !tiktok;
+
+
         }
 
         private void CarregarGrid(IEnumerable<ConferenciaResultado> dados)
@@ -74,8 +106,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
         private void btnImportarArquivo_Click(object sender, EventArgs e)
         {
-            
-            
+
+
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Filter = "Excel Files|*.xls;*.xlsx;*.xlsm";
@@ -151,7 +183,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                                 )
                                 .Sum(row => Convert.ToDecimal(row.Field<string>("Valor")))
                                 .ToString();
-                            tbDebitoTotal.Text =  dtBaseImportada.AsEnumerable()
+                            tbDebitoTotal.Text = dtBaseImportada.AsEnumerable()
                                 .Where(row =>
                                     row.Field<string>("Movimentacao")?.Trim().Equals("D", StringComparison.OrdinalIgnoreCase) == true ||
                                     row.Field<string>("Movimentacao")?.Trim().Equals("Débito", StringComparison.OrdinalIgnoreCase) == true ||
@@ -160,12 +192,87 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                                 .Sum(row => Convert.ToDecimal(row.Field<string>("Valor")))
                                 .ToString();
                         }
-                        
-                        
+
+
                     }
                 }
             }
 
+        }
+
+        private async void btnBuscarBase_Click(object sender, EventArgs e)
+        {
+            if (chkBoxTikTok.Checked)
+            {
+                await BuscarBaseTiktok();
+            }
+            else if (chkBoxComum.Checked)
+            {
+                btnImportarArquivo_Click(sender, e);
+            }
+            else
+            {
+                MessageBox.Show("Selecione o tipo de processo: Comum ou TikTok.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private void btnTotaisOutros_Click(object sender, EventArgs e)
+        {
+            if (dvgRelacaoBoletos.DataSource is not DataTable dt || dt.Rows.Count == 0)
+            {
+                MessageBox.Show("Não há dados na base para somar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            List<ResultadosEmTela.ItemResultado> itens = new();
+
+            foreach (DataColumn coluna in dt.Columns)
+            {
+                if(coluna.ColumnName == "IDLancamento")
+                    continue;
+                if (!EhTipoNumerico(coluna.DataType))
+                    continue;
+
+                decimal soma = dt.AsEnumerable()
+                    .Where(row => row[coluna] != DBNull.Value)
+                    .Sum(row => Convert.ToDecimal(row[coluna]));
+
+                itens.Add(new ResultadosEmTela.ItemResultado { Label = coluna.ColumnName, Valor = soma.ToString("N2") });
+            }
+
+            if (itens.Count == 0)
+            {
+                MessageBox.Show("Nenhuma coluna numérica encontrada para somar.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (ResultadosEmTela form = new ResultadosEmTela(itens))
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private static bool EhTipoNumerico(Type tipo)
+        {
+            return tipo == typeof(int) || tipo == typeof(long) || tipo == typeof(short) ||
+                   tipo == typeof(decimal) || tipo == typeof(double) || tipo == typeof(float) ||
+                   tipo == typeof(byte);
+        }
+
+        private async Task BuscarBaseTiktok()
+        {
+            try
+            {
+                BuscaExtratoTiktokLancamentoUseCase usecase = new BuscaExtratoTiktokLancamentoUseCase();
+                DataTable dt = await usecase.Execute();
+
+                txtFileName.Text = "Extrato TikTok";
+                dvgRelacaoBoletos.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao buscar a base do TikTok:\n" + ex.Message);
+            }
         }
 
         private async void btnConferencia_Click(object sender, EventArgs e)
@@ -320,8 +427,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                                 && baseParametros.Field<int>("Filial") == filial
                                 && baseParametros.Field<int>("CodBanco") == banco
                                 && complemento.Equals(descricao, StringComparison.OrdinalIgnoreCase)
-                                //&& palavras.All(p =>
-                                //        complemento.Contains(p, StringComparison.OrdinalIgnoreCase))
+                            //&& palavras.All(p =>
+                            //        complemento.Contains(p, StringComparison.OrdinalIgnoreCase))
                             select new ConferenciaResultado
                             {
                                 ContaDebito = baseParametros.Field<int>("CodContaDebito").ToString() ?? "",
@@ -395,7 +502,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             tbValorReferente.Text = filtrado.Sum(x => Convert.ToDecimal(x.Valor)).ToString();
         }
 
-       
+
         private void btnGeraLote_Click(object sender, EventArgs e)
         {
             //var lista = (List<ConferenciaResultado>)dvgConferencia.DataSource;
@@ -597,7 +704,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                 default:
                     return "";
             }
-                
+
 
         }
 

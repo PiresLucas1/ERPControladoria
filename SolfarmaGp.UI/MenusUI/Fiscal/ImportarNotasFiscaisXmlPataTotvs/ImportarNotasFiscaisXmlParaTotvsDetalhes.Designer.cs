@@ -37,6 +37,8 @@
             btnAbrirXml = new Button();
             btnCadastrarProduto = new Button();
             gpHeader = new GroupBox();
+            lbDataLancamento = new Label();
+            dtLancamento = new DateTimePicker();
             tbNomeFornecedor = new TextBox();
             tbCodFornecedor = new TextBox();
             tbIdContasPagar = new TextBox();
@@ -152,6 +154,8 @@
             // gpHeader
             // 
             gpHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpHeader.Controls.Add(lbDataLancamento);
+            gpHeader.Controls.Add(dtLancamento);
             gpHeader.Controls.Add(tbNomeFornecedor);
             gpHeader.Controls.Add(tbCodFornecedor);
             gpHeader.Controls.Add(tbIdContasPagar);
@@ -171,6 +175,23 @@
             gpHeader.TabIndex = 7;
             gpHeader.TabStop = false;
             gpHeader.Text = "Identificação";
+            // 
+            // lbDataLancamento
+            // 
+            lbDataLancamento.AutoSize = true;
+            lbDataLancamento.Location = new Point(881, 32);
+            lbDataLancamento.Name = "lbDataLancamento";
+            lbDataLancamento.Size = new Size(129, 20);
+            lbDataLancamento.TabIndex = 22;
+            lbDataLancamento.Text = "Data Lançamento:";
+            // 
+            // dtLancamento
+            // 
+            dtLancamento.Format = DateTimePickerFormat.Short;
+            dtLancamento.Location = new Point(881, 55);
+            dtLancamento.Name = "dtLancamento";
+            dtLancamento.Size = new Size(141, 27);
+            dtLancamento.TabIndex = 21;
             // 
             // tbNomeFornecedor
             // 
@@ -349,5 +370,7 @@
         private ComponentesTelaUI.DataGridView.MyDataGridView dvgContaFinanceira;
         private GroupBox gpContas;
         private Button btnAbrirXml;
+        private Label lbDataLancamento;
+        private DateTimePicker dtLancamento;
     }
 }

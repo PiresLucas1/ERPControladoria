@@ -20,6 +20,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
         private BindingSource _bs = new BindingSource();
         private DataTable _tabelaContaFinanceria;
         private BindingSource _bsContaFinanceira = new BindingSource();
+        private string _codCfoFonecedor;
 
         private readonly ConsultaNotasExportaTotvsDetalhes _consultaDetalhes;
         public ImportarNotasFiscaisXmlParaTotvsDetalhes(int IDQiveArquivoXML, string numDocumento, ConsultaNotasExportaTotvsDetalhes consultaDetalhes)
@@ -147,7 +148,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             {
                 IDQiveArquivoXml = tbIdQive.Text,
                 ChaveAcesso = tbChaveAcesso.Text,
-                CnpjFornecedor = tbCodFornecedor.Text,
+                CnpjFornecedor = _codCfoFonecedor,
                 IDErpContasPagar = tbIdContasPagar.Text,
                 NumDocumento = tbNumDoc.Text
             };                                   
@@ -336,6 +337,12 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                     if (resultado.Encontrado)
                     {
                         produtosEncontrados.Add($"Fornecedor: {resultado.CodCfo} - Cod. Produto: {resultado.CodNoFornecedor}");
+
+                        if(_codCfoFonecedor == null)
+                        {
+                            _codCfoFonecedor = resultado.CodCfo;
+                        }
+                        
 
                         DataRow novalinha = itensEncontrados.NewRow();
                         novalinha["IDProduto"] = resultado.IDProduto;

@@ -42,22 +42,23 @@
             btnSelecionaTodos = new Button();
             label1 = new Label();
             tbRegistrosAtencao = new TextBox();
+            button2 = new Button();
             btnConsultarXml = new Button();
             lbRegistro = new Label();
-            button2 = new Button();
+            groupBox1 = new GroupBox();
+            chkboxLancamento = new CheckBox();
+            checkBox2 = new CheckBox();
             Filtros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgNotas).BeginInit();
             gpAcoes.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // Filtros
             // 
             Filtros.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            Filtros.Controls.Add(groupBox1);
             Filtros.Controls.Add(btnConsultar);
-            Filtros.Controls.Add(lbFim);
-            Filtros.Controls.Add(lbInicio);
-            Filtros.Controls.Add(dtFim);
-            Filtros.Controls.Add(dtInicio);
             Filtros.Location = new Point(12, 3);
             Filtros.Name = "Filtros";
             Filtros.Size = new Size(1171, 187);
@@ -79,7 +80,7 @@
             // lbFim
             // 
             lbFim.AutoSize = true;
-            lbFim.Location = new Point(183, 29);
+            lbFim.Location = new Point(186, 35);
             lbFim.Name = "lbFim";
             lbFim.Size = new Size(33, 20);
             lbFim.TabIndex = 3;
@@ -88,7 +89,7 @@
             // lbInicio
             // 
             lbInicio.AutoSize = true;
-            lbInicio.Location = new Point(21, 29);
+            lbInicio.Location = new Point(24, 35);
             lbInicio.Name = "lbInicio";
             lbInicio.Size = new Size(45, 20);
             lbInicio.TabIndex = 2;
@@ -97,7 +98,7 @@
             // dtFim
             // 
             dtFim.Format = DateTimePickerFormat.Short;
-            dtFim.Location = new Point(183, 52);
+            dtFim.Location = new Point(186, 58);
             dtFim.Name = "dtFim";
             dtFim.Size = new Size(123, 27);
             dtFim.TabIndex = 1;
@@ -105,7 +106,7 @@
             // dtInicio
             // 
             dtInicio.Format = DateTimePickerFormat.Short;
-            dtInicio.Location = new Point(21, 52);
+            dtInicio.Location = new Point(24, 58);
             dtInicio.Name = "dtInicio";
             dtInicio.Size = new Size(123, 27);
             dtInicio.TabIndex = 0;
@@ -205,6 +206,17 @@
             tbRegistrosAtencao.Size = new Size(72, 27);
             tbRegistrosAtencao.TabIndex = 9;
             // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            button2.Enabled = false;
+            button2.Location = new Point(1001, 69);
+            button2.Name = "button2";
+            button2.Size = new Size(147, 30);
+            button2.TabIndex = 8;
+            button2.Text = "Importar Totvs";
+            button2.UseVisualStyleBackColor = true;
+            // 
             // btnConsultarXml
             // 
             btnConsultarXml.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -225,16 +237,40 @@
             lbRegistro.TabIndex = 4;
             lbRegistro.Text = "Registos:";
             // 
-            // button2
+            // groupBox1
             // 
-            button2.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            button2.Enabled = false;
-            button2.Location = new Point(1001, 69);
-            button2.Name = "button2";
-            button2.Size = new Size(147, 30);
-            button2.TabIndex = 8;
-            button2.Text = "Importar Totvs";
-            button2.UseVisualStyleBackColor = true;
+            groupBox1.Controls.Add(checkBox2);
+            groupBox1.Controls.Add(chkboxLancamento);
+            groupBox1.Controls.Add(dtFim);
+            groupBox1.Controls.Add(dtInicio);
+            groupBox1.Controls.Add(lbFim);
+            groupBox1.Controls.Add(lbInicio);
+            groupBox1.Location = new Point(6, 22);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(504, 159);
+            groupBox1.TabIndex = 7;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "groupBox1";
+            // 
+            // chkboxLancamento
+            // 
+            chkboxLancamento.AutoSize = true;
+            chkboxLancamento.Location = new Point(350, 42);
+            chkboxLancamento.Name = "chkboxLancamento";
+            chkboxLancamento.Size = new Size(148, 24);
+            chkboxLancamento.TabIndex = 4;
+            chkboxLancamento.Text = "Data Lançamento";
+            chkboxLancamento.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(350, 72);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(142, 24);
+            checkBox2.TabIndex = 5;
+            checkBox2.Text = "Data Pagamento";
+            checkBox2.UseVisualStyleBackColor = true;
             // 
             // ImportarNotasFiscaisXmlPataTotvs
             // 
@@ -247,10 +283,11 @@
             Name = "ImportarNotasFiscaisXmlPataTotvs";
             Text = "Importar Notas Fiscais XML Para TOTVS";
             Filtros.ResumeLayout(false);
-            Filtros.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dvgNotas).EndInit();
             gpAcoes.ResumeLayout(false);
             gpAcoes.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -273,5 +310,8 @@
         private Button btnLimparSelecao;
         private Button btnVisualizarNota;
         private Button button2;
+        private GroupBox groupBox1;
+        private CheckBox checkBox2;
+        private CheckBox chkboxLancamento;
     }
 }
