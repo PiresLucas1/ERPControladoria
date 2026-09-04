@@ -15,6 +15,7 @@ using System.Globalization;
 using System.Text;
 using static SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.ConsultaLancamentoContabilParametrizadoUseCase;
 using static SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dados.ConsultaLancamentoContabilParametrizadoDadosUseCase;
+using static SolfarmaGp.Controllers.UseCase.Contabil.Tiktok.BuscaParametrizacaoContabilTiktokUseCase;
 
 
 namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
@@ -34,6 +35,19 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             public string ContaCompletaCredito { get; set; }
         }
 
+        private static readonly Dictionary<string, int> MapeamentoMetricaTiktok = new()
+        {
+            { "VendasLiquidas", 21 },
+            { "CustoFrete", 22 },
+            { "TaxaSFP", 23 },
+            { "TaxaItem", 24 },
+            { "ICMSDifal", 25 },
+            { "ComissaoAfiliados", 26 },
+            { "ReembolsoLogistica", 27 },
+            { "ReembolsoTiktok", 28 },
+            { "TarifaComissao", 26 },
+        };
+
         private List<ConferenciaResultado> listaResultado = new();
         private BindingList<ConferenciaResultado> listaExibida = new();
         private BindingSource bsConferencia = new();
@@ -43,6 +57,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             InitializeComponent();
             ExcelPackage.License.SetNonCommercialPersonal("SolfarmaGP");
             cbColigada.Items.Add(10);
+            cbColigada.Items.Add(3);
             gbFiltros.Enabled = false;
             dtpDocumento.Enabled = false;
             checkDataFiltro.Checked = false;
@@ -57,11 +72,13 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
         private void chkBoxComum_CheckedChanged(object sender, EventArgs e)
         {
             AtualizaControlesPorTipoProcesso();
+            chkBoxTikTok.Checked = !chkBoxComum.Checked;
         }
 
         private void chkBoxTikTok_CheckedChanged(object sender, EventArgs e)
         {
             AtualizaControlesPorTipoProcesso();
+            chkBoxComum.Checked = !chkBoxTikTok.Checked;
         }
 
         private void AtualizaControlesPorTipoProcesso()
@@ -76,8 +93,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             tbValor.Enabled = !tiktok;
             tbValorReferente.Enabled = !tiktok;
             tbCreditoTotal.Enabled = !tiktok;
-            tbDebitoTotal.Enabled = !tiktok;
-
+            tbDebitoTotal.Enabled = !tiktok;                       
 
         }
 
@@ -279,6 +295,36 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
         {
 
             DataTable dtProcesso = (DataTable)dvgRelacaoBoletos.DataSource;
+
+            if (chkBoxTikTok.Checked)
+            {
+                if (dtProcesso == null || dtProcesso.Rows.Count < 1)
+                {
+                    MessageBox.Show("Não foi possivel Localizar base importada"); return;
+                }
+                if (tbCodPessoa.Text.IsNullOrEmpty())
+                {
+                    MessageBox.Show("Necessário informar o codigo da pessoa"); return;
+                }
+                if (tbFilial.Text.IsNullOrEmpty())
+                {
+                    MessageBox.Show("Necessário informar Filial"); return;
+                }
+                if (cbColigada.SelectedItem == null)
+                {
+                    MessageBox.Show("Necessário selecionar coligada"); return;
+                }
+
+                var numberFilialTiktok = Convert.ToInt32(tbFilial.Text);
+                var numberColigadaTiktok = Convert.ToInt32(cbColigada.Text);
+
+                if (!ConfirmaGeracaoConferencia("TikTok-Cimed"))
+                    return;
+
+                await ExecutaConferenciaTiktok(dtProcesso, numberFilialTiktok, numberColigadaTiktok);
+                return;
+            }
+
             if (tbFilial.Text.IsNullOrEmpty())
             {
                 MessageBox.Show("Necessário informar Filial"); return;
@@ -298,6 +344,9 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             var numberFilial = Convert.ToInt32(tbFilial.Text);
             var numberColigada = Convert.ToInt32(cbColigada.Text);
             var numberBanco = Convert.ToInt32(cbBanco.SelectedValue);
+
+            if (!ConfirmaGeracaoConferencia(cbBanco.Text))
+                return;
 
             var result = await VerificaSeExisteValorEmParametros(numberFilial, numberColigada, numberBanco, dtProcesso);
             if (result != 1) { return; }
@@ -391,6 +440,18 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
         }
 
+        private bool ConfirmaGeracaoConferencia(string banco)
+        {
+            string mensagem = "Confirma a geração da conferência com os dados abaixo?\n\n" +
+                $"Código de Lote: {tbCodPessoa.Text}\n" +
+                $"Coligada: {cbColigada.Text}\n" +
+                $"Banco: {banco}\n" +
+                $"Filial: {tbFilial.Text}";
+
+            DialogResult resposta = MessageBox.Show(mensagem, "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return resposta == DialogResult.Yes;
+        }
+
         public async Task ExecutaConferencia(DataTable dt, int filial, int codColigada, int banco)
         {
             ConsultaLancamentoContabilParametrizadoUseCase usecase = new ConsultaLancamentoContabilParametrizadoUseCase();
@@ -461,6 +522,72 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
         }
 
+
+        public async Task ExecutaConferenciaTiktok(DataTable dtExtrato, int filial, int codColigada)
+        {
+            BuscaParametrizacaoContabilTiktokUseCase usecase = new BuscaParametrizacaoContabilTiktokUseCase();
+            DataTable dtParametros = await usecase.Execute(new ObjetoPesquisaParametrosTiktok { CodColigada = codColigada, Filial = filial });
+
+            Dictionary<(int IDComplemento, string Sinal), DataRow> lookup = dtParametros.AsEnumerable()
+                .GroupBy(row => (row.Field<int>("IDComplemento"), row.Field<string>("Sinal")?.Trim()))
+                .ToDictionary(g => g.Key, g => g.First());
+
+            List<string> naoEncontrados = new();
+            List<ConferenciaResultado> resultado = new();
+
+            foreach (DataRow linha in dtExtrato.AsEnumerable())
+            {
+                DateTime data = linha.Field<DateTime>("DataDemonstrativo");
+
+                foreach (KeyValuePair<string, int> mapeamento in MapeamentoMetricaTiktok)
+                {
+                    if (!dtExtrato.Columns.Contains(mapeamento.Key))
+                        continue;
+
+                    decimal? valorNullable = linha.Field<decimal?>(mapeamento.Key);
+                    if (valorNullable is null || valorNullable == 0)
+                        continue;
+
+                    decimal valor = valorNullable.Value;
+                    string sinal = valor >= 0 ? "POSITIVO" : "NEGATIVO";
+
+                    if (!lookup.TryGetValue((mapeamento.Value, sinal), out DataRow parametro))
+                    {
+                        naoEncontrados.Add($"{mapeamento.Key} ({sinal})");
+                        continue;
+                    }
+
+                    resultado.Add(new ConferenciaResultado
+                    {
+                        ContaDebito = parametro.Field<string>("CodContaDebito")?.Trim() ?? "",
+                        ContaCredito = parametro.Field<string>("CodContaCredito")?.Trim() ?? "",
+                        Valor = Math.Abs(valor).ToString(),
+                        CodigoHistorico = parametro.Field<string>("CodHistorico")?.Trim() ?? "",
+                        Complemento = parametro.Field<string>("Complemento") ?? "",
+                        Filial = parametro.Field<int?>("Filial") ?? filial,
+                        DataDocumento = data,
+                        ContaCompletaDebito = parametro.Field<string>("ContaCompletaDebito"),
+                        ContaCompletaCredito = parametro.Field<string>("ContaCompletaCredito"),
+                    });
+                }
+            }
+
+            if (naoEncontrados.Count > 0)
+            {
+                string mensagem = "As seguintes métricas não possuem parametrização cadastrada para Filial/Coligada informados:\n" + string.Join("\n", naoEncontrados.Distinct());
+                MessageBox.Show(mensagem, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            listaResultado = resultado;
+            CarregarGrid(listaResultado);
+
+            tbValor.Text = listaResultado
+                .Sum(x => Convert.ToDecimal(x.Valor))
+                .ToString();
+
+            MessageBox.Show("Conferencia TikTok Finalizada");
+            gbFiltros.Enabled = true;
+        }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
         {
@@ -700,6 +827,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                     return "001 - Banco do Brasil";
                 case 184:
                     return "184 - Itau BBA";
+                case 37244238:
+                    return "37244238 - TikTok - Cimed";
 
                 default:
                     return "";
