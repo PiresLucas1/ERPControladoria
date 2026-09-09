@@ -758,14 +758,22 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
             });
 
             var resultado = alteraUnicoValorEmBloco.ShowDialog();
-            if(resultado == DialogResult.OK)
+            if (resultado == DialogResult.OK)
             {
                 string valorDigitado = alteraUnicoValorEmBloco.valorDigitado;
                 foreach (DataGridViewRow row in dvgItensSelecionados.Rows)
                 {
                     if (Convert.ToBoolean(row.Cells["Selecionar"].Value))
-                    row.Cells["Estoque Origem"].Value = valorDigitado;
+                        row.Cells["Estoque Origem"].Value = valorDigitado;
                 }
+            }
+        }
+
+        private void btnDesmarcarTudo_Click_1(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dvgItensSelecionados.Rows)
+            {
+                row.Cells["Selecionar"].Value = false;
             }
         }
     }

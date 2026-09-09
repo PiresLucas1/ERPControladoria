@@ -1,4 +1,5 @@
 ﻿using SolfarmaGp.Controllers.UseCase.Fiscal.Gerenciar;
+using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.CadastroFornecedor;
 using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.ConsultaNotasServico;
 using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.ConsultaServico;
 using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.ImportarNotaServico;
@@ -6,6 +7,7 @@ using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.Nature
 using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.ProdutoServico;
 using SolfarmaGp.Controllers.Utils.Parse.FormatarDataDigitada;
 using SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcessos;
+using SolfarmaGp.UI.ComponentesTelaUI.Tabelas.UIRetornoEmTabela;
 using SolfarmaGp.UI.MenusUI.MenuCompartilhados.ConsultaItens;
 using System.Data;
 using TextBox = System.Windows.Forms.TextBox;
@@ -29,7 +31,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
         private BindingSource _bs = new BindingSource();
         public ImportarNotasTotvs()
         {
-            InitializeComponent();            
+            InitializeComponent();
             //AplicarFonte.AplicarFonteForm(this, new System.Drawing.Font(this.Font.FontFamily, Properties.Settings.Default.FonteTamanho));
 
         }
@@ -43,7 +45,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
             DtPickerInicio.CustomFormat = "dd/MM/yyyy";
             DtPickerFim.Format = DateTimePickerFormat.Custom;
             DtPickerFim.CustomFormat = "dd/MM/yyyy";
-                                    
+
 
             DtPickerInicio.Enabled = false;
             DtPickerFim.Enabled = false;
@@ -59,8 +61,8 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
         }
         public async Task<(DateTime dataInicio, DateTime dataFim)> BuscaDataPeridoParametriza()
         {
-            (DateTime dtInico, DateTime dtFim, bool status) = await new BuscaDataPeriodoUseCase().Execute();            
-            return (dtInico, dtFim);            
+            (DateTime dtInico, DateTime dtFim, bool status) = await new BuscaDataPeriodoUseCase().Execute();
+            return (dtInico, dtFim);
         }
         public async Task MostraValorPeriodo(DateTime dataInicio, DateTime dataFim)
         {
@@ -153,6 +155,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
                     dtImportacao.Columns["Selecionar"].Width = 30;
                     dtImportacao.Columns["Selecionar"].Width = 30;
 
+
                     //colunas invisiveis  ----------------------------------------
                     dtImportacao.Columns["ErpSitucaoContasPagar"].Visible = false;
                     dtImportacao.Columns["IdErpTitulo"].Visible = false;
@@ -181,7 +184,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
                     // finalização de ajuste ----------------------------------------
 
                     var rowCount = dtImportacao.Rows.Count;
-                    txtTotal.Text= rowCount.ToString();
+                    txtTotal.Text = rowCount.ToString();
 
 
 
@@ -250,7 +253,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
             DtPickerFim.Value = DateTime.Today;
 
             txtTotal.Text = "0";
-            
+
             // Limpa a grid
             dtImportacao.DataSource = null;
 
@@ -276,7 +279,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 
         private async void btnExportarTotvs_Click(object sender, EventArgs e)
         {
-            
+
             bool existeDocumentoForaDoPerido = await ValidaSeNotaEstaNoPeriodoAtivo();
             if (existeDocumentoForaDoPerido)
             {
@@ -340,7 +343,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 
         }
 
-        
+
         private void coBoxTipeFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             Console.WriteLine(coBoxTipeFilter.SelectedIndex);
@@ -724,9 +727,9 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
         private void dtImportacao_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return; // Ignora cliques no header
-            
-            dtImportacao.ClearSelection();            
-            dtImportacao.Rows[e.RowIndex].Selected = true;                    
+
+            dtImportacao.ClearSelection();
+            dtImportacao.Rows[e.RowIndex].Selected = true;
             dtImportacao.Rows[e.RowIndex].DefaultCellStyle.SelectionBackColor = Color.LightSteelBlue;
             dtImportacao.Rows[e.RowIndex].DefaultCellStyle.SelectionForeColor = Color.Black;
 
@@ -882,6 +885,112 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private async void btnCadFornecedor_Click(object sender, EventArgs e)
+        {
+            DataGridViewRow linhaAtual = dtImportacao.CurrentRow;
+            if (linhaAtual == null)
+            {
+                MessageBox.Show("Selecione uma nota na grade.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string codigoVerificacao = linhaAtual.Cells["Código Verificação"].Value?.ToString();
+            if (string.IsNullOrWhiteSpace(codigoVerificacao))
+            {
+                MessageBox.Show("A nota selecionada não possui Código de Verificação.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                ProcessStatusManager.Start("Carregando dados...");
+                ProcessStatusManager.Update("Processando...");
+
+                ConsultaFabricanteNfeServicoPorCodigoUseCase usecase = new ConsultaFabricanteNfeServicoPorCodigoUseCase();
+                var (situacao, mensagem, codCfo) = await usecase.Executar(codigoVerificacao);
+
+                MessageBoxIcon icone = situacao switch
+                {
+                    "CRIADO" => MessageBoxIcon.Information,
+                    "JA_EXISTE" => MessageBoxIcon.Information,
+                    "NAO_ENCONTRADO" => MessageBoxIcon.Warning,
+                    _ => MessageBoxIcon.Warning,
+                };
+
+                MessageBox.Show(mensagem, "Cadastro de Fornecedor", MessageBoxButtons.OK, icone);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao consultar/cadastrar fornecedor:\n" + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                ProcessStatusManager.Stop();
+            }
+        }
+
+        private async void btnCadastraSelecionados_Click(object sender, EventArgs e)
+        {
+            List<DataGridViewRow> linhasSelecionadas = dtImportacao.Rows
+                .Cast<DataGridViewRow>()
+                .Where(row => row.Cells["Selecionar"].Value is bool selecionado && selecionado)
+                .ToList();
+
+            if (linhasSelecionadas.Count == 0)
+            {
+                MessageBox.Show("Nenhuma nota selecionada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DataTable dtRetorno = new DataTable();
+            dtRetorno.Columns.Add("Documento", typeof(string));
+            dtRetorno.Columns.Add("Razão Social Prestador", typeof(string));
+            dtRetorno.Columns.Add("Código Verificação", typeof(string));
+            dtRetorno.Columns.Add("Situação", typeof(string));
+            dtRetorno.Columns.Add("Mensagem", typeof(string));
+            dtRetorno.Columns.Add("CODCFO", typeof(string));
+
+            try
+            {
+                ProcessStatusManager.Start("Cadastrando fornecedores...");
+                
+
+                ConsultaFabricanteNfeServicoPorCodigoUseCase usecase = new ConsultaFabricanteNfeServicoPorCodigoUseCase();
+
+                foreach (DataGridViewRow linha in linhasSelecionadas)
+                {
+                    string numDoc = linha.Cells["Documento"].Value?.ToString() ?? "";
+                    string razaoSocial = linha.Cells["Razão Social Prestador"].Value?.ToString() ?? "";
+                    string codigoVerificacao = linha.Cells["Código Verificação"].Value?.ToString();
+
+                    ProcessStatusManager.Update($"Processando documento {numDoc}...");
+
+                    if (string.IsNullOrWhiteSpace(codigoVerificacao))
+                    {
+                        dtRetorno.Rows.Add(numDoc, razaoSocial, "", "ERRO", "Nota sem Código de Verificação.", "");
+                        continue;
+                    }
+
+                    try
+                    {
+                        var (situacao, mensagem, codCfo) = await usecase.Executar(codigoVerificacao);
+                        dtRetorno.Rows.Add(numDoc, razaoSocial, codigoVerificacao, situacao, mensagem, codCfo);
+                    }
+                    catch (Exception ex)
+                    {
+                        dtRetorno.Rows.Add(numDoc, razaoSocial, codigoVerificacao, "ERRO", ex.Message, "");
+                    }
+                }
+            }
+            finally
+            {
+                ProcessStatusManager.Stop();
+            }
+
+            RetornoEmTabela telaRetorno = new RetornoEmTabela(dtRetorno);
+            telaRetorno.Show();
         }
     }
 }

@@ -300,6 +300,7 @@
             btnDesmarcarTudo.TabIndex = 11;
             btnDesmarcarTudo.Text = "Desmarcar Tudo";
             btnDesmarcarTudo.UseVisualStyleBackColor = true;
+            btnDesmarcarTudo.Click += btnDesmarcarTudo_Click_1;
             // 
             // ConsultaSaldoNotasFiscais
             // 

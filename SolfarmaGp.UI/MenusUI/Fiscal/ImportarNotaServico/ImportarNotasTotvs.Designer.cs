@@ -58,11 +58,13 @@
             label5 = new Label();
             label6 = new Label();
             groupBox2 = new GroupBox();
+            btnCadFornecedor = new Button();
             btnLimpar = new Button();
             btnDesmarcarTodos = new Button();
             btnSelecionarTodas = new Button();
             groupBox3 = new GroupBox();
             txtSelecionado = new TextBox();
+            btnCadastraSelecionados = new Button();
             groupBox1.SuspendLayout();
             gbAutoFuncoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtImportacao).BeginInit();
@@ -371,6 +373,8 @@
             // groupBox2
             // 
             groupBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(btnCadastraSelecionados);
+            groupBox2.Controls.Add(btnCadFornecedor);
             groupBox2.Controls.Add(btnLimpar);
             groupBox2.Controls.Add(btnDesmarcarTodos);
             groupBox2.Controls.Add(btnSelecionarTodas);
@@ -381,10 +385,20 @@
             groupBox2.TabIndex = 12;
             groupBox2.TabStop = false;
             // 
+            // btnCadFornecedor
+            // 
+            btnCadFornecedor.Location = new Point(470, 74);
+            btnCadFornecedor.Name = "btnCadFornecedor";
+            btnCadFornecedor.Size = new Size(156, 31);
+            btnCadFornecedor.TabIndex = 18;
+            btnCadFornecedor.Text = "Cad. Fornecedor";
+            btnCadFornecedor.UseVisualStyleBackColor = true;
+            btnCadFornecedor.Click += btnCadFornecedor_Click;
+            // 
             // btnLimpar
             // 
             btnLimpar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnLimpar.Location = new Point(485, 75);
+            btnLimpar.Location = new Point(625, 76);
             btnLimpar.Name = "btnLimpar";
             btnLimpar.Size = new Size(114, 29);
             btnLimpar.TabIndex = 17;
@@ -436,6 +450,16 @@
             txtSelecionado.ReadOnly = true;
             txtSelecionado.Size = new Size(76, 27);
             txtSelecionado.TabIndex = 13;
+            // 
+            // btnCadastraSelecionados
+            // 
+            btnCadastraSelecionados.Location = new Point(470, 24);
+            btnCadastraSelecionados.Name = "btnCadastraSelecionados";
+            btnCadastraSelecionados.Size = new Size(156, 31);
+            btnCadastraSelecionados.TabIndex = 19;
+            btnCadastraSelecionados.Text = "Cad. Sel Fornecedor";
+            btnCadastraSelecionados.UseVisualStyleBackColor = true;
+            btnCadastraSelecionados.Click += btnCadastraSelecionados_Click;
             // 
             // ImportarNotasTotvs
             // 
@@ -500,6 +524,8 @@
         private Button btnLimpar;
         private Button btnDesmarcarTodos;
         private Button btnSelecionarTodas;
+        private Button btnCadFornecedor;
+        private Button btnCadastraSelecionados;
     }
 }
 

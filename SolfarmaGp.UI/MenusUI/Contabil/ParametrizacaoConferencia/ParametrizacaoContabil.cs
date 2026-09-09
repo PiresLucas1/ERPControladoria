@@ -32,7 +32,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
                 e.ThrowException = false;
             };
 
-            cbColigada.Items.AddRange(new object[] { 10 });
+            cbColigada.Items.AddRange(new object[] { 10, 3 });
             dvgParametrizacao.CurrentCellDirtyStateChanged += (s, e) =>
             {
                 if (dvgParametrizacao.IsCurrentCellDirty)

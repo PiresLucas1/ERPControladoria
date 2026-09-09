@@ -12,6 +12,7 @@ namespace SolfarmaGp.UI.ComponentesTelaUI.ProcessoCarregamento.UIStatusDoProcess
                 return;
 
             _form = new StatusProcess();
+            _form.TopMost = true;
             _form.SetMessage(message);
 
             Task.Run(() =>
