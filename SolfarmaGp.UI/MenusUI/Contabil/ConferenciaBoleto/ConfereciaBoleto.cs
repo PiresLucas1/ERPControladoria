@@ -828,8 +828,13 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                 case 184:
                     return "184 - Itau BBA";
                 case 37244238:
-                    return "37244238 - TikTok - Cimed";
-
+                    return "TikTok - Cimed";
+                case 37244239:
+                    return "TikTok - Zanup";
+                case 37244240:
+                    return "TikTok-Loreal";
+                case 37244241:
+                    return "TikTok-Johnson";
                 default:
                     return "";
             }

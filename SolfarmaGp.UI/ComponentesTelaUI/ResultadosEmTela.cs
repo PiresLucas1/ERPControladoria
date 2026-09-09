@@ -43,6 +43,7 @@ namespace SolfarmaGp.UI.ComponentesTelaUI
                 {
                     Text = item.Label,
                     Location = new Point(margem, y + 4),
+                    
                     AutoSize = true,
                     Font = new Font("Segoe UI", 10F, FontStyle.Bold)
                 };
@@ -50,7 +51,7 @@ namespace SolfarmaGp.UI.ComponentesTelaUI
                 TextBox textBox = new TextBox
                 {
                     Text = item.Valor,
-                    Location = new Point(180, y),
+                    Location = new Point(190, y),
                     Size = new Size(260, 27),
                     ReadOnly = true
                 };
