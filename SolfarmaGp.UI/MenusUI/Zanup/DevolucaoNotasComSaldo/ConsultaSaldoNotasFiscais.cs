@@ -435,7 +435,8 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
                     "Shopee Zanup (Fulfillm)",
                     "Solfarma",
                     "TikTok Shop",
-                    "Gaiola"
+                    "Gaiola",
+                    "Shopee EUCERIN"
                 );
 
                 dvgItensSelecionados.Columns.Add(colCombo);
