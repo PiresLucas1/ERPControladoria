@@ -31,6 +31,7 @@
             btnImportarArquivo = new Button();
             gpHeader = new GroupBox();
             btnBuscarBase = new Button();
+            btnLimparTikTok = new Button();
             chkBoxTikTok = new CheckBox();
             chkBoxComum = new CheckBox();
             laBanco = new Label();
@@ -135,6 +136,16 @@
             btnBuscarBase.UseVisualStyleBackColor = true;
             btnBuscarBase.Click += btnBuscarBase_Click;
             // 
+            // btnLimparTikTok
+            // 
+            btnLimparTikTok.Location = new Point(625, 17);
+            btnLimparTikTok.Name = "btnLimparTikTok";
+            btnLimparTikTok.Size = new Size(120, 34);
+            btnLimparTikTok.TabIndex = 20;
+            btnLimparTikTok.Text = "Limpar TikTok";
+            btnLimparTikTok.UseVisualStyleBackColor = true;
+            btnLimparTikTok.Click += btnLimparTikTok_Click;
+            // 
             // chkBoxTikTok
             // 
             chkBoxTikTok.AutoSize = true;
@@ -145,7 +156,7 @@
             chkBoxTikTok.Text = "TikTok";
             chkBoxTikTok.UseVisualStyleBackColor = true;
             chkBoxTikTok.CheckedChanged += chkBoxTikTok_CheckedChanged;
-            //
+            // 
             // chkBoxComum
             // 
             chkBoxComum.AutoSize = true;
@@ -524,6 +535,7 @@
             // 
             gpBottom.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             gpBottom.Controls.Add(btnTotaisOutros);
+            gpBottom.Controls.Add(btnLimparTikTok);
             gpBottom.Controls.Add(label10);
             gpBottom.Controls.Add(tbDebitoTotal);
             gpBottom.Controls.Add(label9);
@@ -546,9 +558,9 @@
             // 
             // btnTotaisOutros
             // 
-            btnTotaisOutros.Location = new Point(638, 56);
+            btnTotaisOutros.Location = new Point(625, 56);
             btnTotaisOutros.Name = "btnTotaisOutros";
-            btnTotaisOutros.Size = new Size(94, 36);
+            btnTotaisOutros.Size = new Size(120, 36);
             btnTotaisOutros.TabIndex = 28;
             btnTotaisOutros.Text = "Ver Totais";
             btnTotaisOutros.UseVisualStyleBackColor = true;
@@ -697,6 +709,7 @@
         private CheckBox chkBoxComum;
         private CheckBox chkBoxTikTok;
         private Button btnBuscarBase;
+        private Button btnLimparTikTok;
         private Button btnTotaisOutros;
     }
 }

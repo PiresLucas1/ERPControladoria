@@ -309,6 +309,33 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             }
         }
 
+        private async void btnLimparTikTok_Click(object sender, EventArgs e)
+        {
+            DialogResult confirmacao = MessageBox.Show(
+                "Isso vai apagar TODOS os registros da tabela de extrato TikTok (tblExtratoTiktokLancamento). Deseja continuar?",
+                "Confirmação",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirmacao != DialogResult.Yes)
+                return;
+
+            try
+            {
+                LimpaExtratoTiktokLancamentoUseCase usecase = new LimpaExtratoTiktokLancamentoUseCase();
+                int linhasApagadas = await usecase.Execute();
+
+                dvgRelacaoBoletos.DataSource = null;
+                txtFileName.Text = "";
+
+                MessageBox.Show($"{linhasApagadas} registro(s) apagado(s) de tblExtratoTiktokLancamento.", "Concluído", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao limpar a base do TikTok:\n" + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private async void btnConferencia_Click(object sender, EventArgs e)
         {
 
