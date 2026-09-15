@@ -39,7 +39,6 @@
             lbCredito = new Label();
             blContaDebito = new Label();
             lbBanco = new Label();
-            tbBanco = new TextBox();
             tbFilial = new TextBox();
             lbCodColigada = new Label();
             cbColigada = new ComboBox();
@@ -48,6 +47,7 @@
             btnSalvaParametros = new Button();
             btnExcluir = new Button();
             toolTip1 = new ToolTip(components);
+            cbBanco = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dvgParametrizacao).BeginInit();
             gpGeral.SuspendLayout();
             SuspendLayout();
@@ -90,13 +90,13 @@
             // gpGeral
             // 
             gpGeral.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpGeral.Controls.Add(cbBanco);
             gpGeral.Controls.Add(btnLimpaFiltro);
             gpGeral.Controls.Add(tbReduzidoCredito);
             gpGeral.Controls.Add(tbReduzidoDebito);
             gpGeral.Controls.Add(lbCredito);
             gpGeral.Controls.Add(blContaDebito);
             gpGeral.Controls.Add(lbBanco);
-            gpGeral.Controls.Add(tbBanco);
             gpGeral.Controls.Add(tbFilial);
             gpGeral.Controls.Add(lbCodColigada);
             gpGeral.Controls.Add(cbColigada);
@@ -161,13 +161,6 @@
             lbBanco.Size = new Size(53, 20);
             lbBanco.TabIndex = 13;
             lbBanco.Text = "Banco:";
-            // 
-            // tbBanco
-            // 
-            tbBanco.Location = new Point(270, 64);
-            tbBanco.Name = "tbBanco";
-            tbBanco.Size = new Size(139, 27);
-            tbBanco.TabIndex = 12;
             // 
             // tbFilial
             // 
@@ -239,6 +232,15 @@
             // 
             toolTip1.Tag = "Limpar Filtro";
             // 
+            // cbBanco
+            // 
+            cbBanco.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbBanco.FormattingEnabled = true;
+            cbBanco.Location = new Point(270, 64);
+            cbBanco.Name = "cbBanco";
+            cbBanco.Size = new Size(151, 28);
+            cbBanco.TabIndex = 19;
+            // 
             // ParametrizacaoContabil
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -275,7 +277,6 @@
         private Label lbCodColigada;
         private ComboBox cbColigada;
         private Button btnSalvaParametros;
-        private TextBox tbBanco;
         private TextBox tbFilial;
         private TextBox tbReduzidoCredito;
         private TextBox tbReduzidoDebito;
@@ -285,5 +286,6 @@
         private Button btnExcluir;
         private Button btnLimpaFiltro;
         private ToolTip toolTip1;
+        private ComboBox cbBanco;
     }
 }

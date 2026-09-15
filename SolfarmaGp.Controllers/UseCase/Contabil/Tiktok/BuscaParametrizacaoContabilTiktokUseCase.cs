@@ -9,6 +9,7 @@ namespace SolfarmaGp.Controllers.UseCase.Contabil.Tiktok
         {
             public int CodColigada { get; set; }
             public int Filial { get; set; }
+            public int IDBanco { get; set; }
         }
 
         public async Task<DataTable> Execute(ObjetoPesquisaParametrosTiktok objeto)
@@ -17,7 +18,8 @@ namespace SolfarmaGp.Controllers.UseCase.Contabil.Tiktok
             BuscaParametrizacaoContabilTiktok.DtoObjetoPesquisaTiktok dto = new BuscaParametrizacaoContabilTiktok.DtoObjetoPesquisaTiktok
             {
                 CodColigada = objeto.CodColigada,
-                Filial = objeto.Filial
+                Filial = objeto.Filial,
+                IDBanco = objeto.IDBanco
             };
             DataTable result = await repo.Execute(dto);
             return result;

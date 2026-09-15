@@ -35,18 +35,36 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             public string ContaCompletaCredito { get; set; }
         }
 
-        private static readonly Dictionary<string, int> MapeamentoMetricaTiktok = new()
+        // IDComplemento não serve mais como chave: cada marca/loja (IDBanco) tem seus próprios IDs de
+        // complemento na tblContabilConferenciaRecebimentosComplemento. A categoria é identificada pelo
+        // sufixo padronizado do texto do complemento (ex.: "(FRETE)", "(COMISSAO)"), que se repete igual
+        // em todas as marcas.
+        private static readonly Dictionary<string, string> CategoriaPorMetricaTiktok = new()
         {
-            { "VendasLiquidas", 21 },
-            { "CustoFrete", 22 },
-            { "TaxaSFP", 23 },
-            { "TaxaItem", 24 },
-            { "ICMSDifal", 25 },
-            { "ComissaoAfiliados", 26 },
-            { "ReembolsoLogistica", 27 },
-            { "ReembolsoTiktok", 28 },
-            { "TarifaComissao", 26 },
+            { "VendasLiquidas", "VendasLiquidas" },
+            { "CustoFrete", "CustoFrete" },
+            { "TaxaSFP", "TaxaSFP" },
+            { "TaxaItem", "TaxaItem" },
+            { "ICMSDifal", "ICMSDifal" },
+            { "ComissaoAfiliados", "ComissaoAfiliados" },
+            { "ReembolsoLogistica", "ReembolsoLogistica" },
+            { "ReembolsoTiktok", "ReembolsoTiktok" },
+            { "TarifaComissao", "ComissaoAfiliados" },
         };
+
+        private static string ClassificaCategoriaTiktok(string complemento)
+        {
+            string texto = (complemento ?? "").ToUpperInvariant();
+
+            if (texto.Contains("(FRETE)")) return "CustoFrete";
+            if (texto.Contains("(TAXA DE SERVIÇO SFP)")) return "TaxaSFP";
+            if (texto.Contains("(TAXAS)")) return "TaxaItem";
+            if (texto.Contains("(ICMS DIFAL)")) return "ICMSDifal";
+            if (texto.Contains("(COMISSAO)")) return "ComissaoAfiliados";
+            if (texto.Contains("(REEMBOLSO LOGISTICA)")) return "ReembolsoLogistica";
+            if (texto.Contains("(REEMBOLSO TIK TOK)")) return "ReembolsoTiktok";
+            return "VendasLiquidas"; // sem sufixo entre parênteses = linha "base" da marca
+        }
 
         private List<ConferenciaResultado> listaResultado = new();
         private BindingList<ConferenciaResultado> listaExibida = new();
@@ -317,11 +335,12 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
                 var numberFilialTiktok = Convert.ToInt32(tbFilial.Text);
                 var numberColigadaTiktok = Convert.ToInt32(cbColigada.Text);
+                var numberBancoTiktok = Convert.ToInt32(cbBanco.SelectedValue);
 
-                if (!ConfirmaGeracaoConferencia("TikTok-Cimed"))
+                if (!ConfirmaGeracaoConferencia(cbBanco.Text))
                     return;
 
-                await ExecutaConferenciaTiktok(dtProcesso, numberFilialTiktok, numberColigadaTiktok);
+                await ExecutaConferenciaTiktok(dtProcesso, numberFilialTiktok, numberColigadaTiktok, numberBancoTiktok);
                 return;
             }
 
@@ -523,13 +542,13 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
         }
 
 
-        public async Task ExecutaConferenciaTiktok(DataTable dtExtrato, int filial, int codColigada)
+        public async Task ExecutaConferenciaTiktok(DataTable dtExtrato, int filial, int codColigada, int idBanco)
         {
             BuscaParametrizacaoContabilTiktokUseCase usecase = new BuscaParametrizacaoContabilTiktokUseCase();
-            DataTable dtParametros = await usecase.Execute(new ObjetoPesquisaParametrosTiktok { CodColigada = codColigada, Filial = filial });
+            DataTable dtParametros = await usecase.Execute(new ObjetoPesquisaParametrosTiktok { CodColigada = codColigada, Filial = filial, IDBanco = idBanco });
 
-            Dictionary<(int IDComplemento, string Sinal), DataRow> lookup = dtParametros.AsEnumerable()
-                .GroupBy(row => (row.Field<int>("IDComplemento"), row.Field<string>("Sinal")?.Trim()))
+            Dictionary<(string Categoria, string Sinal), DataRow> lookup = dtParametros.AsEnumerable()
+                .GroupBy(row => (Categoria: ClassificaCategoriaTiktok(row.Field<string>("Complemento")), Sinal: row.Field<string>("Sinal")?.Trim()))
                 .ToDictionary(g => g.Key, g => g.First());
 
             List<string> naoEncontrados = new();
@@ -539,7 +558,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             {
                 DateTime data = linha.Field<DateTime>("DataDemonstrativo");
 
-                foreach (KeyValuePair<string, int> mapeamento in MapeamentoMetricaTiktok)
+                foreach (KeyValuePair<string, string> mapeamento in CategoriaPorMetricaTiktok)
                 {
                     if (!dtExtrato.Columns.Contains(mapeamento.Key))
                         continue;
@@ -835,6 +854,20 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                     return "TikTok-Loreal";
                 case 37244241:
                     return "TikTok-Johnson";
+                case 37244242:
+                    return "TikTok-Garnier";
+                case 37244243:
+                    return "TikTok-Baruel Baby";
+                case 37244244:
+                    return "TikTok-Bom Ar";
+                case 37244245:
+                    return "TikTok-Eucerin";
+                case 37244246:
+                    return "TikTok-OX";
+                case 37244247:
+                    return "TikTok-Tenys Pe";
+                case 37244248:
+                    return "TikTok-YSL";
                 default:
                     return "";
             }

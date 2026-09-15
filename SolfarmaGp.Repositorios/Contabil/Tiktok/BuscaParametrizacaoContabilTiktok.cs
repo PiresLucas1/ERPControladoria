@@ -6,12 +6,11 @@ namespace SolfarmaGp.Repositorios.Contabil.Tiktok
 {
     public class BuscaParametrizacaoContabilTiktok
     {
-        private const int IDBancoTiktokCimed = 37244238;
-
         public class DtoObjetoPesquisaTiktok
         {
             public int CodColigada { get; set; }
             public int Filial { get; set; }
+            public int IDBanco { get; set; }
         }
 
         public async Task<DataTable> Execute(DtoObjetoPesquisaTiktok objeto)
@@ -55,7 +54,7 @@ namespace SolfarmaGp.Repositorios.Contabil.Tiktok
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
                         cmd.CommandType = CommandType.Text;
-                        cmd.Parameters.AddWithValue("@IDBanco", IDBancoTiktokCimed);
+                        cmd.Parameters.AddWithValue("@IDBanco", objeto.IDBanco);
                         cmd.Parameters.AddWithValue("@CodColigada", objeto.CodColigada);
                         cmd.Parameters.AddWithValue("@Filial", objeto.Filial);
 

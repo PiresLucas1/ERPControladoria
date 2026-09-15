@@ -1,4 +1,5 @@
 ﻿using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao;
+using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Banco;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.CodigoHistorico;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Complemento;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Conta;
@@ -18,6 +19,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
         public List<dtoObjetoComboBoxInteface> cbHistorico { get; set; }
         public List<dtoObjetoComboBoxInteface> cbCodComplemento { get; set; }
         public List<dtoObjetoComboBoxInteface> cbContaCotabil { get; set; }
+        public List<dtoObjetoComboBoxInteface> cbBancoList { get; set; }
 
         private DataTable _tabela;
         private BindingSource _bs = new BindingSource();
@@ -29,6 +31,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             dvgParametrizacao.DataSource = _bs;
             dvgParametrizacao.DataError += (s, e) =>
             {
+                //e.ThrowException = false;
+                MessageBox.Show($"Erro: {e.Exception?.Message}\nContexto: {e.Context}\nColuna: {dvgParametrizacao.Columns[e.ColumnIndex].Name}");
                 e.ThrowException = false;
             };
 
@@ -69,6 +73,10 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             DataTable dt = new DataTable();
             ConsultaLancamentoContabilParametrizadoDadosUseCase usecase = new ConsultaLancamentoContabilParametrizadoDadosUseCase();
             dt = await usecase.Execute(objeto);
+            foreach (DataColumn col in dt.Columns)
+            {
+                col.ReadOnly = false;
+            }
             return dt;
 
 
@@ -113,11 +121,31 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
 
         }
 
+        public async Task CarregaBanco()
+        {
+            ConsultaBancoUseCase usecase = new ConsultaBancoUseCase();
+            var result = await usecase.Execute();
+            cbBancoList = result
+                .Select(x => new dtoObjetoComboBoxInteface
+                {
+                    label = x.label,
+                    valor = x.valor
+                })
+                .ToList();
+
+            cbBancoList.Insert(0, new dtoObjetoComboBoxInteface { label = "Todos", valor = 0 });
+
+            cbBanco.DataSource = cbBancoList;
+            cbBanco.DisplayMember = "label";
+            cbBanco.ValueMember = "valor";
+        }
+
         public async Task CarregaTela(ObjetoPesquisaParametrosContabilDados objeto)
         {
             await CarregaComplemento();
             await CarregaCodigoHistorico();
             await CarregaCodigoReduzido();
+            await CarregaBanco();
 
             dvgParametrizacao.AutoGenerateColumns = false;
             dvgParametrizacao.AllowUserToAddRows = true;
@@ -156,7 +184,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
         {
             int CodColigada = cbColigada.Text != "" ? Convert.ToInt32(cbColigada.Text) : 0;
             int filial = tbFilial.Text != "" ? Convert.ToInt32(tbFilial.Text) : 0;
-            int banco = tbBanco.Text != "" ? Convert.ToInt32(tbBanco.Text) : 0;
+            int banco = cbBanco.SelectedValue != null ? Convert.ToInt32(cbBanco.SelectedValue) : 0;
             var reduzidoCredito = tbReduzidoCredito.Text != "" ? tbReduzidoCredito.Text : "";
             var reduzidoDebito = tbReduzidoDebito.Text != "" ? tbReduzidoDebito.Text : "";
 
