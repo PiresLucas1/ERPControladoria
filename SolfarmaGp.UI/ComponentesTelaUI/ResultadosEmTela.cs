@@ -33,6 +33,9 @@ namespace SolfarmaGp.UI.ComponentesTelaUI
 
             const int alturaLinha = 36;
             const int margem = 10;
+            const int larguraLabel = 150;   // espaço reservado para o texto do label
+            const int espacamento = 30;     // <<< espaçamento extra entre label e input
+            int xTextBox = margem + larguraLabel + espacamento;
 
             for (int i = 0; i < _itens.Count; i++)
             {
@@ -43,7 +46,6 @@ namespace SolfarmaGp.UI.ComponentesTelaUI
                 {
                     Text = item.Label,
                     Location = new Point(margem, y + 4),
-                    
                     AutoSize = true,
                     Font = new Font("Segoe UI", 10F, FontStyle.Bold)
                 };
@@ -51,7 +53,7 @@ namespace SolfarmaGp.UI.ComponentesTelaUI
                 TextBox textBox = new TextBox
                 {
                     Text = item.Valor,
-                    Location = new Point(190, y),
+                    Location = new Point(xTextBox, y),
                     Size = new Size(260, 27),
                     ReadOnly = true
                 };
