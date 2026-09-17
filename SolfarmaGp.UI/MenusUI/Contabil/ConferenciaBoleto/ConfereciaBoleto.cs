@@ -895,6 +895,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                     return "TikTok-Tenys Pe";
                 case 37244248:
                     return "TikTok-YSL";
+                case 37244249:
+                    return "TikTok-Maybelline";
                 default:
                     return "";
             }
