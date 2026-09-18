@@ -161,7 +161,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
             ConsultarNotaPorChaveAcessoUseCAse usecase = new ConsultarNotaPorChaveAcessoUseCAse();
             var existeNota = await usecase.Execute(objetoNota.ChaveAcesso);
-
+            objetoNota.CnpjFornecedor = _codCfoFonecedor;
 
             if (existeNota.Rows.Count > 0)
             {
@@ -338,10 +338,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                     {
                         produtosEncontrados.Add($"Fornecedor: {resultado.CodCfo} - Cod. Produto: {resultado.CodNoFornecedor}");
 
-                        if(_codCfoFonecedor == null)
-                        {
-                            _codCfoFonecedor = resultado.CodCfo;
-                        }
+                        _codCfoFonecedor = resultado.CodCfo;
+
                         
 
                         DataRow novalinha = itensEncontrados.NewRow();
