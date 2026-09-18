@@ -143,6 +143,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
         {
             DataTable dt = (DataTable)_bs.DataSource;
             CriaNotaUsoConsumoNaTotvs criaNotaUseCase = new CriaNotaUsoConsumoNaTotvs();
+
+            
             
             NotaCapa objetoNota = new NotaCapa
             {
@@ -153,6 +155,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 NumDocumento = tbNumDoc.Text
             };                                   
             var (produtosNaoEncontrados, itensEncontrados) = await VerificaSeProdutoExisteTotvs();
+
             if(produtosNaoEncontrados.Count > 0)
             {               
                 MessageBox.Show("Existe produto sem cadastro na Totvs", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -169,8 +172,25 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 return;
             }
             
-            var novaNota = await new CriaNotaUsoConsumoNaTotvs().Execute(objetoNota, itensEncontrados);
-            Console.WriteLine(novaNota);
+            try
+            {
+                ProcessStatusManager.Start("Carregando dados...");
+                ProcessStatusManager.Update("Processando...");
+                var (novaNotaDt,idnota) = await new CriaNotaUsoConsumoNaTotvs().Execute(objetoNota, itensEncontrados);
+                MessageBox.Show($"Nota lançada com sucesso! ID: {idnota}");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocorreu um erro ao lançar  nota: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            finally
+            {
+                ProcessStatusManager.Stop();
+                
+            }
+                        
 
 
         }
@@ -259,7 +279,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
             CadastrarProdutoUseCase useCase = new CadastrarProdutoUseCase();
             DataTable resultadosCadastro= new DataTable();
-
+ 
             foreach (DataRow row in produtosNaoEncontrados)
             {
                 var descricao = row["ProdutoDescricao"]?.ToString();
@@ -332,6 +352,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
                 try
                 {
+                    ProcessStatusManager.Start("Carregando dados...");
+                    ProcessStatusManager.Update("Processando...");
                     var resultado = await usecase.Executar(codNoForn, cnpjFornecedor);
 
                     if (resultado.Encontrado)
@@ -355,11 +377,13 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                     {
                         produtosNaoEncontrados.Add(row);
                         mensagensNaoEncontrados.Add($"Produto '{descricaoProduto}' (cod {codNoForn}) não encontrado no TOTVS.");
+                        ProcessStatusManager.Stop();
                     }
                 }
                 catch (Exception ex)
                 {
                     erros.Add($"Erro ao consultar produto '{descricaoProduto}' (cod {codNoForn}): {ex.Message}");
+                    ProcessStatusManager.Stop();
                 }
             }
 

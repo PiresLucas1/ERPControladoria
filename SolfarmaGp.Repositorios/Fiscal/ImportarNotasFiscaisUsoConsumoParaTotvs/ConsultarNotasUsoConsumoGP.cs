@@ -10,7 +10,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
         {
             DataTable tabela = new DataTable();
             //DataSet dataSet = new DataSet();
-            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
 
             try
             {

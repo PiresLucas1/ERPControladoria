@@ -14,7 +14,7 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
             public string NumDocumento { get; set; }
         }
 
-        public async Task<DataTable> Execute(NotaCapa nota, DataTable itens)
+        public async Task<(DataTable,int)> Execute(NotaCapa nota, DataTable itens)
         {
             CriaNotaUsoConsumoNaTotvsRepositorio repo = new CriaNotaUsoConsumoNaTotvsRepositorio();
 
@@ -27,7 +27,7 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
                 NumDocumento = nota.NumDocumento,
 
                 // Campos que existem só no Repositório - sem valor disponível aqui ainda
-                CodColigada = null,
+                CodColigada = 2,
                 CodFilial = null,
                 CodCCFO = null,
                 SerieDocumento = null,
@@ -44,7 +44,7 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
             var itensTvp = MontaDataTableTvp(itens);
 
             var (dtResult, idMovGerado) = await repo.Executar(notaCapaRepo, itensTvp);
-            return dtResult;
+            return (dtResult, idMovGerado);
         }
 
         /// <summary>
