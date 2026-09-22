@@ -897,6 +897,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                     return "TikTok-YSL";
                 case 37244249:
                     return "TikTok-Maybelline";
+                case 37244250:
+                    return "TikTok Shop Neutrogena";
                 default:
                     return "";
             }
