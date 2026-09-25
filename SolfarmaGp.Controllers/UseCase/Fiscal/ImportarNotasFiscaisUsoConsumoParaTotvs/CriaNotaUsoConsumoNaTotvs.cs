@@ -12,7 +12,11 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
             public string CnpjFornecedor { get; set; }
             public string IDErpContasPagar { get; set; }
             public string NumDocumento { get; set; }
+            public DateTime? DataDocumento { get; set; } // Adicionado para cobrir todos os parâmetros da procedure
+            public DateTime? DataLancamento { get; set; } 
+            public string SerieDocumento { get; set; } // Adicionado para cobrir todos os parâmetros da procedure   
         }
+        public string CfopValue { get; set; }
 
         public async Task<(DataTable,int)> Execute(NotaCapa nota, DataTable itens)
         {
@@ -28,12 +32,12 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
 
                 // Campos que existem só no Repositório - sem valor disponível aqui ainda
                 CodColigada = 2,
-                CodFilial = null,
+                SerieDocumento = nota.SerieDocumento,
+                DataEmissao = nota.DataDocumento,
+                DataLancamento = nota.DataLancamento,                
                 CodCCFO = null,
-                SerieDocumento = null,
+                CodFilial = null,
                 CodTipoMovimento = null,
-                DataEmissao = null,
-                DataLancamento = null,
                 CodMunServico = null,
                 CodEtdMunServ = null,
                 IdNatMov = null,
@@ -42,7 +46,7 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
 
             // Converte o DataTable recebido para a estrutura tipada que o TVP espera
             var itensTvp = MontaDataTableTvp(itens);
-
+            notaCapaRepo.CodNat = CfopValue;
             var (dtResult, idMovGerado) = await repo.Executar(notaCapaRepo, itensTvp);
             return (dtResult, idMovGerado);
         }
@@ -62,6 +66,7 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
             tabelaTvp.Columns.Add("CODCCUSTO", typeof(string));
             tabelaTvp.Columns.Add("ALIQUOTAICMS", typeof(decimal));
             tabelaTvp.Columns.Add("BASEICMS", typeof(decimal));
+            
 
             foreach (DataRow row in itens.Rows)
             {
@@ -78,10 +83,32 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
                 novaLinha["ALIQUOTAICMS"] = DBNull.Value;
                 novaLinha["BASEICMS"] = DBNull.Value;
 
+                //valida
+                
+
                 tabelaTvp.Rows.Add(novaLinha);
             }
+            CfopValue = ObterPrefixoNatureza(itens);
 
             return tabelaTvp;
+        }
+        private string ObterPrefixoNatureza(DataTable itens)
+        {
+            var prefixos = itens.AsEnumerable()
+                .Select(r => (r["Natureza"]?.ToString() ?? "").Replace(".", "").Trim())
+                .Where(s => s.Length > 0)
+                .Select(s => s.Length >= 4 ? s.Substring(0, 4) : s)
+                .ToList();
+
+            if (prefixos.Count == 0)
+                return "";
+
+            // Todos iguais → mantém os 4 dígitos (ex.: "1556")
+            if (prefixos.Distinct().Count() == 1)
+                return prefixos[0];
+
+            // Algum diferente → só o primeiro caractere (ex.: "1")
+            return prefixos[0].Substring(0, 1);
         }
     }
 }

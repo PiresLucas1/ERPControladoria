@@ -156,19 +156,21 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         {
             var IDQiveArquivoXMLString = dvgNotas.Rows[e.RowIndex].Cells["IDQiveArquivoXML"].Value.ToString();
             var numDocumentoString = dvgNotas.Rows[e.RowIndex].Cells["NumDocumento"].Value.ToString();
+            var dataDocumentoString = dvgNotas.CurrentRow.Cells["DataDocumento"].Value.ToString();
             int IDQiveArquivoXML = int.Parse(IDQiveArquivoXMLString);
 
-            ConsultaDetalhesNota(IDQiveArquivoXML, numDocumentoString);
+            ConsultaDetalhesNota(IDQiveArquivoXML, numDocumentoString, dataDocumentoString);
         }
 
         private void btnVisualizarNota_Click(object sender, EventArgs e)
         {
             var IDQiveArquivoXMLString = dvgNotas.CurrentRow.Cells["IDQiveArquivoXML"].Value.ToString();
             var numDocumentoString = dvgNotas.CurrentRow.Cells["NumDocumento"].Value.ToString();
+            var dataDocumentoString = dvgNotas.CurrentRow.Cells["DataDocumento"].Value.ToString();
             //var teste = _linhaSelecionada.Row["NumDocumento"];
             int IDQiveArquivoXML = int.Parse(IDQiveArquivoXMLString);
 
-            ConsultaDetalhesNota(IDQiveArquivoXML, numDocumentoString);
+            ConsultaDetalhesNota(IDQiveArquivoXML, numDocumentoString, dataDocumentoString);
         }
 
         private void dvgNotas_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -188,11 +190,12 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
                     row.DefaultCellStyle.BackColor = Color.White;
             }
         }
-        private void ConsultaDetalhesNota(int IDQiveArquivoXML, string numDocumentoString)
+        private void ConsultaDetalhesNota(int IDQiveArquivoXML, string numDocumentoString, string dataDocumentoString)
         {
             using (var form = new ImportarNotasFiscaisXmlParaTotvsDetalhes(
                                   IDQiveArquivoXML,
                                   numDocumentoString,
+                                  dataDocumentoString,
                                   new ConsultaNotasExportaTotvsDetalhes())
                   )
             {

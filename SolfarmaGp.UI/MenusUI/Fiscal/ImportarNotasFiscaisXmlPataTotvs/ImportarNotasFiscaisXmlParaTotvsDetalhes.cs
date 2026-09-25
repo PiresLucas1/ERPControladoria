@@ -21,12 +21,15 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
         private DataTable _tabelaContaFinanceria;
         private BindingSource _bsContaFinanceira = new BindingSource();
         private string _codCfoFonecedor;
+        private string _dataDocumento;
+        private string _serieDocumento;
 
         private readonly ConsultaNotasExportaTotvsDetalhes _consultaDetalhes;
-        public ImportarNotasFiscaisXmlParaTotvsDetalhes(int IDQiveArquivoXML, string numDocumento, ConsultaNotasExportaTotvsDetalhes consultaDetalhes)
+        public ImportarNotasFiscaisXmlParaTotvsDetalhes(int IDQiveArquivoXML, string numDocumento, string dataDocumento, ConsultaNotasExportaTotvsDetalhes consultaDetalhes)
         {
             _IDQiveArquivoXML = IDQiveArquivoXML;
             _numDocumento = numDocumento;
+            _dataDocumento = dataDocumento;
             _consultaDetalhes = consultaDetalhes;
             InitializeComponent();
 
@@ -55,6 +58,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
                 dvgContaFinanceira.DataSource = _bsContaFinanceira;
                 AjustaTela();
+                await CarregarCodCfoFornecedorAsync();
 
             }
             catch (Exception ex)
@@ -73,14 +77,16 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             dvgDataNotaItens.Columns["CNPJFornecedor"].Visible = false;
             dvgDataNotaItens.Columns["NomeFornecedor"].Visible = false;
             dvgDataNotaItens.Columns["UnidadeComercial"].Visible = false;
+            dvgDataNotaItens.Columns["Serie"].Visible = false;
 
 
-
+            _serieDocumento = _tabela.Rows[0]["Serie"].ToString();
             tbIdQive.Text = _tabela.Rows[0]["IDQiveArquivoXML"].ToString();
             tbNumDoc.Text = _numDocumento;
             tbIdContasPagar.Text = _tabela.Rows[0]["ERP_IDContasPagar"].ToString();
             tbCodFornecedor.Text = _tabela.Rows[0]["CNPJFornecedor"].ToString();
             tbNomeFornecedor.Text = _tabela.Rows[0]["NomeFornecedor"].ToString();
+            
 
             tbChaveAcesso.Text = _tabela.Rows[0]["ChaveAcesso"].ToString();
 
@@ -152,7 +158,10 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 ChaveAcesso = tbChaveAcesso.Text,
                 CnpjFornecedor = _codCfoFonecedor,
                 IDErpContasPagar = tbIdContasPagar.Text,
-                NumDocumento = tbNumDoc.Text
+                NumDocumento = tbNumDoc.Text,
+                DataDocumento = DateTime.TryParse(_dataDocumento, out var dataDoc) ? dataDoc : null,
+                DataLancamento = DateTime.TryParse(dtLancamento.Value.ToString("yyyy-MM-dd"), out var dataLanc) ? dataLanc : null,
+                SerieDocumento = _serieDocumento
             };                                   
             var (produtosNaoEncontrados, itensEncontrados) = await VerificaSeProdutoExisteTotvs();
 
@@ -162,9 +171,11 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 return;
             }
 
+            if (!FornecedorEncontrado())
+                return;
+
             ConsultarNotaPorChaveAcessoUseCAse usecase = new ConsultarNotaPorChaveAcessoUseCAse();
             var existeNota = await usecase.Execute(objetoNota.ChaveAcesso);
-            objetoNota.CnpjFornecedor = _codCfoFonecedor;
 
             if (existeNota.Rows.Count > 0)
             {
@@ -190,7 +201,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 ProcessStatusManager.Stop();
                 
             }
-                        
+            ProcessStatusManager.Stop();
+
 
 
         }
@@ -277,6 +289,9 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 return;
             }
 
+            if (!FornecedorEncontrado())
+                return;
+
             CadastrarProdutoUseCase useCase = new CadastrarProdutoUseCase();
             DataTable resultadosCadastro= new DataTable();
  
@@ -289,14 +304,14 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 var codUnidade = row["UnidadeComercial"]?.ToString();
                 var preco = Convert.ToDecimal(row["ValorItem"]);
                 var origem = "0"; // Defina a origem conforme necessário
-                var cnpjFornecedor = tbCodFornecedor.Text;
+                var cnpjFornecedor = _codCfoFonecedor;
                 StatusProcess processo = new StatusProcess();
                 try
                 {
                     ProcessStatusManager.Start("Carregando dados...");
                     ProcessStatusManager.Update("Processando...");
 
-                    resultadosCadastro = await useCase.Executar(codProduto, descricao, ncm, cest, codUnidade, preco, origem, cnpjFornecedor);
+                    resultadosCadastro = await useCase.Executar(codProduto, descricao, ncm, cest, codUnidade, preco, origem, cnpjFornecedor, _codCfoFonecedor);
                 }
                 catch (Exception ex)
                 {
@@ -315,6 +330,32 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
 
         }
+        //BUSCA O CODCFO DO FORNECEDOR PELO CNPJ AO ABRIR A TELA
+        private async Task CarregarCodCfoFornecedorAsync()
+        {
+            try
+            {
+                _codCfoFonecedor = await new ConsultaCodCfoFornecedorPorCnpjUseCase().Executar(tbCodFornecedor.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao consultar o fornecedor pelo CNPJ: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_codCfoFonecedor))
+                MessageBox.Show($"Fornecedor com CNPJ {tbCodFornecedor.Text} não encontrado na Totvs.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private bool FornecedorEncontrado()
+        {
+            if (!string.IsNullOrWhiteSpace(_codCfoFonecedor))
+                return true;
+
+            MessageBox.Show($"Fornecedor com CNPJ {tbCodFornecedor.Text} não encontrado na Totvs.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return false;
+        }
+
         //VERIFICA SE PRODUTO EXISTE NA TOTVS E RETORNA UMA LISTA DE PRODUTOS NÃO ENCONTRADOS E UMA TABELA COM OS ITENS ENCONTRADOS
         private async Task<(List<DataRow> ProdutosNaoEncontrados, DataTable ItensEncontrados)> VerificaSeProdutoExisteTotvs()
         {
@@ -360,8 +401,6 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                     {
                         produtosEncontrados.Add($"Fornecedor: {resultado.CodCfo} - Cod. Produto: {resultado.CodNoFornecedor}");
 
-                        _codCfoFonecedor = resultado.CodCfo;
-
                         
 
                         DataRow novalinha = itensEncontrados.NewRow();
@@ -386,6 +425,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                     ProcessStatusManager.Stop();
                 }
             }
+
 
             if (erros.Count > 0)
             {

@@ -5,10 +5,10 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs
 {
     public class CadastrarProdutoUseCase
     {
-        public async Task<DataTable> Executar(string codProduto, string descricao, string ncm, string cest, string codUnidade, decimal preco, string origem, string cnpjFornecedor)
+        public async Task<DataTable> Executar(string codProduto, string descricao, string ncm, string cest, string codUnidade, decimal preco, string origem, string cnpjFornecedor, string codFornecedor)
         {
             CadastrarProdutoTotvs repo = new CadastrarProdutoTotvs();
-            return await repo.Executar(codProduto, descricao, ncm, cest, codUnidade, preco, origem, cnpjFornecedor);
+            return await repo.Executar(codProduto, descricao, ncm, cest, codUnidade, preco, origem, cnpjFornecedor, codFornecedor);
         }
         public static string FormatarCnpj(string cnpj)
         {

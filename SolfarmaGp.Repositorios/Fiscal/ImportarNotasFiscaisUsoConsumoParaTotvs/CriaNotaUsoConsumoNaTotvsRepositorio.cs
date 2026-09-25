@@ -26,6 +26,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs
             public string CodMunServico { get; set; }
             public string CodEtdMunServ { get; set; }
             public int? IdNatMov { get; set; }
+            public string? CodNat { get; set; }
             public string CodTdo { get; set; } // default 'NF-e' na procedure
         }
 

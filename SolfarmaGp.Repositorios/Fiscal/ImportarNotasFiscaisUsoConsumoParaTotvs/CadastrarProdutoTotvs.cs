@@ -6,7 +6,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
 {
     public class CadastrarProdutoTotvs
     {
-        public async Task<DataTable> Executar(string codProduto ,string descricao, string ncm, string cest, string codUnidade, decimal preco, string origem, string cnpjFornecedor)
+        public async Task<DataTable> Executar(string codProduto ,string descricao, string ncm, string cest, string codUnidade, decimal preco, string origem, string? cnpjFornecedor, string codFornecedor)
         {
             DataTable dataTable = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
@@ -34,6 +34,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
                         cmd.Parameters.AddWithValue("@ORIGEM", origem);
                         cmd.Parameters.AddWithValue("@CNPJFORNECEDOR", cnpjFornecedor);
                         cmd.Parameters.AddWithValue("@CODIGOPRD_FORNECEDOR", codProduto);
+                        cmd.Parameters.AddWithValue("@CODCFO", codFornecedor);
                         
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
