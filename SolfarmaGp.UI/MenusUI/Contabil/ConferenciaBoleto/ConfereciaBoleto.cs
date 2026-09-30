@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using OfficeOpenXml;
+using OfficeOpenXml.Drawing.Chart;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Banco;
 using SolfarmaGp.Controllers.UseCase.Contabil.Parametrizacao.Dados;
@@ -33,6 +34,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             public DateTime DataDocumento { get; set; }
             public string ContaCompletaDebito { get; set; }
             public string ContaCompletaCredito { get; set; }
+            //linha especifica para tiktok
+            public string? IDDemonstrativo { get; set; }
         }
 
         // IDComplemento não serve mais como chave: cada marca/loja (IDBanco) tem seus próprios IDs de
@@ -128,6 +131,9 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
             if (dvgConferencia.Columns["DataDocumento"] != null)
                 dvgConferencia.Columns["DataDocumento"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            
+            if (dvgConferencia.Columns["IDDemonstrativo"] != null)
+                dvgConferencia.Columns["IDDemonstrativo"].Visible = false;
 
             AtualizarTotal(listaExibida);
         }
@@ -595,6 +601,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                         continue;
 
                     decimal valor = valorNullable.Value;
+                    string idDemontrativoTikTok = linha.Field<string>("IDDemonstrativo");
                     string sinal = valor >= 0 ? "POSITIVO" : "NEGATIVO";
 
                     if (!lookup.TryGetValue((mapeamento.Value, sinal), out DataRow parametro))
@@ -614,6 +621,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                         DataDocumento = data,
                         ContaCompletaDebito = parametro.Field<string>("ContaCompletaDebito"),
                         ContaCompletaCredito = parametro.Field<string>("ContaCompletaCredito"),
+                        IDDemonstrativo = idDemontrativoTikTok
                     });
                 }
             }
@@ -709,18 +717,29 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
         public string GeraLoteDrogaCentro(DataTable dt)
         {
             var sb = new StringBuilder();
+            IEnumerable<IGrouping<object, DataRow>> grupos;
 
-            var grupos = dt.AsEnumerable()
-                .GroupBy(x => x.Field<DateTime>("DataDocumento"))
-                .OrderBy(x => x.Key);
+                grupos = dt.AsEnumerable()
+                    .GroupBy(x => (object)x.Field<DateTime>("DataDocumento"))
+                    .OrderBy(x => x.Key);            
             string codPessoa = tbCodPessoa.Text;
             string codPessoaFormatado = codPessoa.PadLeft(15, '0');
 
             foreach (var grupo in grupos)
             {
-                var data = grupo.Key;
+                string descricao = "";
+                if (chkBoxTikTok.Checked)
+                {
+                    var primeira = grupo.First();
+                    descricao = primeira["IDDemonstrativo"].ToString().Trim();
+                }
+                else
+                {
+                    descricao = "CONCILIACAO BANCARIA";
 
-                sb.AppendLine($"M;{codPessoaFormatado};CONCILIACAO BANCARIA;{data:dd/MM/yyyy}");
+                }
+                var data = grupo.Key;
+                sb.AppendLine($"M;{codPessoaFormatado};{descricao};{data:dd/MM/yyyy}");
                 foreach (var row in grupo)
                 {
                     string contaDebito = row["ContaCompletaDebito"].ToString().Trim();
@@ -771,9 +790,15 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 
             foreach (var grupo in grupos)
             {
+                string descricao = "CONCILIACAO BANCARIA";
+                if (chkBoxTikTok.Checked)
+                {
+                    var primeiro = grupo.First();
+                    descricao = $"ID DEMONSTR. ;{ primeiro["IDDemonstrativo"].ToString().Trim()}";
+                }
                 DateTime data = grupo.Key;
 
-                string header = $"M;{codPessoaFormatado};CONCILIACAO BANCARIA;{data:dd/MM/yyyy}";
+                string header = $"M;{codPessoaFormatado};{descricao};{data:dd/MM/yyyy}";
 
                 dtPreview.Rows.Add(data, "M", header);
 
@@ -899,6 +924,14 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                     return "TikTok-Maybelline";
                 case 37244250:
                     return "TikTok Shop Neutrogena";
+                case 37244251:
+                    return " TikTok - Listerine";
+                case 37244252:
+                    return "TikTok - Casa Vestacy";
+                case 37244253:
+                    return "TikTok - SBP";
+                case 37244254:
+                    return "TikTok - Karina";
                 default:
                     return "";
             }
