@@ -5,9 +5,9 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.Ca
 {
     public class ConsultaFabricanteNfeServicoPorCodigoUseCase
     {
-        public async Task<(string situacao, string mensagem, string codCfo)> Executar(string codigoVerificacao)
+        public async Task<(string situacao, string mensagem, string codCfo)> Executar(string codigoVerificacao, int codColigada)
         {
-            DataTable retorno = await new ConsultaFabricanteNfeServicoPorCodigo().Executar(codigoVerificacao);
+            DataTable retorno = await new ConsultaFabricanteNfeServicoPorCodigo().Executar(codigoVerificacao, codColigada);
 
             if (retorno.Rows.Count == 0)
             {

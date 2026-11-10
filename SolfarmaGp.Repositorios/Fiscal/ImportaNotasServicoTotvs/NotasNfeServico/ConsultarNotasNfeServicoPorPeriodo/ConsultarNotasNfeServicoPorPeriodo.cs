@@ -9,14 +9,14 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.ConsultaNotasN
         public async Task<DataTable> Executar(DateTime dataInicio, DateTime dataFim, int codColigada, int bitExisteErp)
         {
             DataTable tabela = new DataTable();
-            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpTotvs);
+            DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
 
             try
             {
 
                 using (SqlConnection conexao = conexaoBanco.AbrirConexao())
                 {
-                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultarNfeServico", conexao))
+                    using (SqlCommand cmd = new SqlCommand("dbo.uspFisConsultarNfeServicoRef", conexao))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 1200; /* 20 minutos */

@@ -731,7 +731,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                 if (chkBoxTikTok.Checked)
                 {
                     var primeira = grupo.First();
-                    descricao = primeira["IDDemonstrativo"].ToString().Trim();
+                    
+                    descricao = $"ID DEMONSTR. {primeira["IDDemonstrativo"].ToString().Trim()}";
                 }
                 else
                 {
@@ -932,6 +933,10 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
                     return "TikTok - SBP";
                 case 37244254:
                     return "TikTok - Karina";
+                case 37244255:
+                    return "TikTok - Neutrox";
+                case 37244256:
+                    return "TikTok - Kolene";
                 default:
                     return "";
             }
