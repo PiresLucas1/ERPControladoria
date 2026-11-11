@@ -6,7 +6,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.FabricanteNfeS
 {
     public class ConsultaFabricanteNfeServicoPorCodigo
     {
-        public async Task<DataTable> Executar(string codigoVerificacao)
+        public async Task<DataTable> Executar(string codigoVerificacao, int codColigada)
         {
             DataTable tabela = new DataTable();
             DbConexaoConfig conexaoBanco = new DbConexaoConfig(DbName.GpWithLoginTotvs);
@@ -20,6 +20,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.FabricanteNfeS
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 0;
                         cmd.Parameters.AddWithValue("@vhcCodigoVerificacao", codigoVerificacao);
+                        cmd.Parameters.AddWithValue("@intCodColigada", codColigada);
 
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {

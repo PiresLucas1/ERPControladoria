@@ -51,7 +51,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs
                             nota.CodFilial.HasValue ? (object)nota.CodFilial.Value : DBNull.Value;
 
                         cmd.Parameters.Add("@vchCodCCFO", SqlDbType.VarChar, 20).Value =
-                            !string.IsNullOrEmpty(nota.CodCCFO) ? (object)nota.CodCCFO : DBNull.Value;
+                            !string.IsNullOrEmpty(nota.CnpjFornecedor) ? (object)nota.CnpjFornecedor: DBNull.Value;
 
                         cmd.Parameters.Add("@vchSerieDocumento", SqlDbType.VarChar, 5).Value =
                             !string.IsNullOrEmpty(nota.SerieDocumento) ? (object)nota.SerieDocumento : DBNull.Value;

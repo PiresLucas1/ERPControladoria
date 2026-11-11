@@ -54,22 +54,23 @@
             coBoxTipeFilter = new ComboBox();
             label1 = new Label();
             dtImportacao = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            txtTotal = new TextBox();
-            label5 = new Label();
-            label6 = new Label();
-            groupBox2 = new GroupBox();
-            btnCadFornecedor = new Button();
-            btnLimpar = new Button();
-            btnDesmarcarTodos = new Button();
-            btnSelecionarTodas = new Button();
             groupBox3 = new GroupBox();
             txtSelecionado = new TextBox();
+            label6 = new Label();
+            label5 = new Label();
+            txtTotal = new TextBox();
+            btnSelecionarTodas = new Button();
+            btnDesmarcarTodos = new Button();
+            btnLimpar = new Button();
+            btnCadFornecedor = new Button();
             btnCadastraSelecionados = new Button();
+            btnPreencherServicoCfop = new Button();
+            groupBox2 = new GroupBox();
             groupBox1.SuspendLayout();
             gbAutoFuncoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtImportacao).BeginInit();
-            groupBox2.SuspendLayout();
             groupBox3.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // btnListaNotas
@@ -341,93 +342,6 @@
             dtImportacao.EditingControlShowing += dtImportacao_EditingControlShowing;
             dtImportacao.KeyDown += TextBox_KeyDown;
             // 
-            // txtTotal
-            // 
-            txtTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            txtTotal.Location = new Point(6, 75);
-            txtTotal.Name = "txtTotal";
-            txtTotal.ReadOnly = true;
-            txtTotal.Size = new Size(76, 27);
-            txtTotal.TabIndex = 9;
-            // 
-            // label5
-            // 
-            label5.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label5.AutoSize = true;
-            label5.Location = new Point(88, 39);
-            label5.Name = "label5";
-            label5.Size = new Size(134, 20);
-            label5.TabIndex = 10;
-            label5.Text = "Total Selecionados";
-            // 
-            // label6
-            // 
-            label6.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            label6.AutoSize = true;
-            label6.Location = new Point(90, 82);
-            label6.Name = "label6";
-            label6.Size = new Size(42, 20);
-            label6.TabIndex = 11;
-            label6.Text = "Total";
-            // 
-            // groupBox2
-            // 
-            groupBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            groupBox2.Controls.Add(btnCadastraSelecionados);
-            groupBox2.Controls.Add(btnCadFornecedor);
-            groupBox2.Controls.Add(btnLimpar);
-            groupBox2.Controls.Add(btnDesmarcarTodos);
-            groupBox2.Controls.Add(btnSelecionarTodas);
-            groupBox2.Controls.Add(groupBox3);
-            groupBox2.Location = new Point(12, 894);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1263, 117);
-            groupBox2.TabIndex = 12;
-            groupBox2.TabStop = false;
-            // 
-            // btnCadFornecedor
-            // 
-            btnCadFornecedor.Location = new Point(470, 74);
-            btnCadFornecedor.Name = "btnCadFornecedor";
-            btnCadFornecedor.Size = new Size(156, 31);
-            btnCadFornecedor.TabIndex = 18;
-            btnCadFornecedor.Text = "Cad. Fornecedor";
-            btnCadFornecedor.UseVisualStyleBackColor = true;
-            btnCadFornecedor.Click += btnCadFornecedor_Click;
-            // 
-            // btnLimpar
-            // 
-            btnLimpar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnLimpar.Location = new Point(625, 76);
-            btnLimpar.Name = "btnLimpar";
-            btnLimpar.Size = new Size(114, 29);
-            btnLimpar.TabIndex = 17;
-            btnLimpar.Text = "Limpar";
-            btnLimpar.UseVisualStyleBackColor = true;
-            btnLimpar.Click += btLimpar_Click;
-            // 
-            // btnDesmarcarTodos
-            // 
-            btnDesmarcarTodos.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnDesmarcarTodos.Location = new Point(303, 26);
-            btnDesmarcarTodos.Name = "btnDesmarcarTodos";
-            btnDesmarcarTodos.Size = new Size(151, 29);
-            btnDesmarcarTodos.TabIndex = 16;
-            btnDesmarcarTodos.Text = "Limpar Seleção";
-            btnDesmarcarTodos.UseVisualStyleBackColor = true;
-            btnDesmarcarTodos.Click += btnDesmarcarTodos_Click;
-            // 
-            // btnSelecionarTodas
-            // 
-            btnSelecionarTodas.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnSelecionarTodas.Location = new Point(303, 75);
-            btnSelecionarTodas.Name = "btnSelecionarTodas";
-            btnSelecionarTodas.Size = new Size(151, 29);
-            btnSelecionarTodas.TabIndex = 15;
-            btnSelecionarTodas.Text = "Selecionar Todos";
-            btnSelecionarTodas.UseVisualStyleBackColor = true;
-            btnSelecionarTodas.Click += btnSelecionarTodos_Click;
-            // 
             // groupBox3
             // 
             groupBox3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -451,6 +365,78 @@
             txtSelecionado.Size = new Size(76, 27);
             txtSelecionado.TabIndex = 13;
             // 
+            // label6
+            // 
+            label6.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label6.AutoSize = true;
+            label6.Location = new Point(90, 82);
+            label6.Name = "label6";
+            label6.Size = new Size(42, 20);
+            label6.TabIndex = 11;
+            label6.Text = "Total";
+            // 
+            // label5
+            // 
+            label5.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            label5.AutoSize = true;
+            label5.Location = new Point(88, 39);
+            label5.Name = "label5";
+            label5.Size = new Size(134, 20);
+            label5.TabIndex = 10;
+            label5.Text = "Total Selecionados";
+            // 
+            // txtTotal
+            // 
+            txtTotal.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            txtTotal.Location = new Point(6, 75);
+            txtTotal.Name = "txtTotal";
+            txtTotal.ReadOnly = true;
+            txtTotal.Size = new Size(76, 27);
+            txtTotal.TabIndex = 9;
+            // 
+            // btnSelecionarTodas
+            // 
+            btnSelecionarTodas.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnSelecionarTodas.Location = new Point(303, 75);
+            btnSelecionarTodas.Name = "btnSelecionarTodas";
+            btnSelecionarTodas.Size = new Size(151, 29);
+            btnSelecionarTodas.TabIndex = 15;
+            btnSelecionarTodas.Text = "Selecionar Todos";
+            btnSelecionarTodas.UseVisualStyleBackColor = true;
+            btnSelecionarTodas.Click += btnSelecionarTodos_Click;
+            // 
+            // btnDesmarcarTodos
+            // 
+            btnDesmarcarTodos.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnDesmarcarTodos.Location = new Point(303, 26);
+            btnDesmarcarTodos.Name = "btnDesmarcarTodos";
+            btnDesmarcarTodos.Size = new Size(151, 29);
+            btnDesmarcarTodos.TabIndex = 16;
+            btnDesmarcarTodos.Text = "Limpar Seleção";
+            btnDesmarcarTodos.UseVisualStyleBackColor = true;
+            btnDesmarcarTodos.Click += btnDesmarcarTodos_Click;
+            // 
+            // btnLimpar
+            // 
+            btnLimpar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnLimpar.Location = new Point(625, 76);
+            btnLimpar.Name = "btnLimpar";
+            btnLimpar.Size = new Size(114, 29);
+            btnLimpar.TabIndex = 17;
+            btnLimpar.Text = "Limpar";
+            btnLimpar.UseVisualStyleBackColor = true;
+            btnLimpar.Click += btLimpar_Click;
+            // 
+            // btnCadFornecedor
+            // 
+            btnCadFornecedor.Location = new Point(470, 74);
+            btnCadFornecedor.Name = "btnCadFornecedor";
+            btnCadFornecedor.Size = new Size(156, 31);
+            btnCadFornecedor.TabIndex = 18;
+            btnCadFornecedor.Text = "Cad. Fornecedor";
+            btnCadFornecedor.UseVisualStyleBackColor = true;
+            btnCadFornecedor.Click += btnCadFornecedor_Click;
+            // 
             // btnCadastraSelecionados
             // 
             btnCadastraSelecionados.Location = new Point(470, 24);
@@ -460,6 +446,33 @@
             btnCadastraSelecionados.Text = "Cad. Sel Fornecedor";
             btnCadastraSelecionados.UseVisualStyleBackColor = true;
             btnCadastraSelecionados.Click += btnCadastraSelecionados_Click;
+            // 
+            // btnPreencherServicoCfop
+            // 
+            btnPreencherServicoCfop.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnPreencherServicoCfop.Location = new Point(640, 24);
+            btnPreencherServicoCfop.Name = "btnPreencherServicoCfop";
+            btnPreencherServicoCfop.Size = new Size(156, 31);
+            btnPreencherServicoCfop.TabIndex = 20;
+            btnPreencherServicoCfop.Text = "Serviço / CFOP Sel.";
+            btnPreencherServicoCfop.UseVisualStyleBackColor = true;
+            btnPreencherServicoCfop.Click += btnPreencherServicoCfop_Click;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBox2.Controls.Add(btnPreencherServicoCfop);
+            groupBox2.Controls.Add(btnCadastraSelecionados);
+            groupBox2.Controls.Add(btnCadFornecedor);
+            groupBox2.Controls.Add(btnLimpar);
+            groupBox2.Controls.Add(btnDesmarcarTodos);
+            groupBox2.Controls.Add(btnSelecionarTodas);
+            groupBox2.Controls.Add(groupBox3);
+            groupBox2.Location = new Point(12, 894);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(1263, 117);
+            groupBox2.TabIndex = 12;
+            groupBox2.TabStop = false;
             // 
             // ImportarNotasTotvs
             // 
@@ -480,9 +493,9 @@
             groupBox1.PerformLayout();
             gbAutoFuncoes.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dtImportacao).EndInit();
-            groupBox2.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
 
         }
@@ -515,17 +528,18 @@
         private System.Windows.Forms.Button btnPreenche;
         private SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView dtImportacao;
         private TextBox textBox1;
-        private TextBox txtTotal;
-        private Label label5;
-        private Label label6;
-        private GroupBox groupBox2;
-        private TextBox txtSelecionado;
         private GroupBox groupBox3;
-        private Button btnLimpar;
-        private Button btnDesmarcarTodos;
+        private TextBox txtSelecionado;
+        private Label label6;
+        private Label label5;
+        private TextBox txtTotal;
         private Button btnSelecionarTodas;
+        private Button btnDesmarcarTodos;
+        private Button btnLimpar;
         private Button btnCadFornecedor;
         private Button btnCadastraSelecionados;
+        private Button btnPreencherServicoCfop;
+        private GroupBox groupBox2;
     }
 }
 

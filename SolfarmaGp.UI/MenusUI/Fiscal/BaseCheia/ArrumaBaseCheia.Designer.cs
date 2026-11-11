@@ -97,6 +97,7 @@
             btnExecutar.TabIndex = 3;
             btnExecutar.Text = "Executar";
             btnExecutar.UseVisualStyleBackColor = true;
+            btnExecutar.Click += btnExecutar_Click;
             // 
             // btnCancelar
             // 

@@ -9,6 +9,7 @@ namespace SolfarmaGp.UI.MenusUI.MenuCompartilhados.ConsultaItens
         DataGridViewRow rowSelecionada = null;
         ImportarNotasTotvs importarNotaViewForm;
         DataTable _tabelaOrigem;
+        Action<DataRow> _aoSelecionar;
         public ConsultaItem(DataGridViewRow row, DataTable table,String Name, ImportarNotasTotvs importarNotaViewForm)
         {
             InitializeComponent();            
@@ -18,6 +19,25 @@ namespace SolfarmaGp.UI.MenusUI.MenuCompartilhados.ConsultaItens
             this.Text = Name;
             _tabelaOrigem = table;
                 CarregarDataGridView(table);
+        }
+
+        // Usado quando a seleção não é para uma linha da grade (ex.: preenchimento em lote)
+        public ConsultaItem(DataTable table, String Name, Action<DataRow> aoSelecionar)
+        {
+            InitializeComponent();
+            this.Name = Name;
+            this.Text = Name;
+            _aoSelecionar = aoSelecionar;
+            _tabelaOrigem = table;
+            CarregarDataGridView(table);
+        }
+
+        private void RetornarSelecao(DataRow datarow)
+        {
+            if (_aoSelecionar != null)
+                _aoSelecionar(datarow);
+            else
+                importarNotaViewForm.AlteraValorDataRow(datarow, this.Name, row);
         }
 
         public async void btnPesquisar_Click(object sender, EventArgs e)
@@ -48,7 +68,7 @@ namespace SolfarmaGp.UI.MenusUI.MenuCompartilhados.ConsultaItens
 
                 DataRow datarow = convertRow.Row;
 
-                importarNotaViewForm.AlteraValorDataRow(datarow, this.Name, row);
+                RetornarSelecao(datarow);
                 this.Close();
 
             }
@@ -64,7 +84,7 @@ namespace SolfarmaGp.UI.MenusUI.MenuCompartilhados.ConsultaItens
 
             DataRow datarow = convertRow.Row;
             
-            importarNotaViewForm.AlteraValorDataRow(datarow, this.Name, row);
+            RetornarSelecao(datarow);
 
             this.Close();
 
@@ -81,7 +101,7 @@ namespace SolfarmaGp.UI.MenusUI.MenuCompartilhados.ConsultaItens
 
                 DataRow datarow = convertRow.Row;
 
-                importarNotaViewForm.AlteraValorDataRow(datarow, this.Name, row);
+                RetornarSelecao(datarow);
                 this.Close();
             }
         }

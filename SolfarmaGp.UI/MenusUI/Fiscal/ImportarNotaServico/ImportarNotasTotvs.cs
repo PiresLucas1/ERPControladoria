@@ -389,6 +389,14 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
                 DataTable dtServico = await produtoServicoController.Executar(Convert.ToInt32(codColigada));
                 AbrirConsultaItem(dtImportacao.Rows[e.RowIndex], dtServico, "Consulta Produto");
             }
+
+            // Nas demais colunas (exceto as editáveis), o duplo clique abre os detalhes da nota
+            string[] colunasComAcaoPropria = { "CFOP", "Cód. Serviço TOTVS", "Selecionar", "Data Lançamento" };
+            if (!colunasComAcaoPropria.Contains(colName))
+            {
+                using DetalhesNotaServico detalhes = new DetalhesNotaServico(dtImportacao.Rows[e.RowIndex]);
+                detalhes.ShowDialog(this);
+            }
         }
         public void AbrirConsultaItem(DataGridViewRow row, DataTable data, string name)
         {
@@ -909,7 +917,8 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
                 ProcessStatusManager.Update("Processando...");
 
                 ConsultaFabricanteNfeServicoPorCodigoUseCase usecase = new ConsultaFabricanteNfeServicoPorCodigoUseCase();
-                var (situacao, mensagem, codCfo) = await usecase.Executar(codigoVerificacao);
+                int codColigada = Convert.ToInt32(linhaAtual.Cells["CodColigada"].Value);
+                var (situacao, mensagem, codCfo) = await usecase.Executar(codigoVerificacao, codColigada);
 
                 MessageBoxIcon icone = situacao switch
                 {
@@ -975,7 +984,8 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 
                     try
                     {
-                        var (situacao, mensagem, codCfo) = await usecase.Executar(codigoVerificacao);
+                        int codColigada = Convert.ToInt32(linha.Cells["CodColigada"].Value);
+                        var (situacao, mensagem, codCfo) = await usecase.Executar(codigoVerificacao, codColigada);
                         dtRetorno.Rows.Add(numDoc, razaoSocial, codigoVerificacao, situacao, mensagem, codCfo);
                     }
                     catch (Exception ex)
@@ -991,6 +1001,52 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 
             RetornoEmTabela telaRetorno = new RetornoEmTabela(dtRetorno);
             telaRetorno.Show();
+        }
+
+        private void btnPreencherServicoCfop_Click(object sender, EventArgs e)
+        {
+            dtImportacao.EndEdit();
+
+            List<DataGridViewRow> linhasSelecionadas = dtImportacao.Rows
+                .Cast<DataGridViewRow>()
+                .Where(row => row.Cells["Selecionar"].Value is bool selecionado && selecionado)
+                .ToList();
+
+            if (linhasSelecionadas.Count == 0)
+            {
+                MessageBox.Show("Nenhuma nota selecionada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Serviço e CFOP são cadastrados por coligada, então todas as linhas precisam ser da mesma
+            List<int> coligadas = linhasSelecionadas
+                .Select(row => Convert.ToInt32(row.Cells["CodColigada"].Value))
+                .Distinct()
+                .ToList();
+
+            if (coligadas.Count > 1)
+            {
+                MessageBox.Show("As notas selecionadas são de coligadas diferentes. Selecione notas de uma única coligada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using PreencherServicoCfopLote preencher = new PreencherServicoCfopLote(coligadas[0], linhasSelecionadas.Count);
+            if (preencher.ShowDialog(this) != DialogResult.OK)
+                return;
+
+            foreach (DataGridViewRow linha in linhasSelecionadas)
+            {
+                if (preencher.CodigoServico != null)
+                {
+                    linha.Cells["Cód. Serviço TOTVS"].Value = preencher.CodigoServico;
+                    linha.Cells["Descrição"].Value = preencher.DescricaoServico;
+                }
+                if (preencher.CodigoCfop != null)
+                {
+                    linha.Cells["CFOP"].Value = preencher.CodigoCfop;
+                    linha.Cells["CFOP Descrição"].Value = preencher.DescricaoCfop;
+                }
+            }
         }
     }
 }
