@@ -7,6 +7,7 @@ using SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto;
 using SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica;
+using SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia;
 using SolfarmaGp.UI.MenusUI.Fiscal.EntradasComFiltro;
 using SolfarmaGp.UI.MenusUI.Fiscal.Gerenciar;
 using SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs;
@@ -501,6 +502,16 @@ namespace SolfarmaGp.UI.MenusUI
                 BuscaEntradasComFiltro buscaEntradasComFiltro = new BuscaEntradasComFiltro();
                 buscaEntradasComFiltro.MdiParent = this;
                 buscaEntradasComFiltro.Show();
+            }
+        }
+
+        private void baseCheiaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ArrumaBaseCheia)))
+            {
+                ArrumaBaseCheia arrumaBaseCheia = new ArrumaBaseCheia();
+                arrumaBaseCheia.MdiParent = this;
+                arrumaBaseCheia.Show();
             }
         }
     }
