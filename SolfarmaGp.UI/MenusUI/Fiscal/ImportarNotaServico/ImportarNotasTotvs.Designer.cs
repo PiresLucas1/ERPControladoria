@@ -419,9 +419,9 @@
             // btnLimpar
             // 
             btnLimpar.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnLimpar.Location = new Point(625, 76);
+            btnLimpar.Location = new Point(640, 78);
             btnLimpar.Name = "btnLimpar";
-            btnLimpar.Size = new Size(114, 29);
+            btnLimpar.Size = new Size(156, 29);
             btnLimpar.TabIndex = 17;
             btnLimpar.Text = "Limpar";
             btnLimpar.UseVisualStyleBackColor = true;
