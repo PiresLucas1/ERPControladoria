@@ -32,6 +32,7 @@
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             btnListaNotas = new Button();
             btnExportarTotvs = new Button();
+            btnExportarExcel = new Button();
             groupBox1 = new GroupBox();
             gbAutoFuncoes = new GroupBox();
             btnPreenche = new Button();
@@ -97,6 +98,18 @@
             btnExportarTotvs.Text = "Exportar TOTVS";
             btnExportarTotvs.UseVisualStyleBackColor = true;
             btnExportarTotvs.Click += btnExportarTotvs_Click;
+            // 
+            // btnExportarExcel
+            // 
+            btnExportarExcel.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnExportarExcel.Location = new Point(802, 78);
+            btnExportarExcel.Margin = new Padding(3, 4, 3, 4);
+            btnExportarExcel.Name = "btnExportarExcel";
+            btnExportarExcel.Size = new Size(149, 29);
+            btnExportarExcel.TabIndex = 21;
+            btnExportarExcel.Text = "Exporta para Excel";
+            btnExportarExcel.UseVisualStyleBackColor = true;
+            btnExportarExcel.Click += btnExportarExcel_Click;
             // 
             // groupBox1
             // 
@@ -464,6 +477,7 @@
             groupBox2.Controls.Add(btnPreencherServicoCfop);
             groupBox2.Controls.Add(btnCadastraSelecionados);
             groupBox2.Controls.Add(btnCadFornecedor);
+            groupBox2.Controls.Add(btnExportarExcel);
             groupBox2.Controls.Add(btnLimpar);
             groupBox2.Controls.Add(btnDesmarcarTodos);
             groupBox2.Controls.Add(btnSelecionarTodas);
@@ -505,6 +519,7 @@
              
         private System.Windows.Forms.Button btnListaNotas;
         private System.Windows.Forms.Button btnExportarTotvs;
+        private System.Windows.Forms.Button btnExportarExcel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtBoxToFilter;

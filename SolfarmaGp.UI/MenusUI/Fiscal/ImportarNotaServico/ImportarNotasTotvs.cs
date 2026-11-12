@@ -1,4 +1,5 @@
-﻿using SolfarmaGp.Controllers.UseCase.Fiscal.Gerenciar;
+﻿using OfficeOpenXml;
+using SolfarmaGp.Controllers.UseCase.Fiscal.Gerenciar;
 using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.CadastroFornecedor;
 using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.ConsultaNotasServico;
 using SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasServicoParaTotvs.ConsultaServico;
@@ -274,6 +275,92 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
             {
                 if (row.Cells["Selecionado"] is DataGridViewCheckBoxCell chk)
                     chk.Value = false;
+            }
+        }
+
+        /// <summary>
+        /// Exporta para Excel o que está na tabela da tela (colunas visíveis, na ordem em que aparecem) e abre o arquivo.
+        /// </summary>
+        private void btnExportarExcel_Click(object sender, EventArgs e)
+        {
+            if (dtImportacao.Rows.Count == 0)
+            {
+                MessageBox.Show("Não há dados para exportar", "Exportar para Excel", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            var colunas = dtImportacao.Columns
+                .Cast<DataGridViewColumn>()
+                .Where(c => c.Visible)
+                .OrderBy(c => c.DisplayIndex)
+                .ToList();
+
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                ExcelPackage.License.SetNonCommercialPersonal("SolfarmaGP");
+
+                using var package = new ExcelPackage();
+                var planilha = package.Workbook.Worksheets.Add("Notas");
+
+                for (int c = 0; c < colunas.Count; c++)
+                {
+                    // a coluna de marcar tem como título só "✓"
+                    planilha.Cells[1, c + 1].Value = colunas[c].Name == "Selecionar" ? "Selecionar" : colunas[c].HeaderText;
+                }
+
+                int linhaExcel = 2;
+                foreach (DataGridViewRow linha in dtImportacao.Rows)
+                {
+                    for (int c = 0; c < colunas.Count; c++)
+                    {
+                        object? valor = linha.Cells[colunas[c].Index].Value;
+
+                        if (valor == null || valor is DBNull)
+                            continue;
+
+                        if (valor is bool marcado)
+                            valor = marcado ? "Sim" : "Não";
+
+                        planilha.Cells[linhaExcel, c + 1].Value = valor;
+                    }
+                    linhaExcel++;
+                }
+
+                // formatos por tipo de dado (o valor continua sendo número/data, não texto, para o Excel poder somar e filtrar)
+                for (int c = 0; c < colunas.Count; c++)
+                {
+                    var tipo = colunas[c].ValueType;
+                    var coluna = planilha.Cells[2, c + 1, linhaExcel - 1, c + 1];
+
+                    if (tipo == typeof(DateTime) || tipo == typeof(DateTime?))
+                        coluna.Style.Numberformat.Format = "dd/MM/yyyy";
+                    else if (tipo == typeof(decimal) || tipo == typeof(double) || tipo == typeof(float))
+                        coluna.Style.Numberformat.Format = "#,##0.00";
+                }
+
+                var cabecalho = planilha.Cells[1, 1, 1, colunas.Count];
+                cabecalho.Style.Font.Bold = true;
+                cabecalho.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                cabecalho.Style.Fill.BackgroundColor.SetColor(Color.LightGray);
+
+                planilha.View.FreezePanes(2, 1);
+                planilha.Cells[1, 1, linhaExcel - 1, colunas.Count].AutoFilter = true;
+                planilha.Cells[planilha.Dimension.Address].AutoFitColumns(8, 60);
+
+                string caminho = Path.Combine(Path.GetTempPath(), $"NotasServico_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx");
+                package.SaveAs(new FileInfo(caminho));
+
+                // abre no programa associado a .xlsx (Excel); o usuário salva onde quiser a partir dele
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(caminho) { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Não foi possível exportar para o Excel: {ex.Message}", "Exportar para Excel", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
             }
         }
 
