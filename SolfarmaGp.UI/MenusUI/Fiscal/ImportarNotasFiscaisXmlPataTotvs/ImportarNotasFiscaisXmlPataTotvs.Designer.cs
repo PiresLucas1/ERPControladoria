@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
 {
     partial class ImportarNotasFiscaisXmlPataTotvs
     {
@@ -28,24 +30,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Filtros = new GroupBox();
-            btnConsultar = new Button();
+            Filtros = new CartaoGroupBox();
+            btnConsultar = new BotaoModerno();
             lbFim = new Label();
             lbInicio = new Label();
             dtFim = new DateTimePicker();
             dtInicio = new DateTimePicker();
-            dvgNotas = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            dvgNotas = new GradeModerna();
             tbRegistros = new TextBox();
-            gpAcoes = new GroupBox();
-            btnVisualizarNota = new Button();
-            btnLimparSelecao = new Button();
-            btnSelecionaTodos = new Button();
+            gpAcoes = new CartaoGroupBox();
+            btnVisualizarNota = new BotaoModerno();
+            btnLimparSelecao = new BotaoModerno();
+            btnSelecionaTodos = new BotaoModerno();
             label1 = new Label();
             tbRegistrosAtencao = new TextBox();
-            button2 = new Button();
-            btnConsultarXml = new Button();
+            button2 = new BotaoModerno();
+            btnConsultarXml = new BotaoModerno();
             lbRegistro = new Label();
-            groupBox1 = new GroupBox();
+            groupBox1 = new CartaoGroupBox();
             chkboxLancamento = new CheckBox();
             checkBox2 = new CheckBox();
             Filtros.SuspendLayout();
@@ -71,6 +73,7 @@
             btnConsultar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnConsultar.Location = new Point(1042, 129);
             btnConsultar.Name = "btnConsultar";
+            btnConsultar.Principal = true;
             btnConsultar.Size = new Size(106, 30);
             btnConsultar.TabIndex = 6;
             btnConsultar.Text = "Consultar";
@@ -276,6 +279,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(1195, 761);
             Controls.Add(gpAcoes);
             Controls.Add(dvgNotas);
@@ -293,24 +297,24 @@
 
         #endregion
 
-        private GroupBox Filtros;
-        private Button btnConsultar;
+        private CartaoGroupBox Filtros;
+        private BotaoModerno btnConsultar;
         private Label lbFim;
         private Label lbInicio;
         private DateTimePicker dtFim;
         private DateTimePicker dtInicio;
-        private ComponentesTelaUI.DataGridView.MyDataGridView dvgNotas;
+        private GradeModerna dvgNotas;
         private TextBox tbRegistros;
-        private GroupBox gpAcoes;
-        private Button btnConsultarXml;
+        private CartaoGroupBox gpAcoes;
+        private BotaoModerno btnConsultarXml;
         private Label lbRegistro;
         private Label label1;
         private TextBox tbRegistrosAtencao;
-        private Button btnSelecionaTodos;
-        private Button btnLimparSelecao;
-        private Button btnVisualizarNota;
-        private Button button2;
-        private GroupBox groupBox1;
+        private BotaoModerno btnSelecionaTodos;
+        private BotaoModerno btnLimparSelecao;
+        private BotaoModerno btnVisualizarNota;
+        private BotaoModerno button2;
+        private CartaoGroupBox groupBox1;
         private CheckBox checkBox2;
         private CheckBox chkboxLancamento;
     }
