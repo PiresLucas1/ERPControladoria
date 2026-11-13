@@ -15,6 +15,9 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
             public DateTime? DataDocumento { get; set; } // Adicionado para cobrir todos os parâmetros da procedure
             public DateTime? DataLancamento { get; set; } 
             public string SerieDocumento { get; set; } // Adicionado para cobrir todos os parâmetros da procedure   
+            public string CodTipoMovimento { get; set; }
+            public int CodColigada { get; set; }
+            public int CodFilial { get; set; }
         }
         public string CfopValue { get; set; }
 
@@ -31,24 +34,32 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
                 NumDocumento = nota.NumDocumento,
 
                 // Campos que existem só no Repositório - sem valor disponível aqui ainda
-                CodColigada = 2,
+                CodColigada = nota.CodColigada,
                 SerieDocumento = nota.SerieDocumento,
                 DataEmissao = nota.DataDocumento,
                 DataLancamento = nota.DataLancamento,                
                 CodCCFO = null,
-                CodFilial = null,
-                CodTipoMovimento = null,
+                CodFilial = nota.CodFilial,
+                CodTipoMovimento = nota.CodTipoMovimento,
                 CodMunServico = null,
                 CodEtdMunServ = null,
                 IdNatMov = null,
-                CodTdo = null
+                CodTdo = null,
+                CodNat = null
             };
 
             // Converte o DataTable recebido para a estrutura tipada que o TVP espera
             var itensTvp = MontaDataTableTvp(itens);
             notaCapaRepo.CodNat = CfopValue;
+            notaCapaRepo.IdNatMov = await ObterIdNatMov(nota.CodColigada, CfopValue);
             var (dtResult, idMovGerado) = await repo.Executar(notaCapaRepo, itensTvp);
             return (dtResult, idMovGerado);
+        }
+
+        // Retorna os itens exatamente como serão enviados na TVP (usado na conferência antes de lançar)
+        public DataTable MontarItensParaEnvio(DataTable itens)
+        {
+            return MontaDataTableTvp(itens);
         }
 
         /// <summary>
@@ -72,16 +83,25 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
             {
                 var novaLinha = tabelaTvp.NewRow();
 
-                novaLinha["IDPRD"] = Convert.ToInt32(row["IDProduto"]);
-                novaLinha["QUANTIDADE"] = Convert.ToDecimal(row["Quantidade"]);
-                novaLinha["VALORUNITARIO"] = Convert.ToDecimal(row["Valor"]);
-                novaLinha["CODNAT"] = row["Natureza"]?.ToString() ?? (object)DBNull.Value;
-                novaLinha["CODUND"] = row["UnidadeComercial"]?.ToString() ?? (object)DBNull.Value;
+                decimal quantidade = Convert.ToDecimal(row["Quantidade"]);
+                decimal valorTotalItem = Convert.ToDecimal(row["Valor"]); // ValorItem do XML é o total do item
 
-                // TODO: confirmar de onde vêm esses 3 valores
+                if (quantidade <= 0)
+                    throw new ArgumentException($"Item {row["IDProduto"]} está com quantidade zerada.");
+
+                // TVP tem VALORUNITARIO DECIMAL(18,4)
+                decimal valorUnitario = Math.Round(valorTotalItem / quantidade, 4);
+
+                novaLinha["IDPRD"] = Convert.ToInt32(row["IDProduto"]);
+                novaLinha["QUANTIDADE"] = quantidade;
+                novaLinha["VALORUNITARIO"] = valorUnitario;
+                novaLinha["CODNAT"] = ValorOuNulo(row["Natureza"]);
+                novaLinha["CODUND"] = ValorOuNulo(row["UnidadeComercial"]);
+                novaLinha["BASEICMS"] = valorTotalItem;
+
+                // TODO: confirmar de onde vêm esses 2 valores
                 novaLinha["CODCCUSTO"] = DBNull.Value;
                 novaLinha["ALIQUOTAICMS"] = DBNull.Value;
-                novaLinha["BASEICMS"] = DBNull.Value;
 
                 //valida
                 
@@ -92,23 +112,41 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
 
             return tabelaTvp;
         }
+        // Busca o IDNAT da natureza do movimento (natureza do primeiro item) na coligada da nota
+        private async Task<int> ObterIdNatMov(int codColigada, string codNat)
+        {
+            //string codNat = itens.AsEnumerable()
+            //    .Select(r => r["Natureza"]?.ToString()?.Trim())
+            //    .FirstOrDefault(n => !string.IsNullOrEmpty(n));
+
+            return await new ConsultaIDNatPorColigada().Executar(codColigada, codNat);
+        }
+
+        // DBNull.ToString() devolve "", então trata vazio como nulo
+        private static object ValorOuNulo(object valor)
+        {
+            string texto = valor?.ToString()?.Trim();
+            return string.IsNullOrEmpty(texto) ? DBNull.Value : texto;
+        }
+
         private string ObterPrefixoNatureza(DataTable itens)
         {
+            // Mantém os pontos e pega só os dois primeiros níveis: "1.556.003" → "1.556"
             var prefixos = itens.AsEnumerable()
-                .Select(r => (r["Natureza"]?.ToString() ?? "").Replace(".", "").Trim())
+                .Select(r => (r["Natureza"]?.ToString() ?? "").Trim())
                 .Where(s => s.Length > 0)
-                .Select(s => s.Length >= 4 ? s.Substring(0, 4) : s)
+                .Select(s => string.Join(".", s.Split('.').Take(2)))
                 .ToList();
 
             if (prefixos.Count == 0)
                 return "";
 
-            // Todos iguais → mantém os 4 dígitos (ex.: "1556")
+            // Todos iguais → mantém os dois níveis (ex.: "1.556")
             if (prefixos.Distinct().Count() == 1)
                 return prefixos[0];
 
-            // Algum diferente → só o primeiro caractere (ex.: "1")
-            return prefixos[0].Substring(0, 1);
+            // Algum diferente → só o primeiro nível (ex.: "1")
+            return prefixos[0].Split('.')[0];
         }
     }
 }

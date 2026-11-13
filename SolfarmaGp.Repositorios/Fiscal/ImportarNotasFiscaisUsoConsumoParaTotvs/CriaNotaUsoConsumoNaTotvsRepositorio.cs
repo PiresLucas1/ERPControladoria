@@ -1,11 +1,18 @@
 ﻿using Microsoft.Data.SqlClient;
 using SolfarmaGp.Infraestrutura;
+using SolfarmaGp.Repositorios.Utils;
 using System.Data;
 
 namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs
 {
     public class CriaNotaUsoConsumoNaTotvsRepositorio
     {
+        // Script T-SQL com todos os parâmetros da última chamada (inspecionar no debugger)
+        public string UltimoScriptDebug { get; private set; }
+
+        // Tabela em texto com os itens (produtos) enviados na TVP da última chamada
+        public string UltimoItensDebug { get; private set; }
+
         public class NotaCapa
         {
             // Já existentes
@@ -56,7 +63,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs
                         cmd.Parameters.Add("@vchSerieDocumento", SqlDbType.VarChar, 5).Value =
                             !string.IsNullOrEmpty(nota.SerieDocumento) ? (object)nota.SerieDocumento : DBNull.Value;
 
-                        cmd.Parameters.Add("@vchCodTipoMovimento", SqlDbType.VarChar, 3).Value =
+                        cmd.Parameters.Add("@vchCodTipoMovimento", SqlDbType.VarChar, 10).Value =
                             !string.IsNullOrEmpty(nota.CodTipoMovimento) ? (object)nota.CodTipoMovimento : DBNull.Value;
 
                         cmd.Parameters.Add("@INvchNumeroDocumento", SqlDbType.VarChar, 20).Value =
@@ -80,9 +87,10 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs
                         cmd.Parameters.Add("@inIDNatMov", SqlDbType.Int).Value =
                             nota.IdNatMov.HasValue ? (object)nota.IdNatMov.Value : DBNull.Value;
 
-                        // Tem default 'NF-e' na procedure, então só manda se tiver valor
-                        cmd.Parameters.Add("@vchCODTDO", SqlDbType.VarChar, 10).Value =
-                            !string.IsNullOrEmpty(nota.CodTdo) ? (object)nota.CodTdo : DBNull.Value;
+                        // Tem default 'NF-e' na procedure. Passar NULL explícito anula o default,
+                        // então o parâmetro só é enviado quando tiver valor
+                        if (!string.IsNullOrEmpty(nota.CodTdo))
+                            cmd.Parameters.Add("@vchCODTDO", SqlDbType.VarChar, 10).Value = nota.CodTdo;
 
                         // Parâmetro TVP (table-valued)
                         var tvpParam = cmd.Parameters.Add("@tvpItens", SqlDbType.Structured);
@@ -92,6 +100,11 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs
                         // Parâmetro OUTPUT
                         var outputParam = cmd.Parameters.Add("@OUTintIDMOV", SqlDbType.Int);
                         outputParam.Direction = ParameterDirection.Output;
+
+                        // Debug: coloque um breakpoint na linha abaixo e veja UltimoScriptDebug,
+                        // a janela Output do Visual Studio ou o arquivo em %TEMP%
+                        UltimoScriptDebug = ScriptDebugProcedure.GerarESalvar(cmd, "uspUsuNotaUsoConsumoInclusaoGP_debug.sql");
+                        UltimoItensDebug = ScriptDebugProcedure.GerarESalvarTabela(itens, "uspUsuNotaUsoConsumoInclusaoGP_itens_debug.txt");
 
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {

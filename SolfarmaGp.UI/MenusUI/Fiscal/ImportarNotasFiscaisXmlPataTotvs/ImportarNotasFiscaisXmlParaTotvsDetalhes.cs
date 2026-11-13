@@ -23,10 +23,12 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
         private string _codCfoFonecedor;
         private string _dataDocumento;
         private string _serieDocumento;
+        private string _codFilial;
 
         private readonly ConsultaNotasExportaTotvsDetalhes _consultaDetalhes;
-        public ImportarNotasFiscaisXmlParaTotvsDetalhes(int IDQiveArquivoXML, string numDocumento, string dataDocumento, ConsultaNotasExportaTotvsDetalhes consultaDetalhes)
+        public ImportarNotasFiscaisXmlParaTotvsDetalhes(int IDQiveArquivoXML, string numDocumento, string dataDocumento, string codFilial, ConsultaNotasExportaTotvsDetalhes consultaDetalhes)
         {
+            _codFilial = codFilial;
             _IDQiveArquivoXML = IDQiveArquivoXML;
             _numDocumento = numDocumento;
             _dataDocumento = dataDocumento;
@@ -34,6 +36,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             InitializeComponent();
 
             AjustarFonteTextBoxesGroupBox();
+            tbCodFilial.Text = _codFilial;
             Load += ImportarNotasFiscaisXmlParaTotvsDetalhes_Load;
         }
         private async void ImportarNotasFiscaisXmlParaTotvsDetalhes_Load(object sender, EventArgs e)
@@ -147,11 +150,42 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
         private async  void btnLancarNota_Click(object sender, EventArgs e)
         {
+            // Garante que a Natureza digitada na célula em edição seja gravada antes de ler a tabela
+            dvgDataNotaItens.EndEdit();
+            _bs.EndEdit();
+
             DataTable dt = (DataTable)_bs.DataSource;
             CriaNotaUsoConsumoNaTotvs criaNotaUseCase = new CriaNotaUsoConsumoNaTotvs();
 
-            
-            
+            var itensSemNatureza = _tabela.AsEnumerable()
+                .Where(row => row.Field<bool?>("Selecionado") == true
+                           && string.IsNullOrWhiteSpace(row["Natureza"]?.ToString()))
+                .Select(row => row["ProdutoDescricao"]?.ToString())
+                .ToList();
+
+            if (itensSemNatureza.Count > 0)
+            {
+                MessageBox.Show("Informe a Natureza Fiscal dos itens:" + Environment.NewLine + string.Join(Environment.NewLine, itensSemNatureza), "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!int.TryParse(tbCodColigada.Text, out int codColigada))
+            {
+                MessageBox.Show("Informe a Coligada.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                tbCodColigada.Focus();
+                return;
+            }
+            if (!int.TryParse(tbCodFilial.Text, out int codFilial))
+            {
+                MessageBox.Show("Informe a Filial.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                tbCodFilial.Focus();
+                return;
+            }
+
+            string codTipoMovimento = ObterCodTipoMovimento();
+            if (string.IsNullOrEmpty(codTipoMovimento))
+                return;
+
             NotaCapa objetoNota = new NotaCapa
             {
                 IDQiveArquivoXml = tbIdQive.Text,
@@ -161,7 +195,10 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 NumDocumento = tbNumDoc.Text,
                 DataDocumento = DateTime.TryParse(_dataDocumento, out var dataDoc) ? dataDoc : null,
                 DataLancamento = DateTime.TryParse(dtLancamento.Value.ToString("yyyy-MM-dd"), out var dataLanc) ? dataLanc : null,
-                SerieDocumento = _serieDocumento
+                SerieDocumento = _serieDocumento,
+                CodTipoMovimento = codTipoMovimento,
+                CodColigada = codColigada,
+                CodFilial = codFilial
             };                                   
             var (produtosNaoEncontrados, itensEncontrados) = await VerificaSeProdutoExisteTotvs();
 
@@ -182,7 +219,10 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 MessageBox.Show("Já existe um documento com essa chave de acesso cadastrado na totvs", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
+
+            if (!ConfirmarProdutosParaEnvio(itensEncontrados))
+                return;
+
             try
             {
                 ProcessStatusManager.Start("Carregando dados...");
@@ -330,6 +370,72 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
 
         }
+        //MOSTRA OS PRODUTOS COM OS VALORES QUE VÃO PARA A PROCEDURE E PEDE CONFIRMAÇÃO
+        private bool ConfirmarProdutosParaEnvio(DataTable itensEncontrados)
+        {
+            ProcessStatusManager.Stop();
+
+            DataTable itensTvp;
+            try
+            {
+                itensTvp = new CriaNotaUsoConsumoNaTotvs().MontarItensParaEnvio(itensEncontrados);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao montar os itens da nota: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            using ConferenciaProdutosNota conferencia = new ConferenciaProdutosNota(itensEncontrados, itensTvp);
+            return conferencia.ShowDialog(this) == DialogResult.OK;
+        }
+
+        private void SomenteNumeros_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+                e.Handled = true;
+        }
+
+        //DEFINE O CODTMV PELA CONTA FINANCEIRA: CONTA 2.09 (IMOBILIZADO) USA O MOVIMENTO 1.2.50
+        private string ObterCodTipoMovimento()
+        {
+            DataGridViewColumn colunaCodigo = dvgContaFinanceira.Columns
+                .Cast<DataGridViewColumn>()
+                .FirstOrDefault(col => NormalizarTexto(col.Name) == "codigo" || NormalizarTexto(col.HeaderText) == "codigo");
+
+            if (colunaCodigo == null)
+            {
+                string colunas = string.Join(", ", dvgContaFinanceira.Columns.Cast<DataGridViewColumn>().Select(col => col.Name));
+                MessageBox.Show($"Coluna 'Codigo' não encontrada na grade de conta financeira.\nColunas disponíveis: {colunas}", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+
+            List<string> contas = dvgContaFinanceira.Rows
+                .Cast<DataGridViewRow>()
+                .Where(row => !row.IsNewRow)
+                .Select(row => row.Cells[colunaCodigo.Index].Value?.ToString()?.Trim() ?? "")
+                .Where(conta => conta.Length > 0)
+                .ToList();
+
+            // Compara só os dígitos para aceitar a conta com ou sem pontuação (2.09... ou 209...)
+            bool contaImobilizado = contas.Any(conta => new string(conta.Where(char.IsDigit).ToArray()).StartsWith("209"));
+            if (contaImobilizado)
+                return "1.2.50";
+            else
+            {
+                return "1.2.11";
+            }
+
+        }
+
+        private static string NormalizarTexto(string texto)
+        {
+            if (string.IsNullOrEmpty(texto)) return string.Empty;
+
+            string decomposto = texto.Trim().ToLowerInvariant().Normalize(NormalizationForm.FormD);
+            return new string(decomposto.Where(c => System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c) != System.Globalization.UnicodeCategory.NonSpacingMark).ToArray());
+        }
+
         //BUSCA O CODCFO DO FORNECEDOR PELO CNPJ AO ABRIR A TELA
         private async Task CarregarCodCfoFornecedorAsync()
         {
@@ -385,6 +491,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             itensEncontrados.Columns.Add("Valor", typeof(object));
             itensEncontrados.Columns.Add("Natureza", typeof(object));
             itensEncontrados.Columns.Add("UnidadeComercial", typeof(object));
+            itensEncontrados.Columns.Add("CodProdFornecedor", typeof(object)); // só para a conferência
+            itensEncontrados.Columns.Add("Descricao", typeof(object));         // só para a conferência
 
             foreach (DataRow row in linhasSelecionadas)
             {
@@ -409,6 +517,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                         novalinha["Valor"] = row["ValorItem"];
                         novalinha["Natureza"] = row["Natureza"];
                         novalinha["UnidadeComercial"] = row["UnidadeComercial"];
+                        novalinha["CodProdFornecedor"] = codNoForn;
+                        novalinha["Descricao"] = descricaoProduto;
 
                         itensEncontrados.Rows.Add(novalinha); // <- faltava isso
                     }
