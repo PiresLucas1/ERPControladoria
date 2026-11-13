@@ -31,8 +31,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            dataInicio = new DateTimePicker();
-            dataFim = new DateTimePicker();
+            dtpDataInicio = new DateTimePicker();
+            dtpDataFim = new DateTimePicker();
             groupBox1 = new CartaoGroupBox();
             label2 = new Label();
             label1 = new Label();
@@ -139,8 +139,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
 
         #endregion
 
-        private DateTimePicker dataInicio;
-        private DateTimePicker dataFim;
+        private DateTimePicker dtpDataInicio;
+        private DateTimePicker dtpDataFim;
         private CartaoGroupBox groupBox1;
         private Label label1;
         private Label label2;
