@@ -43,31 +43,31 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
-            // dataInicio
+            // dtpDataInicio
             // 
-            dataInicio.Format = DateTimePickerFormat.Short;
-            dataInicio.Location = new Point(10, 55);
-            dataInicio.Name = "dataInicio";
-            dataInicio.Size = new Size(162, 31);
-            dataInicio.TabIndex = 0;
+            dtpDataInicio.Format = DateTimePickerFormat.Short;
+            dtpDataInicio.Location = new Point(10, 55);
+            dtpDataInicio.Name = "dtpDataInicio";
+            dtpDataInicio.Size = new Size(162, 31);
+            dtpDataInicio.TabIndex = 0;
             // 
-            // dataFim
+            // dtpDataFim
             // 
-            dataFim.Format = DateTimePickerFormat.Short;
-            dataFim.Location = new Point(210, 55);
-            dataFim.Name = "dataFim";
-            dataFim.Size = new Size(162, 31);
-            dataFim.TabIndex = 1;
+            dtpDataFim.Format = DateTimePickerFormat.Short;
+            dtpDataFim.Location = new Point(210, 55);
+            dtpDataFim.Name = "dtpDataFim";
+            dtpDataFim.Size = new Size(162, 31);
+            dtpDataFim.TabIndex = 1;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(dataInicio);
-            groupBox1.Controls.Add(dataFim);
+            groupBox1.Controls.Add(dtpDataInicio);
+            groupBox1.Controls.Add(dtpDataFim);
             groupBox1.Location = new Point(12, 12);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(392, 99);
+            groupBox1.Size = new Size(395, 99);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Período para Atualização";
@@ -89,11 +89,10 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
             label1.Size = new Size(98, 25);
             label1.TabIndex = 2;
             label1.Text = "Data Inicial";
-            label1.Click += label1_Click;
             // 
             // btnExecutar
             // 
-            btnExecutar.Location = new Point(72, 276);
+            btnExecutar.Location = new Point(156, 289);
             btnExecutar.Name = "btnExecutar";
             btnExecutar.Principal = true;
             btnExecutar.Size = new Size(112, 34);
@@ -101,15 +100,6 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
             btnExecutar.Text = "Executar";
             btnExecutar.UseVisualStyleBackColor = true;
             btnExecutar.Click += btnExecutar_Click;
-            // 
-            // btnCancelar
-            // 
-            btnCancelar.Location = new Point(222, 276);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(112, 34);
-            btnCancelar.TabIndex = 4;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
             // 
             // contextMenuStrip1
             // 
@@ -119,13 +109,13 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
             // 
             // rtbInformacao
             // 
-            rtbInformacao.BackColor = SystemColors.HighlightText;
+            rtbInformacao.BackColor = SystemColors.Info;
+            rtbInformacao.Enabled = false;
             rtbInformacao.Location = new Point(12, 133);
             rtbInformacao.Name = "rtbInformacao";
-            rtbInformacao.Size = new Size(392, 79);
+            rtbInformacao.Size = new Size(395, 119);
             rtbInformacao.TabIndex = 6;
-            rtbInformacao.Text = "Processo para recalcular as planilhas 11 e 19 dentro da TOTVS RM";
-            rtbInformacao.TextChanged += richTextBox1_TextChanged;
+            rtbInformacao.Text = "Processo para recalcular as planilhas 11 e 19 dentro da TOTVS RM. Após iniciado não poderá ser parado.";
             // 
             // ArrumaBaseCheia
             // 
@@ -134,7 +124,6 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
             BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(419, 328);
             Controls.Add(rtbInformacao);
-            Controls.Add(btnCancelar);
             Controls.Add(btnExecutar);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.FixedSingle;

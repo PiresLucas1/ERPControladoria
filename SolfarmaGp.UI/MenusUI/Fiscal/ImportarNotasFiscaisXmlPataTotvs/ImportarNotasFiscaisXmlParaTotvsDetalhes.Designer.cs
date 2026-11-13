@@ -39,6 +39,10 @@
             gpHeader = new GroupBox();
             lbDataLancamento = new Label();
             dtLancamento = new DateTimePicker();
+            lbCodColigada = new Label();
+            tbCodColigada = new TextBox();
+            lbCodFilial = new Label();
+            tbCodFilial = new TextBox();
             tbNomeFornecedor = new TextBox();
             tbCodFornecedor = new TextBox();
             tbIdContasPagar = new TextBox();
@@ -156,6 +160,10 @@
             gpHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             gpHeader.Controls.Add(lbDataLancamento);
             gpHeader.Controls.Add(dtLancamento);
+            gpHeader.Controls.Add(lbCodColigada);
+            gpHeader.Controls.Add(tbCodColigada);
+            gpHeader.Controls.Add(lbCodFilial);
+            gpHeader.Controls.Add(tbCodFilial);
             gpHeader.Controls.Add(tbNomeFornecedor);
             gpHeader.Controls.Add(tbCodFornecedor);
             gpHeader.Controls.Add(tbIdContasPagar);
@@ -193,12 +201,46 @@
             dtLancamento.Size = new Size(141, 27);
             dtLancamento.TabIndex = 21;
             // 
+            // lbCodColigada
+            // 
+            lbCodColigada.AutoSize = true;
+            lbCodColigada.Location = new Point(881, 93);
+            lbCodColigada.Name = "lbCodColigada";
+            lbCodColigada.Size = new Size(67, 20);
+            lbCodColigada.TabIndex = 23;
+            lbCodColigada.Text = "Coligada:";
+            // 
+            // tbCodColigada
+            // 
+            tbCodColigada.Location = new Point(881, 116);
+            tbCodColigada.Name = "tbCodColigada";
+            tbCodColigada.Size = new Size(65, 27);
+            tbCodColigada.TabIndex = 24;
+            tbCodColigada.KeyPress += SomenteNumeros_KeyPress;
+            // 
+            // lbCodFilial
+            // 
+            lbCodFilial.AutoSize = true;
+            lbCodFilial.Location = new Point(957, 93);
+            lbCodFilial.Name = "lbCodFilial";
+            lbCodFilial.Size = new Size(42, 20);
+            lbCodFilial.TabIndex = 25;
+            lbCodFilial.Text = "Filial:";
+            // 
+            // tbCodFilial
+            // 
+            tbCodFilial.Location = new Point(957, 116);
+            tbCodFilial.Name = "tbCodFilial";
+            tbCodFilial.Size = new Size(65, 27);
+            tbCodFilial.TabIndex = 26;
+            tbCodFilial.KeyPress += SomenteNumeros_KeyPress;
+            // 
             // tbNomeFornecedor
             // 
             tbNomeFornecedor.BackColor = SystemColors.ScrollBar;
             tbNomeFornecedor.Location = new Point(623, 116);
             tbNomeFornecedor.Name = "tbNomeFornecedor";
-            tbNomeFornecedor.Size = new Size(387, 27);
+            tbNomeFornecedor.Size = new Size(240, 27);
             tbNomeFornecedor.TabIndex = 20;
             // 
             // tbCodFornecedor
@@ -372,5 +414,9 @@
         private Button btnAbrirXml;
         private Label lbDataLancamento;
         private DateTimePicker dtLancamento;
+        private Label lbCodColigada;
+        private TextBox tbCodColigada;
+        private Label lbCodFilial;
+        private TextBox tbCodFilial;
     }
 }
