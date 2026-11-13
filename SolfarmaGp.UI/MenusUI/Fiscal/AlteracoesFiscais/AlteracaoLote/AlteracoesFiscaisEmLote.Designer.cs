@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
 {
     partial class AlteracoesFiscaisEmLote
     {
@@ -32,25 +34,25 @@
             contextMenuStrip1 = new ContextMenuStrip(components);
             txtFiltroInput = new RichTextBox();
             lblFiltro = new Label();
-            gpFiltro = new GroupBox();
+            gpFiltro = new CartaoGroupBox();
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
             dtFim = new DateTimePicker();
             dtInicio = new DateTimePicker();
-            btnConsultar = new Button();
-            gbTipoAlteracao = new GroupBox();
+            btnConsultar = new BotaoModerno();
+            gbTipoAlteracao = new CartaoGroupBox();
             rbAlteraDataDocumento = new RadioButton();
             rbAlteraCodTmtv = new RadioButton();
-            btnAlteraCodMovimento = new Button();
-            groupBox1 = new GroupBox();
-            btnSelecionarVazio = new Button();
-            btnAlteraDataDocumento = new Button();
-            btnAlterarSelecionados = new Button();
-            button1 = new Button();
-            btnSelecionarTudo = new Button();
+            btnAlteraCodMovimento = new BotaoModerno();
+            groupBox1 = new CartaoGroupBox();
+            btnSelecionarVazio = new BotaoModerno();
+            btnAlteraDataDocumento = new BotaoModerno();
+            btnAlterarSelecionados = new BotaoModerno();
+            button1 = new BotaoModerno();
+            btnSelecionarTudo = new BotaoModerno();
             txtCountRows = new TextBox();
-            dvgIDMovs = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            dvgIDMovs = new GradeModerna();
             cbColigada = new TextBox();
             gpFiltro.SuspendLayout();
             gbTipoAlteracao.SuspendLayout();
@@ -154,6 +156,7 @@
             btnConsultar.Location = new Point(1272, 105);
             btnConsultar.Margin = new Padding(3, 2, 3, 2);
             btnConsultar.Name = "btnConsultar";
+            btnConsultar.Principal = true;
             btnConsultar.Size = new Size(108, 34);
             btnConsultar.TabIndex = 6;
             btnConsultar.Text = "Consultar";
@@ -325,6 +328,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(1418, 1012);
             Controls.Add(dvgIDMovs);
             Controls.Add(gpFiltro);
@@ -348,16 +352,16 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.RichTextBox txtFiltroInput;
         private System.Windows.Forms.Label lblFiltro;
-        private System.Windows.Forms.GroupBox gpFiltro;
-        private SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView dvgIDMovs;
-        private System.Windows.Forms.Button btnConsultar;
-        private System.Windows.Forms.Button btnAlteraCodMovimento;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnAlterarSelecionados;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnSelecionarTudo;
+        private CartaoGroupBox gpFiltro;
+        private GradeModerna dvgIDMovs;
+        private BotaoModerno btnConsultar;
+        private BotaoModerno btnAlteraCodMovimento;
+        private CartaoGroupBox groupBox1;
+        private BotaoModerno btnAlterarSelecionados;
+        private BotaoModerno button1;
+        private BotaoModerno btnSelecionarTudo;
         private System.Windows.Forms.TextBox txtCountRows;
-        private System.Windows.Forms.GroupBox gbTipoAlteracao;
+        private CartaoGroupBox gbTipoAlteracao;
         private System.Windows.Forms.RadioButton rbAlteraDataDocumento;
         private System.Windows.Forms.RadioButton rbAlteraCodTmtv;
         private System.Windows.Forms.DateTimePicker dtFim;
@@ -365,8 +369,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnAlteraDataDocumento;
-        private Button btnSelecionarVazio;
+        private BotaoModerno btnAlteraDataDocumento;
+        private BotaoModerno btnSelecionarVazio;
         private TextBox cbColigada;
     }
 }
