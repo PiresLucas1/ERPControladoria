@@ -20,19 +20,30 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
             rtbInformacao.SelectionAlignment = HorizontalAlignment.Center;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnExecutar_Click(object sender, EventArgs e)
         {
 
+            DateTime dtInicio = dtpDataInicio.Value.Date;
+            DateTime dtFIm = dtpDataFim.Value.Date;
+
+            if (dtInicio > dtFIm)
+            {
+                MessageBox.Show("Data inválida");
+                return;
+            }
+
+            DialogResult resultado =
+                MessageBox.Show(
+                    "Deseja confirmar o cálculo?",
+                    "Confirmação",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Information
+                    );
+
+            if (resultado == DialogResult.OK)
+            {
+                
+            }
         }
     }
 }
