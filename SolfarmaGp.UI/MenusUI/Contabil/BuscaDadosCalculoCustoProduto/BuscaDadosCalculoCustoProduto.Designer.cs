@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto
 {
     partial class BuscaDadosCalculoCustoProduto
     {
@@ -30,14 +32,14 @@
         {
             dtFim = new DateTimePicker();
             dtInicio = new DateTimePicker();
-            gpHeader = new GroupBox();
-            btnExecutar = new Button();
+            gpHeader = new CartaoGroupBox();
+            btnExecutar = new BotaoModerno();
             lbDataInicio = new Label();
             lbDataFim = new Label();
             rtbResultado = new RichTextBox();
             prbar = new ProgressBar();
-            btnClose = new Button();
-            gbFooter = new GroupBox();
+            btnClose = new BotaoModerno();
+            gbFooter = new CartaoGroupBox();
             chkBoxIcmsRetidoSubstituido = new CheckBox();
             chkAqsValorTransferencia = new CheckBox();
             chkBoxValorFrete = new CheckBox();
@@ -82,6 +84,7 @@
             // 
             btnExecutar.Location = new Point(537, 115);
             btnExecutar.Name = "btnExecutar";
+            btnExecutar.Principal = true;
             btnExecutar.Size = new Size(94, 40);
             btnExecutar.TabIndex = 2;
             btnExecutar.Text = "Executar";
@@ -213,6 +216,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(677, 650);
             Controls.Add(gbFooter);
             Controls.Add(prbar);
@@ -234,14 +238,14 @@
 
         private DateTimePicker dtFim;
         private DateTimePicker dtInicio;
-        private GroupBox gpHeader;
+        private CartaoGroupBox gpHeader;
         private Label lbDataInicio;
         private Label lbDataFim;
         private RichTextBox rtbResultado;
         private ProgressBar prbar;
-        private Button btnExecutar;
-        private Button btnClose;
-        private GroupBox gbFooter;
+        private BotaoModerno btnExecutar;
+        private BotaoModerno btnClose;
+        private CartaoGroupBox gbFooter;
         private CheckBox chkBoxIcmsRetidoSubstituido;
         private CheckBox chkAqsValorTransferencia;
         private CheckBox chkBoxValorFrete;

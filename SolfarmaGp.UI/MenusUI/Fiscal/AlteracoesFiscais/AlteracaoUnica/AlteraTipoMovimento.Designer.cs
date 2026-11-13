@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica
 {
     partial class AlteraTipoMovimento
     {
@@ -29,19 +31,19 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlteraTipoMovimento));
-            gbHeader = new GroupBox();
-            btnAlterarEmBloco = new Button();
+            gbHeader = new CartaoGroupBox();
+            btnAlterarEmBloco = new BotaoModerno();
             chkAlteraEmBloco = new CheckBox();
-            btnConsulta = new Button();
+            btnConsulta = new BotaoModerno();
             lbConsultaMovimento = new Label();
             tbCodMovimento = new TextBox();
             label2 = new Label();
             label1 = new Label();
             tbCodTmv = new TextBox();
             tbColigada = new TextBox();
-            dtAlteracoes = new DataGridView();
-            btnAlterar = new Button();
-            gbBottom = new GroupBox();
+            dtAlteracoes = new GradeModerna();
+            btnAlterar = new BotaoModerno();
+            gbBottom = new CartaoGroupBox();
             txtCount = new TextBox();
             gbHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtAlteracoes).BeginInit();
@@ -92,6 +94,7 @@
             // 
             btnConsulta.Location = new Point(232, 125);
             btnConsulta.Name = "btnConsulta";
+            btnConsulta.Principal = true;
             btnConsulta.Size = new Size(125, 39);
             btnConsulta.TabIndex = 8;
             btnConsulta.Text = "Consultar";
@@ -196,6 +199,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(1002, 830);
             Controls.Add(gbBottom);
             Controls.Add(dtAlteracoes);
@@ -214,19 +218,19 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox gbHeader;
-        private System.Windows.Forms.DataGridView dtAlteracoes;
+        private CartaoGroupBox gbHeader;
+        private GradeModerna dtAlteracoes;
         private System.Windows.Forms.Label lbConsultaMovimento;
         private System.Windows.Forms.TextBox tbCodMovimento;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbCodTmv;
         private System.Windows.Forms.TextBox tbColigada;
-        private System.Windows.Forms.Button btnConsulta;
-        private System.Windows.Forms.Button btnAlterar;
-        private System.Windows.Forms.GroupBox gbBottom;
+        private BotaoModerno btnConsulta;
+        private BotaoModerno btnAlterar;
+        private CartaoGroupBox gbBottom;
         private System.Windows.Forms.CheckBox chkAlteraEmBloco;
-        private System.Windows.Forms.Button btnAlterarEmBloco;
+        private BotaoModerno btnAlterarEmBloco;
         private System.Windows.Forms.TextBox txtCount;
     }
 }

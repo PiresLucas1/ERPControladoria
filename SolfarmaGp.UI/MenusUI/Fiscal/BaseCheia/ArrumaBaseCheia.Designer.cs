@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
 {
     partial class ArrumaBaseCheia
     {
@@ -31,11 +33,11 @@
             components = new System.ComponentModel.Container();
             dataInicio = new DateTimePicker();
             dataFim = new DateTimePicker();
-            groupBox1 = new GroupBox();
+            groupBox1 = new CartaoGroupBox();
             label2 = new Label();
             label1 = new Label();
-            btnExecutar = new Button();
-            btnCancelar = new Button();
+            btnExecutar = new BotaoModerno();
+            btnCancelar = new BotaoModerno();
             contextMenuStrip1 = new ContextMenuStrip(components);
             rtbInformacao = new RichTextBox();
             groupBox1.SuspendLayout();
@@ -93,6 +95,7 @@
             // 
             btnExecutar.Location = new Point(72, 276);
             btnExecutar.Name = "btnExecutar";
+            btnExecutar.Principal = true;
             btnExecutar.Size = new Size(112, 34);
             btnExecutar.TabIndex = 3;
             btnExecutar.Text = "Executar";
@@ -128,6 +131,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(419, 328);
             Controls.Add(rtbInformacao);
             Controls.Add(btnCancelar);
@@ -148,11 +152,11 @@
 
         private DateTimePicker dataInicio;
         private DateTimePicker dataFim;
-        private GroupBox groupBox1;
+        private CartaoGroupBox groupBox1;
         private Label label1;
         private Label label2;
-        private Button btnExecutar;
-        private Button btnCancelar;
+        private BotaoModerno btnExecutar;
+        private BotaoModerno btnCancelar;
         private ContextMenuStrip contextMenuStrip1;
         private RichTextBox rtbInformacao;
     }

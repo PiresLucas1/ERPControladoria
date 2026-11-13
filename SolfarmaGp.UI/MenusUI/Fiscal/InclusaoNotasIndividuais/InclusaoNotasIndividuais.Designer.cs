@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais
 {
     partial class InclusaoNotasIndividuais
     {
@@ -28,15 +30,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnAdiciona = new Button();
+            btnAdiciona = new BotaoModerno();
             lbNumdoc = new Label();
-            dvgNotasIncluidas = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            dvgNotasIncluidas = new GradeModerna();
             lbdtInicio = new Label();
             lbDataFim = new Label();
             dtpInicio = new DateTimePicker();
             dtpFim = new DateTimePicker();
             rtbNumDocs = new RichTextBox();
-            groupBox1 = new GroupBox();
+            groupBox1 = new CartaoGroupBox();
             ((System.ComponentModel.ISupportInitialize)dvgNotasIncluidas).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -46,6 +48,7 @@
             btnAdiciona.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnAdiciona.Location = new Point(632, 149);
             btnAdiciona.Name = "btnAdiciona";
+            btnAdiciona.Principal = true;
             btnAdiciona.Size = new Size(128, 30);
             btnAdiciona.TabIndex = 1;
             btnAdiciona.Text = "Adicionar";
@@ -128,6 +131,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(800, 602);
             Controls.Add(rtbNumDocs);
             Controls.Add(dtpFim);
@@ -146,14 +150,14 @@
         }
 
         #endregion
-        private Button btnAdiciona;
+        private BotaoModerno btnAdiciona;
         private Label lbNumdoc;
-        private ComponentesTelaUI.DataGridView.MyDataGridView dvgNotasIncluidas;
+        private GradeModerna dvgNotasIncluidas;
         private Label lbdtInicio;
         private Label lbDataFim;
         private DateTimePicker dtpInicio;
         private DateTimePicker dtpFim;
         private RichTextBox rtbNumDocs;
-        private GroupBox groupBox1;
+        private CartaoGroupBox groupBox1;
     }
 }

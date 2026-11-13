@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml
 {
     partial class ImportaXmlPasta
     {
@@ -39,7 +41,7 @@
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            btnExecute = new Button();
+            btnExecute = new BotaoModerno();
             tbCnpj = new TextBox();
             lbCnpj = new Label();
             chkBoxTipoImportacao = new CheckBox();
@@ -164,6 +166,7 @@
             btnExecute.ForeColor = SystemColors.ControlLightLight;
             btnExecute.Location = new Point(37, 589);
             btnExecute.Name = "btnExecute";
+            btnExecute.Principal = true;
             btnExecute.Size = new Size(553, 65);
             btnExecute.TabIndex = 13;
             btnExecute.Text = "Executar Exportação";
@@ -205,6 +208,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(641, 696);
             Controls.Add(chkBoxTipoImportacao);
             Controls.Add(lbCnpj);
@@ -244,7 +248,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnExecute;
+        private BotaoModerno btnExecute;
         private TextBox tbCnpj;
         private Label lbCnpj;
         private CheckBox chkBoxTipoImportacao;

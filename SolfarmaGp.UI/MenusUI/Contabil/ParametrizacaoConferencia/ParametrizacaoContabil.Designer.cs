@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Contabil
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Contabil
 {
     partial class ParametrizacaoContabil
     {
@@ -29,10 +31,10 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            dvgParametrizacao = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            btnAddItem = new Button();
+            dvgParametrizacao = new GradeModerna();
+            btnAddItem = new BotaoModerno();
             tbCount = new TextBox();
-            gpGeral = new GroupBox();
+            gpGeral = new CartaoGroupBox();
             btnLimpaFiltro = new Button();
             tbReduzidoCredito = new TextBox();
             tbReduzidoDebito = new TextBox();
@@ -42,10 +44,10 @@
             tbFilial = new TextBox();
             lbCodColigada = new Label();
             cbColigada = new ComboBox();
-            btnFiltrar = new Button();
+            btnFiltrar = new BotaoModerno();
             lbFilial = new Label();
-            btnSalvaParametros = new Button();
-            btnExcluir = new Button();
+            btnSalvaParametros = new BotaoModerno();
+            btnExcluir = new BotaoModerno();
             toolTip1 = new ToolTip(components);
             cbBanco = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dvgParametrizacao).BeginInit();
@@ -211,6 +213,7 @@
             btnSalvaParametros.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnSalvaParametros.Location = new Point(956, 851);
             btnSalvaParametros.Name = "btnSalvaParametros";
+            btnSalvaParametros.Principal = true;
             btnSalvaParametros.Size = new Size(165, 39);
             btnSalvaParametros.TabIndex = 6;
             btnSalvaParametros.Text = "Salvar Parametrização";
@@ -245,6 +248,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(1160, 910);
             Controls.Add(btnExcluir);
             Controls.Add(btnSalvaParametros);
@@ -264,26 +268,26 @@
 
         #endregion
 
-        private ComponentesTelaUI.DataGridView.MyDataGridView dvgParametrizacao;
+        private GradeModerna dvgParametrizacao;
         private Label label1;
-        private Button btnAddItem;
+        private BotaoModerno btnAddItem;
         private TextBox tbCount;
         private ComboBox cbTipoPesquisa;
-        private GroupBox gpGeral;
+        private CartaoGroupBox gpGeral;
         private Label lbValor;
         private Label lbFilial;
         private TextBox tbValorPesquisa;
-        private Button btnFiltrar;
+        private BotaoModerno btnFiltrar;
         private Label lbCodColigada;
         private ComboBox cbColigada;
-        private Button btnSalvaParametros;
+        private BotaoModerno btnSalvaParametros;
         private TextBox tbFilial;
         private TextBox tbReduzidoCredito;
         private TextBox tbReduzidoDebito;
         private Label lbCredito;
         private Label blContaDebito;
         private Label lbBanco;
-        private Button btnExcluir;
+        private BotaoModerno btnExcluir;
         private Button btnLimpaFiltro;
         private ToolTip toolTip1;
         private ComboBox cbBanco;

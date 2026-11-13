@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
 {
     partial class ConfereciaBoleto
     {
@@ -28,10 +30,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnImportarArquivo = new Button();
-            gpHeader = new GroupBox();
-            btnBuscarBase = new Button();
-            btnLimparTikTok = new Button();
+            btnImportarArquivo = new BotaoModerno();
+            gpHeader = new CartaoGroupBox();
+            btnBuscarBase = new BotaoModerno();
+            btnLimparTikTok = new BotaoModerno();
             chkBoxTikTok = new CheckBox();
             chkBoxComum = new CheckBox();
             laBanco = new Label();
@@ -42,8 +44,8 @@
             tbFilial = new TextBox();
             lbBanco = new Label();
             cbColigada = new ComboBox();
-            gbFiltros = new GroupBox();
-            button1 = new Button();
+            gbFiltros = new CartaoGroupBox();
+            button1 = new BotaoModerno();
             checkDataFiltro = new CheckBox();
             label6 = new Label();
             dtpDocumento = new DateTimePicker();
@@ -55,32 +57,32 @@
             tbComplemento = new TextBox();
             tbContaCredito = new TextBox();
             lbCredito = new Label();
-            btnFiltrar = new Button();
+            btnFiltrar = new BotaoModerno();
             tbContaDebito = new TextBox();
             lbContaDebito = new Label();
             lbNomaArquivo = new Label();
             txtFileName = new TextBox();
-            btnConferencia = new Button();
-            dvgRelacaoBoletos = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            btnConferencia = new BotaoModerno();
+            dvgRelacaoBoletos = new GradeModerna();
             tbControlBase = new TabControl();
             tbBaseImportada = new TabPage();
             tbBaseConferencia = new TabPage();
-            dvgConferencia = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            btnGeraLote = new Button();
-            btnVisualiza = new Button();
+            dvgConferencia = new GradeModerna();
+            btnGeraLote = new BotaoModerno();
+            btnVisualiza = new BotaoModerno();
             tbValor = new TextBox();
             label2 = new Label();
             label3 = new Label();
             tbValorReferente = new TextBox();
-            gpBottom = new GroupBox();
-            btnTotaisOutros = new Button();
+            gpBottom = new CartaoGroupBox();
+            btnTotaisOutros = new BotaoModerno();
             label10 = new Label();
             tbDebitoTotal = new TextBox();
             label9 = new Label();
             label8 = new Label();
             tbCreditoTotal = new TextBox();
             label7 = new Label();
-            btnExcluir = new Button();
+            btnExcluir = new BotaoModerno();
             gpHeader.SuspendLayout();
             gbFiltros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgRelacaoBoletos).BeginInit();
@@ -410,6 +412,7 @@
             btnConferencia.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnConferencia.Location = new Point(1065, 63);
             btnConferencia.Name = "btnConferencia";
+            btnConferencia.Principal = true;
             btnConferencia.Size = new Size(140, 35);
             btnConferencia.TabIndex = 9;
             btnConferencia.Text = "Conferir";
@@ -635,6 +638,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(1433, 982);
             Controls.Add(tbControlBase);
             Controls.Add(gpHeader);
@@ -658,27 +662,27 @@
 
         #endregion
 
-        private Button btnImportarArquivo;
-        private GroupBox gpHeader;
-        private ComponentesTelaUI.DataGridView.MyDataGridView dvgRelacaoBoletos;
+        private BotaoModerno btnImportarArquivo;
+        private CartaoGroupBox gpHeader;
+        private GradeModerna dvgRelacaoBoletos;
         private TextBox txtFileName;
         private TabControl tbControlBase;
         private TabPage tbBaseImportada;
         private TabPage tbBaseConferencia;
         private Label lbNomaArquivo;
         private TextBox tbContaDebito;
-        private Button btnConferencia;
+        private BotaoModerno btnConferencia;
         private ComboBox cbColigada;
-        private GroupBox gbFiltros;
+        private CartaoGroupBox gbFiltros;
         private Label lbBanco;
-        private ComponentesTelaUI.DataGridView.MyDataGridView dvgConferencia;
+        private GradeModerna dvgConferencia;
         private Label lbFilial;
         private TextBox tbFilial;
-        private Button btnFiltrar;
+        private BotaoModerno btnFiltrar;
         private Label lbCodPessoa;
         private TextBox tbCodPessoa;
-        private Button btnGeraLote;
-        private Button btnVisualiza;
+        private BotaoModerno btnGeraLote;
+        private BotaoModerno btnVisualiza;
         private Label laBanco;
         private ComboBox cbBanco;
         private TextBox tbValor;
@@ -690,7 +694,7 @@
         private TextBox tbContaCredito;
         private Label lbCredito;
         private Label lbContaDebito;
-        private GroupBox gpBottom;
+        private CartaoGroupBox gpBottom;
         private TextBox tbHistorico;
         private Label label4;
         private TextBox tbValorDocumento;
@@ -698,8 +702,8 @@
         private DateTimePicker dtpDocumento;
         private Label label6;
         private CheckBox checkDataFiltro;
-        private Button btnExcluir;
-        private Button button1;
+        private BotaoModerno btnExcluir;
+        private BotaoModerno button1;
         private TextBox tbCreditoTotal;
         private Label label7;
         private Label label8;
@@ -708,8 +712,8 @@
         private Label label9;
         private CheckBox chkBoxComum;
         private CheckBox chkBoxTikTok;
-        private Button btnBuscarBase;
-        private Button btnLimparTikTok;
-        private Button btnTotaisOutros;
+        private BotaoModerno btnBuscarBase;
+        private BotaoModerno btnLimparTikTok;
+        private BotaoModerno btnTotaisOutros;
     }
 }

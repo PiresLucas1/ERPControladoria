@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso
 {
     partial class GerenciaClientesReembolso
     {
@@ -28,15 +30,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dvgGerenciar = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            btnSalvar = new Button();
+            dvgGerenciar = new GradeModerna();
+            btnSalvar = new BotaoModerno();
             tbContador = new TextBox();
-            btnCancelar = new Button();
+            btnCancelar = new BotaoModerno();
             textBox2 = new TextBox();
             label1 = new Label();
             textBox3 = new TextBox();
             lbNome = new Label();
-            btnFiltrar = new Button();
+            btnFiltrar = new BotaoModerno();
             ((System.ComponentModel.ISupportInitialize)dvgGerenciar).BeginInit();
             SuspendLayout();
             // 
@@ -55,6 +57,7 @@
             btnSalvar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnSalvar.Location = new Point(670, 629);
             btnSalvar.Name = "btnSalvar";
+            btnSalvar.Principal = true;
             btnSalvar.Size = new Size(138, 39);
             btnSalvar.TabIndex = 1;
             btnSalvar.Text = "Salvar";
@@ -126,6 +129,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(842, 693);
             Controls.Add(btnFiltrar);
             Controls.Add(lbNome);
@@ -146,14 +150,14 @@
 
         #endregion
 
-        private ComponentesTelaUI.DataGridView.MyDataGridView dvgGerenciar;
-        private Button btnSalvar;
+        private GradeModerna dvgGerenciar;
+        private BotaoModerno btnSalvar;
         private TextBox tbContador;
-        private Button btnCancelar;
+        private BotaoModerno btnCancelar;
         private TextBox textBox2;
         private Label label1;
         private TextBox textBox3;
         private Label lbNome;
-        private Button btnFiltrar;
+        private BotaoModerno btnFiltrar;
     }
 }

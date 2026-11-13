@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs
 {
     partial class ImportaDadosBigTotvs
     {
@@ -33,22 +35,22 @@
             this.dtPickerFinal = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.gbFiltro = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbFiltro = new CartaoGroupBox();
+            this.groupBox1 = new CartaoGroupBox();
             this.chkSelecionado = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button1 = new BotaoModerno();
             this.txtNumeroNota = new System.Windows.Forms.TextBox();
-            this.btnPesquisar = new System.Windows.Forms.Button();
+            this.btnPesquisar = new BotaoModerno();
             this.label7 = new System.Windows.Forms.Label();
             this.cbConferida = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtFilial = new System.Windows.Forms.TextBox();
-            this.dtNotasImportadas = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dtNotasImportadas = new GradeModerna();
+            this.groupBox2 = new CartaoGroupBox();
             this.txtCount = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btn = new System.Windows.Forms.Button();
+            this.button2 = new BotaoModerno();
+            this.btn = new BotaoModerno();
             this.chkNaoConferida = new System.Windows.Forms.CheckBox();
             this.chkSubstituir = new System.Windows.Forms.CheckBox();
             this.gbFiltro.SuspendLayout();
@@ -178,6 +180,7 @@
             this.btnPesquisar.Location = new System.Drawing.Point(1017, 179);
             this.btnPesquisar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.Principal = true;
             this.btnPesquisar.Size = new System.Drawing.Size(141, 38);
             this.btnPesquisar.TabIndex = 7;
             this.btnPesquisar.Text = "Pesquisar";
@@ -311,6 +314,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = Color.FromArgb(245, 246, 248);
             this.ClientSize = new System.Drawing.Size(1233, 919);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.dtNotasImportadas);
@@ -337,22 +341,22 @@
         private System.Windows.Forms.DateTimePicker dtPickerFinal;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox gbFiltro;
+        private CartaoGroupBox gbFiltro;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtFilial;
-        private System.Windows.Forms.DataGridView dtNotasImportadas;
+        private GradeModerna dtNotasImportadas;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbConferida;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnPesquisar;
+        private CartaoGroupBox groupBox2;
+        private BotaoModerno btnPesquisar;
         private System.Windows.Forms.CheckBox chkNaoConferida;
         private System.Windows.Forms.CheckBox chkSubstituir;
-        private System.Windows.Forms.Button btn;
-        private System.Windows.Forms.Button button1;
+        private BotaoModerno btn;
+        private BotaoModerno button1;
         private System.Windows.Forms.TextBox txtNumeroNota;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button2;
+        private CartaoGroupBox groupBox1;
+        private BotaoModerno button2;
         private System.Windows.Forms.TextBox txtCount;
         private System.Windows.Forms.CheckBox chkSelecionado;
     }
