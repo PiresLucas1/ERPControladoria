@@ -5,6 +5,7 @@ using SolfarmaGp.UI.MenusUI.Contabil;
 using SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto;
 using SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto;
 using SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso;
+using SolfarmaGp.UI.MenusUI.DrogaCentro.Fiscal.ExportaNotasAlpha7;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica;
 using SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia;
@@ -512,6 +513,16 @@ namespace SolfarmaGp.UI.MenusUI
                 ArrumaBaseCheia arrumaBaseCheia = new ArrumaBaseCheia();
                 arrumaBaseCheia.MdiParent = this;
                 arrumaBaseCheia.Show();
+            }
+        }
+
+        private void exportacaoNotasFiscaisAlpha7ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ExportaNotasFiscaisAlpha7)))
+            {
+                ExportaNotasFiscaisAlpha7 exportaAlpha7 = new ExportaNotasFiscaisAlpha7();
+                exportaAlpha7.MdiParent = this;
+                exportaAlpha7.Show();
             }
         }
     }

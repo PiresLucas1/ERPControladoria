@@ -77,6 +77,9 @@
             toolStripMenuItem5 = new ToolStripMenuItem();
             txtNomeUsuario = new ToolStripMenuItem();
             baseCheiaToolStripMenuItem = new ToolStripMenuItem();
+            drogaCentroMenu = new ToolStripMenuItem();
+            drogaCentroFiscalToolStripMenuItem = new ToolStripMenuItem();
+            exportacaoNotasFiscaisAlpha7ToolStripMenuItem = new ToolStripMenuItem();
             menuBarTop.SuspendLayout();
             menuBarBottom.SuspendLayout();
             SuspendLayout();
@@ -85,7 +88,7 @@
             // 
             menuBarTop.BackColor = Color.DarkOrange;
             menuBarTop.ImageScalingSize = new Size(24, 24);
-            menuBarTop.Items.AddRange(new ToolStripItem[] { FiscalMenu, contabilToolStripMenuItem, ZanupMenu, gerencialToolStripMenuItem, gestãoProcessosToolStripMenuItem });
+            menuBarTop.Items.AddRange(new ToolStripItem[] { FiscalMenu, contabilToolStripMenuItem, ZanupMenu, gerencialToolStripMenuItem, gestãoProcessosToolStripMenuItem, drogaCentroMenu });
             menuBarTop.Location = new Point(0, 0);
             menuBarTop.Name = "menuBarTop";
             menuBarTop.Size = new Size(2045, 33);
@@ -422,6 +425,27 @@
             baseCheiaToolStripMenuItem.Size = new Size(376, 34);
             baseCheiaToolStripMenuItem.Text = "Base Cheia";
             baseCheiaToolStripMenuItem.Click += baseCheiaToolStripMenuItem_Click;
+            //
+            // drogaCentroMenu
+            //
+            drogaCentroMenu.DropDownItems.AddRange(new ToolStripItem[] { drogaCentroFiscalToolStripMenuItem });
+            drogaCentroMenu.Name = "drogaCentroMenu";
+            drogaCentroMenu.Size = new Size(120, 29);
+            drogaCentroMenu.Text = "DrogaCentro";
+            //
+            // drogaCentroFiscalToolStripMenuItem
+            //
+            drogaCentroFiscalToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exportacaoNotasFiscaisAlpha7ToolStripMenuItem });
+            drogaCentroFiscalToolStripMenuItem.Name = "drogaCentroFiscalToolStripMenuItem";
+            drogaCentroFiscalToolStripMenuItem.Size = new Size(200, 34);
+            drogaCentroFiscalToolStripMenuItem.Text = "Fiscal";
+            //
+            // exportacaoNotasFiscaisAlpha7ToolStripMenuItem
+            //
+            exportacaoNotasFiscaisAlpha7ToolStripMenuItem.Name = "exportacaoNotasFiscaisAlpha7ToolStripMenuItem";
+            exportacaoNotasFiscaisAlpha7ToolStripMenuItem.Size = new Size(380, 34);
+            exportacaoNotasFiscaisAlpha7ToolStripMenuItem.Text = "Exportação Notas Fiscais Alpha7";
+            exportacaoNotasFiscaisAlpha7ToolStripMenuItem.Click += exportacaoNotasFiscaisAlpha7ToolStripMenuItem_Click;
             // 
             // Portal
             // 
@@ -500,5 +524,8 @@
         private ToolStripMenuItem contabilizaçãoCustoDosProdutosToolStripMenuItem;
         private ToolStripMenuItem entradasComFiltroToolStripMenuItem;
         private ToolStripMenuItem baseCheiaToolStripMenuItem;
+        private ToolStripMenuItem drogaCentroMenu;
+        private ToolStripMenuItem drogaCentroFiscalToolStripMenuItem;
+        private ToolStripMenuItem exportacaoNotasFiscaisAlpha7ToolStripMenuItem;
     }
 }
