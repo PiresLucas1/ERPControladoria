@@ -82,7 +82,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "StatusProcess";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "StatusProcess";
+            this.Text = "Status do Processo";
             this.ResumeLayout(false);
             this.PerformLayout();
             this.Shown += StatusProcess_Shown;

@@ -46,6 +46,12 @@ namespace SolfarmaGp.UI.MenusUI
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             this.IsMdiContainer = true;
 
+            // Remove o ícone padrão da barra de título de todas as telas filhas abertas no Portal.
+            this.MdiChildActivate += (s, e) =>
+            {
+                if (ActiveMdiChild != null)
+                    ActiveMdiChild.ShowIcon = false;
+            };
 
             this.Shown += Portal_Shown;
             DesabilitaItemMenu(menuBarTop, "", false);
@@ -120,12 +126,14 @@ namespace SolfarmaGp.UI.MenusUI
             {
                 case 1:
                     DesabilitaItemMenu(menuBarTop, "FiscalMenu", true);
+                    DesabilitaItemMenu(menuBarTop, "drogaCentroMenu", true);
                     cadastrarUsuarioToolStripMenuItem.Enabled = false;
                     cadastrarUsuarioToolStripMenuItem.Visible = false;
                     break;
                 case 3:
                     DesabilitaItemMenu(menuBarTop, "FiscalMenu", true);
                     DesabilitaItemMenu(menuBarTop, "ZanupMenu", true);
+                    DesabilitaItemMenu(menuBarTop, "drogaCentroMenu", true);
                     cadastrarUsuarioToolStripMenuItem.Enabled = false;
                     cadastrarUsuarioToolStripMenuItem.Visible = false;
                     break;

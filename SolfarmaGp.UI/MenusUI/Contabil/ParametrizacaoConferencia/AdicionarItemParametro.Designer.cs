@@ -91,7 +91,7 @@
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "AdicionarItemParametro";
-            Text = "AdicionarItemParametro";
+            Text = "Adicionar Item Parametro";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -174,7 +174,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.Gerenciar
             Controls.Add(groupBox1);
             MaximizeBox = false;
             Name = "AlteracaoDePeriodo";
-            Text = "AlteraçãoDePeriodo";
+            Text = "Alteração de Período";
             Load += AlteracaoDePeriodo_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

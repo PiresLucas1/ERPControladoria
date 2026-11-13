@@ -30,10 +30,15 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             btnImportarArquivo = new BotaoModerno();
             gpHeader = new CartaoGroupBox();
             btnBuscarBase = new BotaoModerno();
-            btnLimparTikTok = new BotaoModerno();
             chkBoxTikTok = new CheckBox();
             chkBoxComum = new CheckBox();
             laBanco = new Label();
@@ -62,6 +67,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             lbContaDebito = new Label();
             lbNomaArquivo = new Label();
             txtFileName = new TextBox();
+            btnLimparTikTok = new BotaoModerno();
             btnConferencia = new BotaoModerno();
             dvgRelacaoBoletos = new GradeModerna();
             tbControlBase = new TabControl();
@@ -95,8 +101,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // 
             // btnImportarArquivo
             // 
+            btnImportarArquivo.FlatStyle = FlatStyle.Flat;
             btnImportarArquivo.Location = new Point(17, 84);
             btnImportarArquivo.Name = "btnImportarArquivo";
+            btnImportarArquivo.Principal = false;
+            btnImportarArquivo.Raio = 8;
             btnImportarArquivo.Size = new Size(189, 29);
             btnImportarArquivo.TabIndex = 0;
             btnImportarArquivo.Text = "Importar Arquivo Excel";
@@ -106,6 +115,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // gpHeader
             // 
             gpHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpHeader.BackColor = Color.White;
             gpHeader.Controls.Add(btnBuscarBase);
             gpHeader.Controls.Add(chkBoxTikTok);
             gpHeader.Controls.Add(chkBoxComum);
@@ -121,8 +131,10 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             gpHeader.Controls.Add(lbNomaArquivo);
             gpHeader.Controls.Add(txtFileName);
             gpHeader.Controls.Add(btnImportarArquivo);
+            gpHeader.CorBorda = Color.FromArgb(222, 225, 230);
             gpHeader.Location = new Point(12, 5);
             gpHeader.Name = "gpHeader";
+            gpHeader.Raio = 10;
             gpHeader.Size = new Size(1409, 234);
             gpHeader.TabIndex = 1;
             gpHeader.TabStop = false;
@@ -130,23 +142,16 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // 
             // btnBuscarBase
             // 
+            btnBuscarBase.FlatStyle = FlatStyle.Flat;
             btnBuscarBase.Location = new Point(479, 195);
             btnBuscarBase.Name = "btnBuscarBase";
+            btnBuscarBase.Principal = false;
+            btnBuscarBase.Raio = 8;
             btnBuscarBase.Size = new Size(89, 34);
             btnBuscarBase.TabIndex = 19;
             btnBuscarBase.Text = "Buscar";
             btnBuscarBase.UseVisualStyleBackColor = true;
             btnBuscarBase.Click += btnBuscarBase_Click;
-            // 
-            // btnLimparTikTok
-            // 
-            btnLimparTikTok.Location = new Point(625, 17);
-            btnLimparTikTok.Name = "btnLimparTikTok";
-            btnLimparTikTok.Size = new Size(120, 34);
-            btnLimparTikTok.TabIndex = 20;
-            btnLimparTikTok.Text = "Limpar TikTok";
-            btnLimparTikTok.UseVisualStyleBackColor = true;
-            btnLimparTikTok.Click += btnLimparTikTok_Click;
             // 
             // chkBoxTikTok
             // 
@@ -239,6 +244,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // 
             // gbFiltros
             // 
+            gbFiltros.BackColor = Color.White;
             gbFiltros.Controls.Add(button1);
             gbFiltros.Controls.Add(checkDataFiltro);
             gbFiltros.Controls.Add(label6);
@@ -254,8 +260,10 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             gbFiltros.Controls.Add(btnFiltrar);
             gbFiltros.Controls.Add(tbContaDebito);
             gbFiltros.Controls.Add(lbContaDebito);
+            gbFiltros.CorBorda = Color.FromArgb(222, 225, 230);
             gbFiltros.Location = new Point(614, 17);
             gbFiltros.Name = "gbFiltros";
+            gbFiltros.Raio = 10;
             gbFiltros.Size = new Size(741, 171);
             gbFiltros.TabIndex = 7;
             gbFiltros.TabStop = false;
@@ -263,8 +271,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // 
             // button1
             // 
+            button1.FlatStyle = FlatStyle.Flat;
             button1.Location = new Point(469, 116);
             button1.Name = "button1";
+            button1.Principal = false;
+            button1.Raio = 8;
             button1.Size = new Size(114, 34);
             button1.TabIndex = 22;
             button1.Text = "Limpar filtro";
@@ -365,8 +376,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // 
             // btnFiltrar
             // 
+            btnFiltrar.FlatStyle = FlatStyle.Flat;
             btnFiltrar.Location = new Point(596, 116);
             btnFiltrar.Name = "btnFiltrar";
+            btnFiltrar.Principal = false;
+            btnFiltrar.Raio = 8;
             btnFiltrar.Size = new Size(114, 34);
             btnFiltrar.TabIndex = 10;
             btnFiltrar.Text = "Filtrar";
@@ -407,12 +421,27 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             txtFileName.Size = new Size(269, 27);
             txtFileName.TabIndex = 1;
             // 
+            // btnLimparTikTok
+            // 
+            btnLimparTikTok.FlatStyle = FlatStyle.Flat;
+            btnLimparTikTok.Location = new Point(625, 17);
+            btnLimparTikTok.Name = "btnLimparTikTok";
+            btnLimparTikTok.Principal = false;
+            btnLimparTikTok.Raio = 8;
+            btnLimparTikTok.Size = new Size(120, 34);
+            btnLimparTikTok.TabIndex = 20;
+            btnLimparTikTok.Text = "Limpar TikTok";
+            btnLimparTikTok.UseVisualStyleBackColor = true;
+            btnLimparTikTok.Click += btnLimparTikTok_Click;
+            // 
             // btnConferencia
             // 
             btnConferencia.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnConferencia.FlatStyle = FlatStyle.Flat;
             btnConferencia.Location = new Point(1065, 63);
             btnConferencia.Name = "btnConferencia";
             btnConferencia.Principal = true;
+            btnConferencia.Raio = 8;
             btnConferencia.Size = new Size(140, 35);
             btnConferencia.TabIndex = 9;
             btnConferencia.Text = "Conferir";
@@ -423,9 +452,33 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // 
             dvgRelacaoBoletos.AllowUserToAddRows = false;
             dvgRelacaoBoletos.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(250, 251, 252);
+            dvgRelacaoBoletos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dvgRelacaoBoletos.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dvgRelacaoBoletos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dvgRelacaoBoletos.BackgroundColor = Color.White;
+            dvgRelacaoBoletos.BorderStyle = BorderStyle.None;
+            dvgRelacaoBoletos.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dvgRelacaoBoletos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(245, 246, 248);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(60, 60, 60);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(245, 246, 248);
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(60, 60, 60);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dvgRelacaoBoletos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dvgRelacaoBoletos.ColumnHeadersHeight = 29;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(253, 232, 220);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dvgRelacaoBoletos.DefaultCellStyle = dataGridViewCellStyle3;
+            dvgRelacaoBoletos.EnableHeadersVisualStyles = false;
+            dvgRelacaoBoletos.GridColor = Color.FromArgb(235, 237, 240);
             dvgRelacaoBoletos.Location = new Point(13, 8);
             dvgRelacaoBoletos.Name = "dvgRelacaoBoletos";
             dvgRelacaoBoletos.RowHeadersWidth = 51;
@@ -467,9 +520,33 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // 
             // dvgConferencia
             // 
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(250, 251, 252);
+            dvgConferencia.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             dvgConferencia.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dvgConferencia.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dvgConferencia.BackgroundColor = Color.White;
+            dvgConferencia.BorderStyle = BorderStyle.None;
+            dvgConferencia.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dvgConferencia.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(245, 246, 248);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = Color.FromArgb(60, 60, 60);
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(245, 246, 248);
+            dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(60, 60, 60);
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            dvgConferencia.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dvgConferencia.ColumnHeadersHeight = 29;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(253, 232, 220);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dvgConferencia.DefaultCellStyle = dataGridViewCellStyle6;
+            dvgConferencia.EnableHeadersVisualStyles = false;
+            dvgConferencia.GridColor = Color.FromArgb(235, 237, 240);
             dvgConferencia.Location = new Point(3, 6);
             dvgConferencia.Name = "dvgConferencia";
             dvgConferencia.RowHeadersWidth = 51;
@@ -479,8 +556,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // btnGeraLote
             // 
             btnGeraLote.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnGeraLote.FlatStyle = FlatStyle.Flat;
             btnGeraLote.Location = new Point(1227, 63);
             btnGeraLote.Name = "btnGeraLote";
+            btnGeraLote.Principal = false;
+            btnGeraLote.Raio = 8;
             btnGeraLote.Size = new Size(153, 35);
             btnGeraLote.TabIndex = 10;
             btnGeraLote.Text = "Gerar lotes";
@@ -490,8 +570,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // btnVisualiza
             // 
             btnVisualiza.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnVisualiza.FlatStyle = FlatStyle.Flat;
             btnVisualiza.Location = new Point(1227, 20);
             btnVisualiza.Name = "btnVisualiza";
+            btnVisualiza.Principal = false;
+            btnVisualiza.Raio = 8;
             btnVisualiza.Size = new Size(153, 35);
             btnVisualiza.TabIndex = 11;
             btnVisualiza.Text = "Visualizar";
@@ -537,6 +620,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // gpBottom
             // 
             gpBottom.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gpBottom.BackColor = Color.White;
             gpBottom.Controls.Add(btnTotaisOutros);
             gpBottom.Controls.Add(btnLimparTikTok);
             gpBottom.Controls.Add(label10);
@@ -553,16 +637,21 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             gpBottom.Controls.Add(tbValor);
             gpBottom.Controls.Add(label2);
             gpBottom.Controls.Add(btnConferencia);
+            gpBottom.CorBorda = Color.FromArgb(222, 225, 230);
             gpBottom.Location = new Point(16, 872);
             gpBottom.Name = "gpBottom";
+            gpBottom.Raio = 10;
             gpBottom.Size = new Size(1401, 108);
             gpBottom.TabIndex = 21;
             gpBottom.TabStop = false;
             // 
             // btnTotaisOutros
             // 
+            btnTotaisOutros.FlatStyle = FlatStyle.Flat;
             btnTotaisOutros.Location = new Point(625, 56);
             btnTotaisOutros.Name = "btnTotaisOutros";
+            btnTotaisOutros.Principal = false;
+            btnTotaisOutros.Raio = 8;
             btnTotaisOutros.Size = new Size(120, 36);
             btnTotaisOutros.TabIndex = 28;
             btnTotaisOutros.Text = "Ver Totais";
@@ -626,8 +715,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             // btnExcluir
             // 
             btnExcluir.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExcluir.FlatStyle = FlatStyle.Flat;
             btnExcluir.Location = new Point(889, 63);
             btnExcluir.Name = "btnExcluir";
+            btnExcluir.Principal = false;
+            btnExcluir.Raio = 8;
             btnExcluir.Size = new Size(140, 35);
             btnExcluir.TabIndex = 21;
             btnExcluir.Text = "Excluir";
@@ -644,6 +736,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             Controls.Add(gpHeader);
             Controls.Add(gpBottom);
             Name = "ConfereciaBoleto";
+            ShowIcon = false;
             Text = "Conferecia de Extrato";
             Load += ConfereciaBoleto_Load;
             gpHeader.ResumeLayout(false);

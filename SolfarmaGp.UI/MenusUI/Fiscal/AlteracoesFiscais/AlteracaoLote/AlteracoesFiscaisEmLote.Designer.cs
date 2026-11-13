@@ -335,7 +335,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote
             Controls.Add(groupBox1);
             Margin = new Padding(3, 2, 3, 2);
             Name = "AlteracoesFiscaisEmLote";
-            Text = "AlterarTipoMovimentoLista";
+            Text = "Alterar Tipo de Movimento em Lista";
             gpFiltro.ResumeLayout(false);
             gpFiltro.PerformLayout();
             gbTipoAlteracao.ResumeLayout(false);

@@ -206,7 +206,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica
             Controls.Add(gbHeader);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AlteraTipoMovimento";
-            Text = "AlteraTipoMovimento";
+            Text = "Alterar Tipo de Movimento";
             gbHeader.ResumeLayout(false);
             gbHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dtAlteracoes).EndInit();

@@ -68,13 +68,16 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto
             // 
             // gpHeader
             // 
+            gpHeader.BackColor = Color.White;
             gpHeader.Controls.Add(btnExecutar);
             gpHeader.Controls.Add(lbDataInicio);
             gpHeader.Controls.Add(lbDataFim);
             gpHeader.Controls.Add(dtInicio);
             gpHeader.Controls.Add(dtFim);
+            gpHeader.CorBorda = Color.FromArgb(222, 225, 230);
             gpHeader.Location = new Point(12, 12);
             gpHeader.Name = "gpHeader";
+            gpHeader.Raio = 10;
             gpHeader.Size = new Size(648, 172);
             gpHeader.TabIndex = 2;
             gpHeader.TabStop = false;
@@ -82,9 +85,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto
             // 
             // btnExecutar
             // 
+            btnExecutar.FlatStyle = FlatStyle.Flat;
             btnExecutar.Location = new Point(537, 115);
             btnExecutar.Name = "btnExecutar";
             btnExecutar.Principal = true;
+            btnExecutar.Raio = 8;
             btnExecutar.Size = new Size(94, 40);
             btnExecutar.TabIndex = 2;
             btnExecutar.Text = "Executar";
@@ -130,8 +135,11 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto
             // 
             // btnClose
             // 
+            btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Location = new Point(17, 593);
             btnClose.Name = "btnClose";
+            btnClose.Principal = false;
+            btnClose.Raio = 8;
             btnClose.Size = new Size(94, 40);
             btnClose.TabIndex = 6;
             btnClose.Text = "Fechar";
@@ -139,14 +147,17 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto
             // 
             // gbFooter
             // 
+            gbFooter.BackColor = Color.White;
             gbFooter.Controls.Add(chkBoxIcmsRetidoSubstituido);
             gbFooter.Controls.Add(chkAqsValorTransferencia);
             gbFooter.Controls.Add(chkBoxValorFrete);
             gbFooter.Controls.Add(chkBoxReembolsoSaida);
             gbFooter.Controls.Add(chkBoxIcmsSt);
             gbFooter.Controls.Add(chkBoxReembolsoEntrada);
+            gbFooter.CorBorda = Color.FromArgb(222, 225, 230);
             gbFooter.Location = new Point(12, 472);
             gbFooter.Name = "gbFooter";
+            gbFooter.Raio = 10;
             gbFooter.Size = new Size(645, 103);
             gbFooter.TabIndex = 7;
             gbFooter.TabStop = false;
@@ -226,6 +237,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "BuscaDadosCalculoCustoProduto";
+            ShowIcon = false;
             Text = "Contabilização do Custo dos Produtos";
             gpHeader.ResumeLayout(false);
             gpHeader.PerformLayout();

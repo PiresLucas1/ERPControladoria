@@ -57,7 +57,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml
             richTextBox1.ForeColor = SystemColors.InfoText;
             richTextBox1.Location = new Point(185, 37);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(340, 103);
+            richTextBox1.Size = new Size(267, 57);
             richTextBox1.TabIndex = 0;
             richTextBox1.Text = "Exportação de XML";
             // 
@@ -162,11 +162,13 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml
             // btnExecute
             // 
             btnExecute.BackColor = SystemColors.Highlight;
+            btnExecute.FlatStyle = FlatStyle.Flat;
             btnExecute.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnExecute.ForeColor = SystemColors.ControlLightLight;
             btnExecute.Location = new Point(37, 589);
             btnExecute.Name = "btnExecute";
             btnExecute.Principal = true;
+            btnExecute.Raio = 8;
             btnExecute.Size = new Size(553, 65);
             btnExecute.TabIndex = 13;
             btnExecute.Text = "Executar Exportação";
@@ -228,7 +230,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "ImportaXmlPasta";
-            Text = "ExportaXml";
+            Text = "Exportar XML";
             Load += ImportaXmlPasta_Load;
             ResumeLayout(false);
             PerformLayout();

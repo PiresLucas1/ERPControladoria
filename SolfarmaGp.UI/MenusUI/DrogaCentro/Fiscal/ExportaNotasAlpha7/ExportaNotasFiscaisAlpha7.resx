@@ -117,14 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="rtbInformacao.Text" xml:space="preserve">
-    <value>Exporta os dados do Alpha7 para o Totvs.
-
-A exportação roda em sequência:
-1. Produtos (cadastrados desde o 1º dia do mês atual)
-2. Cliente/Fornecedor (cadastrados desde o 1º dia do mês atual)
-3. Notas Fiscais (período e filtros abaixo)
-
-Nenhuma etapa substitui registros existentes. Se uma etapa falhar, as seguintes não são executadas.</value>
-  </data>
 </root>

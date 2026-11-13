@@ -89,7 +89,8 @@
             Controls.Add(btnCancelar);
             Controls.Add(dvgResumo);
             Name = "AdicionaParametroResumido";
-            Text = "AdicionaParametroResumido";
+            ShowIcon = false;
+            Text = "Adiciona Parametro Resumido";
             ((System.ComponentModel.ISupportInitialize)dvgResumo).EndInit();
             ResumeLayout(false);
         }
