@@ -80,6 +80,7 @@
             drogaCentroMenu = new ToolStripMenuItem();
             drogaCentroFiscalToolStripMenuItem = new ToolStripMenuItem();
             exportacaoNotasFiscaisAlpha7ToolStripMenuItem = new ToolStripMenuItem();
+            exportacaoNotasFiscaisZanupToolStripMenuItem = new ToolStripMenuItem();
             menuBarTop.SuspendLayout();
             menuBarBottom.SuspendLayout();
             SuspendLayout();
@@ -272,7 +273,7 @@
             // 
             // ZanupMenu
             // 
-            ZanupMenu.DropDownItems.AddRange(new ToolStripItem[] { devoluçaoDeNotasToolStripMenuItem, criarNotaZanupToolStripMenuItem });
+            ZanupMenu.DropDownItems.AddRange(new ToolStripItem[] { devoluçaoDeNotasToolStripMenuItem, criarNotaZanupToolStripMenuItem, exportacaoNotasFiscaisZanupToolStripMenuItem });
             ZanupMenu.Enabled = false;
             ZanupMenu.Name = "ZanupMenu";
             ZanupMenu.Size = new Size(78, 29);
@@ -290,6 +291,13 @@
             criarNotaZanupToolStripMenuItem.Name = "criarNotaZanupToolStripMenuItem";
             criarNotaZanupToolStripMenuItem.Size = new Size(272, 34);
             criarNotaZanupToolStripMenuItem.Text = "Criar Nota Zanup";
+            //
+            // exportacaoNotasFiscaisZanupToolStripMenuItem
+            //
+            exportacaoNotasFiscaisZanupToolStripMenuItem.Name = "exportacaoNotasFiscaisZanupToolStripMenuItem";
+            exportacaoNotasFiscaisZanupToolStripMenuItem.Size = new Size(272, 34);
+            exportacaoNotasFiscaisZanupToolStripMenuItem.Text = "Exportação Notas Fiscais";
+            exportacaoNotasFiscaisZanupToolStripMenuItem.Click += exportacaoNotasFiscaisZanupToolStripMenuItem_Click;
             // 
             // gerencialToolStripMenuItem
             // 
@@ -527,5 +535,6 @@
         private ToolStripMenuItem drogaCentroMenu;
         private ToolStripMenuItem drogaCentroFiscalToolStripMenuItem;
         private ToolStripMenuItem exportacaoNotasFiscaisAlpha7ToolStripMenuItem;
+        private ToolStripMenuItem exportacaoNotasFiscaisZanupToolStripMenuItem;
     }
 }

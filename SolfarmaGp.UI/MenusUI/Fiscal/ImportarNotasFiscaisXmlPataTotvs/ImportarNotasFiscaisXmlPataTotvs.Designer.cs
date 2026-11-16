@@ -253,7 +253,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             groupBox1.Size = new Size(504, 159);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
+            groupBox1.Text = "";
             // 
             // chkboxLancamento
             // 

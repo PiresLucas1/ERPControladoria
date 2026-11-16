@@ -16,6 +16,7 @@ using SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml;
 using SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais;
 using SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta;
 using SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView;
+using SolfarmaGp.UI.MenusUI.Zanup.ExportaNotasFiscais;
 using SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota;
 using SolfarmaGP.view.FiscalView;
 using System.Reflection;
@@ -531,6 +532,16 @@ namespace SolfarmaGp.UI.MenusUI
                 ExportaNotasFiscaisAlpha7 exportaAlpha7 = new ExportaNotasFiscaisAlpha7();
                 exportaAlpha7.MdiParent = this;
                 exportaAlpha7.Show();
+            }
+        }
+
+        private void exportacaoNotasFiscaisZanupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ExportaNotasFiscaisZanup)))
+            {
+                ExportaNotasFiscaisZanup exportaZanup = new ExportaNotasFiscaisZanup();
+                exportaZanup.MdiParent = this;
+                exportaZanup.Show();
             }
         }
     }

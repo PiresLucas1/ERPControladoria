@@ -25,20 +25,38 @@ namespace SolfarmaGp.UI.ComponentesTelaUI.Moderno
             g.Clear(Parent?.BackColor ?? SystemColors.Control);
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
-            using (var path = FormasModernas.RetanguloArredondado(new Rectangle(0, 0, Width - 1, Height - 1), Raio))
+            // Cartão dentro de cartão fica pesado: um grupo aninhado vira só um subtítulo discreto
+            // (sem fundo e sem borda) e, se não tiver título, é apenas um contêiner invisível.
+            bool aninhado = Parent is CartaoGroupBox;
+
+            if (!aninhado)
             {
-                using (var pincel = new SolidBrush(BackColor))
-                    g.FillPath(pincel, path);
-                using (var pen = new Pen(CorBorda))
-                    g.DrawPath(pen, path);
+                using (var path = FormasModernas.RetanguloArredondado(new Rectangle(0, 0, Width - 1, Height - 1), Raio))
+                {
+                    using (var pincel = new SolidBrush(BackColor))
+                        g.FillPath(pincel, path);
+                    using (var pen = new Pen(CorBorda))
+                        g.DrawPath(pen, path);
+                }
             }
 
             if (!string.IsNullOrEmpty(Text))
             {
-                using var negrito = new Font(Font, FontStyle.Bold);
-                Color cor = Enabled ? Color.FromArgb(40, 40, 40) : SystemColors.GrayText;
-                TextRenderer.DrawText(g, Text, negrito, new Point(10, 3), cor,
-                    TextFormatFlags.NoPadding | TextFormatFlags.EndEllipsis);
+                Color cor = Enabled
+                    ? (aninhado ? Color.FromArgb(96, 96, 96) : Color.FromArgb(40, 40, 40))
+                    : SystemColors.GrayText;
+
+                if (aninhado)
+                {
+                    TextRenderer.DrawText(g, Text, Font, new Point(2, 0), cor,
+                        TextFormatFlags.NoPadding | TextFormatFlags.EndEllipsis);
+                }
+                else
+                {
+                    using var negrito = new Font(Font, FontStyle.Bold);
+                    TextRenderer.DrawText(g, Text, negrito, new Point(10, 3), cor,
+                        TextFormatFlags.NoPadding | TextFormatFlags.EndEllipsis);
+                }
             }
         }
     }

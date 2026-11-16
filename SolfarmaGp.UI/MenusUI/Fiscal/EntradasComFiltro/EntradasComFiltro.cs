@@ -77,16 +77,27 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.EntradasComFiltro
                 return;
             }
 
-            DefineOcupado(true, "Consultando notas, aguarde...");
+            DefineOcupado(true, "Validando coligada e filial...");
             string mensagemFinal = "";
+            string? avisoFiltro = null;
             Exception? falha = null;
+            bool consultou = false;
 
             try
             {
-                var useCase = new BuscaEntradasComFiltroUseCase();
-                dtResultado = await useCase.Execute(dataInicio, dataFim, coligada, filial, tipoMovimento);
-                dtEntradasComFiltro.DataSource = dtResultado;
-                mensagemFinal = $"{dtResultado.Rows.Count} linha(s) retornada(s).";
+                // Coligada/filial inexistentes devolveriam "0 linhas", igual a uma busca sem notas.
+                // Conferimos antes para avisar o que realmente está errado.
+                avisoFiltro = await new ValidaColigadaFilialUseCase().Execute(coligada, filial);
+
+                if (avisoFiltro == null)
+                {
+                    lbStatus.Text = "Consultando notas, aguarde...";
+                    var useCase = new BuscaEntradasComFiltroUseCase();
+                    dtResultado = await useCase.Execute(dataInicio, dataFim, coligada, filial, tipoMovimento);
+                    dtEntradasComFiltro.DataSource = dtResultado;
+                    mensagemFinal = $"{dtResultado.Rows.Count} linha(s) retornada(s).";
+                    consultou = true;
+                }
             }
             catch (Exception ex)
             {
@@ -94,13 +105,25 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.EntradasComFiltro
             }
             finally
             {
-                DefineOcupado(false, falha == null ? mensagemFinal : "Falha na consulta.");
+                string statusFinal = falha != null ? "Falha na consulta."
+                                   : avisoFiltro != null ? "Coligada/filial inválida."
+                                   : mensagemFinal;
+                DefineOcupado(false, statusFinal);
             }
 
             if (falha != null)
+            {
                 MessageBox.Show(this, falha.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            else
+            }
+            else if (avisoFiltro != null)
+            {
+                MessageBox.Show(this, avisoFiltro, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtBxColigada.Focus();
+            }
+            else if (consultou)
+            {
                 MessageBox.Show(this, $"Linhas retornadas: {dtResultado.Rows.Count}");
+            }
         }
 
         private async void btExportar_Click(object sender, EventArgs e)
