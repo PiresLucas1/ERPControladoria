@@ -99,7 +99,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
             btnExecutar.TabIndex = 3;
             btnExecutar.Text = "Executar";
             btnExecutar.UseVisualStyleBackColor = true;
-            btnExecutar.Click += btnExecutar_Click;
+            btnExecutar.Click += this.btnExecutar_Click;
             // 
             // contextMenuStrip1
             // 
