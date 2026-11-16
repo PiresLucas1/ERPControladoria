@@ -14,37 +14,38 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
 
         private async void btnExecutar_Click(object sender, EventArgs e)
         {
-
-            DateTime dtInicio = dtpDataInicio.Value.Date;
-            DateTime dtFim = dtpDataFim.Value.Date;
-
-            if (dtInicio > dtFim)
+            try
             {
-                MessageBox.Show("A data inicial não pode ser maior que a data final.");
-                return;
+                DateTime dtInicio = dtpDataInicio.Value.Date;
+                DateTime dtFim = dtpDataFim.Value.Date;
+
+                if (dtInicio > dtFim)
+                {
+                    MessageBox.Show("A data inicial não pode ser maior que a data final.", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                DialogResult resultado =
+                    MessageBox.Show(
+                        "Deseja confirmar o recálculo?",
+                        "Confirmação",
+                        MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Question
+                        );
+
+                if (resultado == DialogResult.OK)
+                {
+                    var retono = await AlteraBase(dtInicio, dtFim);
+
+                    if (retono == true)
+                    {
+                        MessageBox.Show("Base recálculada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
             }
-
-            DialogResult resultado =
-                MessageBox.Show(
-                    "Deseja confirmar o cálculo?",
-                    "Confirmação",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Information
-                    );
-
-            if (resultado == DialogResult.OK)
+            catch (ArgumentException ex)
             {
-                var retono = await AlteraBase(dtInicio, dtFim);
-                
-                if(retono)
-                {
-                    MessageBox.Show("Base recálculada com sucesso!");
-                }
-                else
-                {
-                    MessageBox.Show("Erro no recálculo da base.");
-                }
-
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -56,7 +57,5 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
 
             return retorno;
         }
-
-       
     }
 }

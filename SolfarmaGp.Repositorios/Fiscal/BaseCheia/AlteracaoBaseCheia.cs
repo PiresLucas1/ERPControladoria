@@ -30,11 +30,10 @@ namespace SolfarmaGp.Repositorios.Fiscal.BaseCheia
                 }
 
                 return true;
-
             }
             catch (SqlException ex)
             {
-                throw new ArgumentException("ERRO INTERNO: " + ex.Message, ex);
+                throw new ArgumentException("Erro ao Recalcular: " + ex.Message, ex);
             }
         }
     }
