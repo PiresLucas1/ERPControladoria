@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using SolfarmaGp.Controllers.UseCase.Fiscal.BaseCheia;
 
 namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
 {
@@ -20,15 +12,15 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
             rtbInformacao.SelectionAlignment = HorizontalAlignment.Center;
         }
 
-        private void btnExecutar_Click(object sender, EventArgs e)
+        private async void btnExecutar_Click(object sender, EventArgs e)
         {
 
             DateTime dtInicio = dtpDataInicio.Value.Date;
-            DateTime dtFIm = dtpDataFim.Value.Date;
+            DateTime dtFim = dtpDataFim.Value.Date;
 
-            if (dtInicio > dtFIm)
+            if (dtInicio > dtFim)
             {
-                MessageBox.Show("Data inválida");
+                MessageBox.Show("A data inicial não pode ser maior que a data final");
                 return;
             }
 
@@ -42,8 +34,29 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
 
             if (resultado == DialogResult.OK)
             {
+                var retono = await AlteraBase(dtInicio, dtFim);
                 
+                if(retono)
+                {
+                    MessageBox.Show("Base recálculada com sucesso!");
+                }
+                else
+                {
+                    MessageBox.Show("Erro no recálculo da base.");
+                }
+
             }
         }
+
+        public async Task<bool> AlteraBase(DateTime dtInicio, DateTime dtFim)
+        {
+            AlteracaoBaseCheiaUseCase useCase = new AlteracaoBaseCheiaUseCase();
+
+            var retorno = await useCase.Executar(dtInicio, dtFim);
+
+            return retorno;
+        }
+
+       
     }
 }
