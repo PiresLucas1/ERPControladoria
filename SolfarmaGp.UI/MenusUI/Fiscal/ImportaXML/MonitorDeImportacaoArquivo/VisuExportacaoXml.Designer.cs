@@ -70,7 +70,7 @@
             this.Controls.Add(this.rtBoxResultado);
             
             this.Name = "VisuExportacaoXml";
-            this.Text = "VisuExportacaoXml";
+            this.Text = "Visualização da Exportação XML";
             this.ResumeLayout(false);
             this.PerformLayout();
 

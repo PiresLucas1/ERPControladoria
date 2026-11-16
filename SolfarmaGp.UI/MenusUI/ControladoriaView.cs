@@ -5,6 +5,7 @@ using SolfarmaGp.UI.MenusUI.Contabil;
 using SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto;
 using SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto;
 using SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso;
+using SolfarmaGp.UI.MenusUI.DrogaCentro.Fiscal.ExportaNotasAlpha7;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoLote;
 using SolfarmaGp.UI.MenusUI.Fiscal.AlteracoesFiscais.AlteracaoUnica;
 using SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia;
@@ -15,6 +16,7 @@ using SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml;
 using SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais;
 using SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta;
 using SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView;
+using SolfarmaGp.UI.MenusUI.Zanup.ExportaNotasFiscais;
 using SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota;
 using SolfarmaGP.view.FiscalView;
 using System.Reflection;
@@ -45,6 +47,12 @@ namespace SolfarmaGp.UI.MenusUI
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
             this.IsMdiContainer = true;
 
+            // Remove o ícone padrão da barra de título de todas as telas filhas abertas no Portal.
+            this.MdiChildActivate += (s, e) =>
+            {
+                if (ActiveMdiChild != null)
+                    ActiveMdiChild.ShowIcon = false;
+            };
 
             this.Shown += Portal_Shown;
             DesabilitaItemMenu(menuBarTop, "", false);
@@ -119,12 +127,14 @@ namespace SolfarmaGp.UI.MenusUI
             {
                 case 1:
                     DesabilitaItemMenu(menuBarTop, "FiscalMenu", true);
+                    DesabilitaItemMenu(menuBarTop, "drogaCentroMenu", true);
                     cadastrarUsuarioToolStripMenuItem.Enabled = false;
                     cadastrarUsuarioToolStripMenuItem.Visible = false;
                     break;
                 case 3:
                     DesabilitaItemMenu(menuBarTop, "FiscalMenu", true);
                     DesabilitaItemMenu(menuBarTop, "ZanupMenu", true);
+                    DesabilitaItemMenu(menuBarTop, "drogaCentroMenu", true);
                     cadastrarUsuarioToolStripMenuItem.Enabled = false;
                     cadastrarUsuarioToolStripMenuItem.Visible = false;
                     break;
@@ -512,6 +522,26 @@ namespace SolfarmaGp.UI.MenusUI
                 ArrumaBaseCheia arrumaBaseCheia = new ArrumaBaseCheia();
                 arrumaBaseCheia.MdiParent = this;
                 arrumaBaseCheia.Show();
+            }
+        }
+
+        private void exportacaoNotasFiscaisAlpha7ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ExportaNotasFiscaisAlpha7)))
+            {
+                ExportaNotasFiscaisAlpha7 exportaAlpha7 = new ExportaNotasFiscaisAlpha7();
+                exportaAlpha7.MdiParent = this;
+                exportaAlpha7.Show();
+            }
+        }
+
+        private void exportacaoNotasFiscaisZanupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormAberto(typeof(ExportaNotasFiscaisZanup)))
+            {
+                ExportaNotasFiscaisZanup exportaZanup = new ExportaNotasFiscaisZanup();
+                exportaZanup.MdiParent = this;
+                exportaZanup.Show();
             }
         }
     }

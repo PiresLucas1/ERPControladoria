@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto
 {
     partial class BuscaDadosCalculoCustoProduto
     {
@@ -30,14 +32,14 @@
         {
             dtFim = new DateTimePicker();
             dtInicio = new DateTimePicker();
-            gpHeader = new GroupBox();
-            btnExecutar = new Button();
+            gpHeader = new CartaoGroupBox();
+            btnExecutar = new BotaoModerno();
             lbDataInicio = new Label();
             lbDataFim = new Label();
             rtbResultado = new RichTextBox();
             prbar = new ProgressBar();
-            btnClose = new Button();
-            gbFooter = new GroupBox();
+            btnClose = new BotaoModerno();
+            gbFooter = new CartaoGroupBox();
             chkBoxIcmsRetidoSubstituido = new CheckBox();
             chkAqsValorTransferencia = new CheckBox();
             chkBoxValorFrete = new CheckBox();
@@ -66,13 +68,16 @@
             // 
             // gpHeader
             // 
+            gpHeader.BackColor = Color.White;
             gpHeader.Controls.Add(btnExecutar);
             gpHeader.Controls.Add(lbDataInicio);
             gpHeader.Controls.Add(lbDataFim);
             gpHeader.Controls.Add(dtInicio);
             gpHeader.Controls.Add(dtFim);
+            gpHeader.CorBorda = Color.FromArgb(222, 225, 230);
             gpHeader.Location = new Point(12, 12);
             gpHeader.Name = "gpHeader";
+            gpHeader.Raio = 10;
             gpHeader.Size = new Size(648, 172);
             gpHeader.TabIndex = 2;
             gpHeader.TabStop = false;
@@ -80,8 +85,11 @@
             // 
             // btnExecutar
             // 
+            btnExecutar.FlatStyle = FlatStyle.Flat;
             btnExecutar.Location = new Point(537, 115);
             btnExecutar.Name = "btnExecutar";
+            btnExecutar.Principal = true;
+            btnExecutar.Raio = 8;
             btnExecutar.Size = new Size(94, 40);
             btnExecutar.TabIndex = 2;
             btnExecutar.Text = "Executar";
@@ -127,8 +135,11 @@
             // 
             // btnClose
             // 
+            btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Location = new Point(17, 593);
             btnClose.Name = "btnClose";
+            btnClose.Principal = false;
+            btnClose.Raio = 8;
             btnClose.Size = new Size(94, 40);
             btnClose.TabIndex = 6;
             btnClose.Text = "Fechar";
@@ -136,14 +147,17 @@
             // 
             // gbFooter
             // 
+            gbFooter.BackColor = Color.White;
             gbFooter.Controls.Add(chkBoxIcmsRetidoSubstituido);
             gbFooter.Controls.Add(chkAqsValorTransferencia);
             gbFooter.Controls.Add(chkBoxValorFrete);
             gbFooter.Controls.Add(chkBoxReembolsoSaida);
             gbFooter.Controls.Add(chkBoxIcmsSt);
             gbFooter.Controls.Add(chkBoxReembolsoEntrada);
+            gbFooter.CorBorda = Color.FromArgb(222, 225, 230);
             gbFooter.Location = new Point(12, 472);
             gbFooter.Name = "gbFooter";
+            gbFooter.Raio = 10;
             gbFooter.Size = new Size(645, 103);
             gbFooter.TabIndex = 7;
             gbFooter.TabStop = false;
@@ -213,6 +227,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(677, 650);
             Controls.Add(gbFooter);
             Controls.Add(prbar);
@@ -222,6 +237,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "BuscaDadosCalculoCustoProduto";
+            ShowIcon = false;
             Text = "Contabilização do Custo dos Produtos";
             gpHeader.ResumeLayout(false);
             gpHeader.PerformLayout();
@@ -234,14 +250,14 @@
 
         private DateTimePicker dtFim;
         private DateTimePicker dtInicio;
-        private GroupBox gpHeader;
+        private CartaoGroupBox gpHeader;
         private Label lbDataInicio;
         private Label lbDataFim;
         private RichTextBox rtbResultado;
         private ProgressBar prbar;
-        private Button btnExecutar;
-        private Button btnClose;
-        private GroupBox gbFooter;
+        private BotaoModerno btnExecutar;
+        private BotaoModerno btnClose;
+        private CartaoGroupBox gbFooter;
         private CheckBox chkBoxIcmsRetidoSubstituido;
         private CheckBox chkAqsValorTransferencia;
         private CheckBox chkBoxValorFrete;

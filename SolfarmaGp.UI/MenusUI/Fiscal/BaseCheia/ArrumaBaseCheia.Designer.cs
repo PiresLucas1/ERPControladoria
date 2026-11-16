@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
 {
     partial class ArrumaBaseCheia
     {
@@ -31,10 +33,11 @@
             components = new System.ComponentModel.Container();
             dtpDataInicio = new DateTimePicker();
             dtpDataFim = new DateTimePicker();
-            groupBox1 = new GroupBox();
+            groupBox1 = new CartaoGroupBox();
             label2 = new Label();
             label1 = new Label();
-            btnExecutar = new Button();
+            btnExecutar = new BotaoModerno();
+            btnCancelar = new BotaoModerno();
             contextMenuStrip1 = new ContextMenuStrip(components);
             rtbInformacao = new RichTextBox();
             groupBox1.SuspendLayout();
@@ -91,6 +94,7 @@
             // 
             btnExecutar.Location = new Point(156, 289);
             btnExecutar.Name = "btnExecutar";
+            btnExecutar.Principal = true;
             btnExecutar.Size = new Size(112, 34);
             btnExecutar.TabIndex = 3;
             btnExecutar.Text = "Executar";
@@ -117,7 +121,8 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(419, 355);
+            BackColor = Color.FromArgb(245, 246, 248);
+            ClientSize = new Size(419, 328);
             Controls.Add(rtbInformacao);
             Controls.Add(btnExecutar);
             Controls.Add(groupBox1);
@@ -136,11 +141,11 @@
 
         private DateTimePicker dtpDataInicio;
         private DateTimePicker dtpDataFim;
-        private GroupBox groupBox1;
+        private CartaoGroupBox groupBox1;
         private Label label1;
         private Label label2;
-        private Button btnExecutar;
-        private Button btnCancelar;
+        private BotaoModerno btnExecutar;
+        private BotaoModerno btnCancelar;
         private ContextMenuStrip contextMenuStrip1;
         private RichTextBox rtbInformacao;
     }

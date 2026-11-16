@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso
 {
     partial class GerenciaClientesReembolso
     {
@@ -28,22 +30,49 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dvgGerenciar = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            btnSalvar = new Button();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            dvgGerenciar = new GradeModerna();
+            btnSalvar = new BotaoModerno();
             tbContador = new TextBox();
-            btnCancelar = new Button();
+            btnCancelar = new BotaoModerno();
             textBox2 = new TextBox();
             label1 = new Label();
             textBox3 = new TextBox();
             lbNome = new Label();
-            btnFiltrar = new Button();
+            btnFiltrar = new BotaoModerno();
             ((System.ComponentModel.ISupportInitialize)dvgGerenciar).BeginInit();
             SuspendLayout();
             // 
             // dvgGerenciar
             // 
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(250, 251, 252);
+            dvgGerenciar.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dvgGerenciar.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dvgGerenciar.BackgroundColor = Color.White;
+            dvgGerenciar.BorderStyle = BorderStyle.None;
+            dvgGerenciar.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dvgGerenciar.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(245, 246, 248);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = Color.FromArgb(60, 60, 60);
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(245, 246, 248);
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(60, 60, 60);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dvgGerenciar.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             dvgGerenciar.ColumnHeadersHeight = 29;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle3.ForeColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(253, 232, 220);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dvgGerenciar.DefaultCellStyle = dataGridViewCellStyle3;
+            dvgGerenciar.EnableHeadersVisualStyles = false;
+            dvgGerenciar.GridColor = Color.FromArgb(235, 237, 240);
             dvgGerenciar.Location = new Point(12, 141);
             dvgGerenciar.Name = "dvgGerenciar";
             dvgGerenciar.RowHeadersWidth = 51;
@@ -53,8 +82,11 @@
             // btnSalvar
             // 
             btnSalvar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnSalvar.FlatStyle = FlatStyle.Flat;
             btnSalvar.Location = new Point(670, 629);
             btnSalvar.Name = "btnSalvar";
+            btnSalvar.Principal = true;
+            btnSalvar.Raio = 8;
             btnSalvar.Size = new Size(138, 39);
             btnSalvar.TabIndex = 1;
             btnSalvar.Text = "Salvar";
@@ -73,8 +105,11 @@
             // btnCancelar
             // 
             btnCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Location = new Point(483, 629);
             btnCancelar.Name = "btnCancelar";
+            btnCancelar.Principal = false;
+            btnCancelar.Raio = 8;
             btnCancelar.Size = new Size(128, 39);
             btnCancelar.TabIndex = 3;
             btnCancelar.Text = "Cancelar";
@@ -115,8 +150,11 @@
             // 
             // btnFiltrar
             // 
+            btnFiltrar.FlatStyle = FlatStyle.Flat;
             btnFiltrar.Location = new Point(670, 94);
             btnFiltrar.Name = "btnFiltrar";
+            btnFiltrar.Principal = false;
+            btnFiltrar.Raio = 8;
             btnFiltrar.Size = new Size(138, 32);
             btnFiltrar.TabIndex = 8;
             btnFiltrar.Text = "Filtrar";
@@ -126,6 +164,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(842, 693);
             Controls.Add(btnFiltrar);
             Controls.Add(lbNome);
@@ -137,7 +176,8 @@
             Controls.Add(btnSalvar);
             Controls.Add(dvgGerenciar);
             Name = "GerenciaClientesReembolso";
-            Text = "GerenciaClientesReembolso";
+            ShowIcon = false;
+            Text = "Gerencia Clientes Reembolso";
             Load += GerenciaClientesReembolso_Load;
             ((System.ComponentModel.ISupportInitialize)dvgGerenciar).EndInit();
             ResumeLayout(false);
@@ -146,14 +186,14 @@
 
         #endregion
 
-        private ComponentesTelaUI.DataGridView.MyDataGridView dvgGerenciar;
-        private Button btnSalvar;
+        private GradeModerna dvgGerenciar;
+        private BotaoModerno btnSalvar;
         private TextBox tbContador;
-        private Button btnCancelar;
+        private BotaoModerno btnCancelar;
         private TextBox textBox2;
         private Label label1;
         private TextBox textBox3;
         private Label lbNome;
-        private Button btnFiltrar;
+        private BotaoModerno btnFiltrar;
     }
 }

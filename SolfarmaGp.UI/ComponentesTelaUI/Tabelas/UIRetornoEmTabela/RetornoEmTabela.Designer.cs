@@ -92,7 +92,7 @@
             MaximizeBox = false;
             Name = "RetornoEmTabela";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "RetornoEmTabela";
+            Text = "Retorno em Tabela";
             ((System.ComponentModel.ISupportInitialize)dataGridRetorno).EndInit();
             ResumeLayout(false);
             PerformLayout();

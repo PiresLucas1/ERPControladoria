@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
 {
     partial class ConsultaSaldoNotasFiscais
     {
@@ -28,26 +30,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            gbFiltro = new GroupBox();
-            groupBox1 = new GroupBox();
+            gbFiltro = new CartaoGroupBox();
+            groupBox1 = new CartaoGroupBox();
             cbFilial = new ComboBox();
             chkExibirRelacionados = new CheckBox();
             txtFiltro = new TextBox();
             lbFiltroSaldo = new Label();
-            btnListaNotas = new Button();
+            btnListaNotas = new BotaoModerno();
             cbFiltroSaldo = new ComboBox();
-            btnRelacionaItens = new Button();
-            btGerarNotaFiscal = new Button();
+            btnRelacionaItens = new BotaoModerno();
+            btGerarNotaFiscal = new BotaoModerno();
             tabNavegacaoAba = new TabControl();
             tabConsultaItens = new TabPage();
-            dvgConsultaNotas = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            dvgConsultaNotas = new GradeModerna();
             tabItensSelecionado = new TabPage();
-            dvgItensSelecionados = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
+            dvgItensSelecionados = new GradeModerna();
             txtCountNotas = new TextBox();
-            btnLimparTela = new Button();
-            btnSelecionarTudo = new Button();
-            btnAlteraEstoque = new Button();
-            btnDesmarcarTudo = new Button();
+            btnLimparTela = new BotaoModerno();
+            btnSelecionarTudo = new BotaoModerno();
+            btnAlteraEstoque = new BotaoModerno();
+            btnDesmarcarTudo = new BotaoModerno();
             gbFiltro.SuspendLayout();
             groupBox1.SuspendLayout();
             tabNavegacaoAba.SuspendLayout();
@@ -130,6 +132,7 @@
             btnListaNotas.Location = new Point(448, 98);
             btnListaNotas.Margin = new Padding(3, 4, 3, 4);
             btnListaNotas.Name = "btnListaNotas";
+            btnListaNotas.Principal = true;
             btnListaNotas.Size = new Size(101, 36);
             btnListaNotas.TabIndex = 4;
             btnListaNotas.Text = "Listar notas";
@@ -306,6 +309,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(1060, 866);
             Controls.Add(btnDesmarcarTudo);
             Controls.Add(btnAlteraEstoque);
@@ -334,25 +338,25 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox gbFiltro;
-        private System.Windows.Forms.Button btnListaNotas;
-        private System.Windows.Forms.Button btGerarNotaFiscal;
+        private CartaoGroupBox gbFiltro;
+        private BotaoModerno btnListaNotas;
+        private BotaoModerno btGerarNotaFiscal;
         private System.Windows.Forms.TabControl tabNavegacaoAba;
         private System.Windows.Forms.TabPage tabConsultaItens;
         private System.Windows.Forms.TabPage tabItensSelecionado;
-        private SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView dvgConsultaNotas;
-        private SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView dvgItensSelecionados;
-        private System.Windows.Forms.Button btnRelacionaItens;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private GradeModerna dvgConsultaNotas;
+        private GradeModerna dvgItensSelecionados;
+        private BotaoModerno btnRelacionaItens;
+        private CartaoGroupBox groupBox1;
         private System.Windows.Forms.ComboBox cbFiltroSaldo;
         private System.Windows.Forms.Label lbFiltroSaldo;
         private System.Windows.Forms.TextBox txtFiltro;
         private System.Windows.Forms.CheckBox chkExibirRelacionados;
         private System.Windows.Forms.TextBox txtCountNotas;
-        private System.Windows.Forms.Button btnLimparTela;
-        private System.Windows.Forms.Button btnSelecionarTudo;
+        private BotaoModerno btnLimparTela;
+        private BotaoModerno btnSelecionarTudo;
         private System.Windows.Forms.ComboBox cbFilial;
-        private Button btnAlteraEstoque;
-        private Button btnDesmarcarTudo;
+        private BotaoModerno btnAlteraEstoque;
+        private BotaoModerno btnDesmarcarTudo;
     }
 }

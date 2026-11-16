@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
 {
     partial class ImportarNotasTotvs
     {
@@ -30,13 +32,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ImportarNotasTotvs));
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            btnListaNotas = new Button();
-            btnExportarTotvs = new Button();
-            btnExportarExcel = new Button();
-            groupBox1 = new GroupBox();
-            gbAutoFuncoes = new GroupBox();
-            btnPreenche = new Button();
-            btnAutoPreencherCfop = new Button();
+            btnListaNotas = new BotaoModerno();
+            btnExportarTotvs = new BotaoModerno();
+            btnExportarExcel = new BotaoModerno();
+            groupBox1 = new CartaoGroupBox();
+            gbAutoFuncoes = new CartaoGroupBox();
+            btnPreenche = new BotaoModerno();
+            btnAutoPreencherCfop = new BotaoModerno();
             checkBoxMostraComErro = new CheckBox();
             cbLancadasNoERP = new CheckBox();
             lbDataInicio = new Label();
@@ -45,7 +47,7 @@
             DtPickerInicio = new DateTimePicker();
             txtCnpjFor = new TextBox();
             DtPickerFim = new DateTimePicker();
-            btnFiltrar = new Button();
+            btnFiltrar = new BotaoModerno();
             label2 = new Label();
             label3 = new Label();
             txtBoxToFilter = new TextBox();
@@ -54,19 +56,19 @@
             lbCodColigada = new Label();
             coBoxTipeFilter = new ComboBox();
             label1 = new Label();
-            dtImportacao = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            groupBox3 = new GroupBox();
+            dtImportacao = new GradeModerna();
+            groupBox3 = new CartaoGroupBox();
             txtSelecionado = new TextBox();
             label6 = new Label();
             label5 = new Label();
             txtTotal = new TextBox();
-            btnSelecionarTodas = new Button();
-            btnDesmarcarTodos = new Button();
-            btnLimpar = new Button();
-            btnCadFornecedor = new Button();
-            btnCadastraSelecionados = new Button();
-            btnPreencherServicoCfop = new Button();
-            groupBox2 = new GroupBox();
+            btnSelecionarTodas = new BotaoModerno();
+            btnDesmarcarTodos = new BotaoModerno();
+            btnLimpar = new BotaoModerno();
+            btnCadFornecedor = new BotaoModerno();
+            btnCadastraSelecionados = new BotaoModerno();
+            btnPreencherServicoCfop = new BotaoModerno();
+            groupBox2 = new CartaoGroupBox();
             groupBox1.SuspendLayout();
             gbAutoFuncoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtImportacao).BeginInit();
@@ -81,6 +83,7 @@
             btnListaNotas.Location = new Point(1116, 152);
             btnListaNotas.Margin = new Padding(3, 4, 3, 4);
             btnListaNotas.Name = "btnListaNotas";
+            btnListaNotas.Principal = true;
             btnListaNotas.Size = new Size(127, 40);
             btnListaNotas.TabIndex = 6;
             btnListaNotas.Text = "Pesquisar";
@@ -492,6 +495,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(1289, 1014);
             Controls.Add(dtImportacao);
             Controls.Add(groupBox1);
@@ -517,10 +521,10 @@
         #endregion
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
              
-        private System.Windows.Forms.Button btnListaNotas;
-        private System.Windows.Forms.Button btnExportarTotvs;
-        private System.Windows.Forms.Button btnExportarExcel;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private BotaoModerno btnListaNotas;
+        private BotaoModerno btnExportarTotvs;
+        private BotaoModerno btnExportarExcel;
+        private CartaoGroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtBoxToFilter;
         private System.Windows.Forms.ComboBox coBoxTipeFilter;
@@ -532,29 +536,29 @@
         private System.Windows.Forms.DateTimePicker DtPickerInicio;
         private System.Windows.Forms.DateTimePicker DtPickerFim;
         private System.Windows.Forms.CheckBox cbLancadasNoERP;
-        private System.Windows.Forms.Button btnFiltrar;
+        private BotaoModerno btnFiltrar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtBoxNumDoc;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtCnpjFor;
         private System.Windows.Forms.CheckBox checkBoxMostraComErro;
-        private System.Windows.Forms.Button btnAutoPreencherCfop;
-        private System.Windows.Forms.GroupBox gbAutoFuncoes;
-        private System.Windows.Forms.Button btnPreenche;
-        private SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView dtImportacao;
+        private BotaoModerno btnAutoPreencherCfop;
+        private CartaoGroupBox gbAutoFuncoes;
+        private BotaoModerno btnPreenche;
+        private GradeModerna dtImportacao;
         private TextBox textBox1;
-        private GroupBox groupBox3;
+        private CartaoGroupBox groupBox3;
         private TextBox txtSelecionado;
         private Label label6;
         private Label label5;
         private TextBox txtTotal;
-        private Button btnSelecionarTodas;
-        private Button btnDesmarcarTodos;
-        private Button btnLimpar;
-        private Button btnCadFornecedor;
-        private Button btnCadastraSelecionados;
-        private Button btnPreencherServicoCfop;
-        private GroupBox groupBox2;
+        private BotaoModerno btnSelecionarTodas;
+        private BotaoModerno btnDesmarcarTodos;
+        private BotaoModerno btnLimpar;
+        private BotaoModerno btnCadFornecedor;
+        private BotaoModerno btnCadastraSelecionados;
+        private BotaoModerno btnPreencherServicoCfop;
+        private CartaoGroupBox groupBox2;
     }
 }
 

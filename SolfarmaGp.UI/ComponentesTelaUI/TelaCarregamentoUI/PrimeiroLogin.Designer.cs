@@ -66,7 +66,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.Name = "PrimeiroLogin";
-            this.Text = "PrimeiroLogin";
+            this.Text = "Primeiro Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

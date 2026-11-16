@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.Gerenciar
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Fiscal.Gerenciar
 {
     partial class AlteracaoDePeriodo
     {
@@ -33,13 +35,13 @@
             dtpFim = new DateTimePicker();
             lbDtInicio = new Label();
             lbDataFim = new Label();
-            btnConfirmar = new Button();
+            btnConfirmar = new BotaoModerno();
             richTextBox1 = new RichTextBox();
             lbStatus = new Label();
             cbStatus = new ComboBox();
             dateTimePicker1 = new DateTimePicker();
             dateTimePicker2 = new DateTimePicker();
-            groupBox1 = new GroupBox();
+            groupBox1 = new CartaoGroupBox();
             textBox1 = new TextBox();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -82,6 +84,7 @@
             // 
             btnConfirmar.Location = new Point(414, 364);
             btnConfirmar.Name = "btnConfirmar";
+            btnConfirmar.Principal = true;
             btnConfirmar.Size = new Size(101, 32);
             btnConfirmar.TabIndex = 4;
             btnConfirmar.Text = "Confirmar";
@@ -158,6 +161,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(542, 419);
             Controls.Add(richTextBox1);
             Controls.Add(lbStatus);
@@ -170,7 +174,7 @@
             Controls.Add(groupBox1);
             MaximizeBox = false;
             Name = "AlteracaoDePeriodo";
-            Text = "AlteraçãoDePeriodo";
+            Text = "Alteração de Período";
             Load += AlteracaoDePeriodo_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -184,13 +188,13 @@
         private DateTimePicker dtpFim;
         private Label lbDtInicio;
         private Label lbDataFim;
-        private Button btnConfirmar;
+        private BotaoModerno btnConfirmar;
         private RichTextBox richTextBox1;
         private Label lbStatus;
         private ComboBox cbStatus;
         private DateTimePicker dateTimePicker1;
         private DateTimePicker dateTimePicker2;
-        private GroupBox groupBox1;
+        private CartaoGroupBox groupBox1;
         private TextBox textBox1;
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 {
     partial class ImportarNotasFiscaisXmlParaTotvsDetalhes
     {
@@ -28,15 +30,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dvgDataNotaItens = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            btnLancarNota = new Button();
-            btnCancelar = new Button();
+            dvgDataNotaItens = new GradeModerna();
+            btnLancarNota = new BotaoModerno();
+            btnCancelar = new BotaoModerno();
             textBox1 = new TextBox();
             lbTotalItens = new Label();
-            gpFooter = new GroupBox();
-            btnAbrirXml = new Button();
-            btnCadastrarProduto = new Button();
-            gpHeader = new GroupBox();
+            gpFooter = new CartaoGroupBox();
+            btnAbrirXml = new BotaoModerno();
+            btnCadastrarProduto = new BotaoModerno();
+            gpHeader = new CartaoGroupBox();
             lbDataLancamento = new Label();
             dtLancamento = new DateTimePicker();
             lbCodColigada = new Label();
@@ -55,8 +57,8 @@
             lbNumDoc = new Label();
             lbIDQiveArquivoXml = new Label();
             tbChaveAcesso = new TextBox();
-            dvgContaFinanceira = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            gpContas = new GroupBox();
+            dvgContaFinanceira = new GradeModerna();
+            gpContas = new CartaoGroupBox();
             ((System.ComponentModel.ISupportInitialize)dvgDataNotaItens).BeginInit();
             gpFooter.SuspendLayout();
             gpHeader.SuspendLayout();
@@ -83,6 +85,7 @@
             btnLancarNota.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnLancarNota.Location = new Point(955, 26);
             btnLancarNota.Name = "btnLancarNota";
+            btnLancarNota.Principal = true;
             btnLancarNota.Size = new Size(132, 36);
             btnLancarNota.TabIndex = 1;
             btnLancarNota.Text = "Lançar Nota";
@@ -368,6 +371,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(1117, 830);
             Controls.Add(gpHeader);
             Controls.Add(dvgDataNotaItens);
@@ -388,14 +392,14 @@
 
         #endregion
 
-        private ComponentesTelaUI.DataGridView.MyDataGridView dvgDataNotaItens;
-        private Button button2;
-        private Button btnLancarNota;
-        private Button btnCancelar;
+        private GradeModerna dvgDataNotaItens;
+        private BotaoModerno button2;
+        private BotaoModerno btnLancarNota;
+        private BotaoModerno btnCancelar;
         private TextBox textBox1;
         private Label lbTotalItens;
-        private GroupBox gpFooter;
-        private GroupBox gpHeader;
+        private CartaoGroupBox gpFooter;
+        private CartaoGroupBox gpHeader;
         private TextBox tbNomeFornecedor;
         private TextBox tbCodFornecedor;
         private TextBox tbIdContasPagar;
@@ -407,11 +411,11 @@
         private Label lbIDContasPagar;
         private Label lbNumDoc;
         private Label lbIDQiveArquivoXml;
-        private Button btnCadastrarProduto;
+        private BotaoModerno btnCadastrarProduto;
         private TextBox tbNumDoc;
-        private ComponentesTelaUI.DataGridView.MyDataGridView dvgContaFinanceira;
-        private GroupBox gpContas;
-        private Button btnAbrirXml;
+        private GradeModerna dvgContaFinanceira;
+        private CartaoGroupBox gpContas;
+        private BotaoModerno btnAbrirXml;
         private Label lbDataLancamento;
         private DateTimePicker dtLancamento;
         private Label lbCodColigada;

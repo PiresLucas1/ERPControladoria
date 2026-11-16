@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
 {
     partial class ExcutaAutomacaoRenomearArquivos
     {
@@ -30,9 +32,9 @@
         {
             txbPath = new TextBox();
             label1 = new Label();
-            btnExecutar = new Button();
-            btnCancelar = new Button();
-            btnAbrirPasta = new Button();
+            btnExecutar = new BotaoModerno();
+            btnCancelar = new BotaoModerno();
+            btnAbrirPasta = new BotaoModerno();
             rtbInfo = new RichTextBox();
             pgBar = new ProgressBar();
             chkNotasQive = new CheckBox();
@@ -60,6 +62,7 @@
             // 
             btnExecutar.Location = new Point(500, 64);
             btnExecutar.Name = "btnExecutar";
+            btnExecutar.Principal = true;
             btnExecutar.Size = new Size(109, 30);
             btnExecutar.TabIndex = 2;
             btnExecutar.Text = "Executar";
@@ -117,6 +120,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(637, 518);
             Controls.Add(chkNotasQive);
             Controls.Add(pgBar);
@@ -138,9 +142,9 @@
 
         private TextBox txbPath;
         private Label label1;
-        private Button btnExecutar;
-        private Button btnCancelar;
-        private Button btnAbrirPasta;
+        private BotaoModerno btnExecutar;
+        private BotaoModerno btnCancelar;
+        private BotaoModerno btnAbrirPasta;
         private RichTextBox rtbInfo;
         private ProgressBar pgBar;
         private CheckBox chkNotasQive;

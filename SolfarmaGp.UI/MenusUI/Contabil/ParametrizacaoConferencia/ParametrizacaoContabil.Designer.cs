@@ -1,4 +1,6 @@
-﻿namespace SolfarmaGp.UI.MenusUI.Contabil
+﻿using SolfarmaGp.UI.ComponentesTelaUI.Moderno;
+
+namespace SolfarmaGp.UI.MenusUI.Contabil
 {
     partial class ParametrizacaoContabil
     {
@@ -29,10 +31,14 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            dvgParametrizacao = new SolfarmaGp.UI.ComponentesTelaUI.DataGridView.MyDataGridView();
-            btnAddItem = new Button();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            dvgParametrizacao = new GradeModerna();
+            btnAddItem = new BotaoModerno();
             tbCount = new TextBox();
-            gpGeral = new GroupBox();
+            gpGeral = new CartaoGroupBox();
+            cbBanco = new ComboBox();
             btnLimpaFiltro = new Button();
             tbReduzidoCredito = new TextBox();
             tbReduzidoDebito = new TextBox();
@@ -42,21 +48,44 @@
             tbFilial = new TextBox();
             lbCodColigada = new Label();
             cbColigada = new ComboBox();
-            btnFiltrar = new Button();
+            btnFiltrar = new BotaoModerno();
             lbFilial = new Label();
-            btnSalvaParametros = new Button();
-            btnExcluir = new Button();
+            btnSalvaParametros = new BotaoModerno();
+            btnExcluir = new BotaoModerno();
             toolTip1 = new ToolTip(components);
-            cbBanco = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dvgParametrizacao).BeginInit();
             gpGeral.SuspendLayout();
             SuspendLayout();
             // 
             // dvgParametrizacao
             // 
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(250, 251, 252);
+            dvgParametrizacao.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             dvgParametrizacao.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             dvgParametrizacao.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dvgParametrizacao.BackgroundColor = Color.White;
+            dvgParametrizacao.BorderStyle = BorderStyle.None;
+            dvgParametrizacao.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dvgParametrizacao.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(245, 246, 248);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = Color.FromArgb(60, 60, 60);
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(245, 246, 248);
+            dataGridViewCellStyle5.SelectionForeColor = Color.FromArgb(60, 60, 60);
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
+            dvgParametrizacao.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dvgParametrizacao.ColumnHeadersHeight = 29;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 9F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(253, 232, 220);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(40, 40, 40);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dvgParametrizacao.DefaultCellStyle = dataGridViewCellStyle6;
+            dvgParametrizacao.EnableHeadersVisualStyles = false;
+            dvgParametrizacao.GridColor = Color.FromArgb(235, 237, 240);
             dvgParametrizacao.Location = new Point(12, 211);
             dvgParametrizacao.Name = "dvgParametrizacao";
             dvgParametrizacao.RowHeadersVisible = false;
@@ -69,8 +98,11 @@
             // btnAddItem
             // 
             btnAddItem.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnAddItem.FlatStyle = FlatStyle.Flat;
             btnAddItem.Location = new Point(329, 851);
             btnAddItem.Name = "btnAddItem";
+            btnAddItem.Principal = false;
+            btnAddItem.Raio = 8;
             btnAddItem.Size = new Size(131, 39);
             btnAddItem.TabIndex = 1;
             btnAddItem.Text = "Adicionar Item";
@@ -90,6 +122,7 @@
             // gpGeral
             // 
             gpGeral.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            gpGeral.BackColor = Color.White;
             gpGeral.Controls.Add(cbBanco);
             gpGeral.Controls.Add(btnLimpaFiltro);
             gpGeral.Controls.Add(tbReduzidoCredito);
@@ -102,12 +135,23 @@
             gpGeral.Controls.Add(cbColigada);
             gpGeral.Controls.Add(btnFiltrar);
             gpGeral.Controls.Add(lbFilial);
+            gpGeral.CorBorda = Color.FromArgb(222, 225, 230);
             gpGeral.Location = new Point(12, 12);
             gpGeral.Name = "gpGeral";
+            gpGeral.Raio = 10;
             gpGeral.Size = new Size(1133, 193);
             gpGeral.TabIndex = 5;
             gpGeral.TabStop = false;
             gpGeral.Text = "Geral";
+            // 
+            // cbBanco
+            // 
+            cbBanco.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbBanco.FormattingEnabled = true;
+            cbBanco.Location = new Point(270, 64);
+            cbBanco.Name = "cbBanco";
+            cbBanco.Size = new Size(151, 28);
+            cbBanco.TabIndex = 19;
             // 
             // btnLimpaFiltro
             // 
@@ -189,8 +233,11 @@
             // btnFiltrar
             // 
             btnFiltrar.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnFiltrar.FlatStyle = FlatStyle.Flat;
             btnFiltrar.Location = new Point(978, 124);
             btnFiltrar.Name = "btnFiltrar";
+            btnFiltrar.Principal = false;
+            btnFiltrar.Raio = 8;
             btnFiltrar.Size = new Size(131, 39);
             btnFiltrar.TabIndex = 8;
             btnFiltrar.Text = "Filtrar";
@@ -209,8 +256,11 @@
             // btnSalvaParametros
             // 
             btnSalvaParametros.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnSalvaParametros.FlatStyle = FlatStyle.Flat;
             btnSalvaParametros.Location = new Point(956, 851);
             btnSalvaParametros.Name = "btnSalvaParametros";
+            btnSalvaParametros.Principal = true;
+            btnSalvaParametros.Raio = 8;
             btnSalvaParametros.Size = new Size(165, 39);
             btnSalvaParametros.TabIndex = 6;
             btnSalvaParametros.Text = "Salvar Parametrização";
@@ -220,8 +270,11 @@
             // btnExcluir
             // 
             btnExcluir.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnExcluir.FlatStyle = FlatStyle.Flat;
             btnExcluir.Location = new Point(179, 851);
             btnExcluir.Name = "btnExcluir";
+            btnExcluir.Principal = false;
+            btnExcluir.Raio = 8;
             btnExcluir.Size = new Size(131, 39);
             btnExcluir.TabIndex = 7;
             btnExcluir.Text = "Excluir item";
@@ -232,19 +285,11 @@
             // 
             toolTip1.Tag = "Limpar Filtro";
             // 
-            // cbBanco
-            // 
-            cbBanco.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbBanco.FormattingEnabled = true;
-            cbBanco.Location = new Point(270, 64);
-            cbBanco.Name = "cbBanco";
-            cbBanco.Size = new Size(151, 28);
-            cbBanco.TabIndex = 19;
-            // 
             // ParametrizacaoContabil
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 246, 248);
             ClientSize = new Size(1160, 910);
             Controls.Add(btnExcluir);
             Controls.Add(btnSalvaParametros);
@@ -253,7 +298,8 @@
             Controls.Add(btnAddItem);
             Controls.Add(dvgParametrizacao);
             Name = "ParametrizacaoContabil";
-            Text = "ParametrizacaoContabil";
+            ShowIcon = false;
+            Text = "Parametrizacao Contabil";
             Load += ParametrizacaoContabil_Load;
             ((System.ComponentModel.ISupportInitialize)dvgParametrizacao).EndInit();
             gpGeral.ResumeLayout(false);
@@ -264,26 +310,26 @@
 
         #endregion
 
-        private ComponentesTelaUI.DataGridView.MyDataGridView dvgParametrizacao;
+        private GradeModerna dvgParametrizacao;
         private Label label1;
-        private Button btnAddItem;
+        private BotaoModerno btnAddItem;
         private TextBox tbCount;
         private ComboBox cbTipoPesquisa;
-        private GroupBox gpGeral;
+        private CartaoGroupBox gpGeral;
         private Label lbValor;
         private Label lbFilial;
         private TextBox tbValorPesquisa;
-        private Button btnFiltrar;
+        private BotaoModerno btnFiltrar;
         private Label lbCodColigada;
         private ComboBox cbColigada;
-        private Button btnSalvaParametros;
+        private BotaoModerno btnSalvaParametros;
         private TextBox tbFilial;
         private TextBox tbReduzidoCredito;
         private TextBox tbReduzidoDebito;
         private Label lbCredito;
         private Label blContaDebito;
         private Label lbBanco;
-        private Button btnExcluir;
+        private BotaoModerno btnExcluir;
         private Button btnLimpaFiltro;
         private ToolTip toolTip1;
         private ComboBox cbBanco;
