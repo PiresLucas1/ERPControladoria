@@ -15,7 +15,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs
                 select
                     fornecedor.CODCFO
                 from
-                    CORPORERM_TESTE.dbo.FCFO fornecedor (NOLOCK)
+                    CORPORERM_PRODUCAO.dbo.FCFO fornecedor (NOLOCK)
                 where
                     fornecedor.CODCOLIGADA = 2
                     and REPLACE(REPLACE(REPLACE(fornecedor.CGCCFO, '.', ''), '/', ''), '-', '') = @Cnpj";

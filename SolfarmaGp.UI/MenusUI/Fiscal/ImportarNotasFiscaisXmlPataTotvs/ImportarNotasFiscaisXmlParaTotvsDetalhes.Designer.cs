@@ -36,6 +36,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             textBox1 = new TextBox();
             lbTotalItens = new Label();
             gpFooter = new CartaoGroupBox();
+            btnMarcarTodos = new BotaoModerno();
+            btnAlterarNatureza = new BotaoModerno();
             btnAbrirXml = new BotaoModerno();
             btnCadastrarProduto = new BotaoModerno();
             gpHeader = new CartaoGroupBox();
@@ -124,6 +126,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             // gpFooter
             // 
             gpFooter.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            gpFooter.Controls.Add(btnMarcarTodos);
+            gpFooter.Controls.Add(btnAlterarNatureza);
             gpFooter.Controls.Add(btnAbrirXml);
             gpFooter.Controls.Add(btnCadastrarProduto);
             gpFooter.Controls.Add(btnCancelar);
@@ -135,6 +139,28 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             gpFooter.Size = new Size(1093, 71);
             gpFooter.TabIndex = 6;
             gpFooter.TabStop = false;
+            // 
+            // btnMarcarTodos
+            // 
+            btnMarcarTodos.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnMarcarTodos.Location = new Point(122, 26);
+            btnMarcarTodos.Name = "btnMarcarTodos";
+            btnMarcarTodos.Size = new Size(130, 36);
+            btnMarcarTodos.TabIndex = 7;
+            btnMarcarTodos.Text = "Marcar Todos";
+            btnMarcarTodos.UseVisualStyleBackColor = true;
+            btnMarcarTodos.Click += btnMarcarTodos_Click;
+            // 
+            // btnAlterarNatureza
+            // 
+            btnAlterarNatureza.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            btnAlterarNatureza.Location = new Point(260, 26);
+            btnAlterarNatureza.Name = "btnAlterarNatureza";
+            btnAlterarNatureza.Size = new Size(130, 36);
+            btnAlterarNatureza.TabIndex = 8;
+            btnAlterarNatureza.Text = "Alterar CFOP";
+            btnAlterarNatureza.UseVisualStyleBackColor = true;
+            btnAlterarNatureza.Click += btnAlterarNatureza_Click;
             // 
             // btnAbrirXml
             // 
@@ -418,6 +444,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
         private BotaoModerno btnAbrirXml;
         private Label lbDataLancamento;
         private DateTimePicker dtLancamento;
+        private BotaoModerno btnMarcarTodos;
+        private BotaoModerno btnAlterarNatureza;
         private Label lbCodColigada;
         private TextBox tbCodColigada;
         private Label lbCodFilial;
