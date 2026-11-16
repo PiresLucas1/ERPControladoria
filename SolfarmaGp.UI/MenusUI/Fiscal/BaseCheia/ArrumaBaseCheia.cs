@@ -20,7 +20,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
 
             if (dtInicio > dtFim)
             {
-                MessageBox.Show("A data inicial não pode ser maior que a data final");
+                MessageBox.Show("A data inicial não pode ser maior que a data final.");
                 return;
             }
 
