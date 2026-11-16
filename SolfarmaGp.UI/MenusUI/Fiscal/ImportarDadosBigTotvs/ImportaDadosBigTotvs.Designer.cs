@@ -323,7 +323,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarDadosBigTotvs
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ExportaDadosBig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Exporta Dados Big";
+            this.Text = "XML Big";
             this.gbFiltro.ResumeLayout(false);
             this.gbFiltro.PerformLayout();
             this.groupBox1.ResumeLayout(false);

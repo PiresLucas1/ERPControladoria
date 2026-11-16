@@ -737,7 +737,8 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.ConferenciaBoleto
             Controls.Add(gpBottom);
             Name = "ConfereciaBoleto";
             ShowIcon = false;
-            Text = "Conferecia de Extrato";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Conferencia de Extrato";
             Load += ConfereciaBoleto_Load;
             gpHeader.ResumeLayout(false);
             gpHeader.PerformLayout();

@@ -57,12 +57,6 @@ namespace SolfarmaGp.Repositorios.Zanup.ExportaNotasFiscais
                 cmd.Parameters.AddWithValue("@INbitExibeLog", true);
             });
 
-        public Task<RetornoProcedureZanup> VinculaPedidoVendaArquivoXml() =>
-            Executar("dbo.uspVinculaPedidoVendaArquivoXML", cmd =>
-            {
-                cmd.Parameters.AddWithValue("@INbitExibeLog", true);
-            });
-
         public Task<RetornoProcedureZanup> AtualizaNotasCanceladas(ParametrosExportaNotasZanup p) =>
             Executar("dbo.uspExportaTotvsAtualizaNotasCanceladas", cmd =>
             {
@@ -101,7 +95,8 @@ namespace SolfarmaGp.Repositorios.Zanup.ExportaNotasFiscais
                 cmd.Parameters.AddWithValue("@INbitSubstituir", false);
                 cmd.Parameters.AddWithValue("@INvchCodTmv", string.IsNullOrWhiteSpace(p.CodTmv) ? DBNull.Value : p.CodTmv);
                 cmd.Parameters.AddWithValue("@INvchNumeroDocumentos",
-                    string.IsNullOrWhiteSpace(p.NumeroDocumentos) ? DBNull.Value : p.NumeroDocumentos);
+                    // A tela mostra 192;193;194; a procedure recebe com vírgula ('192,193,194'), como é executada no SSMS.
+                    string.IsNullOrWhiteSpace(p.NumeroDocumentos) ? DBNull.Value : p.NumeroDocumentos.Replace(';', ','));
                 cmd.Parameters.AddWithValue("@INbitExibeLog", true);
             });
 

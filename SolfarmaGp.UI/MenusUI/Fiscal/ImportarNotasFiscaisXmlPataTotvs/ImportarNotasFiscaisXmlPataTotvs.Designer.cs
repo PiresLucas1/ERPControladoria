@@ -285,7 +285,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             Controls.Add(dvgNotas);
             Controls.Add(Filtros);
             Name = "ImportarNotasFiscaisXmlPataTotvs";
-            Text = "Importar Notas Fiscais XML Para TOTVS";
+            Text = "Importar XML Uso e Consumo";
             Filtros.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dvgNotas).EndInit();
             gpAcoes.ResumeLayout(false);

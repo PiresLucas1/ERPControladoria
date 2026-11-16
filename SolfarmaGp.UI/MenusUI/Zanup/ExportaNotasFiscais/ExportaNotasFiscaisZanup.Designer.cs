@@ -33,8 +33,15 @@ namespace SolfarmaGp.UI.MenusUI.Zanup.ExportaNotasFiscais
             lbCodTmv = new Label();
             lbTituloFiltros = new Label();
             btnExportar = new BotaoModerno();
+            btnSoClienteFornecedor = new BotaoModerno();
+            btnSoProdutos = new BotaoModerno();
+            btnSoNota = new BotaoModerno();
             cartaoResultado = new CartaoPanel();
             rtbResultado = new RichTextBox();
+            tabResultado = new TabControl();
+            btnExcelAba = new BotaoModerno();
+            btnExcelTodas = new BotaoModerno();
+            tpLog = new TabPage();
             flpEtapas = new FlowLayoutPanel();
             lbResultado = new Label();
             cartaoPeriodo.SuspendLayout();
@@ -50,7 +57,7 @@ namespace SolfarmaGp.UI.MenusUI.Zanup.ExportaNotasFiscais
             lbInfo.Name = "lbInfo";
             lbInfo.Size = new Size(656, 44);
             lbInfo.TabIndex = 0;
-            lbInfo.Text = "Primeiro atualiza situação na Sefaz, vínculo de pedidos e notas canceladas. Depois exporta Cliente/Fornecedor, Produtos e, por fim, o Documento Fiscal da Zanup para o Totvs (nunca substitui registros).";
+            lbInfo.Text = "Primeiro atualiza a situação na Sefaz e as notas canceladas. Depois exporta Cliente/Fornecedor, Produtos e, por fim, o Documento Fiscal da Zanup para o Totvs (nunca substitui registros).";
             // 
             // cartaoPeriodo
             // 
@@ -189,32 +196,121 @@ namespace SolfarmaGp.UI.MenusUI.Zanup.ExportaNotasFiscais
             btnExportar.Text = "Exportar";
             btnExportar.UseVisualStyleBackColor = true;
             btnExportar.Click += btnExportar_Click;
+            //
+            // btnSoClienteFornecedor
+            //
+            btnSoClienteFornecedor.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSoClienteFornecedor.FlatStyle = FlatStyle.Flat;
+            btnSoClienteFornecedor.Location = new Point(20, 338);
+            btnSoClienteFornecedor.Name = "btnSoClienteFornecedor";
+            btnSoClienteFornecedor.Principal = false;
+            btnSoClienteFornecedor.Raio = 8;
+            btnSoClienteFornecedor.Size = new Size(190, 38);
+            btnSoClienteFornecedor.TabIndex = 4;
+            btnSoClienteFornecedor.Text = "Cliente/Fornecedor";
+            btnSoClienteFornecedor.UseVisualStyleBackColor = true;
+            btnSoClienteFornecedor.Click += btnSoClienteFornecedor_Click;
+            //
+            // btnSoProdutos
+            //
+            btnSoProdutos.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSoProdutos.FlatStyle = FlatStyle.Flat;
+            btnSoProdutos.Location = new Point(218, 338);
+            btnSoProdutos.Name = "btnSoProdutos";
+            btnSoProdutos.Principal = false;
+            btnSoProdutos.Raio = 8;
+            btnSoProdutos.Size = new Size(120, 38);
+            btnSoProdutos.TabIndex = 5;
+            btnSoProdutos.Text = "Produtos";
+            btnSoProdutos.UseVisualStyleBackColor = true;
+            btnSoProdutos.Click += btnSoProdutos_Click;
+            //
+            // btnSoNota
+            //
+            btnSoNota.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSoNota.FlatStyle = FlatStyle.Flat;
+            btnSoNota.Location = new Point(346, 338);
+            btnSoNota.Name = "btnSoNota";
+            btnSoNota.Principal = false;
+            btnSoNota.Raio = 8;
+            btnSoNota.Size = new Size(160, 38);
+            btnSoNota.TabIndex = 6;
+            btnSoNota.Text = "Nota fiscal";
+            btnSoNota.UseVisualStyleBackColor = true;
+            btnSoNota.Click += btnSoNota_Click;
             // 
             // cartaoResultado
             // 
             cartaoResultado.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             cartaoResultado.BackColor = Color.White;
-            cartaoResultado.Controls.Add(rtbResultado);
+            cartaoResultado.Controls.Add(btnExcelTodas);
+            cartaoResultado.Controls.Add(btnExcelAba);
+            cartaoResultado.Controls.Add(tabResultado);
             cartaoResultado.Controls.Add(flpEtapas);
             cartaoResultado.Controls.Add(lbResultado);
             cartaoResultado.CorBorda = Color.FromArgb(222, 225, 230);
             cartaoResultado.Location = new Point(20, 388);
             cartaoResultado.Name = "cartaoResultado";
             cartaoResultado.Raio = 10;
-            cartaoResultado.Size = new Size(660, 342);
+            cartaoResultado.Size = new Size(660, 442);
             cartaoResultado.TabIndex = 4;
             // 
             // rtbResultado
             // 
-            rtbResultado.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             rtbResultado.BackColor = Color.FromArgb(245, 246, 248);
             rtbResultado.BorderStyle = BorderStyle.None;
-            rtbResultado.Location = new Point(16, 168);
+            rtbResultado.Dock = DockStyle.Fill;
             rtbResultado.Name = "rtbResultado";
             rtbResultado.ReadOnly = true;
-            rtbResultado.Size = new Size(628, 158);
-            rtbResultado.TabIndex = 2;
+            rtbResultado.TabIndex = 0;
             rtbResultado.Text = "";
+            //
+            // tabResultado
+            //
+            tabResultado.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tabResultado.Controls.Add(tpLog);
+            tabResultado.Location = new Point(16, 168);
+            tabResultado.Name = "tabResultado";
+            tabResultado.SelectedIndex = 0;
+            tabResultado.Size = new Size(628, 258);
+            tabResultado.TabIndex = 2;
+            //
+            // btnExcelAba
+            //
+            btnExcelAba.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExcelAba.Enabled = false;
+            btnExcelAba.FlatStyle = FlatStyle.Flat;
+            btnExcelAba.Location = new Point(348, 4);
+            btnExcelAba.Name = "btnExcelAba";
+            btnExcelAba.Principal = false;
+            btnExcelAba.Raio = 8;
+            btnExcelAba.Size = new Size(140, 30);
+            btnExcelAba.TabIndex = 3;
+            btnExcelAba.Text = "Excel da aba";
+            btnExcelAba.UseVisualStyleBackColor = true;
+            btnExcelAba.Click += btnExcelAba_Click;
+            //
+            // btnExcelTodas
+            //
+            btnExcelTodas.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExcelTodas.Enabled = false;
+            btnExcelTodas.FlatStyle = FlatStyle.Flat;
+            btnExcelTodas.Location = new Point(496, 4);
+            btnExcelTodas.Name = "btnExcelTodas";
+            btnExcelTodas.Principal = false;
+            btnExcelTodas.Raio = 8;
+            btnExcelTodas.Size = new Size(148, 30);
+            btnExcelTodas.TabIndex = 4;
+            btnExcelTodas.Text = "Excel de todas";
+            btnExcelTodas.UseVisualStyleBackColor = true;
+            btnExcelTodas.Click += btnExcelTodas_Click;
+            //
+            // tpLog
+            //
+            tpLog.Controls.Add(rtbResultado);
+            tpLog.Name = "tpLog";
+            tpLog.Text = "Log";
+            tpLog.UseVisualStyleBackColor = true;
             // 
             // flpEtapas
             // 
@@ -242,24 +338,28 @@ namespace SolfarmaGp.UI.MenusUI.Zanup.ExportaNotasFiscais
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 246, 248);
-            ClientSize = new Size(700, 750);
+            ClientSize = new Size(700, 850);
             Controls.Add(cartaoResultado);
             Controls.Add(btnExportar);
+            Controls.Add(btnSoNota);
+            Controls.Add(btnSoProdutos);
+            Controls.Add(btnSoClienteFornecedor);
             Controls.Add(cartaoFiltros);
             Controls.Add(cartaoPeriodo);
             Controls.Add(lbInfo);
-            MaximizeBox = false;
             MinimumSize = new Size(718, 797);
             Name = "ExportaNotasFiscaisZanup";
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Exportação Notas Fiscais Zanup";
+            Text = "Exportação Notas Fiscais";
             cartaoPeriodo.ResumeLayout(false);
             cartaoPeriodo.PerformLayout();
             cartaoFiltros.ResumeLayout(false);
             cartaoFiltros.PerformLayout();
             cartaoResultado.ResumeLayout(false);
             cartaoResultado.PerformLayout();
+            tabResultado.ResumeLayout(false);
+            tpLog.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -279,9 +379,16 @@ namespace SolfarmaGp.UI.MenusUI.Zanup.ExportaNotasFiscais
         private Label lbNumeroDocumentos;
         private RichTextBox rtbNumeroDocumentos;
         private BotaoModerno btnExportar;
+        private BotaoModerno btnSoClienteFornecedor;
+        private BotaoModerno btnSoProdutos;
+        private BotaoModerno btnSoNota;
         private CartaoPanel cartaoResultado;
         private Label lbResultado;
         private FlowLayoutPanel flpEtapas;
         private RichTextBox rtbResultado;
+        private TabControl tabResultado;
+        private BotaoModerno btnExcelAba;
+        private BotaoModerno btnExcelTodas;
+        private TabPage tpLog;
     }
 }

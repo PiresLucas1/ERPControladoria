@@ -42,8 +42,13 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
 
             if (resultado == DialogResult.OK)
             {
-                
+
             }
+        }
+
+        private void ArrumaBaseCheia_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

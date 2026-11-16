@@ -46,28 +46,35 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
             // dtpDataInicio
             // 
             dtpDataInicio.Format = DateTimePickerFormat.Short;
-            dtpDataInicio.Location = new Point(10, 55);
+            dtpDataInicio.Location = new Point(8, 44);
+            dtpDataInicio.Margin = new Padding(2, 2, 2, 2);
             dtpDataInicio.Name = "dtpDataInicio";
-            dtpDataInicio.Size = new Size(162, 31);
+            dtpDataInicio.Size = new Size(130, 27);
             dtpDataInicio.TabIndex = 0;
             // 
             // dtpDataFim
             // 
             dtpDataFim.Format = DateTimePickerFormat.Short;
-            dtpDataFim.Location = new Point(210, 55);
+            dtpDataFim.Location = new Point(168, 44);
+            dtpDataFim.Margin = new Padding(2, 2, 2, 2);
             dtpDataFim.Name = "dtpDataFim";
-            dtpDataFim.Size = new Size(162, 31);
+            dtpDataFim.Size = new Size(130, 27);
             dtpDataFim.TabIndex = 1;
             // 
             // groupBox1
             // 
+            groupBox1.BackColor = Color.White;
             groupBox1.Controls.Add(label2);
             groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(dtpDataInicio);
             groupBox1.Controls.Add(dtpDataFim);
-            groupBox1.Location = new Point(12, 12);
+            groupBox1.CorBorda = Color.FromArgb(222, 225, 230);
+            groupBox1.Location = new Point(10, 10);
+            groupBox1.Margin = new Padding(2, 2, 2, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(395, 99);
+            groupBox1.Padding = new Padding(2, 2, 2, 2);
+            groupBox1.Raio = 10;
+            groupBox1.Size = new Size(316, 79);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "Período para Atualização";
@@ -75,31 +82,46 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(210, 27);
+            label2.Location = new Point(168, 22);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(90, 25);
+            label2.Size = new Size(76, 20);
             label2.TabIndex = 3;
             label2.Text = "Data Final";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(9, 27);
+            label1.Location = new Point(7, 22);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(98, 25);
+            label1.Size = new Size(84, 20);
             label1.TabIndex = 2;
             label1.Text = "Data Inicial";
             // 
             // btnExecutar
             // 
-            btnExecutar.Location = new Point(156, 289);
+            btnExecutar.FlatStyle = FlatStyle.Flat;
+            btnExecutar.Location = new Point(125, 231);
+            btnExecutar.Margin = new Padding(2, 2, 2, 2);
             btnExecutar.Name = "btnExecutar";
             btnExecutar.Principal = true;
-            btnExecutar.Size = new Size(112, 34);
+            btnExecutar.Raio = 8;
+            btnExecutar.Size = new Size(90, 27);
             btnExecutar.TabIndex = 3;
             btnExecutar.Text = "Executar";
             btnExecutar.UseVisualStyleBackColor = true;
             btnExecutar.Click += btnExecutar_Click;
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Location = new Point(0, 0);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Principal = false;
+            btnCancelar.Raio = 8;
+            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.TabIndex = 0;
             // 
             // contextMenuStrip1
             // 
@@ -111,27 +133,30 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
             // 
             rtbInformacao.BackColor = SystemColors.Info;
             rtbInformacao.Enabled = false;
-            rtbInformacao.Location = new Point(12, 133);
+            rtbInformacao.Location = new Point(10, 106);
+            rtbInformacao.Margin = new Padding(2, 2, 2, 2);
             rtbInformacao.Name = "rtbInformacao";
-            rtbInformacao.Size = new Size(395, 119);
+            rtbInformacao.Size = new Size(317, 96);
             rtbInformacao.TabIndex = 6;
             rtbInformacao.Text = "Processo para recalcular as planilhas 11 e 19 dentro da TOTVS RM. Após iniciado não poderá ser parado.";
             // 
             // ArrumaBaseCheia
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 246, 248);
-            ClientSize = new Size(419, 328);
+            ClientSize = new Size(335, 262);
             Controls.Add(rtbInformacao);
             Controls.Add(btnExecutar);
             Controls.Add(groupBox1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(2, 2, 2, 2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ArrumaBaseCheia";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Recalcular Base Cheia";
+            Text = "Recalcular Base Cheia ICMS";
+            Load += ArrumaBaseCheia_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ResumeLayout(false);

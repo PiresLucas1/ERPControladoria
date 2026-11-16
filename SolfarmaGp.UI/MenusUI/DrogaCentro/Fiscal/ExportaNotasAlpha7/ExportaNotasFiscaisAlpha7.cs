@@ -57,10 +57,10 @@ namespace SolfarmaGp.UI.MenusUI.DrogaCentro.Fiscal.ExportaNotasAlpha7
                 Substituir = false,
                 NaoConferida = null,
                 CodTmv = txtCodTmv.Text.Trim(),
-                // um documento por linha -> separados por vírgula, como nas outras telas
-                NumeroDocumentos = string.Join(",",
+                // aceita um por linha, vírgula ou ponto e vírgula; fica no formato 192;193;194
+                NumeroDocumentos = string.Join(";",
                     rtbNumeroDocumentos.Text
-                        .Split(new[] { '\r', '\n', ',' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                        .Split(new[] { '\r', '\n', ',', ';' }, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
             };
 
             // Exportar só fica ativo com a caixa desmarcada: sincronização é um modo à parte.
@@ -118,7 +118,7 @@ namespace SolfarmaGp.UI.MenusUI.DrogaCentro.Fiscal.ExportaNotasAlpha7
 
             if (temDocumentos)
             {
-                int qtd = p.NumeroDocumentos.Split(',', StringSplitOptions.RemoveEmptyEntries).Length;
+                int qtd = p.NumeroDocumentos.Split(';', StringSplitOptions.RemoveEmptyEntries).Length;
                 msg.AppendLine(qtd == 1
                     ? $"3. Nota fiscal nº {p.NumeroDocumentos}"
                     : $"3. {qtd} notas fiscais: {p.NumeroDocumentos}");

@@ -299,7 +299,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil
             Controls.Add(dvgParametrizacao);
             Name = "ParametrizacaoContabil";
             ShowIcon = false;
-            Text = "Parametrizacao Contabil";
+            Text = "Lançamento Contabil";
             Load += ParametrizacaoContabil_Load;
             ((System.ComponentModel.ISupportInitialize)dvgParametrizacao).EndInit();
             gpGeral.ResumeLayout(false);
