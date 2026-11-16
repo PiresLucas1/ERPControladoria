@@ -1,6 +1,4 @@
 ﻿using SolfarmaGp.Repositorios.Fiscal.BaseCheia;
-using SolfarmaGp.Services.Zanup.Bling;
-using System.Data;
 
 namespace SolfarmaGp.Controllers.UseCase.Fiscal.BaseCheia
 {
