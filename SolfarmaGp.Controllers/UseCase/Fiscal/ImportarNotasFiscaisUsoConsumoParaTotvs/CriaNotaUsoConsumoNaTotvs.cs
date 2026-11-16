@@ -18,6 +18,7 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
             public string CodTipoMovimento { get; set; }
             public int CodColigada { get; set; }
             public int CodFilial { get; set; }
+            public TotaisNotaXml TotaisXml { get; set; } = new TotaisNotaXml();
         }
         public string CfopValue { get; set; }
 
@@ -77,7 +78,24 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
             tabelaTvp.Columns.Add("CODCCUSTO", typeof(string));
             tabelaTvp.Columns.Add("ALIQUOTAICMS", typeof(decimal));
             tabelaTvp.Columns.Add("BASEICMS", typeof(decimal));
-            
+            // Impostos e valores do item vindos do XML.
+            // ATENÇÃO: a ordem das colunas precisa ser a mesma do tipo dbo.TVPItensNotaUsoConsumo
+            tabelaTvp.Columns.Add("VALORICMS", typeof(decimal));
+            tabelaTvp.Columns.Add("BASEICMSST", typeof(decimal));
+            tabelaTvp.Columns.Add("ALIQUOTAICMSST", typeof(decimal));
+            tabelaTvp.Columns.Add("VALORICMSST", typeof(decimal));
+            tabelaTvp.Columns.Add("BASEIPI", typeof(decimal));
+            tabelaTvp.Columns.Add("ALIQUOTAIPI", typeof(decimal));
+            tabelaTvp.Columns.Add("VALORIPI", typeof(decimal));
+            tabelaTvp.Columns.Add("BASEPIS", typeof(decimal));
+            tabelaTvp.Columns.Add("ALIQUOTAPIS", typeof(decimal));
+            tabelaTvp.Columns.Add("VALORPIS", typeof(decimal));
+            tabelaTvp.Columns.Add("BASECOFINS", typeof(decimal));
+            tabelaTvp.Columns.Add("ALIQUOTACOFINS", typeof(decimal));
+            tabelaTvp.Columns.Add("VALORCOFINS", typeof(decimal));
+            tabelaTvp.Columns.Add("VALORFRETE", typeof(decimal));
+            tabelaTvp.Columns.Add("VALORDESCONTO", typeof(decimal));
+            tabelaTvp.Columns.Add("VALOROUTRAS", typeof(decimal));
 
             foreach (DataRow row in itens.Rows)
             {
@@ -97,14 +115,33 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
                 novaLinha["VALORUNITARIO"] = valorUnitario;
                 novaLinha["CODNAT"] = ValorOuNulo(row["Natureza"]);
                 novaLinha["CODUND"] = ValorOuNulo(row["UnidadeComercial"]);
-                novaLinha["BASEICMS"] = valorTotalItem;
 
-                // TODO: confirmar de onde vêm esses 2 valores
+                // TODO: confirmar de onde vem o centro de custo
                 novaLinha["CODCCUSTO"] = DBNull.Value;
-                novaLinha["ALIQUOTAICMS"] = DBNull.Value;
 
-                //valida
-                
+                // Impostos do item no XML; item sem correspondência no XML vai com tudo zerado
+                ImpostoItemXml imposto = itens.Columns.Contains("Impostos") ? row["Impostos"] as ImpostoItemXml : null;
+                imposto ??= new ImpostoItemXml();
+
+                novaLinha["BASEICMS"] = imposto.BaseIcms;
+                novaLinha["ALIQUOTAICMS"] = imposto.AliquotaIcms;
+                novaLinha["VALORICMS"] = imposto.ValorIcms;
+                novaLinha["BASEICMSST"] = imposto.BaseIcmsST;
+                novaLinha["ALIQUOTAICMSST"] = imposto.AliquotaIcmsST;
+                novaLinha["VALORICMSST"] = imposto.ValorIcmsST;
+                novaLinha["BASEIPI"] = imposto.BaseIpi;
+                novaLinha["ALIQUOTAIPI"] = imposto.AliquotaIpi;
+                novaLinha["VALORIPI"] = imposto.ValorIpi;
+                novaLinha["BASEPIS"] = imposto.BasePis;
+                novaLinha["ALIQUOTAPIS"] = imposto.AliquotaPis;
+                novaLinha["VALORPIS"] = imposto.ValorPis;
+                novaLinha["BASECOFINS"] = imposto.BaseCofins;
+                novaLinha["ALIQUOTACOFINS"] = imposto.AliquotaCofins;
+                novaLinha["VALORCOFINS"] = imposto.ValorCofins;
+                novaLinha["VALORFRETE"] = imposto.ValorFrete;
+                novaLinha["VALORDESCONTO"] = imposto.ValorDesconto;
+                novaLinha["VALOROUTRAS"] = imposto.ValorOutrasDespesas;
+
 
                 tabelaTvp.Rows.Add(novaLinha);
             }

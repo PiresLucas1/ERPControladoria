@@ -24,6 +24,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
         private string _dataDocumento;
         private string _serieDocumento;
         private string _codFilial;
+        private TotaisNotaXml _totaisNota = new TotaisNotaXml(); // impostos/totais lidos do XML (zerados se não existirem)
+        private Dictionary<DataRow, ImpostoItemXml> _impostosPorLinha = new Dictionary<DataRow, ImpostoItemXml>(); // impostos de cada linha da grade
 
         private readonly ConsultaNotasExportaTotvsDetalhes _consultaDetalhes;
         public ImportarNotasFiscaisXmlParaTotvsDetalhes(int IDQiveArquivoXML, string numDocumento, string dataDocumento, string codFilial, ConsultaNotasExportaTotvsDetalhes consultaDetalhes)
@@ -38,6 +40,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             AjustarFonteTextBoxesGroupBox();
             tbCodFilial.Text = _codFilial;
             Load += ImportarNotasFiscaisXmlParaTotvsDetalhes_Load;
+            dvgDataNotaItens.EditingControlShowing += dvgDataNotaItens_EditingControlShowing;
         }
         private async void ImportarNotasFiscaisXmlParaTotvsDetalhes_Load(object sender, EventArgs e)
         {
@@ -62,6 +65,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 dvgContaFinanceira.DataSource = _bsContaFinanceira;
                 AjustaTela();
                 await CarregarCodCfoFornecedorAsync();
+                await CarregarTotaisNotaXmlAsync();
 
             }
             catch (Exception ex)
@@ -196,6 +200,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 DataDocumento = DateTime.TryParse(_dataDocumento, out var dataDoc) ? dataDoc : null,
                 DataLancamento = DateTime.TryParse(dtLancamento.Value.ToString("yyyy-MM-dd"), out var dataLanc) ? dataLanc : null,
                 SerieDocumento = _serieDocumento,
+                TotaisXml = _totaisNota,
                 CodTipoMovimento = codTipoMovimento,
                 CodColigada = codColigada,
                 CodFilial = codFilial
@@ -390,6 +395,110 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             return conferencia.ShowDialog(this) == DialogResult.OK;
         }
 
+        //LÊ OS TOTAIS/IMPOSTOS DO XML DA NOTA (QUADRO "CÁLCULO DO IMPOSTO")
+        private async Task CarregarTotaisNotaXmlAsync()
+        {
+            try
+            {
+                string xml = await new ConsultarXmlNotaQiveUseCase().Executar(_IDQiveArquivoXML);
+                var extrator = new ExtrairTotaisNotaXml();
+                _totaisNota = extrator.Executar(xml);
+                RelacionarImpostosComLinhas(extrator.ExtrairItens(xml));
+            }
+            catch (Exception ex)
+            {
+                _totaisNota = new TotaisNotaXml();
+                _impostosPorLinha.Clear();
+                MessageBox.Show("Não foi possível ler os impostos do XML. Os valores ficarão zerados." + Environment.NewLine + ex.Message, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        // A grade não tem o nItem do XML: liga cada linha ao <det> pelo código do produto (cProd)
+        // e pela ordem de ocorrência, para tratar o mesmo produto repetido em mais de um item
+        private void RelacionarImpostosComLinhas(List<ImpostoItemXml> itensXml)
+        {
+            _impostosPorLinha.Clear();
+            var semImposto = new List<string>();
+
+            var itensPorCodigo = itensXml
+                .GroupBy(i => i.CodProduto ?? "")
+                .ToDictionary(g => g.Key, g => new Queue<ImpostoItemXml>(g.OrderBy(i => i.NumeroItem)));
+
+            foreach (DataRow row in _tabela.Rows)
+            {
+                string codProduto = row["IDProdFornecedor"]?.ToString()?.Trim() ?? "";
+
+                if (itensPorCodigo.TryGetValue(codProduto, out var fila) && fila.Count > 0)
+                    _impostosPorLinha[row] = fila.Dequeue();
+                else
+                    semImposto.Add($"{codProduto} - {row["ProdutoDescricao"]}");
+            }
+
+            if (semImposto.Count > 0)
+                MessageBox.Show("Itens sem correspondência no XML (impostos irão zerados):" + Environment.NewLine + string.Join(Environment.NewLine, semImposto), "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        //MARCA TODOS OS ITENS; SE TODOS JÁ ESTIVEREM MARCADOS, DESMARCA
+        private void btnMarcarTodos_Click(object sender, EventArgs e)
+        {
+            if (_tabela == null || _tabela.Rows.Count == 0) return;
+
+            dvgDataNotaItens.EndEdit();
+            _bs.EndEdit();
+
+            bool todosMarcados = _tabela.AsEnumerable().All(row => row.Field<bool?>("Selecionado") == true);
+            foreach (DataRow row in _tabela.Rows)
+                row["Selecionado"] = !todosMarcados;
+
+            btnMarcarTodos.Text = todosMarcados ? "Marcar Todos" : "Desmarcar Todos";
+        }
+
+        //ALTERA A NATUREZA FISCAL (CFOP DA TOTVS) DOS ITENS SELECIONADOS
+        private void btnAlterarNatureza_Click(object sender, EventArgs e)
+        {
+            if (_tabela == null) return;
+
+            dvgDataNotaItens.EndEdit();
+            _bs.EndEdit();
+
+            var linhasSelecionadas = _tabela.AsEnumerable()
+                .Where(row => row.Field<bool?>("Selecionado") == true)
+                .ToList();
+
+            if (linhasSelecionadas.Count == 0)
+            {
+                MessageBox.Show("Nenhum item selecionado.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // A pesquisa da natureza é por coligada
+            if (!int.TryParse(tbCodColigada.Text, out int codColigada))
+            {
+                MessageBox.Show("Informe a Coligada para pesquisar a natureza.", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                tbCodColigada.Focus();
+                return;
+            }
+
+            using AlterarNaturezaItens alterar = new AlterarNaturezaItens(codColigada, linhasSelecionadas.Count);
+            if (alterar.ShowDialog(this) != DialogResult.OK)
+                return;
+
+            foreach (DataRow row in linhasSelecionadas)
+                row["Natureza"] = alterar.CodigoNatureza;
+        }
+
+        // Máscara x.xxx.xxx na edição da Natureza Fiscal. O controle de edição é reaproveitado
+        // entre as colunas, então a máscara é removida quando a célula editada for de outra coluna
+        private void dvgDataNotaItens_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            if (e.Control is not TextBox textBox) return;
+
+            if (dvgDataNotaItens.CurrentCell?.OwningColumn.Name == "Natureza")
+                MascaraNatureza.Aplicar(textBox);
+            else
+                MascaraNatureza.Remover(textBox);
+        }
+
         private void SomenteNumeros_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -493,6 +602,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             itensEncontrados.Columns.Add("UnidadeComercial", typeof(object));
             itensEncontrados.Columns.Add("CodProdFornecedor", typeof(object)); // só para a conferência
             itensEncontrados.Columns.Add("Descricao", typeof(object));         // só para a conferência
+            itensEncontrados.Columns.Add("Impostos", typeof(object));          // ImpostoItemXml com os impostos do item
 
             foreach (DataRow row in linhasSelecionadas)
             {
@@ -519,6 +629,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                         novalinha["UnidadeComercial"] = row["UnidadeComercial"];
                         novalinha["CodProdFornecedor"] = codNoForn;
                         novalinha["Descricao"] = descricaoProduto;
+                        novalinha["Impostos"] = _impostosPorLinha.TryGetValue(row, out var impostoItem) ? impostoItem : null;
 
                         itensEncontrados.Rows.Add(novalinha); // <- faltava isso
                     }
