@@ -43,6 +43,15 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
         public decimal AliquotaCofins { get; set; }        // COFINSxx/pCOFINS
         public decimal ValorCofins { get; set; }           // COFINSxx/vCOFINS
 
+        // Reforma tributária: grupo IBSCBS/gIBSCBS (a base é a mesma para IBS UF, IBS Mun. e CBS)
+        public decimal BaseIbsCbs { get; set; }            // gIBSCBS/vBC
+        public decimal AliquotaIbsUF { get; set; }         // gIBSUF/pIBSUF
+        public decimal ValorIbsUF { get; set; }            // gIBSUF/vIBSUF
+        public decimal AliquotaIbsMun { get; set; }        // gIBSMun/pIBSMun
+        public decimal ValorIbsMun { get; set; }           // gIBSMun/vIBSMun
+        public decimal AliquotaCbs { get; set; }           // gCBS/pCBS
+        public decimal ValorCbs { get; set; }              // gCBS/vCBS
+
         public decimal ValorFrete { get; set; }            // prod/vFrete
         public decimal ValorDesconto { get; set; }         // prod/vDesc
         public decimal ValorOutrasDespesas { get; set; }   // prod/vOutro
@@ -72,6 +81,10 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
                 XElement ipi = Filho(Filho(imposto, "IPI"), "IPITrib");
                 XElement pis = PrimeiroFilho(Filho(imposto, "PIS"));
                 XElement cofins = PrimeiroFilho(Filho(imposto, "COFINS"));
+                XElement ibsCbs = Filho(Filho(imposto, "IBSCBS"), "gIBSCBS");
+                XElement ibsUF = Filho(ibsCbs, "gIBSUF");
+                XElement ibsMun = Filho(ibsCbs, "gIBSMun");
+                XElement cbs = Filho(ibsCbs, "gCBS");
 
                 itens.Add(new ImpostoItemXml
                 {
@@ -93,6 +106,13 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
                     BaseCofins = LerValor(cofins, "vBC"),
                     AliquotaCofins = LerValor(cofins, "pCOFINS"),
                     ValorCofins = LerValor(cofins, "vCOFINS"),
+                    BaseIbsCbs = LerValor(ibsCbs, "vBC"),
+                    AliquotaIbsUF = LerValor(ibsUF, "pIBSUF"),
+                    ValorIbsUF = LerValor(ibsUF, "vIBSUF"),
+                    AliquotaIbsMun = LerValor(ibsMun, "pIBSMun"),
+                    ValorIbsMun = LerValor(ibsMun, "vIBSMun"),
+                    AliquotaCbs = LerValor(cbs, "pCBS"),
+                    ValorCbs = LerValor(cbs, "vCBS"),
 
                     ValorFrete = LerValor(prod, "vFrete"),
                     ValorDesconto = LerValor(prod, "vDesc"),

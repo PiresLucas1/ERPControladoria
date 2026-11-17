@@ -38,7 +38,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             dgvProdutos.ReadOnly = true;
             dgvProdutos.RowHeadersVisible = false;
             dgvProdutos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvProdutos.Size = new Size(1100, 393);
+            dgvProdutos.Size = new Size(1100, 380);
             dgvProdutos.TabIndex = 0;
             dgvProdutos.CellFormatting += dgvProdutos_CellFormatting;
             //
@@ -48,9 +48,9 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             pnlRodape.Controls.Add(btnConfirmar);
             pnlRodape.Controls.Add(btnCancelar);
             pnlRodape.Dock = DockStyle.Bottom;
-            pnlRodape.Location = new Point(0, 393);
+            pnlRodape.Location = new Point(0, 380);
             pnlRodape.Name = "pnlRodape";
-            pnlRodape.Size = new Size(1100, 57);
+            pnlRodape.Size = new Size(1100, 70);
             pnlRodape.TabIndex = 1;
             //
             // lbTotais
@@ -58,7 +58,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             lbTotais.Anchor = AnchorStyles.Left;
             lbTotais.AutoSize = true;
             lbTotais.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            lbTotais.Location = new Point(12, 18);
+            lbTotais.Location = new Point(12, 14);
             lbTotais.Name = "lbTotais";
             lbTotais.Size = new Size(0, 20);
             lbTotais.TabIndex = 0;
@@ -66,7 +66,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             // btnConfirmar
             //
             btnConfirmar.Anchor = AnchorStyles.Right;
-            btnConfirmar.Location = new Point(872, 13);
+            btnConfirmar.Location = new Point(872, 20);
             btnConfirmar.Name = "btnConfirmar";
             btnConfirmar.Size = new Size(105, 31);
             btnConfirmar.TabIndex = 1;
@@ -77,7 +77,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             // btnCancelar
             //
             btnCancelar.Anchor = AnchorStyles.Right;
-            btnCancelar.Location = new Point(983, 13);
+            btnCancelar.Location = new Point(983, 20);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(105, 31);
             btnCancelar.TabIndex = 2;

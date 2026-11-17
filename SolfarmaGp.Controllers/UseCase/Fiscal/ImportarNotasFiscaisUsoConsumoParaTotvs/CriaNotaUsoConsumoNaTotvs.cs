@@ -5,6 +5,10 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
 {
     public class CriaNotaUsoConsumoNaTotvs
     {
+        // Nota de uso e consumo não aproveita crédito de ICMS: o ICMS e o ICMS ST do XML vão zerados para a TOTVS
+        private const bool EnviarIcms = false;
+        private const bool EnviarIcmsST = false;
+
         public class NotaCapa
         {
             public string IDQiveArquivoXml { get; set; }
@@ -96,6 +100,13 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
             tabelaTvp.Columns.Add("VALORFRETE", typeof(decimal));
             tabelaTvp.Columns.Add("VALORDESCONTO", typeof(decimal));
             tabelaTvp.Columns.Add("VALOROUTRAS", typeof(decimal));
+            tabelaTvp.Columns.Add("BASEIBSCBS", typeof(decimal));
+            tabelaTvp.Columns.Add("ALIQUOTAIBSUF", typeof(decimal));
+            tabelaTvp.Columns.Add("VALORIBSUF", typeof(decimal));
+            tabelaTvp.Columns.Add("ALIQUOTAIBSMUN", typeof(decimal));
+            tabelaTvp.Columns.Add("VALORIBSMUN", typeof(decimal));
+            tabelaTvp.Columns.Add("ALIQUOTACBS", typeof(decimal));
+            tabelaTvp.Columns.Add("VALORCBS", typeof(decimal));
 
             foreach (DataRow row in itens.Rows)
             {
@@ -123,12 +134,12 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
                 ImpostoItemXml imposto = itens.Columns.Contains("Impostos") ? row["Impostos"] as ImpostoItemXml : null;
                 imposto ??= new ImpostoItemXml();
 
-                novaLinha["BASEICMS"] = imposto.BaseIcms;
-                novaLinha["ALIQUOTAICMS"] = imposto.AliquotaIcms;
-                novaLinha["VALORICMS"] = imposto.ValorIcms;
-                novaLinha["BASEICMSST"] = imposto.BaseIcmsST;
-                novaLinha["ALIQUOTAICMSST"] = imposto.AliquotaIcmsST;
-                novaLinha["VALORICMSST"] = imposto.ValorIcmsST;
+                novaLinha["BASEICMS"] = EnviarIcms ? imposto.BaseIcms : 0m;
+                novaLinha["ALIQUOTAICMS"] = EnviarIcms ? imposto.AliquotaIcms : 0m;
+                novaLinha["VALORICMS"] = EnviarIcms ? imposto.ValorIcms : 0m;
+                novaLinha["BASEICMSST"] = EnviarIcmsST ? imposto.BaseIcmsST : 0m;
+                novaLinha["ALIQUOTAICMSST"] = EnviarIcmsST ? imposto.AliquotaIcmsST : 0m;
+                novaLinha["VALORICMSST"] = EnviarIcmsST ? imposto.ValorIcmsST : 0m;
                 novaLinha["BASEIPI"] = imposto.BaseIpi;
                 novaLinha["ALIQUOTAIPI"] = imposto.AliquotaIpi;
                 novaLinha["VALORIPI"] = imposto.ValorIpi;
@@ -141,6 +152,13 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
                 novaLinha["VALORFRETE"] = imposto.ValorFrete;
                 novaLinha["VALORDESCONTO"] = imposto.ValorDesconto;
                 novaLinha["VALOROUTRAS"] = imposto.ValorOutrasDespesas;
+                novaLinha["BASEIBSCBS"] = imposto.BaseIbsCbs;
+                novaLinha["ALIQUOTAIBSUF"] = imposto.AliquotaIbsUF;
+                novaLinha["VALORIBSUF"] = imposto.ValorIbsUF;
+                novaLinha["ALIQUOTAIBSMUN"] = imposto.AliquotaIbsMun;
+                novaLinha["VALORIBSMUN"] = imposto.ValorIbsMun;
+                novaLinha["ALIQUOTACBS"] = imposto.AliquotaCbs;
+                novaLinha["VALORCBS"] = imposto.ValorCbs;
 
 
                 tabelaTvp.Rows.Add(novaLinha);

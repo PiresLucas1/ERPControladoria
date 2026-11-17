@@ -466,9 +466,9 @@ namespace SolfarmaGp.UI.MenusUI
 
         private void importarXMLTOTVSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!FormAberto(typeof(ImportarNotasFiscaisXmlPataTotvs)))
+            if (!FormAberto(typeof(ImportarNotasFiscaisXmlParaTotvs)))
             {
-                ImportarNotasFiscaisXmlPataTotvs importaXml = new ImportarNotasFiscaisXmlPataTotvs();
+                ImportarNotasFiscaisXmlParaTotvs importaXml = new ImportarNotasFiscaisXmlParaTotvs();
                 importaXml.MdiParent = this;
                 importaXml.Show();
             }

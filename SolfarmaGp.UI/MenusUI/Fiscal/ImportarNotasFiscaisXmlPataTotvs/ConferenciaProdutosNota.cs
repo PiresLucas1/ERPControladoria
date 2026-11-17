@@ -7,6 +7,19 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
     {
         private const string ColDiferenca = "Diferença";
 
+        // Tributos mostrados na conferência: nome e colunas da TVP (base, alíquota, valor)
+        private static readonly (string Nome, string Base, string Aliquota, string Valor)[] Tributos =
+        {
+            ("ICMS",     "BASEICMS",   "ALIQUOTAICMS",   "VALORICMS"),
+            ("ICMS ST",  "BASEICMSST", "ALIQUOTAICMSST", "VALORICMSST"),
+            ("IPI",      "BASEIPI",    "ALIQUOTAIPI",    "VALORIPI"),
+            ("PIS",      "BASEPIS",    "ALIQUOTAPIS",    "VALORPIS"),
+            ("COFINS",   "BASECOFINS", "ALIQUOTACOFINS", "VALORCOFINS"),
+            ("IBS UF",   "BASEIBSCBS", "ALIQUOTAIBSUF",  "VALORIBSUF"),
+            ("IBS Mun.", "BASEIBSCBS", "ALIQUOTAIBSMUN", "VALORIBSMUN"),
+            ("CBS",      "BASEIBSCBS", "ALIQUOTACBS",    "VALORCBS"),
+        };
+
         public ConferenciaProdutosNota(DataTable itensTela, DataTable itensTvp)
         {
             InitializeComponent();
@@ -25,9 +38,20 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             relatorio.Columns.Add("Valor Unitário", typeof(decimal));
             relatorio.Columns.Add("Total Calculado", typeof(decimal));
             relatorio.Columns.Add(ColDiferenca, typeof(decimal));
-            relatorio.Columns.Add("Base ICMS", typeof(decimal));
             relatorio.Columns.Add("Natureza", typeof(string));
             relatorio.Columns.Add("Unidade", typeof(string));
+
+            // Só mostra o tributo se ele for enviado em algum item, para a grade não ficar larga demais
+            var tributosExibidos = Tributos
+                .Where(t => itensTvp.AsEnumerable().Any(r => Decimal(r, t.Base) != 0 || Decimal(r, t.Valor) != 0))
+                .ToList();
+
+            foreach (var t in tributosExibidos)
+            {
+                relatorio.Columns.Add($"{t.Nome} Base", typeof(decimal));
+                relatorio.Columns.Add($"{t.Nome} %", typeof(decimal));
+                relatorio.Columns.Add($"{t.Nome} Valor", typeof(decimal));
+            }
 
             decimal somaXml = 0, somaCalculada = 0;
 
@@ -46,7 +70,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 somaXml += valorXml;
                 somaCalculada += totalCalculado;
 
-                relatorio.Rows.Add(
+                DataRow linha = relatorio.Rows.Add(
                     i + 1,
                     tela["CodProdFornecedor"]?.ToString(),
                     tela["Descricao"]?.ToString(),
@@ -56,9 +80,15 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                     valorUnitario,
                     totalCalculado,
                     totalCalculado - valorXml,
-                    tvp["BASEICMS"],
                     tvp["CODNAT"] == DBNull.Value ? "(nulo)" : tvp["CODNAT"],
                     tvp["CODUND"] == DBNull.Value ? "(nulo)" : tvp["CODUND"]);
+
+                foreach (var t in tributosExibidos)
+                {
+                    linha[$"{t.Nome} Base"] = Decimal(tvp, t.Base);
+                    linha[$"{t.Nome} %"] = Decimal(tvp, t.Aliquota);
+                    linha[$"{t.Nome} Valor"] = Decimal(tvp, t.Valor);
+                }
             }
 
             dgvProdutos.DataSource = relatorio;
@@ -72,12 +102,32 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 }
             }
             dgvProdutos.Columns["Quantidade"].DefaultCellStyle.Format = "N4";
-            dgvProdutos.Columns["Descrição"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            // Com os tributos a grade fica larga: descrição com largura fixa e as 3 primeiras colunas congeladas na rolagem
+            DataGridViewColumn colDescricao = dgvProdutos.Columns["Descrição"];
+            colDescricao.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            colDescricao.Width = 260;
+            colDescricao.Frozen = true;
+
+            // Valores de tributo em azul para separar visualmente das colunas do produto
+            foreach (var t in tributosExibidos)
+                dgvProdutos.Columns[$"{t.Nome} Valor"].DefaultCellStyle.ForeColor = Color.SteelBlue;
 
             decimal diferenca = somaCalculada - somaXml;
-            lbTotais.Text = $"Itens: {relatorio.Rows.Count}    Total XML: {somaXml:N2}    Total enviado: {somaCalculada:N2}    Diferença: {diferenca:N2}";
+            string totaisTributos = string.Join("    ", tributosExibidos.Select(t =>
+                $"{t.Nome}: {itensTvp.AsEnumerable().Sum(r => Decimal(r, t.Valor)):N2}"));
+
+            lbTotais.Text = $"Itens: {relatorio.Rows.Count}    Total XML: {somaXml:N2}    Total enviado: {somaCalculada:N2}    Diferença: {diferenca:N2}"
+                          + Environment.NewLine + "Tributos  →  " + totaisTributos;
             if (diferenca != 0)
                 lbTotais.ForeColor = Color.Firebrick;
+        }
+
+        private static decimal Decimal(DataRow row, string coluna)
+        {
+            if (!row.Table.Columns.Contains(coluna) || row[coluna] == DBNull.Value)
+                return 0m;
+            return Convert.ToDecimal(row[coluna]);
         }
 
         // Destaca as linhas em que o total recalculado pela proc não bate com o XML

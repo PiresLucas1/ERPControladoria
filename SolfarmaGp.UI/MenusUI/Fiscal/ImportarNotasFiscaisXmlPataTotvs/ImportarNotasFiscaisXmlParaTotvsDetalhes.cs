@@ -28,6 +28,9 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
         private Dictionary<DataRow, ImpostoItemXml> _impostosPorLinha = new Dictionary<DataRow, ImpostoItemXml>(); // impostos de cada linha da grade
 
         private readonly ConsultaNotasExportaTotvsDetalhes _consultaDetalhes;
+
+        // Preenchido quando a nota é lançada com sucesso; a tela de lista usa para marcar a linha de verde
+        public int? IdMovLancado { get; private set; }
         public ImportarNotasFiscaisXmlParaTotvsDetalhes(int IDQiveArquivoXML, string numDocumento, string dataDocumento, string codFilial, ConsultaNotasExportaTotvsDetalhes consultaDetalhes)
         {
             _codFilial = codFilial;
@@ -39,6 +42,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
 
             AjustarFonteTextBoxesGroupBox();
             tbCodFilial.Text = _codFilial;
+            tbCodColigada.Text = "2"; // coligada padrão; o usuário pode alterar
             Load += ImportarNotasFiscaisXmlParaTotvsDetalhes_Load;
             dvgDataNotaItens.EditingControlShowing += dvgDataNotaItens_EditingControlShowing;
         }
@@ -233,6 +237,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 ProcessStatusManager.Start("Carregando dados...");
                 ProcessStatusManager.Update("Processando...");
                 var (novaNotaDt,idnota) = await new CriaNotaUsoConsumoNaTotvs().Execute(objetoNota, itensEncontrados);
+                IdMovLancado = idnota;
                 MessageBox.Show($"Nota lançada com sucesso! ID: {idnota}");
 
             }

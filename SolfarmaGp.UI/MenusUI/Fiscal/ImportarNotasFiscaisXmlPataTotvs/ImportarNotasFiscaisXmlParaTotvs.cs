@@ -8,12 +8,13 @@ using System.Text;
 
 namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
 {
-    public partial class ImportarNotasFiscaisXmlPataTotvs : Form
+    public partial class ImportarNotasFiscaisXmlParaTotvs : Form
     {
         private DataTable _tabela;
         private BindingSource _bs = new BindingSource();
         private DataRowView _linhaSelecionada = null;
-        public ImportarNotasFiscaisXmlPataTotvs()
+        private readonly HashSet<int> _notasLancadas = new HashSet<int>(); // IDQiveArquivoXML lançados nesta sessão da tela
+        public ImportarNotasFiscaisXmlParaTotvs()
         {
             InitializeComponent();
             dvgNotas.ReadOnly = true;
@@ -84,6 +85,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             dvgNotas.Columns["DataDocumento"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
             tbRegistros.Text = _tabela.Rows.Count.ToString();
+            AtualizarCoresDaGrid();
         }
 
         private void AdicionarColunaSelecao()
@@ -163,6 +165,11 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             ConsultaDetalhesNota(IDQiveArquivoXML, numDocumentoString, dataDocumentoString, codFilialString);
         }
 
+        private void btnExportarExcel_Click(object sender, EventArgs e)
+        {
+            ExportarGridParaExcel.Executar(dvgNotas, "NotasUsoConsumo");
+        }
+
         private void btnVisualizarNota_Click(object sender, EventArgs e)
         {
             var IDQiveArquivoXMLString = dvgNotas.CurrentRow.Cells["IDQiveArquivoXML"].Value.ToString();
@@ -186,11 +193,20 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         {
             foreach (DataGridViewRow row in dvgNotas.Rows)
             {
-                if (row.DataBoundItem == _linhaSelecionada)
+                // Nota lançada fica verde, mesmo se for a linha selecionada
+                if (NotaFoiLancada(row))
+                    row.DefaultCellStyle.BackColor = Color.LightGreen;
+                else if (row.DataBoundItem == _linhaSelecionada)
                     row.DefaultCellStyle.BackColor = Color.LightBlue;
                 else
                     row.DefaultCellStyle.BackColor = Color.White;
             }
+        }
+
+        private bool NotaFoiLancada(DataGridViewRow row)
+        {
+            return int.TryParse(row.Cells["IDQiveArquivoXML"].Value?.ToString(), out int id)
+                && _notasLancadas.Contains(id);
         }
         private void ConsultaDetalhesNota(int IDQiveArquivoXML, string numDocumentoString, string dataDocumentoString, string codFilialString)
         {
@@ -203,6 +219,12 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
                   )
             {
                 DialogResult result = form.ShowDialog(this);
+
+                if (form.IdMovLancado.HasValue)
+                {
+                    _notasLancadas.Add(IDQiveArquivoXML);
+                    AtualizarCoresDaGrid();
+                }
             }
         }
         private void VisualizarXml(string xmlFile)

@@ -2,7 +2,7 @@
 
 namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
 {
-    partial class ImportarNotasFiscaisXmlPataTotvs
+    partial class ImportarNotasFiscaisXmlParaTotvs
     {
         /// <summary>
         /// Required designer variable.
@@ -44,6 +44,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             tbRegistros = new TextBox();
             gpAcoes = new CartaoGroupBox();
             btnVisualizarNota = new BotaoModerno();
+            btnExportarExcel = new BotaoModerno();
             btnLimparSelecao = new BotaoModerno();
             btnSelecionaTodos = new BotaoModerno();
             label1 = new Label();
@@ -189,6 +190,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             // 
             gpAcoes.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             gpAcoes.BackColor = Color.White;
+            gpAcoes.Controls.Add(btnExportarExcel);
             gpAcoes.Controls.Add(btnVisualizarNota);
             gpAcoes.Controls.Add(btnLimparSelecao);
             gpAcoes.Controls.Add(btnSelecionaTodos);
@@ -220,6 +222,20 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             btnVisualizarNota.Text = "Visualizar Nota";
             btnVisualizarNota.UseVisualStyleBackColor = true;
             btnVisualizarNota.Click += btnVisualizarNota_Click;
+            // 
+            // btnExportarExcel
+            // 
+            btnExportarExcel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnExportarExcel.FlatStyle = FlatStyle.Flat;
+            btnExportarExcel.Location = new Point(807, 24);
+            btnExportarExcel.Name = "btnExportarExcel";
+            btnExportarExcel.Principal = false;
+            btnExportarExcel.Raio = 8;
+            btnExportarExcel.Size = new Size(151, 30);
+            btnExportarExcel.TabIndex = 15;
+            btnExportarExcel.Text = "Exportar Excel";
+            btnExportarExcel.UseVisualStyleBackColor = true;
+            btnExportarExcel.Click += btnExportarExcel_Click;
             // 
             // btnLimparSelecao
             // 
@@ -341,6 +357,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         private BotaoModerno btnSelecionaTodos;
         private BotaoModerno btnLimparSelecao;
         private BotaoModerno btnVisualizarNota;
+        private BotaoModerno btnExportarExcel;
         private BotaoModerno button2;
         private CartaoGroupBox groupBox1;
     }
