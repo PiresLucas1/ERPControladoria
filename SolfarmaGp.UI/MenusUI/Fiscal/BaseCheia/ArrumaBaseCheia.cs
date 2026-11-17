@@ -57,5 +57,10 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.BaseCheia
 
             return retorno;
         }
+
+        private void ArrumaBaseCheia_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

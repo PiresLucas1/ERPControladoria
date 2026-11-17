@@ -322,7 +322,7 @@ namespace SolfarmaGP.UI.MenusUI.Zanup.DevolucaoNota
             Margin = new Padding(3, 4, 3, 4);
             Name = "ConsultaSaldoNotasFiscais";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Consulta Saldo Notas Fiscais";
+            Text = "Devoluçao de notas";
             gbFiltro.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

@@ -238,7 +238,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.BuscaDadosCalculoCustoProduto
             MaximizeBox = false;
             Name = "BuscaDadosCalculoCustoProduto";
             ShowIcon = false;
-            Text = "Contabilização do Custo dos Produtos";
+            Text = "Contabilização Custo dos Produtos";
             gpHeader.ResumeLayout(false);
             gpHeader.PerformLayout();
             gbFooter.ResumeLayout(false);

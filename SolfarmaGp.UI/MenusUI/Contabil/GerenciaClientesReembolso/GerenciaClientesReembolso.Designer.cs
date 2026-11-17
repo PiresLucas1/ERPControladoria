@@ -177,7 +177,7 @@ namespace SolfarmaGp.UI.MenusUI.Contabil.GerenciaClientesReembolso
             Controls.Add(dvgGerenciar);
             Name = "GerenciaClientesReembolso";
             ShowIcon = false;
-            Text = "Gerencia Clientes Reembolso";
+            Text = "Pessoas";
             Load += GerenciaClientesReembolso_Load;
             ((System.ComponentModel.ISupportInitialize)dvgGerenciar).EndInit();
             ResumeLayout(false);

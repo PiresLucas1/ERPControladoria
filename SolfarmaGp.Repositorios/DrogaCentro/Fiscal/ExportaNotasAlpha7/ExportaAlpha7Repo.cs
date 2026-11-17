@@ -85,7 +85,8 @@ namespace SolfarmaGp.Repositorios.DrogaCentro.Fiscal.ExportaNotasAlpha7
                 cmd.Parameters.AddWithValue("@INbitSubstituir", p.Substituir);
                 cmd.Parameters.AddWithValue("@INbitNaoConferida", (object?)p.NaoConferida ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("@INvchCodTmv", string.IsNullOrWhiteSpace(p.CodTmv) ? DBNull.Value : p.CodTmv);
-                cmd.Parameters.AddWithValue("@INvchNumeroDocumentos", p.NumeroDocumentos ?? "");
+                // A tela trabalha com 192;193;194, mas a ufnTextoTabela da procedure separa por VÍRGULA.
+                cmd.Parameters.AddWithValue("@INvchNumeroDocumentos", (p.NumeroDocumentos ?? "").Replace(';', ','));
             });
         }
 

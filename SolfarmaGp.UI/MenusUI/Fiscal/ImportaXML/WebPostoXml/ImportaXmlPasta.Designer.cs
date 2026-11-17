@@ -230,7 +230,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportaXML.WebPostoXml
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "ImportaXmlPasta";
-            Text = "Exportar XML";
+            Text = "XML Posto do Lago";
             Load += ImportaXmlPasta_Load;
             ResumeLayout(false);
             PerformLayout();

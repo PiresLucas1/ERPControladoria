@@ -133,7 +133,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "ExcutaAutomacaoRenomearArquivos";
-            Text = "Renomear PDF (NFe | NFS-e)";
+            Text = "Renomear PDF Nota Fiscais";
             ResumeLayout(false);
             PerformLayout();
         }

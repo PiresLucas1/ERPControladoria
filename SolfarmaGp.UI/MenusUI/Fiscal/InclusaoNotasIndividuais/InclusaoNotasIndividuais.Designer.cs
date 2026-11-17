@@ -142,7 +142,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.InclusaoNotasIndividuais
             Controls.Add(lbNumdoc);
             Controls.Add(groupBox1);
             Name = "InclusaoNotasIndividuais";
-            Text = "Inclusão de Notas Individuais";
+            Text = "Importar Notas Não Encontradas";
             ((System.ComponentModel.ISupportInitialize)dvgNotasIncluidas).EndInit();
             groupBox1.ResumeLayout(false);
             ResumeLayout(false);

@@ -505,7 +505,7 @@ namespace SolfarmaGP.UI.MenusUI.Fiscal.ImportarNotaServicoView
             Margin = new Padding(3, 4, 3, 4);
             Name = "ImportarNotasTotvs";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Importação NFS-E";
+            Text = "Importar XML Serviço";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
