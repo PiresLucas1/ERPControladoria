@@ -39,6 +39,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             dtInicio = new DateTimePicker();
             lbFim = new Label();
             lbInicio = new Label();
+            cbDataLancamentoErp = new CheckBox();
             btnConsultar = new BotaoModerno();
             dvgNotas = new GradeModerna();
             tbRegistros = new TextBox();
@@ -80,6 +81,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             groupBox1.Controls.Add(dtInicio);
             groupBox1.Controls.Add(lbFim);
             groupBox1.Controls.Add(lbInicio);
+            groupBox1.Controls.Add(cbDataLancamentoErp);
             groupBox1.CorBorda = Color.FromArgb(222, 225, 230);
             groupBox1.Location = new Point(6, 22);
             groupBox1.Name = "groupBox1";
@@ -121,6 +123,16 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
             lbInicio.Size = new Size(45, 20);
             lbInicio.TabIndex = 2;
             lbInicio.Text = "Inicio";
+            // 
+            // cbDataLancamentoErp
+            // 
+            cbDataLancamentoErp.AutoSize = true;
+            cbDataLancamentoErp.Location = new Point(24, 100);
+            cbDataLancamentoErp.Name = "cbDataLancamentoErp";
+            cbDataLancamentoErp.Size = new Size(197, 24);
+            cbDataLancamentoErp.TabIndex = 8;
+            cbDataLancamentoErp.Text = "Data lançamento do ERP";
+            cbDataLancamentoErp.UseVisualStyleBackColor = true;
             // 
             // btnConsultar
             // 
@@ -345,6 +357,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         private BotaoModerno btnConsultar;
         private Label lbFim;
         private Label lbInicio;
+        private CheckBox cbDataLancamentoErp;
         private DateTimePicker dtFim;
         private DateTimePicker dtInicio;
         private GradeModerna dvgNotas;

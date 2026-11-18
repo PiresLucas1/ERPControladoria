@@ -59,6 +59,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             lbNumDoc = new Label();
             lbIDQiveArquivoXml = new Label();
             tbChaveAcesso = new TextBox();
+            lbDataDocumento = new Label();
+            tbDataDocumento = new TextBox();
             dvgContaFinanceira = new GradeModerna();
             gpContas = new CartaoGroupBox();
             ((System.ComponentModel.ISupportInitialize)dvgDataNotaItens).BeginInit();
@@ -205,6 +207,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             gpHeader.Controls.Add(lbNumDoc);
             gpHeader.Controls.Add(lbIDQiveArquivoXml);
             gpHeader.Controls.Add(tbChaveAcesso);
+            gpHeader.Controls.Add(lbDataDocumento);
+            gpHeader.Controls.Add(tbDataDocumento);
             gpHeader.Font = new Font("Segoe UI", 9F);
             gpHeader.Location = new Point(12, -1);
             gpHeader.Name = "gpHeader";
@@ -363,8 +367,26 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             tbChaveAcesso.BackColor = SystemColors.ScrollBar;
             tbChaveAcesso.Location = new Point(15, 116);
             tbChaveAcesso.Name = "tbChaveAcesso";
-            tbChaveAcesso.Size = new Size(543, 27);
+            tbChaveAcesso.Size = new Size(430, 27);
             tbChaveAcesso.TabIndex = 6;
+            // 
+            // lbDataDocumento
+            // 
+            lbDataDocumento.AutoSize = true;
+            lbDataDocumento.Location = new Point(460, 91);
+            lbDataDocumento.Name = "lbDataDocumento";
+            lbDataDocumento.Size = new Size(118, 20);
+            lbDataDocumento.TabIndex = 27;
+            lbDataDocumento.Text = "Data Documento:";
+            // 
+            // tbDataDocumento
+            // 
+            tbDataDocumento.BackColor = SystemColors.ScrollBar;
+            tbDataDocumento.Location = new Point(460, 116);
+            tbDataDocumento.Name = "tbDataDocumento";
+            tbDataDocumento.ReadOnly = true;
+            tbDataDocumento.Size = new Size(110, 27);
+            tbDataDocumento.TabIndex = 28;
             // 
             // dvgContaFinanceira
             // 
@@ -430,6 +452,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
         private TextBox tbCodFornecedor;
         private TextBox tbIdContasPagar;
         private TextBox tbChaveAcesso;
+        private Label lbDataDocumento;
+        private TextBox tbDataDocumento;
         private TextBox tbIdQive;
         private Label lbChaveAcesso;
         private Label lbNomeFornecedor;

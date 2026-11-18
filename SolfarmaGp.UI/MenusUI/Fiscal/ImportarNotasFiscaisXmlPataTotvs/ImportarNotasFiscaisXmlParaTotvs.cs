@@ -52,7 +52,7 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.NovaPasta
         public async Task ConsultaNotas(DateTime dataInicio, DateTime dataFim)
         {
             ConsultaNotasUseCase useCase = new ConsultaNotasUseCase();
-            var result = await useCase.Execute(dataInicio, dataFim);
+            var result = await useCase.Execute(dataInicio, dataFim, cbDataLancamentoErp.Checked);
 
             PreencherGrid(result);
         }

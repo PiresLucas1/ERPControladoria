@@ -6,7 +6,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
 {
     public class ConsultarNotasUsoConsumoGP
     {
-        public async Task<DataTable> Executar(DateTime dataInicio, DateTime dataFim)
+        public async Task<DataTable> Executar(DateTime dataInicio, DateTime dataFim, int tipoPesquisa)
         {
             DataTable tabela = new DataTable();
             //DataSet dataSet = new DataSet();
@@ -21,7 +21,8 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
                     {
                         cmd.CommandType = CommandType.StoredProcedure;                        
                         cmd.Parameters.AddWithValue("@INdatDataLancamentoInicio", dataInicio);
-                        cmd.Parameters.AddWithValue("@INdatDataLancamentoFim", dataFim);                       
+                        cmd.Parameters.AddWithValue("@INdatDataLancamentoFim", dataFim);
+                        cmd.Parameters.Add("@INtipoPesquisa", SqlDbType.Int).Value = tipoPesquisa;
                         using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                         {
                             tabela.Load(reader);

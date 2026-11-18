@@ -26,6 +26,7 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
     {
         public int NumeroItem { get; set; }                // det/@nItem
         public string CodProduto { get; set; }             // prod/cProd
+        public string CstIcms { get; set; }                // ICMSxx/CSOSN (Simples Nacional) ou ICMSxx/CST
 
         public decimal BaseIcms { get; set; }              // ICMSxx/vBC
         public decimal AliquotaIcms { get; set; }          // ICMSxx/pICMS
@@ -90,6 +91,8 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
                 {
                     NumeroItem = int.TryParse(det.Attribute("nItem")?.Value, out int nItem) ? nItem : itens.Count + 1,
                     CodProduto = Filho(prod, "cProd")?.Value?.Trim(),
+                    // Simples Nacional primeiro (CSOSN, ex.: ICMSSN102); se não houver, CST do regime normal (ex.: ICMS00)
+                    CstIcms = (Filho(icms, "CSOSN") ?? Filho(icms, "CST"))?.Value?.Trim(),
 
                     BaseIcms = LerValor(icms, "vBC"),
                     AliquotaIcms = LerValor(icms, "pICMS"),

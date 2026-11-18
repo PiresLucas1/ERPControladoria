@@ -100,6 +100,9 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             
 
             tbChaveAcesso.Text = _tabela.Rows[0]["ChaveAcesso"].ToString();
+            tbDataDocumento.Text = DateTime.TryParse(_dataDocumento, out var dataDocumento)
+                ? dataDocumento.ToString("dd/MM/yyyy")
+                : _dataDocumento;
 
 
         }
@@ -123,6 +126,14 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             {
                 _tabela.Columns.Add("Selecionado", typeof(bool));
             }
+            // CST do ICMS de cada item, preenchida a partir do XML em RelacionarImpostosComLinhas
+            if (!_tabela.Columns.Contains("CST"))
+            {
+                _tabela.Columns.Add("CST", typeof(string));
+            }
+            // Se a coluna já vier da procedure, o DataTable.Load pode deixá-la só leitura ou com tamanho limitado
+            _tabela.Columns["CST"].ReadOnly = false;
+            _tabela.Columns["CST"].MaxLength = -1;
 
 
 
@@ -139,6 +150,8 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             dvgDataNotaItens.Columns["Natureza"].HeaderText = "Natureza Fiscal";
             //dvgDataNotaItens.Columns["Natureza"].ReadOnly = false;
             dvgDataNotaItens.Columns["Natureza"].DisplayIndex = indexColunaNatureza + 1;
+            if (dvgDataNotaItens.Columns.Contains("CEST"))
+                dvgDataNotaItens.Columns["CST"].DisplayIndex = dvgDataNotaItens.Columns["CEST"].DisplayIndex + 1;
             // e trava todas as outras colunas manualmente
             foreach (DataGridViewColumn col in dvgDataNotaItens.Columns)
             {
@@ -426,17 +439,33 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
             var semImposto = new List<string>();
 
             var itensPorCodigo = itensXml
-                .GroupBy(i => i.CodProduto ?? "")
+                .GroupBy(i => NormalizarCodigoProduto(i.CodProduto))
                 .ToDictionary(g => g.Key, g => new Queue<ImpostoItemXml>(g.OrderBy(i => i.NumeroItem)));
 
-            foreach (DataRow row in _tabela.Rows)
+            // Se a grade tiver a mesma quantidade de itens do XML, a posição serve de reserva quando o código não bater
+            bool podeUsarPosicao = itensXml.Count == _tabela.Rows.Count;
+
+            for (int i = 0; i < _tabela.Rows.Count; i++)
             {
+                DataRow row = _tabela.Rows[i];
                 string codProduto = row["IDProdFornecedor"]?.ToString()?.Trim() ?? "";
 
-                if (itensPorCodigo.TryGetValue(codProduto, out var fila) && fila.Count > 0)
-                    _impostosPorLinha[row] = fila.Dequeue();
-                else
+                ImpostoItemXml item = null;
+                if (itensPorCodigo.TryGetValue(NormalizarCodigoProduto(codProduto), out var fila) && fila.Count > 0)
+                    item = fila.Dequeue();
+                else if (podeUsarPosicao)
+                    item = itensXml.OrderBy(x => x.NumeroItem).ElementAt(i);
+
+                Debug.WriteLine($"[CST] linha {i + 1}: grade='{codProduto}' xml='{item?.CodProduto}' nItem={item?.NumeroItem} CST='{item?.CstIcms}'");
+
+                if (item == null)
+                {
                     semImposto.Add($"{codProduto} - {row["ProdutoDescricao"]}");
+                    continue;
+                }
+
+                _impostosPorLinha[row] = item;
+                row["CST"] = string.IsNullOrEmpty(item.CstIcms) ? DBNull.Value : item.CstIcms;
             }
 
             if (semImposto.Count > 0)
@@ -502,6 +531,12 @@ namespace SolfarmaGp.UI.MenusUI.Fiscal.ImportarNotasFiscaisXmlPataTotvs
                 MascaraNatureza.Aplicar(textBox);
             else
                 MascaraNatureza.Remover(textBox);
+        }
+
+        // Compara códigos de produto ignorando espaços e maiúsculas/minúsculas
+        private static string NormalizarCodigoProduto(string codigo)
+        {
+            return (codigo ?? "").Trim().ToUpperInvariant();
         }
 
         private void SomenteNumeros_KeyPress(object sender, KeyPressEventArgs e)
