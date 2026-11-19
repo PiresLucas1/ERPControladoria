@@ -1,4 +1,5 @@
-﻿using SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs;
+﻿using SolfarmaGp.Controllers.Utils.Parse.FormatarUnidadeMedida;
+using SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs;
 using System.Data;
 
 namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs
@@ -8,7 +9,9 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisParaTotvs
         public async Task<DataTable> Executar(string codProduto, string descricao, string ncm, string cest, string codUnidade, decimal preco, string origem, string cnpjFornecedor, string codFornecedor)
         {
             CadastrarProdutoTotvs repo = new CadastrarProdutoTotvs();
-            return await repo.Executar(codProduto, descricao, ncm, cest, codUnidade, preco, origem, cnpjFornecedor, codFornecedor);
+            // Unidade do XML convertida para a unidade cadastrada na TOTVS (ex.: CXA -> CX)
+            string codUnidadeTotvs = FormatarUnidadeMedida.Executar(codUnidade);
+            return await repo.Executar(codProduto, descricao, ncm, cest, codUnidadeTotvs, preco, origem, cnpjFornecedor, codFornecedor);
         }
         public static string FormatarCnpj(string cnpj)
         {

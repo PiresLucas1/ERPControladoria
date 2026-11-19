@@ -29,7 +29,7 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisParaTotvs
                         {
                             cmd.Parameters.AddWithValue("@CEST", DBNull.Value);
                         }                        
-                        cmd.Parameters.AddWithValue("@CODUND", codUnidade);
+                        cmd.Parameters.AddWithValue("@CODUND", "UN");
                         cmd.Parameters.AddWithValue("@PRECO", preco);
                         cmd.Parameters.AddWithValue("@ORIGEM", origem);
                         cmd.Parameters.AddWithValue("@CNPJFORNECEDOR", cnpjFornecedor);

@@ -1,4 +1,5 @@
-﻿using SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs;
+﻿using SolfarmaGp.Controllers.Utils.Parse.FormatarUnidadeMedida;
+using SolfarmaGp.Repositorios.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs;
 using System.Data;
 
 namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoParaTotvs
@@ -125,7 +126,8 @@ namespace SolfarmaGp.Controllers.UseCase.Fiscal.ImportarNotasFiscaisUsoConsumoPa
                 novaLinha["QUANTIDADE"] = quantidade;
                 novaLinha["VALORUNITARIO"] = valorUnitario;
                 novaLinha["CODNAT"] = ValorOuNulo(row["Natureza"]);
-                novaLinha["CODUND"] = ValorOuNulo(row["UnidadeComercial"]);
+                // Mesma conversão do cadastro do produto (ex.: CXA -> CX), para a unidade do item existir na TUND
+                novaLinha["CODUND"] = ValorOuNulo(FormatarUnidadeMedida.Executar(row["UnidadeComercial"]?.ToString()));
 
                 // TODO: confirmar de onde vem o centro de custo
                 novaLinha["CODCCUSTO"] = DBNull.Value;

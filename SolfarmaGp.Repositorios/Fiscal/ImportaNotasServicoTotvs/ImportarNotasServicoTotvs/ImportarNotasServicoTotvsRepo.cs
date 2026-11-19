@@ -58,6 +58,31 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.ImportarNotasS
                                 ? DecimalParse.ParseDecimal(row["Valor INSS"])
                                 : 0);
 
+                            // IBS / CBS (reforma tributária) - valores já lidos da grade.
+                            // A uspImportaNotaServico ainda não tem esses parâmetros: quando criar, descomente
+                            // as linhas abaixo e ajuste o nome de cada parâmetro (@...) para o da procedure.
+                            string cstIbsCbs = row["CST IBS/CBS"]?.ToString() ?? "";
+                            string cClassTribIbsCbs = row["cClassTrib IBS/CBS"]?.ToString() ?? "";
+                            decimal baseIbsCbs = ValorDecimal(row, "Base Cálculo IBS/CBS");
+                            decimal aliquotaIbsUF = ValorDecimal(row, "Alíq. IBS UF");
+                            decimal valorIbsUF = ValorDecimal(row, "Valor IBS UF");
+                            decimal aliquotaIbsMun = ValorDecimal(row, "Alíq. IBS Mun");
+                            decimal valorIbsMun = ValorDecimal(row, "Valor IBS Mun");
+                            decimal valorIbs = ValorDecimal(row, "Valor IBS");
+                            decimal aliquotaCbs = ValorDecimal(row, "Alíq. CBS");
+                            decimal valorCbs = ValorDecimal(row, "Valor CBS");
+
+                            cmd.Parameters.Add("@INvchCSTIBSCBS", SqlDbType.VarChar, 3).Value = cstIbsCbs;
+                            cmd.Parameters.Add("@INvchcClassTribIBSCBS", SqlDbType.VarChar, 6).Value = cClassTribIbsCbs;
+                            cmd.Parameters.Add("@INnumIBSCBSBaseCalculo", SqlDbType.Decimal).Value = baseIbsCbs;
+                            cmd.Parameters.Add("@INnumIBSUFAliquota", SqlDbType.Decimal).Value = aliquotaIbsUF;
+                            cmd.Parameters.Add("@INnumIBSUFValor", SqlDbType.Decimal).Value = valorIbsUF;
+                            cmd.Parameters.Add("@INnumIBSMunAliquota", SqlDbType.Decimal).Value = aliquotaIbsMun;
+                            cmd.Parameters.Add("@INnumIBSMunValor", SqlDbType.Decimal).Value = valorIbsMun;
+                            cmd.Parameters.Add("@INnumIBSValor", SqlDbType.Decimal).Value = valorIbs;
+                            cmd.Parameters.Add("@INnumCBSAliquota", SqlDbType.Decimal).Value = aliquotaCbs;
+                            cmd.Parameters.Add("@INnumCBSValor", SqlDbType.Decimal).Value = valorCbs;
+
                             cmd.Parameters.AddWithValue("@INvchCodProduto", row["Cód. Serviço TOTVS"]?.ToString() ?? "");
                             cmd.Parameters.AddWithValue("@INvchCFOP", row["CFOP"]?.ToString() ?? "");
                             cmd.Parameters.AddWithValue("@INdatDataLancamento", row["Data Lançamento"] != DBNull.Value
@@ -90,6 +115,15 @@ namespace SolfarmaGp.Repositorios.Fiscal.ImportaNotasServicoTotvs.ImportarNotasS
                 throw new Exception("Erro ao importar notas de serviço: " + ex.Message, ex);
             }
 
+        }
+
+        // Coluna ausente ou vazia vale zero (notas no layout ABRASF não têm IBS/CBS)
+        private static decimal ValorDecimal(DataRow row, string coluna)
+        {
+            if (!row.Table.Columns.Contains(coluna) || row[coluna] == DBNull.Value || string.IsNullOrWhiteSpace(row[coluna].ToString()))
+                return 0m;
+
+            return DecimalParse.ParseDecimal(row[coluna]);
         }
     }
 }
